@@ -5,35 +5,47 @@
 % Eingabe:
 % csvline
 %   Cell-Array mit Spaltenweise Kinematik-Parameter (MDH) für alle Gelenke
+%   csv-Format (aber nur die ersten Spalten, die noch Gelenk-Bezug haben.
+%   Keine zusätzlichen Spalten, z.B. für EE-FG)
 % 
 % Ausgabe:
-% BA [1xN] uint16
+% BAJ [1xN] uint16
 %   Bit-Array zur Kennzeichnung aller MDH-Kinematikparameter.
 %   Jede Spalte des Arrays (2Byte, uint16) entspricht einer Gelenk-Transfo.
 %   Bits:
-%   01:    Gelenktyp
+%   01 (LSB):    Gelenktyp
 %   02-05: beta
 %   06:    b
 %   07-10: alpha
 %   ...
+% 
+% BAE [1x1] uint16
+%   Bit-Array zur Kennzeichnung der EE-FG
+%   Bits:
+%   01 (LSB): vx0
+%   ...
+%   06: wz0
 % 
 % Siehe auch: serroblib_bits2csvline
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
-function BA = serroblib_csvline2bits(csvline)
+function [BAJ, BAE] = serroblib_csvline2bits(csvline)
 
+%% Initialisierung
 % Prüfe Eingabe
-if mod(length(csvline)-1,8) ~= 0
-  error('falsche Anzahl Einträge');
+% Nicht Teil der Gelenk-Einträge: Name (1 Spalte), EE-FG (6 Spalten)
+N1 = (length(csvline)-1-6);
+if mod(N1,8) ~= 0
+  error('falsche Anzahl Einträge in csvline');
 end
-N = (length(csvline)-1)/8; % 8 Spalten pro Gelenk. So herausfinden der Gelenkzahl
+N = N1/8; % 8 Spalten pro Gelenk. So herausfinden der Gelenkzahl
 
 % Ausgabevariable vorbelegen
-BA = uint16(zeros(1,N));
-
-% Bit-Vektor aus csv-Zeile machen
+BAJ = uint16(zeros(1,N));
+BAE = uint16(0);
+%% Bit-Vektor für Gelenk-Parameter aus csv-Zeile gewinnen
 c = 1;
 for kk = 1:N % über alle Gelenk-FG
   % Inhalt der csv-Zeilen. Siehe auch serroblib_bits2csvline.m und
@@ -61,13 +73,23 @@ for kk = 1:N % über alle Gelenk-FG
   
   % Bit-Array aus den Bits für alle Parameter zusammenstellen
   b = 0; % Bit-Offset zur Verschiebung der Parameter-Bits in der Gesamtvariable
-  BA(kk) = bitor( BA(kk), bitshift(Bit_type,0)); b = b+1;
-  BA(kk) = bitor( BA(kk), bitshift(Bit_beta,b)); b = b+3;
-  BA(kk) = bitor( BA(kk), bitshift(Bit_b,b)); b = b+1;
-  BA(kk) = bitor( BA(kk), bitshift(Bit_alpha,b)); b = b+3;
-  BA(kk) = bitor( BA(kk), bitshift(Bit_a,b));b = b+1;
-  BA(kk) = bitor( BA(kk), bitshift(Bit_theta,b)); b = b+3;
-  BA(kk) = bitor( BA(kk), bitshift(Bit_d,b));b = b+1;
-  BA(kk) = bitor( BA(kk), bitshift(Bit_offset,b));
+  BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_type,0)); b = b+1;
+  BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_beta,b)); b = b+3;
+  BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_b,b)); b = b+1;
+  BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_alpha,b)); b = b+3;
+  BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_a,b));b = b+1;
+  BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_theta,b)); b = b+3;
+  BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_d,b));b = b+1;
+  BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_offset,b));
 end
 
+%% Bit-Vektor für EE-FG aus csv-Zeile gewinnen
+b = 0; % Bit-Offset zur Verschiebung der Parameter-Bits in der Gesamtvariable
+for i = 1:6
+  c = c+1;
+  if strcmp(csvline{c}, '0')
+    BAE = bitor( BAE, bitshift(0,b)); b = b+1;
+  else
+    BAE = bitor( BAE, bitshift(1,b)); b = b+1;
+  end
+end

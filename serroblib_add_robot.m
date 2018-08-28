@@ -16,6 +16,10 @@
 %   theta  Rotation z (Gelenkkoordinate)
 %   d      Translation z (Gelenkkoordinate)
 %   offset Gelenk-Offset
+% EEdof0
+%   Vektor mit beweglichen EE-FG des Roboters (Geschw. und Winkelgeschw. im
+%   Basis-KS. Entspricht Vorgabe in der Struktursynthese von Ramirez)
+%   1="Komponente durch Roboter beeinflussbar"; 0="nicht beeinflussbar"
 % 
 % Ausgabe:
 % mdlname
@@ -28,7 +32,11 @@
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
-function mdlname = serroblib_add_robot(MDH_struct)
+function mdlname = serroblib_add_robot(MDH_struct, EEdof0)
+
+if nargin == 1
+  EEdof0 = []; % 6 Leerzeichen
+end
 
 % Anzahl Gelenke
 N = length(MDH_struct.type);
@@ -70,6 +78,15 @@ if ~exist(filepath_csv, 'file')
     csvline_head2{c} = 'theta'; c = c+1;
     csvline_head2{c} = 'd'; c = c+1;
     csvline_head2{c} = 'offset'; c = c+1;
+  end
+  % Kopfezeile für EE-FG erzeugen
+  csvline_head1{c} = 'EE-FG (Basis-KS)';
+  for jj = 1:5
+    csvline_head1{c+jj} = '';
+  end
+  eestr = {'vx0','vy0','vz0','wx0','wy0','wz0'};
+  for jj = 1:6
+    csvline_head2{c} = eestr{jj}; c=c+1;
   end
   % String aus Cell-Array erzeugen
   line_head1 = csvline_head1{1};
@@ -113,6 +130,17 @@ for kk = 1:N
   c = c+1; csvline{c} = descr_theta{MDH_struct.theta(kk)+1}; %#ok<AGROW>
   c = c+1; csvline{c} = descr_d{MDH_struct.d(kk)+1}; %#ok<AGROW>
   c = c+1; csvline{c} = descr_offset{MDH_struct.offset(kk)+1}; %#ok<AGROW>
+end
+
+% Spalten für EE-Freiheitsgrade
+if ~isempty(EEdof0)
+  for i = 1:6
+    c = c+1; csvline{c} = EEdof0(i); %#ok<AGROW>
+  end
+else
+  for i = 1:6
+    c = c+1; csvline{c} = ''; %#ok<AGROW>
+  end
 end
 
 %% Zeile für den Roboter finden

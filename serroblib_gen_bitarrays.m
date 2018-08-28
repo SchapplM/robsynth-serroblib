@@ -15,7 +15,7 @@ for N = N_update(:)'
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
   BitArrays_Ndof = uint16(zeros(1,N));
   Names_Ndof = {};
-  b = 1;
+  b = 1; % Zähler für gefundene Roboterkonfigurationen aus csv-Tabelle für N FG
   % Durchsuche alle csv-Dateien im Ordner nach passenden Strukturen
   mdldir = fullfile(repopath, sprintf('mdl_%ddof', N));
   for d = dir(fullfile(mdldir, '*.csv'))'
@@ -29,7 +29,7 @@ for N = N_update(:)'
       if isempty(csvline) || strcmp(csvline{1}, '')
         continue
       end
-      if length(csvline) < N*8+1
+      if length(csvline) < N*8+1+6
         % warning('Zeile %s sieht ungültig aus', tline_it);
         continue % nicht genug Spalten: Ungültiger Datensatz
       end
@@ -39,15 +39,14 @@ for N = N_update(:)'
       if length(firstcol)<length(robtype) || ~strcmp(firstcol(1:length(robtype)), robtype)
         continue % keine Roboter-Zeile; wahrscheinlich Überschrift
       end
+%       % Entferne Spalten, die keinen Gelenk-Bezug haben
+%       csvline_jointkin = csvline(1:end-6);
       BA = serroblib_csvline2bits(csvline);
-      % dec2bin(BA)
-      % fprintf('serroblib_gen_bitarrays: %s aus %s zur mat-Datei %s hinzugefügt\n', csvline{1}, d.name, sprintf('S%d_list.mat',N));
-      % csvline2 = serroblib_bits2csvline(BA);
 
+      % Ausgabe belegen
       Names_Ndof{b} = csvline{1}; %#ok<AGROW>
       BitArrays_Ndof(b,:) = BA;
       b = b+1;
-      
     end
     fclose(fid);
   end
