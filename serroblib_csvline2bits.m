@@ -1,0 +1,73 @@
+% Wandle eine Roboterstruktur aus gegebener CSV-Zeile in Bit-Array um
+% Die csv-Zeile ist besser lesbar, das Bit-Array ist schneller
+% Maschinen-Verarbeitbar
+% 
+% Eingabe:
+% csvline
+%   Cell-Array mit Spaltenweise Kinematik-Parameter (MDH) für alle Gelenke
+% 
+% Ausgabe:
+% BA [1xN] uint16
+%   Bit-Array zur Kennzeichnung aller MDH-Kinematikparameter.
+%   Jede Spalte des Arrays (2Byte, uint16) entspricht einer Gelenk-Transfo.
+%   Bits:
+%   01:    Gelenktyp
+%   02-05: beta
+%   06:    b
+%   07-10: alpha
+%   ...
+% 
+% Siehe auch: serroblib_bits2csvline
+
+% Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
+% (C) Institut für mechatronische Systeme, Universität Hannover
+
+function BA = serroblib_csvline2bits(csvline)
+
+% Prüfe Eingabe
+if mod(length(csvline)-1,8) ~= 0
+  error('falsche Anzahl Einträge');
+end
+N = (length(csvline)-1)/8; % 8 Spalten pro Gelenk. So herausfinden der Gelenkzahl
+
+% Ausgabevariable vorbelegen
+BA = uint16(zeros(1,N));
+
+% Bit-Vektor aus csv-Zeile machen
+c = 1;
+for kk = 1:N % über alle Gelenk-FG
+  % Inhalt der csv-Zeilen. Siehe auch serroblib_bits2csvline.m und
+  % serroblib_add_robot.m
+  descr_type = {'R', 'P'};
+  descr_beta = {'0', 'pi/2', 'pi', '-pi/2', sprintf('beta%d',kk)};
+  descr_b = {'0', sprintf('b%d',kk)};
+  descr_theta = {'0', 'pi/2', 'pi', '-pi/2', sprintf('theta%d',kk)};
+  descr_d = {'0', sprintf('d%d',kk)};
+  descr_alpha = {'0', 'pi/2', 'pi', '-pi/2', sprintf('alpha%d',kk)};
+  descr_a = {'0', sprintf('a%d',kk)};
+  descr_offset = {'0', 'pi/2', 'pi', '-pi/2', sprintf('offset%d',kk)};
+
+  % Finde die Nummer des Eintrages in den möglichen Optionen für die
+  % csv-Zeile. Index ist Null-Basiert. Aus diesem Index (Bit_...) wird dann
+  % das Bit-Array erzeugt.
+  c=c+1; Bit_type   = uint16(find(strcmp(csvline{c},descr_type  ))-1);
+  c=c+1; Bit_beta   = uint16(find(strcmp(csvline{c},descr_beta  ))-1);
+  c=c+1; Bit_b      = uint16(find(strcmp(csvline{c},descr_b     ))-1);
+  c=c+1; Bit_alpha  = uint16(find(strcmp(csvline{c},descr_alpha ))-1); 
+  c=c+1; Bit_a      = uint16(find(strcmp(csvline{c},descr_a     ))-1);
+  c=c+1; Bit_theta  = uint16(find(strcmp(csvline{c},descr_theta ))-1);
+  c=c+1; Bit_d      = uint16(find(strcmp(csvline{c},descr_d     ))-1);
+  c=c+1; Bit_offset = uint16(find(strcmp(csvline{c},descr_offset))-1);
+  
+  % Bit-Array aus den Bits für alle Parameter zusammenstellen
+  b = 0; % Bit-Offset zur Verschiebung der Parameter-Bits in der Gesamtvariable
+  BA(kk) = bitor( BA(kk), bitshift(Bit_type,0)); b = b+1;
+  BA(kk) = bitor( BA(kk), bitshift(Bit_beta,b)); b = b+3;
+  BA(kk) = bitor( BA(kk), bitshift(Bit_b,b)); b = b+1;
+  BA(kk) = bitor( BA(kk), bitshift(Bit_alpha,b)); b = b+3;
+  BA(kk) = bitor( BA(kk), bitshift(Bit_a,b));b = b+1;
+  BA(kk) = bitor( BA(kk), bitshift(Bit_theta,b)); b = b+3;
+  BA(kk) = bitor( BA(kk), bitshift(Bit_d,b));b = b+1;
+  BA(kk) = bitor( BA(kk), bitshift(Bit_offset,b));
+end
+
