@@ -1,5 +1,10 @@
 % Generiere .mat-Dateien mit den Arrays zum schnelleren Durchsuchen der
 % Datenbank
+% 
+% Eingabe:
+% N_update
+%   Anzahl der Gelenk-Freiheitsgrade der Roboter, für die die .mat-Datei
+%   aktualisiert werden soll.
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
@@ -19,6 +24,7 @@ for N = N_update(:)'
   % Durchsuche alle csv-Dateien im Ordner nach passenden Strukturen
   mdldir = fullfile(repopath, sprintf('mdl_%ddof', N));
   for d = dir(fullfile(mdldir, '*.csv'))'
+    % fprintf('%s\n', d.name);
     csvfilepath = fullfile(mdldir, d.name);
     fid = fopen(csvfilepath);
     tline = fgetl(fid);
