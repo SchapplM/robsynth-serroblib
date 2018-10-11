@@ -1,5 +1,9 @@
 % Generiere die csv-Dateien für alle Robotermodelle (zum Abspeichern der
 % Strukturen mit konkreten Zahlenwerten für die Parameter)
+% 
+% Schreibt Dateien:
+% /mdl_xdof/SRR...PRy/models.csv (für alle x FG, RRR... Gelenkanordnungen
+% und y Modellvariationen
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover

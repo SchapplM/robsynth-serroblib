@@ -14,6 +14,9 @@
 %   true, falls die csv-Datei schon existiert (dann keine Aktion)
 % filepath_csv
 %   Pfad der zu erstellenden csv-Datei
+% 
+% Schreibt Dateien:
+% /mdl_xdof/SRR...PRy/models.csv (für den gegebenen Roboter)
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
@@ -75,6 +78,7 @@ for i = 2:length(csvline_head1)
   line_head3 = sprintf('%s,%s', line_head3, csvline_head3{i});
 end
 % Kopfzeilen in csv-Tabelle schreiben
+mkdirs(fileparts(filepath_csv));
 fid = fopen(filepath_csv, 'a');
 fwrite(fid, [line_head1, newline]);
 fwrite(fid, [line_head2, newline]);
