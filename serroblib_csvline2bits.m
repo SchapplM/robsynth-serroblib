@@ -84,12 +84,5 @@ for kk = 1:N % über alle Gelenk-FG
 end
 
 %% Bit-Vektor für EE-FG aus csv-Zeile gewinnen
-b = 0; % Bit-Offset zur Verschiebung der Parameter-Bits in der Gesamtvariable
-for i = 1:6
-  c = c+1;
-  if strcmp(csvline{c}, '0')
-    BAE = bitor( BAE, bitshift(0,b)); b = b+1;
-  else
-    BAE = bitor( BAE, bitshift(1,b)); b = b+1;
-  end
-end
+BAE = serroblib_csvline2bits_EE(csvline(c+1:end));
+
