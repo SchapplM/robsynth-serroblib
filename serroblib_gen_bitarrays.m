@@ -5,6 +5,15 @@
 % N_update
 %   Anzahl der Gelenk-Freiheitsgrade der Roboter, für die die .mat-Datei
 %   aktualisiert werden soll.
+% 
+% Schreibt Dateien:
+% mdl_xdof.mat (x=Anzahl FG aus Eingabe) mit Variablen:
+%   Names_Ndof
+%     Cell-Array mit Namen aller Roboter dieses FG
+%   BitArrays_Ndof
+%     Bit-Arrays mit gespeicherten Eigenschaften der einzelnen Gelenke
+%   BitArrays_EEdof0
+%     Bit-Arrays mit Eigenschaften der Endeffektor-Bewegung (im Basis-KS)
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
@@ -19,6 +28,7 @@ repopath=fileparts(which('serroblib_path_init.m'));
 for N = N_update(:)'
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
   BitArrays_Ndof = uint16(zeros(1,N));
+  BitArrays_EEdof0 = uint16(zeros(1,1));
   Names_Ndof = {};
   b = 1; % Zähler für gefundene Roboterkonfigurationen aus csv-Tabelle für N FG
   % Durchsuche alle csv-Dateien im Ordner nach passenden Strukturen
@@ -47,11 +57,12 @@ for N = N_update(:)'
       end
 %       % Entferne Spalten, die keinen Gelenk-Bezug haben
 %       csvline_jointkin = csvline(1:end-6);
-      BA = serroblib_csvline2bits(csvline);
+      [BAJ, BAE] = serroblib_csvline2bits(csvline);
 
       % Ausgabe belegen
       Names_Ndof{b} = csvline{1}; %#ok<AGROW>
-      BitArrays_Ndof(b,:) = BA;
+      BitArrays_Ndof(b,:) = BAJ;
+      BitArrays_EEdof0(b,:) = BAE;
       b = b+1;
     end
     fclose(fid);
@@ -60,6 +71,6 @@ for N = N_update(:)'
   % Alle Modelle neu in Ergebnisdatei (.mat) speichern
   % fprintf('serroblib_gen_bitarrays: Datei %s mit %d Einträgen gespeichert \n', mdllistfile_Ndof, size(BitArrays_Ndof,1));
   mkdirs(fileparts(mdllistfile_Ndof));
-  save(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof');
+  save(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_EEdof0');
 end
 
