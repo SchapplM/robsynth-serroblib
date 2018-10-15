@@ -43,20 +43,21 @@ PS = struct('beta',  NaN(N,1), 'b', NaN(N,1), ...
 
 
 for kk = 1:N
+  PS.sigma(kk) = descr_type{  csvbits(2+8*(kk-1)) };
   PS.beta(kk)  = descr_beta{  csvbits(3+8*(kk-1)) };
   PS.b(kk)     = descr_b{     csvbits(4+8*(kk-1)) };
   PS.alpha(kk) = descr_alpha{ csvbits(5+8*(kk-1)) };  
   PS.a(kk)     = descr_a{     csvbits(6+8*(kk-1)) };
   PS.theta(kk) = descr_theta{ csvbits(7+8*(kk-1)) };
   PS.d(kk)     = descr_d{     csvbits(8+8*(kk-1)) };
+  PS.offset(kk)= descr_offset{csvbits(9+8*(kk-1)) };
 end
 
-% Zahlenwerte der Parameter festlegen (TODO)
-PS.pkin = []; % TODO
+% Zahlenwerte der Parameter festlegen. TODO.
+PS.pkin = []; % sind hier noch gar nicht bekannt. Würde Auswahl eines bestimmten Roboters erfordern
 
 % Klassen-Instanz erstellen
 RS = SerRob(PS, Name);
 
 % Klassen-Instanz vorbereiten
 RS = RS.fill_fcn_handles(false);
-
