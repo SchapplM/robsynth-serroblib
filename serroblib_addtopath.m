@@ -4,7 +4,7 @@
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
 function serroblib_addtopath(Names)
-
+repopath=fileparts(which('serroblib_path_init.m'));
 for i = 1:length(Names)
   n = Names{i};
   N = str2double(n(2)); % Nehme Namensschema SxRRRR mit x=Anzahl FG
