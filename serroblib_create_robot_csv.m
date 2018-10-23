@@ -73,9 +73,9 @@ line_head1 = csvline_head1{1};
 line_head2 = csvline_head2{1};
 line_head3 = csvline_head3{1};
 for i = 2:length(csvline_head1)
-  line_head1 = sprintf('%s,%s', line_head1, csvline_head1{i});
-  line_head2 = sprintf('%s,%s', line_head2, csvline_head2{i});
-  line_head3 = sprintf('%s,%s', line_head3, csvline_head3{i});
+  line_head1 = sprintf('%s;%s', line_head1, csvline_head1{i});
+  line_head2 = sprintf('%s;%s', line_head2, csvline_head2{i});
+  line_head3 = sprintf('%s;%s', line_head3, csvline_head3{i});
 end
 % Kopfzeilen in csv-Tabelle schreiben
 mkdirs(fileparts(filepath_csv));

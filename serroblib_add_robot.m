@@ -92,8 +92,8 @@ if ~exist(filepath_csv, 'file')
   line_head1 = csvline_head1{1};
   line_head2 = csvline_head2{1};
   for i = 2:length(csvline_head1)
-    line_head1 = sprintf('%s,%s', line_head1, csvline_head1{i});
-    line_head2 = sprintf('%s,%s', line_head2, csvline_head2{i});
+    line_head1 = sprintf('%s;%s', line_head1, csvline_head1{i});
+    line_head2 = sprintf('%s;%s', line_head2, csvline_head2{i});
   end
   % Kopfzeile in csv-Tabelle schreiben
   fid = fopen(filepath_csv, 'a');
@@ -173,7 +173,7 @@ end
 % steht.
 line_robot = mdlname;
 for i = 2:length(csvline)
-  line_robot = sprintf('%s,%s', line_robot, csvline{i});
+  line_robot = sprintf('%s;%s', line_robot, csvline{i});
 end
 
 fid = fopen(filepath_csv, 'a');

@@ -40,7 +40,7 @@ for N = N_update(:)'
     tline = fgetl(fid);
     while ischar(tline)
       % Spaltenweise als Cell-Array
-      csvline = strsplit(tline, ',');
+      csvline = strsplit(tline, ';');
       tline = fgetl(fid); % nächste Zeile
       if isempty(csvline) || strcmp(csvline{1}, '')
         continue
