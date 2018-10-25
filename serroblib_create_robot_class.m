@@ -17,6 +17,9 @@ l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof');
 
 % Bit-Array für Namen
 BA = l.BitArrays_Ndof(strcmp(l.Names_Ndof,Name),:);
+if isempty(BA)
+  error('Roboter %s ist nicht bekannt', Name);
+end
 [~, csvbits] = serroblib_bits2csvline(BA);
 
 % Parameter-Struktur erstellen
