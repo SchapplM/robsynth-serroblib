@@ -50,13 +50,20 @@ csvline_head1 = {'Name/lfdNr', 'Name2', 'Langname'};
 csvline_head2 = {'', '', ''};
 % Dritte Zeile: Kennzeichnung, welche MDH-Parameter Null oder fest auf z.B.
 % pi/2 liegen
-csvline_head3 = {Name, '', '', csvline{2:end}};
+csvline_head3 = {Name, '', ''};
 c = 4; % Spalten-Zähler
 % Kopfzeile für alle Gelenke erstellen
 for kk = 1:N
   csvline_head1{c} = sprintf('Gelenk %d', kk);
-  for jj = 1:7
+  for jj = 1:12
     csvline_head1{c+jj} = '';
+  end
+  for jj = 1:12
+    if jj < 9
+      csvline_head3{c+jj-1} =  csvline{1+(kk-1)*8+jj};
+    else
+      csvline_head3{c+jj-1} = '';
+    end
   end
   csvline_head2{c} = 'Typ'; c = c+1;
   csvline_head2{c} = 'beta'; c = c+1;
@@ -66,7 +73,22 @@ for kk = 1:N
   csvline_head2{c} = 'theta'; c = c+1;
   csvline_head2{c} = 'd'; c = c+1;
   csvline_head2{c} = 'offset'; c = c+1;
+  csvline_head2{c} = 'qmin'; c = c+1;
+  csvline_head2{c} = 'qmax'; c = c+1;
+  csvline_head2{c} = 'vmax'; c = c+1;
+  csvline_head2{c} = 'VZ'; c = c+1;
+  csvline_head2{c} = 'just'; c = c+1;
 end
+
+% Kopfzeile für zusätzliche Infos
+c=c+1;
+csvline_head1{c} = 'Allgemein';
+csvline_head2{c} = 'Nenn-Traglast';
+csvline_head3{c} = '';
+c=c+1;
+csvline_head1{c} = '';
+csvline_head2{c} = 'Masse';
+csvline_head3{c} = '';
 
 % String aus Cell-Arrays erzeugen
 line_head1 = csvline_head1{1};
