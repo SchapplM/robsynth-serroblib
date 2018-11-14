@@ -10,5 +10,7 @@ for i = 1:length(Names)
   N = str2double(n(2)); % Nehme Namensschema SxRRRR mit x=Anzahl FG
 
   fcn_dir = fullfile(repopath, sprintf('mdl_%ddof', N), n, 'hd');
-  addpath(fcn_dir);
+  if exist(fcn_dir, 'file')
+    addpath(fcn_dir);
+  end
 end
