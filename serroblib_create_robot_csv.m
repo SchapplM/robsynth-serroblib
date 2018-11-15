@@ -81,7 +81,6 @@ for kk = 1:N
 end
 
 % Kopfzeile für zusätzliche Infos
-c=c+1;
 csvline_head1{c} = 'Allgemein';
 csvline_head2{c} = 'Nenn-Traglast';
 csvline_head3{c} = '';
