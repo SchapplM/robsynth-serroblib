@@ -1,0 +1,4 @@
+Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;EE-FG (Basis-KS);;;;;
+;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;vx0;vy0;vz0;wx0;wy0;wz0
+S2RR1;R;0;0;-pi/2;0;0;0;-pi/2;R;0;0;-pi/2;0;0;d2;0;1;0;1;1;1;1
+S2RR2;R;0;0;-pi/2;0;0;0;0;R;0;0;pi/2;0;0;d2;0;1;1;1;1;1;1
