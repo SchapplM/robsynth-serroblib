@@ -4,3 +4,4 @@ slprj
 codegen
 *.mat
 maplerepo_path.m
+.~lock.*.csv#
