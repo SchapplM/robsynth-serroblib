@@ -149,11 +149,12 @@ end
 PS.pkin = []; % sind hier noch gar nicht bekannt. Würde Auswahl eines bestimmten Roboters erfordern
 
 % Klassen-Instanz erstellen
+serroblib_addtopath({Name})
 RS = SerRob(PS, Name);
 
 % Klassen-Instanz vorbereiten
 RS = RS.fill_fcn_handles(false);
-serroblib_addtopath({Name});
+
 RS.update_pkin();
 
 RS.qlim = [PS.qmin(:), PS.qmax(:)];
@@ -161,3 +162,4 @@ RS.qDlim = [-PS.vmax(:), PS.vmax(:)];
 RS.qref = PS.qref(:);
 
 RS.descr = descr;
+
