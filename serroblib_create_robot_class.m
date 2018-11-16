@@ -135,6 +135,30 @@ if nargin > 1 % Falls Name des Parametrierten Modells gegeben
       if isnan(PS.theta(kk)), PS.theta(kk)   = unitmult_angle*value_theta; end
       if isnan(PS.d(kk)), PS.d(kk)           = unitmult_dist*value_d; end
       if isnan(PS.offset(kk)), PS.offset(kk) = unitmult_q*value_offset; end
+      
+      % Werte belegen, wenn sie in der Tabelle nicht gegeben sind
+      if isnan(value_qmin)
+        if PS.sigma(kk) == 0
+          value_qmin = -pi;
+        else
+          value_qmin = -1;
+        end
+      end
+      if isnan(value_qmax)
+        if PS.sigma(kk) == 0
+          value_qmax = pi;
+        else
+          value_qmax = 1;
+        end
+      end
+      if isnan(value_vmax)
+        if PS.sigma(kk) == 0
+          value_vmax = 2;
+        else
+          value_vmax = 1;
+        end
+      end
+      
       PS.qmin(kk) = unitmult_q*value_qmin;
       PS.qmax(kk) = unitmult_q*value_qmax;
       PS.vmax(kk) = unitmult_q*value_vmax;
