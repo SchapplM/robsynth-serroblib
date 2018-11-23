@@ -118,7 +118,7 @@ if nargin > 1 % Falls Name des Parametrierten Modells gegeben
       c=c+1; value_qmin   = str2double(csvline{c});
       c=c+1; value_qmax   = str2double(csvline{c});
       c=c+1; value_vmax   = str2double(csvline{c});
-      c=c+1; % Spalte für Achs-Vorzeichen nach Hersteller-Norm (noch nicht implementiert)
+      c=c+1; value_sign   = str2double(csvline{c});
       c=c+1; value_qref = str2double(csvline{c});
       
       if PS.sigma(kk) == 0
@@ -158,6 +158,10 @@ if nargin > 1 % Falls Name des Parametrierten Modells gegeben
           value_vmax = 1;
         end
       end
+      % Spalte für Achs-Vorzeichen nach Hersteller-Norm (noch nicht vollständig implementiert)
+      if value_sign ~= -1 && value_sign ~= 1
+        error('Spalte für Vorzeichen hat Wert mit Betrag ungleich eins');
+      end
       
       PS.qmin(kk) = unitmult_q*value_qmin;
       PS.qmax(kk) = unitmult_q*value_qmax;
@@ -186,4 +190,3 @@ RS.qDlim = [-PS.vmax(:), PS.vmax(:)];
 RS.qref = PS.qref(:);
 
 RS.descr = descr;
-
