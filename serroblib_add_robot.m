@@ -24,6 +24,8 @@
 % Ausgabe:
 % mdlname
 %   Name des Roboters in der Datenbank
+% new
+%   true, wenn Roboter neu ist und der Datenbank hinzugefügt wurde.
 
 % Quelle:
 % [KhalilKle1986] Khalil, W. and Kleinfinger, J.-F.: "A new geometric
@@ -32,7 +34,7 @@
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
-function mdlname = serroblib_add_robot(MDH_struct, EEdof0)
+function [mdlname, new] = serroblib_add_robot(MDH_struct, EEdof0)
 
 if nargin == 1
   EEdof0 = []; % 6 Leerzeichen
@@ -161,9 +163,11 @@ mdlname = sprintf('S%d%s%d', N, typestring, index);
 csvline{1} = mdlname;
 if found
   fprintf('serroblib_add_robot: Roboter %s ist schon in der Datenbank.\n', mdlname);
+  new = false;
   return;
 else
   fprintf('serroblib_add_robot: Roboter %s ist noch nicht in der Datenbank.\n', mdlname);
+  new = true;
 end
 
 %% Zeile in Datei hinzufügen
