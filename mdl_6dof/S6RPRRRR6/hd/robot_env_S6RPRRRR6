@@ -1,0 +1,13 @@
+robot_name := "S6RPRRRR6":
+NJ := 6:
+NQJ := 6:
+v := Matrix(NJ,1,[0,1,2,3,4,5]):
+mu := Matrix(NJ,1,[1,1,1,1,1,1]):
+sigma := Matrix(NJ,1,[0,1,0,0,0,0]):
+beta := Matrix(NJ,1,[0,0,0,0,0,0]):
+b := Matrix(NJ,1,[0,0,0,0,0,0]):
+alpha := Matrix(NJ,1,[0,Pi/2,0,Pi/2,0,0]):
+a := Matrix(NJ,1,[0,a2,a3,a4,a5,a6]):
+theta := Matrix(NJ,1,[qJ_t(1,1) + 0,theta2,qJ_t(3,1) + 0,qJ_t(4,1) + 0,qJ_t(5,1) + 0,qJ_t(6,1) + 0]):
+d := Matrix(NJ,1,[d1,qJ_t(2,1) + 0,d3,d4,d5,d6]):
+qoffset := Matrix(NJ,1,[0,0,0,0,0,0]):
