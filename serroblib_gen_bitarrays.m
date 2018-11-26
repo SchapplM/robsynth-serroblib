@@ -22,7 +22,7 @@ function serroblib_gen_bitarrays(N_update)
 
 
 if nargin == 0
-  N_update = 1:6; % Aktualisiere alle Roboter
+  N_update = 1:7; % Aktualisiere alle Roboter
 end
 repopath=fileparts(which('serroblib_path_init.m'));
 for N = N_update(:)'

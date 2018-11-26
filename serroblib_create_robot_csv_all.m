@@ -8,7 +8,7 @@
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
-for N = 1:6
+for N = 1:7
   % Bit-Arrays aktualisieren
   serroblib_gen_bitarrays(N);
   
