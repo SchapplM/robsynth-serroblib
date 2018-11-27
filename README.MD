@@ -69,6 +69,12 @@ Die Tabelle enthält Zahlenwerte für die einzelnen MDH-Parameter.
 
 Die csv-Dateien enhalten alle Informationen der Roboterbibliothek. Die Daten werden zusätzlich in komprimierter Form gespeichert. In `mdl_xdof/Sx_list.mat` liegen die gleichen Daten wie in den csv-Tabellen zur einfacheren Verarbeitung in Matlab.
 
+### CAD-Modelle
+
+Zu den Parametrierten Robotermodellen können in der Datenbank auch CAD-Modelle abgelegt werden. Diese können dann mit Hilfe der Matlab-Klasse `SerRob` zur Visualisierung verwendet werden.
+Die CAD-Modelle werden im Unterordner `CAD_Robotername` von `mdl_xdof/Typbezeichnung` abgelegt.  
+In jedem CAD-Ordner liegen die CAD-Modelle der einzelnen Roboterkörper im STL-Format (binär, nicht ASCI) und eine Initialisierungsdatei `Robotername_init_CAD.m`. Dort werden z.B. die Koordinatentransformationen zwischen den Körper-Koordinatensystemen und dem Ursprung und der Ausrichtung in den STL-Dateien definiert.
+
 ## Quellen
 
 * [KhalilKle1986] Khalil, W. and Kleinfinger, J.-F.: "A new geometric notation for open and closed-loop robots" (1986) <a name="KhalilKle1986"></a> 
