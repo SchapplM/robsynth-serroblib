@@ -22,7 +22,7 @@
 %   joint torques required to compensate gravitation load
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-26 19:01
+% Datum: 2018-11-26 21:21
 % Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
@@ -46,9 +46,9 @@ assert(isreal(mrSges) && all(size(mrSges) == [8,3]), ...
 %% Symbolic Calculation
 % From joint_gravload_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-26 19:00:02
-% EndTime: 2018-11-26 19:00:04
-% DurationCPUTime: 1.84s
+% StartTime: 2018-11-26 19:14:26
+% EndTime: 2018-11-26 19:14:31
+% DurationCPUTime: 1.90s
 % Computational Cost: add. (1119->187), mult. (3035->291), div. (0->0), fcn. (3749->14), ass. (0->92)
 t87 = sin(qJ(2));
 t88 = sin(qJ(1));

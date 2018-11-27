@@ -23,7 +23,7 @@
 %   Zeitableitung der rotatorischen Teilmatrix der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-26 19:01
+% Datum: 2018-11-26 21:21
 % Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
