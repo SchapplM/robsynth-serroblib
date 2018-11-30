@@ -2,7 +2,7 @@
 % Datenbank
 % 
 % Eingabe:
-% N_update
+% N_update (optional)
 %   Anzahl der Gelenk-Freiheitsgrade der Roboter, für die die .mat-Datei
 %   aktualisiert werden soll.
 % 

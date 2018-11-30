@@ -4,3 +4,7 @@
 
 this_tb_path = fileparts( mfilename('fullpath') );
 addpath(this_tb_path);
+
+% Alle csv-Tabellen (versionsverwaltet) nach .mat konvertieren (nicht
+% versionsverwaltet, da binär-Format)
+serroblib_gen_bitarrays
