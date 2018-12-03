@@ -15,7 +15,7 @@
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
-function [v_mdh, sigma_mdh, mu_mdh] = S5RRRRR1_structural_kinematic_parameters()
+function [v_mdh, sigma_mdh, mu_mdh, NL, NKP] = S5RRRRR1_structural_kinematic_parameters()
 
 % Aus parameters_mdh_v_matlab.m
 t1 = [0; 1; 2; 3; 4;];
@@ -28,3 +28,7 @@ sigma_mdh = t1;
 % Aus parameters_mdh_mu_matlab.m
 t1 = [1; 1; 1; 1; 1;];
 mu_mdh = t1;
+
+% Zusatz:
+NL = 6;
+NKP = 6;

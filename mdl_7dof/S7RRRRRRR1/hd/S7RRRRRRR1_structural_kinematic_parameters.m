@@ -17,7 +17,7 @@
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
-function [v_mdh, sigma_mdh, mu_mdh, NL] = S7RRRRRRR1_structural_kinematic_parameters()
+function [v_mdh, sigma_mdh, mu_mdh, NL, NKP] = S7RRRRRRR1_structural_kinematic_parameters()
 
 % Aus parameters_mdh_v_matlab.m
 t1 = [0; 1; 2; 3; 4; 5; 6;];
@@ -33,3 +33,4 @@ mu_mdh = t1;
 
 % Aus Roboterdefinition
 NL = 8;
+NKP = 4;
