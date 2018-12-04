@@ -10,10 +10,12 @@
 %   Aktives Gelenk = 1, Passiv = 0
 % NL [1x1]
 %   Anzahl der Starrkörper (inklusive Basis)
+% NKP [1x1]
+%   Anzahl der Kinematikparameter im Vektor `pkin`
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 11:28
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Datum: 2018-12-03 23:58
+% Revision: d48b0a2e5a58b84c602962b686e619ad34ecf1f0 (2018-11-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
@@ -32,5 +34,8 @@ t1 = [1; 1; 1; 1; 1; 1;];
 mu_mdh = t1;
 
 % Aus Roboterdefinition
+% Anzahl der Robotersegmente (inkl Basis)
 NL = 7;
+% Anzahl der Kinematikparameter
+% pkin = [a2 a3 a4 a5 a6 alpha2 alpha3 alpha4 d1 d2 d3 d4 d5 d6]'
 NKP = 14;
