@@ -23,8 +23,8 @@
 %   pkin=[a2,a3,a4,a5,a6,alpha2,alpha3,alpha4,d1,d2,d4,d5,d6,theta3]';
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 17:31
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Datum: 2018-12-10 18:39
+% Revision: bb42a8b95257d9bc83910d26e849f5825122f662 (2018-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 

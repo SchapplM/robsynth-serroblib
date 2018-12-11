@@ -14,8 +14,8 @@
 %   Anzahl der Kinematikparameter im Vektor `pkin`
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-12-03 22:38
-% Revision: d48b0a2e5a58b84c602962b686e619ad34ecf1f0 (2018-11-30)
+% Datum: 2018-12-10 18:39
+% Revision: bb42a8b95257d9bc83910d26e849f5825122f662 (2018-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
