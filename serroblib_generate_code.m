@@ -7,6 +7,8 @@
 %   x=Anzahl Gelenk-FG und yyy laufende Nummer für "RRR".
 % force [1x1 logical]
 %   Erzwinge die Neu-Generierung des Codes
+% nocopy [1x1 logical]
+%   Nur Code generieren, aber nicht zurück kopieren
 % 
 % Vorher: 
 % * Funktion maplerepo_path.m muss vorliegen mit Rückgabe des
@@ -17,10 +19,13 @@
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
-function serroblib_generate_code(Names, force)
+function serroblib_generate_code(Names, force, nocopy)
 
 if nargin < 2
   force = false;
+end
+if nargin < 3
+  nocopy = false;
 end
 
 repopath=fileparts(which('serroblib_path_init.m'));
@@ -57,7 +62,11 @@ for i = 1:length(Names)
   system( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel', mrp) ); %  > /dev/null
   
   % generierten Code zurückkopieren (alle .m-Dateien)
-  for f = dir(fullfile(outputdir_tb, '*.m'))'
-    copyfile(fullfile(outputdir_tb, f.name), fullfile(outputdir_local, f.name));
+  % TODO: Hier sind noch viele automatisch generierte Dateien dabei, die
+  % eigentlich nicht relevant sind (z.B. eulxyz-Floatbase)
+  if ~nocopy
+    for f = dir(fullfile(outputdir_tb, '*.m'))'
+      copyfile(fullfile(outputdir_tb, f.name), fullfile(outputdir_local, f.name));
+    end
   end
 end

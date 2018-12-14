@@ -11,17 +11,15 @@
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
 function serroblib_generate_mapleinput(Names)
-
+repopath=fileparts(which('serroblib_path_init.m'));
 %#ok<*AGROW>
 for i = 1:length(Names)
   n = Names{i};
   N = str2double(n(2));
   
   % Datenbank laden
-  repopath=fileparts(which('serroblib_path_init.m'));
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
   l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof');
-  
   
   % Index in Gesamt-Tabelle laden
   index_ges = find(strcmp(l.Names_Ndof, n));
@@ -35,9 +33,9 @@ for i = 1:length(Names)
   mkdirs(fileparts(mapleinputfile));
   fid = fopen(mapleinputfile, 'w');
   % Allgemeine Definitionen
-  fprintf(fid, sprintf('robot_name := "%s":\n', n));
-  fprintf(fid, sprintf('NJ := %d:\n', N));
-  fprintf(fid, sprintf('NQJ := %d:\n', N));
+  fprintf(fid, 'robot_name := "%s":\n', n);
+  fprintf(fid, 'NJ := %d:\n', N);
+  fprintf(fid, 'NQJ := %d:\n', N);
 
   % Zeilen für alle MDH-Parameter
   line_v = 'v := Matrix(NJ,1,[';

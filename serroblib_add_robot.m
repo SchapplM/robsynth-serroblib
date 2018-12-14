@@ -98,7 +98,7 @@ if ~exist(filepath_csv, 'file')
     line_head2 = sprintf('%s;%s', line_head2, csvline_head2{i});
   end
   % Kopfzeile in csv-Tabelle schreiben
-  fid = fopen(filepath_csv, 'a');
+  fid = fopen(filepath_csv, 'w');
   fwrite(fid, [line_head1, newline]);
   fwrite(fid, [line_head2, newline]);
   fclose(fid);
