@@ -75,6 +75,12 @@ Zu den Parametrierten Robotermodellen können in der Datenbank auch CAD-Modelle 
 Die CAD-Modelle werden im Unterordner `CAD_Robotername` von `mdl_xdof/Typbezeichnung` abgelegt.  
 In jedem CAD-Ordner liegen die CAD-Modelle der einzelnen Roboterkörper im STL-Format (binär, nicht ASCI) und eine Initialisierungsdatei `Robotername_init_CAD.m`. Dort werden z.B. die Koordinatentransformationen zwischen den Körper-Koordinatensystemen und dem Ursprung und der Ausrichtung in den STL-Dateien definiert.
 
+### Tests
+
+Im Ordner `examples_tests` befinden sich Testskripte, mit denen sich die Funktionen aus dieser Bibliothek ausführen lassen.
+
+Weitere Beispiele befinden sich im Robotik-Repo für die Roboterklasse `SerRob` unter Benutzung der Modelle aus dieser Toolbox.
+
 ## Quellen
 
 * [KhalilKle1986] Khalil, W. and Kleinfinger, J.-F.: "A new geometric notation for open and closed-loop robots" (1986) <a name="KhalilKle1986"></a> 
