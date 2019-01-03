@@ -20,8 +20,8 @@
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-12-10 18:38
-% Revision: bb42a8b95257d9bc83910d26e849f5825122f662 (2018-12-05)
+% Datum: 2019-01-03 10:25
+% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
@@ -38,66 +38,55 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From jacobia_rot_3_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-12-10 18:38:20
-% EndTime: 2018-12-10 18:38:21
-% DurationCPUTime: 0.21s
-% Computational Cost: add. (825->43), mult. (979->85), div. (50->9), fcn. (1135->21), ass. (0->58)
-t93 = sin(pkin(6));
-t96 = sin(qJ(1));
-t106 = t93 * t96;
-t90 = pkin(6) + qJ(2);
-t84 = cos(t90) / 0.2e1;
-t103 = pkin(6) - qJ(2);
-t87 = cos(t103);
-t78 = t87 / 0.2e1 + t84;
-t95 = sin(qJ(2));
-t98 = cos(qJ(1));
-t69 = -t96 * t78 - t98 * t95;
-t100 = sin(t103);
-t102 = sin(t90) / 0.2e1;
-t76 = t102 - t100 / 0.2e1;
-t97 = cos(qJ(2));
-t71 = t96 * t76 - t98 * t97;
-t88 = pkin(7) + pkin(14);
-t80 = sin(t88) / 0.2e1;
-t89 = pkin(7) - pkin(14);
-t85 = sin(t89);
-t73 = t80 - t85 / 0.2e1;
-t81 = cos(t89) / 0.2e1;
-t86 = cos(t88);
-t75 = t81 - t86 / 0.2e1;
-t94 = cos(pkin(14));
-t55 = t75 * t106 + t69 * t73 - t71 * t94;
-t53 = 0.1e1 / t55 ^ 2;
-t72 = t80 + t85 / 0.2e1;
-t74 = t81 + t86 / 0.2e1;
-t91 = sin(pkin(14));
-t54 = -t72 * t106 - t69 * t74 - t71 * t91;
-t109 = t53 * t54;
-t104 = cos(pkin(7));
-t101 = t93 * t104;
-t66 = -t98 * t78 + t96 * t95;
-t92 = sin(pkin(7));
-t60 = t98 * t101 - t66 * t92;
-t65 = -(t102 + t100 / 0.2e1) * t92 + cos(pkin(6)) * t104;
-t59 = atan2(t60, t65);
-t57 = cos(t59);
-t108 = t57 * t60;
-t56 = sin(t59);
-t50 = t56 * t60 + t57 * t65;
-t49 = 0.1e1 / t50 ^ 2;
-t61 = -t96 * t101 + t69 * t92;
-t107 = t61 ^ 2 * t49;
-t105 = t93 * t98;
-t99 = -t98 * t76 - t96 * t97;
-t77 = t84 - t87 / 0.2e1;
-t64 = 0.1e1 / t65 ^ 2;
-t63 = 0.1e1 / t65;
-t58 = 0.1e1 / (t60 ^ 2 * t64 + 0.1e1);
-t52 = 0.1e1 / t55;
-t51 = 0.1e1 / (t54 ^ 2 * t53 + 0.1e1);
-t48 = 0.1e1 / t50;
-t47 = 0.1e1 / (0.1e1 + t107);
-t46 = (t60 * t64 * t77 + t63 * t99) * t92 * t58;
-t1 = [t61 * t63 * t58, t46, 0, 0, 0, 0; (t60 * t48 + (t56 + (t63 * t108 - t56) * t58) * t107) * t47 (-t71 * t92 * t48 + ((t56 * t99 - t57 * t77) * t92 + (-t56 * t65 + t108) * t46) * t61 * t49) * t47, 0, 0, 0, 0; ((-t72 * t105 - t66 * t74 + t91 * t99) * t52 - (t75 * t105 + t66 * t73 + t94 * t99) * t109) * t51 ((t69 * t91 - t71 * t74) * t52 - (t69 * t94 + t71 * t73) * t109) * t51, 0, 0, 0, 0;];
+% StartTime: 2019-01-03 10:25:33
+% EndTime: 2019-01-03 10:25:33
+% DurationCPUTime: 0.14s
+% Computational Cost: add. (273->29), mult. (795->75), div. (50->9), fcn. (1135->13), ass. (0->47)
+t61 = cos(pkin(6));
+t64 = cos(qJ(2));
+t65 = cos(qJ(1));
+t68 = t64 * t65;
+t62 = sin(qJ(2));
+t63 = sin(qJ(1));
+t70 = t63 * t62;
+t50 = -t61 * t68 + t70;
+t57 = sin(pkin(7));
+t60 = cos(pkin(7));
+t58 = sin(pkin(6));
+t72 = t58 * t65;
+t44 = -t50 * t57 + t60 * t72;
+t49 = -t57 * t58 * t64 + t60 * t61;
+t43 = atan2(t44, t49);
+t40 = sin(t43);
+t41 = cos(t43);
+t34 = t40 * t44 + t41 * t49;
+t33 = 0.1e1 / t34 ^ 2;
+t69 = t63 * t64;
+t71 = t62 * t65;
+t52 = -t61 * t69 - t71;
+t73 = t58 * t63;
+t45 = t52 * t57 - t60 * t73;
+t78 = t33 * t45 ^ 2;
+t53 = -t61 * t70 + t68;
+t56 = sin(pkin(14));
+t59 = cos(pkin(14));
+t66 = t52 * t60 + t57 * t73;
+t39 = t53 * t59 + t66 * t56;
+t37 = 0.1e1 / t39 ^ 2;
+t38 = t53 * t56 - t66 * t59;
+t77 = t37 * t38;
+t76 = t41 * t44;
+t75 = t53 * t60;
+t74 = t58 * t62;
+t67 = t50 * t60 + t57 * t72;
+t51 = -t61 * t71 - t69;
+t48 = 0.1e1 / t49 ^ 2;
+t47 = 0.1e1 / t49;
+t42 = 0.1e1 / (t44 ^ 2 * t48 + 0.1e1);
+t36 = 0.1e1 / t39;
+t35 = 0.1e1 / (t37 * t38 ^ 2 + 0.1e1);
+t32 = 0.1e1 / t34;
+t31 = 0.1e1 / (0.1e1 + t78);
+t30 = (-t44 * t48 * t74 + t47 * t51) * t57 * t42;
+t1 = [t45 * t47 * t42, t30, 0, 0, 0, 0; (t44 * t32 + (t40 + (t47 * t76 - t40) * t42) * t78) * t31 (t53 * t57 * t32 + ((t40 * t51 + t41 * t74) * t57 + (-t40 * t49 + t76) * t30) * t45 * t33) * t31, 0, 0, 0, 0; ((t51 * t56 - t67 * t59) * t36 - (t51 * t59 + t67 * t56) * t77) * t35 ((t52 * t56 + t59 * t75) * t36 - (t52 * t59 - t56 * t75) * t77) * t35, 0, 0, 0, 0;];
 Ja_rot  = t1;

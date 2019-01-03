@@ -21,8 +21,8 @@
 %   Zeitableitung der translatorischen Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-12-10 18:38
-% Revision: bb42a8b95257d9bc83910d26e849f5825122f662 (2018-12-05)
+% Datum: 2019-01-03 10:25
+% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
@@ -43,8 +43,8 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From jacobiaD_transl_1_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-12-10 18:38:20
-% EndTime: 2018-12-10 18:38:20
+% StartTime: 2019-01-03 10:25:33
+% EndTime: 2019-01-03 10:25:33
 % DurationCPUTime: 0.01s
 % Computational Cost: add. (2->2), mult. (8->6), div. (0->0), fcn. (4->2), ass. (0->3)
 t27 = cos(qJ(1));

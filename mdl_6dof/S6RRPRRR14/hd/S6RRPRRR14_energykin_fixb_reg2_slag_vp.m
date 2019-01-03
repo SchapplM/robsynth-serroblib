@@ -16,8 +16,8 @@
 %   minimal parameter regressor of kinetic energy
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-12-10 18:39
-% Revision: bb42a8b95257d9bc83910d26e849f5825122f662 (2018-12-05)
+% Datum: 2019-01-03 10:26
+% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-12-10 18:32:30
-% EndTime: 2018-12-10 18:32:31
-% DurationCPUTime: 0.62s
+% StartTime: 2019-01-03 10:20:39
+% EndTime: 2019-01-03 10:20:39
+% DurationCPUTime: 0.58s
 % Computational Cost: add. (4144->86), mult. (11841->198), div. (0->0), fcn. (10102->16), ass. (0->70)
 t91 = cos(pkin(6)) * qJD(1);
 t66 = qJD(2) + t91;
@@ -108,5 +108,5 @@ t4 = t34 * pkin(13) + t6;
 t3 = -t34 * pkin(5) - t5;
 t2 = t101 * t4 + t75 * t7;
 t1 = t101 * t7 - t75 * t4;
-t8 = [0, 0, 0, 0, 0, t81 / 0.2e1, 0, 0, 0, 0, t78 ^ 2 * t86, t78 * t90, t66 * t88, t80 ^ 2 * t86, t66 * t87, t66 ^ 2 / 0.2e1, pkin(1) * t90 + t59 * t66, -pkin(1) * t78 * t96 - t60 * t66 (-t59 * t78 + t60 * t80) * t92, t60 ^ 2 / 0.2e1 + t59 ^ 2 / 0.2e1 + pkin(1) ^ 2 * t86, t49 ^ 2 / 0.2e1, -t47 * t49, -t57 * t49, t47 ^ 2 / 0.2e1, t47 * t57, t57 ^ 2 / 0.2e1, -t31 * t57 + t38 * t47, t32 * t57 + t38 * t49, -t31 * t49 - t32 * t47, t32 ^ 2 / 0.2e1 + t31 ^ 2 / 0.2e1 + t38 ^ 2 / 0.2e1, t37 ^ 2 / 0.2e1, -t35 * t37, -t40 * t37, t35 ^ 2 / 0.2e1, t40 * t35, t40 ^ 2 / 0.2e1, -t13 * t40 + t15 * t35, t14 * t40 + t15 * t37, -t13 * t37 - t14 * t35, t14 ^ 2 / 0.2e1 + t13 ^ 2 / 0.2e1 + t15 ^ 2 / 0.2e1, t26 ^ 2 / 0.2e1, -t24 * t26, t34 * t26, t24 ^ 2 / 0.2e1, -t24 * t34, t34 ^ 2 / 0.2e1, t9 * t24 + t5 * t34, t9 * t26 - t6 * t34, -t6 * t24 - t5 * t26, t6 ^ 2 / 0.2e1 + t5 ^ 2 / 0.2e1 + t9 ^ 2 / 0.2e1, t18 ^ 2 / 0.2e1, -t18 * t16, t22 * t18, t16 ^ 2 / 0.2e1, -t22 * t16, t22 ^ 2 / 0.2e1, t1 * t22 + t3 * t16, t3 * t18 - t2 * t22, -t1 * t18 - t2 * t16, t2 ^ 2 / 0.2e1 + t1 ^ 2 / 0.2e1 + t3 ^ 2 / 0.2e1;];
+t8 = [0, 0, 0, 0, 0, t81 / 0.2e1, 0, 0, 0, 0, t78 ^ 2 * t86, t78 * t90, t66 * t88, t80 ^ 2 * t86, t66 * t87, t66 ^ 2 / 0.2e1, pkin(1) * t90 + t59 * t66, -pkin(1) * t78 * t96 - t60 * t66 (-t59 * t78 + t60 * t80) * t92, t60 ^ 2 / 0.2e1 + t59 ^ 2 / 0.2e1 + pkin(1) ^ 2 * t86, t49 ^ 2 / 0.2e1, -t47 * t49, -t57 * t49, t47 ^ 2 / 0.2e1, t47 * t57, t57 ^ 2 / 0.2e1, -t31 * t57 + t38 * t47, t32 * t57 + t38 * t49, -t31 * t49 - t32 * t47, t32 ^ 2 / 0.2e1 + t31 ^ 2 / 0.2e1 + t38 ^ 2 / 0.2e1, t37 ^ 2 / 0.2e1, -t35 * t37, -t40 * t37, t35 ^ 2 / 0.2e1, t40 * t35, t40 ^ 2 / 0.2e1, -t13 * t40 + t15 * t35, t14 * t40 + t15 * t37, -t13 * t37 - t14 * t35, t14 ^ 2 / 0.2e1 + t13 ^ 2 / 0.2e1 + t15 ^ 2 / 0.2e1, t26 ^ 2 / 0.2e1, -t26 * t24, t26 * t34, t24 ^ 2 / 0.2e1, -t24 * t34, t34 ^ 2 / 0.2e1, t9 * t24 + t5 * t34, t9 * t26 - t6 * t34, -t6 * t24 - t5 * t26, t6 ^ 2 / 0.2e1 + t5 ^ 2 / 0.2e1 + t9 ^ 2 / 0.2e1, t18 ^ 2 / 0.2e1, -t18 * t16, t18 * t22, t16 ^ 2 / 0.2e1, -t16 * t22, t22 ^ 2 / 0.2e1, t1 * t22 + t3 * t16, t3 * t18 - t2 * t22, -t1 * t18 - t2 * t16, t2 ^ 2 / 0.2e1 + t1 ^ 2 / 0.2e1 + t3 ^ 2 / 0.2e1;];
 T_reg  = t8;

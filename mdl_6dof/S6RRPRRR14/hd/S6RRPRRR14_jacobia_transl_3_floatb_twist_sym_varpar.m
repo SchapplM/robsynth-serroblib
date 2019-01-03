@@ -19,8 +19,8 @@
 %   Translatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-12-10 18:38
-% Revision: bb42a8b95257d9bc83910d26e849f5825122f662 (2018-12-05)
+% Datum: 2019-01-03 10:25
+% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
@@ -39,47 +39,34 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From jacobia_transl_3_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-12-10 18:38:20
-% EndTime: 2018-12-10 18:38:20
-% DurationCPUTime: 0.18s
-% Computational Cost: add. (231->54), mult. (251->75), div. (0->0), fcn. (251->18), ass. (0->39)
-t45 = r_i_i_C(3) + qJ(3);
-t26 = sin(pkin(6));
-t30 = sin(qJ(1));
-t44 = t26 * t30;
-t32 = cos(qJ(1));
-t43 = t26 * t32;
-t42 = pkin(6) - qJ(2);
-t41 = pkin(6) + qJ(2);
-t25 = sin(pkin(7));
-t40 = t45 * t25;
-t39 = cos(t42);
-t38 = sin(t42);
-t37 = cos(t41) / 0.2e1;
-t36 = sin(t41) / 0.2e1;
-t14 = t36 - t38 / 0.2e1;
-t31 = cos(qJ(2));
-t35 = -t32 * t14 - t30 * t31;
-t7 = t30 * t14 - t32 * t31;
-t29 = sin(qJ(2));
-t33 = t39 / 0.2e1 + t37;
-t2 = t30 * t29 - t32 * t33;
-t28 = cos(pkin(7));
-t34 = -t2 * t25 + t28 * t43;
-t5 = -t32 * t29 - t30 * t33;
-t1 = -t5 * t25 + t28 * t44;
-t27 = cos(pkin(14));
-t24 = sin(pkin(14));
-t23 = pkin(7) - pkin(14);
-t22 = pkin(7) + pkin(14);
-t21 = cos(t22);
-t20 = sin(t23);
-t17 = cos(t23) / 0.2e1;
-t16 = sin(t22) / 0.2e1;
-t13 = t36 + t38 / 0.2e1;
-t12 = t17 - t21 / 0.2e1;
-t11 = t17 + t21 / 0.2e1;
-t10 = t16 - t20 / 0.2e1;
-t9 = t16 + t20 / 0.2e1;
-t3 = [(t2 * t10 + t12 * t43 + t27 * t35) * r_i_i_C(1) + (t2 * t11 - t24 * t35 + t9 * t43) * r_i_i_C(2) + t35 * pkin(2) - t30 * pkin(1) + pkin(10) * t43 + t45 * t34 (t7 * t10 + t5 * t27) * r_i_i_C(1) + (t7 * t11 - t5 * t24) * r_i_i_C(2) + t5 * pkin(2) - t7 * t40, t1, 0, 0, 0; (t5 * t10 + t12 * t44 - t27 * t7) * r_i_i_C(1) + (t5 * t11 + t24 * t7 + t9 * t44) * r_i_i_C(2) - t7 * pkin(2) + t32 * pkin(1) + pkin(10) * t44 + t45 * t1 (t10 * t35 - t2 * t27) * r_i_i_C(1) + (t11 * t35 + t2 * t24) * r_i_i_C(2) - t2 * pkin(2) - t35 * t40, -t34, 0, 0, 0; 0 (t27 * r_i_i_C(1) - t24 * r_i_i_C(2) + pkin(2)) * t13 + (t10 * r_i_i_C(1) + t11 * r_i_i_C(2) - t40) * (t37 - t39 / 0.2e1) -t13 * t25 + cos(pkin(6)) * t28, 0, 0, 0;];
-Ja_transl  = t3;
+% StartTime: 2019-01-03 10:25:33
+% EndTime: 2019-01-03 10:25:33
+% DurationCPUTime: 0.13s
+% Computational Cost: add. (75->32), mult. (199->56), div. (0->0), fcn. (251->10), ass. (0->26)
+t26 = r_i_i_C(3) + qJ(3);
+t11 = cos(pkin(14));
+t12 = cos(pkin(7));
+t8 = sin(pkin(14));
+t9 = sin(pkin(7));
+t29 = (r_i_i_C(1) * t8 + r_i_i_C(2) * t11) * t12 - t26 * t9;
+t10 = sin(pkin(6));
+t14 = sin(qJ(1));
+t28 = t10 * t14;
+t16 = cos(qJ(1));
+t27 = t10 * t16;
+t25 = cos(pkin(6));
+t24 = t14 * t25;
+t23 = t16 * t25;
+t21 = r_i_i_C(1) * t11 - r_i_i_C(2) * t8 + pkin(2);
+t13 = sin(qJ(2));
+t15 = cos(qJ(2));
+t4 = -t16 * t13 - t15 * t24;
+t20 = t12 * t4 + t9 * t28;
+t1 = t12 * t28 - t4 * t9;
+t2 = t13 * t14 - t15 * t23;
+t19 = t12 * t2 + t9 * t27;
+t18 = t12 * t27 - t2 * t9;
+t5 = -t13 * t24 + t15 * t16;
+t3 = -t13 * t23 - t14 * t15;
+t6 = [(t3 * t11 + t19 * t8) * r_i_i_C(1) + (t19 * t11 - t3 * t8) * r_i_i_C(2) + t3 * pkin(2) - t14 * pkin(1) + pkin(10) * t27 + t26 * t18, t21 * t4 - t29 * t5, t1, 0, 0, 0; (t11 * t5 + t20 * t8) * r_i_i_C(1) + (t20 * t11 - t5 * t8) * r_i_i_C(2) + t5 * pkin(2) + t16 * pkin(1) + pkin(10) * t28 + t26 * t1, -t21 * t2 + t29 * t3, -t18, 0, 0, 0; 0 (-t13 * t29 + t21 * t15) * t10, -t10 * t15 * t9 + t25 * t12, 0, 0, 0;];
+Ja_transl  = t6;

@@ -19,8 +19,8 @@
 %   Translatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-12-10 18:38
-% Revision: bb42a8b95257d9bc83910d26e849f5825122f662 (2018-12-05)
+% Datum: 2019-01-03 10:25
+% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
@@ -39,26 +39,24 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From jacobia_transl_2_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-12-10 18:38:20
-% EndTime: 2018-12-10 18:38:20
-% DurationCPUTime: 0.08s
-% Computational Cost: add. (49->20), mult. (56->29), div. (0->0), fcn. (54->9), ass. (0->18)
-t20 = pkin(6) - qJ(2);
-t9 = pkin(6) + qJ(2);
-t19 = sin(t9) / 0.2e1;
-t18 = sin(pkin(6)) * (pkin(10) + r_i_i_C(3));
-t17 = sin(t20);
-t12 = sin(qJ(1));
-t13 = cos(qJ(2));
-t14 = cos(qJ(1));
-t3 = t19 - t17 / 0.2e1;
-t16 = t12 * t3 - t14 * t13;
-t15 = -t12 * t13 - t14 * t3;
-t11 = sin(qJ(2));
-t8 = cos(t20);
-t7 = cos(t9) / 0.2e1;
-t4 = t8 / 0.2e1 + t7;
-t2 = -t14 * t11 - t12 * t4;
-t1 = t12 * t11 - t14 * t4;
-t5 = [-t12 * pkin(1) + t15 * r_i_i_C(1) + t1 * r_i_i_C(2) + t14 * t18, t2 * r_i_i_C(1) + r_i_i_C(2) * t16, 0, 0, 0, 0; t14 * pkin(1) - t16 * r_i_i_C(1) + t2 * r_i_i_C(2) + t12 * t18, -t1 * r_i_i_C(1) + r_i_i_C(2) * t15, 0, 0, 0, 0; 0 (t19 + t17 / 0.2e1) * r_i_i_C(1) + (t7 - t8 / 0.2e1) * r_i_i_C(2), 0, 0, 0, 0;];
-Ja_transl  = t5;
+% StartTime: 2019-01-03 10:25:33
+% EndTime: 2019-01-03 10:25:33
+% DurationCPUTime: 0.07s
+% Computational Cost: add. (19->14), mult. (46->24), div. (0->0), fcn. (54->6), ass. (0->16)
+t7 = sin(qJ(2));
+t8 = sin(qJ(1));
+t15 = t8 * t7;
+t9 = cos(qJ(2));
+t14 = t8 * t9;
+t10 = cos(qJ(1));
+t13 = t10 * t7;
+t12 = t10 * t9;
+t5 = sin(pkin(6));
+t11 = (pkin(10) + r_i_i_C(3)) * t5;
+t6 = cos(pkin(6));
+t4 = -t6 * t15 + t12;
+t3 = -t6 * t14 - t13;
+t2 = -t6 * t13 - t14;
+t1 = -t6 * t12 + t15;
+t16 = [-t8 * pkin(1) + t2 * r_i_i_C(1) + t1 * r_i_i_C(2) + t10 * t11, t3 * r_i_i_C(1) - t4 * r_i_i_C(2), 0, 0, 0, 0; t10 * pkin(1) + t4 * r_i_i_C(1) + t3 * r_i_i_C(2) + t8 * t11, -t1 * r_i_i_C(1) + t2 * r_i_i_C(2), 0, 0, 0, 0; 0 (r_i_i_C(1) * t9 - r_i_i_C(2) * t7) * t5, 0, 0, 0, 0;];
+Ja_transl  = t16;

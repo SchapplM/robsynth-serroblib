@@ -20,8 +20,8 @@
 %   Zeitableitung der rotatorischen Teilmatrix der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-12-10 18:38
-% Revision: bb42a8b95257d9bc83910d26e849f5825122f662 (2018-12-05)
+% Datum: 2019-01-03 10:26
+% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
@@ -40,46 +40,37 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From jacobigD_rot_4_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-12-10 18:38:22
-% EndTime: 2018-12-10 18:38:22
-% DurationCPUTime: 0.12s
-% Computational Cost: add. (88->34), mult. (131->64), div. (0->0), fcn. (102->18), ass. (0->38)
-t343 = qJD(2) / 0.2e1;
-t321 = pkin(7) + pkin(14);
-t322 = pkin(7) - pkin(14);
-t328 = sin(pkin(6));
-t342 = t328 * (sin(t321) / 0.2e1 + sin(t322) / 0.2e1);
-t341 = qJD(1) * t328;
-t323 = pkin(6) + qJ(2);
-t317 = sin(t323);
-t340 = qJD(2) * t317;
-t324 = pkin(6) - qJ(2);
-t320 = cos(t324);
-t339 = qJD(2) * t320;
-t332 = sin(qJ(1));
-t338 = qJD(2) * t332;
-t334 = cos(qJ(1));
-t337 = qJD(2) * t334;
-t336 = t332 * t341;
-t335 = t334 * t341;
-t333 = cos(qJ(2));
-t331 = sin(qJ(2));
-t330 = cos(pkin(7));
-t329 = cos(pkin(8));
-t327 = sin(pkin(7));
-t326 = sin(pkin(8));
-t325 = sin(pkin(14));
-t319 = cos(t323);
-t318 = sin(t324);
-t316 = t319 * t343;
-t315 = t318 * t343;
-t314 = t320 / 0.2e1 + t319 / 0.2e1;
-t313 = t317 / 0.2e1 - t318 / 0.2e1;
-t312 = cos(t322) / 0.2e1 + cos(t321) / 0.2e1;
-t310 = t316 - t339 / 0.2e1;
-t309 = t316 + t339 / 0.2e1;
-t308 = t315 - t340 / 0.2e1;
-t307 = -t333 * t338 + t334 * t308 + (-t314 * t332 - t331 * t334) * qJD(1);
-t306 = -t333 * t337 - t332 * t308 + (-t314 * t334 + t331 * t332) * qJD(1);
-t1 = [0, t335, 0 -(-(-t332 * t309 - t331 * t337) * t325 + t306 * t312 + (-(-t313 * t334 - t332 * t333) * t325 + t334 * t342) * qJD(1)) * t326 + (-t306 * t327 + t330 * t335) * t329, 0, 0; 0, t336, 0 -(-(t334 * t309 - t331 * t338) * t325 + t307 * t312 + (-(-t313 * t332 + t333 * t334) * t325 + t332 * t342) * qJD(1)) * t326 + (-t307 * t327 + t330 * t336) * t329, 0, 0; 0, 0, 0 -(-(t315 + t340 / 0.2e1) * t325 + t310 * t312) * t326 - t310 * t327 * t329, 0, 0;];
+% StartTime: 2019-01-03 10:25:34
+% EndTime: 2019-01-03 10:25:34
+% DurationCPUTime: 0.07s
+% Computational Cost: add. (28->18), mult. (102->43), div. (0->0), fcn. (102->12), ass. (0->29)
+t241 = cos(pkin(14));
+t243 = cos(pkin(7));
+t262 = t243 * t241;
+t245 = sin(qJ(2));
+t246 = sin(qJ(1));
+t261 = t245 * t246;
+t248 = cos(qJ(1));
+t260 = t245 * t248;
+t247 = cos(qJ(2));
+t259 = t246 * t247;
+t258 = t247 * t248;
+t240 = sin(pkin(6));
+t257 = qJD(1) * t240;
+t237 = sin(pkin(14));
+t256 = qJD(2) * t237;
+t239 = sin(pkin(7));
+t255 = t240 * t239 * t241;
+t254 = t246 * t257;
+t253 = t248 * t257;
+t244 = cos(pkin(6));
+t252 = t244 * t258 - t261;
+t251 = -t244 * t259 - t260;
+t250 = -t244 * t260 - t259;
+t249 = t244 * t261 - t258;
+t242 = cos(pkin(8));
+t238 = sin(pkin(8));
+t236 = t251 * qJD(1) + t250 * qJD(2);
+t235 = -t252 * qJD(1) + t249 * qJD(2);
+t1 = [0, t253, 0 -(t235 * t262 - t251 * t256 + (-t250 * t237 + t248 * t255) * qJD(1)) * t238 + (-t235 * t239 + t243 * t253) * t242, 0, 0; 0, t254, 0 -(t236 * t262 - t252 * t256 + (t249 * t237 + t246 * t255) * qJD(1)) * t238 + (-t236 * t239 + t243 * t254) * t242, 0, 0; 0, 0, 0 (-(-t237 * t247 - t245 * t262) * t238 + t245 * t239 * t242) * t240 * qJD(2), 0, 0;];
 JgD_rot  = t1;

@@ -18,8 +18,8 @@
 %   Rotatorische Teilmatrix der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-12-10 18:38
-% Revision: bb42a8b95257d9bc83910d26e849f5825122f662 (2018-12-05)
+% Datum: 2019-01-03 10:25
+% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
@@ -36,73 +36,54 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From jacobig_rot_6_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-12-10 18:38:23
-% EndTime: 2018-12-10 18:38:24
-% DurationCPUTime: 0.11s
-% Computational Cost: add. (390->56), mult. (392->82), div. (0->0), fcn. (409->28), ass. (0->65)
-t338 = sin(pkin(6));
-t346 = sin(qJ(1));
-t352 = t346 * t338;
-t350 = cos(qJ(1));
-t351 = t350 * t338;
-t349 = cos(qJ(2));
-t348 = cos(qJ(4));
-t347 = cos(qJ(5));
-t345 = sin(qJ(2));
-t344 = sin(qJ(4));
-t343 = sin(qJ(5));
-t342 = cos(pkin(6));
-t341 = cos(pkin(7));
-t340 = cos(pkin(8));
-t339 = cos(pkin(14));
-t337 = sin(pkin(7));
-t336 = sin(pkin(8));
-t335 = sin(pkin(14));
-t334 = pkin(6) - qJ(2);
-t333 = pkin(6) + qJ(2);
-t332 = pkin(8) - qJ(4);
-t331 = pkin(8) + qJ(4);
-t330 = pkin(7) - pkin(14);
-t329 = pkin(7) + pkin(14);
-t328 = cos(t333);
-t327 = cos(t331);
-t326 = sin(t334);
-t325 = sin(t332);
-t324 = cos(t329);
-t323 = sin(t330);
-t322 = cos(t334) / 0.2e1;
-t321 = cos(t332) / 0.2e1;
-t320 = sin(t333) / 0.2e1;
-t319 = sin(t331) / 0.2e1;
-t318 = cos(t330) / 0.2e1;
-t317 = sin(t329) / 0.2e1;
-t316 = t322 - t328 / 0.2e1;
-t315 = t322 + t328 / 0.2e1;
-t314 = t321 - t327 / 0.2e1;
-t313 = t321 + t327 / 0.2e1;
-t312 = t320 - t326 / 0.2e1;
-t311 = t320 + t326 / 0.2e1;
-t310 = t319 - t325 / 0.2e1;
-t309 = t319 + t325 / 0.2e1;
-t308 = t318 - t324 / 0.2e1;
-t307 = t318 + t324 / 0.2e1;
-t306 = t317 - t323 / 0.2e1;
-t305 = t317 + t323 / 0.2e1;
-t304 = -t346 * t312 + t350 * t349;
-t303 = -t346 * t315 - t350 * t345;
-t302 = t350 * t312 + t346 * t349;
-t301 = t350 * t315 - t346 * t345;
-t300 = -t311 * t337 + t342 * t341;
-t299 = -t303 * t337 + t341 * t352;
-t298 = -t301 * t337 - t341 * t351;
-t297 = t311 * t306 + t342 * t308 + t316 * t339;
-t296 = t342 * t305 + t311 * t307 - t316 * t335;
-t295 = t303 * t306 + t304 * t339 + t308 * t352;
-t294 = t303 * t307 - t304 * t335 + t305 * t352;
-t293 = t301 * t306 + t302 * t339 - t308 * t351;
-t292 = t301 * t307 - t302 * t335 - t305 * t351;
-t291 = -t296 * t336 + t300 * t340;
-t290 = -t294 * t336 + t299 * t340;
-t289 = -t292 * t336 + t298 * t340;
-t1 = [0, t352, 0, t290, -t294 * t313 + t295 * t344 - t299 * t309 (t294 * t310 + t295 * t348 + t299 * t314) * t343 - t290 * t347; 0, -t351, 0, t289, -t292 * t313 + t293 * t344 - t298 * t309 (t292 * t310 + t293 * t348 + t298 * t314) * t343 - t289 * t347; 1, t342, 0, t291, -t296 * t313 + t297 * t344 - t300 * t309 (t296 * t310 + t297 * t348 + t300 * t314) * t343 - t291 * t347;];
+% StartTime: 2019-01-03 10:25:35
+% EndTime: 2019-01-03 10:25:35
+% DurationCPUTime: 0.09s
+% Computational Cost: add. (102->33), mult. (296->69), div. (0->0), fcn. (409->16), ass. (0->46)
+t274 = sin(pkin(7));
+t279 = cos(pkin(6));
+t300 = t274 * t279;
+t278 = cos(pkin(7));
+t286 = cos(qJ(2));
+t299 = t278 * t286;
+t275 = sin(pkin(6));
+t283 = sin(qJ(1));
+t298 = t283 * t275;
+t282 = sin(qJ(2));
+t297 = t283 * t282;
+t296 = t283 * t286;
+t287 = cos(qJ(1));
+t295 = t287 * t275;
+t294 = t287 * t282;
+t293 = t287 * t286;
+t269 = t279 * t294 + t296;
+t272 = sin(pkin(14));
+t276 = cos(pkin(14));
+t268 = t279 * t293 - t297;
+t289 = t268 * t278 - t274 * t295;
+t259 = -t269 * t272 + t289 * t276;
+t265 = -t268 * t274 - t278 * t295;
+t273 = sin(pkin(8));
+t277 = cos(pkin(8));
+t292 = t259 * t277 + t265 * t273;
+t271 = -t279 * t297 + t293;
+t270 = -t279 * t296 - t294;
+t288 = t270 * t278 + t274 * t298;
+t261 = -t271 * t272 + t288 * t276;
+t266 = -t270 * t274 + t278 * t298;
+t291 = t261 * t277 + t266 * t273;
+t263 = t276 * t300 + (-t272 * t282 + t276 * t299) * t275;
+t267 = -t275 * t286 * t274 + t279 * t278;
+t290 = t263 * t277 + t267 * t273;
+t285 = cos(qJ(4));
+t284 = cos(qJ(5));
+t281 = sin(qJ(4));
+t280 = sin(qJ(5));
+t264 = t275 * t282 * t276 + (t275 * t299 + t300) * t272;
+t262 = t271 * t276 + t288 * t272;
+t260 = t269 * t276 + t289 * t272;
+t258 = -t263 * t273 + t267 * t277;
+t257 = -t261 * t273 + t266 * t277;
+t256 = -t259 * t273 + t265 * t277;
+t1 = [0, t298, 0, t257, t262 * t281 - t291 * t285 (t262 * t285 + t291 * t281) * t280 - t257 * t284; 0, -t295, 0, t256, t260 * t281 - t292 * t285 (t260 * t285 + t292 * t281) * t280 - t256 * t284; 1, t279, 0, t258, t264 * t281 - t290 * t285 (t264 * t285 + t290 * t281) * t280 - t258 * t284;];
 Jg_rot  = t1;
