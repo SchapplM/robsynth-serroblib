@@ -69,6 +69,13 @@ Die Tabelle enthält Zahlenwerte für die einzelnen MDH-Parameter.
 
 Die csv-Dateien enhalten alle Informationen der Roboterbibliothek. Die Daten werden zusätzlich in komprimierter Form gespeichert. In `mdl_xdof/Sx_list.mat` liegen die gleichen Daten wie in den csv-Tabellen zur einfacheren Verarbeitung in Matlab.
 
+### Kinematik- und Dynamikfunktionen
+
+Die Modelle für Kinematik und Dynamik, die den Kern dieser Sammlung darstellt, sind in den jeweiligen Modellordnern `mdl_xdof/SxRRRRRRyyyyy` im Unterordner `hd` (Abkürzung für "HybrDyn") als Matlab-Funktionen abgelegt.
+Die Bedeutung der Funktionsnamen ist in der README von HybrDyn dargestellt. Es werden Abkürzungen für Funktionsart, Art der Herleitung und verwendete Parameter verwendet.
+
+Zusätzlich werden hier auch Simulink-Bibliotheken abgelegt (mdl-Format, beginnend mit dem Präfix "lib"). Die Simulink-Bibliotheken können für Simulationen oder auch direkt für Regler auf Echtzeitsystemen verwendet werden.
+
 ### CAD-Modelle
 
 Zu den Parametrierten Robotermodellen können in der Datenbank auch CAD-Modelle abgelegt werden. Diese können dann mit Hilfe der Matlab-Klasse `SerRob` zur Visualisierung verwendet werden.
