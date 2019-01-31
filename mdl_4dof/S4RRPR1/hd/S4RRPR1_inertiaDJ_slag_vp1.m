@@ -25,11 +25,11 @@
 % MqD [4x4]
 %   time derivative of inertia matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:54
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-01-31 13:16
+% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Mq = S4RRPR1_inertiaDJ_slag_vp11(qJ, qJD, ...
   pkin, m, rSges, Icges)
@@ -42,7 +42,7 @@ assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
   'S4RRPR1_inertiaDJ_slag_vp1: qJD has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [7 1]), ...
   'S4RRPR1_inertiaDJ_slag_vp1: pkin has to be [7x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RRPR1_inertiaDJ_slag_vp1: m has to be [5x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [5,3]), ...
   'S4RRPR1_inertiaDJ_slag_vp1: rSges has to be [5x3] (double)');
@@ -52,9 +52,9 @@ assert(isreal(Icges) && all(size(Icges) == [5 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_time_derivative_floatb_twist_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:53:18
-% EndTime: 2018-11-14 13:53:19
-% DurationCPUTime: 0.19s
+% StartTime: 2019-01-31 13:16:39
+% EndTime: 2019-01-31 13:16:40
+% DurationCPUTime: 0.18s
 % Computational Cost: add. (730->59), mult. (452->82), div. (0->0), fcn. (236->8), ass. (0->51)
 t48 = qJ(1) + qJ(2);
 t43 = pkin(7) + t48;

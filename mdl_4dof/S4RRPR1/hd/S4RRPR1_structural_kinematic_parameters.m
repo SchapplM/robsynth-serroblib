@@ -13,11 +13,11 @@
 % NKP [1x1]
 %   Anzahl der Kinematikparameter im Vektor `pkin`
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-12-03 19:44
-% Revision: d48b0a2e5a58b84c602962b686e619ad34ecf1f0 (2018-11-30)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-01-31 13:16
+% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function [v_mdh, sigma_mdh, mu_mdh, NL, NKP] = S4RRPR1_structural_kinematic_parameters()
 

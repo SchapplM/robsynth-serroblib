@@ -23,11 +23,11 @@
 % Mq [4x4]
 %   inertia matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:54
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-01-31 13:16
+% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Mq = S4RRPR1_inertiaJ_slag_vp2(qJ, ...
   pkin, m, mrSges, Ifges)
@@ -38,7 +38,7 @@ assert(isreal(qJ) && all(size(qJ) == [4 1]), ...
   'S4RRPR1_inertiaJ_slag_vp2: qJ has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [7 1]), ...
   'S4RRPR1_inertiaJ_slag_vp2: pkin has to be [7x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RRPR1_inertiaJ_slag_vp2: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4RRPR1_inertiaJ_slag_vp2: mrSges has to be [5x3] (double)');
@@ -48,9 +48,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:53:18
-% EndTime: 2018-11-14 13:53:19
-% DurationCPUTime: 0.11s
+% StartTime: 2019-01-31 13:16:35
+% EndTime: 2019-01-31 13:16:36
+% DurationCPUTime: 0.12s
 % Computational Cost: add. (142->48), mult. (266->62), div. (0->0), fcn. (186->6), ass. (0->27)
 t16 = sin(qJ(2));
 t29 = pkin(1) * t16;
@@ -78,7 +78,7 @@ t7 = t17 * t11 - t15 * t28;
 t4 = t7 * mrSges(5,1);
 t2 = -t15 * t8 + t17 * t5;
 t1 = t2 * mrSges(5,1);
-t10 = [0.2e1 * t26 - 0.2e1 * t25 - 0.2e1 * t27 + Ifges(2,3) + 0.2e1 * t1 + 0.2e1 * t21 + m(5) * (t2 ^ 2 + t3 ^ 2) + m(4) * (t6 ^ 2 + t8 ^ 2) + m(3) * (t16 ^ 2 + t18 ^ 2) * pkin(1) ^ 2 + t23; m(5) * (t7 * t2 + t9 * t3) + t4 + t1 - t25 + t26 + t21 + (-t9 - t3) * mrSges(5,2) + (m(4) * (t13 * t8 + t14 * t6) + t22) * pkin(2) + t23; -0.2e1 * t24 + 0.2e1 * t4 + m(5) * (t7 ^ 2 + t9 ^ 2) + t23 + (0.2e1 * t22 + m(4) * (t13 ^ 2 + t14 ^ 2) * pkin(2)) * pkin(2); 0; 0; m(4) + m(5); Ifges(5,3) + t1 - t27; Ifges(5,3) + t4 - t24; 0; Ifges(5,3);];
+t10 = [0.2e1 * t26 - 0.2e1 * t25 - 0.2e1 * t27 + Ifges(2,3) + 0.2e1 * t1 + 0.2e1 * t21 + m(4) * (t6 ^ 2 + t8 ^ 2) + m(5) * (t2 ^ 2 + t3 ^ 2) + m(3) * (t16 ^ 2 + t18 ^ 2) * pkin(1) ^ 2 + t23; m(5) * (t7 * t2 + t9 * t3) + t4 + t1 - t25 + t26 + t21 + (-t3 - t9) * mrSges(5,2) + (m(4) * (t13 * t8 + t14 * t6) + t22) * pkin(2) + t23; -0.2e1 * t24 + 0.2e1 * t4 + m(5) * (t7 ^ 2 + t9 ^ 2) + t23 + (0.2e1 * t22 + m(4) * (t13 ^ 2 + t14 ^ 2) * pkin(2)) * pkin(2); 0; 0; m(4) + m(5); Ifges(5,3) + t1 - t27; Ifges(5,3) + t4 - t24; 0; Ifges(5,3);];
 %% Postprocessing: Reshape Output
 % From vec2symmat_4_matlab.m
 res = [t10(1) t10(2) t10(4) t10(7); t10(2) t10(3) t10(5) t10(8); t10(4) t10(5) t10(6) t10(9); t10(7) t10(8) t10(9) t10(10);];

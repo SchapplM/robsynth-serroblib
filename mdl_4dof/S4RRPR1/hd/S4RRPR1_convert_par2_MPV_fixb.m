@@ -21,11 +21,11 @@
 % MPV [10x1]
 %   base parameter vector (minimal parameter vector)
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:54
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-01-31 13:16
+% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function MPV = S4RRPR1_convert_par2_MPV_fixb(pkin, m, mrSges, Ifges)
 
@@ -34,7 +34,7 @@ function MPV = S4RRPR1_convert_par2_MPV_fixb(pkin, m, mrSges, Ifges)
 %$cgargs {zeros(7,1),zeros(5,1),zeros(5,3),zeros(5,6)}
 assert(isreal(pkin) && all(size(pkin) == [7 1]), ...
   'S4RRPR1_convert_par2_MPV_fixb: pkin has to be [7x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RRPR1_convert_par2_MPV_fixb: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4RRPR1_convert_par2_MPV_fixb: mrSges has to be [5x3] (double)');
