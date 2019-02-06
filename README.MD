@@ -33,7 +33,8 @@ Datenbank aufbauen (z.B. mit Struktursynthese-Ergebnissen):
 
 Datenbank sortieren:
 * `serroblib_gen_bitarrays`: Robotermodelle aus den csv-Tabellen effizient als Bit-Array in Matlab-Datendateien speichern. Muss durchgeführt werden, bevor die Datenbank ausgelesen wird.
-* `serroblib_create_robot_csv_all.m`: Skript zum Schreiben von csv-Tabellen zur Beschreibung der einzelnen Roboter zu den Modellen.
+* `serroblib_create_robot_csv_all`: Skript zum Schreiben von csv-Tabellen zur Beschreibung der einzelnen Roboter zu den Modellen.
+* `serroblib_remove_robot`: Robotermodell aus Datenbank entfernen.
 
 Datenbank auslesen und benutzen:
 * `serroblib_filter_robots`: Liste von Robotern nach Filterkriterien (wie Anzahl und Art der FG) ausgeben
