@@ -43,6 +43,9 @@ Datenbank auslesen und benutzen:
 * `serroblib_generate_code`: Kinematik- und Dynamikfunktionen symbolisch mit der HybrDyn-Toolbox berechnen lassen.
 * `serroblib_addtopath`: Matlab-Funktionen dieses Roboters zum Matlab-Pfad hinzufügen, damit die Funktionsaufrufe funktionieren.
 
+Datenbank prüfen:
+* Mit `scripts/check_model_enumeration.m` lässt sich prüfen, ob nach Lösung von Kinematiken Lücken in der Nummerierung auftreten.
+
 ### Übersichtsdateien
 
 Alle Informationen der Roboterbibliothek liegen in csv-Dateien (Trennzeichen: Semikolon) vor. Dadurch ist eine automatische Verarbeitung und eine Versionsverwaltung möglich.
