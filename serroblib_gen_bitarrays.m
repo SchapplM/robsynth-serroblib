@@ -34,7 +34,7 @@ for N = N_update(:)'
   % Durchsuche alle csv-Dateien im Ordner nach passenden Strukturen
   mdldir = fullfile(repopath, sprintf('mdl_%ddof', N));
   for d = dir(fullfile(mdldir, '*.csv'))'
-    % fprintf('%s\n', d.name);
+    robtype = d.name(1:end-4); % Name der csv-Datei ohne die Endung
     csvfilepath = fullfile(mdldir, d.name);
     fid = fopen(csvfilepath);
     tline = fgetl(fid);
@@ -50,7 +50,6 @@ for N = N_update(:)'
         continue % nicht genug Spalten: Ungültiger Datensatz
       end
       % Prüfe, ob Zeile Roboterzeile ist
-      robtype = d.name(1:end-4); % Name der csv-Datei ohne die Endung
       firstcol = csvline{1};
       if length(firstcol)<length(robtype) || ~strcmp(firstcol(1:length(robtype)), robtype)
         continue % keine Roboter-Zeile; wahrscheinlich Überschrift
