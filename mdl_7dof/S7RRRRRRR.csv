@@ -1,3 +1,3 @@
 Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;Gelenk 3;;;;;;;;Gelenk 4;;;;;;;;Gelenk 5;;;;;;;;Gelenk 6;;;;;;;;Gelenk 7;;;;;;;;EE-Transformation (phi_N_E);;;EE-FG (Basis-KS);;;;;;;;
 ;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;phix_NE;phiy_NE;phiz_NE;vx0;vy0;vz0;wx0;wy0;wz0;phix0;phiy0;phiz0
-S7RRRRRRR1;R;0;0;0;0;0;d1;0;R;0;0;pi/2;0;0;0;0;R;0;0;-pi/2;0;0;d3;0;R;0;0;-pi/2;0;0;0;0;R;0;0;pi/2;0;0;d5;0;R;0;0;pi/2;0;0;0;0;R;0;0;-pi/2;0;0;d7;0;?;?;?;1;1;1;1;1;1;1;1;1
+S7RRRRRRR1;R;0;0;0;0;0;d1;0;R;0;0;pi/2;0;0;0;0;R;0;0;-pi/2;0;0;d3;0;R;0;0;-pi/2;0;0;0;0;R;0;0;pi/2;0;0;d5;0;R;0;0;pi/2;0;0;0;0;R;0;0;-pi/2;0;0;d7;0;0;0;0;1;1;1;1;1;1;1;1;1
