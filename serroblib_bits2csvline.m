@@ -19,7 +19,7 @@
 % csvbits
 %   Spaltenweise Indizes für die Daten in csvline
 % 
-% %iehe auch: serroblib_csvline2bits
+% Siehe auch: serroblib_csvline2bits
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
@@ -59,12 +59,12 @@ for kk = 1:N
   
   % csv-Zeile erstellen
   % Siehe auch serroblib_add_robot.m
-  c=c+1; csvline{c} = descr_type{Bit_type+1};     csvbits(c) = Bit_type+1;
-  c=c+1; csvline{c} = descr_beta{Bit_beta+1};     csvbits(c) = Bit_beta+1;
-  c=c+1; csvline{c} = descr_b{Bit_b+1};           csvbits(c) = Bit_b+1;
-  c=c+1; csvline{c} = descr_alpha{Bit_alpha+1};   csvbits(c) = Bit_alpha+1;
-  c=c+1; csvline{c} = descr_a{Bit_a+1};           csvbits(c) = Bit_a+1;
-  c=c+1; csvline{c} = descr_theta{Bit_theta+1};   csvbits(c) = Bit_theta+1;
-  c=c+1; csvline{c} = descr_d{Bit_d+1};           csvbits(c) = Bit_d+1;
-  c=c+1; csvline{c} = descr_offset{Bit_offset+1}; csvbits(c) = Bit_offset+1;
+  c=c+1; csvline{c} = descr_type{Bit_type+1};     csvbits(c) = Bit_type+1;  %#ok<AGROW>
+  c=c+1; csvline{c} = descr_beta{Bit_beta+1};     csvbits(c) = Bit_beta+1;  %#ok<AGROW>
+  c=c+1; csvline{c} = descr_b{Bit_b+1};           csvbits(c) = Bit_b+1;     %#ok<AGROW>
+  c=c+1; csvline{c} = descr_alpha{Bit_alpha+1};   csvbits(c) = Bit_alpha+1; %#ok<AGROW>
+  c=c+1; csvline{c} = descr_a{Bit_a+1};           csvbits(c) = Bit_a+1;     %#ok<AGROW>
+  c=c+1; csvline{c} = descr_theta{Bit_theta+1};   csvbits(c) = Bit_theta+1; %#ok<AGROW>
+  c=c+1; csvline{c} = descr_d{Bit_d+1};           csvbits(c) = Bit_d+1;     %#ok<AGROW>
+  c=c+1; csvline{c} = descr_offset{Bit_offset+1}; csvbits(c) = Bit_offset+1;%#ok<AGROW>
 end
