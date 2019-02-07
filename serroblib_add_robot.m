@@ -148,6 +148,9 @@ end
 %% Zeile für den Roboter finden
 % Suche Roboter in den bestehenden csv-Tabellen
 [found, index, num] = serroblib_find_robot(csvline);
+% Prüfe, ob der Roboter identisch in der Datenbank ist (ohne Betrachtung
+% von Basis-Isomorphismen)
+found_ident = serroblib_find_robot(csvline, false);
 if ~found
   % Roboter existiert noch nicht. Erhöhe die letzte Nummer um eins
   index = num+1;
@@ -162,7 +165,11 @@ mdlname = sprintf('S%d%s%d', N, typestring, index);
 
 csvline{1} = mdlname;
 if found
-  fprintf('serroblib_add_robot: Roboter %s ist schon in der Datenbank.\n', mdlname);
+  if found_ident
+    fprintf('serroblib_add_robot: Roboter %s ist schon identisch in der Datenbank.\n', mdlname);
+  else
+    fprintf('serroblib_add_robot: Roboter %s ist als Basis-Isomorphismus in der Datenbank.\n', mdlname);
+  end
   new = false;
   return;
 else
