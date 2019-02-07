@@ -19,24 +19,36 @@
 %   07-10: alpha
 %   ...
 % 
+% BAR [1x1] uint16
+%   Bit-Array zur Kennzeichnung der Rotation vom KS N zum KS E
+%   In X-Y-Z-Euler-Winkeln (Die Bits kodieren diskrete Zustände der
+%   einzelnen Winkel; 0,pi/2,pi,...; siehe Quelltext)
+%   Bits:
+%   01 (LSB) - 03: Erster Euler-Winkel
+%   04-06: Zweiter Euler-Winkel
+%   07-09: Dritter Euler-Winkel
+% 
 % BAE [1x1] uint16
 %   Bit-Array zur Kennzeichnung der EE-FG
 %   Bits:
 %   01 (LSB): vx0
 %   ...
 %   06: wz0
+%   07: phix0
+%   08: phiy0
+%   09: phiz0
 % 
 % Siehe auch: serroblib_bits2csvline
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function [BAJ, BAE] = serroblib_csvline2bits(csvline)
+function [BAJ, BAR, BAE] = serroblib_csvline2bits(csvline)
 
 %% Initialisierung
 % Prüfe Eingabe
 % Nicht Teil der Gelenk-Einträge: Name (1 Spalte), EE-FG (6 Spalten)
-N1 = (length(csvline)-1-6);
+N1 = (length(csvline)-1-3-6-3);
 if mod(N1,8) ~= 0
   error('falsche Anzahl Einträge in csvline');
 end
@@ -44,7 +56,7 @@ N = N1/8; % 8 Spalten pro Gelenk. So herausfinden der Gelenkzahl
 
 % Ausgabevariable vorbelegen
 BAJ = uint16(zeros(1,N));
-BAE = uint16(0);
+BAR = uint16(0);
 %% Bit-Vektor für Gelenk-Parameter aus csv-Zeile gewinnen
 c = 1;
 for kk = 1:N % über alle Gelenk-FG
@@ -83,6 +95,17 @@ for kk = 1:N % über alle Gelenk-FG
   BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_offset,b));
 end
 
+%% Bit-Vektor für EE-Transformation von letztem Körper
+% Mögliche diskrete Zustände für die phi-Winkel in der csv-Tabelle. 
+% "?" steht für einen noch undefinierten Winkel
+descr_phi = {'0', 'pi/2', 'pi', '-pi/2', '?'};
+b = 0; % Bit-Offset zur Verschiebung der Parameter-Bits in der Gesamtvariable
+for kk = 1:3
+  c=c+1; Bit_phi   = uint16(find( strcmp(csvline{c},descr_phi))-1);
+  BAR = bitor( BAR, bitshift(Bit_phi,b)); b = b+3;
+	% Prüfen mit: `dec2bin(Bit_phi)`
+end
+% Prüfen mit: `dec2bin(BAR)`
+
 %% Bit-Vektor für EE-FG aus csv-Zeile gewinnen
 BAE = serroblib_csvline2bits_EE(csvline(c+1:end));
-

@@ -15,7 +15,7 @@
 %   ladenden Roboters
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function RS = serroblib_create_robot_class(Name, RobName)
 
@@ -23,7 +23,7 @@ function RS = serroblib_create_robot_class(Name, RobName)
 N = str2double(Name(2)); % Annahme: Namensschema SxRRR; mit x="Anzahl Gelenk-FG"
 repopath=fileparts(which('serroblib_path_init.m'));
 mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
-l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof');
+l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_phiNE');
 
 % Bit-Array für Namen
 BA = l.BitArrays_Ndof(strcmp(l.Names_Ndof,Name),:);
@@ -31,10 +31,11 @@ if isempty(BA)
   error('Roboter %s ist nicht bekannt', Name);
 end
 [~, csvbits] = serroblib_bits2csvline(BA);
-
+BAR = l.BitArrays_phiNE(strcmp(l.Names_Ndof,Name),:);
 %% Parameter-Struktur erstellen
 
-% Mögliche Zustände für MDH-Parameterstruktur bei Eingabe in die Roboterklasse
+% Mögliche Zustände für MDH-Parameterstruktur bei Eingabe in die
+% Roboterklasse (siehe auch serroblib_csvline2bits.m)
 descr_type = {0, 1};
 descr_beta = {0, pi/2, pi, -pi/2, NaN};
 descr_b = {0, NaN};
@@ -88,7 +89,7 @@ if nargin > 1 % Falls Name des Parametrierten Modells gegeben
   tline = fgetl(fid); % csv-Datei zeilenweise einlesen
   while ischar(tline)
     % Spaltenweise als Cell-Array
-    csvline = strsplit(tline, ';');
+    csvline = strsplit(tline, ';', 'CollapseDelimiters', false);
     tline = fgetl(fid); % nächste Zeile
     if isempty(csvline) || strcmp(csvline{1}, '')
       continue
@@ -171,6 +172,17 @@ if nargin > 1 % Falls Name des Parametrierten Modells gegeben
   end
 end
 
+%% EE-Transformation
+phi_N_E = NaN(3,1); % Variable vorbelegen
+descr_phi = {0, pi/2, pi, -pi/2, NaN}; % mögliche Werte, die durch Bits kodiert werden
+b = 0; % Bit-Zähler
+for kk = 1:3 % 3 Euler-Winkel
+  % 3 Bits zur Kodierung des aktuellen Wertes extrahieren
+  Bit_phi   = bitand( bitshift( BAR, -b), bin2dec('111')); b = b+3;
+  % Wert mit den Bits auswählen
+  phi_N_E(kk) = descr_phi{Bit_phi+1};
+end
+
 %% Klasse initialisieren
 
 % Zahlenwerte der Parameter festlegen.
@@ -182,6 +194,9 @@ RS = SerRob(PS, Name);
 
 % Klassen-Instanz vorbereiten
 RS = RS.fill_fcn_handles(false);
+
+% Setze Euler-Winkel für Transformation zum EE-KS
+RS.update_EE(zeros(3,1), phi_N_E, uint8(2));
 
 RS.update_pkin();
 
