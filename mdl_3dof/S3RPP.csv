@@ -1,3 +1,3 @@
-Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;Gelenk 3;;;;;;;;EE-FG (Basis-KS);;;;;
-;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;vx0;vy0;vz0;wx0;wy0;wz0
-S3RPP1;R;0;0;0;0;0;d1;0;P;0;0;pi/2;a2;pi/2;0;0;P;0;0;pi/2;a3;0;0;0;1;1;0;0;0;1
+Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;Gelenk 3;;;;;;;;EE-Transformation (phi_N_E);;;EE-FG (Basis-KS);;;;;;;;
+;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;phix_NE;phiy_NE;phiz_NE;vx0;vy0;vz0;wx0;wy0;wz0;phix0;phiy0;phiz0
+S3RPP1;R;0;0;0;0;0;d1;0;P;0;0;pi/2;a2;pi/2;0;0;P;0;0;pi/2;a3;0;0;0;?;?;?;1;1;0;0;0;1;0;0;1

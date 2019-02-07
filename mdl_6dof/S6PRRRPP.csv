@@ -1,5 +1,5 @@
-Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;Gelenk 3;;;;;;;;Gelenk 4;;;;;;;;Gelenk 5;;;;;;;;Gelenk 6;;;;;;;;EE-FG (Basis-KS);;;;;
-;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;vx0;vy0;vz0;wx0;wy0;wz0
-S6PRRRPP1;P;0;0;0;0;theta1;0;0;R;0;0;alpha2;a2;0;d2;0;R;0;0;pi/2;a3;0;d3;0;R;0;0;pi/2;a4;0;d4;0;P;0;0;0;a5;theta5;0;0;P;0;0;pi/2;a6;0;0;0;1;1;1;1;1;1
-S6PRRRPP2;P;0;0;0;0;theta1;0;0;R;0;0;alpha2;a2;0;d2;0;R;0;0;pi/2;a3;0;d3;0;R;0;0;pi/2;a4;0;d4;0;P;0;0;pi/2;a5;0;0;0;P;0;0;pi/2;a6;0;0;0;1;1;1;1;1;1
-S6PRRRPP3;P;0;0;0;0;theta1;0;0;R;0;0;alpha2;a2;0;d2;0;R;0;0;pi/2;a3;0;d3;0;R;0;0;pi/2;a4;0;d4;0;P;0;0;pi/2;a5;pi/2;0;0;P;0;0;pi/2;a6;0;0;0;1;1;1;1;1;1
+Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;Gelenk 3;;;;;;;;Gelenk 4;;;;;;;;Gelenk 5;;;;;;;;Gelenk 6;;;;;;;;EE-Transformation (phi_N_E);;;EE-FG (Basis-KS);;;;;;;;
+;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;phix_NE;phiy_NE;phiz_NE;vx0;vy0;vz0;wx0;wy0;wz0;phix0;phiy0;phiz0
+S6PRRRPP1;P;0;0;0;0;theta1;0;0;R;0;0;alpha2;a2;0;d2;0;R;0;0;pi/2;a3;0;d3;0;R;0;0;pi/2;a4;0;d4;0;P;0;0;0;a5;theta5;0;0;P;0;0;pi/2;a6;0;0;0;?;?;?;1;1;1;1;1;1;1;1;1
+S6PRRRPP2;P;0;0;0;0;theta1;0;0;R;0;0;alpha2;a2;0;d2;0;R;0;0;pi/2;a3;0;d3;0;R;0;0;pi/2;a4;0;d4;0;P;0;0;pi/2;a5;0;0;0;P;0;0;pi/2;a6;0;0;0;?;?;?;1;1;1;1;1;1;1;1;1
+S6PRRRPP3;P;0;0;0;0;theta1;0;0;R;0;0;alpha2;a2;0;d2;0;R;0;0;pi/2;a3;0;d3;0;R;0;0;pi/2;a4;0;d4;0;P;0;0;pi/2;a5;pi/2;0;0;P;0;0;pi/2;a6;0;0;0;?;?;?;1;1;1;1;1;1;1;1;1
