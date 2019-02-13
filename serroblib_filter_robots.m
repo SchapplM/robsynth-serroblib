@@ -6,8 +6,11 @@
 % EE_FG [1x9] oder [1x6]
 %   Vektor mit 1/0 für Belegung ob EE-FG aktiv ist
 % EE_FG_Mask [1x9] oder [1x6]
-%   Maske, die festlegt ob die FG exakt wie in `EE_FG` sind, oder ob auch
-%   gesperrte FG wirklich nicht beweglich sind
+%   Maske, die festlegt ob die FG exakt wie in `EE_FG` sind (Bit auf 1), 
+%   Bit 1: Gesperrter FG in `EE_FG` (auf 0) muss auch gesperrt sein, FG in
+%   `EE_FG` (auf 1) muss auch frei sein
+%   Bit 0: Bit in `EE_FG` wird nicht beachtet (z.B. zur Auswahl aller
+%   Beinketten, die 3T haben, egal ob 0R,1R,2R,3R)
 % 
 % Rückgabe:
 % Indizes

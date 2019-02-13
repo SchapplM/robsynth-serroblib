@@ -14,10 +14,8 @@
 %   Jede Spalte des Arrays (2Byte, uint16) entspricht einer Gelenk-Transfo.
 %   Bits:
 %   01 (LSB):    Gelenktyp
-%   02-05: beta
-%   06:    b
-%   07-10: alpha
-%   ...
+%   02-04: beta
+%   ... (siehe serroblib_bits2csvline)
 % 
 % BAR [1x1] uint16
 %   Bit-Array zur Kennzeichnung der Rotation vom KS N zum KS E

@@ -7,11 +7,14 @@
 %   Bit-Array zur Kennzeichnung aller MDH-Kinematikparameter.
 %   Jede Spalte des Arrays (2Byte, uint16) entspricht einer Gelenk-Transfo.
 %   Bits:
-%   01:    Gelenktyp
-%   02-05: beta
-%   06:    b
-%   07-10: alpha
-%   ...
+%   01 (LSB): Gelenktyp (1 Bit)
+%   02-04:    beta (3 Bit)
+%   05:       b (1 Bit)
+%   06-08:    alpha (3 Bit)
+%   09:       a (1 Bit)
+%   10-12:    theta (3 Bit)
+%   13:       d (1 Bit)
+%   14-16:    offset (3 Bit)
 % 
 % Ausgabe:
 % csvline
@@ -32,7 +35,7 @@ csvbits = [];
 c = 1;
 for kk = 1:N
   % In den 2 Byte sind alle Kinematik-Parameter enthalten mit jeweils 1 bis
-  % 3 Bit. Die Bis kodieren den Index auf die möglichen Zustände.
+  % 3 Bit. Die Bits kodieren den Index auf die möglichen Zustände.
   % Die Reihenfolge ist überall gleich
   b = 0; % Zähler für Bit-Verschiebung
   Bit_type   = bitand( bitshift( BA(kk), -b), bin2dec('1'));   b = b+1;

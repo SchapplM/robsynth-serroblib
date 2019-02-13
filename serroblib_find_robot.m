@@ -48,16 +48,24 @@ l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof');
 
 % Filter-Variable für erstes Gelenk: Die ersten Parameter beta, b, alpha,
 % a, d, theta sollen nicht ausgewertet werden
-BAJ1_Filter = uint16(zeros(1,N));
+BAJ_Iso_Filter = uint16(zeros(1,N));
 for i = 1:N
-  BAJ1_Filter(i) = intmax;
+  BAJ_Iso_Filter(i) = intmax;
 end
 if filter_relkin
   % Setze alle Bits auf 1, bis auf die Bits der Orientierung der ersten Achse
   % (Zu den Bits, siehe serroblib_bits2csvline.m)
   for i = 2:13 % Bits von beta bis theta
-    BAJ1_Filter(1) = bitset(BAJ1_Filter(1), i, 0);
-  end % dec2bin(BAJ1_Filter)
+    BAJ_Iso_Filter(1) = bitset(BAJ_Iso_Filter(1), i, 0);
+  end % dec2bin(BAJ_Iso_Filter)
+  % Bit für Offset Null setzen (für alle Gelenke)
+  for aa = 1:N
+    % Offset Filtern: Der Offset auf die Gelenkkoordinate q ist egal für die
+    % Kinematik (im Sinne von Isomorphismen)
+    for i = 14:16
+      BAJ_Iso_Filter(aa) = bitset(BAJ_Iso_Filter(aa), i, 0);
+    end
+  end
 else
   % Filter ist nicht aktiv, da alle Bits des Filters auf "1" gelassen
   % werden.
@@ -72,7 +80,7 @@ for i = 1:size(l.BitArrays_Ndof, 1) % Alle Roboterstrukturen aus Datenbank durch
   
   % Prüfe ob alle Bits übereinstimmen (alle MDH-Parameter)
   % Nutze dazu den Filter für das erste Gelenk
-  if(all( bitand(BA,BAJ1_Filter) == bitand(l.BitArrays_Ndof(i,:),BAJ1_Filter) ))
+  if(all( bitand(BA,BAJ_Iso_Filter) == bitand(l.BitArrays_Ndof(i,:),BAJ_Iso_Filter) ))
     % Eintrag ist die gesuchte Nummer (bezogen auf die Roboter derselben
     % Gelenkreihenfolge)
     index_type = num; %Index in den Robotern mit derselben Gelenkreihenfolge
