@@ -16,9 +16,10 @@
 %   theta  Rotation z (Gelenkkoordinate)
 %   d      Translation z (Gelenkkoordinate)
 %   offset Gelenk-Offset
-% EEdof0
+% EEdof0 [1x9] oder [1x6]
 %   Vektor mit beweglichen EE-FG des Roboters (Geschw. und Winkelgeschw. im
 %   Basis-KS. Entspricht Vorgabe in der Struktursynthese von Ramirez)
+%   Zusätzlich Euler-Winkel Basis-Endeffektor (letzte 3 Komponenten)
 %   1="Komponente durch Roboter beeinflussbar"; 0="nicht beeinflussbar"
 % 
 % Ausgabe:
@@ -32,12 +33,19 @@
 % notation for open and closed-loop robots" (1986) 
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function [mdlname, new] = serroblib_add_robot(MDH_struct, EEdof0)
 
 if nargin == 1
   EEdof0 = []; % 6 Leerzeichen
+end
+
+if length(EEdof0) == 6
+  % Altes Format: Ignoriere die Erweiterung um die Euler-Winkel des EE
+  % Setze gewünschte Euler-Winkel auf Winkelgeschwindigkeit (passt bei 1R
+  % und 3R; nicht bei 2R). Aber da muss man sowieso die Euler-Winkel nehmen
+  EEdof0 = [EEdof0, EEdof0(4:6)];
 end
 
 % Anzahl Gelenke
@@ -81,13 +89,23 @@ if ~exist(filepath_csv, 'file')
     csvline_head2{c} = 'd'; c = c+1;
     csvline_head2{c} = 'offset'; c = c+1;
   end
-  % Kopfezeile für EE-FG erzeugen
-  csvline_head1{c} = 'EE-FG (Basis-KS)';
-  for jj = 1:5
+  % Kopfzeile für EE-Trafo erzeugen
+  csvline_head1{c} = 'EE-Transformation (phi_N_E)';
+  for jj = 1:2
     csvline_head1{c+jj} = '';
   end
-  eestr = {'vx0','vy0','vz0','wx0','wy0','wz0'};
-  for jj = 1:6
+  phiNEstr = {'phix_NE', 'phiy_NE', 'phiz_NE'};
+  for jj = 1:3
+    csvline_head2{c} = phiNEstr{jj}; c=c+1;
+  end
+  
+  % Kopfezeile für EE-FG erzeugen
+  csvline_head1{c} = 'EE-FG (Basis-KS)';
+  for jj = 1:8
+    csvline_head1{c+jj} = '';
+  end
+  eestr = {'vx0','vy0','vz0','wx0','wy0','wz0','phix0','phiy0','phiz0'};
+  for jj = 1:9
     csvline_head2{c} = eestr{jj}; c=c+1;
   end
   % String aus Cell-Array erzeugen
@@ -134,13 +152,18 @@ for kk = 1:N
   c = c+1; csvline{c} = descr_offset{MDH_struct.offset(kk)+1}; %#ok<AGROW>
 end
 
+% Spalten für EE-Transformation
+for i = 1:3
+  c = c+1; csvline{c} = '?'; %#ok<AGROW>
+end
+
 % Spalten für EE-Freiheitsgrade
 if ~isempty(EEdof0)
-  for i = 1:6
+  for i = 1:9
     c = c+1; csvline{c} = EEdof0(i); %#ok<AGROW>
   end
 else
-  for i = 1:6
+  for i = 1:9
     c = c+1; csvline{c} = ''; %#ok<AGROW>
   end
 end

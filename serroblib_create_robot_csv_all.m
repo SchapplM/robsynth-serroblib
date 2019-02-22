@@ -8,12 +8,13 @@
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
+repopath=fileparts(which('serroblib_path_init.m'));
+
 for N = 1:7
   % Bit-Arrays aktualisieren
   serroblib_gen_bitarrays(N);
   
   fprintf('Erstelle Modelldateien für Roboter mit %d FG\n', N);
-  repopath=fileparts(which('serroblib_path_init.m'));
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
   l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof');
   for j = 1:length(l.Names_Ndof)

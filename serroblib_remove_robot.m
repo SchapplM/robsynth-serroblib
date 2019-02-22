@@ -32,7 +32,7 @@ tline = fgetl(fid);
 found = false;
 while ischar(tline)
   % Spaltenweise als Cell-Array
-  csvline = strsplit(tline, ';');
+  csvline = strsplit(tline, ';', 'CollapseDelimiters', false);
   if strcmp(csvline{1}, Name)
     % Zu löschenden Roboter gefunden. Diese Zeile nicht in Dateikopie schreiben
     found = true;

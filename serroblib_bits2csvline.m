@@ -7,11 +7,14 @@
 %   Bit-Array zur Kennzeichnung aller MDH-Kinematikparameter.
 %   Jede Spalte des Arrays (2Byte, uint16) entspricht einer Gelenk-Transfo.
 %   Bits:
-%   01:    Gelenktyp
-%   02-05: beta
-%   06:    b
-%   07-10: alpha
-%   ...
+%   01 (LSB): Gelenktyp (1 Bit)
+%   02-04:    beta (3 Bit)
+%   05:       b (1 Bit)
+%   06-08:    alpha (3 Bit)
+%   09:       a (1 Bit)
+%   10-12:    theta (3 Bit)
+%   13:       d (1 Bit)
+%   14-16:    offset (3 Bit)
 % 
 % Ausgabe:
 % csvline
@@ -19,7 +22,7 @@
 % csvbits
 %   Spaltenweise Indizes für die Daten in csvline
 % 
-% %iehe auch: serroblib_csvline2bits
+% Siehe auch: serroblib_csvline2bits
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
@@ -32,7 +35,7 @@ csvbits = [];
 c = 1;
 for kk = 1:N
   % In den 2 Byte sind alle Kinematik-Parameter enthalten mit jeweils 1 bis
-  % 3 Bit. Die Bis kodieren den Index auf die möglichen Zustände.
+  % 3 Bit. Die Bits kodieren den Index auf die möglichen Zustände.
   % Die Reihenfolge ist überall gleich
   b = 0; % Zähler für Bit-Verschiebung
   Bit_type   = bitand( bitshift( BA(kk), -b), bin2dec('1'));   b = b+1;
@@ -59,12 +62,12 @@ for kk = 1:N
   
   % csv-Zeile erstellen
   % Siehe auch serroblib_add_robot.m
-  c=c+1; csvline{c} = descr_type{Bit_type+1};     csvbits(c) = Bit_type+1;
-  c=c+1; csvline{c} = descr_beta{Bit_beta+1};     csvbits(c) = Bit_beta+1;
-  c=c+1; csvline{c} = descr_b{Bit_b+1};           csvbits(c) = Bit_b+1;
-  c=c+1; csvline{c} = descr_alpha{Bit_alpha+1};   csvbits(c) = Bit_alpha+1;
-  c=c+1; csvline{c} = descr_a{Bit_a+1};           csvbits(c) = Bit_a+1;
-  c=c+1; csvline{c} = descr_theta{Bit_theta+1};   csvbits(c) = Bit_theta+1;
-  c=c+1; csvline{c} = descr_d{Bit_d+1};           csvbits(c) = Bit_d+1;
-  c=c+1; csvline{c} = descr_offset{Bit_offset+1}; csvbits(c) = Bit_offset+1;
+  c=c+1; csvline{c} = descr_type{Bit_type+1};     csvbits(c) = Bit_type+1;  %#ok<AGROW>
+  c=c+1; csvline{c} = descr_beta{Bit_beta+1};     csvbits(c) = Bit_beta+1;  %#ok<AGROW>
+  c=c+1; csvline{c} = descr_b{Bit_b+1};           csvbits(c) = Bit_b+1;     %#ok<AGROW>
+  c=c+1; csvline{c} = descr_alpha{Bit_alpha+1};   csvbits(c) = Bit_alpha+1; %#ok<AGROW>
+  c=c+1; csvline{c} = descr_a{Bit_a+1};           csvbits(c) = Bit_a+1;     %#ok<AGROW>
+  c=c+1; csvline{c} = descr_theta{Bit_theta+1};   csvbits(c) = Bit_theta+1; %#ok<AGROW>
+  c=c+1; csvline{c} = descr_d{Bit_d+1};           csvbits(c) = Bit_d+1;     %#ok<AGROW>
+  c=c+1; csvline{c} = descr_offset{Bit_offset+1}; csvbits(c) = Bit_offset+1;%#ok<AGROW>
 end
