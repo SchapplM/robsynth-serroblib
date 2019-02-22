@@ -17,11 +17,11 @@
 % JR_rot [9x6]
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-22 11:48
+% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function JR_rot = S6RRPRRR14_jacobiR_rot_0_sym_varpar(qJ, ...
   pkin)
@@ -36,8 +36,8 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_0_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:25:33
-% EndTime: 2019-01-03 10:25:33
+% StartTime: 2019-02-22 11:47:57
+% EndTime: 2019-02-22 11:47:57
 % DurationCPUTime: 0.01s
 % Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 t1 = [0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0;];

@@ -17,11 +17,11 @@
 % JR_rot [9x6]
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-22 11:48
+% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function JR_rot = S6RRPRRR14_jacobiR_rot_6_sym_varpar(qJ, ...
   pkin)
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_6_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:25:35
-% EndTime: 2019-01-03 10:25:36
-% DurationCPUTime: 0.81s
+% StartTime: 2019-02-22 11:48:00
+% EndTime: 2019-02-22 11:48:01
+% DurationCPUTime: 0.79s
 % Computational Cost: add. (825->85), mult. (2425->180), div. (0->0), fcn. (3286->18), ass. (0->92)
 t368 = sin(qJ(2));
 t369 = sin(qJ(1));
@@ -55,13 +55,13 @@ t364 = cos(pkin(7));
 t361 = sin(pkin(6));
 t402 = t361 * t374;
 t389 = t352 * t364 + t360 * t402;
-t337 = -t353 * t362 + t358 * t389;
+t337 = -t353 * t362 + t389 * t358;
 t367 = sin(qJ(4));
 t372 = cos(qJ(4));
 t348 = -t352 * t360 + t364 * t402;
 t359 = sin(pkin(8));
 t363 = cos(pkin(8));
-t413 = t353 * t358 + t362 * t389;
+t413 = t353 * t358 + t389 * t362;
 t417 = t348 * t359 + t363 * t413;
 t315 = t337 * t372 + t367 * t417;
 t326 = -t348 * t363 + t359 * t413;
@@ -77,14 +77,14 @@ t303 = t315 * t366 + t326 * t371;
 t393 = t412 * t360;
 t399 = t364 * t373;
 t377 = t362 * t393 + (-t358 * t368 + t362 * t399) * t361;
-t385 = -t361 * t373 * t360 + t364 * t412;
+t385 = -t361 * t373 * t360 + t412 * t364;
 t416 = t385 * t359 + t377 * t363;
 t395 = t369 * t412;
 t355 = -t368 * t395 + t374 * t373;
 t354 = -t374 * t368 - t373 * t395;
 t403 = t361 * t369;
 t387 = t354 * t364 + t360 * t403;
-t380 = t355 * t358 - t362 * t387;
+t380 = t355 * t358 - t387 * t362;
 t388 = -t354 * t360 + t364 * t403;
 t415 = -t388 * t359 + t380 * t363;
 t407 = t358 * t364;
@@ -102,33 +102,33 @@ t341 = -t354 * t358 - t355 * t401;
 t390 = t341 * t363 + t355 * t406;
 t350 = (-t358 * t373 - t362 * t400) * t361;
 t386 = t350 * t363 + t359 * t396;
-t375 = t359 * t380 + t363 * t388;
+t375 = t380 * t359 + t388 * t363;
 t351 = (-t358 * t400 + t362 * t373) * t361;
 t347 = t362 * t404 + (t361 * t399 + t393) * t358;
 t343 = -t350 * t359 + t363 * t396;
 t342 = t354 * t362 - t355 * t407;
 t340 = -t352 * t362 - t353 * t407;
-t338 = t355 * t362 + t358 * t387;
-t334 = -t359 * t377 + t363 * t385;
+t338 = t355 * t362 + t387 * t358;
+t334 = -t377 * t359 + t385 * t363;
 t331 = -t341 * t359 + t355 * t405;
 t330 = -t339 * t359 + t353 * t405;
-t329 = t351 * t372 + t367 * t386;
-t328 = t351 * t367 - t372 * t386;
+t329 = t351 * t372 + t386 * t367;
+t328 = t351 * t367 - t386 * t372;
 t324 = t347 * t372 + t416 * t367;
 t323 = t347 * t367 - t416 * t372;
 t322 = t329 * t371 + t343 * t366;
-t321 = t342 * t372 + t367 * t390;
-t320 = t342 * t367 - t372 * t390;
-t319 = t340 * t372 + t367 * t391;
-t318 = t340 * t367 - t372 * t391;
+t321 = t342 * t372 + t390 * t367;
+t320 = t342 * t367 - t390 * t372;
+t319 = t340 * t372 + t391 * t367;
+t318 = t340 * t367 - t391 * t372;
 t317 = t338 * t372 - t415 * t367;
 t316 = t338 * t367 + t415 * t372;
 t311 = t324 * t371 + t334 * t366;
 t310 = -t324 * t366 + t334 * t371;
 t309 = t321 * t371 + t331 * t366;
 t308 = t319 * t371 + t330 * t366;
-t307 = t317 * t371 + t366 * t375;
-t306 = t317 * t366 - t371 * t375;
+t307 = t317 * t371 + t375 * t366;
+t306 = t317 * t366 - t375 * t371;
 t302 = t307 * t370 + t316 * t365;
 t301 = -t307 * t365 + t316 * t370;
 t1 = [t422, t309 * t370 + t320 * t365, 0, -t316 * t397 + t317 * t365, -t306 * t370, t301; t302, t308 * t370 + t318 * t365, 0, t314 * t397 - t315 * t365, t303 * t370, t423; 0, t322 * t370 + t328 * t365, 0, -t323 * t397 + t324 * t365, t310 * t370, -t311 * t365 + t323 * t370; -t423, -t309 * t365 + t320 * t370, 0, t316 * t398 + t317 * t370, t306 * t365, -t302; t301, -t308 * t365 + t318 * t370, 0, -t314 * t398 - t315 * t370, -t303 * t365, t422; 0, -t322 * t365 + t328 * t370, 0, t323 * t398 + t324 * t370, -t310 * t365, -t311 * t370 - t323 * t365; t303, t321 * t366 - t331 * t371, 0, -t316 * t366, t307, 0; t306, t319 * t366 - t330 * t371, 0, t314 * t366, -t305, 0; 0, t329 * t366 - t343 * t371, 0, -t323 * t366, t311, 0;];

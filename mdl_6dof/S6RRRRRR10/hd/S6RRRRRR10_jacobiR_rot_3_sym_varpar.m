@@ -17,11 +17,11 @@
 % JR_rot [9x6]
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 11:28
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-22 12:39
+% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function JR_rot = S6RRRRRR10_jacobiR_rot_3_sym_varpar(qJ, ...
   pkin)
@@ -36,49 +36,40 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_3_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-23 11:27:17
-% EndTime: 2018-11-23 11:27:17
-% DurationCPUTime: 0.12s
-% Computational Cost: add. (248->40), mult. (241->59), div. (0->0), fcn. (255->18), ass. (0->41)
-t160 = sin(pkin(6));
-t165 = sin(qJ(1));
-t186 = t160 * t165;
-t168 = cos(qJ(1));
-t185 = t160 * t168;
-t184 = pkin(6) - qJ(2);
-t183 = pkin(6) + qJ(2);
-t182 = pkin(7) - qJ(3);
-t181 = pkin(7) + qJ(3);
-t180 = cos(t184);
-t179 = cos(t182);
-t178 = sin(t184);
-t177 = sin(t182);
-t176 = cos(t183) / 0.2e1;
-t175 = cos(t181) / 0.2e1;
-t174 = sin(t183) / 0.2e1;
-t173 = sin(t181) / 0.2e1;
-t148 = t174 - t178 / 0.2e1;
-t167 = cos(qJ(2));
-t139 = t168 * t148 + t165 * t167;
-t143 = t165 * t148 - t168 * t167;
-t164 = sin(qJ(2));
-t169 = t180 / 0.2e1 + t176;
-t138 = t165 * t164 - t168 * t169;
-t145 = t173 + t177 / 0.2e1;
-t150 = t179 / 0.2e1 + t175;
-t163 = sin(qJ(3));
-t172 = t138 * t150 + t139 * t163 + t145 * t185;
-t146 = t173 - t177 / 0.2e1;
-t149 = t175 - t179 / 0.2e1;
-t166 = cos(qJ(3));
-t171 = t138 * t146 - t139 * t166 - t149 * t185;
-t141 = -t168 * t164 - t165 * t169;
-t170 = -t141 * t146 + t143 * t166 + t149 * t186;
-t162 = cos(pkin(6));
-t161 = cos(pkin(7));
-t159 = sin(pkin(7));
-t151 = t176 - t180 / 0.2e1;
-t147 = t174 + t178 / 0.2e1;
-t137 = t141 * t150 + t143 * t163 + t145 * t186;
-t1 = [t171, t141 * t166 + t143 * t146, t137, 0, 0, 0; -t170, -t138 * t166 - t139 * t146, -t172, 0, 0, 0; 0, t151 * t146 + t147 * t166, t162 * t145 + t147 * t150 + t151 * t163, 0, 0, 0; t172, -t141 * t163 + t143 * t150, t170, 0, 0, 0; t137, t138 * t163 - t139 * t150, t171, 0, 0, 0; 0, -t147 * t163 + t151 * t150, -t147 * t146 + t162 * t149 + t151 * t166, 0, 0, 0; -t138 * t159 + t161 * t185, -t143 * t159, 0, 0, 0, 0; -t141 * t159 + t161 * t186, t139 * t159, 0, 0, 0, 0; 0, -t151 * t159, 0, 0, 0, 0;];
+% StartTime: 2019-02-22 12:38:59
+% EndTime: 2019-02-22 12:38:59
+% DurationCPUTime: 0.11s
+% Computational Cost: add. (58->25), mult. (178->58), div. (0->0), fcn. (255->10), ass. (0->32)
+t115 = sin(qJ(2));
+t116 = sin(qJ(1));
+t118 = cos(qJ(2));
+t119 = cos(qJ(1));
+t136 = cos(pkin(6));
+t124 = t119 * t136;
+t104 = t116 * t115 - t118 * t124;
+t105 = t115 * t124 + t116 * t118;
+t113 = cos(pkin(7));
+t114 = sin(qJ(3));
+t117 = cos(qJ(3));
+t111 = sin(pkin(7));
+t112 = sin(pkin(6));
+t133 = t112 * t119;
+t126 = t111 * t133;
+t137 = (t104 * t113 + t126) * t117 + t105 * t114;
+t134 = t112 * t116;
+t132 = t113 * t114;
+t131 = t113 * t117;
+t130 = t114 * t115;
+t129 = t114 * t118;
+t128 = t115 * t117;
+t127 = t117 * t118;
+t125 = t116 * t136;
+t123 = t136 * t111;
+t106 = -t119 * t115 - t118 * t125;
+t121 = t106 * t113 + t111 * t134;
+t120 = t104 * t132 - t105 * t117 + t114 * t126;
+t107 = -t115 * t125 + t119 * t118;
+t103 = t107 * t117 + t121 * t114;
+t102 = -t107 * t114 + t121 * t117;
+t1 = [t120, t106 * t117 - t107 * t132, t102, 0, 0, 0; t103, -t104 * t117 - t105 * t132, -t137, 0, 0, 0; 0 (-t113 * t130 + t127) * t112, t117 * t123 + (t113 * t127 - t130) * t112, 0, 0, 0; t137, -t106 * t114 - t107 * t131, -t103, 0, 0, 0; t102, t104 * t114 - t105 * t131, t120, 0, 0, 0; 0 (-t113 * t128 - t129) * t112, -t114 * t123 + (-t113 * t129 - t128) * t112, 0, 0, 0; -t104 * t111 + t113 * t133, t107 * t111, 0, 0, 0, 0; -t106 * t111 + t113 * t134, t105 * t111, 0, 0, 0, 0; 0, t112 * t115 * t111, 0, 0, 0, 0;];
 JR_rot  = t1;

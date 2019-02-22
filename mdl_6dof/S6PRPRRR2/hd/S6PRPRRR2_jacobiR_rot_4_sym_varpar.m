@@ -1,0 +1,66 @@
+% Rotatorische Teilmatrix der Rotationsmatrix-Jacobi-Matrix für Segment Nr. 4 (0=Basis) von
+% S6PRPRRR2
+% Use Code from Maple symbolic Code Generation
+%
+% Rotationsmatrix-Jacobi-Matrix: Differentieller Zusammenhang zwischen
+% gestapelter Endeffektor-Rotationsmatrix und verallgemeinerten Koordinaten.
+%
+%
+% Input:
+% qJ [6x1]
+%   Generalized joint coordinates (joint angles)
+% pkin [12x1]
+%   kinematic parameters (e.g. lengths of the links)
+%   pkin=[a2,a3,a4,a5,a6,alpha2,d2,d4,d5,d6,theta1,theta3]';
+%
+% Output:
+% JR_rot [9x6]
+%   Jacobi-Matrix der Endeffektor-Rotationsmatrix
+
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-22 09:38
+% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Moritz Schappler, moritz.schappler@imes.uni-hannover.de
+% (C) Institut für Mechatronische Systeme, Universität Hannover
+
+function JR_rot = S6PRPRRR2_jacobiR_rot_4_sym_varpar(qJ, ...
+  pkin)
+%% Coder Information
+%#codegen
+%$cgargs {zeros(6,1),zeros(12,1)}
+assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
+  'S6PRPRRR2_jacobiR_rot_4_sym_varpar: qJ has to be [6x1] (double)');
+assert(isreal(pkin) && all(size(pkin) == [12 1]), ...
+  'S6PRPRRR2_jacobiR_rot_4_sym_varpar: pkin has to be [12x1] (double)');
+
+%% Symbolic Calculation
+% From jacobiR_rot_4_floatb_twist_matlab.m
+% OptimizationMode: 2
+% StartTime: 2019-02-22 09:38:29
+% EndTime: 2019-02-22 09:38:29
+% DurationCPUTime: 0.05s
+% Computational Cost: add. (44->15), mult. (122->36), div. (0->0), fcn. (178->10), ass. (0->23)
+t93 = sin(pkin(6));
+t97 = sin(qJ(4));
+t104 = t93 * t97;
+t99 = cos(qJ(4));
+t103 = t93 * t99;
+t100 = cos(qJ(2));
+t91 = sin(pkin(12));
+t94 = cos(pkin(12));
+t98 = sin(qJ(2));
+t102 = t100 * t94 - t98 * t91;
+t101 = t100 * t91 + t98 * t94;
+t96 = cos(pkin(6));
+t87 = t101 * t96;
+t92 = sin(pkin(11));
+t95 = cos(pkin(11));
+t81 = t102 * t92 + t95 * t87;
+t83 = t102 * t95 - t92 * t87;
+t86 = t102 * t96;
+t85 = t101 * t93;
+t84 = t102 * t93;
+t82 = -t101 * t95 - t92 * t86;
+t80 = -t101 * t92 + t95 * t86;
+t1 = [0, t82 * t99, 0, t92 * t103 - t83 * t97, 0, 0; 0, t80 * t99, 0, -t95 * t103 - t81 * t97, 0, 0; 0, t84 * t99, 0, -t85 * t97 + t96 * t99, 0, 0; 0, -t82 * t97, 0, -t92 * t104 - t83 * t99, 0, 0; 0, -t80 * t97, 0, t95 * t104 - t81 * t99, 0, 0; 0, -t84 * t97, 0, -t85 * t99 - t96 * t97, 0, 0; 0, t83, 0, 0, 0, 0; 0, t81, 0, 0, 0, 0; 0, t85, 0, 0, 0, 0;];
+JR_rot  = t1;

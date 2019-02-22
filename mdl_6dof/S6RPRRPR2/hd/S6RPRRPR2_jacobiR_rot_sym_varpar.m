@@ -20,11 +20,11 @@
 % JR_rot [9x6]
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 16:16
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-22 10:44
+% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function JR_rot = S6RPRRPR2_jacobiR_rot_sym_varpar(qJ, link_index, pkin)
 %% Coder Information
