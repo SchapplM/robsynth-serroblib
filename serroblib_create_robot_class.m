@@ -138,25 +138,27 @@ if nargin > 1 % Falls Name des Parametrierten Modells gegeben
       if isnan(PS.offset(kk)), PS.offset(kk) = unitmult_q*value_offset; end
       
       % Werte belegen, wenn sie in der Tabelle nicht gegeben sind
+      % Nehme die typischen Einheiten aus der Tabelle (deg, mm) und rechne
+      % sie am Ende um
       if isnan(value_qmin)
         if PS.sigma(kk) == 0
-          value_qmin = -pi;
+          value_qmin = -180;
         else
-          value_qmin = -1;
+          value_qmin = -1000;
         end
       end
       if isnan(value_qmax)
         if PS.sigma(kk) == 0
-          value_qmax = pi;
+          value_qmax = 180;
         else
-          value_qmax = 1;
+          value_qmax = 1000;
         end
       end
       if isnan(value_vmax)
         if PS.sigma(kk) == 0
-          value_vmax = 2;
+          value_vmax = 720;
         else
-          value_vmax = 1;
+          value_vmax = 1000;
         end
       end
       % Spalte für Achs-Vorzeichen nach Hersteller-Norm (noch nicht vollständig implementiert)
