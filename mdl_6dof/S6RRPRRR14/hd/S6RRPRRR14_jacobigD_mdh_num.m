@@ -24,11 +24,11 @@
 % Quelle:
 % Berechnungen Moritz Schappler, 21.06.2016
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 22:56
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 % Moritz Schappler, schappler@irt.uni-hannover.de, 2016-06
 % (C) Institut für Regelungstechnik, Leibniz Universität Hannover
 

@@ -22,38 +22,38 @@
 % Ja_rot [3x6]
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 17:04
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 21:40
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function Ja_rot = S6RRPRPR6_jacobia_rot_floatb_twist_sym_varpar(qJ, link_index, ...
+function Ja_rot = S6RRPRPR6_jacobia_rot_sym_varpar(qJ, link_index, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(6,1),uint8(0),zeros(11,1)}
 assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
-  'S6RRPRPR6_jacobia_rot_floatb_twist_sym_varpar: qJ has to be [6x1] (double)');
+  'S6RRPRPR6_jacobia_rot_sym_varpar: qJ has to be [6x1] (double)');
 assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
-	'S6RRPRPR6_jacobia_rot_floatb_twist_sym_varpar: link_index has to be [1x1] uint8');
+	'S6RRPRPR6_jacobia_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [11 1]), ...
-  'S6RRPRPR6_jacobia_rot_floatb_twist_sym_varpar: pkin has to be [11x1] (double)');
+  'S6RRPRPR6_jacobia_rot_sym_varpar: pkin has to be [11x1] (double)');
 %% Function calls
 if link_index == 0
-	Ja_rot=S6RRPRPR6_jacobia_rot_0_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S6RRPRPR6_jacobia_rot_0_sym_varpar(qJ, pkin);
 elseif link_index == 1
-	Ja_rot=S6RRPRPR6_jacobia_rot_1_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S6RRPRPR6_jacobia_rot_1_sym_varpar(qJ, pkin);
 elseif link_index == 2
-	Ja_rot=S6RRPRPR6_jacobia_rot_2_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S6RRPRPR6_jacobia_rot_2_sym_varpar(qJ, pkin);
 elseif link_index == 3
-	Ja_rot=S6RRPRPR6_jacobia_rot_3_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S6RRPRPR6_jacobia_rot_3_sym_varpar(qJ, pkin);
 elseif link_index == 4
-	Ja_rot=S6RRPRPR6_jacobia_rot_4_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S6RRPRPR6_jacobia_rot_4_sym_varpar(qJ, pkin);
 elseif link_index == 5
-	Ja_rot=S6RRPRPR6_jacobia_rot_5_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S6RRPRPR6_jacobia_rot_5_sym_varpar(qJ, pkin);
 elseif link_index == 6
-	Ja_rot=S6RRPRPR6_jacobia_rot_6_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S6RRPRPR6_jacobia_rot_6_sym_varpar(qJ, pkin);
 else
 	Ja_rot=NaN(3,6);
 end

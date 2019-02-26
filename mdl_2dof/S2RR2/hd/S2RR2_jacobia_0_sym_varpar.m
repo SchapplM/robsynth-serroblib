@@ -1,9 +1,12 @@
-% Geometrischen Jacobi-Matrix für Segment Nr. 0 (0=Basis) von
+% Analytische Jacobi-Matrix für Segment Nr. 0 (0=Basis) von
 % S2RR2
 % Use Code from Maple symbolic Code Generation
 %
-% geometrische Jacobi-Matrix: Differentieller Zusammenhang zwischen
+% analytische Jacobi-Matrix: Differentieller Zusammenhang zwischen
 % Endeffektorposition und verallgemeinerten Koordinaten.
+% Zeitableitung der Winkeldarstellung des Endeffektors in Basis-Koordinaten
+%
+% Winkeldarstellung: Euler-XYZ-Winkel, rotx(alpha)*roty(beta)*rotz(gamma)
 %
 % Input:
 % qJ [2x1]
@@ -15,22 +18,21 @@
 %   pkin=[d2]';
 %
 % Output:
-% Jg [3x2]
-%   Geometrischen Jacobi-Matrix
+% Ja [6x2]
+%   Analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 16:49
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:11
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function Jg = S2RR2_jacobia_0_floatb_twist_sym_varpar(qJ, r_i_i_C, ...
+function Ja = S2RR2_jacobia_0_sym_varpar(qJ, r_i_i_C, ...
   pkin)
 
-
-Ja_transl = S2RR2_jacobia_transl_0_floatb_twist_sym_varpar(qJ, r_i_i_C, ...
+Ja_transl = S2RR2_jacobia_transl_0_sym_varpar(qJ, r_i_i_C, ...
   pkin);
-Jg_rot = S2RR2_jacobig_rot_0_floatb_twist_sym_varpar(qJ, ...
+Ja_rot = S2RR2_jacobia_rot_0_sym_varpar(qJ, ...
   pkin);
 
-Jg = [Ja_transl; Jg_rot];
+Ja = [Ja_transl; Ja_rot];

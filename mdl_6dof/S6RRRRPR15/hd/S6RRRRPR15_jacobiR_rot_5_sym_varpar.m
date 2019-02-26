@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 12:25
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 22:39
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,20 +36,20 @@ assert(isreal(pkin) && all(size(pkin) == [12 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_5_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 12:25:42
-% EndTime: 2019-02-22 12:25:42
-% DurationCPUTime: 0.23s
+% StartTime: 2019-02-26 22:38:57
+% EndTime: 2019-02-26 22:38:58
+% DurationCPUTime: 0.21s
 % Computational Cost: add. (136->42), mult. (408->90), div. (0->0), fcn. (571->12), ass. (0->50)
 t209 = sin(qJ(2));
 t210 = sin(qJ(1));
 t213 = cos(qJ(2));
 t214 = cos(qJ(1));
 t233 = cos(pkin(6));
-t216 = t214 * t233;
-t198 = t209 * t216 + t210 * t213;
+t217 = t214 * t233;
+t198 = t209 * t217 + t210 * t213;
 t208 = sin(qJ(3));
 t212 = cos(qJ(3));
-t197 = t209 * t210 - t213 * t216;
+t197 = t209 * t210 - t213 * t217;
 t204 = sin(pkin(7));
 t206 = cos(pkin(7));
 t205 = sin(pkin(6));
@@ -73,16 +73,16 @@ t222 = t209 * t212;
 t221 = t212 * t213;
 t220 = t209 * t231;
 t219 = t204 * t228;
-t218 = t204 * t233;
-t217 = t210 * t233;
+t218 = t210 * t233;
+t216 = t233 * t204;
 t182 = -t198 * t208 - t215 * t212;
-t200 = -t209 * t217 + t213 * t214;
-t199 = -t214 * t209 - t213 * t217;
+t200 = -t209 * t218 + t213 * t214;
+t199 = -t214 * t209 - t213 * t218;
 t196 = t233 * t206 - t213 * t231;
 t195 = (-t206 * t224 + t221) * t205;
 t193 = -t199 * t204 + t206 * t228;
-t190 = t208 * t218 + (t206 * t223 + t222) * t205;
-t189 = t212 * t218 + (t206 * t221 - t224) * t205;
+t190 = t208 * t216 + (t206 * t223 + t222) * t205;
+t189 = t212 * t216 + (t206 * t221 - t224) * t205;
 t188 = t199 * t212 - t200 * t226;
 t187 = -t197 * t212 - t198 * t226;
 t186 = t200 * t212 + (t199 * t206 + t219) * t208;

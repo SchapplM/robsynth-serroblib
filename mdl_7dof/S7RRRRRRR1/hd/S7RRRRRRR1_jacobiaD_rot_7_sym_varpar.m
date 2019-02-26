@@ -21,30 +21,30 @@
 % JaD_rot [3x7]
 %   Zeitableitung der rotatorischen Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-26 21:21
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 22:54
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function JaD_rot = S7RRRRRRR1_jacobiaD_rot_7_floatb_twist_sym_varpar(qJ, qJD, ...
+function JaD_rot = S7RRRRRRR1_jacobiaD_rot_7_sym_varpar(qJ, qJD, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(7,1),zeros(7,1),zeros(4,1)}
 assert(isreal(qJ) && all(size(qJ) == [7 1]), ...
-  'S7RRRRRRR1_jacobiaD_rot_7_floatb_twist_sym_varpar: qJ has to be [7x1] (double)');
+  'S7RRRRRRR1_jacobiaD_rot_7_sym_varpar: qJ has to be [7x1] (double)');
 assert(isreal(qJD) && all(size(qJD) == [7 1]), ...
-  'S7RRRRRRR1_jacobiaD_rot_7_floatb_twist_sym_varpar: qJD has to be [7x1] (double)');
+  'S7RRRRRRR1_jacobiaD_rot_7_sym_varpar: qJD has to be [7x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [4 1]), ...
-  'S7RRRRRRR1_jacobiaD_rot_7_floatb_twist_sym_varpar: pkin has to be [4x1] (double)');
+  'S7RRRRRRR1_jacobiaD_rot_7_sym_varpar: pkin has to be [4x1] (double)');
 
 %% Symbolic Calculation
 % From jacobiaD_rot_7_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-26 21:20:56
-% EndTime: 2018-11-26 21:21:08
-% DurationCPUTime: 12.00s
+% StartTime: 2019-02-26 22:54:33
+% EndTime: 2019-02-26 22:54:44
+% DurationCPUTime: 11.77s
 % Computational Cost: add. (34439->421), mult. (96643->757), div. (1497->12), fcn. (121102->17), ass. (0->284)
 t618 = sin(qJ(4));
 t620 = sin(qJ(2));

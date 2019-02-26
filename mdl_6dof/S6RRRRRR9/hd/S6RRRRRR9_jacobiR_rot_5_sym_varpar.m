@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 12:38
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 22:52
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [13 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_5_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 12:38:22
-% EndTime: 2019-02-22 12:38:23
-% DurationCPUTime: 0.41s
+% StartTime: 2019-02-26 22:52:07
+% EndTime: 2019-02-26 22:52:08
+% DurationCPUTime: 0.40s
 % Computational Cost: add. (293->66), mult. (867->135), div. (0->0), fcn. (1196->14), ass. (0->69)
 t256 = sin(qJ(2));
 t257 = sin(qJ(1));
@@ -49,14 +49,14 @@ t266 = t262 * t286;
 t242 = t256 * t266 + t257 * t261;
 t255 = sin(qJ(3));
 t260 = cos(qJ(3));
-t241 = t256 * t257 - t261 * t266;
+t241 = t257 * t256 - t261 * t266;
 t252 = cos(pkin(7));
 t250 = sin(pkin(7));
 t251 = sin(pkin(6));
 t279 = t251 * t262;
 t268 = t250 * t279;
 t264 = t241 * t252 + t268;
-t223 = -t242 * t260 + t255 * t264;
+t223 = -t242 * t260 + t264 * t255;
 t234 = -t241 * t250 + t252 * t279;
 t254 = sin(qJ(4));
 t259 = cos(qJ(4));
@@ -83,10 +83,10 @@ t270 = t256 * t283;
 t269 = t250 * t280;
 t267 = t257 * t286;
 t265 = t286 * t250;
-t243 = -t256 * t262 - t261 * t267;
+t243 = -t262 * t256 - t261 * t267;
 t263 = -t243 * t250 + t252 * t280;
-t244 = -t256 * t267 + t261 * t262;
-t240 = t252 * t286 - t261 * t283;
+t244 = -t256 * t267 + t262 * t261;
+t240 = t286 * t252 - t261 * t283;
 t239 = (-t252 * t275 + t271) * t251;
 t238 = (t252 * t273 + t274) * t251;
 t233 = t255 * t265 + (t252 * t274 + t273) * t251;
@@ -98,14 +98,14 @@ t227 = -t241 * t260 - t242 * t278;
 t226 = -t241 * t255 + t242 * t277;
 t225 = t244 * t260 + (t243 * t252 + t269) * t255;
 t224 = -t243 * t277 + t244 * t255 - t260 * t269;
-t222 = -t260 * t264 - t285;
+t222 = -t264 * t260 - t285;
 t220 = t241 * t277 + t260 * t268 + t285;
 t219 = t233 * t259 + t240 * t254;
 t218 = -t233 * t254 + t240 * t259;
 t217 = t229 * t259 + t244 * t282;
 t216 = t227 * t259 + t242 * t282;
-t215 = t225 * t259 + t254 * t263;
-t214 = t225 * t254 - t259 * t263;
+t215 = t225 * t259 + t263 * t254;
+t214 = t225 * t254 - t263 * t259;
 t210 = t215 * t258 + t224 * t253;
 t209 = -t215 * t253 + t224 * t258;
 t1 = [t222 * t253 + t289, t217 * t258 + t228 * t253, -t224 * t272 + t225 * t253, -t214 * t258, t209, 0; t210, t216 * t258 + t226 * t253, -t220 * t272 - t223 * t253, t211 * t258, t220 * t258 + t290, 0; 0, t230 * t258 + t238 * t253, -t232 * t272 + t233 * t253, t218 * t258, -t219 * t253 + t232 * t258, 0; t222 * t258 - t290, -t217 * t253 + t228 * t258, t224 * t276 + t225 * t258, t214 * t253, -t210, 0; t209, -t216 * t253 + t226 * t258, t220 * t276 - t223 * t258, -t211 * t253, -t220 * t253 + t289, 0; 0, -t230 * t253 + t238 * t258, t232 * t276 + t233 * t258, -t218 * t253, -t219 * t258 - t232 * t253, 0; t211, t229 * t254 - t244 * t281, -t224 * t254, t215, 0, 0; t214, t227 * t254 - t242 * t281, -t220 * t254, -t213, 0, 0; 0, t239 * t254 - t259 * t270, -t232 * t254, t219, 0, 0;];

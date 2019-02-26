@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 11:15
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 21:30
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [10 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_6_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 11:15:03
-% EndTime: 2019-02-22 11:15:03
-% DurationCPUTime: 0.14s
+% StartTime: 2019-02-26 21:30:48
+% EndTime: 2019-02-26 21:30:48
+% DurationCPUTime: 0.13s
 % Computational Cost: add. (74->28), mult. (219->64), div. (0->0), fcn. (320->10), ass. (0->34)
 t133 = sin(qJ(2));
 t134 = sin(qJ(1));
@@ -67,8 +67,8 @@ t140 = t134 * t150;
 t116 = -t124 * t132 + t136 * t144;
 t126 = -t133 * t140 + t138 * t137;
 t125 = -t138 * t133 - t137 * t140;
-t122 = -t132 * t150 + t133 * t146;
-t121 = -t133 * t147 - t136 * t150;
+t122 = -t150 * t132 + t133 * t146;
+t121 = -t133 * t147 - t150 * t136;
 t120 = t126 * t136 - t134 * t147;
 t119 = t126 * t132 + t134 * t146;
 t115 = t120 * t135 + t125 * t131;

@@ -22,34 +22,34 @@
 % Ja_rot [3x4]
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:59
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:22
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function Ja_rot = S4PPRR2_jacobia_rot_floatb_twist_sym_varpar(qJ, link_index, ...
+function Ja_rot = S4PPRR2_jacobia_rot_sym_varpar(qJ, link_index, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(4,1),uint8(0),zeros(6,1)}
 assert(isreal(qJ) && all(size(qJ) == [4 1]), ...
-  'S4PPRR2_jacobia_rot_floatb_twist_sym_varpar: qJ has to be [4x1] (double)');
+  'S4PPRR2_jacobia_rot_sym_varpar: qJ has to be [4x1] (double)');
 assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
-	'S4PPRR2_jacobia_rot_floatb_twist_sym_varpar: link_index has to be [1x1] uint8');
+	'S4PPRR2_jacobia_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
-  'S4PPRR2_jacobia_rot_floatb_twist_sym_varpar: pkin has to be [6x1] (double)');
+  'S4PPRR2_jacobia_rot_sym_varpar: pkin has to be [6x1] (double)');
 %% Function calls
 if link_index == 0
-	Ja_rot=S4PPRR2_jacobia_rot_0_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S4PPRR2_jacobia_rot_0_sym_varpar(qJ, pkin);
 elseif link_index == 1
-	Ja_rot=S4PPRR2_jacobia_rot_1_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S4PPRR2_jacobia_rot_1_sym_varpar(qJ, pkin);
 elseif link_index == 2
-	Ja_rot=S4PPRR2_jacobia_rot_2_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S4PPRR2_jacobia_rot_2_sym_varpar(qJ, pkin);
 elseif link_index == 3
-	Ja_rot=S4PPRR2_jacobia_rot_3_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S4PPRR2_jacobia_rot_3_sym_varpar(qJ, pkin);
 elseif link_index == 4
-	Ja_rot=S4PPRR2_jacobia_rot_4_floatb_twist_sym_varpar(qJ, pkin);
+	Ja_rot=S4PPRR2_jacobia_rot_4_sym_varpar(qJ, pkin);
 else
 	Ja_rot=NaN(3,4);
 end

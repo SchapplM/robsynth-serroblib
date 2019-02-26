@@ -19,30 +19,30 @@
 % JgD_rot [3x6]
 %   Zeitableitung der rotatorischen Teilmatrix der geometrischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 22:56
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function JgD_rot = S6RRPRRR14_jacobigD_rot_5_floatb_twist_sym_varpar(qJ, qJD, ...
+function JgD_rot = S6RRPRRR14_jacobigD_rot_5_sym_varpar(qJ, qJD, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(6,1),zeros(6,1),zeros(14,1)}
 assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
-  'S6RRPRRR14_jacobigD_rot_5_floatb_twist_sym_varpar: qJ has to be [6x1] (double)');
+  'S6RRPRRR14_jacobigD_rot_5_sym_varpar: qJ has to be [6x1] (double)');
 assert(isreal(qJD) && all(size(qJD) == [6 1]), ...
-  'S6RRPRRR14_jacobigD_rot_5_floatb_twist_sym_varpar: qJD has to be [6x1] (double)');
+  'S6RRPRRR14_jacobigD_rot_5_sym_varpar: qJD has to be [6x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
-  'S6RRPRRR14_jacobigD_rot_5_floatb_twist_sym_varpar: pkin has to be [14x1] (double)');
+  'S6RRPRRR14_jacobigD_rot_5_sym_varpar: pkin has to be [14x1] (double)');
 
 %% Symbolic Calculation
 % From jacobigD_rot_5_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:25:35
-% EndTime: 2019-01-03 10:25:35
-% DurationCPUTime: 0.25s
+% StartTime: 2019-02-26 22:55:47
+% EndTime: 2019-02-26 22:55:47
+% DurationCPUTime: 0.27s
 % Computational Cost: add. (110->49), mult. (371->110), div. (0->0), fcn. (396->14), ass. (0->46)
 t354 = sin(pkin(7));
 t359 = cos(pkin(6));
@@ -89,5 +89,5 @@ t342 = -t345 * t354 + t358 * t372;
 t341 = -t343 * t354 + t358 * t371;
 t340 = -t346 * t352 + t366 * t356;
 t339 = -t344 * t352 + t367 * t356;
-t1 = [0, t371, 0, -t339 * t353 + t341 * t357 (t344 * t356 + t367 * t352) * t360 + (-t339 * t357 - t341 * t353) * t363 + ((t369 * t352 - t356 * t368) * t363 + ((t352 * t368 + t369 * t356) * t357 + (-t350 * t354 + t358 * t382) * t353) * t360) * qJD(4), 0; 0, t372, 0, -t340 * t353 + t342 * t357 (t346 * t356 + t366 * t352) * t360 + (-t340 * t357 - t342 * t353) * t363 + ((t349 * t356 + t370 * t352) * t363 + ((-t349 * t352 + t370 * t356) * t357 + (-t348 * t354 - t358 * t381) * t353) * t360) * qJD(4), 0; 0, 0, 0, t357 * t373 * t383 - t347 * t353, -t347 * t357 * t363 + ((t355 * t356 * t361 + (t355 * t379 + t384) * t352) * t363 + ((t356 * t384 + (-t352 * t361 + t356 * t379) * t355) * t357 + (-t354 * t355 * t364 + t358 * t359) * t353) * t360) * qJD(4) + ((-t352 * t380 + t356 * t364) * t360 - t353 * t363 * t383) * t373, 0;];
+t1 = [0, t371, 0, -t339 * t353 + t341 * t357 (t344 * t356 + t367 * t352) * t360 + (-t339 * t357 - t341 * t353) * t363 + ((t369 * t352 - t356 * t368) * t363 + ((t352 * t368 + t369 * t356) * t357 + (-t350 * t354 + t358 * t382) * t353) * t360) * qJD(4), 0; 0, t372, 0, -t340 * t353 + t342 * t357 (t346 * t356 + t366 * t352) * t360 + (-t340 * t357 - t342 * t353) * t363 + ((t349 * t356 + t370 * t352) * t363 + ((-t349 * t352 + t370 * t356) * t357 + (-t348 * t354 - t358 * t381) * t353) * t360) * qJD(4), 0; 0, 0, 0, t357 * t373 * t383 - t347 * t353, -t347 * t357 * t363 + ((t355 * t361 * t356 + (t355 * t379 + t384) * t352) * t363 + ((t356 * t384 + (-t352 * t361 + t356 * t379) * t355) * t357 + (-t354 * t355 * t364 + t358 * t359) * t353) * t360) * qJD(4) + ((-t352 * t380 + t356 * t364) * t360 - t353 * t363 * t383) * t373, 0;];
 JgD_rot  = t1;

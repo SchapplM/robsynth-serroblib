@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 09:25
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 19:41
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [12 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_6_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 09:24:57
-% EndTime: 2019-02-22 09:24:57
-% DurationCPUTime: 0.14s
+% StartTime: 2019-02-26 19:41:34
+% EndTime: 2019-02-26 19:41:34
+% DurationCPUTime: 0.15s
 % Computational Cost: add. (175->43), mult. (516->91), div. (0->0), fcn. (712->14), ass. (0->46)
 t217 = cos(qJ(3));
 t191 = sin(pkin(11));
@@ -71,8 +71,8 @@ t199 = sin(qJ(4));
 t186 = -t190 * t216 + t195 * t194;
 t185 = t190 * t211 + t191 * t194;
 t184 = -t194 * t214 + t197 * t196;
-t181 = t191 * t213 + t205 * t192;
-t180 = -t206 * t192 - t195 * t213;
+t181 = t191 * t213 + t192 * t205;
+t180 = -t192 * t206 - t195 * t213;
 t179 = t200 * t215 + (t217 * t190 + t200 * t212) * t193;
 t178 = t193 * t190 * t200 - t208 * t212 - t217 * t215;
 t177 = t179 * t202 + t184 * t199;

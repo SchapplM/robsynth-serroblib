@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 12:39
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 22:53
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_6_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 12:39:02
-% EndTime: 2019-02-22 12:39:03
-% DurationCPUTime: 1.16s
+% StartTime: 2019-02-26 22:52:59
+% EndTime: 2019-02-26 22:53:00
+% DurationCPUTime: 1.09s
 % Computational Cost: add. (985->110), mult. (2912->225), div. (0->0), fcn. (3942->18), ass. (0->110)
 t415 = sin(qJ(2));
 t416 = sin(qJ(1));
@@ -46,7 +46,7 @@ t421 = cos(qJ(2));
 t422 = cos(qJ(1));
 t460 = cos(pkin(6));
 t436 = t422 * t460;
-t399 = t416 * t415 - t421 * t436;
+t399 = t415 * t416 - t421 * t436;
 t400 = t415 * t436 + t416 * t421;
 t414 = sin(qJ(3));
 t420 = cos(qJ(3));
@@ -59,13 +59,13 @@ t447 = t410 * t414;
 t382 = t399 * t447 - t400 * t420 + t414 * t438;
 t413 = sin(qJ(4));
 t419 = cos(qJ(4));
-t381 = (t399 * t410 + t438) * t420 + t400 * t414;
+t381 = t420 * (t399 * t410 + t438) + t400 * t414;
 t409 = cos(pkin(8));
 t395 = -t399 * t407 + t410 * t450;
 t406 = sin(pkin(8));
 t459 = t395 * t406;
 t434 = t381 * t409 + t459;
-t352 = t382 * t419 + t434 * t413;
+t352 = t382 * t419 + t413 * t434;
 t368 = t381 * t406 - t395 * t409;
 t412 = sin(qJ(5));
 t418 = cos(qJ(5));
@@ -97,7 +97,7 @@ t435 = t460 * t407;
 t385 = t399 * t414 - t400 * t446;
 t433 = t385 * t409 + t400 * t456;
 t401 = -t422 * t415 - t421 * t437;
-t402 = -t415 * t437 + t422 * t421;
+t402 = -t415 * t437 + t421 * t422;
 t387 = -t401 * t414 - t402 * t446;
 t432 = t387 * t409 + t402 * t456;
 t430 = -t401 * t407 + t410 * t451;
@@ -107,16 +107,16 @@ t428 = t397 * t409 + t406 * t439;
 t427 = t410 * t460 - t421 * t453;
 t425 = t430 * t406;
 t424 = t427 * t406;
-t383 = -t402 * t414 + t429 * t420;
-t423 = -t383 * t406 + t430 * t409;
+t383 = -t402 * t414 + t420 * t429;
+t423 = -t383 * t406 + t409 * t430;
 t398 = (-t410 * t444 + t440) * t408;
 t394 = t414 * t435 + (t410 * t443 + t442) * t408;
 t393 = t420 * t435 + (t410 * t440 - t444) * t408;
 t389 = -t397 * t406 + t409 * t439;
 t388 = t401 * t420 - t402 * t447;
 t386 = -t399 * t420 - t400 * t447;
-t384 = t402 * t420 + t429 * t414;
-t378 = -t393 * t406 + t427 * t409;
+t384 = t402 * t420 + t414 * t429;
+t378 = -t393 * t406 + t409 * t427;
 t375 = -t387 * t406 + t402 * t452;
 t374 = -t385 * t406 + t400 * t452;
 t373 = t398 * t419 + t413 * t428;

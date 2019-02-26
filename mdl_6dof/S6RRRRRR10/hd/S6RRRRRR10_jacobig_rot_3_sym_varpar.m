@@ -17,40 +17,39 @@
 % Jg_rot [3x6]
 %   Rotatorische Teilmatrix der geometrischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 11:27
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 22:53
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function Jg_rot = S6RRRRRR10_jacobig_rot_3_floatb_twist_sym_varpar(qJ, ...
+function Jg_rot = S6RRRRRR10_jacobig_rot_3_sym_varpar(qJ, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(6,1),zeros(14,1)}
 assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
-  'S6RRRRRR10_jacobig_rot_3_floatb_twist_sym_varpar: qJ has to be [6x1] (double)');
+  'S6RRRRRR10_jacobig_rot_3_sym_varpar: qJ has to be [6x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
-  'S6RRRRRR10_jacobig_rot_3_floatb_twist_sym_varpar: pkin has to be [14x1] (double)');
+  'S6RRRRRR10_jacobig_rot_3_sym_varpar: pkin has to be [14x1] (double)');
 
 %% Symbolic Calculation
 % From jacobig_rot_3_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-23 11:27:17
-% EndTime: 2018-11-23 11:27:17
-% DurationCPUTime: 0.03s
-% Computational Cost: add. (15->10), mult. (20->16), div. (0->0), fcn. (28->11), ass. (0->13)
-t129 = sin(pkin(6));
-t133 = sin(qJ(1));
-t136 = t133 * t129;
-t134 = cos(qJ(1));
-t135 = t134 * t129;
-t132 = sin(qJ(2));
-t131 = cos(pkin(6));
-t130 = cos(pkin(7));
-t128 = sin(pkin(7));
-t127 = pkin(6) - qJ(2);
-t126 = pkin(6) + qJ(2);
-t125 = cos(t127) / 0.2e1 + cos(t126) / 0.2e1;
-t1 = [0, t136 -(-t133 * t125 - t134 * t132) * t128 + t130 * t136, 0, 0, 0; 0, -t135 -(t134 * t125 - t133 * t132) * t128 - t130 * t135, 0, 0, 0; 1, t131 -(sin(t126) / 0.2e1 + sin(t127) / 0.2e1) * t128 + t131 * t130, 0, 0, 0;];
+% StartTime: 2019-02-26 22:52:46
+% EndTime: 2019-02-26 22:52:46
+% DurationCPUTime: 0.02s
+% Computational Cost: add. (6->6), mult. (17->14), div. (0->0), fcn. (28->8), ass. (0->12)
+t94 = cos(pkin(6));
+t97 = cos(qJ(2));
+t101 = t94 * t97;
+t92 = sin(pkin(6));
+t96 = sin(qJ(1));
+t100 = t96 * t92;
+t98 = cos(qJ(1));
+t99 = t98 * t92;
+t95 = sin(qJ(2));
+t93 = cos(pkin(7));
+t91 = sin(pkin(7));
+t1 = [0, t100 -(-t96 * t101 - t98 * t95) * t91 + t93 * t100, 0, 0, 0; 0, -t99 -(t98 * t101 - t96 * t95) * t91 - t93 * t99, 0, 0, 0; 1, t94, -t92 * t97 * t91 + t94 * t93, 0, 0, 0;];
 Jg_rot  = t1;

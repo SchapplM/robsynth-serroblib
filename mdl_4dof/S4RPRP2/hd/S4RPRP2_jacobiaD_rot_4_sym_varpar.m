@@ -21,41 +21,41 @@
 % JaD_rot [3x4]
 %   Zeitableitung der rotatorischen Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:49
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:33
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function JaD_rot = S4RPRP2_jacobiaD_rot_4_floatb_twist_sym_varpar(qJ, qJD, ...
+function JaD_rot = S4RPRP2_jacobiaD_rot_4_sym_varpar(qJ, qJD, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(4,1),zeros(4,1),zeros(5,1)}
 assert(isreal(qJ) && all(size(qJ) == [4 1]), ...
-  'S4RPRP2_jacobiaD_rot_4_floatb_twist_sym_varpar: qJ has to be [4x1] (double)');
+  'S4RPRP2_jacobiaD_rot_4_sym_varpar: qJ has to be [4x1] (double)');
 assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
-  'S4RPRP2_jacobiaD_rot_4_floatb_twist_sym_varpar: qJD has to be [4x1] (double)');
+  'S4RPRP2_jacobiaD_rot_4_sym_varpar: qJD has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
-  'S4RPRP2_jacobiaD_rot_4_floatb_twist_sym_varpar: pkin has to be [5x1] (double)');
+  'S4RPRP2_jacobiaD_rot_4_sym_varpar: pkin has to be [5x1] (double)');
 
 %% Symbolic Calculation
 % From jacobiaD_rot_4_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:49:46
-% EndTime: 2018-11-14 13:49:46
-% DurationCPUTime: 0.09s
+% StartTime: 2019-02-26 19:33:01
+% EndTime: 2019-02-26 19:33:01
+% DurationCPUTime: 0.08s
 % Computational Cost: add. (128->13), mult. (322->30), div. (40->4), fcn. (356->4), ass. (0->21)
 t56 = sin(qJ(3));
 t57 = cos(qJ(1));
 t69 = sin(qJ(1));
 t70 = cos(qJ(3));
-t61 = t69 * t56 + t57 * t70;
+t61 = t56 * t69 + t57 * t70;
 t46 = 0.1e1 / t61 ^ 2;
 t72 = t46 * t61;
 t71 = qJD(1) - qJD(3);
 t45 = 0.1e1 / t61;
-t60 = -t57 * t56 + t69 * t70;
+t60 = -t56 * t57 + t69 * t70;
 t40 = t71 * t60;
 t44 = t60 ^ 2;
 t66 = t44 * t46;

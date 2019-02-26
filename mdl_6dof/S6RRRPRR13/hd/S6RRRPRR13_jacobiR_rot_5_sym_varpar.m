@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 12:10
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 22:23
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,20 +36,20 @@ assert(isreal(pkin) && all(size(pkin) == [13 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_5_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 12:10:53
-% EndTime: 2019-02-22 12:10:53
-% DurationCPUTime: 0.20s
+% StartTime: 2019-02-26 22:23:04
+% EndTime: 2019-02-26 22:23:05
+% DurationCPUTime: 0.21s
 % Computational Cost: add. (174->43), mult. (408->90), div. (0->0), fcn. (571->12), ass. (0->51)
 t193 = sin(qJ(2));
 t194 = sin(qJ(1));
 t196 = cos(qJ(2));
 t197 = cos(qJ(1));
 t216 = cos(pkin(6));
-t199 = t197 * t216;
-t180 = t193 * t199 + t194 * t196;
+t200 = t197 * t216;
+t180 = t193 * t200 + t194 * t196;
 t192 = sin(qJ(3));
 t195 = cos(qJ(3));
-t179 = t194 * t193 - t196 * t199;
+t179 = t194 * t193 - t196 * t200;
 t189 = sin(pkin(7));
 t191 = cos(pkin(7));
 t190 = sin(pkin(6));
@@ -74,16 +74,16 @@ t205 = t193 * t195;
 t204 = t195 * t196;
 t203 = t193 * t212;
 t202 = t189 * t211;
-t201 = t189 * t216;
-t200 = t194 * t216;
+t201 = t194 * t216;
+t199 = t216 * t189;
 t164 = -t180 * t192 - t198 * t195;
-t182 = -t193 * t200 + t197 * t196;
-t181 = -t197 * t193 - t196 * t200;
+t182 = -t193 * t201 + t197 * t196;
+t181 = -t197 * t193 - t196 * t201;
 t178 = t216 * t191 - t196 * t212;
 t177 = (-t191 * t207 + t204) * t190;
 t175 = -t181 * t189 + t191 * t211;
-t172 = t192 * t201 + (t191 * t206 + t205) * t190;
-t171 = t195 * t201 + (t191 * t204 - t207) * t190;
+t172 = t192 * t199 + (t191 * t206 + t205) * t190;
+t171 = t195 * t199 + (t191 * t204 - t207) * t190;
 t170 = t181 * t195 - t182 * t209;
 t169 = -t179 * t195 - t180 * t209;
 t168 = t182 * t195 + (t181 * t191 + t202) * t192;

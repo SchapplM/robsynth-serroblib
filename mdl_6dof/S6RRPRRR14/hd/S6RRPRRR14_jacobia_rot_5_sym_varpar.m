@@ -19,28 +19,28 @@
 % Ja_rot [3x6]
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:25
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 22:56
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function Ja_rot = S6RRPRRR14_jacobia_rot_5_floatb_twist_sym_varpar(qJ, ...
+function Ja_rot = S6RRPRRR14_jacobia_rot_5_sym_varpar(qJ, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(6,1),zeros(14,1)}
 assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
-  'S6RRPRRR14_jacobia_rot_5_floatb_twist_sym_varpar: qJ has to be [6x1] (double)');
+  'S6RRPRRR14_jacobia_rot_5_sym_varpar: qJ has to be [6x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
-  'S6RRPRRR14_jacobia_rot_5_floatb_twist_sym_varpar: pkin has to be [14x1] (double)');
+  'S6RRPRRR14_jacobia_rot_5_sym_varpar: pkin has to be [14x1] (double)');
 
 %% Symbolic Calculation
 % From jacobia_rot_5_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:25:34
-% EndTime: 2019-01-03 10:25:34
-% DurationCPUTime: 0.73s
+% StartTime: 2019-02-26 22:55:45
+% EndTime: 2019-02-26 22:55:46
+% DurationCPUTime: 0.70s
 % Computational Cost: add. (2431->68), mult. (7151->158), div. (85->9), fcn. (9681->19), ass. (0->84)
 t161 = cos(pkin(6));
 t167 = cos(qJ(2));

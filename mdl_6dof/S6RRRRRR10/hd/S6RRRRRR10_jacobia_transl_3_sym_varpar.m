@@ -18,72 +18,62 @@
 % Ja_transl [3x6]
 %   Translatorische Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 11:27
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 22:53
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function Ja_transl = S6RRRRRR10_jacobia_transl_3_floatb_twist_sym_varpar(qJ, r_i_i_C, ...
+function Ja_transl = S6RRRRRR10_jacobia_transl_3_sym_varpar(qJ, r_i_i_C, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(6,1),zeros(3,1),zeros(14,1)}
 assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
-  'S6RRRRRR10_jacobia_transl_3_floatb_twist_sym_varpar: qJ has to be [6x1] (double)');
+  'S6RRRRRR10_jacobia_transl_3_sym_varpar: qJ has to be [6x1] (double)');
 assert(isa(r_i_i_C,'double') && isreal(r_i_i_C) && all(size(r_i_i_C) == [3 1]), ...
-	'S6RRRRRR10_jacobia_transl_3_floatb_twist_sym_varpar: Position vector r_i_i_C has to be [3x1] double');
+	'S6RRRRRR10_jacobia_transl_3_sym_varpar: Position vector r_i_i_C has to be [3x1] double');
 assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
-  'S6RRRRRR10_jacobia_transl_3_floatb_twist_sym_varpar: pkin has to be [14x1] (double)');
+  'S6RRRRRR10_jacobia_transl_3_sym_varpar: pkin has to be [14x1] (double)');
 
 %% Symbolic Calculation
 % From jacobia_transl_3_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-23 11:27:16
-% EndTime: 2018-11-23 11:27:17
-% DurationCPUTime: 0.17s
-% Computational Cost: add. (312->59), mult. (325->85), div. (0->0), fcn. (316->18), ass. (0->43)
-t54 = pkin(11) + r_i_i_C(3);
-t24 = sin(pkin(6));
-t29 = sin(qJ(1));
-t53 = t24 * t29;
-t32 = cos(qJ(1));
-t52 = t24 * t32;
-t51 = pkin(6) - qJ(2);
-t50 = pkin(6) + qJ(2);
-t49 = pkin(7) - qJ(3);
-t48 = pkin(7) + qJ(3);
-t23 = sin(pkin(7));
-t47 = t54 * t23;
-t46 = cos(t51);
-t45 = cos(t49);
-t44 = sin(t51);
-t43 = sin(t49);
-t42 = cos(t50) / 0.2e1;
-t41 = cos(t48) / 0.2e1;
-t40 = sin(t50) / 0.2e1;
-t39 = sin(t48) / 0.2e1;
-t12 = t40 - t44 / 0.2e1;
-t31 = cos(qJ(2));
-t3 = t32 * t12 + t29 * t31;
-t7 = t29 * t12 - t32 * t31;
-t14 = t45 / 0.2e1 + t41;
-t28 = sin(qJ(2));
-t33 = t46 / 0.2e1 + t42;
-t2 = t29 * t28 - t32 * t33;
-t27 = sin(qJ(3));
-t9 = t39 + t43 / 0.2e1;
-t36 = t2 * t14 + t3 * t27 + t9 * t52;
-t10 = t39 - t43 / 0.2e1;
-t13 = t41 - t45 / 0.2e1;
-t30 = cos(qJ(3));
-t35 = t2 * t10 - t13 * t52 - t3 * t30;
-t5 = -t32 * t28 - t29 * t33;
-t34 = -t5 * t10 + t13 * t53 + t30 * t7;
-t26 = cos(pkin(6));
-t25 = cos(pkin(7));
-t15 = t42 - t46 / 0.2e1;
-t11 = t40 + t44 / 0.2e1;
-t1 = t5 * t14 + t27 * t7 + t9 * t53;
-t4 = [-t29 * pkin(1) - t3 * pkin(2) + pkin(10) * t52 + t35 * r_i_i_C(1) + t36 * r_i_i_C(2) + t54 * (-t2 * t23 + t25 * t52) (t7 * t10 + t5 * t30) * r_i_i_C(1) + (t7 * t14 - t5 * t27) * r_i_i_C(2) + t5 * pkin(2) - t7 * t47, t1 * r_i_i_C(1) + t34 * r_i_i_C(2), 0, 0, 0; t32 * pkin(1) - t7 * pkin(2) + pkin(10) * t53 - t34 * r_i_i_C(1) + t1 * r_i_i_C(2) + t54 * (-t5 * t23 + t25 * t53) (-t10 * t3 - t2 * t30) * r_i_i_C(1) + (-t14 * t3 + t2 * t27) * r_i_i_C(2) - t2 * pkin(2) + t3 * t47, -t36 * r_i_i_C(1) + t35 * r_i_i_C(2), 0, 0, 0; 0 (t30 * r_i_i_C(1) - t27 * r_i_i_C(2) + pkin(2)) * t11 + (t10 * r_i_i_C(1) + t14 * r_i_i_C(2) - t47) * t15 (t11 * t14 + t15 * t27 + t26 * t9) * r_i_i_C(1) + (-t11 * t10 + t26 * t13 + t15 * t30) * r_i_i_C(2), 0, 0, 0;];
-Ja_transl  = t4;
+% StartTime: 2019-02-26 22:52:46
+% EndTime: 2019-02-26 22:52:46
+% DurationCPUTime: 0.16s
+% Computational Cost: add. (93->46), mult. (252->84), div. (0->0), fcn. (316->10), ass. (0->33)
+t39 = pkin(11) + r_i_i_C(3);
+t12 = cos(pkin(7));
+t13 = sin(qJ(3));
+t16 = cos(qJ(3));
+t10 = sin(pkin(7));
+t11 = sin(pkin(6));
+t18 = cos(qJ(1));
+t35 = t11 * t18;
+t27 = t10 * t35;
+t14 = sin(qJ(2));
+t15 = sin(qJ(1));
+t17 = cos(qJ(2));
+t28 = cos(pkin(6));
+t24 = t18 * t28;
+t3 = t15 * t14 - t17 * t24;
+t4 = t14 * t24 + t15 * t17;
+t38 = (t12 * t3 + t27) * t16 + t4 * t13;
+t36 = t11 * t15;
+t34 = t12 * t13;
+t33 = t12 * t16;
+t32 = t13 * t14;
+t31 = t13 * t17;
+t30 = t14 * t16;
+t29 = t16 * t17;
+t26 = t10 * t39;
+t25 = t15 * t28;
+t5 = -t18 * t14 - t17 * t25;
+t22 = t10 * t36 + t12 * t5;
+t19 = t13 * t27 - t4 * t16 + t3 * t34;
+t6 = -t14 * t25 + t18 * t17;
+t2 = t22 * t13 + t6 * t16;
+t1 = -t6 * t13 + t22 * t16;
+t7 = [t19 * r_i_i_C(1) + t38 * r_i_i_C(2) - t4 * pkin(2) - t15 * pkin(1) + pkin(10) * t35 + t39 * (-t3 * t10 + t12 * t35) (t5 * t16 - t6 * t34) * r_i_i_C(1) + (-t5 * t13 - t6 * t33) * r_i_i_C(2) + t5 * pkin(2) + t6 * t26, r_i_i_C(1) * t1 - r_i_i_C(2) * t2, 0, 0, 0; t18 * pkin(1) + t6 * pkin(2) + pkin(10) * t36 + t2 * r_i_i_C(1) + t1 * r_i_i_C(2) + t39 * (-t5 * t10 + t12 * t36) (-t3 * t16 - t4 * t34) * r_i_i_C(1) + (t3 * t13 - t4 * t33) * r_i_i_C(2) - t3 * pkin(2) + t4 * t26, -t38 * r_i_i_C(1) + t19 * r_i_i_C(2), 0, 0, 0; 0 ((-t12 * t32 + t29) * r_i_i_C(1) + (-t12 * t30 - t31) * r_i_i_C(2) + t17 * pkin(2) + t14 * t26) * t11 ((t12 * t29 - t32) * r_i_i_C(1) + (-t12 * t31 - t30) * r_i_i_C(2)) * t11 + (t16 * r_i_i_C(1) - t13 * r_i_i_C(2)) * t10 * t28, 0, 0, 0;];
+Ja_transl  = t7;

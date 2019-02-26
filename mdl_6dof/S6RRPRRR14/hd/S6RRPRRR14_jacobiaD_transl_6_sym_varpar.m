@@ -20,32 +20,32 @@
 % JaD_transl [3x6]
 %   Zeitableitung der translatorischen Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:25
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 22:56
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function JaD_transl = S6RRPRRR14_jacobiaD_transl_6_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, ...
+function JaD_transl = S6RRPRRR14_jacobiaD_transl_6_sym_varpar(qJ, qJD, r_i_i_C, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(6,1),zeros(6,1),zeros(3,1),zeros(14,1)}
 assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
-  'S6RRPRRR14_jacobiaD_transl_6_floatb_twist_sym_varpar: qJ has to be [6x1] (double)');
+  'S6RRPRRR14_jacobiaD_transl_6_sym_varpar: qJ has to be [6x1] (double)');
 assert(isreal(qJD) && all(size(qJD) == [6 1]), ...
-  'S6RRPRRR14_jacobiaD_transl_6_floatb_twist_sym_varpar: qJD has to be [6x1] (double)');
+  'S6RRPRRR14_jacobiaD_transl_6_sym_varpar: qJD has to be [6x1] (double)');
 assert(isa(r_i_i_C,'double') && isreal(r_i_i_C) && all(size(r_i_i_C) == [3 1]), ...
-	'S6RRPRRR14_jacobiaD_transl_6_floatb_twist_sym_varpar: Position vector r_i_i_C has to be [3x1] double');
+	'S6RRPRRR14_jacobiaD_transl_6_sym_varpar: Position vector r_i_i_C has to be [3x1] double');
 assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
-  'S6RRPRRR14_jacobiaD_transl_6_floatb_twist_sym_varpar: pkin has to be [14x1] (double)');
+  'S6RRPRRR14_jacobiaD_transl_6_sym_varpar: pkin has to be [14x1] (double)');
 
 %% Symbolic Calculation
 % From jacobiaD_transl_6_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:25:45
-% EndTime: 2019-01-03 10:25:49
-% DurationCPUTime: 4.39s
+% StartTime: 2019-02-26 22:55:58
+% EndTime: 2019-02-26 22:56:03
+% DurationCPUTime: 4.45s
 % Computational Cost: add. (5091->293), mult. (15916->498), div. (0->0), fcn. (18069->18), ass. (0->185)
 t1061 = cos(qJ(4));
 t1058 = cos(pkin(6));
@@ -129,7 +129,7 @@ t1072 = t938 * t958 + t942 * t954;
 t1071 = t1070 * t1061;
 t1069 = t1066 * t1061;
 t1067 = t1075 * t1061;
-t997 = qJD(6) * (t944 * r_i_i_C(1) + t947 * r_i_i_C(2));
+t997 = qJD(6) * (r_i_i_C(1) * t944 + r_i_i_C(2) * t947);
 t1041 = t939 * t942;
 t1038 = t941 * t943;
 t959 = qJD(1) * t926 + t976;
@@ -150,7 +150,7 @@ t991 = t1022 * t943 + t937 * t949;
 t923 = t991 * t940;
 t1046 = t923 * t942;
 t1043 = t937 * t943;
-t1042 = t939 * t938;
+t1042 = t938 * t939;
 t1034 = qJD(3) * t939;
 t1033 = qJD(4) * t946;
 t1032 = qJD(6) * t944;

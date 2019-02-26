@@ -17,11 +17,11 @@
 % JR_rot [9x4]
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:46
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:29
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function JR_rot = S4RPPP1_jacobiR_rot_2_sym_varpar(qJ, ...
   pkin)
@@ -36,18 +36,19 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_2_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:45:47
-% EndTime: 2018-11-14 13:45:47
+% StartTime: 2019-02-26 19:29:48
+% EndTime: 2019-02-26 19:29:48
 % DurationCPUTime: 0.02s
-% Computational Cost: add. (16->8), mult. (18->14), div. (0->0), fcn. (24->9), ass. (0->10)
-t45 = cos(qJ(1));
-t44 = sin(qJ(1));
-t43 = cos(pkin(6));
-t42 = sin(pkin(4));
-t41 = sin(pkin(6));
-t40 = pkin(4) - pkin(6);
-t39 = pkin(4) + pkin(6);
-t38 = cos(t40) / 0.2e1 + cos(t39) / 0.2e1;
-t37 = sin(t39) / 0.2e1 - sin(t40) / 0.2e1;
-t1 = [-t45 * t37 - t44 * t43, 0, 0, 0; -t44 * t37 + t45 * t43, 0, 0, 0; 0, 0, 0, 0; -t45 * t38 + t44 * t41, 0, 0, 0; -t44 * t38 - t45 * t41, 0, 0, 0; 0, 0, 0, 0; t45 * t42, 0, 0, 0; t44 * t42, 0, 0, 0; 0, 0, 0, 0;];
+% Computational Cost: add. (4->4), mult. (14->10), div. (0->0), fcn. (24->6), ass. (0->11)
+t38 = sin(pkin(6));
+t42 = sin(qJ(1));
+t47 = t42 * t38;
+t40 = cos(pkin(6));
+t46 = t42 * t40;
+t43 = cos(qJ(1));
+t45 = t43 * t38;
+t44 = t43 * t40;
+t41 = cos(pkin(4));
+t39 = sin(pkin(4));
+t1 = [-t41 * t45 - t46, 0, 0, 0; -t41 * t47 + t44, 0, 0, 0; 0, 0, 0, 0; -t41 * t44 + t47, 0, 0, 0; -t41 * t46 - t45, 0, 0, 0; 0, 0, 0, 0; t43 * t39, 0, 0, 0; t42 * t39, 0, 0, 0; 0, 0, 0, 0;];
 JR_rot  = t1;

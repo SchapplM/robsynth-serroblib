@@ -24,17 +24,17 @@
 %   Zeitableitung der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-01-31 13:16
-% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
+% Datum: 2019-02-26 19:36
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function JaD = S4RRPR1_jacobiaD_4_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, ...
+function JaD = S4RRPR1_jacobiaD_4_sym_varpar(qJ, qJD, r_i_i_C, ...
   pkin)
 
-JaD_transl = S4RRPR1_jacobiaD_transl_4_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, ...
+JaD_transl = S4RRPR1_jacobiaD_transl_4_sym_varpar(qJ, qJD, r_i_i_C, ...
   pkin);
-JaD_rot = S4RRPR1_jacobiaD_rot_4_floatb_twist_sym_varpar(qJ, qJD, ...
+JaD_rot = S4RRPR1_jacobiaD_rot_4_sym_varpar(qJ, qJD, ...
   pkin);
 
 JaD = [JaD_transl; JaD_rot];

@@ -21,90 +21,83 @@
 % JaD_rot [3x6]
 %   Zeitableitung der rotatorischen Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 11:27
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 22:53
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function JaD_rot = S6RRRRRR10_jacobiaD_rot_2_floatb_twist_sym_varpar(qJ, qJD, ...
+function JaD_rot = S6RRRRRR10_jacobiaD_rot_2_sym_varpar(qJ, qJD, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(6,1),zeros(6,1),zeros(14,1)}
 assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
-  'S6RRRRRR10_jacobiaD_rot_2_floatb_twist_sym_varpar: qJ has to be [6x1] (double)');
+  'S6RRRRRR10_jacobiaD_rot_2_sym_varpar: qJ has to be [6x1] (double)');
 assert(isreal(qJD) && all(size(qJD) == [6 1]), ...
-  'S6RRRRRR10_jacobiaD_rot_2_floatb_twist_sym_varpar: qJD has to be [6x1] (double)');
+  'S6RRRRRR10_jacobiaD_rot_2_sym_varpar: qJD has to be [6x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
-  'S6RRRRRR10_jacobiaD_rot_2_floatb_twist_sym_varpar: pkin has to be [14x1] (double)');
+  'S6RRRRRR10_jacobiaD_rot_2_sym_varpar: pkin has to be [14x1] (double)');
 
 %% Symbolic Calculation
 % From jacobiaD_rot_2_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-23 11:27:17
-% EndTime: 2018-11-23 11:27:17
-% DurationCPUTime: 0.32s
-% Computational Cost: add. (564->49), mult. (1035->121), div. (133->12), fcn. (1112->13), ass. (0->61)
-t140 = pkin(6) + qJ(2);
-t141 = pkin(6) - qJ(2);
-t103 = cos(t141) / 0.2e1 + cos(t140) / 0.2e1;
-t123 = sin(qJ(2));
-t124 = sin(qJ(1));
-t126 = cos(qJ(1));
-t94 = t124 * t103 + t126 * t123;
-t88 = t94 ^ 2;
-t102 = sin(t140) / 0.2e1 - sin(t141) / 0.2e1;
-t125 = cos(qJ(2));
-t136 = -t124 * t102 + t126 * t125;
-t90 = 0.1e1 / t136 ^ 2;
-t158 = t88 * t90;
-t122 = cos(pkin(6));
-t117 = 0.1e1 / t122 ^ 2;
-t121 = sin(pkin(6));
-t115 = t121 ^ 2;
-t120 = t126 ^ 2;
-t107 = t120 * t115 * t117 + 0.1e1;
-t119 = t124 ^ 2;
-t150 = 0.1e1 / t107 ^ 2 * t119;
-t157 = t117 * t150;
-t147 = t126 * t121;
-t106 = atan2(t147, t122);
-t100 = sin(t106);
-t101 = cos(t106);
-t87 = t100 * t147 + t101 * t122;
-t84 = 0.1e1 / t87;
-t89 = 0.1e1 / t136;
-t116 = 0.1e1 / t122;
-t85 = 0.1e1 / t87 ^ 2;
-t154 = t90 * t94;
-t135 = t102 * qJD(2);
-t143 = qJD(2) * t126;
-t145 = qJD(1) * t126;
-t146 = qJD(1) * t124;
-t76 = -t103 * t145 + t123 * t146 + t124 * t135 - t125 * t143;
-t139 = t76 * t154;
-t93 = -t126 * t102 - t124 * t125;
-t99 = t103 * qJD(2);
-t77 = t93 * qJD(1) - t123 * t143 - t124 * t99;
-t91 = t89 * t90;
-t153 = t91 * t77;
-t80 = 0.1e1 + t158;
-t156 = (-t88 * t153 - t139) / t80 ^ 2;
-t152 = t124 * t85;
-t151 = t126 * t85;
-t149 = t115 * t116;
-t144 = qJD(2) * t124;
-t142 = 0.2e1 * t93 * t94;
-t104 = 0.1e1 / t107;
-t138 = (t104 - 0.1e1) * t121;
-t137 = -0.2e1 * t116 * t157;
-t75 = (-t101 * t104 * t126 * t149 + t100 * t138) * t124;
-t114 = t121 * t115;
-t92 = t126 * t103 - t124 * t123;
-t86 = t84 * t85;
-t83 = t119 * t115 * t85 + 0.1e1;
-t78 = 0.1e1 / t80;
-t74 = qJD(1) * t75;
-t1 = [(-t104 * t116 * t121 + t114 * t137) * t145, 0, 0, 0, 0, 0; (0.2e1 * (-t126 * t84 + t75 * t152) / t83 ^ 2 * (-t119 * t74 * t86 + t145 * t152) * t115 + ((0.2e1 * t124 * t75 * t86 - t151) * t74 + (-t75 * t151 + (-t84 + (-t114 * t157 - t138) * t100 * t151 - (t120 * t115 ^ 2 * t137 + (-t150 + (0.2e1 * t119 - t120) * t104) * t149) * t85 * t101) * t124) * qJD(1)) / t83) * t121, 0, 0, 0, 0, 0; (t90 * t142 - 0.2e1 * t92 * t89) * t156 + ((t93 * t76 - t92 * t77) * t90 + (-t103 * t146 - t123 * t145 - t125 * t144 - t126 * t135) * t89 - (-t136 * qJD(1) + t123 * t144 - t126 * t99) * t154 + t142 * t153) * t78, 0.2e1 * (-t136 * t89 - t158) * t156 + (-0.2e1 * t139 + (-t136 * t90 - 0.2e1 * t88 * t91 + t89) * t77) * t78, 0, 0, 0, 0;];
+% StartTime: 2019-02-26 22:52:46
+% EndTime: 2019-02-26 22:52:46
+% DurationCPUTime: 0.28s
+% Computational Cost: add. (215->39), mult. (853->106), div. (126->12), fcn. (1047->9), ass. (0->54)
+t99 = sin(pkin(6));
+t93 = t99 ^ 2;
+t100 = cos(pkin(6));
+t95 = 0.1e1 / t100 ^ 2;
+t104 = cos(qJ(1));
+t98 = t104 ^ 2;
+t89 = t98 * t93 * t95 + 0.1e1;
+t102 = sin(qJ(1));
+t97 = t102 ^ 2;
+t126 = 0.1e1 / t89 ^ 2 * t97;
+t131 = t126 * t95;
+t122 = t104 * t99;
+t88 = atan2(t122, t100);
+t84 = sin(t88);
+t85 = cos(t88);
+t72 = t85 * t100 + t84 * t122;
+t67 = 0.1e1 / t72;
+t103 = cos(qJ(2));
+t118 = t104 * t103;
+t101 = sin(qJ(2));
+t121 = t102 * t101;
+t113 = t100 * t121 - t118;
+t77 = 0.1e1 / t113;
+t94 = 0.1e1 / t100;
+t68 = 0.1e1 / t72 ^ 2;
+t78 = 0.1e1 / t113 ^ 2;
+t119 = t104 * t101;
+t120 = t102 * t103;
+t81 = -t100 * t119 - t120;
+t82 = t100 * t120 + t119;
+t71 = t81 * qJD(1) - t82 * qJD(2);
+t128 = t71 * t77 * t78;
+t115 = t100 * t118;
+t70 = -qJD(1) * t115 - qJD(2) * t118 + (qJD(2) * t100 + qJD(1)) * t121;
+t129 = t70 * t78;
+t76 = t82 ^ 2;
+t75 = t76 * t78 + 0.1e1;
+t130 = (t76 * t128 - t82 * t129) / t75 ^ 2;
+t127 = t81 * t82;
+t125 = t93 * t94;
+t124 = t102 * t68;
+t123 = t104 * t68;
+t117 = qJD(1) * t104;
+t86 = 0.1e1 / t89;
+t116 = (t86 - 0.1e1) * t99;
+t114 = -0.2e1 * t94 * t131;
+t80 = t115 - t121;
+t63 = (-t104 * t85 * t86 * t125 + t84 * t116) * t102;
+t92 = t99 * t93;
+t73 = 0.1e1 / t75;
+t69 = t67 * t68;
+t66 = t97 * t93 * t68 + 0.1e1;
+t62 = qJD(1) * t63;
+t1 = [(-t86 * t94 * t99 + t92 * t114) * t117, 0, 0, 0, 0, 0; (0.2e1 * (-t104 * t67 + t63 * t124) / t66 ^ 2 * (-t62 * t69 * t97 + t117 * t124) * t93 + ((0.2e1 * t102 * t63 * t69 - t123) * t62 + (-t63 * t123 + (-t67 + (-t92 * t131 - t116) * t84 * t123 - (t93 ^ 2 * t98 * t114 + (-t126 + (0.2e1 * t97 - t98) * t86) * t125) * t68 * t85) * t102) * qJD(1)) / t66) * t99, 0, 0, 0, 0, 0; 0.2e1 * (t78 * t127 + t77 * t80) * t130 + (-(-t82 * qJD(1) + t81 * qJD(2)) * t77 - 0.2e1 * t127 * t128 + (-t80 * t71 - (t113 * qJD(1) - t80 * qJD(2)) * t82 + t81 * t70) * t78) * t73, -0.2e1 * t130 + 0.2e1 * (-t73 * t129 + (t73 * t128 - t78 * t130) * t82) * t82, 0, 0, 0, 0;];
 JaD_rot  = t1;

@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 12:10
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 22:23
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [13 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_4_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 12:10:43
-% EndTime: 2019-02-22 12:10:43
-% DurationCPUTime: 0.14s
+% StartTime: 2019-02-26 22:23:04
+% EndTime: 2019-02-26 22:23:04
+% DurationCPUTime: 0.11s
 % Computational Cost: add. (100->37), mult. (304->83), div. (0->0), fcn. (425->12), ass. (0->43)
 t168 = sin(qJ(2));
 t169 = sin(qJ(1));
@@ -49,13 +49,13 @@ t175 = t172 * t190;
 t156 = t168 * t175 + t169 * t171;
 t167 = sin(qJ(3));
 t170 = cos(qJ(3));
-t155 = t168 * t169 - t171 * t175;
+t155 = t169 * t168 - t171 * t175;
 t163 = sin(pkin(7));
 t166 = cos(pkin(7));
 t164 = sin(pkin(6));
 t185 = t164 * t172;
 t173 = t155 * t166 + t163 * t185;
-t145 = -t156 * t170 + t167 * t173;
+t145 = -t156 * t170 + t173 * t167;
 t162 = sin(pkin(13));
 t188 = t162 * t163;
 t165 = cos(pkin(13));
@@ -71,9 +71,9 @@ t178 = t163 * t164 * t168;
 t177 = t163 * t186;
 t176 = t169 * t190;
 t174 = t190 * t163;
-t144 = -t156 * t167 - t170 * t173;
-t158 = -t168 * t176 + t171 * t172;
-t157 = -t168 * t172 - t171 * t176;
+t144 = -t156 * t167 - t173 * t170;
+t158 = -t168 * t176 + t172 * t171;
+t157 = -t172 * t168 - t171 * t176;
 t154 = (-t166 * t182 + t179) * t164;
 t152 = -t157 * t163 + t166 * t186;
 t151 = -t155 * t163 + t166 * t185;

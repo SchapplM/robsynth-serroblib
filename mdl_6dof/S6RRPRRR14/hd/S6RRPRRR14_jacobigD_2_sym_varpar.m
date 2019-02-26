@@ -20,19 +20,19 @@
 % JgD [6x6]
 %   Zeitableitung der geometrischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 22:56
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function JgD = S6RRPRRR14_jacobigD_2_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, ...
+function JgD = S6RRPRRR14_jacobigD_2_sym_varpar(qJ, qJD, r_i_i_C, ...
   pkin)
 
 
-JaD_transl = S6RRPRRR14_jacobiaD_transl_2_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, ...
+JaD_transl = S6RRPRRR14_jacobiaD_transl_2_sym_varpar(qJ, qJD, r_i_i_C, ...
   pkin);
-JgD_rot = S6RRPRRR14_jacobigD_rot_2_floatb_twist_sym_varpar(qJ, qJD, ...
+JgD_rot = S6RRPRRR14_jacobigD_rot_2_sym_varpar(qJ, qJD, ...
   pkin);
 
 JgD = [JaD_transl; JgD_rot];

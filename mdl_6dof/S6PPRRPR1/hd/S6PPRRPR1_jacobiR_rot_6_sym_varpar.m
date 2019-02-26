@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 09:23
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 19:40
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,8 +36,8 @@ assert(isreal(pkin) && all(size(pkin) == [13 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_6_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 09:23:30
-% EndTime: 2019-02-22 09:23:30
+% StartTime: 2019-02-26 19:40:19
+% EndTime: 2019-02-26 19:40:19
 % DurationCPUTime: 0.14s
 % Computational Cost: add. (205->44), mult. (516->91), div. (0->0), fcn. (712->14), ass. (0->47)
 t217 = cos(qJ(3));
@@ -63,25 +63,25 @@ t209 = t197 * t199;
 t208 = t195 * t217;
 t207 = t194 * t208;
 t192 = sin(pkin(12));
-t206 = -t192 * t193 + t196 * t209;
-t205 = t192 * t197 + t196 * t214;
+t206 = -t193 * t192 + t196 * t209;
+t205 = t197 * t192 + t196 * t214;
 t204 = t206 * t198;
 t203 = t205 * t198;
 t201 = sin(qJ(3));
 t200 = sin(qJ(4));
-t185 = -t192 * t214 + t196 * t197;
+t185 = -t192 * t214 + t197 * t196;
 t184 = t192 * t209 + t193 * t196;
-t183 = -t196 * t212 + t198 * t199;
-t180 = t193 * t211 + t194 * t205;
-t179 = -t194 * t206 - t197 * t211;
-t178 = t201 * t213 + (t192 * t217 + t201 * t210) * t195;
-t177 = t192 * t195 * t201 - t208 * t210 - t213 * t217;
+t183 = -t196 * t212 + t199 * t198;
+t180 = t193 * t211 + t205 * t194;
+t179 = -t206 * t194 - t197 * t211;
+t178 = t201 * t213 + (t217 * t192 + t201 * t210) * t195;
+t177 = t195 * t192 * t201 - t208 * t210 - t217 * t213;
 t176 = t178 * t202 + t183 * t200;
 t175 = -t178 * t200 + t183 * t202;
 t174 = t185 * t217 + (t193 * t212 - t203) * t201;
-t173 = t185 * t201 - t193 * t207 + t203 * t217;
+t173 = t185 * t201 - t193 * t207 + t217 * t203;
 t172 = t184 * t217 + (-t197 * t212 + t204) * t201;
-t171 = t184 * t201 + t197 * t207 - t204 * t217;
+t171 = t184 * t201 + t197 * t207 - t217 * t204;
 t170 = t174 * t202 + t180 * t200;
 t169 = -t174 * t200 + t180 * t202;
 t168 = t172 * t202 + t179 * t200;

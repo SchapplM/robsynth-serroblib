@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 12:39
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 22:53
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_4_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 12:38:59
-% EndTime: 2019-02-22 12:39:00
-% DurationCPUTime: 0.35s
+% StartTime: 2019-02-26 22:52:57
+% EndTime: 2019-02-26 22:52:57
+% DurationCPUTime: 0.36s
 % Computational Cost: add. (239->56), mult. (721->123), div. (0->0), fcn. (987->14), ass. (0->62)
 t225 = sin(qJ(2));
 t226 = sin(qJ(1));
@@ -101,5 +101,5 @@ t200 = -t211 * t228 - t212 * t250;
 t198 = t214 * t228 + t232 * t224;
 t192 = t198 * t227 + t237 * t223;
 t191 = -t198 * t223 + t237 * t227;
-t1 = [t264, t202 * t227 + t234 * t223, t197 * t227 - t198 * t252, t191, 0, 0; t192, t200 * t227 + t235 * t223, -t195 * t227 + t196 * t252, -t263, 0, 0; 0, t209 * t227 + t231 * t223, t203 * t227 - t204 * t252, -t204 * t223 + t227 * t236, 0, 0; t263, -t202 * t223 + t234 * t227, -t197 * t223 - t198 * t251, -t192, 0, 0; t191, -t200 * t223 + t235 * t227, t195 * t223 + t196 * t251, t264, 0, 0; 0, -t209 * t223 + t231 * t227, -t203 * t223 - t204 * t251, -t204 * t227 - t223 * t236, 0, 0; -t195 * t218 + t205 * t221, -t201 * t218 + t214 * t255, t198 * t218, 0, 0, 0; -t197 * t218 + t207 * t221, -t199 * t218 + t212 * t255, -t196 * t218, 0, 0, 0; 0, -t208 * t218 + t221 * t244, t204 * t218, 0, 0, 0;];
+t1 = [t264, t202 * t227 + t234 * t223, t197 * t227 - t198 * t252, t191, 0, 0; t192, t200 * t227 + t235 * t223, -t195 * t227 + t196 * t252, -t263, 0, 0; 0, t209 * t227 + t231 * t223, t203 * t227 - t204 * t252, -t204 * t223 + t236 * t227, 0, 0; t263, -t202 * t223 + t234 * t227, -t197 * t223 - t198 * t251, -t192, 0, 0; t191, -t200 * t223 + t235 * t227, t195 * t223 + t196 * t251, t264, 0, 0; 0, -t209 * t223 + t231 * t227, -t203 * t223 - t204 * t251, -t204 * t227 - t236 * t223, 0, 0; -t195 * t218 + t205 * t221, -t201 * t218 + t214 * t255, t198 * t218, 0, 0, 0; -t197 * t218 + t207 * t221, -t199 * t218 + t212 * t255, -t196 * t218, 0, 0, 0; 0, -t208 * t218 + t221 * t244, t204 * t218, 0, 0, 0;];
 JR_rot  = t1;

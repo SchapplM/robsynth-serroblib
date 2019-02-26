@@ -1,4 +1,4 @@
-% Geometrischen Jacobi-Matrix für Segment Nr. 1 (0=Basis) von
+% Geometrische Jacobi-Matrix für Segment Nr. 1 (0=Basis) von
 % S2RR1
 % Use Code from Maple symbolic Code Generation
 %
@@ -18,19 +18,19 @@
 % Jg [3x2]
 %   Geometrischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 16:44
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:11
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function Jg = S2RR1_jacobig_1_floatb_twist_sym_varpar(qJ, r_i_i_C, ...
+function Jg = S2RR1_jacobig_1_sym_varpar(qJ, r_i_i_C, ...
   pkin)
 
 
-Ja_transl = S2RR1_jacobia_transl_1_floatb_twist_sym_varpar(qJ, r_i_i_C, ...
+Ja_transl = S2RR1_jacobia_transl_1_sym_varpar(qJ, r_i_i_C, ...
   pkin);
-Jg_rot = S2RR1_jacobig_rot_1_floatb_twist_sym_varpar(qJ, ...
+Jg_rot = S2RR1_jacobig_rot_1_sym_varpar(qJ, ...
   pkin);
 
 Jg = [Ja_transl; Jg_rot];

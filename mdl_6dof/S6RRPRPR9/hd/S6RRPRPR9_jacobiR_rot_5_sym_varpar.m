@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 11:27
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 21:42
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [12 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_5_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 11:27:29
-% EndTime: 2019-02-22 11:27:29
-% DurationCPUTime: 0.10s
+% StartTime: 2019-02-26 21:42:33
+% EndTime: 2019-02-26 21:42:33
+% DurationCPUTime: 0.08s
 % Computational Cost: add. (93->26), mult. (163->58), div. (0->0), fcn. (238->10), ass. (0->31)
 t120 = pkin(11) + qJ(4);
 t119 = cos(t120);
@@ -67,8 +67,8 @@ t109 = -t114 * t119 + t118 * t133;
 t116 = -t124 * t132 + t129;
 t115 = t124 * t131 + t130;
 t113 = t124 * t129 - t132;
-t112 = -t118 * t135 + t124 * t119;
+t112 = -t118 * t135 + t119 * t124;
 t111 = t116 * t119 + t118 * t134;
 t110 = t116 * t118 - t119 * t134;
-t1 = [t109 * t123 + t113 * t121, -t115 * t137 + t116 * t121, 0, -t110 * t123, 0, 0; t111 * t123 + t115 * t121, t113 * t137 + t114 * t121, 0, t108 * t123, 0, 0; 0 (t121 * t125 + t123 * t136) * t122, 0, t112 * t123, 0, 0; -t109 * t121 + t113 * t123, t115 * t138 + t116 * t123, 0, t110 * t121, 0, 0; -t111 * t121 + t115 * t123, -t113 * t138 + t114 * t123, 0, -t108 * t121, 0, 0; 0 (-t121 * t136 + t123 * t125) * t122, 0, -t112 * t121, 0, 0; t108, -t115 * t118, 0, t111, 0, 0; t110, t113 * t118, 0, -t109, 0, 0; 0, t122 * t127 * t118, 0, t124 * t118 + t119 * t135, 0, 0;];
+t1 = [t109 * t123 + t113 * t121, -t115 * t137 + t116 * t121, 0, -t110 * t123, 0, 0; t111 * t123 + t115 * t121, t113 * t137 + t114 * t121, 0, t108 * t123, 0, 0; 0 (t121 * t125 + t123 * t136) * t122, 0, t112 * t123, 0, 0; -t109 * t121 + t113 * t123, t115 * t138 + t116 * t123, 0, t110 * t121, 0, 0; -t111 * t121 + t115 * t123, -t113 * t138 + t114 * t123, 0, -t108 * t121, 0, 0; 0 (-t121 * t136 + t123 * t125) * t122, 0, -t112 * t121, 0, 0; t108, -t115 * t118, 0, t111, 0, 0; t110, t113 * t118, 0, -t109, 0, 0; 0, t122 * t127 * t118, 0, t118 * t124 + t119 * t135, 0, 0;];
 JR_rot  = t1;

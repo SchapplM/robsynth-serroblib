@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 11:12
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 21:27
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,8 +36,8 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_1_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 11:12:01
-% EndTime: 2019-02-22 11:12:01
+% StartTime: 2019-02-26 21:27:26
+% EndTime: 2019-02-26 21:27:26
 % DurationCPUTime: 0.01s
 % Computational Cost: add. (3->3), mult. (0->0), div. (0->0), fcn. (4->2), ass. (0->3)
 t9 = cos(qJ(1));

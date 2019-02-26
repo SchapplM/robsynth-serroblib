@@ -23,13 +23,13 @@
 % Jg [6x6]
 %   Zeitableitung der geometrischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 14:54
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:46
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function JgD = S6PRPPRR3_jacobigD_floatb_twist_sym_varpar(qJ, qJD, link_index, r_i_i_C, pkin)
+function JgD = S6PRPPRR3_jacobigD_sym_varpar(qJ, qJD, link_index, r_i_i_C, pkin)
 
 
 
@@ -37,30 +37,30 @@ function JgD = S6PRPPRR3_jacobigD_floatb_twist_sym_varpar(qJ, qJD, link_index, r
 %#codegen
 %$cgargs {zeros(6,1),zeros(6,1),uint8(0),zeros(3,1),zeros(11,1)}
 assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
-  'S6PRPPRR3_jacobigD_floatb_twist_sym_varpar: qJ has to be [6x1] (double)');
+  'S6PRPPRR3_jacobigD_sym_varpar: qJ has to be [6x1] (double)');
 assert(isreal(qJD) && all(size(qJD) == [6 1]), ...
-  'S6PRPPRR3_jacobigD_floatb_twist_sym_varpar: qJD has to be [6x1] (double)');
+  'S6PRPPRR3_jacobigD_sym_varpar: qJD has to be [6x1] (double)');
 assert(isa(r_i_i_C,'double') && isreal(r_i_i_C) && all(size(r_i_i_C) == [3 1]), ...
-	'S6PRPPRR3_jacobigD_floatb_twist_sym_varpar: Position vector r_i_i_C has to be [3x1] double');
+	'S6PRPPRR3_jacobigD_sym_varpar: Position vector r_i_i_C has to be [3x1] double');
 assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
-	'S6PRPPRR3_jacobigD_floatb_twist_sym_varpar: link_index has to be [1x1] uint8');
+	'S6PRPPRR3_jacobigD_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [11 1]), ...
-  'S6PRPPRR3_jacobigD_floatb_twist_sym_varpar: pkin has to be [11x1] (double)');
+  'S6PRPPRR3_jacobigD_sym_varpar: pkin has to be [11x1] (double)');
 %% Function calls
 if link_index == 0
-	JgD=S6PRPPRR3_jacobigD_0_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S6PRPPRR3_jacobigD_0_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 elseif link_index == 1
-	JgD=S6PRPPRR3_jacobigD_1_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S6PRPPRR3_jacobigD_1_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 elseif link_index == 2
-	JgD=S6PRPPRR3_jacobigD_2_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S6PRPPRR3_jacobigD_2_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 elseif link_index == 3
-	JgD=S6PRPPRR3_jacobigD_3_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S6PRPPRR3_jacobigD_3_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 elseif link_index == 4
-	JgD=S6PRPPRR3_jacobigD_4_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S6PRPPRR3_jacobigD_4_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 elseif link_index == 5
-	JgD=S6PRPPRR3_jacobigD_5_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S6PRPPRR3_jacobigD_5_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 elseif link_index == 6
-	JgD=S6PRPPRR3_jacobigD_6_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S6PRPPRR3_jacobigD_6_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 else
 	JgD=NaN(6,6);
 end

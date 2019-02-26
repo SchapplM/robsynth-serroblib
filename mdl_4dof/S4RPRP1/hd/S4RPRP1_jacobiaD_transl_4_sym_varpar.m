@@ -20,31 +20,31 @@
 % JaD_transl [3x4]
 %   Zeitableitung der translatorischen Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:48
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:32
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function JaD_transl = S4RPRP1_jacobiaD_transl_4_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, ...
+function JaD_transl = S4RPRP1_jacobiaD_transl_4_sym_varpar(qJ, qJD, r_i_i_C, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(4,1),zeros(4,1),zeros(3,1),zeros(6,1)}
 assert(isreal(qJ) && all(size(qJ) == [4 1]), ...
-  'S4RPRP1_jacobiaD_transl_4_floatb_twist_sym_varpar: qJ has to be [4x1] (double)');
+  'S4RPRP1_jacobiaD_transl_4_sym_varpar: qJ has to be [4x1] (double)');
 assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
-  'S4RPRP1_jacobiaD_transl_4_floatb_twist_sym_varpar: qJD has to be [4x1] (double)');
+  'S4RPRP1_jacobiaD_transl_4_sym_varpar: qJD has to be [4x1] (double)');
 assert(isa(r_i_i_C,'double') && isreal(r_i_i_C) && all(size(r_i_i_C) == [3 1]), ...
-	'S4RPRP1_jacobiaD_transl_4_floatb_twist_sym_varpar: Position vector r_i_i_C has to be [3x1] double');
+	'S4RPRP1_jacobiaD_transl_4_sym_varpar: Position vector r_i_i_C has to be [3x1] double');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
-  'S4RPRP1_jacobiaD_transl_4_floatb_twist_sym_varpar: pkin has to be [6x1] (double)');
+  'S4RPRP1_jacobiaD_transl_4_sym_varpar: pkin has to be [6x1] (double)');
 
 %% Symbolic Calculation
 % From jacobiaD_transl_4_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:48:45
-% EndTime: 2018-11-14 13:48:45
+% StartTime: 2019-02-26 19:32:12
+% EndTime: 2019-02-26 19:32:12
 % DurationCPUTime: 0.06s
 % Computational Cost: add. (84->13), mult. (46->15), div. (0->0), fcn. (26->6), ass. (0->12)
 t32 = qJ(4) + r_i_i_C(3);
@@ -56,7 +56,7 @@ t25 = qJD(1) + qJD(3);
 t30 = t25 * t22;
 t23 = cos(t24);
 t29 = t25 * t23;
-t28 = t22 * qJD(4) + t29 * t32 + t31 * t30;
-t27 = t23 * qJD(4) + (-t22 * t32 + t31 * t23) * t25;
+t28 = t22 * qJD(4) + t32 * t29 + t31 * t30;
+t27 = t23 * qJD(4) + (-t32 * t22 + t31 * t23) * t25;
 t1 = [(-cos(t26) * pkin(2) - cos(qJ(1)) * pkin(1)) * qJD(1) + t27, 0, t27, t29; (-sin(t26) * pkin(2) - sin(qJ(1)) * pkin(1)) * qJD(1) + t28, 0, t28, t30; 0, 0, 0, 0;];
 JaD_transl  = t1;

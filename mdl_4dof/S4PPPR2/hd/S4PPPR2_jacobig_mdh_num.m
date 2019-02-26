@@ -20,11 +20,11 @@
 % Quellen:
 % [1] Ortmaier: Robotik I Skript
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:56
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:17
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 % Moritz Schappler, schappler@irt.uni-hannover.de, 2016-03
 % (C) Institut für Regelungstechnik, Leibniz Universität Hannover
 

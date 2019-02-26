@@ -23,13 +23,13 @@
 % Jg [6x4]
 %   Zeitableitung der geometrischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:43
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:27
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function JgD = S4PRRP1_jacobigD_floatb_twist_sym_varpar(qJ, qJD, link_index, r_i_i_C, pkin)
+function JgD = S4PRRP1_jacobigD_sym_varpar(qJ, qJD, link_index, r_i_i_C, pkin)
 
 
 
@@ -37,26 +37,26 @@ function JgD = S4PRRP1_jacobigD_floatb_twist_sym_varpar(qJ, qJD, link_index, r_i
 %#codegen
 %$cgargs {zeros(4,1),zeros(4,1),uint8(0),zeros(3,1),zeros(6,1)}
 assert(isreal(qJ) && all(size(qJ) == [4 1]), ...
-  'S4PRRP1_jacobigD_floatb_twist_sym_varpar: qJ has to be [4x1] (double)');
+  'S4PRRP1_jacobigD_sym_varpar: qJ has to be [4x1] (double)');
 assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
-  'S4PRRP1_jacobigD_floatb_twist_sym_varpar: qJD has to be [4x1] (double)');
+  'S4PRRP1_jacobigD_sym_varpar: qJD has to be [4x1] (double)');
 assert(isa(r_i_i_C,'double') && isreal(r_i_i_C) && all(size(r_i_i_C) == [3 1]), ...
-	'S4PRRP1_jacobigD_floatb_twist_sym_varpar: Position vector r_i_i_C has to be [3x1] double');
+	'S4PRRP1_jacobigD_sym_varpar: Position vector r_i_i_C has to be [3x1] double');
 assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
-	'S4PRRP1_jacobigD_floatb_twist_sym_varpar: link_index has to be [1x1] uint8');
+	'S4PRRP1_jacobigD_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
-  'S4PRRP1_jacobigD_floatb_twist_sym_varpar: pkin has to be [6x1] (double)');
+  'S4PRRP1_jacobigD_sym_varpar: pkin has to be [6x1] (double)');
 %% Function calls
 if link_index == 0
-	JgD=S4PRRP1_jacobigD_0_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S4PRRP1_jacobigD_0_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 elseif link_index == 1
-	JgD=S4PRRP1_jacobigD_1_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S4PRRP1_jacobigD_1_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 elseif link_index == 2
-	JgD=S4PRRP1_jacobigD_2_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S4PRRP1_jacobigD_2_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 elseif link_index == 3
-	JgD=S4PRRP1_jacobigD_3_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S4PRRP1_jacobigD_3_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 elseif link_index == 4
-	JgD=S4PRRP1_jacobigD_4_floatb_twist_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	JgD=S4PRRP1_jacobigD_4_sym_varpar(qJ, qJD, r_i_i_C, pkin);
 else
 	JgD=NaN(6,4);
 end

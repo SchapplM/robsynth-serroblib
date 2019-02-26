@@ -21,30 +21,30 @@
 % JaD_rot [3x3]
 %   Zeitableitung der rotatorischen Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:14
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:15
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function JaD_rot = S3RPR1_jacobiaD_rot_3_floatb_twist_sym_varpar(qJ, qJD, ...
+function JaD_rot = S3RPR1_jacobiaD_rot_3_sym_varpar(qJ, qJD, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(3,1),zeros(3,1),zeros(4,1)}
 assert(isreal(qJ) && all(size(qJ) == [3 1]), ...
-  'S3RPR1_jacobiaD_rot_3_floatb_twist_sym_varpar: qJ has to be [3x1] (double)');
+  'S3RPR1_jacobiaD_rot_3_sym_varpar: qJ has to be [3x1] (double)');
 assert(isreal(qJD) && all(size(qJD) == [3 1]), ...
-  'S3RPR1_jacobiaD_rot_3_floatb_twist_sym_varpar: qJD has to be [3x1] (double)');
+  'S3RPR1_jacobiaD_rot_3_sym_varpar: qJD has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [4 1]), ...
-  'S3RPR1_jacobiaD_rot_3_floatb_twist_sym_varpar: pkin has to be [4x1] (double)');
+  'S3RPR1_jacobiaD_rot_3_sym_varpar: pkin has to be [4x1] (double)');
 
 %% Symbolic Calculation
 % From jacobiaD_rot_3_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:14:34
-% EndTime: 2018-11-14 10:14:34
-% DurationCPUTime: 0.08s
+% StartTime: 2019-02-26 19:15:16
+% EndTime: 2019-02-26 19:15:17
+% DurationCPUTime: 0.09s
 % Computational Cost: add. (128->13), mult. (322->30), div. (40->4), fcn. (356->4), ass. (0->21)
 t54 = sin(qJ(3));
 t55 = cos(qJ(1));

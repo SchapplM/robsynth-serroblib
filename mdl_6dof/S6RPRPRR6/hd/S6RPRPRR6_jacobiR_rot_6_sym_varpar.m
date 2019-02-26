@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 10:33
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 20:51
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [11 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_6_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 10:33:34
-% EndTime: 2019-02-22 10:33:34
-% DurationCPUTime: 0.10s
+% StartTime: 2019-02-26 20:51:42
+% EndTime: 2019-02-26 20:51:42
+% DurationCPUTime: 0.09s
 % Computational Cost: add. (115->18), mult. (54->20), div. (0->0), fcn. (93->6), ass. (0->19)
 t94 = pkin(11) + qJ(5) + qJ(6);
 t90 = sin(t94);
@@ -54,9 +54,9 @@ t100 = t96 * t93;
 t97 = cos(qJ(1));
 t99 = t97 * t92;
 t98 = t97 * t93;
-t89 = t90 * t96 + t91 * t98;
-t88 = -t90 * t98 + t91 * t96;
-t87 = -t100 * t91 + t90 * t97;
-t86 = t100 * t90 + t91 * t97;
+t89 = t96 * t90 + t91 * t98;
+t88 = -t90 * t98 + t96 * t91;
+t87 = -t91 * t100 + t97 * t90;
+t86 = t90 * t100 + t97 * t91;
 t1 = [t87, 0, -t91 * t99, 0, t88, t88; t89, 0, -t91 * t101, 0, -t86, -t86; 0, 0, t93 * t91, 0, -t103, -t103; t86, 0, t90 * t99, 0, -t89, -t89; t88, 0, t90 * t101, 0, t87, t87; 0, 0, -t93 * t90, 0, -t102, -t102; -t101, 0, t98, 0, 0, 0; t99, 0, t100, 0, 0, 0; 0, 0, t92, 0, 0, 0;];
 JR_rot  = t1;

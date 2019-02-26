@@ -19,51 +19,50 @@
 % Ja_rot [3x4]
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:45
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:29
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function Ja_rot = S4RPPP1_jacobia_rot_4_floatb_twist_sym_varpar(qJ, ...
+function Ja_rot = S4RPPP1_jacobia_rot_4_sym_varpar(qJ, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(4,1),zeros(6,1)}
 assert(isreal(qJ) && all(size(qJ) == [4 1]), ...
-  'S4RPPP1_jacobia_rot_4_floatb_twist_sym_varpar: qJ has to be [4x1] (double)');
+  'S4RPPP1_jacobia_rot_4_sym_varpar: qJ has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
-  'S4RPPP1_jacobia_rot_4_floatb_twist_sym_varpar: pkin has to be [6x1] (double)');
+  'S4RPPP1_jacobia_rot_4_sym_varpar: pkin has to be [6x1] (double)');
 
 %% Symbolic Calculation
 % From jacobia_rot_4_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:45:52
-% EndTime: 2018-11-14 13:45:52
-% DurationCPUTime: 0.05s
-% Computational Cost: add. (199->19), mult. (196->29), div. (24->11), fcn. (226->12), ass. (0->24)
-t43 = cos(pkin(6));
-t44 = sin(qJ(1));
-t45 = cos(qJ(1));
-t47 = pkin(4) + pkin(6);
-t48 = pkin(4) - pkin(6);
-t46 = sin(t47) / 0.2e1 - sin(t48) / 0.2e1;
-t29 = t44 * t43 + t45 * t46;
-t37 = cos(t48) / 0.2e1;
-t38 = cos(t47);
-t36 = t37 - t38 / 0.2e1;
-t27 = atan2(-t29, t36);
-t24 = sin(t27);
-t25 = cos(t27);
-t23 = -t24 * t29 + t25 * t36;
-t32 = t45 * t43 - t44 * t46;
-t49 = t32 ^ 2 / t23 ^ 2;
-t42 = sin(pkin(4));
-t41 = sin(pkin(6));
-t40 = 0.1e1 / t44 ^ 2;
-t35 = t37 + t38 / 0.2e1;
-t34 = 0.1e1 / t36;
-t31 = -t44 * t35 - t45 * t41;
-t26 = 0.1e1 / (0.1e1 + t29 ^ 2 / t36 ^ 2);
-t1 = [-t32 * t34 * t26, 0, 0, 0; (-t29 / t23 - (-t24 + (t25 * t29 * t34 + t24) * t26) * t49) / (0.1e1 + t49) 0, 0, 0; (t41 + (-t35 / t44 - t31 * t40) * t45) / t42 / (0.1e1 + t31 ^ 2 * t40 / t42 ^ 2) 0, 0, 0;];
+% StartTime: 2019-02-26 19:29:58
+% EndTime: 2019-02-26 19:29:58
+% DurationCPUTime: 0.04s
+% Computational Cost: add. (46->14), mult. (143->30), div. (29->11), fcn. (226->9), ass. (0->23)
+t37 = cos(pkin(4));
+t34 = sin(pkin(6));
+t39 = cos(qJ(1));
+t40 = t39 * t34;
+t36 = cos(pkin(6));
+t38 = sin(qJ(1));
+t41 = t38 * t36;
+t25 = t37 * t40 + t41;
+t35 = sin(pkin(4));
+t42 = t35 * t34;
+t23 = atan2(-t25, t42);
+t20 = sin(t23);
+t21 = cos(t23);
+t19 = -t20 * t25 + t21 * t42;
+t28 = -t38 * t37 * t34 + t39 * t36;
+t44 = t28 ^ 2 / t19 ^ 2;
+t31 = 0.1e1 / t35;
+t43 = 0.1e1 / t34 * t31;
+t33 = 0.1e1 / t38 ^ 2;
+t32 = 0.1e1 / t35 ^ 2;
+t27 = -t37 * t41 - t40;
+t22 = 0.1e1 / (0.1e1 + t25 ^ 2 * t32 / t34 ^ 2);
+t1 = [-t28 * t22 * t43, 0, 0, 0; (-t25 / t19 - (-t20 + (t21 * t25 * t43 + t20) * t22) * t44) / (0.1e1 + t44) 0, 0, 0; (t34 + (-t36 * t37 / t38 - t27 * t33) * t39) * t31 / (t27 ^ 2 * t33 * t32 + 0.1e1) 0, 0, 0;];
 Ja_rot  = t1;

@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-22 12:32
-% Revision: 2b76964ad985d937eecd005a1a368749e6b3dc4d (2019-02-18)
+% Datum: 2019-02-26 22:46
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [12 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_6_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-02-22 12:32:43
-% EndTime: 2019-02-22 12:32:43
-% DurationCPUTime: 0.41s
+% StartTime: 2019-02-26 22:46:23
+% EndTime: 2019-02-26 22:46:24
+% DurationCPUTime: 0.43s
 % Computational Cost: add. (290->65), mult. (867->135), div. (0->0), fcn. (1196->14), ass. (0->69)
 t295 = sin(qJ(2));
 t296 = sin(qJ(1));
@@ -49,7 +49,7 @@ t304 = t301 * t325;
 t281 = t295 * t304 + t296 * t300;
 t294 = sin(qJ(3));
 t299 = cos(qJ(3));
-t280 = t296 * t295 - t300 * t304;
+t280 = t295 * t296 - t300 * t304;
 t291 = cos(pkin(7));
 t289 = sin(pkin(7));
 t290 = sin(pkin(6));
@@ -85,7 +85,7 @@ t306 = t289 * t325;
 t305 = t296 * t325;
 t282 = -t301 * t295 - t300 * t305;
 t302 = -t282 * t289 + t291 * t319;
-t283 = -t295 * t305 + t301 * t300;
+t283 = -t295 * t305 + t300 * t301;
 t279 = t325 * t291 - t300 * t322;
 t278 = (-t291 * t314 + t310) * t290;
 t277 = (t291 * t312 + t313) * t290;

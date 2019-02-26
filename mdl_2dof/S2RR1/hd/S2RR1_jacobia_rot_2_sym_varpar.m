@@ -19,27 +19,27 @@
 % Ja_rot [3x2]
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 16:44
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-02-26 19:11
+% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function Ja_rot = S2RR1_jacobia_rot_2_floatb_twist_sym_varpar(qJ, ...
+function Ja_rot = S2RR1_jacobia_rot_2_sym_varpar(qJ, ...
   pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(2,1),zeros(1,1)}
 assert(isreal(qJ) && all(size(qJ) == [2 1]), ...
-  'S2RR1_jacobia_rot_2_floatb_twist_sym_varpar: qJ has to be [2x1] (double)');
+  'S2RR1_jacobia_rot_2_sym_varpar: qJ has to be [2x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
-  'S2RR1_jacobia_rot_2_floatb_twist_sym_varpar: pkin has to be [1x1] (double)');
+  'S2RR1_jacobia_rot_2_sym_varpar: pkin has to be [1x1] (double)');
 
 %% Symbolic Calculation
 % From jacobia_rot_2_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-16 16:44:42
-% EndTime: 2018-11-16 16:44:42
+% StartTime: 2019-02-26 19:11:20
+% EndTime: 2019-02-26 19:11:20
 % DurationCPUTime: 0.02s
 % Computational Cost: add. (6->2), mult. (13->3), div. (14->4), fcn. (24->3), ass. (0->5)
 t17 = sin(qJ(1));
