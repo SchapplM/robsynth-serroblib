@@ -7,3 +7,5 @@ maplerepo_path.m
 .~lock.*.csv#
 *kinconstr_expl_mdh_num_varpar.m
 *eulxyz*
+*jacobi*floatb_twist*
+*matlabtmp*
