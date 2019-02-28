@@ -1,0 +1,11 @@
+robot_NQJ=7
+robot_NJ=7
+robot_name="S7RRRRRRR1"
+robot_NL=8
+robot_NKP=4
+robot_KP="d1 d3 d5 d7"
+robot_kinconstr_exist=0
+robot_NKCP=0
+robot_KCP=""
+robot_NMPVFIXB=45
+robot_NMPVFLOATB=NOTDEFINED
