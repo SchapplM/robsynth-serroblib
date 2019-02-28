@@ -8,7 +8,8 @@
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-12
 % (C) Institut für Mechatronische Systeme, Universität Hannover
-
+clear
+clc
 repopath=fileparts(which('serroblib_path_init.m'));
 %% Alle Robotermodell initialisieren
 serroblib_gen_bitarrays
@@ -25,6 +26,18 @@ for N = 1:7
     serroblib_generate_mapleinput({Name})
     serroblib_generate_code({Name}, true)
     % serroblib_addtopath({Name})
+  end
+end
+
+%% Nur Vorlagen-Funktionen für alle Modelle neu generieren
+for N = 1:7
+  % Liste zusammenstellen
+  mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
+  l = load(mdllistfile_Ndof, 'Names_Ndof');
+  % alle Modelle generieren
+  for iFK = 1:length(l.Names_Ndof)
+    Name = l.Names_Ndof{iFK};
+    serroblib_generate_code({Name}, true, false, 2)
   end
 end
 

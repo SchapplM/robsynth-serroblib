@@ -9,6 +9,11 @@
 %   Erzwinge die Neu-Generierung des Codes
 % nocopy [1x1 logical]
 %   Nur Code generieren, aber nicht zurück kopieren
+% mode
+%   Modus, welche Dateien generiert werden sollen, damit nicht die
+%   vollständige Dynamik jedes mal neu generiert werden muss
+%   1: Vollständige Generierung, alles
+%   2: Nur aus Vorlagen generierte Funktionen (z.B. Jacobi, inverse Kinematik)
 % 
 % Vorher: 
 % * Funktion maplerepo_path.m muss vorliegen mit Rückgabe des
@@ -19,7 +24,7 @@
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für mechatronische Systeme, Universität Hannover
 
-function serroblib_generate_code(Names, force, nocopy)
+function serroblib_generate_code(Names, force, nocopy, mode)
 
 if nargin < 2
   force = false;
@@ -27,7 +32,9 @@ end
 if nargin < 3
   nocopy = false;
 end
-
+if nargin < 4
+  mode = 1;
+end
 repopath=fileparts(which('serroblib_path_init.m'));
 
 for i = 1:length(Names)
@@ -55,12 +62,28 @@ for i = 1:length(Names)
   end
   
   % Eingabedatei kopieren
-  copyfile( mapleinputfile, fullfile(mrp, 'robot_codegen_definitions', 'robot_env') );
-  
+  mapleinputfile_tb = fullfile(mrp, 'robot_codegen_definitions', 'robot_env');
+  copyfile( mapleinputfile, mapleinputfile_tb );
+  % Datei mit Shell-Variablen auch kopieren (wird bei vollständigem
+  % Durchlauf der Toolbox überschrieben, aber für Einzelaufruf von Skripten
+  % benötigt
+  if exist([mapleinputfile,'.sh'], 'file')
+    copyfile( [mapleinputfile,'.sh'], [mapleinputfile_tb, '.sh'] );
+  elseif mode == 2
+    error('Generierung der Vorlagen-Funktionen nicht möglich. %s existiert nicht', [mapleinputfile,'.sh']);
+  end
   % Code-Erstellung starten
-  fprintf('Starte Code-Generierung %d/%d für %s\n', i, length(Names), n);
-  system( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel', mrp) ); %  > /dev/null
-  
+  if mode == 1
+    fprintf('Starte Code-Generierung %d/%d für %s\n', i, length(Names), n);
+    system( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel', mrp) ); %  > /dev/null
+  elseif mode == 2
+    fprintf('Generiere Matlab-Funktionen aus Vorlagen (%d/%d) für %s\n', i, length(Names), n);
+    system( sprintf('cd %s/robot_codegen_scripts && ./create_git_versioninfo.sh', mrp) );
+    system( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_tmpvar_matlab.sh', mrp) );
+    system( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_matlab_num_varpar.sh', mrp) );
+  else
+    error('Modus nicht definiert');
+  end
   % generierten Code zurückkopieren (alle .m-Dateien)
   % TODO: Hier sind noch viele automatisch generierte Dateien dabei, die
   % eigentlich nicht relevant sind (z.B. eulxyz-Floatbase)
@@ -69,4 +92,8 @@ for i = 1:length(Names)
       copyfile(fullfile(outputdir_tb, f.name), fullfile(outputdir_local, f.name));
     end
   end
+  % Definitionen des Roboters zurückkopieren. Damit lassen sich später
+  % leichter Roboterspezifische Funktionen neu generieren, ohne die Toolbox
+  % neu durchlaufen zu lassen
+  copyfile( fullfile(mrp, 'robot_codegen_definitions', 'robot_env.sh'), [mapleinputfile, '.sh']);
 end
