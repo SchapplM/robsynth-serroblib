@@ -23,11 +23,11 @@
 % Mq [6x6]
 %   inertia matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 15:42
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-09 01:49
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Mq = S6RPPRPR5_inertiaJ_slag_vp2(qJ, ...
   pkin, m, mrSges, Ifges)
@@ -38,7 +38,7 @@ assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
   'S6RPPRPR5_inertiaJ_slag_vp2: qJ has to be [6x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
   'S6RPPRPR5_inertiaJ_slag_vp2: pkin has to be [9x1] (double)');
-assert( isreal(m) && all(size(m) == [7 1]), ...
+assert(isreal(m) && all(size(m) == [7 1]), ...
   'S6RPPRPR5_inertiaJ_slag_vp2: m has to be [7x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [7,3]), ...
   'S6RPPRPR5_inertiaJ_slag_vp2: mrSges has to be [7x3] (double)');
@@ -48,9 +48,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [7 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-23 15:41:41
-% EndTime: 2018-11-23 15:41:42
-% DurationCPUTime: 0.52s
+% StartTime: 2019-03-09 01:48:37
+% EndTime: 2019-03-09 01:48:38
+% DurationCPUTime: 0.53s
 % Computational Cost: add. (655->192), mult. (1200->265), div. (0->0), fcn. (1058->6), ass. (0->75)
 t60 = (qJ(2) - pkin(7));
 t92 = -2 * t60;

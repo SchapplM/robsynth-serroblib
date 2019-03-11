@@ -29,11 +29,11 @@
 % tau [3x1]
 %   joint torques of inverse dynamics (contains inertial, gravitational coriolis and centrifugal forces)
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:14
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:06
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tau = S3RPR1_invdynJ_fixb_slag_vp1(qJ, qJD, qJDD, g, ...
   pkin, m, rSges, Icges)
@@ -50,7 +50,7 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S3RPR1_invdynJ_fixb_slag_vp1: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [4 1]), ...
   'S3RPR1_invdynJ_fixb_slag_vp1: pkin has to be [4x1] (double)');
-assert( isreal(m) && all(size(m) == [4 1]), ...
+assert(isreal(m) && all(size(m) == [4 1]), ...
   'S3RPR1_invdynJ_fixb_slag_vp1: m has to be [4x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [4,3]), ...
   'S3RPR1_invdynJ_fixb_slag_vp1: rSges has to be [4x3] (double)');
@@ -60,9 +60,9 @@ assert(isreal(Icges) && all(size(Icges) == [4 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:14:23
-% EndTime: 2018-11-14 10:14:23
-% DurationCPUTime: 0.57s
+% StartTime: 2019-03-08 18:05:51
+% EndTime: 2019-03-08 18:05:52
+% DurationCPUTime: 0.52s
 % Computational Cost: add. (493->104), mult. (960->127), div. (0->0), fcn. (698->4), ass. (0->55)
 t61 = sin(qJ(1));
 t62 = cos(qJ(1));
@@ -118,5 +118,5 @@ t10 = t85 * qJD(1) - t59 * t16 - t51;
 t9 = t87 + t50 + (-t61 * pkin(2) - t33) * qJD(1);
 t4 = qJDD(1) * t37 + qJD(1) * (-rSges(3,1) * t70 + t48) + t65;
 t3 = t75 * qJDD(1) + (-t37 * qJD(1) - t24) * qJD(1) + t74;
-t7 = [-m(2) * (-g(1) * t35 + g(2) * t38) + t71 + (Icges(2,3) + Icges(3,2) + m(2) * (t35 ^ 2 + t38 ^ 2)) * qJDD(1) + (-(-pkin(2) * t70 + t72 + t87 - t9) * t10 + t9 * (-t5 + t51) + t10 * (t6 + t73) + (t9 * t81 * t62 + (-t9 * qJ(2) + t10 * t81) * t61) * qJD(1) + t88 * (-t16 + t85) + t89 * (t81 * t61 + t53 + t76)) * m(4) + (-(-qJD(1) * t34 - t19 + t72) * t20 + t19 * t51 + t20 * (t48 + t73) + (t19 * t79 * t62 + (t19 * (-rSges(3,3) - qJ(2)) + t20 * t79) * t61) * qJD(1) + (-g(2) + t4) * t23 + (-g(1) + t3) * (t79 * t61 + t53 + t55)) * m(3); (-m(3) - m(4)) * (g(1) * t61 - g(2) * t62) + 0.2e1 * (t1 * t83 + t2 * t82) * m(4) + 0.2e1 * (t3 * t83 + t4 * t82) * m(3); -t71 + (-t10 * t6 + t9 * t5 - (-t59 * t10 + t89) * t76 + (t59 * t9 + t88) * t16) * m(4);];
+t7 = [-m(2) * (-g(1) * t35 + g(2) * t38) + t71 + (Icges(2,3) + Icges(3,2) + m(2) * (t35 ^ 2 + t38 ^ 2)) * qJDD(1) + (-(-pkin(2) * t70 + t72 + t87 - t9) * t10 + t9 * (-t5 + t51) + t10 * (t6 + t73) + (t9 * t81 * t62 + (-t9 * qJ(2) + t10 * t81) * t61) * qJD(1) + t88 * (-t16 + t85) + t89 * (t81 * t61 + t53 + t76)) * m(4) + (-(-qJD(1) * t34 - t19 + t72) * t20 + t19 * t51 + t20 * (t48 + t73) + (t19 * t79 * t62 + (t19 * (-rSges(3,3) - qJ(2)) + t20 * t79) * t61) * qJD(1) + (-g(2) + t4) * t23 + (-g(1) + t3) * (t79 * t61 + t53 + t55)) * m(3); (-m(3) - m(4)) * (g(1) * t61 - g(2) * t62) + 0.2e1 * (t1 * t83 + t2 * t82) * m(4) + 0.2e1 * (t3 * t83 + t4 * t82) * m(3); -t71 + (-t10 * t6 + t9 * t5 - (-t10 * t59 + t89) * t76 + (t59 * t9 + t88) * t16) * m(4);];
 tau  = t7;

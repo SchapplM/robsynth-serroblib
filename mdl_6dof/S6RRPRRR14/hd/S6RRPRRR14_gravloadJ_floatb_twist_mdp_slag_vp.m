@@ -18,11 +18,11 @@
 % taug [6x1]
 %   joint torques required to compensate gravitation load
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-09 15:13
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug = S6RRPRRR14_gravloadJ_floatb_twist_mdp_slag_vp(qJ, g, pkin, MDP)
 %% Coder Information
@@ -33,14 +33,14 @@ assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
 assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
   'S6RRPRRR14_gravloadJ_floatb_twist_mdp_slag_vp: pkin has to be [14x1] (double)');
 assert(isreal(MDP) && all(size(MDP) == [35 1]), ...
-  'S6RRPRRR14_gravloadJ_floatb_twist_mdp_slag_vp: MDP has to be [35x6] (double)'); 
+  'S6RRPRRR14_gravloadJ_floatb_twist_mdp_slag_vp: MDP has to be [35x1] (double)'); 
 
 %% Symbolic Calculation
 % From gravload_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:20:49
-% EndTime: 2019-01-03 10:20:58
-% DurationCPUTime: 2.23s
+% StartTime: 2019-03-09 15:08:43
+% EndTime: 2019-03-09 15:08:50
+% DurationCPUTime: 2.18s
 % Computational Cost: add. (1301->179), mult. (3718->323), div. (0->0), fcn. (4867->18), ass. (0->96)
 t197 = sin(qJ(2));
 t198 = sin(qJ(1));

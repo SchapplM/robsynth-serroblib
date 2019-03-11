@@ -26,11 +26,11 @@
 %   matrix of coriolis and centrifugal joint torques.
 %   Gives coriolis joint torques when multiplied with joint velocities
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:52
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:34
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Cq = S4RRPP2_coriolismatJ_fixb_slag_vp1(qJ, qJD, ...
   pkin, m, rSges, Icges)
@@ -43,7 +43,7 @@ assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
   'S4RRPP2_coriolismatJ_fixb_slag_vp1: qJD has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
   'S4RRPP2_coriolismatJ_fixb_slag_vp1: pkin has to be [5x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RRPP2_coriolismatJ_fixb_slag_vp1: m has to be [5x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [5,3]), ...
   'S4RRPP2_coriolismatJ_fixb_slag_vp1: rSges has to be [5x3] (double)');
@@ -53,9 +53,9 @@ assert(isreal(Icges) && all(size(Icges) == [5 6]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:52:25
-% EndTime: 2018-11-14 13:52:25
-% DurationCPUTime: 0.31s
+% StartTime: 2019-03-08 18:33:59
+% EndTime: 2019-03-08 18:34:00
+% DurationCPUTime: 0.30s
 % Computational Cost: add. (2614->49), mult. (1970->70), div. (0->0), fcn. (1484->4), ass. (0->39)
 t108 = m(5) / 0.2e1;
 t109 = m(4) / 0.2e1;
@@ -83,7 +83,7 @@ t83 = (t33 + t25) * t109 + (t24 + t21) * t108;
 t84 = (t25 - t33) * t109 + (t21 - t24) * t108;
 t1 = t84 - t83;
 t110 = t1 * qJD(1);
-t101 = m(3) * ((-t71 * rSges(3,1) - t72 * rSges(3,2)) * t86 + (t72 * rSges(3,1) - t71 * rSges(3,2)) * t87);
+t101 = m(3) * (t86 * (-t71 * rSges(3,1) - t72 * rSges(3,2)) + (t72 * rSges(3,1) - t71 * rSges(3,2)) * t87);
 t97 = m(4) * (-t60 * t55 + t56 * t59);
 t91 = m(5) * (-t49 * t44 + t45 * t48);
 t107 = 0.4e1 * qJD(1);

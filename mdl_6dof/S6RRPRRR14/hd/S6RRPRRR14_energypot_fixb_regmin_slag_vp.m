@@ -15,11 +15,11 @@
 % U_reg [1x35]
 %   minimal parameter regressor of Potential energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-09 15:13
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function U_reg = S6RRPRRR14_energypot_fixb_regmin_slag_vp(qJ, g, ...
   pkin)
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:20:40
-% EndTime: 2019-01-03 10:20:41
-% DurationCPUTime: 0.27s
+% StartTime: 2019-03-09 15:08:38
+% EndTime: 2019-03-09 15:08:38
+% DurationCPUTime: 0.26s
 % Computational Cost: add. (409->74), mult. (1149->136), div. (0->0), fcn. (1517->18), ass. (0->60)
 t410 = cos(pkin(6));
 t419 = cos(qJ(2));
@@ -59,7 +59,7 @@ t401 = -t410 * t428 - t427;
 t433 = t406 * t415;
 t397 = -t401 * t405 + t409 * t433;
 t432 = t406 * t419;
-t398 = -t405 * t432 + t410 * t409;
+t398 = -t405 * t432 + t409 * t410;
 t439 = -g(1) * t397 - g(2) * t396 - g(3) * t398;
 t435 = t405 * t410;
 t434 = t406 * t414;
@@ -68,13 +68,13 @@ t400 = t410 * t427 + t428;
 t403 = sin(pkin(14));
 t407 = cos(pkin(14));
 t422 = t399 * t409 - t405 * t431;
-t390 = -t400 * t403 + t422 * t407;
+t390 = -t400 * t403 + t407 * t422;
 t404 = sin(pkin(8));
 t408 = cos(pkin(8));
 t425 = t390 * t408 + t396 * t404;
 t402 = -t410 * t429 + t426;
 t421 = t401 * t409 + t405 * t433;
-t392 = -t402 * t403 + t421 * t407;
+t392 = -t402 * t403 + t407 * t421;
 t424 = t392 * t408 + t397 * t404;
 t394 = t407 * t435 + (-t403 * t414 + t407 * t430) * t406;
 t423 = t394 * t408 + t398 * t404;
@@ -85,17 +85,17 @@ t413 = sin(qJ(4));
 t412 = sin(qJ(5));
 t411 = sin(qJ(6));
 t395 = t407 * t434 + (t406 * t430 + t435) * t403;
-t393 = t402 * t407 + t421 * t403;
-t391 = t400 * t407 + t422 * t403;
+t393 = t402 * t407 + t403 * t421;
+t391 = t400 * t407 + t403 * t422;
 t389 = -t394 * t404 + t398 * t408;
 t388 = -t392 * t404 + t397 * t408;
 t387 = -t390 * t404 + t396 * t408;
-t386 = t395 * t418 + t423 * t413;
-t385 = t395 * t413 - t423 * t418;
-t384 = t393 * t418 + t424 * t413;
-t383 = t393 * t413 - t424 * t418;
-t382 = t391 * t418 + t425 * t413;
-t381 = t391 * t413 - t425 * t418;
+t386 = t395 * t418 + t413 * t423;
+t385 = t395 * t413 - t418 * t423;
+t384 = t393 * t418 + t413 * t424;
+t383 = t393 * t413 - t418 * t424;
+t382 = t391 * t418 + t413 * t425;
+t381 = t391 * t413 - t418 * t425;
 t380 = t386 * t417 + t389 * t412;
 t379 = t384 * t417 + t388 * t412;
 t378 = t382 * t417 + t387 * t412;

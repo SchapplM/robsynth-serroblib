@@ -21,11 +21,11 @@
 % taug [6x1]
 %   joint torques required to compensate gravitation load
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 18:30
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-10 01:33
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug = S6RRRRRP6_gravloadJ_floatb_twist_slag_vp2(qJ, g, ...
   pkin, m, mrSges)
@@ -38,17 +38,17 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S6RRRRRP6_gravloadJ_floatb_twist_slag_vp2: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [10 1]), ...
   'S6RRRRRP6_gravloadJ_floatb_twist_slag_vp2: pkin has to be [10x1] (double)');
-assert( isreal(m) && all(size(m) == [7 1]), ...
+assert(isreal(m) && all(size(m) == [7 1]), ...
   'S6RRRRRP6_gravloadJ_floatb_twist_slag_vp2: m has to be [7x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [7,3]), ...
   'S6RRRRRP6_gravloadJ_floatb_twist_slag_vp2: mrSges has to be [7x3] (double)');
 
 %% Symbolic Calculation
-% From joint_gravload_floatb_twist_par2_matlab.m
+% From gravload_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-23 18:30:00
-% EndTime: 2018-11-23 18:30:01
-% DurationCPUTime: 1.13s
+% StartTime: 2019-03-10 01:26:35
+% EndTime: 2019-03-10 01:26:39
+% DurationCPUTime: 1.18s
 % Computational Cost: add. (722->154), mult. (770->175), div. (0->0), fcn. (743->10), ass. (0->82)
 t142 = mrSges(6,1) + mrSges(7,1);
 t141 = mrSges(6,2) - mrSges(7,3);
@@ -85,11 +85,11 @@ t130 = mrSges(4,1) + t120;
 t95 = t61 * t44;
 t13 = -t58 * t45 + t60 * t95;
 t14 = t44 * t58 + t45 * t96;
-t129 = t13 * t142 + t141 * t14;
+t129 = t142 * t13 + t141 * t14;
 t97 = t58 * t60;
 t11 = t44 * t97 + t45 * t61;
 t12 = t45 * t97 - t95;
-t128 = t11 * t142 + t141 * t12;
+t128 = t142 * t11 + t141 * t12;
 t127 = -m(3) - m(4) - m(5);
 t22 = t47 * t58 + t48 * t96;
 t126 = -t21 * mrSges(5,1) + t22 * mrSges(5,2) + t129;

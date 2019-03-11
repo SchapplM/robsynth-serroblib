@@ -15,11 +15,11 @@
 % taug_reg [2x(2*10)]
 %   inertial parameter regressor of gravitation joint torque vector
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 16:49
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:01
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug_reg = S2RR2_gravloadJ_reg2_slag_vp(qJ, g, pkin)
 %% Coder Information
@@ -33,7 +33,7 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
   'S2RR2_gravloadJ_reg2_slag_vp: pkin has to be [1x1] (double)');
 
 %% Symbolic Calculation
-% From joint_gravload_fixb_regressor_matlab.m
+% From gravload_joint_fixb_regressor_matlab.m
 t3 = sin(qJ(1));
 t5 = cos(qJ(1));
 t1 = g(1) * t5 - g(3) * t3;

@@ -23,11 +23,11 @@
 % Mq [4x4]
 %   inertia matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:51
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:32
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Mq = S4RPRR1_inertiaJ_slag_vp1(qJ, ...
   pkin, m, rSges, Icges)
@@ -38,7 +38,7 @@ assert(isreal(qJ) && all(size(qJ) == [4 1]), ...
   'S4RPRR1_inertiaJ_slag_vp1: qJ has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [7 1]), ...
   'S4RPRR1_inertiaJ_slag_vp1: pkin has to be [7x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RPRR1_inertiaJ_slag_vp1: m has to be [5x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [5,3]), ...
   'S4RPRR1_inertiaJ_slag_vp1: rSges has to be [5x3] (double)');
@@ -48,8 +48,8 @@ assert(isreal(Icges) && all(size(Icges) == [5 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_floatb_twist_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:50:29
-% EndTime: 2018-11-14 13:50:29
+% StartTime: 2019-03-08 18:31:39
+% EndTime: 2019-03-08 18:31:39
 % DurationCPUTime: 0.10s
 % Computational Cost: add. (271->48), mult. (160->55), div. (0->0), fcn. (94->8), ass. (0->31)
 t29 = sin(qJ(1));

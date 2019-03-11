@@ -25,11 +25,11 @@
 % Cq [4x4]
 %   matrix of coriolis and centrifugal joint torques
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:45
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:25
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Cq = S4PRRR1_coriolismatJ_fixb_slag_vp2(qJ, qJD, ...
   pkin, m, mrSges, Ifges)
@@ -42,7 +42,7 @@ assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
   'S4PRRR1_coriolismatJ_fixb_slag_vp2: qJD has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [7 1]), ...
   'S4PRRR1_coriolismatJ_fixb_slag_vp2: pkin has to be [7x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4PRRR1_coriolismatJ_fixb_slag_vp2: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4PRRR1_coriolismatJ_fixb_slag_vp2: mrSges has to be [5x3] (double)');
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:44:28
-% EndTime: 2018-11-14 13:44:28
-% DurationCPUTime: 0.11s
+% StartTime: 2019-03-08 18:25:15
+% EndTime: 2019-03-08 18:25:15
+% DurationCPUTime: 0.09s
 % Computational Cost: add. (214->32), mult. (554->51), div. (0->0), fcn. (354->4), ass. (0->31)
 t39 = -pkin(3) / 0.2e1;
 t25 = cos(qJ(3));
@@ -81,10 +81,10 @@ t32 = t4 * qJD(2);
 t31 = t4 * qJD(4);
 t30 = t24 * t39 - t13 / 0.2e1;
 t29 = -t10 / 0.2e1 + t36 * t39;
-t1 = -t15 / 0.2e1 + (t16 / 0.2e1 + t30) * mrSges(5,2) + t29;
 t18 = (t24 * mrSges(5,2) + t36) * pkin(3);
-t28 = -t1 * qJD(2) + t18 * qJD(3);
+t2 = -t15 / 0.2e1 + (t16 / 0.2e1 + t30) * mrSges(5,2) + t29;
+t28 = -t2 * qJD(2) + t18 * qJD(3);
 t17 = t18 * qJD(4);
-t2 = -t37 / 0.2e1 + t15 / 0.2e1 + t30 * mrSges(5,2) + t29;
-t5 = [0, 0, 0, 0; 0, -t3 * qJD(3) - t31, -t33 + (m(5) * (t22 * t16 + t24 * t27) * pkin(3) + t26) * qJD(3) + t2 * qJD(4), t2 * qJD(3) - t31 - t32; 0, t1 * qJD(4) + t33, -t17, -t17 - t28; 0, -t1 * qJD(3) + t32, t28, 0;];
+t1 = t15 / 0.2e1 - t37 / 0.2e1 + t30 * mrSges(5,2) + t29;
+t5 = [0, 0, 0, 0; 0, -t3 * qJD(3) - t31, -t33 + (m(5) * (t22 * t16 + t24 * t27) * pkin(3) + t26) * qJD(3) + t1 * qJD(4), t1 * qJD(3) - t31 - t32; 0, t2 * qJD(4) + t33, -t17, -t17 - t28; 0, -t2 * qJD(3) + t32, t28, 0;];
 Cq  = t5;

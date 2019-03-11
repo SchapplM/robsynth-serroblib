@@ -15,11 +15,11 @@
 % T_reg [1x(3*10)]
 %   minimal parameter regressor of kinetic energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:16
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:08
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function T_reg = S3RRR1_energykin_fixb_reg2_slag_vp(qJ, qJD, pkin)
 %% Coder Information
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:15:59
-% EndTime: 2018-11-14 10:15:59
-% DurationCPUTime: 0.07s
+% StartTime: 2019-03-08 18:08:07
+% EndTime: 2019-03-08 18:08:07
+% DurationCPUTime: 0.06s
 % Computational Cost: add. (25->9), mult. (58->29), div. (0->0), fcn. (20->4), ass. (0->14)
 t14 = pkin(1) * qJD(1);
 t5 = qJD(1) + qJD(2);

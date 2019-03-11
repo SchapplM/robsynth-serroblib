@@ -29,11 +29,11 @@
 % tau [4x1]
 %   joint torques of inverse dynamics (contains inertial, gravitational coriolis and centrifugal forces)
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:48
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:28
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tau = S4RPPR2_invdynJ_fixb_slag_vp1(qJ, qJD, qJDD, g, ...
   pkin, m, rSges, Icges)
@@ -50,7 +50,7 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S4RPPR2_invdynJ_fixb_slag_vp1: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
   'S4RPPR2_invdynJ_fixb_slag_vp1: pkin has to be [6x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RPPR2_invdynJ_fixb_slag_vp1: m has to be [5x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [5,3]), ...
   'S4RPPR2_invdynJ_fixb_slag_vp1: rSges has to be [5x3] (double)');
@@ -60,9 +60,9 @@ assert(isreal(Icges) && all(size(Icges) == [5 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:47:26
-% EndTime: 2018-11-14 13:47:27
-% DurationCPUTime: 1.06s
+% StartTime: 2019-03-08 18:28:26
+% EndTime: 2019-03-08 18:28:28
+% DurationCPUTime: 0.98s
 % Computational Cost: add. (1001->159), mult. (1541->174), div. (0->0), fcn. (1142->6), ass. (0->90)
 t114 = qJD(1) * qJD(2);
 t93 = sin(qJ(1));
@@ -103,7 +103,7 @@ t9 = rSges(5,1) * t19 - rSges(5,2) * t20;
 t90 = qJDD(1) - qJDD(4);
 t1 = t90 * t127 - t91 * t9 + t105 * qJDD(1) + (-t31 * qJD(1) - t41) * qJD(1) + t102;
 t146 = -g(1) + t1;
-t10 = rSges(5,1) * t20 + rSges(5,2) * t19;
+t10 = rSges(5,1) * t20 + t19 * rSges(5,2);
 t117 = qJD(1) * t93;
 t21 = -rSges(5,1) * t97 - rSges(5,2) * t139;
 t112 = t92 * t116;

@@ -19,11 +19,11 @@
 % tau_reg [4x(4*10)]
 %   inertial parameter regressor of inverse dynamics joint torque vector
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:47
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:27
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tau_reg = S4RPPR1_invdynJ_fixb_reg2_slag_vp(qJ, qJD, qJDD, g, pkin)
 %% Coder Information
@@ -43,9 +43,9 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From invdyn_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:46:48
-% EndTime: 2018-11-14 13:46:48
-% DurationCPUTime: 0.21s
+% StartTime: 2019-03-08 18:27:33
+% EndTime: 2019-03-08 18:27:33
+% DurationCPUTime: 0.20s
 % Computational Cost: add. (336->74), mult. (463->88), div. (0->0), fcn. (239->8), ass. (0->46)
 t40 = cos(pkin(6));
 t29 = -t40 * pkin(1) - pkin(2);

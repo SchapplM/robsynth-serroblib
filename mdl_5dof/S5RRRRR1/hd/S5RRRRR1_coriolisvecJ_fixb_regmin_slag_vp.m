@@ -12,14 +12,14 @@
 %   pkin=[a2,a3,a4,a5,d1,d5]';
 % 
 % Output:
-% taug_reg [5x31]
+% tauc_reg [5x31]
 %   minimal parameter regressor of coriolis joint torque vector
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 14:53
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:38
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tauc_reg = S5RRRRR1_coriolisvecJ_fixb_regmin_slag_vp(qJ, qJD, ...
   pkin)
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-16 14:52:09
-% EndTime: 2018-11-16 14:52:16
-% DurationCPUTime: 1.93s
+% StartTime: 2019-03-08 18:37:46
+% EndTime: 2019-03-08 18:37:52
+% DurationCPUTime: 1.87s
 % Computational Cost: add. (2872->223), mult. (7498->333), div. (0->0), fcn. (6176->8), ass. (0->139)
 t106 = cos(qJ(5));
 t157 = qJD(5) * t106;
@@ -178,5 +178,5 @@ t31 = -t79 * t98 + t114;
 t30 = -t78 * t98 + t55;
 t6 = t22 * pkin(4) - t21 * pkin(6) + t41;
 t5 = t106 * t6;
-t7 = [0, 0, 0, 0.2e1 * t109 * t144, 0.2e1 * t168 * t156, -t110 * t109, t110 * t105, 0, t105 * t137, t109 * t137, -t124 * t55 - t61 * t79, -t114 * t124 + t55 * t80 + t61 * t78 - t79 * t62, t61 * t98, t62 * t98, 0, t78 * t152 - t86 * t62 + (-qJD(3) * t123 + (t80 * t186 - t123) * qJD(2)) * qJD(1), 0.2e1 * t152 * t79 + t55 * t94 + t61 * t86, t127 * t25 + t21 * t60, -t127 * t26 - t21 * t59 + t25 * t50 - t185, t25 * t96, -t26 * t96, 0, t22 * t70 + t26 * t65 + t41 * t59 - t50 * t52, t127 * t52 + t21 * t70 + t25 * t65 + t41 * t60, -t36 * t149 + (t11 * t60 + t25 * t36) * t106 (-t102 * t36 - t106 * t34) * t25 + (-t9 - t106 * t12 + (t102 * t34 - t106 * t36) * qJD(5)) * t60, t129 * t106 + t11 * t59 + t149 * t163 + t26 * t36, -t129 * t102 - t12 * t59 - t26 * t34 + t60 * t42, -t163 * t26 + t22 * t59, -t128 * t26 + t5 * t59 + ((-t59 * t64 + t181) * qJD(5) + t130) * t106 + t191 * t102, -t17 * t26 + t191 * t106 + (-(-qJD(5) * t64 + t6) * t59 - qJD(5) * t181 - t130) * t102; 0, 0, 0, -t105 * t164, -t168 * t111, 0, 0, 0, t111 * pkin(1) * t105, pkin(1) * t164, t178, t38, t30, t31, 0, t177 + (t104 * t136 - t78 * t162) * pkin(2), -t179 + (t108 * t136 - t79 * t162) * pkin(2), -t182, t15, t13, t14, 0, t50 * t68 - t54 * t96 + t112, -t127 * t68 - t53 * t96 + t198, t4, t1, t3, t2, t184, t12 * t73 + t34 * t54 + (t141 * t163 - t40) * t106 + t121 * t102 + t145, t106 * t121 + t11 * t73 - t141 * t195 + t36 * t54 + t133; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t178, t38, t30, t31, 0, t104 * t131 + t177, t108 * t131 - t179, -t182, t15, t13, t14, 0, t75 * t96 + (-t96 * t160 - t50 * t79) * pkin(3) + t112, t127 * t188 - t183 + t76 * t96 + (-t134 + (-pkin(3) * t96 - t82) * qJD(4)) * t107 + t174, t4, t1, t3, t2, t184, t92 * t12 + t132 * t34 + (t140 * t163 - t40) * t106 + t117 * t102 + t145, t106 * t117 + t92 * t11 + t132 * t36 - t140 * t195 + t133; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t182, t15, t13, t14, 0, t67 * t96 + t112, t66 * t96 + t198, t4, t1, t3, t2, t184, -pkin(4) * t12 - t40 * t106 + (-t102 * t66 + t106 * t29) * t163 - t67 * t34 - t102 * t180 - t176 * pkin(6) + t145, -pkin(4) * t11 - (t102 * t29 + t106 * t66) * t163 - t67 * t36 - t63 * t196 + (-t158 * t163 - t20) * pkin(6) + t133; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t36 * t34, -t34 ^ 2 + t36 ^ 2, -t163 * t34 + t11, -t163 * t36 - t12, t22, -t102 * t39 - t197 * t17 - t36 * t63 + t5, -t102 * t6 - t106 * t39 + t197 * t128 + t34 * t63;];
+t7 = [0, 0, 0, 0.2e1 * t109 * t144, 0.2e1 * t168 * t156, -t110 * t109, t110 * t105, 0, t105 * t137, t109 * t137, -t124 * t55 - t61 * t79, -t114 * t124 + t55 * t80 + t61 * t78 - t79 * t62, t61 * t98, t62 * t98, 0, t78 * t152 - t86 * t62 + (-qJD(3) * t123 + (t80 * t186 - t123) * qJD(2)) * qJD(1), 0.2e1 * t152 * t79 + t55 * t94 + t61 * t86, t127 * t25 + t21 * t60, -t127 * t26 - t21 * t59 + t25 * t50 - t185, t25 * t96, -t26 * t96, 0, t22 * t70 + t26 * t65 + t41 * t59 - t50 * t52, t127 * t52 + t21 * t70 + t25 * t65 + t41 * t60, -t36 * t149 + (t11 * t60 + t25 * t36) * t106 (-t102 * t36 - t106 * t34) * t25 + (-t9 - t106 * t12 + (t102 * t34 - t106 * t36) * qJD(5)) * t60, t106 * t129 + t11 * t59 + t149 * t163 + t26 * t36, -t102 * t129 - t12 * t59 - t26 * t34 + t42 * t60, -t163 * t26 + t22 * t59, -t128 * t26 + t5 * t59 + ((-t59 * t64 + t181) * qJD(5) + t130) * t106 + t191 * t102, -t17 * t26 + t191 * t106 + (-(-qJD(5) * t64 + t6) * t59 - qJD(5) * t181 - t130) * t102; 0, 0, 0, -t105 * t164, -t168 * t111, 0, 0, 0, t111 * pkin(1) * t105, pkin(1) * t164, t178, t38, t30, t31, 0, t177 + (t104 * t136 - t162 * t78) * pkin(2), -t179 + (t108 * t136 - t162 * t79) * pkin(2), -t182, t15, t13, t14, 0, t50 * t68 - t54 * t96 + t112, -t127 * t68 - t53 * t96 + t198, t4, t1, t3, t2, t184, t12 * t73 + t34 * t54 + (t141 * t163 - t40) * t106 + t121 * t102 + t145, t106 * t121 + t11 * t73 - t141 * t195 + t36 * t54 + t133; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t178, t38, t30, t31, 0, t104 * t131 + t177, t108 * t131 - t179, -t182, t15, t13, t14, 0, t75 * t96 + (-t160 * t96 - t50 * t79) * pkin(3) + t112, t127 * t188 - t183 + t76 * t96 + (-t134 + (-pkin(3) * t96 - t82) * qJD(4)) * t107 + t174, t4, t1, t3, t2, t184, t92 * t12 + t132 * t34 + (t140 * t163 - t40) * t106 + t117 * t102 + t145, t106 * t117 + t92 * t11 + t132 * t36 - t140 * t195 + t133; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t182, t15, t13, t14, 0, t67 * t96 + t112, t66 * t96 + t198, t4, t1, t3, t2, t184, -pkin(4) * t12 - t40 * t106 + (-t102 * t66 + t106 * t29) * t163 - t67 * t34 - t102 * t180 - t176 * pkin(6) + t145, -pkin(4) * t11 - (t102 * t29 + t106 * t66) * t163 - t67 * t36 - t63 * t196 + (-t158 * t163 - t20) * pkin(6) + t133; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t36 * t34, -t34 ^ 2 + t36 ^ 2, -t163 * t34 + t11, -t163 * t36 - t12, t22, -t102 * t39 - t197 * t17 - t36 * t63 + t5, -t102 * t6 - t106 * t39 + t197 * t128 + t34 * t63;];
 tauc_reg  = t7;

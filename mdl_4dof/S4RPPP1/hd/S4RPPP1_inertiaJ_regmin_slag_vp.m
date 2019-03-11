@@ -14,11 +14,11 @@
 %   minimal parameter regressor of joint inertia matrix
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:46
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:26
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function MM_reg = S4RPPP1_inertiaJ_regmin_slag_vp(qJ, pkin)
 %% Coder Information
@@ -38,7 +38,7 @@ t23 = pkin(1) * t17;
 t18 = cos(pkin(4));
 t22 = pkin(1) * t18;
 t15 = sin(pkin(6));
-t12 = t15 * t16;
+t12 = t16 * t15;
 t13 = t16 * t17;
 t21 = qJ(2) * t16;
 t8 = t15 * t22 + t17 * t21;

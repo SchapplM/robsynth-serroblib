@@ -25,11 +25,11 @@
 % T [1x1]
 %   kinetic energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:51
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:32
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function T = S4RPRR1_energykin_fixb_slag_vp2(qJ, qJD, ...
   pkin, m, mrSges, Ifges)
@@ -42,7 +42,7 @@ assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
   'S4RPRR1_energykin_fixb_slag_vp2: qJD has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [7 1]), ...
   'S4RPRR1_energykin_fixb_slag_vp2: pkin has to be [7x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RPRR1_energykin_fixb_slag_vp2: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4RPRR1_energykin_fixb_slag_vp2: mrSges has to be [5x3] (double)');
@@ -52,8 +52,8 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_linkframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:50:23
-% EndTime: 2018-11-14 13:50:23
+% StartTime: 2019-03-08 18:31:38
+% EndTime: 2019-03-08 18:31:38
 % DurationCPUTime: 0.07s
 % Computational Cost: add. (63->26), mult. (147->44), div. (0->0), fcn. (60->6), ass. (0->18)
 t68 = m(3) / 0.2e1;
@@ -73,5 +73,5 @@ t53 = t61 * t55 + t63 * t67;
 t51 = t57 * pkin(3) + t52;
 t50 = t60 * t51 + t62 * t53;
 t49 = t62 * t51 - t60 * t53;
-t1 = t64 * t68 + m(4) * (t52 ^ 2 + t53 ^ 2 + t64) / 0.2e1 + m(5) * (t49 ^ 2 + t50 ^ 2 + t64) / 0.2e1 + (t52 * mrSges(4,1) - t53 * mrSges(4,2) + Ifges(4,3) * t57 / 0.2e1) * t57 + (t49 * mrSges(5,1) - t50 * mrSges(5,2) + Ifges(5,3) * t56 / 0.2e1) * t56 + (Ifges(3,3) / 0.2e1 + Ifges(2,3) / 0.2e1 + (t59 * mrSges(3,1) - t58 * mrSges(3,2) + (t58 ^ 2 + t59 ^ 2) * t68 * pkin(1)) * pkin(1)) * qJD(1) ^ 2;
+t1 = m(5) * (t49 ^ 2 + t50 ^ 2 + t64) / 0.2e1 + t64 * t68 + m(4) * (t52 ^ 2 + t53 ^ 2 + t64) / 0.2e1 + (t52 * mrSges(4,1) - t53 * mrSges(4,2) + Ifges(4,3) * t57 / 0.2e1) * t57 + (t49 * mrSges(5,1) - t50 * mrSges(5,2) + Ifges(5,3) * t56 / 0.2e1) * t56 + (Ifges(3,3) / 0.2e1 + Ifges(2,3) / 0.2e1 + (t59 * mrSges(3,1) - t58 * mrSges(3,2) + (t58 ^ 2 + t59 ^ 2) * t68 * pkin(1)) * pkin(1)) * qJD(1) ^ 2;
 T  = t1;

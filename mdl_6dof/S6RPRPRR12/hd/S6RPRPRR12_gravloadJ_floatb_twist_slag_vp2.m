@@ -21,11 +21,11 @@
 % taug [6x1]
 %   joint torques required to compensate gravitation load
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 16:10
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-09 04:20
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug = S6RPRPRR12_gravloadJ_floatb_twist_slag_vp2(qJ, g, ...
   pkin, m, mrSges)
@@ -38,17 +38,17 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S6RPRPRR12_gravloadJ_floatb_twist_slag_vp2: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
   'S6RPRPRR12_gravloadJ_floatb_twist_slag_vp2: pkin has to be [9x1] (double)');
-assert( isreal(m) && all(size(m) == [7 1]), ...
+assert(isreal(m) && all(size(m) == [7 1]), ...
   'S6RPRPRR12_gravloadJ_floatb_twist_slag_vp2: m has to be [7x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [7,3]), ...
   'S6RPRPRR12_gravloadJ_floatb_twist_slag_vp2: mrSges has to be [7x3] (double)');
 
 %% Symbolic Calculation
-% From joint_gravload_floatb_twist_par2_matlab.m
+% From gravload_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-23 16:10:09
-% EndTime: 2018-11-23 16:10:09
-% DurationCPUTime: 0.78s
+% StartTime: 2019-03-09 04:18:18
+% EndTime: 2019-03-09 04:18:20
+% DurationCPUTime: 0.74s
 % Computational Cost: add. (236->104), mult. (421->121), div. (0->0), fcn. (367->8), ass. (0->53)
 t33 = -pkin(9) - pkin(8);
 t77 = mrSges(6,3) + mrSges(7,3);
@@ -78,29 +78,29 @@ t29 = sin(qJ(1));
 t65 = g(1) * t29;
 t71 = -t65 + t64;
 t56 = t32 * t20;
-t5 = t29 * t19 - t31 * t56;
+t5 = t19 * t29 - t31 * t56;
 t57 = t32 * t19;
-t6 = -t29 * t20 - t31 * t57;
-t68 = -t5 * mrSges(7,1) + t6 * mrSges(7,2);
+t6 = -t20 * t29 - t31 * t57;
+t68 = -mrSges(7,1) * t5 + mrSges(7,2) * t6;
 t58 = t29 * t31;
 t7 = -t20 * t58 - t57;
 t8 = -t19 * t58 + t56;
-t67 = t7 * mrSges(7,1) - t8 * mrSges(7,2);
+t67 = mrSges(7,1) * t7 - mrSges(7,2) * t8;
 t63 = g(3) * t28;
 t62 = t28 * pkin(3);
 t60 = mrSges(7,2) * t19;
 t55 = t32 * t27;
 t54 = t32 * t30;
-t51 = t32 * pkin(1) + t29 * qJ(2);
+t51 = pkin(1) * t32 + qJ(2) * t29;
 t50 = qJ(4) * t28;
-t48 = t32 * pkin(7) + t51;
+t48 = pkin(7) * t32 + t51;
 t43 = mrSges(4,1) * t31 - mrSges(4,2) * t28;
 t39 = -t31 * mrSges(5,2) + t28 * mrSges(5,3);
-t38 = -t29 * t27 + t31 * t54;
+t38 = -t27 * t29 + t31 * t54;
 t11 = -t30 * t58 - t55;
 t23 = t32 * qJ(2);
 t13 = t28 * t20 * mrSges(7,1);
 t12 = -t27 * t58 + t54;
 t10 = -t29 * t30 - t31 * t55;
-t1 = [(-m(3) * t51 - m(4) * t48 - t12 * mrSges(6,1) - t8 * mrSges(7,1) - t11 * mrSges(6,2) - t7 * mrSges(7,2) - t49 * (t29 * t62 + t48) - t74 * t32 + t75 * t29) * g(2) + (-t10 * mrSges(6,1) - t6 * mrSges(7,1) + t38 * mrSges(6,2) - t5 * mrSges(7,2) + t78 * t23 - t49 * (t32 * t62 + t23) + (m(3) * pkin(1) + (-m(4) - t49) * (-pkin(1) - pkin(7)) + t74) * t29 + t75 * t32) * g(1), t71 * (t49 - t78) -t43 * t65 + (-t49 * (pkin(3) * t58 + t29 * t50) + (t73 * t28 + t82 * t31 - t39) * t29) * g(1) + (m(5) * t50 + t39 + t43 + (m(5) * pkin(3) + t72) * t31 + (m(6) * qJ(4) - m(7) * (-qJ(4) - t66) + t76) * t28) * t64 + (m(5) * t62 + t72 * t28 - t49 * t22 + (-mrSges(5,3) + t73) * t31 + t79) * g(3) (-t31 * t71 - t63) * t49 -(mrSges(6,1) * t30 - mrSges(6,2) * t27) * t63 - g(3) * (t13 + (m(7) * t61 - t60) * t28) + (-t10 * mrSges(6,2) + t80 * t38 - t68) * g(2) + (t12 * mrSges(6,2) + t80 * t11 - t67) * g(1), -g(1) * t67 - g(2) * t68 - g(3) * (-t28 * t60 + t13)];
+t1 = [(-m(3) * t51 - m(4) * t48 - t12 * mrSges(6,1) - t8 * mrSges(7,1) - t11 * mrSges(6,2) - t7 * mrSges(7,2) - t49 * (t29 * t62 + t48) - t74 * t32 + t75 * t29) * g(2) + (-t10 * mrSges(6,1) - t6 * mrSges(7,1) + t38 * mrSges(6,2) - t5 * mrSges(7,2) + t78 * t23 - t49 * (t32 * t62 + t23) + (m(3) * pkin(1) + (-m(4) - t49) * (-pkin(1) - pkin(7)) + t74) * t29 + t75 * t32) * g(1), t71 * (t49 - t78) -t43 * t65 + (-t49 * (pkin(3) * t58 + t29 * t50) + (t73 * t28 + t31 * t82 - t39) * t29) * g(1) + (m(5) * t50 + t39 + t43 + (m(5) * pkin(3) + t72) * t31 + (m(6) * qJ(4) - m(7) * (-qJ(4) - t66) + t76) * t28) * t64 + (m(5) * t62 + t72 * t28 - t49 * t22 + (-mrSges(5,3) + t73) * t31 + t79) * g(3) (-t31 * t71 - t63) * t49 -(mrSges(6,1) * t30 - mrSges(6,2) * t27) * t63 - g(3) * (t13 + (m(7) * t61 - t60) * t28) + (-t10 * mrSges(6,2) + t38 * t80 - t68) * g(2) + (t12 * mrSges(6,2) + t11 * t80 - t67) * g(1), -g(1) * t67 - g(2) * t68 - g(3) * (-t28 * t60 + t13)];
 taug  = t1(:);

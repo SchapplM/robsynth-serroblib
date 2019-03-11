@@ -1,4 +1,4 @@
-% Calculate vector of centrifugal and coriolis load on the joints for
+% Calculate vector of centrifugal and Coriolis load on the joints for
 % S4RPPR1
 % Use Code from Maple symbolic Code Generation
 % 
@@ -23,13 +23,13 @@
 % 
 % Output:
 % tauc [4x1]
-%   joint torques required to compensate coriolis and centrifugal load
+%   joint torques required to compensate Coriolis and centrifugal load
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:47
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:27
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tauc = S4RPPR1_coriolisvecJ_fixb_slag_vp1(qJ, qJD, ...
   pkin, m, rSges, Icges)
@@ -42,7 +42,7 @@ assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
   'S4RPPR1_coriolisvecJ_fixb_slag_vp1: qJD has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
   'S4RPPR1_coriolisvecJ_fixb_slag_vp1: pkin has to be [6x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RPPR1_coriolisvecJ_fixb_slag_vp1: m has to be [5x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [5,3]), ...
   'S4RPPR1_coriolisvecJ_fixb_slag_vp1: rSges has to be [5x3] (double)');
@@ -52,8 +52,8 @@ assert(isreal(Icges) && all(size(Icges) == [5 6]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:46:34
-% EndTime: 2018-11-14 13:46:35
+% StartTime: 2019-03-08 18:27:25
+% EndTime: 2019-03-08 18:27:26
 % DurationCPUTime: 0.69s
 % Computational Cost: add. (828->94), mult. (945->103), div. (0->0), fcn. (622->6), ass. (0->62)
 t55 = qJ(1) + pkin(6);
@@ -103,7 +103,7 @@ t71 = t45 - t90;
 t69 = -pkin(3) * t51 - t90;
 t28 = rSges(3,1) * t51 + rSges(3,2) * t52;
 t15 = t54 * t62;
-t16 = -qJD(1) * t73 + qJD(4) * t94 + t56 * t78;
+t16 = -qJD(1) * t73 + t94 * qJD(4) + t56 * t78;
 t6 = rSges(5,1) * t16 + rSges(5,2) * t15;
 t5 = rSges(5,1) * t15 - rSges(5,2) * t16;
 t64 = -rSges(5,1) * t62 - rSges(5,2) * t94;
@@ -111,7 +111,7 @@ t41 = rSges(4,3) * t78;
 t36 = t52 * t77;
 t20 = qJD(1) * t96 - t43;
 t13 = t42 + (-t26 + t72) * qJD(1);
-t10 = -t75 + t36 + (-qJD(1) * t80 - t20) * qJD(1);
+t10 = -t75 + t36 + (-t80 * qJD(1) - t20) * qJD(1);
 t9 = -t76 + qJD(1) * (-rSges(4,1) * t79 + t41) + t83;
 t8 = -t64 * t54 - t100;
 t7 = t99 + t42 + (-t26 + t69) * qJD(1);

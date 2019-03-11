@@ -15,11 +15,11 @@
 % U_reg [1x10]
 %   minimal parameter regressor of Potential energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:47
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:27
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function U_reg = S4RPPR1_energypot_fixb_regmin_slag_vp(qJ, g, ...
   pkin)
@@ -36,8 +36,8 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:46:45
-% EndTime: 2018-11-14 13:46:45
+% StartTime: 2019-03-08 18:27:31
+% EndTime: 2019-03-08 18:27:31
 % DurationCPUTime: 0.05s
 % Computational Cost: add. (36->17), mult. (34->26), div. (0->0), fcn. (32->6), ass. (0->12)
 t64 = g(3) * (qJ(2) + pkin(4));
@@ -51,5 +51,5 @@ t56 = cos(t57);
 t55 = sin(t57);
 t54 = t55 * t61 - t56 * t59;
 t53 = -t55 * t59 - t56 * t61;
-t1 = [0, t63, g(1) * t60 - g(2) * t62, t63 * pkin(1) - t64, -g(1) * t56 - g(2) * t55, -g(1) * t55 + g(2) * t56, -g(1) * (t62 * pkin(1) + t56 * pkin(2) + t55 * qJ(3)) - g(2) * (t60 * pkin(1) + t55 * pkin(2) - t56 * qJ(3)) - t64, 0, g(1) * t53 - g(2) * t54, -g(1) * t54 - g(2) * t53;];
+t1 = [0, t63, g(1) * t60 - g(2) * t62, pkin(1) * t63 - t64, -g(1) * t56 - g(2) * t55, -g(1) * t55 + g(2) * t56, -g(1) * (pkin(1) * t62 + pkin(2) * t56 + qJ(3) * t55) - g(2) * (pkin(1) * t60 + pkin(2) * t55 - qJ(3) * t56) - t64, 0, g(1) * t53 - g(2) * t54, -g(1) * t54 - g(2) * t53;];
 U_reg  = t1;

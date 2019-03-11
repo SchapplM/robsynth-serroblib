@@ -15,11 +15,11 @@
 % cmat_reg [(4*4)x(4*10)]
 %   inertial parameter regressor of coriolis matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 14:01
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:19
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function cmat_reg = S4PRPP2_coriolismatJ_fixb_reg2_slag_vp(qJ, qJD, pkin)
 %% Coder Information
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 14:00:27
-% EndTime: 2018-11-14 14:00:27
-% DurationCPUTime: 0.13s
+% StartTime: 2019-03-08 18:19:05
+% EndTime: 2019-03-08 18:19:05
+% DurationCPUTime: 0.12s
 % Computational Cost: add. (53->14), mult. (110->20), div. (0->0), fcn. (145->4), ass. (0->11)
 t13 = cos(qJ(2));
 t10 = cos(pkin(5));

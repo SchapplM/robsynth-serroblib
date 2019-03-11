@@ -26,8 +26,8 @@
 %   time derivative of inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-01-31 13:16
-% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
+% Datum: 2019-03-08 18:35
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Icges) && all(size(Icges) == [5 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_time_derivative_floatb_twist_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-31 13:16:39
-% EndTime: 2019-01-31 13:16:40
-% DurationCPUTime: 0.18s
+% StartTime: 2019-03-08 18:34:54
+% EndTime: 2019-03-08 18:34:55
+% DurationCPUTime: 0.17s
 % Computational Cost: add. (730->59), mult. (452->82), div. (0->0), fcn. (236->8), ass. (0->51)
 t48 = qJ(1) + qJ(2);
 t43 = pkin(7) + t48;

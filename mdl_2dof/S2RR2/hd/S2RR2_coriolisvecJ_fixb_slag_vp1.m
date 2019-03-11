@@ -1,4 +1,4 @@
-% Calculate vector of centrifugal and coriolis load on the joints for
+% Calculate vector of centrifugal and Coriolis load on the joints for
 % S2RR2
 % Use Code from Maple symbolic Code Generation
 % 
@@ -23,13 +23,13 @@
 % 
 % Output:
 % tauc [2x1]
-%   joint torques required to compensate coriolis and centrifugal load
+%   joint torques required to compensate Coriolis and centrifugal load
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 16:49
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:01
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tauc = S2RR2_coriolisvecJ_fixb_slag_vp1(qJ, qJD, ...
   pkin, m, rSges, Icges)
@@ -42,7 +42,7 @@ assert(isreal(qJD) && all(size(qJD) == [2 1]), ...
   'S2RR2_coriolisvecJ_fixb_slag_vp1: qJD has to be [2x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
   'S2RR2_coriolisvecJ_fixb_slag_vp1: pkin has to be [1x1] (double)');
-assert( isreal(m) && all(size(m) == [3 1]), ...
+assert(isreal(m) && all(size(m) == [3 1]), ...
   'S2RR2_coriolisvecJ_fixb_slag_vp1: m has to be [3x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [3,3]), ...
   'S2RR2_coriolisvecJ_fixb_slag_vp1: rSges has to be [3x3] (double)');
@@ -52,9 +52,9 @@ assert(isreal(Icges) && all(size(Icges) == [3 6]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-16 16:48:45
-% EndTime: 2018-11-16 16:48:47
-% DurationCPUTime: 1.70s
+% StartTime: 2019-03-08 18:00:52
+% EndTime: 2019-03-08 18:00:54
+% DurationCPUTime: 1.63s
 % Computational Cost: add. (1057->177), mult. (2851->261), div. (0->0), fcn. (2266->4), ass. (0->111)
 t85 = cos(qJ(2));
 t80 = Icges(3,4) * t85;
@@ -146,7 +146,7 @@ t54 = t67 * t86;
 t13 = -t153 * t43 + t149;
 t100 = (t13 * t86 + t14 * t84) * qJD(2);
 t15 = -t154 * t41 + t148;
-t16 = t84 * t40 - t172;
+t16 = t40 * t84 - t172;
 t99 = (t15 * t86 + t16 * t84) * qJD(2);
 t17 = (-t45 * t84 + t46 * t86) * qJD(2);
 t93 = -qJD(2) * t156 + (t106 + t39) * qJD(1);

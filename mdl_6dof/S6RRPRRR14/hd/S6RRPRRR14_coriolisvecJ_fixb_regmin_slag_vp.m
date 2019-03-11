@@ -15,11 +15,11 @@
 % tauc_reg [6x35]
 %   minimal parameter regressor of coriolis joint torque vector
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-09 15:13
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tauc_reg = S6RRPRRR14_coriolisvecJ_fixb_regmin_slag_vp(qJ, qJD, ...
   pkin)
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:20:43
-% EndTime: 2019-01-03 10:21:34
-% DurationCPUTime: 15.97s
+% StartTime: 2019-03-09 15:08:39
+% EndTime: 2019-03-09 15:09:21
+% DurationCPUTime: 15.80s
 % Computational Cost: add. (38656->714), mult. (122543->1053), div. (0->0), fcn. (107760->16), ass. (0->339)
 t343 = sin(pkin(14));
 t346 = sin(pkin(6));
@@ -62,7 +62,7 @@ t463 = t352 * t484;
 t434 = t345 * t463;
 t381 = -t296 * t347 + t344 * t434;
 t526 = cos(qJ(4));
-t425 = t510 * t526;
+t425 = t526 * t510;
 t467 = t344 * t526;
 t536 = t345 * (-t343 * t351 + t347 * t425) + t348 * t467;
 t488 = t536 * qJD(4) - t299 * t526 - t351 * t381;
@@ -79,7 +79,7 @@ t468 = pkin(1) * t511;
 t435 = t355 * t468;
 t332 = qJD(1) * t435;
 t455 = -qJ(3) * t348 - pkin(10);
-t415 = t455 * t352;
+t415 = t352 * t455;
 t399 = t346 * t415;
 t282 = qJD(1) * t399 + t332;
 t436 = t352 * t468;
@@ -125,7 +125,7 @@ t379 = t345 * t462 - t348 * t406;
 t357 = -t344 * t379 - t347 * t359;
 t236 = -t296 * t344 - t347 * t434;
 t541 = pkin(12) * t236 + t543;
-t540 = -t487 * pkin(4) + t488 * pkin(12) - t401;
+t540 = -t487 * pkin(4) + pkin(12) * t488 - t401;
 t390 = t406 * t345;
 t304 = t348 * t462 + t390;
 t504 = t343 * t304;

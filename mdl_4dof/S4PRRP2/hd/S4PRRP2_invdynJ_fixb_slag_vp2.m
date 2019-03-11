@@ -29,11 +29,11 @@
 % tau [4x1]
 %   joint torques of inverse dynamics (contains inertial, gravitational coriolis and centrifugal forces)
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 14:03
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:24
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tau = S4PRRP2_invdynJ_fixb_slag_vp2(qJ, qJD, qJDD, g, ...
   pkin, m, mrSges, Ifges)
@@ -50,7 +50,7 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S4PRRP2_invdynJ_fixb_slag_vp2: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
   'S4PRRP2_invdynJ_fixb_slag_vp2: pkin has to be [5x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4PRRP2_invdynJ_fixb_slag_vp2: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4PRRP2_invdynJ_fixb_slag_vp2: mrSges has to be [5x3] (double)');
@@ -60,9 +60,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 14:03:19
-% EndTime: 2018-11-14 14:03:19
-% DurationCPUTime: 0.39s
+% StartTime: 2019-03-08 18:23:59
+% EndTime: 2019-03-08 18:24:00
+% DurationCPUTime: 0.38s
 % Computational Cost: add. (384->90), mult. (753->116), div. (0->0), fcn. (454->6), ass. (0->44)
 t54 = mrSges(4,1) + mrSges(5,1);
 t41 = cos(qJ(2));
@@ -86,7 +86,7 @@ t6 = t15 * qJD(3) + t38 * t20 + t40 * t24;
 t60 = t6 * t38 * pkin(2) + (t40 * t52 - t19) * t16;
 t36 = qJD(2) + qJD(3);
 t57 = m(4) + m(5);
-t59 = t57 * pkin(2) + mrSges(3,1);
+t59 = pkin(2) * t57 + mrSges(3,1);
 t58 = m(5) * pkin(3);
 t11 = t36 * t22;
 t21 = t38 * t41 + t40 * t39;
@@ -107,5 +107,5 @@ t29 = t40 * pkin(2) + pkin(3);
 t18 = t21 * qJD(1);
 t14 = t36 * pkin(3) + t15;
 t12 = t36 * t21;
-t1 = [m(2) * qJDD(1) + (-t39 * qJDD(2) - t42 * t41) * mrSges(3,2) + (t41 * qJDD(2) - t42 * t39) * mrSges(3,1) + m(3) * (t23 * t41 + t24 * t39) + m(4) * (-t15 * t12 + t7 * t22 + t56) + m(5) * (-t14 * t12 + t3 * t22 + t56) + (-t11 * t53 - t12 * t54) * t36 + (-t21 * t53 + t22 * t54) * t35 + (-m(2) - m(3) - t57) * g(2); Ifges(3,3) * qJDD(2) + (-t24 + t45) * mrSges(3,2) + (t23 + t46) * mrSges(3,1) + (t39 * mrSges(3,2) - t34 * t58 - t59 * t41 + t44) * g(2) + (t41 * mrSges(3,2) + t47 + t59 * t39 + (t54 + t58) * t33) * g(1) + (t29 * mrSges(5,1) + (mrSges(4,1) * t40 - t53 * t38) * pkin(2)) * t35 + (t53 * t19 + t54 * t18 + (-t54 * t38 - t53 * t40) * t52) * t36 + t43 + (t3 * t29 + (-pkin(2) * t50 + t18) * t14 + t60) * m(5) + (t15 * t18 + (-t15 * t50 + t40 * t7) * pkin(2) + t60) * m(4); t44 * g(2) + (t54 * t33 + t47) * g(1) + (t35 * mrSges(5,1) + (g(1) * t33 - g(2) * t34 + t3) * m(5)) * pkin(3) + t53 * t15 * t36 + t43 + (-m(5) * (-t14 + t15) + t54 * t36) * t16; (-g(3) + qJDD(4)) * m(5);];
+t1 = [m(2) * qJDD(1) + (-t39 * qJDD(2) - t42 * t41) * mrSges(3,2) + (t41 * qJDD(2) - t42 * t39) * mrSges(3,1) + m(3) * (t23 * t41 + t24 * t39) + m(4) * (-t15 * t12 + t7 * t22 + t56) + m(5) * (-t14 * t12 + t3 * t22 + t56) + (-t11 * t53 - t12 * t54) * t36 + (-t21 * t53 + t22 * t54) * t35 + (-m(2) - m(3) - t57) * g(2); Ifges(3,3) * qJDD(2) + (-t24 + t45) * mrSges(3,2) + (t23 + t46) * mrSges(3,1) + (t39 * mrSges(3,2) - t34 * t58 - t59 * t41 + t44) * g(2) + (t41 * mrSges(3,2) + t47 + t59 * t39 + (t54 + t58) * t33) * g(1) + (t29 * mrSges(5,1) + (mrSges(4,1) * t40 - t38 * t53) * pkin(2)) * t35 + (t53 * t19 + t54 * t18 + (-t38 * t54 - t40 * t53) * t52) * t36 + t43 + (t3 * t29 + (-pkin(2) * t50 + t18) * t14 + t60) * m(5) + (t15 * t18 + (-t15 * t50 + t40 * t7) * pkin(2) + t60) * m(4); t44 * g(2) + (t54 * t33 + t47) * g(1) + (t35 * mrSges(5,1) + (g(1) * t33 - g(2) * t34 + t3) * m(5)) * pkin(3) + t53 * t15 * t36 + t43 + (-m(5) * (-t14 + t15) + t54 * t36) * t16; (-g(3) + qJDD(4)) * m(5);];
 tau  = t1;

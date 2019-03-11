@@ -15,11 +15,11 @@
 % taug_reg [4x10]
 %   minimal parameter regressor of gravitation joint torque vector
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 14:02
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:20
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug_reg = S4PRPP3_gravloadJ_regmin_slag_vp(qJ, g, ...
   pkin)
@@ -34,12 +34,12 @@ assert(isreal(pkin) && all(size(pkin) == [4 1]), ...
   'S4PRPP3_gravloadJ_regmin_slag_vp: pkin has to be [4x1] (double)');
 
 %% Symbolic Calculation
-% From joint_gravload_fixb_regressor_minpar_matlab.m
+% From gravload_joint_fixb_regressor_minpar_matlab.m
 t7 = sin(qJ(2));
 t8 = cos(qJ(2));
 t9 = t8 * pkin(2) + t7 * qJ(3);
 t4 = t8 * qJ(3);
 t2 = g(1) * t8 + g(2) * t7;
 t1 = g(1) * t7 - g(2) * t8;
-t3 = [-g(2), 0, 0, 0, 0, 0, -g(2), 0, 0, -g(2); 0, 0, t1, t2, t1, -t2, -g(1) * (-t7 * pkin(2) + t4) - g(2) * t9, t1, -t2, -g(1) * (t4 + (-pkin(2) - pkin(3)) * t7) - g(2) * (t8 * pkin(3) + t9); 0, 0, 0, 0, 0, 0, -t1, 0, 0, -t1; 0, 0, 0, 0, 0, 0, 0, 0, 0, g(3);];
+t3 = [-g(2), 0, 0, 0, 0, 0, -g(2), 0, 0, -g(2); 0, 0, t1, t2, t1, -t2, -g(1) * (-pkin(2) * t7 + t4) - g(2) * t9, t1, -t2, -g(1) * (t4 + (-pkin(2) - pkin(3)) * t7) - g(2) * (pkin(3) * t8 + t9); 0, 0, 0, 0, 0, 0, -t1, 0, 0, -t1; 0, 0, 0, 0, 0, 0, 0, 0, 0, g(3);];
 taug_reg  = t3;

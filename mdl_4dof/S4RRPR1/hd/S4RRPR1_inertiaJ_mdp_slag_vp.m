@@ -17,8 +17,8 @@
 %   inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-01-31 13:16
-% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
+% Datum: 2019-03-08 18:35
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -31,14 +31,14 @@ assert(isreal(qJ) && all(size(qJ) == [4 1]), ...
 assert(isreal(pkin) && all(size(pkin) == [7 1]), ...
   'S4RRPR1_inertiaJ_mdp_slag_vp: pkin has to be [7x1] (double)');
 assert(isreal(MDP) && all(size(MDP) == [10 1]), ...
-  'S4RRPR1_inertiaJ_mdp_slag_vp: MDP has to be [10x6] (double)'); 
+  'S4RRPR1_inertiaJ_mdp_slag_vp: MDP has to be [10x1] (double)'); 
 
 %% Symbolic Calculation
 % From inertia_joint_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-31 13:16:46
-% EndTime: 2019-01-31 13:16:46
-% DurationCPUTime: 0.06s
+% StartTime: 2019-03-08 18:35:01
+% EndTime: 2019-03-08 18:35:01
+% DurationCPUTime: 0.05s
 % Computational Cost: add. (82->34), mult. (143->45), div. (0->0), fcn. (108->6), ass. (0->24)
 t39 = sin(qJ(2));
 t51 = pkin(1) * t39;

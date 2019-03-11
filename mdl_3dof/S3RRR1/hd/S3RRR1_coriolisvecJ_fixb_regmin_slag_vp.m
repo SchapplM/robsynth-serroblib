@@ -12,14 +12,14 @@
 %   pkin=[a2,a3,d1,d2,d3]';
 % 
 % Output:
-% taug_reg [3x9]
+% tauc_reg [3x9]
 %   minimal parameter regressor of coriolis joint torque vector
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:16
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:08
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tauc_reg = S3RRR1_coriolisvecJ_fixb_regmin_slag_vp(qJ, qJD, ...
   pkin)
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:15:59
-% EndTime: 2018-11-14 10:15:59
-% DurationCPUTime: 0.15s
+% StartTime: 2019-03-08 18:08:08
+% EndTime: 2019-03-08 18:08:08
+% DurationCPUTime: 0.13s
 % Computational Cost: add. (78->30), mult. (188->50), div. (0->0), fcn. (90->4), ass. (0->26)
 t21 = qJD(2) + qJD(3);
 t7 = sin(qJ(3));

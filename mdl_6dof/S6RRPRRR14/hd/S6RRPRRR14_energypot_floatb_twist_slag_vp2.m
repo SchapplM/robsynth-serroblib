@@ -13,7 +13,7 @@
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,a6,alpha2,alpha3,alpha4,d1,d2,d4,d5,d6,theta3]';
 % m_mdh [7x1]
-%   mass of all robot links (leg links until cut joint, platform)
+%   mass of all robot links (including the base)
 % mrSges [7x3]
 %  first moment of all robot links (mass times center of mass in body frames)
 %  rows: links of the robot (starting with base)
@@ -23,11 +23,11 @@
 % U [1x1]
 %   Potential energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-09 15:13
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function U = S6RRPRRR14_energypot_floatb_twist_slag_vp2(qJ, r_base, g, ...
   pkin, m, mrSges)
@@ -50,9 +50,9 @@ assert(isreal(mrSges) && all(size(mrSges) == [7,3]), ...
 %% Symbolic Calculation
 % From energy_potential_floatb_twist_worldframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:07:42
-% EndTime: 2019-01-03 10:07:43
-% DurationCPUTime: 0.94s
+% StartTime: 2019-03-09 14:57:10
+% EndTime: 2019-03-09 14:57:11
+% DurationCPUTime: 0.93s
 % Computational Cost: add. (972->128), mult. (2579->166), div. (0->0), fcn. (3324->18), ass. (0->69)
 t58 = sin(pkin(7));
 t59 = sin(pkin(6));
@@ -95,7 +95,7 @@ t112 = -m(7) * pkin(13) + mrSges(6,2) - mrSges(7,3);
 t64 = sin(qJ(6));
 t69 = cos(qJ(6));
 t111 = -t64 * mrSges(7,1) - t69 * mrSges(7,2) + mrSges(5,2) - mrSges(6,3);
-t110 = -m(7) * pkin(5) - mrSges(7,1) * t69 + mrSges(7,2) * t64 - mrSges(6,1);
+t110 = -m(7) * pkin(5) - t69 * mrSges(7,1) + t64 * mrSges(7,2) - mrSges(6,1);
 t109 = cos(qJ(4));
 t100 = t59 * t67;
 t91 = pkin(9) + r_base(3);
@@ -112,7 +112,7 @@ t37 = t60 * t100 + (t59 * t96 + t101) * t56;
 t78 = t37 * pkin(3) + t23 * pkin(11) + t80;
 t77 = t46 * pkin(2) + qJ(3) * t38 + t82;
 t27 = t46 * t60 + t56 * t84;
-t74 = t27 * pkin(3) + t18 * pkin(11) + t77;
+t74 = t27 * pkin(3) + pkin(11) * t18 + t77;
 t70 = cos(qJ(5));
 t66 = sin(qJ(4));
 t65 = sin(qJ(5));

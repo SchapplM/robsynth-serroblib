@@ -14,11 +14,11 @@
 %   minimal parameter regressor of joint inertia matrix
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:40
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:16
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function MM_reg = S4PPRR1_inertiaJ_regmin_slag_vp(qJ, pkin)
 %% Coder Information
@@ -37,7 +37,7 @@ t5 = cos(qJ(4));
 t7 = t5 * pkin(3);
 t6 = cos(qJ(3));
 t4 = sin(qJ(3));
-t2 = -t3 * t6 - t5 * t4;
+t2 = -t3 * t6 - t4 * t5;
 t1 = -t3 * t4 + t5 * t6;
 t9 = [1, 1, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0; 0, 1, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, t6, -t4, 0, t1, t2; 0, 0, 1, 0, 0, 1, 0.2e1 * t7, -0.2e1 * t8; 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, t1, t2; 0, 0, 0, 0, 0, 1, t7, -t8; 0, 0, 0, 0, 0, 1, 0, 0;];
 MM_reg  = t9;

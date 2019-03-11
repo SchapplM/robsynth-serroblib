@@ -25,11 +25,11 @@
 % T [1x1]
 %   kinetic energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:43
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:21
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function T = S4PRPR1_energykin_fixb_slag_vp2(qJ, qJD, ...
   pkin, m, mrSges, Ifges)
@@ -42,7 +42,7 @@ assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
   'S4PRPR1_energykin_fixb_slag_vp2: qJD has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
   'S4PRPR1_energykin_fixb_slag_vp2: pkin has to be [6x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4PRPR1_energykin_fixb_slag_vp2: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4PRPR1_energykin_fixb_slag_vp2: mrSges has to be [5x3] (double)');
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_linkframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:42:11
-% EndTime: 2018-11-14 13:42:11
-% DurationCPUTime: 0.04s
+% StartTime: 2019-03-08 18:20:51
+% EndTime: 2019-03-08 18:20:51
+% DurationCPUTime: 0.03s
 % Computational Cost: add. (31->20), mult. (58->29), div. (0->0), fcn. (8->2), ass. (0->11)
 t56 = m(4) / 0.2e1;
 t54 = qJD(2) * qJ(3);

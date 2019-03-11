@@ -26,8 +26,8 @@
 %   matrix of coriolis and centrifugal joint torques
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-01-31 13:16
-% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
+% Datum: 2019-03-08 18:35
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,48 +52,48 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-31 13:16:36
-% EndTime: 2019-01-31 13:16:36
-% DurationCPUTime: 0.19s
+% StartTime: 2019-03-08 18:34:55
+% EndTime: 2019-03-08 18:34:55
+% DurationCPUTime: 0.16s
 % Computational Cost: add. (720->46), mult. (1504->71), div. (0->0), fcn. (1230->6), ass. (0->40)
-t32 = sin(pkin(7));
-t37 = cos(qJ(2));
-t33 = cos(pkin(7));
-t35 = sin(qJ(2));
-t50 = t33 * t35;
-t28 = (-t32 * t37 - t50) * pkin(1);
-t51 = t32 * t35;
-t29 = (t33 * t37 - t51) * pkin(1);
-t34 = sin(qJ(4));
-t36 = cos(qJ(4));
-t41 = t36 * t28 - t34 * t29;
-t18 = t41 * mrSges(5,1);
-t19 = t34 * t28 + t36 * t29;
-t52 = t19 * mrSges(5,2);
-t55 = t28 * mrSges(4,1) - t29 * mrSges(4,2) - (t35 * mrSges(3,1) + t37 * mrSges(3,2)) * pkin(1) + t18 - t52;
-t53 = pkin(2) * t32;
-t31 = t37 * pkin(1) + pkin(2);
-t39 = -pkin(1) * t51 + t33 * t31;
-t23 = pkin(3) + t39;
-t25 = pkin(1) * t50 + t32 * t31;
-t14 = t36 * t23 - t34 * t25;
-t15 = t34 * t23 + t36 * t25;
-t3 = -m(4) * (t25 * t29 + t39 * t28) - m(5) * (t14 * t41 + t15 * t19) - t55;
-t47 = t3 * qJD(1);
-t13 = t15 * mrSges(5,1);
-t4 = t14 * mrSges(5,2) + t13;
-t46 = t4 * qJD(1);
-t45 = t4 * qJD(4);
-t30 = t33 * pkin(2) + pkin(3);
-t26 = t34 * t30 + t36 * t53;
-t22 = t26 * mrSges(5,1);
-t24 = t36 * t30 - t34 * t53;
-t8 = t24 * mrSges(5,2) + t22;
-t44 = t8 * qJD(4);
-t43 = -t13 / 0.2e1 - t22 / 0.2e1;
-t42 = -t14 / 0.2e1 - t24 / 0.2e1;
-t1 = -t18 / 0.2e1 + (t19 / 0.2e1 + t42) * mrSges(5,2) + t43;
-t40 = -t1 * qJD(1) + t8 * qJD(2);
-t2 = -t52 / 0.2e1 + t18 / 0.2e1 + t42 * mrSges(5,2) + t43;
-t5 = [-t3 * qJD(2) - t45, t2 * qJD(4) - t47 + (m(5) * (t26 * t19 + t24 * t41) + m(4) * (t28 * t33 + t29 * t32) * pkin(2) + t55) * qJD(2), 0, t2 * qJD(2) - t45 - t46; t1 * qJD(4) + t47, -t44, 0, -t40 - t44; 0, 0, 0, 0; -t1 * qJD(2) + t46, t40, 0, 0;];
+t30 = sin(pkin(7));
+t35 = cos(qJ(2));
+t31 = cos(pkin(7));
+t33 = sin(qJ(2));
+t48 = t31 * t33;
+t26 = (-t30 * t35 - t48) * pkin(1);
+t49 = t30 * t33;
+t27 = (t31 * t35 - t49) * pkin(1);
+t32 = sin(qJ(4));
+t34 = cos(qJ(4));
+t39 = t34 * t26 - t32 * t27;
+t16 = t39 * mrSges(5,1);
+t17 = t32 * t26 + t34 * t27;
+t50 = t17 * mrSges(5,2);
+t54 = t26 * mrSges(4,1) - t27 * mrSges(4,2) - (t33 * mrSges(3,1) + t35 * mrSges(3,2)) * pkin(1) + t16 - t50;
+t52 = pkin(2) * t30;
+t29 = t35 * pkin(1) + pkin(2);
+t37 = -pkin(1) * t49 + t31 * t29;
+t21 = pkin(3) + t37;
+t23 = pkin(1) * t48 + t30 * t29;
+t13 = t32 * t21 + t34 * t23;
+t51 = t13 * mrSges(5,1);
+t12 = t34 * t21 - t32 * t23;
+t3 = -m(5) * (t12 * t39 + t13 * t17) - m(4) * (t23 * t27 + t37 * t26) - t54;
+t45 = t3 * qJD(1);
+t4 = -t12 * mrSges(5,2) - t51;
+t44 = t4 * qJD(1);
+t43 = t4 * qJD(4);
+t28 = t31 * pkin(2) + pkin(3);
+t24 = t32 * t28 + t34 * t52;
+t20 = t24 * mrSges(5,1);
+t22 = t34 * t28 - t32 * t52;
+t7 = t22 * mrSges(5,2) + t20;
+t42 = t7 * qJD(4);
+t41 = -t22 / 0.2e1 - t12 / 0.2e1;
+t40 = -t20 / 0.2e1 - t51 / 0.2e1;
+t1 = -t16 / 0.2e1 + (t17 / 0.2e1 + t41) * mrSges(5,2) + t40;
+t38 = -t1 * qJD(1) + t7 * qJD(2);
+t2 = -t50 / 0.2e1 + t16 / 0.2e1 + t41 * mrSges(5,2) + t40;
+t5 = [-t3 * qJD(2) + t43, t2 * qJD(4) - t45 + (m(5) * (t24 * t17 + t22 * t39) + m(4) * (t26 * t31 + t27 * t30) * pkin(2) + t54) * qJD(2), 0, t2 * qJD(2) + t43 + t44; t1 * qJD(4) + t45, -t42, 0, -t38 - t42; 0, 0, 0, 0; -t1 * qJD(2) - t44, t38, 0, 0;];
 Cq  = t5;

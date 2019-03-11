@@ -30,8 +30,8 @@
 %   joint torques of inverse dynamics (contains inertial, gravitational coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-01-31 13:16
-% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
+% Datum: 2019-03-08 18:35
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,9 +60,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-31 13:16:35
-% EndTime: 2019-01-31 13:16:36
-% DurationCPUTime: 0.54s
+% StartTime: 2019-03-08 18:34:54
+% EndTime: 2019-03-08 18:34:55
+% DurationCPUTime: 0.50s
 % Computational Cost: add. (748->133), mult. (1380->176), div. (0->0), fcn. (738->14), ass. (0->75)
 t90 = m(4) + m(5);
 t63 = sin(pkin(7));
@@ -138,5 +138,5 @@ t27 = qJD(2) * t74;
 t25 = qJD(2) * t75;
 t5 = -t12 * qJD(4) + t25 * t68 - t27 * t65;
 t4 = t11 * qJD(4) + t25 * t65 + t27 * t68;
-t1 = [(-t12 * t54 - t4 * t55 - t2) * mrSges(5,2) + (-t27 * t61 - t30 * t60 - t15) * mrSges(4,2) + (t11 * t54 + t5 * t55) * mrSges(5,1) + (t25 * t61 + t28 * t60) * mrSges(4,1) + (-t70 * mrSges(2,1) + t67 * mrSges(2,2) - m(4) * t81 - m(5) * (t40 + t81) + t41 * mrSges(5,2) + t73) * g(2) + m(5) * (t11 * t3 + t12 * t2 + t4 * t7 + t5 * t6) + m(4) * (t14 * t28 + t15 * t30 + t17 * t25 + t18 * t27) + t72 + (t67 * mrSges(2,1) + t41 * mrSges(5,1) + t70 * mrSges(2,2) + t42 * mrSges(5,2) + t71) * g(1) + (t90 * t85 + (-t60 * t66 - t61 * t79) * mrSges(3,2) + (-qJD(2) * t61 * t66 + t60 * t69) * mrSges(3,1) + (-g(2) * t70 + t34 * t69 + t35 * t66 + t85) * m(3)) * pkin(1) + Ifges(2,3) * qJDD(1); t72 + (-t31 * t54 + t91 * t55 + t76) * mrSges(5,2) + (-t24 * mrSges(4,1) + t26 * mrSges(4,2) + (mrSges(3,1) * t66 + mrSges(3,2) * t69) * t80) * t61 + (t29 * t54 + t92 * t55 + t86) * mrSges(5,1) + (-t60 * t88 - t15) * mrSges(4,2) + t73 * g(2) + t71 * g(1) + t60 * mrSges(4,1) * t87 + ((-t40 - t48) * g(2) + t2 * t31 + t3 * t29 - t91 * t7 + t92 * t6) * m(5) + ((t14 * t64 + t15 * t63) * pkin(2) - t48 * g(2) - t17 * t24 - t18 * t26) * m(4); t90 * (-g(3) + qJDD(3)); -g(2) * t38 + (t55 * t7 + t86) * mrSges(5,1) + (t55 * t6 + t76) * mrSges(5,2) + t84;];
+t1 = [(-t12 * t54 - t4 * t55 - t2) * mrSges(5,2) + (-t27 * t61 - t30 * t60 - t15) * mrSges(4,2) + (t11 * t54 + t5 * t55) * mrSges(5,1) + (t25 * t61 + t28 * t60) * mrSges(4,1) + t72 + (-t70 * mrSges(2,1) + t67 * mrSges(2,2) - m(4) * t81 - m(5) * (t40 + t81) + t41 * mrSges(5,2) + t73) * g(2) + m(5) * (t11 * t3 + t12 * t2 + t4 * t7 + t5 * t6) + m(4) * (t14 * t28 + t15 * t30 + t17 * t25 + t18 * t27) + (t67 * mrSges(2,1) + t41 * mrSges(5,1) + t70 * mrSges(2,2) + t42 * mrSges(5,2) + t71) * g(1) + Ifges(2,3) * qJDD(1) + (t90 * t85 + (-t60 * t66 - t61 * t79) * mrSges(3,2) + (-qJD(2) * t61 * t66 + t60 * t69) * mrSges(3,1) + (-g(2) * t70 + t34 * t69 + t35 * t66 + t85) * m(3)) * pkin(1); t72 + (-t31 * t54 + t91 * t55 + t76) * mrSges(5,2) + (-t24 * mrSges(4,1) + t26 * mrSges(4,2) + (mrSges(3,1) * t66 + mrSges(3,2) * t69) * t80) * t61 + (t29 * t54 + t92 * t55 + t86) * mrSges(5,1) + (-t60 * t88 - t15) * mrSges(4,2) + t73 * g(2) + t71 * g(1) + t60 * mrSges(4,1) * t87 + ((-t40 - t48) * g(2) + t2 * t31 + t3 * t29 - t91 * t7 + t92 * t6) * m(5) + ((t14 * t64 + t15 * t63) * pkin(2) - t48 * g(2) - t17 * t24 - t18 * t26) * m(4); t90 * (-g(3) + qJDD(3)); -g(2) * t38 + (t55 * t7 + t86) * mrSges(5,1) + (t55 * t6 + t76) * mrSges(5,2) + t84;];
 tau  = t1;

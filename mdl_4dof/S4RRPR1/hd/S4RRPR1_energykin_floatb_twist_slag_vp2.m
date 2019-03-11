@@ -28,8 +28,8 @@
 %   kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-01-31 13:16
-% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
+% Datum: 2019-03-08 18:35
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -56,9 +56,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_floatb_twist_linkframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-31 13:16:33
-% EndTime: 2019-01-31 13:16:33
-% DurationCPUTime: 0.60s
+% StartTime: 2019-03-08 18:34:53
+% EndTime: 2019-03-08 18:34:53
+% DurationCPUTime: 0.53s
 % Computational Cost: add. (1097->108), mult. (1673->158), div. (0->0), fcn. (1264->8), ass. (0->40)
 t36 = V_base(5) * pkin(4) + V_base(1);
 t37 = -V_base(4) * pkin(4) + V_base(2);

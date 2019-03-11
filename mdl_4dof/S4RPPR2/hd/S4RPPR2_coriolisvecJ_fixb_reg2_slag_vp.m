@@ -12,14 +12,14 @@
 %   pkin=[a2,a3,a4,d1,d4,theta3]';
 % 
 % Output:
-% taug_reg [4x(4*10)]
+% tauc_reg [4x(4*10)]
 %   inertial parameter regressor of coriolis joint torque vector
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:48
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:28
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tauc_reg = S4RPPR2_coriolisvecJ_fixb_reg2_slag_vp(qJ, qJD, pkin)
 %% Coder Information
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:47:32
-% EndTime: 2018-11-14 13:47:33
-% DurationCPUTime: 0.20s
+% StartTime: 2019-03-08 18:28:32
+% EndTime: 2019-03-08 18:28:33
+% DurationCPUTime: 0.19s
 % Computational Cost: add. (277->42), mult. (496->68), div. (0->0), fcn. (266->4), ass. (0->37)
 t47 = qJD(1) - qJD(4);
 t26 = -pkin(1) - pkin(2);

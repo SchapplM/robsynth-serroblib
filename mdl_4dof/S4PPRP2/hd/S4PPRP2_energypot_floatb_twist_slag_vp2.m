@@ -23,11 +23,11 @@
 % U [1x1]
 %   Potential energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:58
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:13
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function U = S4PPRP2_energypot_floatb_twist_slag_vp2(qJ, r_base, g, ...
   pkin, m, mrSges)
@@ -42,7 +42,7 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S4PPRP2_energypot_floatb_twist_slag_vp2: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
   'S4PPRP2_energypot_floatb_twist_slag_vp2: pkin has to be [5x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4PPRP2_energypot_floatb_twist_slag_vp2: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4PPRP2_energypot_floatb_twist_slag_vp2: mrSges has to be [5x3] (double)');
@@ -50,9 +50,9 @@ assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
 %% Symbolic Calculation
 % From energy_potential_floatb_twist_worldframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:57:21
-% EndTime: 2018-11-14 13:57:21
-% DurationCPUTime: 0.13s
+% StartTime: 2019-03-08 18:13:14
+% EndTime: 2019-03-08 18:13:14
+% DurationCPUTime: 0.12s
 % Computational Cost: add. (67->39), mult. (50->24), div. (0->0), fcn. (20->4), ass. (0->12)
 t16 = -m(4) - m(5);
 t17 = -m(2) - m(3);

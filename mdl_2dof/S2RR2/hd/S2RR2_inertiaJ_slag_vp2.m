@@ -23,11 +23,11 @@
 % Mq [2x2]
 %   inertia matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 16:49
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:01
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Mq = S2RR2_inertiaJ_slag_vp2(qJ, ...
   pkin, m, mrSges, Ifges)
@@ -38,7 +38,7 @@ assert(isreal(qJ) && all(size(qJ) == [2 1]), ...
   'S2RR2_inertiaJ_slag_vp2: qJ has to be [2x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
   'S2RR2_inertiaJ_slag_vp2: pkin has to be [1x1] (double)');
-assert( isreal(m) && all(size(m) == [3 1]), ...
+assert(isreal(m) && all(size(m) == [3 1]), ...
   'S2RR2_inertiaJ_slag_vp2: m has to be [3x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [3,3]), ...
   'S2RR2_inertiaJ_slag_vp2: mrSges has to be [3x3] (double)');
@@ -48,8 +48,8 @@ assert(isreal(Ifges) && all(size(Ifges) == [3 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-16 16:48:45
-% EndTime: 2018-11-16 16:48:45
+% StartTime: 2019-03-08 18:00:52
+% EndTime: 2019-03-08 18:00:53
 % DurationCPUTime: 0.06s
 % Computational Cost: add. (11->9), mult. (30->16), div. (0->0), fcn. (14->2), ass. (0->4)
 t4 = cos(qJ(2));

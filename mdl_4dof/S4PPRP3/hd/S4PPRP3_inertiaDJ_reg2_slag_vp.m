@@ -16,11 +16,11 @@
 %   inertial parameter regressor of inerta matrix time derivative
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:59
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:14
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function MMD_reg = S4PPRP3_inertiaDJ_reg2_slag_vp(qJ, qJD, pkin)
 %% Coder Information
@@ -36,8 +36,8 @@ assert(isreal(pkin) && all(size(pkin) == [4 1]), ...
 %% Symbolic Calculation
 % From inertiaD_joint_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:58:25
-% EndTime: 2018-11-14 13:58:25
+% StartTime: 2019-03-08 18:14:40
+% EndTime: 2019-03-08 18:14:40
 % DurationCPUTime: 0.08s
 % Computational Cost: add. (8->8), mult. (12->4), div. (0->0), fcn. (10->2), ass. (0->3)
 t1 = sin(qJ(3)) * qJD(3);

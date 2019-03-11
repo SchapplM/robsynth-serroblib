@@ -1,4 +1,4 @@
-% Calculate vector of centrifugal and coriolis load on the joints for
+% Calculate vector of centrifugal and Coriolis load on the joints for
 % S2RR1
 % Use Code from Maple symbolic Code Generation
 % 
@@ -23,13 +23,13 @@
 % 
 % Output:
 % tauc [2x1]
-%   joint torques required to compensate coriolis and centrifugal load
+%   joint torques required to compensate Coriolis and centrifugal load
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 16:44
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:00
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tauc = S2RR1_coriolisvecJ_fixb_slag_vp2(qJ, qJD, ...
   pkin, m, mrSges, Ifges)
@@ -42,7 +42,7 @@ assert(isreal(qJD) && all(size(qJD) == [2 1]), ...
   'S2RR1_coriolisvecJ_fixb_slag_vp2: qJD has to be [2x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
   'S2RR1_coriolisvecJ_fixb_slag_vp2: pkin has to be [1x1] (double)');
-assert( isreal(m) && all(size(m) == [3 1]), ...
+assert(isreal(m) && all(size(m) == [3 1]), ...
   'S2RR1_coriolisvecJ_fixb_slag_vp2: m has to be [3x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [3,3]), ...
   'S2RR1_coriolisvecJ_fixb_slag_vp2: mrSges has to be [3x3] (double)');
@@ -52,8 +52,8 @@ assert(isreal(Ifges) && all(size(Ifges) == [3 6]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-16 16:44:19
-% EndTime: 2018-11-16 16:44:20
+% StartTime: 2019-03-08 17:59:55
+% EndTime: 2019-03-08 17:59:55
 % DurationCPUTime: 0.10s
 % Computational Cost: add. (42->26), mult. (138->50), div. (0->0), fcn. (52->2), ass. (0->14)
 t5 = sin(qJ(2));

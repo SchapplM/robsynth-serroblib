@@ -21,11 +21,11 @@
 % taug [6x1]
 %   joint torques required to compensate gravitation load
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 17:26
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-09 14:07
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug = S6RRPRRR8_gravloadJ_floatb_twist_slag_vp2(qJ, g, ...
   pkin, m, mrSges)
@@ -38,17 +38,17 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S6RRPRRR8_gravloadJ_floatb_twist_slag_vp2: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [11 1]), ...
   'S6RRPRRR8_gravloadJ_floatb_twist_slag_vp2: pkin has to be [11x1] (double)');
-assert( isreal(m) && all(size(m) == [7 1]), ...
+assert(isreal(m) && all(size(m) == [7 1]), ...
   'S6RRPRRR8_gravloadJ_floatb_twist_slag_vp2: m has to be [7x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [7,3]), ...
   'S6RRPRRR8_gravloadJ_floatb_twist_slag_vp2: mrSges has to be [7x3] (double)');
 
 %% Symbolic Calculation
-% From joint_gravload_floatb_twist_par2_matlab.m
+% From gravload_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-23 17:25:35
-% EndTime: 2018-11-23 17:25:35
-% DurationCPUTime: 0.77s
+% StartTime: 2019-03-09 14:02:21
+% EndTime: 2019-03-09 14:02:23
+% DurationCPUTime: 0.81s
 % Computational Cost: add. (592->130), mult. (597->149), div. (0->0), fcn. (549->12), ass. (0->68)
 t105 = mrSges(5,3) + mrSges(6,3) + mrSges(7,3);
 t46 = pkin(11) + qJ(4);
@@ -108,7 +108,7 @@ t92 = -m(5) * t40 - m(6) * (t30 + t40) - m(7) * (-t23 + t40) + mrSges(2,2) - mrS
 t90 = m(7) * pkin(5);
 t84 = g(3) * t50;
 t71 = m(4) * qJ(3) + mrSges(4,3);
-t65 = t17 * t52 - t39 * t50;
+t65 = t17 * t52 - t50 * t39;
 t64 = t25 * t52 - t45 * t50;
 t63 = t34 * t52 - t49 * t50;
 t20 = -t36 * t78 + t51 * t37;

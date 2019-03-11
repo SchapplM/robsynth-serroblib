@@ -14,11 +14,11 @@
 %   minimal parameter regressor of joint inertia matrix
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:04
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:03
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function MM_reg = S3PRP1_inertiaJ_regmin_slag_vp(qJ, pkin)
 %% Coder Information
@@ -33,5 +33,5 @@ assert(isreal(pkin) && all(size(pkin) == [3 1]), ...
 % From inertia_joint_joint_fixb_regressor_minpar_matlab.m
 t2 = cos(qJ(2));
 t1 = sin(qJ(2));
-t3 = [1, 0, 0, 0, 0, 0, t1 ^ 2 + t2 ^ 2; 0, 0, t2, -t1, t2, t1, pkin(2) * t2 + qJ(3) * t1; 0, 1, 0, 0, 0.2e1 * pkin(2), 0.2e1 * qJ(3), pkin(2) ^ 2 + qJ(3) ^ 2; 0, 0, 0, 0, 0, 0, -t2; 0, 0, 0, 0, -1, 0, -pkin(2); 0, 0, 0, 0, 0, 0, 1;];
+t3 = [1, 0, 0, 0, 0, 0, t1 ^ 2 + t2 ^ 2; 0, 0, t2, -t1, t2, t1, t2 * pkin(2) + t1 * qJ(3); 0, 1, 0, 0, 0.2e1 * pkin(2), 0.2e1 * qJ(3), pkin(2) ^ 2 + qJ(3) ^ 2; 0, 0, 0, 0, 0, 0, -t2; 0, 0, 0, 0, -1, 0, -pkin(2); 0, 0, 0, 0, 0, 0, 1;];
 MM_reg  = t3;

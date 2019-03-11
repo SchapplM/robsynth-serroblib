@@ -21,11 +21,11 @@
 % taug [6x1]
 %   joint torques required to compensate gravitation load
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-23 16:57
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-09 09:48
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug = S6RRPRPP1_gravloadJ_floatb_twist_slag_vp2(qJ, g, ...
   pkin, m, mrSges)
@@ -38,17 +38,17 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S6RRPRPP1_gravloadJ_floatb_twist_slag_vp2: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [10 1]), ...
   'S6RRPRPP1_gravloadJ_floatb_twist_slag_vp2: pkin has to be [10x1] (double)');
-assert( isreal(m) && all(size(m) == [7 1]), ...
+assert(isreal(m) && all(size(m) == [7 1]), ...
   'S6RRPRPP1_gravloadJ_floatb_twist_slag_vp2: m has to be [7x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [7,3]), ...
   'S6RRPRPP1_gravloadJ_floatb_twist_slag_vp2: mrSges has to be [7x3] (double)');
 
 %% Symbolic Calculation
-% From joint_gravload_floatb_twist_par2_matlab.m
+% From gravload_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-23 16:56:38
-% EndTime: 2018-11-23 16:56:39
-% DurationCPUTime: 0.87s
+% StartTime: 2019-03-09 09:45:09
+% EndTime: 2019-03-09 09:45:12
+% DurationCPUTime: 0.90s
 % Computational Cost: add. (475->107), mult. (532->120), div. (0->0), fcn. (485->10), ass. (0->61)
 t98 = mrSges(6,1) + mrSges(7,1);
 t97 = -mrSges(6,2) + mrSges(7,3);
@@ -100,7 +100,7 @@ t63 = t31 * t29;
 t61 = t32 * t34;
 t60 = t34 * t20;
 t19 = t24 + pkin(1);
-t56 = t19 * t34 - t31 * t28;
+t56 = t19 * t34 - t28 * t31;
 t52 = pkin(3) * t23 + t77;
 t44 = pkin(5) * t22 + qJ(6) * t20;
 t5 = t23 * t63 + t61;

@@ -21,11 +21,11 @@
 % U [1x1]
 %   Potential energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:04
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:03
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function U = S3PRP1_energypot_fixb_slag_vp1(qJ, g, ...
   pkin, m, rSges)
@@ -38,7 +38,7 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S3PRP1_energypot_fixb_slag_vp1: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [3 1]), ...
   'S3PRP1_energypot_fixb_slag_vp1: pkin has to be [3x1] (double)');
-assert( isreal(m) && all(size(m) == [4 1]), ...
+assert(isreal(m) && all(size(m) == [4 1]), ...
   'S3PRP1_energypot_fixb_slag_vp1: m has to be [4x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [4,3]), ...
   'S3PRP1_energypot_fixb_slag_vp1: rSges has to be [4x3] (double)');
@@ -46,9 +46,9 @@ assert(isreal(rSges) && all(size(rSges) == [4,3]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:04:13
-% EndTime: 2018-11-14 10:04:13
-% DurationCPUTime: 0.04s
+% StartTime: 2019-03-08 18:02:55
+% EndTime: 2019-03-08 18:02:55
+% DurationCPUTime: 0.03s
 % Computational Cost: add. (26->24), mult. (28->26), div. (0->0), fcn. (12->2), ass. (0->5)
 t11 = rSges(4,1) + pkin(2);
 t10 = rSges(4,3) + qJ(3);

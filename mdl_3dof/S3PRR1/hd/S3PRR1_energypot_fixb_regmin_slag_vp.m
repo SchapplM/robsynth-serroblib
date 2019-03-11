@@ -15,11 +15,11 @@
 % U_reg [1x7]
 %   minimal parameter regressor of Potential energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:12
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:04
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function U_reg = S3PRR1_energypot_fixb_regmin_slag_vp(qJ, g, ...
   pkin)
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [4 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:11:57
-% EndTime: 2018-11-14 10:11:57
-% DurationCPUTime: 0.02s
+% StartTime: 2019-03-08 18:04:00
+% EndTime: 2019-03-08 18:04:00
+% DurationCPUTime: 0.01s
 % Computational Cost: add. (9->6), mult. (9->9), div. (0->0), fcn. (8->4), ass. (0->6)
 t30 = cos(qJ(2));
 t29 = sin(qJ(2));

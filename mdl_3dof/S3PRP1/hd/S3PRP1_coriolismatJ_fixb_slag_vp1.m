@@ -26,11 +26,11 @@
 %   matrix of coriolis and centrifugal joint torques.
 %   Gives coriolis joint torques when multiplied with joint velocities
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:04
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:03
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Cq = S3PRP1_coriolismatJ_fixb_slag_vp1(qJ, qJD, ...
   pkin, m, rSges, Icges)
@@ -43,7 +43,7 @@ assert(isreal(qJD) && all(size(qJD) == [3 1]), ...
   'S3PRP1_coriolismatJ_fixb_slag_vp1: qJD has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [3 1]), ...
   'S3PRP1_coriolismatJ_fixb_slag_vp1: pkin has to be [3x1] (double)');
-assert( isreal(m) && all(size(m) == [4 1]), ...
+assert(isreal(m) && all(size(m) == [4 1]), ...
   'S3PRP1_coriolismatJ_fixb_slag_vp1: m has to be [4x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [4,3]), ...
   'S3PRP1_coriolismatJ_fixb_slag_vp1: rSges has to be [4x3] (double)');
@@ -53,8 +53,8 @@ assert(isreal(Icges) && all(size(Icges) == [4 6]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:04:14
-% EndTime: 2018-11-14 10:04:14
+% StartTime: 2019-03-08 18:02:55
+% EndTime: 2019-03-08 18:02:56
 % DurationCPUTime: 0.07s
 % Computational Cost: add. (55->9), mult. (117->20), div. (0->0), fcn. (72->2), ass. (0->10)
 t12 = rSges(4,1) + pkin(2);

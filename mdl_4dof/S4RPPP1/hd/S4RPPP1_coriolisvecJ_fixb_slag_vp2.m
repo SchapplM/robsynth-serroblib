@@ -1,4 +1,4 @@
-% Calculate vector of centrifugal and coriolis load on the joints for
+% Calculate vector of centrifugal and Coriolis load on the joints for
 % S4RPPP1
 % Use Code from Maple symbolic Code Generation
 % 
@@ -23,13 +23,13 @@
 % 
 % Output:
 % tauc [4x1]
-%   joint torques required to compensate coriolis and centrifugal load
+%   joint torques required to compensate Coriolis and centrifugal load
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:46
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:26
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tauc = S4RPPP1_coriolisvecJ_fixb_slag_vp2(qJ, qJD, ...
   pkin, m, mrSges, Ifges)
@@ -42,7 +42,7 @@ assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
   'S4RPPP1_coriolisvecJ_fixb_slag_vp2: qJD has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
   'S4RPPP1_coriolisvecJ_fixb_slag_vp2: pkin has to be [6x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RPPP1_coriolisvecJ_fixb_slag_vp2: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4RPPP1_coriolisvecJ_fixb_slag_vp2: mrSges has to be [5x3] (double)');
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:45:25
-% EndTime: 2018-11-14 13:45:26
-% DurationCPUTime: 0.50s
+% StartTime: 2019-03-08 18:26:20
+% EndTime: 2019-03-08 18:26:21
+% DurationCPUTime: 0.48s
 % Computational Cost: add. (183->84), mult. (649->132), div. (0->0), fcn. (393->4), ass. (0->52)
 t32 = cos(pkin(4));
 t30 = sin(pkin(4));
@@ -66,9 +66,9 @@ t29 = sin(pkin(6));
 t9 = (mrSges(4,2) * t31 - mrSges(4,3) * t29) * t50;
 t45 = -pkin(1) * t31 - pkin(2);
 t64 = (-qJ(4) + t45) * t32;
-t58 = t65 * qJD(1);
 t60 = t29 * t30;
 t63 = ((mrSges(4,1) + mrSges(3,3)) * t60 + (-mrSges(3,1) + mrSges(4,2)) * t32) * qJD(1);
+t58 = t65 * qJD(1);
 t55 = t32 * qJ(3);
 t61 = pkin(1) * t32;
 t44 = qJ(2) * t50;

@@ -25,11 +25,11 @@
 % T [1x1]
 %   kinetic energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 14:01
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:20
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function T = S4PRPP3_energykin_fixb_slag_vp2(qJ, qJD, ...
   pkin, m, mrSges, Ifges)
@@ -42,7 +42,7 @@ assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
   'S4PRPP3_energykin_fixb_slag_vp2: qJD has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [4 1]), ...
   'S4PRPP3_energykin_fixb_slag_vp2: pkin has to be [4x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4PRPP3_energykin_fixb_slag_vp2: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4PRPP3_energykin_fixb_slag_vp2: mrSges has to be [5x3] (double)');
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_linkframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 14:01:19
-% EndTime: 2018-11-14 14:01:19
-% DurationCPUTime: 0.06s
+% StartTime: 2019-03-08 18:19:42
+% EndTime: 2019-03-08 18:19:42
+% DurationCPUTime: 0.05s
 % Computational Cost: add. (30->21), mult. (61->31), div. (0->0), fcn. (12->2), ass. (0->8)
 t35 = cos(qJ(2));
 t38 = -t35 * qJD(1) + qJD(3);
@@ -63,5 +63,5 @@ t33 = qJD(2) * qJ(3) + t34 * qJD(1);
 t32 = t33 ^ 2;
 t31 = -qJD(2) * pkin(2) + t38;
 t30 = (-pkin(2) - pkin(3)) * qJD(2) + t38;
-t1 = m(4) * (t31 ^ 2 + t32) / 0.2e1 + m(5) * (qJD(4) ^ 2 + t30 ^ 2 + t32) / 0.2e1 + (m(3) * (t34 ^ 2 + t35 ^ 2) / 0.2e1 + m(2) / 0.2e1) * qJD(1) ^ 2 + (-t31 * mrSges(4,1) - t30 * mrSges(5,1) + (mrSges(5,2) + mrSges(4,3)) * t33 + (mrSges(3,1) * t35 - mrSges(3,2) * t34) * qJD(1) + (Ifges(4,2) / 0.2e1 + Ifges(3,3) / 0.2e1 + Ifges(5,3) / 0.2e1) * qJD(2)) * qJD(2);
+t1 = m(4) * (t31 ^ 2 + t32) / 0.2e1 + m(5) * (qJD(4) ^ 2 + t30 ^ 2 + t32) / 0.2e1 + (m(2) / 0.2e1 + m(3) * (t34 ^ 2 + t35 ^ 2) / 0.2e1) * qJD(1) ^ 2 + (-t31 * mrSges(4,1) - t30 * mrSges(5,1) + (mrSges(5,2) + mrSges(4,3)) * t33 + (mrSges(3,1) * t35 - mrSges(3,2) * t34) * qJD(1) + (Ifges(4,2) / 0.2e1 + Ifges(3,3) / 0.2e1 + Ifges(5,3) / 0.2e1) * qJD(2)) * qJD(2);
 T  = t1;

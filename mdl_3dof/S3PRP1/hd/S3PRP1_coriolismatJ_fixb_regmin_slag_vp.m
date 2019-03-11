@@ -15,11 +15,11 @@
 % cmat_reg [(3*%NQJ)%x7]
 %   minimal parameter regressor of coriolis matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:04
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:03
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function cmat_reg = S3PRP1_coriolismatJ_fixb_regmin_slag_vp(qJ, qJD, ...
   pkin)
@@ -36,8 +36,8 @@ assert(isreal(pkin) && all(size(pkin) == [3 1]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:04:15
-% EndTime: 2018-11-14 10:04:16
+% StartTime: 2019-03-08 18:03:01
+% EndTime: 2019-03-08 18:03:01
 % DurationCPUTime: 0.05s
 % Computational Cost: add. (7->7), mult. (12->8), div. (0->0), fcn. (8->2), ass. (0->6)
 t1 = sin(qJ(2));

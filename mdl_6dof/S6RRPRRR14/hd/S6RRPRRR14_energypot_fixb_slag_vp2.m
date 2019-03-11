@@ -11,7 +11,7 @@
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,a6,alpha2,alpha3,alpha4,d1,d2,d4,d5,d6,theta3]';
 % m_mdh [7x1]
-%   mass of all robot links (leg links until cut joint, platform)
+%   mass of all robot links (including the base)
 % mrSges [7x3]
 %  first moment of all robot links (mass times center of mass in body frames)
 %  rows: links of the robot (starting with base)
@@ -21,11 +21,11 @@
 % U [1x1]
 %   Potential energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-09 15:13
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function U = S6RRPRRR14_energypot_fixb_slag_vp2(qJ, g, ...
   pkin, m, mrSges)
@@ -46,9 +46,9 @@ assert(isreal(mrSges) && all(size(mrSges) == [7,3]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_worldframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:07:43
-% EndTime: 2019-01-03 10:07:44
-% DurationCPUTime: 0.89s
+% StartTime: 2019-03-09 14:57:11
+% EndTime: 2019-03-09 14:57:12
+% DurationCPUTime: 0.87s
 % Computational Cost: add. (951->121), mult. (2574->163), div. (0->0), fcn. (3324->18), ass. (0->67)
 t177 = cos(pkin(6));
 t182 = sin(qJ(1));

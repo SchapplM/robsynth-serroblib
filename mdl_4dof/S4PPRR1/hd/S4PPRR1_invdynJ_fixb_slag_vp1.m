@@ -29,11 +29,11 @@
 % tau [4x1]
 %   joint torques of inverse dynamics (contains inertial, gravitational coriolis and centrifugal forces)
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:40
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:16
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tau = S4PPRR1_invdynJ_fixb_slag_vp1(qJ, qJD, qJDD, g, ...
   pkin, m, rSges, Icges)
@@ -50,7 +50,7 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S4PPRR1_invdynJ_fixb_slag_vp1: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
   'S4PPRR1_invdynJ_fixb_slag_vp1: pkin has to be [6x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4PPRR1_invdynJ_fixb_slag_vp1: m has to be [5x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [5,3]), ...
   'S4PPRR1_invdynJ_fixb_slag_vp1: rSges has to be [5x3] (double)');
@@ -60,9 +60,9 @@ assert(isreal(Icges) && all(size(Icges) == [5 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:40:08
-% EndTime: 2018-11-14 13:40:09
-% DurationCPUTime: 0.39s
+% StartTime: 2019-03-08 18:15:38
+% EndTime: 2019-03-08 18:15:38
+% DurationCPUTime: 0.36s
 % Computational Cost: add. (541->80), mult. (723->105), div. (0->0), fcn. (610->6), ass. (0->55)
 t64 = qJ(3) + qJ(4);
 t46 = sin(t64);

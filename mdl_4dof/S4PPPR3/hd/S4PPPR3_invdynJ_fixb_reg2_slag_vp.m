@@ -19,11 +19,11 @@
 % tau_reg [4x(4*10)]
 %   inertial parameter regressor of inverse dynamics joint torque vector
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:57
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:11
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tau_reg = S4PPPR3_invdynJ_fixb_reg2_slag_vp(qJ, qJD, qJDD, g, pkin)
 %% Coder Information
@@ -43,34 +43,34 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
 %% Symbolic Calculation
 % From invdyn_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:56:34
-% EndTime: 2018-11-14 13:56:35
+% StartTime: 2019-03-08 18:11:18
+% EndTime: 2019-03-08 18:11:18
 % DurationCPUTime: 0.11s
 % Computational Cost: add. (124->35), mult. (228->44), div. (0->0), fcn. (212->6), ass. (0->26)
 t23 = sin(pkin(5));
 t24 = cos(pkin(5));
 t25 = sin(qJ(4));
 t26 = cos(qJ(4));
-t9 = -t25 * t23 + t26 * t24;
-t11 = -t23 * qJDD(1) + t24 * qJDD(2);
-t12 = t24 * qJDD(1) + t23 * qJDD(2);
+t9 = -t25 * t23 + t24 * t26;
+t11 = -qJDD(1) * t23 + qJDD(2) * t24;
+t12 = qJDD(1) * t24 + qJDD(2) * t23;
 t29 = t26 * t11 - t25 * t12;
 t28 = t25 * t11 + t26 * t12;
-t13 = -t23 * qJD(1) + t24 * qJD(2);
-t14 = t24 * qJD(1) + t23 * qJD(2);
-t4 = t26 * t13 - t25 * t14;
-t5 = t25 * t13 + t26 * t14;
+t13 = -qJD(1) * t23 + qJD(2) * t24;
+t14 = qJD(1) * t24 + qJD(2) * t23;
+t4 = t13 * t26 - t25 * t14;
+t5 = t25 * t13 + t14 * t26;
 t10 = -t26 * t23 - t25 * t24;
 t6 = t9 * qJD(4);
-t27 = -t6 * qJD(4) + t10 * qJDD(4);
+t27 = -qJD(4) * t6 + qJDD(4) * t10;
 t22 = qJDD(1) - g(2);
 t21 = qJDD(3) + g(3);
 t20 = pkin(5) + qJ(4);
 t19 = cos(t20);
 t18 = sin(t20);
 t7 = t10 * qJD(4);
-t3 = t7 * qJD(4) + t9 * qJDD(4);
+t3 = qJD(4) * t7 + qJDD(4) * t9;
 t2 = -t5 * qJD(4) + t29;
 t1 = t4 * qJD(4) + t28;
-t8 = [0, 0, 0, 0, 0, 0, 0, 0, 0, t22, 0, 0, 0, 0, 0, 0, 0, 0, 0, t22, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t11 * t23 + t12 * t24 - g(2), 0, 0, 0, 0, 0, 0, t27, -t3, 0, t1 * t9 + t2 * t10 - t4 * t6 + t5 * t7 - g(2); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, qJDD(2) - g(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, t11 * t24 + t12 * t23 - g(1), 0, 0, 0, 0, 0, 0, t3, t27, 0, -t1 * t10 + t2 * t9 + t4 * t7 + t5 * t6 - g(1); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t21, 0, 0, 0, 0, 0, 0, 0, 0, 0, t21; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, qJDD(4), -g(1) * t19 + g(2) * t18 + t29, g(1) * t18 + g(2) * t19 - t28, 0, 0;];
+t8 = [0, 0, 0, 0, 0, 0, 0, 0, 0, t22, 0, 0, 0, 0, 0, 0, 0, 0, 0, t22, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t11 * t23 + t12 * t24 - g(2), 0, 0, 0, 0, 0, 0, t27, -t3, 0, t1 * t9 + t10 * t2 - t4 * t6 + t5 * t7 - g(2); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, qJDD(2) - g(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, t11 * t24 + t12 * t23 - g(1), 0, 0, 0, 0, 0, 0, t3, t27, 0, -t1 * t10 + t2 * t9 + t4 * t7 + t5 * t6 - g(1); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t21, 0, 0, 0, 0, 0, 0, 0, 0, 0, t21; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, qJDD(4), -g(1) * t19 + g(2) * t18 + t29, g(1) * t18 + g(2) * t19 - t28, 0, 0;];
 tau_reg  = t8;

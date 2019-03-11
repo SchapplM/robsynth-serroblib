@@ -27,11 +27,11 @@
 % T [1x1]
 %   kinetic energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:58
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:13
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function T = S4PPRP2_energykin_floatb_twist_slag_vp2(qJ, qJD, V_base, ...
   pkin, m, mrSges, Ifges)
@@ -46,7 +46,7 @@ assert(isreal(V_base) && all(size(V_base) == [6 1]), ...
   'S4PPRP2_energykin_floatb_twist_slag_vp2: V_base has to be [6x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
   'S4PPRP2_energykin_floatb_twist_slag_vp2: pkin has to be [5x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4PPRP2_energykin_floatb_twist_slag_vp2: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4PPRP2_energykin_floatb_twist_slag_vp2: mrSges has to be [5x3] (double)');
@@ -56,9 +56,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_floatb_twist_linkframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:57:21
-% EndTime: 2018-11-14 13:57:21
-% DurationCPUTime: 0.34s
+% StartTime: 2019-03-08 18:13:14
+% EndTime: 2019-03-08 18:13:14
+% DurationCPUTime: 0.32s
 % Computational Cost: add. (411->100), mult. (565->125), div. (0->0), fcn. (288->4), ass. (0->26)
 t31 = sin(qJ(3));
 t32 = cos(qJ(3));

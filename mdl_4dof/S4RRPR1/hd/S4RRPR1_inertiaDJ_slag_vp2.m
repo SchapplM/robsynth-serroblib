@@ -26,8 +26,8 @@
 %   time derivative of inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-01-31 13:16
-% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
+% Datum: 2019-03-08 18:35
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_time_derivative_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-31 13:16:35
-% EndTime: 2019-01-31 13:16:36
-% DurationCPUTime: 0.12s
+% StartTime: 2019-03-08 18:34:55
+% EndTime: 2019-03-08 18:34:55
+% DurationCPUTime: 0.11s
 % Computational Cost: add. (191->37), mult. (504->64), div. (0->0), fcn. (342->6), ass. (0->31)
 t18 = sin(pkin(7));
 t23 = cos(qJ(2));
@@ -86,7 +86,7 @@ t6 = t8 * mrSges(5,1);
 t12 = t22 * t16 - t20 * t33;
 t7 = t12 * qJD(4);
 t26 = -t7 * mrSges(5,2) - t6;
-t15 = [-0.2e1 * t32 + 0.2e1 * m(4) * (t25 * t10 + t13 * t11) + 0.2e1 * m(5) * (t5 * t2 + t4 * t3) + 0.2e1 * t34; -t6 + (-t2 - t7) * mrSges(5,2) + m(5) * (t12 * t3 + t14 * t2 - t8 * t4 + t7 * t5) + m(4) * (t10 * t19 + t11 * t18) * pkin(2) + t34; 0.2e1 * m(5) * (-t12 * t8 + t14 * t7) + 0.2e1 * t26; 0; 0; 0; t1 - t32; t26; 0; 0;];
+t15 = [-0.2e1 * t32 + 0.2e1 * m(5) * (t5 * t2 + t4 * t3) + 0.2e1 * m(4) * (t25 * t10 + t13 * t11) + 0.2e1 * t34; -t6 + (-t7 - t2) * mrSges(5,2) + m(5) * (t12 * t3 + t14 * t2 - t8 * t4 + t7 * t5) + m(4) * (t10 * t19 + t11 * t18) * pkin(2) + t34; 0.2e1 * m(5) * (-t12 * t8 + t14 * t7) + 0.2e1 * t26; 0; 0; 0; t1 - t32; t26; 0; 0;];
 %% Postprocessing: Reshape Output
 % From vec2symmat_4_matlab.m
 res = [t15(1) t15(2) t15(4) t15(7); t15(2) t15(3) t15(5) t15(8); t15(4) t15(5) t15(6) t15(9); t15(7) t15(8) t15(9) t15(10);];

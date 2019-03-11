@@ -21,11 +21,11 @@
 % U [1x1]
 %   Potential energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:55
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:36
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function U = S4RRRP1_energypot_fixb_slag_vp2(qJ, g, ...
   pkin, m, mrSges)
@@ -38,7 +38,7 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S4RRRP1_energypot_fixb_slag_vp2: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
   'S4RRRP1_energypot_fixb_slag_vp2: pkin has to be [6x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RRRP1_energypot_fixb_slag_vp2: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4RRRP1_energypot_fixb_slag_vp2: mrSges has to be [5x3] (double)');
@@ -46,9 +46,9 @@ assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_worldframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:54:19
-% EndTime: 2018-11-14 13:54:19
-% DurationCPUTime: 0.11s
+% StartTime: 2019-03-08 18:35:51
+% EndTime: 2019-03-08 18:35:51
+% DurationCPUTime: 0.10s
 % Computational Cost: add. (72->36), mult. (53->27), div. (0->0), fcn. (28->6), ass. (0->15)
 t41 = -m(4) - m(5);
 t40 = pkin(5) + pkin(4);
@@ -64,5 +64,5 @@ t27 = cos(t31);
 t26 = sin(t31);
 t25 = cos(t28);
 t24 = sin(t28);
-t1 = (-mrSges(1,3) - m(2) * pkin(4) - mrSges(2,3) - m(3) * t40 - mrSges(3,3) - m(4) * t36 - mrSges(4,3) - m(5) * (qJ(4) + t36) - mrSges(5,3)) * g(3) + (-t26 * mrSges(3,1) - t33 * mrSges(2,2) - t27 * mrSges(3,2) + t34 * t24 - t39 * t25 + t35 * t32 - mrSges(1,2) + t41 * (pkin(1) * t32 + pkin(2) * t26)) * g(2) + (-t27 * mrSges(3,1) + t32 * mrSges(2,2) + t26 * mrSges(3,2) + t39 * t24 + t34 * t25 + t35 * t33 - mrSges(1,1) + t41 * (pkin(1) * t33 + pkin(2) * t27)) * g(1);
+t1 = (-mrSges(1,3) - m(2) * pkin(4) - mrSges(2,3) - m(3) * t40 - mrSges(3,3) - m(4) * t36 - mrSges(4,3) - m(5) * (qJ(4) + t36) - mrSges(5,3)) * g(3) + (-t26 * mrSges(3,1) - t33 * mrSges(2,2) - t27 * mrSges(3,2) + t34 * t24 - t39 * t25 + t35 * t32 - mrSges(1,2) + t41 * (t32 * pkin(1) + pkin(2) * t26)) * g(2) + (-t27 * mrSges(3,1) + t32 * mrSges(2,2) + t26 * mrSges(3,2) + t39 * t24 + t34 * t25 + t35 * t33 - mrSges(1,1) + t41 * (t33 * pkin(1) + pkin(2) * t27)) * g(1);
 U  = t1;

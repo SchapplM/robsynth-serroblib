@@ -14,11 +14,11 @@
 %   minimal parameter regressor of joint inertia matrix
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 14:02
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:20
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function MM_reg = S4PRPP3_inertiaJ_regmin_slag_vp(qJ, pkin)
 %% Coder Information
@@ -38,5 +38,5 @@ t4 = cos(qJ(2));
 t3 = sin(qJ(2));
 t2 = t3 * qJ(3);
 t1 = t3 ^ 2 + t4 ^ 2;
-t6 = [1, 0, 0, 0, 0, 0, t1, 0, 0, t1; 0, 0, t4, -t3, t4, t3, pkin(2) * t4 + t2, t4, t3, t4 * t5 + t2; 0, 1, 0, 0, 0.2e1 * pkin(2), t7, pkin(2) ^ 2 + t8, 0.2e1 * t5, t7, t5 ^ 2 + t8; 0, 0, 0, 0, 0, 0, -t4, 0, 0, -t4; 0, 0, 0, 0, -1, 0, -pkin(2), -1, 0, -t5; 0, 0, 0, 0, 0, 0, 1, 0, 0, 1; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1;];
+t6 = [1, 0, 0, 0, 0, 0, t1, 0, 0, t1; 0, 0, t4, -t3, t4, t3, t4 * pkin(2) + t2, t4, t3, t4 * t5 + t2; 0, 1, 0, 0, 0.2e1 * pkin(2), t7, pkin(2) ^ 2 + t8, 0.2e1 * t5, t7, t5 ^ 2 + t8; 0, 0, 0, 0, 0, 0, -t4, 0, 0, -t4; 0, 0, 0, 0, -1, 0, -pkin(2), -1, 0, -t5; 0, 0, 0, 0, 0, 0, 1, 0, 0, 1; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1;];
 MM_reg  = t6;

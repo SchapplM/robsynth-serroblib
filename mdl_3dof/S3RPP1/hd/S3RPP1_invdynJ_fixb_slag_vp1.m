@@ -29,11 +29,11 @@
 % tau [3x1]
 %   joint torques of inverse dynamics (contains inertial, gravitational coriolis and centrifugal forces)
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:14
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:05
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tau = S3RPP1_invdynJ_fixb_slag_vp1(qJ, qJD, qJDD, g, ...
   pkin, m, rSges, Icges)
@@ -50,7 +50,7 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S3RPP1_invdynJ_fixb_slag_vp1: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [3 1]), ...
   'S3RPP1_invdynJ_fixb_slag_vp1: pkin has to be [3x1] (double)');
-assert( isreal(m) && all(size(m) == [4 1]), ...
+assert(isreal(m) && all(size(m) == [4 1]), ...
   'S3RPP1_invdynJ_fixb_slag_vp1: m has to be [4x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [4,3]), ...
   'S3RPP1_invdynJ_fixb_slag_vp1: rSges has to be [4x3] (double)');
@@ -60,9 +60,9 @@ assert(isreal(Icges) && all(size(Icges) == [4 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:13:33
-% EndTime: 2018-11-14 10:13:34
-% DurationCPUTime: 0.38s
+% StartTime: 2019-03-08 18:05:01
+% EndTime: 2019-03-08 18:05:01
+% DurationCPUTime: 0.32s
 % Computational Cost: add. (362->97), mult. (721->113), div. (0->0), fcn. (398->2), ass. (0->52)
 t50 = sin(qJ(1));
 t51 = cos(qJ(1));
@@ -111,9 +111,9 @@ t31 = t51 * rSges(2,1) - t50 * rSges(2,2);
 t27 = t50 * rSges(2,1) + t51 * rSges(2,2);
 t13 = t18 * qJD(1) - t42;
 t12 = t69 * qJD(1) + t41;
-t9 = qJD(1) * t76 - t55;
+t9 = t76 * qJD(1) - t55;
 t8 = t53 * qJD(1) + t65;
 t4 = qJD(1) * t66 - qJDD(1) * t77 - qJDD(2) * t51 + t57;
-t3 = t69 * qJDD(1) + (qJD(1) * t77 - t19) * qJD(1) + t68;
+t3 = t69 * qJDD(1) + (t77 * qJD(1) - t19) * qJD(1) + t68;
 t5 = [-m(2) * (-g(1) * t27 + g(2) * t31) + (-(t56 * qJD(1) + t40 + t64 - t8) * t9 + t8 * t55 + t9 * (t35 + t38 + t65) + (t8 * t58 * t51 + (t8 * (-rSges(4,2) - qJ(2)) + t9 * t58) * t50) * qJD(1) + t78 * t76 + t79 * (t70 * t50 + t29 + t44)) * m(4) + (-(qJD(1) * t26 - t12 + t64) * t13 + t12 * t42 + t13 * (t66 + t67) + (t12 * t73 * t51 + (t12 * (-rSges(3,3) - qJ(2)) - t13 * pkin(1)) * t50) * qJD(1) + (-g(2) + t4) * t18 + (-g(1) + t3) * (t73 * t50 + t44 + t71)) * m(3) + (Icges(2,3) + Icges(3,1) + Icges(4,1) + m(2) * (t27 ^ 2 + t31 ^ 2)) * qJDD(1); (-m(3) - m(4)) * (g(1) * t50 - g(2) * t51) + 0.2e1 * (t1 * t75 + t2 * t74) * m(4) + 0.2e1 * (t3 * t75 + t4 * t74) * m(3); (t78 * t50 + t79 * t51) * m(4);];
 tau  = t5;

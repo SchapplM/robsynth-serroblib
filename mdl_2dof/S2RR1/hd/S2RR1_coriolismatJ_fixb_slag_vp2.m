@@ -25,11 +25,11 @@
 % Cq [2x2]
 %   matrix of coriolis and centrifugal joint torques
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 16:44
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:00
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Cq = S2RR1_coriolismatJ_fixb_slag_vp2(qJ, qJD, ...
   pkin, m, mrSges, Ifges)
@@ -42,7 +42,7 @@ assert(isreal(qJD) && all(size(qJD) == [2 1]), ...
   'S2RR1_coriolismatJ_fixb_slag_vp2: qJD has to be [2x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
   'S2RR1_coriolismatJ_fixb_slag_vp2: pkin has to be [1x1] (double)');
-assert( isreal(m) && all(size(m) == [3 1]), ...
+assert(isreal(m) && all(size(m) == [3 1]), ...
   'S2RR1_coriolismatJ_fixb_slag_vp2: m has to be [3x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [3,3]), ...
   'S2RR1_coriolismatJ_fixb_slag_vp2: mrSges has to be [3x3] (double)');
@@ -52,8 +52,8 @@ assert(isreal(Ifges) && all(size(Ifges) == [3 6]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-16 16:44:20
-% EndTime: 2018-11-16 16:44:20
+% StartTime: 2019-03-08 17:59:55
+% EndTime: 2019-03-08 17:59:55
 % DurationCPUTime: 0.05s
 % Computational Cost: add. (25->8), mult. (58->13), div. (0->0), fcn. (40->2), ass. (0->5)
 t6 = sin(qJ(2));

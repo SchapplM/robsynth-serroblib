@@ -15,11 +15,11 @@
 % taug_reg [4x10]
 %   minimal parameter regressor of gravitation joint torque vector
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:50
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:31
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug_reg = S4RPRP2_gravloadJ_regmin_slag_vp(qJ, g, ...
   pkin)
@@ -34,7 +34,7 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
   'S4RPRP2_gravloadJ_regmin_slag_vp: pkin has to be [5x1] (double)');
 
 %% Symbolic Calculation
-% From joint_gravload_fixb_regressor_minpar_matlab.m
+% From gravload_joint_fixb_regressor_minpar_matlab.m
 t14 = sin(qJ(1));
 t16 = cos(qJ(1));
 t21 = t16 * pkin(1) + t14 * qJ(2);

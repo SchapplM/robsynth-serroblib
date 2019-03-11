@@ -21,11 +21,11 @@
 % taug [4x1]
 %   joint torques required to compensate gravitation load
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:46
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:26
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug = S4RPPP1_gravloadJ_floatb_twist_slag_vp2(qJ, g, ...
   pkin, m, mrSges)
@@ -38,41 +38,38 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S4RPPP1_gravloadJ_floatb_twist_slag_vp2: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
   'S4RPPP1_gravloadJ_floatb_twist_slag_vp2: pkin has to be [6x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RPPP1_gravloadJ_floatb_twist_slag_vp2: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4RPPP1_gravloadJ_floatb_twist_slag_vp2: mrSges has to be [5x3] (double)');
 
 %% Symbolic Calculation
-% From joint_gravload_floatb_twist_par2_matlab.m
+% From gravload_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:45:25
-% EndTime: 2018-11-14 13:45:25
-% DurationCPUTime: 0.17s
-% Computational Cost: add. (181->43), mult. (234->52), div. (0->0), fcn. (199->10), ass. (0->25)
-t37 = m(4) + m(5);
-t38 = t37 * qJ(3) - mrSges(3,2) + mrSges(5,2) + mrSges(4,3);
-t23 = sin(qJ(1));
-t24 = cos(qJ(1));
-t20 = sin(pkin(4));
-t35 = qJ(2) * t20;
-t36 = t24 * pkin(1) + t23 * t35;
-t18 = pkin(4) - pkin(6);
-t13 = cos(t18) / 0.2e1;
-t17 = pkin(4) + pkin(6);
-t15 = cos(t17);
-t33 = t13 + t15 / 0.2e1;
-t12 = -sin(t18) / 0.2e1;
-t14 = sin(t17);
-t32 = t14 / 0.2e1 + t12;
-t29 = -t23 * pkin(1) + t24 * t35;
-t27 = m(5) * qJ(4) + mrSges(3,1) - mrSges(4,2) + mrSges(5,3);
-t25 = mrSges(2,2) + (-m(5) * pkin(3) - mrSges(4,1) - mrSges(5,1) - mrSges(3,3)) * t20;
-t21 = cos(pkin(6));
-t19 = sin(pkin(6));
-t6 = t21 * t24 - t23 * t32;
-t5 = t24 * t19 + t23 * t33;
-t4 = t23 * t21 + t24 * t32;
-t3 = t19 * t23 - t24 * t33;
-t1 = [(-mrSges(2,1) * t24 - m(3) * t36 - t27 * t6 - t38 * t5 + t25 * t23 - t37 * (t6 * pkin(2) + t36)) * g(2) + (t23 * mrSges(2,1) - m(3) * t29 + t27 * t4 + t38 * t3 + t25 * t24 + t37 * (t4 * pkin(2) - t29)) * g(1) (-cos(pkin(4)) * g(3) + (-g(1) * t23 + g(2) * t24) * t20) * (m(3) + t37) t37 * (-g(1) * t5 - g(2) * t3 - g(3) * (-t14 / 0.2e1 + t12)) (-g(1) * t6 - g(2) * t4 - g(3) * (t13 - t15 / 0.2e1)) * m(5)];
+% StartTime: 2019-03-08 18:26:20
+% EndTime: 2019-03-08 18:26:20
+% DurationCPUTime: 0.15s
+% Computational Cost: add. (88->37), mult. (203->48), div. (0->0), fcn. (199->6), ass. (0->22)
+t32 = m(4) + m(5);
+t33 = t32 * qJ(3) - mrSges(3,2) + mrSges(5,2) + mrSges(4,3);
+t13 = sin(pkin(4));
+t31 = g(3) * t13;
+t16 = sin(qJ(1));
+t17 = cos(qJ(1));
+t26 = qJ(2) * t13;
+t30 = t17 * pkin(1) + t16 * t26;
+t12 = sin(pkin(6));
+t29 = t12 * t16;
+t15 = cos(pkin(4));
+t28 = t15 * t17;
+t14 = cos(pkin(6));
+t27 = t16 * t14;
+t22 = -t16 * pkin(1) + t17 * t26;
+t20 = m(5) * qJ(4) + mrSges(3,1) - mrSges(4,2) + mrSges(5,3);
+t18 = mrSges(2,2) + (-m(5) * pkin(3) - mrSges(4,1) - mrSges(5,1) - mrSges(3,3)) * t13;
+t6 = t14 * t17 - t15 * t29;
+t5 = t12 * t17 + t15 * t27;
+t4 = t12 * t28 + t27;
+t3 = -t14 * t28 + t29;
+t1 = [(-mrSges(2,1) * t17 - m(3) * t30 - t20 * t6 - t33 * t5 + t18 * t16 - t32 * (t6 * pkin(2) + t30)) * g(2) + (t16 * mrSges(2,1) - m(3) * t22 + t20 * t4 + t33 * t3 + t18 * t17 + t32 * (t4 * pkin(2) - t22)) * g(1) (-g(3) * t15 + (-g(1) * t16 + g(2) * t17) * t13) * (m(3) + t32) t32 * (-g(1) * t5 - g(2) * t3 + t14 * t31) (-g(1) * t6 - g(2) * t4 - t12 * t31) * m(5)];
 taug  = t1(:);

@@ -21,11 +21,11 @@
 % U [1x1]
 %   Potential energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-26 21:21
-% Revision: 76f9d5e39f14dc242b53c0d9d3d9db48bd8f37c0
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-10 08:31
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function U = S7RRRRRRR1_energypot_fixb_slag_vp1(qJ, g, ...
   pkin, m, rSges)
@@ -38,7 +38,7 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S7RRRRRRR1_energypot_fixb_slag_vp1: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [4 1]), ...
   'S7RRRRRRR1_energypot_fixb_slag_vp1: pkin has to be [4x1] (double)');
-assert( isreal(m) && all(size(m) == [8 1]), ...
+assert(isreal(m) && all(size(m) == [8 1]), ...
   'S7RRRRRRR1_energypot_fixb_slag_vp1: m has to be [8x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [8,3]), ...
   'S7RRRRRRR1_energypot_fixb_slag_vp1: rSges has to be [8x3] (double)');
@@ -46,9 +46,9 @@ assert(isreal(rSges) && all(size(rSges) == [8,3]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-26 19:14:16
-% EndTime: 2018-11-26 19:14:16
-% DurationCPUTime: 0.43s
+% StartTime: 2019-03-10 06:29:07
+% EndTime: 2019-03-10 06:29:07
+% DurationCPUTime: 0.39s
 % Computational Cost: add. (294->109), mult. (689->160), div. (0->0), fcn. (857->14), ass. (0->53)
 t112 = rSges(6,3) + pkin(3);
 t94 = cos(qJ(2));
@@ -59,21 +59,21 @@ t87 = sin(qJ(3));
 t88 = sin(qJ(2));
 t108 = t87 * t88;
 t89 = sin(qJ(1));
-t107 = t88 * t89;
+t107 = t89 * t88;
+t106 = t89 * t94;
 t95 = cos(qJ(1));
-t106 = t88 * t95;
-t105 = t89 * t94;
-t104 = t95 * t87;
+t105 = t95 * t87;
+t104 = t95 * t88;
 t93 = cos(qJ(3));
 t103 = t95 * t93;
 t102 = pkin(2) * t107;
-t101 = pkin(2) * t106;
+t101 = pkin(2) * t104;
 t100 = t88 * t109;
 t86 = sin(qJ(4));
 t74 = t88 * t93 * t86 + t94 * t109;
 t99 = t74 * pkin(3) + t111;
 t98 = rSges(3,1) * t94 - rSges(3,2) * t88;
-t77 = t93 * t105 + t104;
+t77 = t93 * t106 + t105;
 t70 = -t89 * t100 + t77 * t86;
 t97 = t70 * pkin(3) - t102;
 t79 = t94 * t103 - t89 * t87;
@@ -85,10 +85,10 @@ t90 = cos(qJ(7));
 t85 = sin(qJ(5));
 t84 = sin(qJ(6));
 t83 = sin(qJ(7));
-t78 = -t94 * t104 - t89 * t93;
-t76 = -t87 * t105 + t103;
+t78 = -t94 * t105 - t89 * t93;
+t76 = -t87 * t106 + t103;
 t75 = t93 * t100 - t94 * t86;
-t73 = t86 * t106 + t79 * t109;
+t73 = t86 * t104 + t79 * t109;
 t71 = t86 * t107 + t77 * t109;
 t69 = -t85 * t108 + t75 * t92;
 t68 = t92 * t108 + t75 * t85;

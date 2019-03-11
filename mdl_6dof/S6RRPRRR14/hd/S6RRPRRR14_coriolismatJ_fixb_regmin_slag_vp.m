@@ -15,11 +15,11 @@
 % cmat_reg [(6*%NQJ)%x35]
 %   minimal parameter regressor of coriolis matrix
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-09 15:13
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function cmat_reg = S6RRPRRR14_coriolismatJ_fixb_regmin_slag_vp(qJ, qJD, ...
   pkin)
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [14 1]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:20:52
-% EndTime: 2019-01-03 10:23:45
-% DurationCPUTime: 108.70s
+% StartTime: 2019-03-09 15:08:45
+% EndTime: 2019-03-09 15:11:25
+% DurationCPUTime: 108.04s
 % Computational Cost: add. (115196->1930), mult. (338378->2686), div. (0->0), fcn. (398903->16), ass. (0->1267)
 t1191 = sin(qJ(5));
 t1188 = cos(pkin(14));
@@ -96,7 +96,7 @@ t1514 = t1883 * t1929;
 t1683 = t1185 * t1186;
 t1050 = -t1189 * t1514 + t1192 * t1683 - t1498 * t1929;
 t1918 = t1050 / 0.2e1;
-t845 = t1192 * t1231 - t1929 * t1976;
+t845 = t1231 * t1192 - t1929 * t1976;
 t492 = t1916 * t845 + t1918 * t847;
 t1989 = t492 * qJD(4);
 t1539 = t1193 * t1885;
@@ -147,7 +147,7 @@ t1680 = t1186 * t1188;
 t1682 = t1185 * t1189;
 t1115 = pkin(2) * t1682 + qJ(3) * t1680;
 t1040 = (t1189 * t1883 + t1498) * pkin(11) + t1115;
-t792 = t1040 * t1929 + t1192 * t1986;
+t792 = t1929 * t1040 + t1192 * t1986;
 t725 = -pkin(12) * t1480 + t792;
 t496 = t1191 * t725 - t1195 * t1206;
 t426 = -pkin(5) * t1050 + t496;
@@ -1062,7 +1062,7 @@ t1434 = t471 * qJD(1) + t866 * qJD(2);
 t1433 = qJD(1) * t556 + qJD(2) * t912;
 t1432 = -qJD(1) * t559 - qJD(2) * t915;
 t599 = (-t1231 + t988) * t1556 - (t1230 + t989) * t1680 / 0.2e1;
-t677 = (t988 * (-t1185 * t1673 - t1674) + t989 * t1345) * t1187 + (-t1185 * t988 + t989 * t1188) * t1537;
+t677 = (t988 * (-t1185 * t1673 - t1674) + t989 * t1345) * t1187 + (-t1185 * t988 + t1188 * t989) * t1537;
 t1431 = qJD(1) * t677 - qJD(2) * t599;
 t1041 = t1189 * t1494 + (t1617 / 0.2e1 + t1188 * t1496) * t1186;
 t838 = t1221 / 0.2e1 + (t1220 / 0.2e1 - t1324 / 0.2e1) * t1192;
@@ -1289,7 +1289,7 @@ t79 = -t1210 + t1493;
 t71 = t1190 * t1392 + t1194 * t1396 + t1893 * t589 + t1899 * t588;
 t68 = t1325 + t1245;
 t48 = t1386 * t1934 - t1828 / 0.2e1 + t1427 * t1891 + t266 * t1897 + t497 * t1548 + t426 * t1546 + t1050 * t1526 + t1644 + t1742 / 0.2e1 + t1973 * pkin(12);
-t47 = pkin(12) * t1975 + t1050 * t1527 + t1426 * t1892 + t1552 * t426 + t1553 * t497 + t1897 * t265 - t1293 + t1399;
+t47 = pkin(12) * t1975 + t1050 * t1527 + t1426 * t1892 + t426 * t1552 + t497 * t1553 + t265 * t1897 - t1293 + t1399;
 t44 = t664 * t1637 + t1648 + t1778 / 0.2e1 + t1827 / 0.2e1 + t1604;
 t42 = t664 * t1638 + t1649 + t1777 / 0.2e1 + t1803 / 0.2e1 + t1612;
 t40 = -t1242 + t1363;
@@ -1301,7 +1301,7 @@ t25 = t127 * t1554 + t1605 - t1824 / 0.2e1 - t1271;
 t22 = -t1247 + t1369;
 t21 = -t1248 + t1367;
 t12 = t1386 * t1952 - t1829 / 0.2e1 + t1430 * t1891 + t60 * t1897 + t142 * t1548 + t127 * t1546 + t845 * t1526 + t1647 + t1772 / 0.2e1 + t1972 * pkin(12);
-t11 = pkin(12) * t1974 + t127 * t1552 + t142 * t1553 + t1429 * t1892 + t1527 * t845 + t1897 * t59 - t1294 + t1400;
+t11 = pkin(12) * t1974 + t127 * t1552 + t142 * t1553 + t1429 * t1892 + t845 * t1527 + t59 * t1897 - t1294 + t1400;
 t8 = t1204 + t1278;
 t7 = t1205 + t1279;
 t4 = t1191 * t1397 + t1550 * t60 + t1607 * t266 - t1217 + t1389;

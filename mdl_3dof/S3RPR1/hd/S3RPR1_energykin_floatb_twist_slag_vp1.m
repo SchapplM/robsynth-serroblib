@@ -27,11 +27,11 @@
 % T [1x1]
 %   kinetic energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:14
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:06
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function T = S3RPR1_energykin_floatb_twist_slag_vp1(qJ, qJD, V_base, ...
   pkin, m, rSges, Icges)
@@ -46,7 +46,7 @@ assert(isreal(V_base) && all(size(V_base) == [6 1]), ...
   'S3RPR1_energykin_floatb_twist_slag_vp1: V_base has to be [6x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [4 1]), ...
   'S3RPR1_energykin_floatb_twist_slag_vp1: pkin has to be [4x1] (double)');
-assert( isreal(m) && all(size(m) == [4 1]), ...
+assert(isreal(m) && all(size(m) == [4 1]), ...
   'S3RPR1_energykin_floatb_twist_slag_vp1: m has to be [4x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [4,3]), ...
   'S3RPR1_energykin_floatb_twist_slag_vp1: rSges has to be [4x3] (double)');
@@ -56,9 +56,9 @@ assert(isreal(Icges) && all(size(Icges) == [4 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_floatb_twist_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:14:21
-% EndTime: 2018-11-14 10:14:22
-% DurationCPUTime: 0.54s
+% StartTime: 2019-03-08 18:05:50
+% EndTime: 2019-03-08 18:05:51
+% DurationCPUTime: 0.50s
 % Computational Cost: add. (233->111), mult. (348->142), div. (0->0), fcn. (264->4), ass. (0->52)
 t99 = Icges(2,4) - Icges(3,5);
 t98 = Icges(2,1) + Icges(3,1);
@@ -67,10 +67,10 @@ t74 = sin(qJ(1));
 t96 = t99 * t74;
 t75 = cos(qJ(1));
 t95 = t99 * t75;
-t94 = -t97 * t75 - t96;
-t93 = t97 * t74 - t95;
-t92 = t98 * t74 + t95;
-t91 = t98 * t75 - t96;
+t94 = -t75 * t97 - t96;
+t93 = t74 * t97 - t95;
+t92 = t74 * t98 + t95;
+t91 = t75 * t98 - t96;
 t90 = Icges(3,4) + Icges(2,5);
 t89 = Icges(2,6) - Icges(3,6);
 t88 = pkin(2) * t74;
@@ -79,21 +79,21 @@ t86 = cos(qJ(3));
 t85 = sin(qJ(3));
 t43 = -t74 * t85 - t75 * t86;
 t83 = Icges(4,4) * t43;
-t63 = pkin(1) * t75 + t74 * qJ(2);
+t63 = pkin(1) * t75 + qJ(2) * t74;
 t69 = V_base(6) + qJD(1);
-t81 = t69 * t63 + V_base(2);
-t60 = t74 * pkin(1) - qJ(2) * t75;
-t80 = V_base(4) * t60 + V_base(3);
+t81 = t63 * t69 + V_base(2);
+t60 = pkin(1) * t74 - qJ(2) * t75;
+t80 = t60 * V_base(4) + V_base(3);
 t79 = V_base(5) * pkin(3) + V_base(1);
 t76 = qJD(2) * t74 + t79;
 t66 = -qJD(3) + t69;
-t65 = rSges(2,1) * t75 - t74 * rSges(2,2);
-t64 = rSges(3,1) * t75 + t74 * rSges(3,3);
-t62 = t74 * rSges(2,1) + rSges(2,2) * t75;
-t61 = t74 * rSges(3,1) - rSges(3,3) * t75;
-t47 = -V_base(5) * rSges(1,1) + V_base(4) * rSges(1,2) + V_base(3);
-t46 = V_base(6) * rSges(1,1) - V_base(4) * rSges(1,3) + V_base(2);
-t45 = -V_base(6) * rSges(1,2) + V_base(5) * rSges(1,3) + V_base(1);
+t65 = rSges(2,1) * t75 - rSges(2,2) * t74;
+t64 = rSges(3,1) * t75 + rSges(3,3) * t74;
+t62 = rSges(2,1) * t74 + rSges(2,2) * t75;
+t61 = rSges(3,1) * t74 - rSges(3,3) * t75;
+t47 = -rSges(1,1) * V_base(5) + rSges(1,2) * V_base(4) + V_base(3);
+t46 = rSges(1,1) * V_base(6) - rSges(1,3) * V_base(4) + V_base(2);
+t45 = -rSges(1,2) * V_base(6) + rSges(1,3) * V_base(5) + V_base(1);
 t44 = t74 * t86 - t75 * t85;
 t41 = Icges(4,4) * t44;
 t39 = V_base(5) * rSges(2,3) - t62 * t69 + t79;
@@ -111,5 +111,5 @@ t26 = t61 * V_base(4) + (-t63 - t64) * V_base(5) + t80;
 t25 = -t35 * t66 + t87 * V_base(5) + (-t60 - t88) * t69 + t76;
 t24 = t66 * t36 + (pkin(2) * t69 - qJD(2)) * t75 + (-pkin(3) - t87) * V_base(4) + t81;
 t23 = (t35 + t88) * V_base(4) + (-pkin(2) * t75 - t36 - t63) * V_base(5) + t80;
-t1 = m(1) * (t45 ^ 2 + t46 ^ 2 + t47 ^ 2) / 0.2e1 + Icges(1,1) * V_base(4) ^ 2 / 0.2e1 + Icges(1,2) * V_base(5) ^ 2 / 0.2e1 + m(2) * (t37 ^ 2 + t38 ^ 2 + t39 ^ 2) / 0.2e1 + m(3) * (t26 ^ 2 + t27 ^ 2 + t28 ^ 2) / 0.2e1 + m(4) * (t23 ^ 2 + t24 ^ 2 + t25 ^ 2) / 0.2e1 + V_base(4) * V_base(5) * Icges(1,4) + (Icges(1,5) * V_base(4) + Icges(1,6) * V_base(5) + Icges(1,3) * V_base(6) / 0.2e1) * V_base(6) + ((-Icges(4,5) * t44 - Icges(4,6) * t43) * V_base(5) + (Icges(4,5) * t43 - Icges(4,6) * t44) * V_base(4) + Icges(4,3) * t66 / 0.2e1) * t66 + ((Icges(2,3) / 0.2e1 + Icges(3,2) / 0.2e1) * t69 + (t89 * V_base(5) + t90 * V_base(4)) * t75 + (-t89 * V_base(4) + t90 * V_base(5)) * t74) * t69 + ((t31 * t44 - t33 * t43 + t94 * t74 + t92 * t75) * V_base(5) + (t44 * t32 - t43 * t34 + t93 * t74 + t91 * t75) * V_base(4)) * V_base(4) / 0.2e1 + ((t43 * t31 + t44 * t33 + t92 * t74 - t94 * t75) * V_base(5) + (t32 * t43 + t34 * t44 + t91 * t74 - t93 * t75) * V_base(4)) * V_base(5) / 0.2e1;
+t1 = m(1) * (t45 ^ 2 + t46 ^ 2 + t47 ^ 2) / 0.2e1 + Icges(1,1) * V_base(4) ^ 2 / 0.2e1 + Icges(1,2) * V_base(5) ^ 2 / 0.2e1 + m(2) * (t37 ^ 2 + t38 ^ 2 + t39 ^ 2) / 0.2e1 + m(3) * (t26 ^ 2 + t27 ^ 2 + t28 ^ 2) / 0.2e1 + m(4) * (t23 ^ 2 + t24 ^ 2 + t25 ^ 2) / 0.2e1 + V_base(4) * V_base(5) * Icges(1,4) + (Icges(1,5) * V_base(4) + Icges(1,6) * V_base(5) + Icges(1,3) * V_base(6) / 0.2e1) * V_base(6) + ((-Icges(4,5) * t44 - Icges(4,6) * t43) * V_base(5) + (Icges(4,5) * t43 - Icges(4,6) * t44) * V_base(4) + Icges(4,3) * t66 / 0.2e1) * t66 + ((Icges(2,3) / 0.2e1 + Icges(3,2) / 0.2e1) * t69 + (t89 * V_base(5) + t90 * V_base(4)) * t75 + (-t89 * V_base(4) + t90 * V_base(5)) * t74) * t69 + ((t31 * t44 - t33 * t43 + t74 * t94 + t75 * t92) * V_base(5) + (t44 * t32 - t43 * t34 + t93 * t74 + t91 * t75) * V_base(4)) * V_base(4) / 0.2e1 + ((t43 * t31 + t44 * t33 + t92 * t74 - t94 * t75) * V_base(5) + (t32 * t43 + t34 * t44 + t74 * t91 - t75 * t93) * V_base(4)) * V_base(5) / 0.2e1;
 T  = t1;

@@ -15,11 +15,11 @@
 % U_reg [1x(4*10)]
 %   inertial parameter regressor of Potential energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:56
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:10
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function U_reg = S4PPPR2_energypot_fixb_reg2_slag_vp(qJ, g, pkin)
 %% Coder Information
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:55:35
-% EndTime: 2018-11-14 13:55:35
-% DurationCPUTime: 0.04s
+% StartTime: 2019-03-08 18:10:17
+% EndTime: 2019-03-08 18:10:17
+% DurationCPUTime: 0.03s
 % Computational Cost: add. (32->25), mult. (40->26), div. (0->0), fcn. (34->4), ass. (0->13)
 t28 = g(2) * qJ(1);
 t27 = g(3) * qJ(2);

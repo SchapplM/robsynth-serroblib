@@ -16,11 +16,11 @@
 %   minimal parameter regressor of inerta matrix time derivative
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:16
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:08
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function MMD_reg = S3RRR1_inertiaDJ_regmin_slag_vp(qJ, qJD, ...
   pkin)
@@ -37,8 +37,8 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
 %% Symbolic Calculation
 % From inertiaD_joint_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:16:09
-% EndTime: 2018-11-14 10:16:09
+% StartTime: 2019-03-08 18:08:08
+% EndTime: 2019-03-08 18:08:08
 % DurationCPUTime: 0.08s
 % Computational Cost: add. (30->15), mult. (104->28), div. (0->0), fcn. (58->4), ass. (0->18)
 t18 = pkin(1) * qJD(2);
@@ -53,7 +53,7 @@ t9 = cos(qJ(2));
 t14 = t9 * t18;
 t13 = pkin(2) * t17;
 t12 = pkin(2) * t16;
-t5 = pkin(1) * t9 + pkin(2);
+t5 = t9 * pkin(1) + pkin(2);
 t11 = (-pkin(2) - t5) * qJD(3);
 t10 = (-t7 * t16 + (-t6 * t9 - t7 * t8) * qJD(2)) * pkin(1);
 t2 = -t5 * t17 + t10;

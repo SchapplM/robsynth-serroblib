@@ -11,7 +11,7 @@
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,a6,alpha2,alpha3,alpha4,d1,d2,d4,d5,d6,theta3]';
 % m_mdh [7x1]
-%   mass of all robot links (leg links until cut joint, platform)
+%   mass of all robot links (including the base)
 % mrSges [7x3]
 %  first moment of all robot links (mass times center of mass in body frames)
 %  rows: links of the robot (starting with base)
@@ -21,11 +21,11 @@
 % taug [6x1]
 %   joint torques required to compensate gravitation load
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2019-01-03 10:26
-% Revision: 5fdbc45bcf2cc60deefd7ac2d71d743ed41bf7e4 (2018-12-21)
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-09 15:13
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug = S6RRPRRR14_gravloadJ_floatb_twist_slag_vp2(qJ, g, ...
   pkin, m, mrSges)
@@ -46,9 +46,9 @@ assert(isreal(mrSges) && all(size(mrSges) == [7,3]), ...
 %% Symbolic Calculation
 % From gravload_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-03 10:07:52
-% EndTime: 2019-01-03 10:08:00
-% DurationCPUTime: 2.46s
+% StartTime: 2019-03-09 14:57:20
+% EndTime: 2019-03-09 14:57:26
+% DurationCPUTime: 2.45s
 % Computational Cost: add. (2525->208), mult. (7155->311), div. (0->0), fcn. (9298->18), ass. (0->117)
 t101 = sin(qJ(5));
 t104 = cos(qJ(5));
@@ -107,7 +107,7 @@ t66 = t176 * t147 - t78 * t98;
 t149 = -t100 * mrSges(7,1) - t103 * mrSges(7,2);
 t203 = mrSges(5,2) - mrSges(6,3);
 t191 = t149 + t203;
-t205 = pkin(4) * t204 - t101 * t200 + t104 * t202 + mrSges(5,1);
+t205 = pkin(4) * t204 - t200 * t101 + t202 * t104 + mrSges(5,1);
 t201 = -t99 * mrSges(4,3) + mrSges(3,2);
 t199 = t111 * t176 - t206 * t98;
 t169 = t99 * t178;

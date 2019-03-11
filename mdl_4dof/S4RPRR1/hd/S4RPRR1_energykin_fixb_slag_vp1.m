@@ -25,11 +25,11 @@
 % T [1x1]
 %   kinetic energy
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:51
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:32
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function T = S4RPRR1_energykin_fixb_slag_vp1(qJ, qJD, ...
   pkin, m, rSges, Icges)
@@ -42,7 +42,7 @@ assert(isreal(qJD) && all(size(qJD) == [4 1]), ...
   'S4RPRR1_energykin_fixb_slag_vp1: qJD has to be [4x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [7 1]), ...
   'S4RPRR1_energykin_fixb_slag_vp1: pkin has to be [7x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RPRR1_energykin_fixb_slag_vp1: m has to be [5x1] (double)'); 
 assert(isreal(rSges) && all(size(rSges) == [5,3]), ...
   'S4RPRR1_energykin_fixb_slag_vp1: rSges has to be [5x3] (double)');
@@ -52,14 +52,14 @@ assert(isreal(Icges) && all(size(Icges) == [5 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:50:28
-% EndTime: 2018-11-14 13:50:28
-% DurationCPUTime: 0.08s
+% StartTime: 2019-03-08 18:31:39
+% EndTime: 2019-03-08 18:31:39
+% DurationCPUTime: 0.07s
 % Computational Cost: add. (77->37), mult. (81->58), div. (0->0), fcn. (28->8), ass. (0->28)
-t158 = sin(qJ(1));
-t165 = pkin(1) * t158;
 t156 = qJD(1) + qJD(3);
-t164 = pkin(3) * t156;
+t165 = pkin(3) * t156;
+t158 = sin(qJ(1));
+t164 = t158 * pkin(1);
 t159 = cos(qJ(1));
 t151 = qJD(1) * t159 * pkin(1);
 t157 = qJ(1) + pkin(7);
@@ -67,7 +67,7 @@ t153 = cos(t157);
 t163 = qJD(1) * pkin(2) * t153 + t151;
 t155 = qJ(3) + t157;
 t152 = sin(t157);
-t162 = (-pkin(2) * t152 - t165) * qJD(1);
+t162 = (-pkin(2) * t152 - t164) * qJD(1);
 t160 = qJD(2) ^ 2;
 t154 = qJD(4) + t156;
 t150 = qJ(4) + t155;
@@ -75,13 +75,13 @@ t149 = cos(t155);
 t148 = sin(t155);
 t147 = cos(t150);
 t146 = sin(t150);
-t144 = rSges(2,1) * t159 - rSges(2,2) * t158;
-t143 = rSges(2,1) * t158 + rSges(2,2) * t159;
-t142 = t151 + qJD(1) * (rSges(3,1) * t153 - rSges(3,2) * t152);
-t141 = (-rSges(3,1) * t152 - rSges(3,2) * t153 - t165) * qJD(1);
-t140 = t156 * (rSges(4,1) * t149 - rSges(4,2) * t148) + t163;
-t139 = -t156 * (rSges(4,1) * t148 + rSges(4,2) * t149) + t162;
-t138 = t149 * t164 + t154 * (rSges(5,1) * t147 - rSges(5,2) * t146) + t163;
-t137 = -t148 * t164 - t154 * (rSges(5,1) * t146 + rSges(5,2) * t147) + t162;
+t144 = t159 * rSges(2,1) - t158 * rSges(2,2);
+t143 = t158 * rSges(2,1) + t159 * rSges(2,2);
+t142 = t151 + qJD(1) * (t153 * rSges(3,1) - t152 * rSges(3,2));
+t141 = (-t152 * rSges(3,1) - t153 * rSges(3,2) - t164) * qJD(1);
+t140 = t156 * (t149 * rSges(4,1) - t148 * rSges(4,2)) + t163;
+t139 = -t156 * (t148 * rSges(4,1) + t149 * rSges(4,2)) + t162;
+t138 = t149 * t165 + t154 * (t147 * rSges(5,1) - t146 * rSges(5,2)) + t163;
+t137 = -t148 * t165 - t154 * (t146 * rSges(5,1) + t147 * rSges(5,2)) + t162;
 t1 = m(3) * (t141 ^ 2 + t142 ^ 2 + t160) / 0.2e1 + m(4) * (t139 ^ 2 + t140 ^ 2 + t160) / 0.2e1 + t156 ^ 2 * Icges(4,3) / 0.2e1 + m(5) * (t137 ^ 2 + t138 ^ 2 + t160) / 0.2e1 + t154 ^ 2 * Icges(5,3) / 0.2e1 + (m(2) * (t143 ^ 2 + t144 ^ 2) / 0.2e1 + Icges(2,3) / 0.2e1 + Icges(3,3) / 0.2e1) * qJD(1) ^ 2;
 T  = t1;
