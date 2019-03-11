@@ -19,11 +19,11 @@
 % tau_reg [3x9]
 %   minimal parameter regressor of inverse dynamics joint torque vector
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 10:16
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:08
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tau_reg = S3RRR1_invdynJ_fixb_regmin_slag_vp(qJ, qJD, qJDD, g, ...
   pkin)
@@ -44,9 +44,9 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
 %% Symbolic Calculation
 % From invdyn_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 10:16:00
-% EndTime: 2018-11-14 10:16:00
-% DurationCPUTime: 0.20s
+% StartTime: 2019-03-08 18:08:08
+% EndTime: 2019-03-08 18:08:08
+% DurationCPUTime: 0.19s
 % Computational Cost: add. (188->71), mult. (274->92), div. (0->0), fcn. (148->10), ass. (0->45)
 t27 = cos(qJ(2));
 t52 = t27 * pkin(1);

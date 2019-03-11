@@ -7,5 +7,6 @@ robot_KP="d2"
 robot_kinconstr_exist=0
 robot_NKCP=0
 robot_KCP=""
-robot_NMPVFIXB=NOTDEFINED
+robot_NMPVFIXB=10
 robot_NMPVFLOATB=NOTDEFINED
+robot_NTAUJFIXBREGNN=16

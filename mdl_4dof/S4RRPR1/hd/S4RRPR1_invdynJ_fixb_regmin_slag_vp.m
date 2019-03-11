@@ -20,8 +20,8 @@
 %   minimal parameter regressor of inverse dynamics joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-01-31 13:16
-% Revision: 9ef80adae39e3cd5824e7abdb6e4e1e7895c437e (2019-01-31)
+% Datum: 2019-03-08 18:35
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -44,9 +44,9 @@ assert(isreal(pkin) && all(size(pkin) == [7 1]), ...
 %% Symbolic Calculation
 % From invdyn_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-01-31 13:16:46
-% EndTime: 2019-01-31 13:16:47
-% DurationCPUTime: 0.26s
+% StartTime: 2019-03-08 18:35:06
+% EndTime: 2019-03-08 18:35:06
+% DurationCPUTime: 0.22s
 % Computational Cost: add. (385->92), mult. (662->125), div. (0->0), fcn. (386->12), ass. (0->59)
 t42 = sin(qJ(2));
 t60 = qJDD(1) * t42;

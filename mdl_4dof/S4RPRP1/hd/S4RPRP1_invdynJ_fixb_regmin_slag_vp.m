@@ -19,11 +19,11 @@
 % tau_reg [4x10]
 %   minimal parameter regressor of inverse dynamics joint torque vector
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:49
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:30
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tau_reg = S4RPRP1_invdynJ_fixb_regmin_slag_vp(qJ, qJD, qJDD, g, ...
   pkin)
@@ -44,8 +44,8 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From invdyn_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-14 13:48:40
-% EndTime: 2018-11-14 13:48:40
+% StartTime: 2019-03-08 18:29:43
+% EndTime: 2019-03-08 18:29:44
 % DurationCPUTime: 0.18s
 % Computational Cost: add. (293->69), mult. (447->78), div. (0->0), fcn. (238->10), ass. (0->52)
 t41 = cos(pkin(6));
@@ -99,5 +99,5 @@ t7 = qJD(4) + t53;
 t4 = t37 * qJ(4) + t6;
 t3 = -t37 * pkin(3) + t63;
 t1 = t57 + t70;
-t11 = [qJDD(1), t54, g(1) * t45 + g(2) * t43 (t54 + (t40 ^ 2 + t41 ^ 2) * qJDD(1) * pkin(1)) * pkin(1), t36, t51 * t36 + t47, -t64 * t36 - t53 * t37 + t52, -qJDD(4) + (pkin(3) - t10) * t36 + t47, t9 * t36 + t7 * t37 - t52 + t70, t1 * t9 + t4 * t7 + t2 * t10 + t3 * t8 - g(1) * (-pkin(2) * sin(t38) - t43 * pkin(1) + t58) - g(2) * (pkin(2) * cos(t38) + t45 * pkin(1) + t65); 0, 0, 0, t39, 0, 0, 0, 0, 0, t39; 0, 0, 0, 0, t36, t48, t49, -qJDD(4) + t48 + 0.2e1 * t67, 0.2e1 * t33 + 0.2e1 * t34 - t49, -t2 * pkin(3) - g(1) * t58 - g(2) * t65 + t1 * qJ(4) - t3 * t6 + t63 * t4; 0, 0, 0, 0, 0, 0, 0, -t36, -t37 ^ 2, -t4 * t37 + t2 - t71;];
+t11 = [qJDD(1), t54, g(1) * t45 + g(2) * t43 (t54 + (t40 ^ 2 + t41 ^ 2) * qJDD(1) * pkin(1)) * pkin(1), t36, t36 * t51 + t47, -t64 * t36 - t53 * t37 + t52, -qJDD(4) + (pkin(3) - t10) * t36 + t47, t9 * t36 + t7 * t37 - t52 + t70, t1 * t9 + t4 * t7 + t2 * t10 + t3 * t8 - g(1) * (-pkin(2) * sin(t38) - t43 * pkin(1) + t58) - g(2) * (pkin(2) * cos(t38) + t45 * pkin(1) + t65); 0, 0, 0, t39, 0, 0, 0, 0, 0, t39; 0, 0, 0, 0, t36, t48, t49, -qJDD(4) + t48 + 0.2e1 * t67, 0.2e1 * t33 + 0.2e1 * t34 - t49, -t2 * pkin(3) - g(1) * t58 - g(2) * t65 + t1 * qJ(4) - t3 * t6 + t63 * t4; 0, 0, 0, 0, 0, 0, 0, -t36, -t37 ^ 2, -t4 * t37 + t2 - t71;];
 tau_reg  = t11;

@@ -21,11 +21,11 @@
 % MPV [15x1]
 %   base parameter vector (minimal parameter vector)
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:46
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:26
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function MPV = S4RPPP1_convert_par2_MPV_fixb(pkin, m, mrSges, Ifges)
 
@@ -34,7 +34,7 @@ function MPV = S4RPPP1_convert_par2_MPV_fixb(pkin, m, mrSges, Ifges)
 %$cgargs {zeros(6,1),zeros(5,1),zeros(5,3),zeros(5,6)}
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
   'S4RPPP1_convert_par2_MPV_fixb: pkin has to be [6x1] (double)');
-assert( isreal(m) && all(size(m) == [5 1]), ...
+assert(isreal(m) && all(size(m) == [5 1]), ...
   'S4RPPP1_convert_par2_MPV_fixb: m has to be [5x1] (double)'); 
 assert(isreal(mrSges) && all(size(mrSges) == [5,3]), ...
   'S4RPPP1_convert_par2_MPV_fixb: mrSges has to be [5x3] (double)');
@@ -43,9 +43,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 
 %% Symbolic Calculation
 % From minimal_parameter_vector_fixb_matlab.m
-t88 = cos(pkin(4));
-t87 = cos(pkin(6));
-t86 = sin(pkin(4));
-t85 = sin(pkin(6));
-t1 = [Ifges(2,3) + ((Ifges(3,3) + Ifges(4,1) + Ifges(5,1)) * t88 + 0.2e1 * (t85 * (Ifges(3,5) - Ifges(4,4) + Ifges(5,5)) + t87 * (Ifges(3,6) - Ifges(4,5) - Ifges(5,4))) * t86) * t88 + (t87 ^ 2 * (Ifges(3,2) + Ifges(4,3) + Ifges(5,2)) + (0.2e1 * t87 * (Ifges(3,4) + Ifges(4,6) - Ifges(5,6)) + (Ifges(3,1) + Ifges(4,2) + Ifges(5,3)) * t85) * t85) * t86 ^ 2; mrSges(2,1); mrSges(2,2); mrSges(3,1); mrSges(3,2); mrSges(3,3); m(3); mrSges(4,1); mrSges(4,2); mrSges(4,3); m(4); mrSges(5,1); mrSges(5,2); mrSges(5,3); m(5);];
+t81 = cos(pkin(4));
+t80 = cos(pkin(6));
+t79 = sin(pkin(4));
+t78 = sin(pkin(6));
+t1 = [Ifges(2,3) + ((Ifges(3,3) + Ifges(4,1) + Ifges(5,1)) * t81 + 0.2e1 * (t78 * (Ifges(3,5) - Ifges(4,4) + Ifges(5,5)) + t80 * (Ifges(3,6) - Ifges(4,5) - Ifges(5,4))) * t79) * t81 + (t80 ^ 2 * (Ifges(3,2) + Ifges(4,3) + Ifges(5,2)) + (0.2e1 * t80 * (Ifges(3,4) + Ifges(4,6) - Ifges(5,6)) + (Ifges(3,1) + Ifges(4,2) + Ifges(5,3)) * t78) * t78) * t79 ^ 2; mrSges(2,1); mrSges(2,2); mrSges(3,1); mrSges(3,2); mrSges(3,3); m(3); mrSges(4,1); mrSges(4,2); mrSges(4,3); m(4); mrSges(5,1); mrSges(5,2); mrSges(5,3); m(5);];
 MPV  = t1;

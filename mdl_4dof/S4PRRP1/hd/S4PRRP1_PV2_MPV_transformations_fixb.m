@@ -24,11 +24,11 @@
 % [Sousa2014] Sousa, C. D. and Cortesao, R.: Physical feasibility of robot
 % base inertial parameter identification: A linear matrix inequality approach (2014)
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-14 13:44
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2019-03-08 18:23
+% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function [K, K_d, P_b, P_d] = S4PRRP1_PV2_MPV_transformations_fixb(pkin)
 
