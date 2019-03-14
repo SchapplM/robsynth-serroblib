@@ -46,3 +46,7 @@ end
 Name = 'S6RRPRRR14';
 serroblib_generate_mapleinput({Name})
 serroblib_generate_code({Name}, true)
+
+%% Vorlagen-Funktionen für ein bestimmtes Modell neu generieren
+Name = 'S4RRPR1';
+serroblib_generate_code({Name}, true, false, 2)
