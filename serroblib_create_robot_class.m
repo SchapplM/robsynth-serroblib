@@ -23,7 +23,7 @@ function RS = serroblib_create_robot_class(Name, RobName)
 N = str2double(Name(2)); % Annahme: Namensschema SxRRR; mit x="Anzahl Gelenk-FG"
 repopath=fileparts(which('serroblib_path_init.m'));
 mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
-l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_phiNE');
+l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_phiNE', 'BitArrays_EEdof0');
 
 % Bit-Array für Namen
 BA = l.BitArrays_Ndof(strcmp(l.Names_Ndof,Name),:);
@@ -31,6 +31,10 @@ if isempty(BA)
   error('Roboter %s ist nicht bekannt', Name);
 end
 [~, csvbits] = serroblib_bits2csvline(BA);
+% Bit-Array für EE-Eigenschaften
+BAE = l.BitArrays_EEdof0(strcmp(l.Names_Ndof,Name),:);
+[~, EEFG0] = serroblib_bits2csvline_EE(BAE);
+% Bit-Array für Endeffektor-Rotation
 BAR = l.BitArrays_phiNE(strcmp(l.Names_Ndof,Name),:);
 %% Parameter-Struktur erstellen
 
@@ -199,6 +203,10 @@ RS = RS.fill_fcn_handles(false);
 
 % Setze Euler-Winkel für Transformation zum EE-KS
 RS.update_EE(zeros(3,1), phi_N_E, uint8(2));
+
+% EE-FG einsetzen
+RS.I_EE = logical(EEFG0([1:3,7:9]));
+RS.I_EE_Task = RS.I_EE; % Setze EE-FG für Aufgabe (für IK) auf EE-FG des Roboters
 
 RS.update_pkin();
 
