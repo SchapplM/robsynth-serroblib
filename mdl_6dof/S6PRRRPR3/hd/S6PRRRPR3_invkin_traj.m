@@ -15,6 +15,8 @@
 % XDD
 %   Trajektorie von EE-Beschleunigungen (Sollwerte)
 %   Orientierung bezogen auf Euler-Winkel
+% PHI
+%   Kinematische Zwangsbedingungen über die Trajektorie
 % T
 %   Zeitbasis der Trajektorie (Alle Zeit-Stützstellen)
 % q0
@@ -44,14 +46,14 @@
 % [2] Aufzeichnungen Schappler vom 11.12.2018
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-28 13:00
-% Revision: 2bf3b907e1213de0593c9d1d0a7eb98ef6ddbfca (2019-02-28)
+% Datum: 2019-03-14 16:10
+% Revision: 386a36ae716355afebba52144c67e2e472fda1cd (2019-03-13)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2019-02
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function [Q, QD, QDD] = S6PRRRPR3_invkin_traj(X, XD, XDD, T, q0, s)
+function [Q, QD, QDD, PHI] = S6PRRRPR3_invkin_traj(X, XD, XDD, T, q0, s)
 
 %% Coder Information
 %#codegen
@@ -67,7 +69,6 @@ function [Q, QD, QDD] = S6PRRRPR3_invkin_traj(X, XD, XDD, T, q0, s)
 %$cgargs        'I_EElink', uint8(0),
 %$cgargs            'reci', true,
 %$cgargs           'T_N_E', zeros(4,4),
-%$cgargs        'task_red', false,
 %$cgargs               'K', zeros(6,1),
 %$cgargs              'Kn', zeros(6,1),
 %$cgargs              'wn', 0,
@@ -82,6 +83,7 @@ function [Q, QD, QDD] = S6PRRRPR3_invkin_traj(X, XD, XDD, T, q0, s)
 Q = NaN(length(T), s.NQJ);
 QD = Q;
 QDD = Q;
+PHI = NaN( length(T), sum(s.I_EE) );
 
 % Einstellungsvariablen aus Struktur herausholen
 I_EE = s.I_EE;
@@ -97,7 +99,7 @@ for k = 1:nt
   %% Gelenk-Position berechnen
   % Inverse Kinematik für aktuellen Bahnpunkt. Nutze Anfangswert aus der
   % differentiellen Kinematik hiernach von der letzten Iteration (k-1)
-  q_k = S6PRRRPR3_invkin_eulangresidual(X(k,:)', qk0, s);
+  [q_k, Phi_k] = S6PRRRPR3_invkin_eulangresidual(X(k,:)', qk0, s);
 
   %% Gelenk-Geschwindigkeit berechnen (Siehe [1]).
   % Geometrische Jacobi-Matrix in analytische Jacobi umrechnen
@@ -133,4 +135,6 @@ for k = 1:nt
   Q(k,:) = q_k;
   QD(k,:) = qD_k;
   QDD(k,:) = qDD_k;
+  PHI(k,:) = Phi_k;
 end
+
