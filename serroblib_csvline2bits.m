@@ -63,7 +63,7 @@ for kk = 1:N % über alle Gelenk-FG
   descr_type = {'R', 'P'};
   descr_beta = {'0', 'pi/2', 'pi', '-pi/2', sprintf('beta%d',kk)};
   descr_b = {'0', sprintf('b%d',kk)};
-  descr_theta = {'0', 'pi/2', 'pi', '-pi/2', sprintf('theta%d',kk)};
+  descr_theta = {'0', 'pi/2', 'pi', '-pi/2', sprintf('theta%d',kk), 'q%d'};
   descr_d = {'0', sprintf('d%d',kk)};
   descr_alpha = {'0', 'pi/2', 'pi', '-pi/2', sprintf('alpha%d',kk)};
   descr_a = {'0', sprintf('a%d',kk)};
@@ -77,8 +77,21 @@ for kk = 1:N % über alle Gelenk-FG
   c=c+1; Bit_b      = uint16(find(strcmp(csvline{c},descr_b     ))-1);
   c=c+1; Bit_alpha  = uint16(find(strcmp(csvline{c},descr_alpha ))-1); 
   c=c+1; Bit_a      = uint16(find(strcmp(csvline{c},descr_a     ))-1);
-  c=c+1; Bit_theta  = uint16(find(strcmp(csvline{c},descr_theta ))-1);
-  c=c+1; Bit_d      = uint16(find(strcmp(csvline{c},descr_d     ))-1);
+  c=c+1;
+  if Bit_type == 1
+    % Schubgelenk: theta ist Parameter
+    Bit_theta  = uint16(find(strcmp(csvline{c},descr_theta ))-1);
+  else
+    % Drehgelenk: Theta ist Gelenkkoordinate. Setze auf 0
+    Bit_theta = uint16(0);
+  end
+  c=c+1; 
+  if Bit_type == 0
+    % Drehgelenk, d ist Parameter
+    Bit_d      = uint16(find(strcmp(csvline{c},descr_d     ))-1);
+  else
+    Bit_d = uint16(0);
+  end
   c=c+1; Bit_offset = uint16(find(strcmp(csvline{c},descr_offset))-1);
   
   % Bit-Array aus den Bits für alle Parameter zusammenstellen

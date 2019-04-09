@@ -147,8 +147,18 @@ for kk = 1:N
   c = c+1; csvline{c} = descr_b{MDH_struct.b(kk)+1}; %#ok<AGROW>
   c = c+1; csvline{c} = descr_alpha{MDH_struct.alpha(kk)+1}; %#ok<AGROW>
   c = c+1; csvline{c} = descr_a{MDH_struct.a(kk)+1}; %#ok<AGROW>
-  c = c+1; csvline{c} = descr_theta{MDH_struct.theta(kk)+1}; %#ok<AGROW>
-  c = c+1; csvline{c} = descr_d{MDH_struct.d(kk)+1}; %#ok<AGROW>
+  c = c+1; 
+  if strcmp(descr_type{MDH_struct.type(kk)+1}, 'R')
+    csvline{c} = sprintf('q%d', kk); %#ok<AGROW>
+  else
+    csvline{c} = descr_theta{MDH_struct.theta(kk)+1}; %#ok<AGROW>
+  end
+  c = c+1;
+  if strcmp(descr_type{MDH_struct.type(kk)+1}, 'P')
+    csvline{c} = sprintf('q%d', kk); %#ok<AGROW>
+  else
+    csvline{c} = descr_d{MDH_struct.d(kk)+1}; %#ok<AGROW>
+  end
   c = c+1; csvline{c} = descr_offset{MDH_struct.offset(kk)+1}; %#ok<AGROW>
 end
 
