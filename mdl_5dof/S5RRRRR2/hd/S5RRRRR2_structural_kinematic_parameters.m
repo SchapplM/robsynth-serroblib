@@ -12,14 +12,18 @@
 %   Anzahl der Starrkörper (inklusive Basis)
 % NKP [1x1]
 %   Anzahl der Kinematikparameter im Vektor `pkin`
+% NQJ [1x1]
+%   Anzahl der Minimalkoordinaten der kinematischen Kette
+% pkin_names (1x2) cell
+%   Namen aller Kinematik-Parameter im Vektor `pkin`
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-29 15:26
-% Revision: 932832b1be1be80f59b7f1a581a1a8f328bdb39d (2019-03-29)
+% Datum: 2019-04-09 16:43
+% Revision: 6c14de6f4c9ff4dbe46db99908a97716657f1d1c (2019-04-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function [v_mdh, sigma_mdh, mu_mdh, NL, NKP] = S5RRRRR2_structural_kinematic_parameters()
+function [v_mdh, sigma_mdh, mu_mdh, NL, NKP, NQJ, pkin_names] = S5RRRRR2_structural_kinematic_parameters()
 
 % Aus parameters_mdh_v_matlab.m
 t1 = [0; 1; 2; 3; 4;];
@@ -39,3 +43,7 @@ NL = 6;
 % Anzahl der Kinematikparameter
 % pkin = [a2 a4]'
 NKP = 2;
+% Anzahl der Minimalkoordinaten (für hybride Systeme)
+NQJ = 5;
+% Namen der Kinematikparameter
+pkin_names = {'a2', 'a4'};
