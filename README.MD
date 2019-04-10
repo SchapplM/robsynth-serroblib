@@ -43,10 +43,14 @@ Datenbank auslesen und benutzen:
 * `serroblib_generate_code`: Kinematik- und Dynamikfunktionen symbolisch mit der HybrDyn-Toolbox berechnen lassen.
 * `serroblib_addtopath`: Matlab-Funktionen dieses Roboters zum Matlab-Pfad hinzufügen, damit die Funktionsaufrufe funktionieren.
 
+Zusätzliche Eigenschaften des Roboters ermitteln und ebenfalls eintragen (ist notwendig, da manche Eigenschaften erst mit den generierten Matlab-Funktionen berechnet werden können): 
+* `scripts/correct_phi_N_E.m`
+* `scripts/determine_jointnumber_influence_ee_position.m`
+
 Datenbank prüfen:
 * Mit `scripts/check_model_enumeration.m` lässt sich prüfen, ob nach Lösung von Kinematiken Lücken in der Nummerierung auftreten.
 
-Datenbank modifizieren: Wenn nachträglich das Format der Datenbank geändert wird, geschieht dies automatisiert über Skripte (Ordner `scripts`):
+Datenbank modifizieren: Wenn nachträglich das Format der Datenbank geändert wird, geschieht dies automatisiert über Skripte (Ordner `scripts`). Die folgenden Skripte können als Beispiele für weitere Modifikationen dienen:
 * `add_csv_column_ee_phi.m` und `correct_phi_N_E.m`: Hinzufügen und Belegen von Spalten für zusätzliche EE-Drehung
 * `add_csv_column_pos_infl_joint.m` und `determine_jointnumber_influence_ee_position.m`: Zusätzliche Spalte für Nummer des Gelenks, das zuletzt die EE-Position beeinflusst.
 
