@@ -38,9 +38,16 @@ end
 
 % Parameter des Roboters laden
 mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
-l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof');
-BA = l.BitArrays_Ndof(strcmp(l.Names_Ndof, Name),:);
+l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'AdditionalInfo');
+I = strcmp(l.Names_Ndof, Name);
+BA = l.BitArrays_Ndof(I,:);
+isvariant = l.AdditionalInfo(I,2);
 csvline = serroblib_bits2csvline(BA);
+if isvariant
+  % Für Varianten wird keine eigene Parameter-Datei erstellt, da die
+  % Parameter für das Haupt-Modell verwendet werden können
+  return
+end
 %% Erstelle Überschriftenzeilen für die Struktur
 % Siehe auch: serroblib_add_robot.m
 % Die ersten drei Spalten sind zur Kennzeichnung des Roboters

@@ -35,13 +35,22 @@
 %   07: phix0
 %   08: phiy0
 %   09: phiz0
+%
+% BAJVF [1xN] uint16
+%   Bit-Array zum Filtern von Varianten eines Roboters
+%   Dadurch kann bestimmt werden, welcher Roboter bereits durch ein
+%   allgemeineres Robotermodell beschrieben werden kann (durch allgemeine
+%   DH-Parameter, die beim spezifischen Modell auf einen Wert wie 0, pi/2
+%   gesetzt werden)
+%   Bits entsprechen denen aus BAJ, sind auf 0 gesetzt, wenn Parameter/Bits
+%   nicht betrachtet werden müssen
 % 
 % Siehe auch: serroblib_bits2csvline
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function [BAJ, BAR, BAE] = serroblib_csvline2bits(csvline)
+function [BAJ, BAR, BAE, BAJVF] = serroblib_csvline2bits(csvline)
 
 %% Initialisierung
 % Prüfe Eingabe
@@ -55,6 +64,7 @@ N = N1/8; % 8 Spalten pro Gelenk. So herausfinden der Gelenkzahl
 
 % Ausgabevariable vorbelegen
 BAJ = uint16(zeros(1,N));
+BAJVF = uint16(Inf(1,N));
 BAR = uint16(0);
 %% Bit-Vektor für Gelenk-Parameter aus csv-Zeile gewinnen
 c = 1;
@@ -83,7 +93,7 @@ for kk = 1:N % über alle Gelenk-FG
     % Schubgelenk: theta ist Parameter
     Bit_theta  = uint16(find(strcmp(csvline{c},descr_theta ))-1);
   else
-    % Drehgelenk: Theta ist Gelenkkoordinate. Setze auf 0
+    % Drehgelenk: theta ist Gelenkkoordinate. Setze auf 0
     Bit_theta = uint16(0);
   end
   c=c+1; 
@@ -105,8 +115,20 @@ for kk = 1:N % über alle Gelenk-FG
   BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_theta,b)); b = b+3;
   BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_d,b));b = b+1;
   BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_offset,b));
+  
+  % Bit-Array für Filter genauso zusammenstellen
+  bits_disable = [];
+  if Bit_beta == 4,  bits_disable = [bits_disable, 2:4]; end %#ok<AGROW>
+  if Bit_b == 1,     bits_disable = [bits_disable, 5]; end %#ok<AGROW>
+  if Bit_alpha == 4, bits_disable = [bits_disable, 6:8]; end %#ok<AGROW>
+  if Bit_a == 1,     bits_disable = [bits_disable, 9]; end %#ok<AGROW>
+  if Bit_theta == 4, bits_disable = [bits_disable, 10:12]; end %#ok<AGROW>
+  if Bit_d == 1,     bits_disable = [bits_disable, 13]; end %#ok<AGROW>
+  for i = bits_disable
+    BAJVF(kk) = bitset(BAJVF(kk), i, 0);
+  end
 end
-
+% Prüfen mit: `dec2bin(BAJVF)`
 %% Bit-Vektor für EE-Transformation von letztem Körper
 % Mögliche diskrete Zustände für die phi-Winkel in der csv-Tabelle. 
 % "?" steht für einen noch undefinierten Winkel

@@ -187,13 +187,24 @@ end
 c = c+1; csvline{c} = '?';
 %% Zeile für den Roboter finden
 % Suche Roboter in den bestehenden csv-Tabellen
-[found, index, num] = serroblib_find_robot(csvline);
+[found, index, num, Name] = serroblib_find_robot(csvline);
+
 % Prüfe, ob der Roboter identisch in der Datenbank ist (ohne Betrachtung
 % von Basis-Isomorphismen)
 found_ident = serroblib_find_robot(csvline, false);
+
+[found_var, ~, ~, Name_var, index_haupt, index_var] = serroblib_find_robot(csvline, false, true);
+
 if ~found
-  % Roboter existiert noch nicht. Erhöhe die letzte Nummer um eins
-  index = num+1;
+  if found_var
+    % Hauptmodell des Roboters existiert, aber noch nicht diese Variante.
+    % Erhöhe nur die Variantennummer um eins
+    index_var = index_var + 1;
+    index = index_haupt;
+  else
+    % Roboter existiert noch nicht. Erhöhe die letzte Nummer um eins
+    index = num+1;
+  end
 end
 % Namen des Robotermodells zusammenstellen.
 % Benennungsschema: 
@@ -203,34 +214,87 @@ end
 % * index (Laufende Nummer dieser Konfiguration in allen RRP-Robotern
 mdlname = sprintf('S%d%s%d', N, typestring, index);
 
-csvline{1} = mdlname;
 if found
   if found_ident
-    fprintf('serroblib_add_robot: Roboter %s ist schon identisch in der Datenbank.\n', mdlname);
+    fprintf('serroblib_add_robot: Roboter %s ist schon identisch in der Datenbank.\n', Name);
   else
-    fprintf('serroblib_add_robot: Roboter %s ist als Basis-Isomorphismus in der Datenbank.\n', mdlname);
+    fprintf('serroblib_add_robot: Roboter %s ist als Basis-Isomorphismus in der Datenbank.\n', Name);
   end
   new = false;
-  return;
+  new_var = false;
+elseif found_var
+  new = true;
+  new_var = true;
+  mdlname_var = sprintf('S%d%s%dV%d', N, typestring, index, index_var);
+  fprintf('serroblib_add_robot: Roboter %s ist eine noch unbekannte Variante von %s.\n', mdlname_var, Name_var);
 else
   fprintf('serroblib_add_robot: Roboter %s ist noch nicht in der Datenbank.\n', mdlname);
   new = true;
+  new_var = false;
 end
 
-%% Zeile in Datei hinzufügen
+%% Zeile eines neuen Hauptmodells in Datei hinzufügen
+% Zeile ans Ende anhängen
+if new && ~new_var
+  csvline{1} = mdlname;
+  % Cell-Array in csv-Zeile umwandeln (da das Schreiben von Strings nur mit
+  % xlswrite funktioniert, dass nicht plattformunabhängig zur Verfügung
+  % steht.
+  line_robot = mdlname;
+  for i = 2:length(csvline)
+    line_robot = sprintf('%s;%s', line_robot, csvline{i});
+  end
 
-% Cell-Array in csv-Zeile umwandeln (da das Schreiben von Strings nur mit
-% xlswrite funktioniert, dass nicht plattformunabhängig zur Verfügung
-% steht.
-line_robot = mdlname;
-for i = 2:length(csvline)
-  line_robot = sprintf('%s;%s', line_robot, csvline{i});
+  fid = fopen(filepath_csv, 'a');
+  fwrite(fid, [line_robot, newline]);
+  fclose(fid);
 end
 
-fid = fopen(filepath_csv, 'a');
-fwrite(fid, [line_robot, newline]);
-fclose(fid);
+%% Zeile einer neuen Variante in Datei hinzufügen
+if new_var
+%   index_haupt, index_var
+  % Trage Variante in Tabelle an letzter Stelle für das Hauptmodell ein
+  if index_var == 1
+    mdlname_previous = mdlname;
+  else
+    mdlname_previous = sprintf('S%d%s%dV%d', N, typestring, index, index_var-1);
+  end
+  csvline{1} = mdlname_var;
+  filename = sprintf('S%d%s.csv', N, typestring);
+  filepath_csv = fullfile(repopath, sprintf('mdl_%ddof', N),filename);
+  filepath_csv_copy = [filepath_csv, '.copy']; % Kopie der Tabelle zur Bearbeitung
+  fid = fopen(filepath_csv);
+  fidc = fopen(filepath_csv_copy, 'w');
+  tline = fgetl(fid);
+  action = false;
+  while ischar(tline)
+    % Spaltenweise als Cell-Array
+    csvline_file = strsplit(tline, ';', 'CollapseDelimiters', false);
+    fwrite(fidc, [tline, newline()]);
+    if strcmp(csvline_file{1}, mdlname_previous) % Suche Roboternamen (erste Spalte)
+      % Neue Zeile für Variante einfügen
+      line_new = csvline{1};
+      for i = 2:length(csvline)
+        line_new = sprintf('%s;%s', line_new, csvline{i});
+      end
+      fwrite(fidc, [line_new, newline()]);
+      action = true;
+    end    
+    tline = fgetl(fid); % nächste Zeile
+  end
+  fclose(fid);
+  fclose(fidc);
+  if ~action
+    error('Obwohl eine neue Zeile geschrieben werden sollte, wurde nichts gemacht. Fehler in Tabellenstruktur von %s', filename);
+  else
+    % Modifizierte Tabelle zurückkopieren
+    copyfile(filepath_csv_copy, filepath_csv);
+    % Kopie-Tabelle löschen
+    delete(filepath_csv_copy);
+  end
+end
 
+%% Abschluss
 % Neu zur mat-Datenbank hinzufügen (wird zum schnelleren Zugriff gepflegt).
 % Muss hier erfolgen, damit ein weiterer Aufruf von dieser Funktion den
 % vorherigen Roboter auch finden kann (um Nummern korrekt hochzuzählen)
