@@ -45,8 +45,9 @@ function [BAJ, BAR, BAE] = serroblib_csvline2bits(csvline)
 
 %% Initialisierung
 % Prüfe Eingabe
-% Nicht Teil der Gelenk-Einträge: Name (1 Spalte), EE-FG (6 Spalten)
-N1 = (length(csvline)-1-3-6-3);
+% Nicht Teil der Gelenk-Einträge: Name (1 Spalte), EE-Trafo (3), EE-FG (6
+% Spalten), EE-FG Euler-Winkel (3), Nummer des Pos.-beeinfl. Gelenks (1)
+N1 = (length(csvline)-1-3-6-3-1);
 if mod(N1,8) ~= 0
   error('falsche Anzahl Einträge in csvline');
 end
@@ -119,4 +120,4 @@ end
 % Prüfen mit: `dec2bin(BAR)`
 
 %% Bit-Vektor für EE-FG aus csv-Zeile gewinnen
-BAE = serroblib_csvline2bits_EE(csvline(c+1:end));
+BAE = serroblib_csvline2bits_EE(csvline(c+1:end-1));

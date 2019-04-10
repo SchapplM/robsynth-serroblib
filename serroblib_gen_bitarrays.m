@@ -17,6 +17,10 @@
 %   BitArrays_phiNE
 %     Bit-Arrays mit Transformation KS-N zu KS-E (in Euler-Winkeln)
 %     Diese Information dient nur zur Konsistenz der Kinematik
+%   AdditionalInfo
+%     Vektor mit zusätzlichen Eigenschaften des Roboters (als Zahl).
+%     Einträge:
+%     1: Letztes positionsbeeinflussendes Gelenk
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für Mechatronische Systeme, Universität Hannover
@@ -33,6 +37,7 @@ for N = N_update(:)'
   BitArrays_Ndof = uint16(zeros(1,N));
   BitArrays_phiNE = uint16(zeros(1,1));
   BitArrays_EEdof0 = uint16(zeros(1,1));
+  AdditionalInfo = zeros(1,1);
   Names_Ndof = {};
   b = 1; % Zähler für gefundene Roboterkonfigurationen aus csv-Tabelle für N FG
   % Durchsuche alle csv-Dateien im Ordner nach passenden Strukturen
@@ -49,7 +54,7 @@ for N = N_update(:)'
       if isempty(csvline) || strcmp(csvline{1}, '')
         continue
       end
-      if length(csvline) ~= 1+N*8+3+6+3
+      if length(csvline) ~= 1+N*8+3+6+3+1
         warning('Zeile %s sieht ungültig aus', tline);
         continue % nicht genug Spalten: Ungültiger Datensatz
       end
@@ -66,6 +71,7 @@ for N = N_update(:)'
       BitArrays_Ndof(b,:) = BAJ;
       BitArrays_phiNE(b,:) = BAR;
       BitArrays_EEdof0(b,:) = BAE;
+      AdditionalInfo(b,1) = str2double(csvline{end});
       b = b+1;
     end
     fclose(fid);
@@ -74,6 +80,7 @@ for N = N_update(:)'
   % Alle Modelle neu in Ergebnisdatei (.mat) speichern
   % fprintf('serroblib_gen_bitarrays: Datei %s mit %d Einträgen gespeichert \n', mdllistfile_Ndof, size(BitArrays_Ndof,1));
   mkdirs(fileparts(mdllistfile_Ndof));
-  save(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_phiNE', 'BitArrays_EEdof0');
+  save(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', ...
+    'BitArrays_phiNE', 'BitArrays_EEdof0', 'AdditionalInfo');
 end
 

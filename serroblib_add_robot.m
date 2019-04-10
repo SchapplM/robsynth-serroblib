@@ -108,6 +108,11 @@ if ~exist(filepath_csv, 'file')
   for jj = 1:9
     csvline_head2{c} = eestr{jj}; c=c+1;
   end
+  % Kopfzeile für weitere Eigenschaften des Roboters
+  c = length(csvline_head1)+1;
+  csvline_head1{c} = 'Weitere Eigenschaften';
+  csvline_head2{c} = 'Positionsbeeinflussendes Gelenk';
+  
   % String aus Cell-Array erzeugen
   line_head1 = csvline_head1{1};
   line_head2 = csvline_head2{1};
@@ -178,6 +183,8 @@ else
   end
 end
 
+% Spalte für Gelenknummer, dass die Position als letztes Beeinflusst
+c = c+1; csvline{c} = '?';
 %% Zeile für den Roboter finden
 % Suche Roboter in den bestehenden csv-Tabellen
 [found, index, num] = serroblib_find_robot(csvline);
