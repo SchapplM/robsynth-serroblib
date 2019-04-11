@@ -8,22 +8,31 @@
 % RobName
 %   Name der Roboterparameter entsprechend der ersten Spalte der Tabelle
 %   models.csv des jeweiligen Robotermodells
+% only_mdh
+%   Falls auf true gesetzt, wird nur die Parameterstruktur PS zurückgegeben
 % 
 % Ausgabe:
 % RS [SerRob]
 %   Instanz der SerRob-Klasse mit den Eigenschaften und Funktionen des zu
 %   ladenden Roboters
+% PS [struct]
+%   Struktur mit allen MDH-Parametern des Roboters
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function RS = serroblib_create_robot_class(Name, RobName)
+function [RS, PS] = serroblib_create_robot_class(Name, RobName, only_mdh)
+
+if nargin < 3
+  only_mdh = false;
+end
 
 %% Daten laden
 N = str2double(Name(2)); % Annahme: Namensschema SxRRR; mit x="Anzahl Gelenk-FG"
 repopath=fileparts(which('serroblib_path_init.m'));
 mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
-l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_phiNE', 'BitArrays_EEdof0');
+l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_phiNE', ...
+  'BitArrays_EEdof0', 'AdditionalInfo');
 
 % Bit-Array für Namen
 BA = l.BitArrays_Ndof(strcmp(l.Names_Ndof,Name),:);
@@ -78,7 +87,7 @@ end
 % In diesem Abschnitt belegte Variablen mit Standardwerten initialisieren:
 descr = '';
 % Parameter aus Tabelle holen
-if nargin > 1 % Falls Name des Parametrierten Modells gegeben
+if nargin > 1 && ~isempty(RobName) % Falls Name des Parametrierten Modells gegeben
   % Allgemeine Definitionen
   unitmult_angle = pi/180; % Angaben in Tabelle in Grad. Umrechnung in Radiant
   unitmult_dist = 1/1000;
@@ -178,6 +187,11 @@ if nargin > 1 % Falls Name des Parametrierten Modells gegeben
   end
 end
 
+if only_mdh
+  RS = [];
+  return
+end
+
 %% EE-Transformation
 phi_N_E = NaN(3,1); % Variable vorbelegen
 descr_phi = {0, pi/2, pi, -pi/2, NaN}; % mögliche Werte, die durch Bits kodiert werden
@@ -194,9 +208,23 @@ end
 % Zahlenwerte der Parameter festlegen.
 PS.pkin = []; % sind hier noch gar nicht bekannt. Würde Auswahl eines bestimmten Roboters erfordern
 
+% Informationen über Variante extrahieren
+isvariant = l.AdditionalInfo(strcmp(l.Names_Ndof,Name),2);
+variantof = l.AdditionalInfo(strcmp(l.Names_Ndof,Name),3);
+
 % Klassen-Instanz erstellen
 serroblib_addtopath({Name})
-RS = SerRob(PS, Name);
+if ~isvariant % Keine Variante: Normale Definition der Klasse
+  RS = SerRob(PS, Name);
+elseif ~isempty(which(sprintf('%s_structural_kinematic_parameters.m', Name)))
+  % Benutze die direkt für diese Varianten erzeugten Funktionen. Normaler
+  % Aufruf der Klasse (Existenz der Funktionen wurde stichprobenartig geprüft)
+  RS = SerRob(PS, Name);
+else
+  % Variante ohne existierende generierte Funktionen
+  Name_GenMdl = l.Names_Ndof{variantof};% Name des Hauptmodells herausfinden
+  RS = SerRob(PS, Name_GenMdl, Name);   % Modell als Variante erzeugen
+end
 
 % Klassen-Instanz vorbereiten
 RS = RS.fill_fcn_handles(false);
