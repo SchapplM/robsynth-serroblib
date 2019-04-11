@@ -23,9 +23,12 @@ for i = 1:length(Names)
   
   % Index in Gesamt-Tabelle laden
   index_ges = find(strcmp(l.Names_Ndof, n));
+  if isempty(index_ges)
+    error('Modell %s nicht in Datenbank gefunden. Wurde schon serroblib_gen_bitarrays gemacht?', n);
+  end
   
   % MDH-Tabelle laden
-  BA = l.BitArrays_Ndof(index_ges,:); %#ok<FNDSB>
+  BA = l.BitArrays_Ndof(index_ges,:);
   [~, csvbits] = serroblib_bits2csvline(BA);
   
   % Prüfe, ob Modell eine Variante ist

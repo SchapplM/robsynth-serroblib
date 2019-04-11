@@ -252,7 +252,6 @@ end
 
 %% Zeile einer neuen Variante in Datei hinzufügen
 if new_var
-%   index_haupt, index_var
   % Trage Variante in Tabelle an letzter Stelle für das Hauptmodell ein
   if index_var == 1
     mdlname_previous = mdlname;
@@ -299,4 +298,3 @@ end
 % Muss hier erfolgen, damit ein weiterer Aufruf von dieser Funktion den
 % vorherigen Roboter auch finden kann (um Nummern korrekt hochzuzählen)
 serroblib_gen_bitarrays(N); % Das aktualisiert immer die gesamte Datenbank
-

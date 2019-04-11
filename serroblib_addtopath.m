@@ -33,7 +33,7 @@ for i = 1:length(Names)
       Name_GenMdl = l.Names_Ndof{variantof};
       fcn_dir_var = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
         sprintf('hd_%s', Name(length(Name_GenMdl)+1:end)));
-      if exist(fcn_dir_var, 'file')
+      if exist(fullfile(fcn_dir_var, sprintf('%s_structural_kinematic_parameters.m', Name)), 'file')
         % Es wurde schon Code spezifisch für diese Variante generiert
         addpath(fcn_dir_var);
       else % Kein spezifischer Code da

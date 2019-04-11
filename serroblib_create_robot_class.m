@@ -34,6 +34,11 @@ mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list
 l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_phiNE', ...
   'BitArrays_EEdof0', 'AdditionalInfo');
 
+% Informationen über Variante extrahieren
+isvariant = l.AdditionalInfo(strcmp(l.Names_Ndof,Name),2);
+variantof = l.AdditionalInfo(strcmp(l.Names_Ndof,Name),3);
+Name_GenMdl = l.Names_Ndof{variantof};% Name des Hauptmodells herausfinden
+  
 % Bit-Array für Namen
 BA = l.BitArrays_Ndof(strcmp(l.Names_Ndof,Name),:);
 if isempty(BA)
@@ -92,7 +97,11 @@ if nargin > 1 && ~isempty(RobName) % Falls Name des Parametrierten Modells gegeb
   unitmult_angle = pi/180; % Angaben in Tabelle in Grad. Umrechnung in Radiant
   unitmult_dist = 1/1000;
   found = false; % Marker, ob Parametersatz gefunden wurde
-  pardat = fullfile(repopath, sprintf('mdl_%ddof', N), Name, 'models.csv');
+  if isvariant
+    pardat = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, 'models.csv');
+  else
+    pardat = fullfile(repopath, sprintf('mdl_%ddof', N), Name, 'models.csv');
+  end
   if ~exist(pardat, 'file')
     error('Parameterdatei zu %s existiert nicht', Name);
   end
@@ -208,10 +217,6 @@ end
 % Zahlenwerte der Parameter festlegen.
 PS.pkin = []; % sind hier noch gar nicht bekannt. Würde Auswahl eines bestimmten Roboters erfordern
 
-% Informationen über Variante extrahieren
-isvariant = l.AdditionalInfo(strcmp(l.Names_Ndof,Name),2);
-variantof = l.AdditionalInfo(strcmp(l.Names_Ndof,Name),3);
-
 % Klassen-Instanz erstellen
 serroblib_addtopath({Name})
 if ~isvariant % Keine Variante: Normale Definition der Klasse
@@ -222,7 +227,6 @@ elseif ~isempty(which(sprintf('%s_structural_kinematic_parameters.m', Name)))
   RS = SerRob(PS, Name);
 else
   % Variante ohne existierende generierte Funktionen
-  Name_GenMdl = l.Names_Ndof{variantof};% Name des Hauptmodells herausfinden
   RS = SerRob(PS, Name_GenMdl, Name);   % Modell als Variante erzeugen
 end
 
