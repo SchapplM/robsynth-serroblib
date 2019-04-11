@@ -43,6 +43,7 @@ Datenbank auslesen und benutzen:
 * `serroblib_generate_mapleinput`: Eingabedaten zur Code-Generierung für diesen Roboter erstellen
 * `serroblib_generate_code`: Kinematik- und Dynamikfunktionen symbolisch mit der HybrDyn-Toolbox berechnen lassen.
 * `serroblib_addtopath`: Matlab-Funktionen dieses Roboters zum Matlab-Pfad hinzufügen, damit die Funktionsaufrufe funktionieren.
+* `scripts/generate_variant_pkin_conv_fcns.m`: Generiere Funktionen zur Umwandlung der Kinematikparameter von Varianten und ihren zugehörigen allgemeineren Modellen
 
 Zusätzliche Eigenschaften des Roboters ermitteln und ebenfalls eintragen (ist notwendig, da manche Eigenschaften erst mit den generierten Matlab-Funktionen berechnet werden können): 
 * `scripts/correct_phi_N_E.m`
