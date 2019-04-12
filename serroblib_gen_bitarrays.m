@@ -21,7 +21,10 @@
 %     Vektor mit zusätzlichen Eigenschaften des Roboters (als Zahl).
 %     Einträge:
 %     1: Letztes positionsbeeinflussendes Gelenk
-%     2: Ist Variante
+%     2: Ist Variante (1/0)
+%     3: Nummer des Modells, von dem dieses Modell eine Variante ist
+%        Die Nummer bezieht sich auf die Liste aller Modelle und Varianten
+%        in der Tabelle
 %   BitArrays_Ndof_VF
 %     Bit-Array mit Filter, um Varianten eines Roboters zu erkennen
 

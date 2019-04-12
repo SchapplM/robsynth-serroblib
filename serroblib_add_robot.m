@@ -175,7 +175,7 @@ end
 % Spalten für EE-Freiheitsgrade
 if ~isempty(EEdof0)
   for i = 1:9
-    c = c+1; csvline{c} = EEdof0(i); %#ok<AGROW>
+    c = c+1; csvline{c} = sprintf('%d', EEdof0(i)); %#ok<AGROW>
   end
 else
   for i = 1:9
@@ -187,24 +187,26 @@ end
 c = c+1; csvline{c} = '?';
 %% Zeile für den Roboter finden
 % Suche Roboter in den bestehenden csv-Tabellen
-[found, index, num, Name] = serroblib_find_robot(csvline);
+[found, idx_direct, num_direct, Name] = serroblib_find_robot(csvline);
 
 % Prüfe, ob der Roboter identisch in der Datenbank ist (ohne Betrachtung
 % von Basis-Isomorphismen)
 found_ident = serroblib_find_robot(csvline, false);
 
-[found_var, ~, ~, Name_var, index_haupt, index_var] = serroblib_find_robot(csvline, false, true);
+[found_var, idx_var, ~, Name_var] = serroblib_find_robot(csvline, false, true);
 
 if ~found
   if found_var
     % Hauptmodell des Roboters existiert, aber noch nicht diese Variante.
     % Erhöhe nur die Variantennummer um eins
-    index_var = index_var + 1;
-    index = index_haupt;
+    index = idx_var(3);
+    index_var = idx_var(4) + 1;
   else
     % Roboter existiert noch nicht. Erhöhe die letzte Nummer um eins
-    index = num+1;
+    index = num_direct(2)+1;
   end
+else
+  index = idx_direct(3);
 end
 % Namen des Robotermodells zusammenstellen.
 % Benennungsschema: 
@@ -284,7 +286,7 @@ if new_var
   fclose(fid);
   fclose(fidc);
   if ~action
-    error('Obwohl eine neue Zeile geschrieben werden sollte, wurde nichts gemacht. Fehler in Tabellenstruktur von %s', filename);
+    error('Obwohl eine neue Zeile geschrieben werden sollte, wurde nichts gemacht. Vorheriges Modell %s wurde nicht gefunden. Fehler in Tabellenstruktur von %s', mdlname_previous, filename);
   else
     % Modifizierte Tabelle zurückkopieren
     copyfile(filepath_csv_copy, filepath_csv);

@@ -38,10 +38,11 @@ for N = 1:7
     
     % Kinematik-Parameter auslesen:
     % ... für allgemeines Modell
-    [~, PSG] = serroblib_create_robot_class(Name_GenMdl, [], true);
+    [RSG, PSG] = serroblib_create_robot_class(Name_GenMdl, [], false);
     % ... für Variante
     [~, PSV] = serroblib_create_robot_class(Name, [], true);
-    
+
+    pkin_names_gen = RSG.pkin_names; % Parameternamen des allgemeinen Modells
     % Unterschiede in den MDH-Parametern feststellen und daraus die
     % Funktionen erstellen
     serroblib_addtopath({Name_GenMdl});
@@ -88,16 +89,19 @@ for N = 1:7
       fprintf(fid, '%% Ausgabe:\n');
       fprintf(fid, '%% pkin_gen (%dx1) double\n', length(pkinGV));
       fprintf(fid, '%%   Kinematikparameter (pkin) von %s\n', Name_GenMdl);
+      fprintf(fid, '%%\n');
+      fprintf(fid, '%% Siehe auch: %s_structural_kinematic_parameters.m\n', Name_GenMdl);
       fprintf(fid, 'function pkin_gen = %s_pkin_var2gen(pkin_var)\n', Name);
       fprintf(fid, 'pkin_gen = zeros(%d,1);\n', length(pkinGV));
-      fprintf(fid, 'pkin_gen([%s]) = pkin_var;\n', disp_array(I_pkinV','%d'));
+      fprintf(fid, 'pkin_gen([%s]) = pkin_var;\n\n', disp_array(I_pkinV','%d'));
       for ii = 1:length(I_pkinG_fix)
         if     abs(values_fix(ii)-pi/2)<1e-10, value_str = 'pi/2'; 
         elseif abs(values_fix(ii)-(-pi/2))<1e-10, value_str = '-pi/2'; 
         elseif abs(values_fix(ii)-pi)<1e-10, value_str = 'pi'; 
         else,  value_str = sprintf('%1.1f', values_fix(ii));
         end
-        fprintf(fid, 'pkin_gen(%d) = %s;\n', I_pkinG_fix(ii), value_str);
+        fprintf(fid, 'pkin_gen(%d) = %s; %% %s\n', I_pkinG_fix(ii), ...
+          value_str, pkin_names_gen{I_pkinG_fix(ii)});
       end
       fclose(fid);
     else

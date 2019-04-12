@@ -13,35 +13,41 @@
 % Rückgabe:
 % found
 %   true, wenn gegebener Roboter bereits in der .mat-Datenbank vorliegt
-% index
-%   Nummer des Roboters in der Liste aller Roboter dieser Gelenkreihenfolge
-%   (falls gefunden). Nummer des letzten Roboters, falls nicht gefunden.
-%   Die Liste beinhaltet Hauptmodelle und Varianten
-% num
-%   Anzahl der Roboter dieser Gelenkreihenfolge insgesamt (bezogen auf
-%   Hauptmodelle und Varianten)
+% idx [4x1] (index_all, index_type, index_gen, index_var)
+%   1: Nummer des Roboters in der Liste aller Roboter mit dieser
+%      Gelenkanzahl
+%   2: Nummer des Roboters in der Liste aller Roboter dieser Gelenkreihenfolge
+%      (falls gefunden). Nummer des letzten Roboters, falls nicht gefunden.
+%      Die Liste beinhaltet Hauptmodelle und Varianten
+%   3: Nummer des gefundenen Roboters in allen Hauptmodellen. Falls nicht
+%      gefunden: Anzahl der Hauptmodelle dieser Gelenkreihenfolge
+%   4: Nummer des gefundenen Roboters in den Varianten des Hauptmodells. Falls
+%      nicht gefunden: Anzahl der Varianten dieses Hauptmodells
+% num [2x1] (num_all, num_gen)
+%   1: Anzahl der Roboter dieser Gelenkreihenfolge insgesamt (bezogen auf
+%      Hauptmodelle und Varianten)
+%   2: Anzahl der Roboter in der Liste der Hauptmodelle dieser
+%      Gelenkreihenfolge (ohne Varianten)
 % Name
 %   Name des durch Parameter gegebenen Roboters (falls gefunden)
-% index_haupt
-%   Nummer des gefundenen Roboters in allen Hauptmodellen. Falls nicht
-%   gefunden: Anzahl der Hauptmodelle dieser Gelenkreihenfolge
-% index_var
-%   Nummer des gefundenen Roboters in den Varianten des Hauptmodells. Falls
-%   nicht gefunden: Anzahl der Varianten dieses Hauptmodells
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function [found, index, num, Name, index_haupt, index_var] = serroblib_find_robot(csvline, filter_relkin, filter_var)
+function [found, idx, num, Name] = serroblib_find_robot(csvline, filter_relkin, filter_var)
 
 %% Initialisierung
 found = false;
-index = 0;
-index_haupt = 0;
+index_all = 0;
+index_type = 0;
+index_gen = 0;
 index_var = 0;
 Name = '';
-exp_mdl = 'S(\d)([RP]+)(\d+)'; % Format "S3RRR1" für Hauptmodelle
-exp_var = 'S(\d)([RP]+)(\d+)V(\d+)'; % Format "S3RRR1V1" für Varianten
+% Reguläre Ausdrücke zur Erkennung von Modellen und Varianten. Benutze
+% Anfangs- und End-Begrenzung ("^","$"), damit die Variante nicht als
+% Hauptmodell erkannt wird
+exp_mdl = '^S(\d)([RP]+)(\d+)$'; % Format "S3RRR1" für Hauptmodelle
+exp_var = '^S(\d)([RP]+)(\d+)V(\d+)$'; % Format "S3RRR1V1" für Varianten
 
 if nargin < 2
   filter_relkin = true;
@@ -87,18 +93,18 @@ else
 end
 
 % Filter für Typ des Roboters und DH-Parameter
-num = 0;
-num_haupt = 0;
+num_all = 0;
+num_gen = 0;
 num_var = 0;
 for i = 1:size(l.BitArrays_Ndof, 1) % Alle Roboterstrukturen aus Datenbank durchgehen
   % Zähle, wie viele Roboter dieser Gelenkreihenfolge existieren
   % (das erste Bit kennzeichnet den Gelenktyp)
   if all(bitand(BA, 1) == bitand(l.BitArrays_Ndof(i,:), 1))
-    num = num + 1;
+    num_all = num_all + 1;
     % Zähle, wie viele Haupt-Modelle das waren
     [tokens_mdl, ~] = regexp(l.Names_Ndof{i},exp_mdl,'tokens','match');
     if ~isempty(tokens_mdl)
-      num_haupt = num_haupt + 1;
+      num_gen = num_gen + 1;
       index_var = 0; % Neue Hauptstruktur führt zum Zurücksetzen des Zählers für Varianten
     end
     % Zähle, wie viele Varianten dieses Haupt-Modells es waren
@@ -115,9 +121,9 @@ for i = 1:size(l.BitArrays_Ndof, 1) % Alle Roboterstrukturen aus Datenbank durch
   if(all( bitand(BA,BAJ_Iso_Filter) == bitand(l.BitArrays_Ndof(i,:),BAJ_Iso_Filter) ))
     % Eintrag ist die gesuchte Nummer (bezogen auf die Roboter derselben
     % Gelenkreihenfolge)
-    index_type = num; %Index in den Robotern mit derselben Gelenkreihenfolge
-    index_haupt = num_haupt; % Index in den Hauptmodellen mit derselben Gelenkreihenfolge
-    index_N = i; % Index in allen Robotern mit derselben Anzahl Gelenk-FG
+    index_type = num_all; %Index in den Robotern mit derselben Gelenkreihenfolge
+    index_gen = num_gen; % Index in den Hauptmodellen mit derselben Gelenkreihenfolge
+    index_all = i; % Index in allen Robotern mit derselben Anzahl Gelenk-FG
     found = true;
     break
   end
@@ -126,32 +132,44 @@ end
 %% Variante suchen
 
 if ~found && filter_var
-  num = 0;
+  zlr_type = 0; % Zähler für die Position der Variante in allen Robotern (dieser FG-Zahl)
+  zlr_gen = 0; % Zähler für Nummer des Allgemeinen Modells der Variante
+  index_var = 0;
   for i = 1:size(l.BitArrays_Ndof, 1) % Alle Roboterstrukturen aus Datenbank durchgehen
+    if ~all(bitand(BA, 1) == bitand(l.BitArrays_Ndof(i,:), 1))
+      continue % Gelenkreihenfolge stimmt nicht. Weitergehen
+    end
+    zlr_type = zlr_type + 1; % Gleiche Gelenkfolge: Hochzählen (entspricht Nummer in Datei
     % Erster Schritt: Suche, welches Hauptmodell es ist
-    BAJ_Filter_Ges = bitand(BAJ_Iso_Filter, l.BitArrays_Ndof_VF(i,:));
-    if all(bitand(BA, 1) == bitand(l.BitArrays_Ndof(i,:), 1))
-      num = num + 1;
-      [tokens_mdl, ~] = regexp(l.Names_Ndof{i},exp_mdl,'tokens','match');
-      if ~isempty(tokens_mdl)
-        num_haupt = num_haupt + 1;
-      end
+    BAJ_Filter_Ges = bitand(BAJ_Iso_Filter, l.BitArrays_Ndof_VF(i,:)); % Filter für Hauptmodell
+    [tokens_mdl, ~] = regexp(l.Names_Ndof{i},exp_mdl,'tokens','match');
+    if ~isempty(tokens_mdl) && ~found
+      zlr_gen = zlr_gen + 1; % Ist Hauptmodell
     end
     if ~found && (all( bitand(BA,BAJ_Filter_Ges) == bitand(l.BitArrays_Ndof(i,:),BAJ_Filter_Ges) ))
       % Eintrag stimmt überein
-      index_type = num; %Index in den Robotern mit derselben Gelenkreihenfolge
-      index_N = i; % Index in allen Robotern mit derselben Anzahl Gelenk-FG
+      index_type = zlr_type; % Index in den Robotern mit derselben Gelenkreihenfolge
+      index_all = i; % Index in allen Robotern mit derselben Anzahl Gelenk-FG
       found = true;
-      [tokens_mdl, ~] = regexp(l.Names_Ndof{i},exp_mdl,'tokens','match');
-      index_haupt = str2double(tokens_mdl{1}{3});
+      [tokens_mdl_found, ~] = regexp(l.Names_Ndof{i},exp_mdl,'tokens','match');
+      index_gen = str2double(tokens_mdl_found{1}{3});
+      continue % sonst wird die Prüfung der folgenden Zeilen schon auf diese Zeile angewendet
     end
     % Zweiter Schritt: Finde heraus, wie viele Varianten dieses Hauptmodell
     % schon hat
     if found
       [tokens_var, ~] = regexp(l.Names_Ndof{i},exp_var,'tokens','match');
-      if isempty(tokens_var) || ~strcmp(tokens_mdl{1}{2}, tokens_var{1}{2}) || ~strcmp(tokens_mdl{1}{3}, tokens_var{1}{3})
-        % Keine Variante des gefundenen Roboters oder neuer Roboter (weiter
-        % unten in der Tabelle). Höre auf zu suchen 
+      if isempty(tokens_var) && ...
+          (~strcmp(tokens_mdl{1}{2}, tokens_mdl_found{1}{2}) || ~strcmp(tokens_mdl{1}{3}, tokens_mdl_found{1}{3}))
+        % Der aktuelle Roboter ist ein Hauptmodell, dass sich von dem         
+        % gefundenen unterscheidet. Die Suche nach Varianten des Modells
+        % kann abgebrochen werden
+        break;
+      end
+      if ~isempty(tokens_var) && ...
+          (~strcmp(tokens_mdl_found{1}{2}, tokens_var{1}{2}) || ~strcmp(tokens_mdl_found{1}{3}, tokens_var{1}{3}))
+        % Aktueller Roboter ist Variante, aber keine Variante mehr des
+        % gefundenen Hauptmodells. Höre auf zu suchen 
         break;
       end
       % Bestimme die Anzahl der Varianten, die es für den Roboter gibt
@@ -162,6 +180,7 @@ end
 
 %% Rückgabewerte belegen
 if found
-  index = index_type;
-  Name = l.Names_Ndof{index_N};
+  Name = l.Names_Ndof{index_all};
 end
+idx = [index_all; index_type; index_gen; index_var];
+num = [num_all; num_gen];
