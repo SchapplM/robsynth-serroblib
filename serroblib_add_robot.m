@@ -23,7 +23,7 @@
 %   1="Komponente durch Roboter beeinflussbar"; 0="nicht beeinflussbar"
 % 
 % Ausgabe:
-% mdlname
+% Name_DB
 %   Name des Roboters in der Datenbank
 % new
 %   true, wenn Roboter neu ist und der Datenbank hinzugefügt wurde.
@@ -35,7 +35,7 @@
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function [mdlname, new] = serroblib_add_robot(MDH_struct, EEdof0)
+function [Name_DB, new] = serroblib_add_robot(MDH_struct, EEdof0)
 
 if nargin == 1
   EEdof0 = []; % 6 Leerzeichen
@@ -214,7 +214,7 @@ end
 % * N ("Anzahl FG"), 
 % * RRP % ("Gelenkreihenfolge"), 
 % * index (Laufende Nummer dieser Konfiguration in allen RRP-Robotern
-mdlname = sprintf('S%d%s%d', N, typestring, index);
+mdlname_gen = sprintf('S%d%s%d', N, typestring, index);
 
 if found
   if found_ident
@@ -224,25 +224,28 @@ if found
   end
   new = false;
   new_var = false;
+  Name_DB = Name;
 elseif found_var
   new = true;
   new_var = true;
   mdlname_var = sprintf('S%d%s%dV%d', N, typestring, index, index_var);
-  fprintf('serroblib_add_robot: Roboter %s ist eine noch unbekannte Variante von %s.\n', mdlname_var, Name_var);
+  fprintf('serroblib_add_robot: Roboter %s wurde als noch unbekannte Variante von %s hinzugefügt.\n', mdlname_var, Name_var);
+  Name_DB = mdlname_var;
 else
-  fprintf('serroblib_add_robot: Roboter %s ist noch nicht in der Datenbank.\n', mdlname);
+  fprintf('serroblib_add_robot: Roboter %s wurde zur Datenbank hinzugefügt.\n', mdlname_gen);
   new = true;
   new_var = false;
+  Name_DB = mdlname_gen;
 end
 
 %% Zeile eines neuen Hauptmodells in Datei hinzufügen
 % Zeile ans Ende anhängen
 if new && ~new_var
-  csvline{1} = mdlname;
+  csvline{1} = mdlname_gen;
   % Cell-Array in csv-Zeile umwandeln (da das Schreiben von Strings nur mit
   % xlswrite funktioniert, dass nicht plattformunabhängig zur Verfügung
   % steht.
-  line_robot = mdlname;
+  line_robot = mdlname_gen;
   for i = 2:length(csvline)
     line_robot = sprintf('%s;%s', line_robot, csvline{i});
   end
@@ -256,7 +259,7 @@ end
 if new_var
   % Trage Variante in Tabelle an letzter Stelle für das Hauptmodell ein
   if index_var == 1
-    mdlname_previous = mdlname;
+    mdlname_previous = mdlname_gen;
   else
     mdlname_previous = sprintf('S%d%s%dV%d', N, typestring, index, index_var-1);
   end
