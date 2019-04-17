@@ -79,9 +79,15 @@ for N = 1:7
       if any(abs(phi_test(1:2)) > 1e-10)
         error('Die Transformation N-E konnte nicht richtig berechnet werden');
       end
+    elseif all(bitget(l.BitArrays_EEdof0(j),4:6) == [0 0 0])
+      % Kein Rotations-FG. Die Orientierung des End-Effektors ist für die
+      % inverse Kinematik egal, da sowieso keine rotatorischen
+      % Zwangsbedingungen ausgewählt werden
+      % (Betrifft sowieso nur PPP-Kette)
+      phi_N_E_neu = zeros(3,1);
     else
       warning('EE-Kombination [%s] nicht in Tabelle hinterlegt. Überspringe.', ...
-        disp_array(bitget(BAE,4:6), '%d'));
+        disp_array(bitget(l.BitArrays_EEdof0(j),4:6), '%d'));
       continue
     end
     %% Durchsuche die csv-Tabelle und ändere die Werte
