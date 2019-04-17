@@ -13,14 +13,16 @@
 %   Beinketten, die 3T haben, egal ob 0R,1R,2R,3R)
 % 
 % Rückgabe:
-% Indizes
+% IndZ
 %   Vektor mit Zähl-Indizes für zur Auswahl der passenden Roboter in der
 %   Liste von allen Robotern mit `N` FG (Datei S3list.mat für 3FG).
+% IndB
+%   Gleicher Vektor als Binärindex (1, falls entsprechender Roboter passend)
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function [Indizes] = serroblib_filter_robots(N, EE_FG, EE_FG_Mask)
+function [IndZ, IndB] = serroblib_filter_robots(N, EE_FG, EE_FG_Mask)
 
 if length(EE_FG) == 6 && length(EE_FG_Mask) == 6
   % Altes Format: Ignoriere die Erweiterung um die Euler-Winkel des EE
@@ -48,17 +50,16 @@ end
 
 repopath=fileparts(which('serroblib_path_init.m'));
 
-Indizes = [];
-b = 1;
 mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
 l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_EEdof0');
+IndB = false(length(l.Names_Ndof),1);
 
 % Bit-Maske für EE-FG
 % Suche alle Roboter für FG N heraus
 for i = 1:size(l.BitArrays_Ndof, 1)
   if (all( bitand(EE_FG_BA,EE_FG_Mask_bin) == bitand(l.BitArrays_EEdof0(i,:),EE_FG_Mask_bin) ))
     % Roboter mit passenden EE-FG
-    Indizes(b) = i; %#ok<AGROW>
-    b = b+1;      
+    IndB(i) = true;  
   end
 end
+IndZ = find(IndB);
