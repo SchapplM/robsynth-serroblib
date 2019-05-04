@@ -19,17 +19,35 @@ for i = 1:length(Names)
   
   % Datenbank laden
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
-  l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof');
+  l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'AdditionalInfo');
   
   % Index in Gesamt-Tabelle laden
   index_ges = find(strcmp(l.Names_Ndof, n));
+  if isempty(index_ges)
+    error('Modell %s nicht in Datenbank gefunden. Wurde schon serroblib_gen_bitarrays gemacht?', n);
+  end
   
   % MDH-Tabelle laden
-  BA = l.BitArrays_Ndof(index_ges,:); %#ok<FNDSB>
+  BA = l.BitArrays_Ndof(index_ges,:);
   [~, csvbits] = serroblib_bits2csvline(BA);
   
+  % Prüfe, ob Modell eine Variante ist
+  isvariant = l.AdditionalInfo(strcmp(l.Names_Ndof,n),2);
+  variantof = l.AdditionalInfo(strcmp(l.Names_Ndof,n),3);
+  
   % Maple-Toolbox-Eingabe erzeugen
-  mapleinputfile=fullfile(repopath, sprintf('mdl_%ddof', N), n, 'hd', sprintf('robot_env_%s', n));
+  if isvariant
+    % Der Code für Varianten wird im selben Ordner wie der des Allgemeinen
+    % Modells gespeichert (andersnamiger Unterordner)
+    n_gen = l.Names_Ndof{variantof};
+    mapleinputfile=fullfile(repopath, sprintf('mdl_%ddof', N), n_gen, ...
+                            sprintf('hd_%s', n(length(n_gen)+1:end)), sprintf('robot_env_%s', n));
+  else
+    % ist keine Variante
+    mapleinputfile=fullfile(repopath, sprintf('mdl_%ddof', N), n, ...
+                            'hd', sprintf('robot_env_%s', n));
+  end
+  
   mkdirs(fileparts(mapleinputfile));
   fid = fopen(mapleinputfile, 'w');
   % Allgemeine Definitionen

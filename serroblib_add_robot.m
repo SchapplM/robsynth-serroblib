@@ -23,7 +23,7 @@
 %   1="Komponente durch Roboter beeinflussbar"; 0="nicht beeinflussbar"
 % 
 % Ausgabe:
-% mdlname
+% Name_DB
 %   Name des Roboters in der Datenbank
 % new
 %   true, wenn Roboter neu ist und der Datenbank hinzugefügt wurde.
@@ -35,7 +35,7 @@
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function [mdlname, new] = serroblib_add_robot(MDH_struct, EEdof0)
+function [Name_DB, new] = serroblib_add_robot(MDH_struct, EEdof0)
 
 if nargin == 1
   EEdof0 = []; % 6 Leerzeichen
@@ -108,6 +108,11 @@ if ~exist(filepath_csv, 'file')
   for jj = 1:9
     csvline_head2{c} = eestr{jj}; c=c+1;
   end
+  % Kopfzeile für weitere Eigenschaften des Roboters
+  c = length(csvline_head1)+1;
+  csvline_head1{c} = 'Weitere Eigenschaften';
+  csvline_head2{c} = 'Positionsbeeinflussendes Gelenk';
+  
   % String aus Cell-Array erzeugen
   line_head1 = csvline_head1{1};
   line_head2 = csvline_head2{1};
@@ -170,7 +175,7 @@ end
 % Spalten für EE-Freiheitsgrade
 if ~isempty(EEdof0)
   for i = 1:9
-    c = c+1; csvline{c} = EEdof0(i); %#ok<AGROW>
+    c = c+1; csvline{c} = sprintf('%d', EEdof0(i)); %#ok<AGROW>
   end
 else
   for i = 1:9
@@ -178,15 +183,30 @@ else
   end
 end
 
+% Spalte für Gelenknummer, dass die Position als letztes Beeinflusst
+c = c+1; csvline{c} = '?';
 %% Zeile für den Roboter finden
 % Suche Roboter in den bestehenden csv-Tabellen
-[found, index, num] = serroblib_find_robot(csvline);
+[found, idx_direct, num_direct, Name] = serroblib_find_robot(csvline);
+
 % Prüfe, ob der Roboter identisch in der Datenbank ist (ohne Betrachtung
 % von Basis-Isomorphismen)
 found_ident = serroblib_find_robot(csvline, false);
+
+[found_var, idx_var, ~, Name_var] = serroblib_find_robot(csvline, false, true);
+
 if ~found
-  % Roboter existiert noch nicht. Erhöhe die letzte Nummer um eins
-  index = num+1;
+  if found_var
+    % Hauptmodell des Roboters existiert, aber noch nicht diese Variante.
+    % Erhöhe nur die Variantennummer um eins
+    index = idx_var(3);
+    index_var = idx_var(4) + 1;
+  else
+    % Roboter existiert noch nicht. Erhöhe die letzte Nummer um eins
+    index = num_direct(2)+1;
+  end
+else
+  index = idx_direct(3);
 end
 % Namen des Robotermodells zusammenstellen.
 % Benennungsschema: 
@@ -194,38 +214,92 @@ end
 % * N ("Anzahl FG"), 
 % * RRP % ("Gelenkreihenfolge"), 
 % * index (Laufende Nummer dieser Konfiguration in allen RRP-Robotern
-mdlname = sprintf('S%d%s%d', N, typestring, index);
+mdlname_gen = sprintf('S%d%s%d', N, typestring, index);
 
-csvline{1} = mdlname;
 if found
   if found_ident
-    fprintf('serroblib_add_robot: Roboter %s ist schon identisch in der Datenbank.\n', mdlname);
+    fprintf('serroblib_add_robot: Roboter %s ist schon identisch in der Datenbank.\n', Name);
   else
-    fprintf('serroblib_add_robot: Roboter %s ist als Basis-Isomorphismus in der Datenbank.\n', mdlname);
+    fprintf('serroblib_add_robot: Roboter %s ist als Basis-Isomorphismus in der Datenbank.\n', Name);
   end
   new = false;
-  return;
-else
-  fprintf('serroblib_add_robot: Roboter %s ist noch nicht in der Datenbank.\n', mdlname);
+  new_var = false;
+  Name_DB = Name;
+elseif found_var
   new = true;
+  new_var = true;
+  mdlname_var = sprintf('S%d%s%dV%d', N, typestring, index, index_var);
+  fprintf('serroblib_add_robot: Roboter %s wurde als noch unbekannte Variante von %s hinzugefügt.\n', mdlname_var, Name_var);
+  Name_DB = mdlname_var;
+else
+  fprintf('serroblib_add_robot: Roboter %s wurde zur Datenbank hinzugefügt.\n', mdlname_gen);
+  new = true;
+  new_var = false;
+  Name_DB = mdlname_gen;
 end
 
-%% Zeile in Datei hinzufügen
+%% Zeile eines neuen Hauptmodells in Datei hinzufügen
+% Zeile ans Ende anhängen
+if new && ~new_var
+  csvline{1} = mdlname_gen;
+  % Cell-Array in csv-Zeile umwandeln (da das Schreiben von Strings nur mit
+  % xlswrite funktioniert, dass nicht plattformunabhängig zur Verfügung
+  % steht.
+  line_robot = mdlname_gen;
+  for i = 2:length(csvline)
+    line_robot = sprintf('%s;%s', line_robot, csvline{i});
+  end
 
-% Cell-Array in csv-Zeile umwandeln (da das Schreiben von Strings nur mit
-% xlswrite funktioniert, dass nicht plattformunabhängig zur Verfügung
-% steht.
-line_robot = mdlname;
-for i = 2:length(csvline)
-  line_robot = sprintf('%s;%s', line_robot, csvline{i});
+  fid = fopen(filepath_csv, 'a');
+  fwrite(fid, [line_robot, newline]);
+  fclose(fid);
 end
 
-fid = fopen(filepath_csv, 'a');
-fwrite(fid, [line_robot, newline]);
-fclose(fid);
+%% Zeile einer neuen Variante in Datei hinzufügen
+if new_var
+  % Trage Variante in Tabelle an letzter Stelle für das Hauptmodell ein
+  if index_var == 1
+    mdlname_previous = mdlname_gen;
+  else
+    mdlname_previous = sprintf('S%d%s%dV%d', N, typestring, index, index_var-1);
+  end
+  csvline{1} = mdlname_var;
+  filename = sprintf('S%d%s.csv', N, typestring);
+  filepath_csv = fullfile(repopath, sprintf('mdl_%ddof', N),filename);
+  filepath_csv_copy = [filepath_csv, '.copy']; % Kopie der Tabelle zur Bearbeitung
+  fid = fopen(filepath_csv);
+  fidc = fopen(filepath_csv_copy, 'w');
+  tline = fgetl(fid);
+  action = false;
+  while ischar(tline)
+    % Spaltenweise als Cell-Array
+    csvline_file = strsplit(tline, ';', 'CollapseDelimiters', false);
+    fwrite(fidc, [tline, newline()]);
+    if strcmp(csvline_file{1}, mdlname_previous) % Suche Roboternamen (erste Spalte)
+      % Neue Zeile für Variante einfügen
+      line_new = csvline{1};
+      for i = 2:length(csvline)
+        line_new = sprintf('%s;%s', line_new, csvline{i});
+      end
+      fwrite(fidc, [line_new, newline()]);
+      action = true;
+    end    
+    tline = fgetl(fid); % nächste Zeile
+  end
+  fclose(fid);
+  fclose(fidc);
+  if ~action
+    error('Obwohl eine neue Zeile geschrieben werden sollte, wurde nichts gemacht. Vorheriges Modell %s wurde nicht gefunden. Fehler in Tabellenstruktur von %s', mdlname_previous, filename);
+  else
+    % Modifizierte Tabelle zurückkopieren
+    copyfile(filepath_csv_copy, filepath_csv);
+    % Kopie-Tabelle löschen
+    delete(filepath_csv_copy);
+  end
+end
 
+%% Abschluss
 % Neu zur mat-Datenbank hinzufügen (wird zum schnelleren Zugriff gepflegt).
 % Muss hier erfolgen, damit ein weiterer Aufruf von dieser Funktion den
 % vorherigen Roboter auch finden kann (um Nummern korrekt hochzuzählen)
 serroblib_gen_bitarrays(N); % Das aktualisiert immer die gesamte Datenbank
-

@@ -1,10 +1,10 @@
-Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;Gelenk 3;;;;;;;;Gelenk 4;;;;;;;;Gelenk 5;;;;;;;;Gelenk 6;;;;;;;;EE-Transformation (phi_N_E);;;EE-FG (Basis-KS);;;;;;;;
-;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;phix_NE;phiy_NE;phiz_NE;vx0;vy0;vz0;wx0;wy0;wz0;phix0;phiy0;phiz0
-S6RPPRRP1;R;0;0;0;0;0;d1;0;P;0;0;0;a2;theta2;0;0;P;0;0;pi/2;a3;theta3;0;0;R;0;0;0;a4;0;d4;0;R;0;0;pi/2;a5;0;d5;0;P;0;0;0;a6;0;0;0;0;0;0;1;1;1;1;1;1;1;1;1
-S6RPPRRP2;R;0;0;0;0;0;d1;0;P;0;0;0;a2;theta2;0;0;P;0;0;pi/2;a3;theta3;0;0;R;0;0;0;a4;0;d4;0;R;0;0;pi/2;a5;0;d5;0;P;0;0;pi/2;a6;0;0;0;0;0;0;1;1;1;1;1;1;1;1;1
-S6RPPRRP3;R;0;0;0;0;0;d1;0;P;0;0;0;a2;theta2;0;0;P;0;0;pi/2;a3;pi/2;0;0;R;0;0;pi/2;a4;0;d4;0;R;0;0;pi/2;a5;0;d5;0;P;0;0;pi/2;a6;0;0;0;0;0;0;1;1;1;1;1;1;1;1;1
-S6RPPRRP4;R;0;0;0;0;0;d1;0;P;0;0;pi/2;a2;0;0;0;P;0;0;pi/2;a3;theta3;0;0;R;0;0;pi/2;a4;0;d4;0;R;0;0;pi/2;a5;0;d5;0;P;0;0;pi/2;a6;0;0;0;0;0;0;1;1;1;1;1;1;1;1;1
-S6RPPRRP5;R;0;0;0;0;0;d1;0;P;0;0;pi/2;a2;pi/2;0;0;P;0;0;pi/2;a3;0;0;0;R;0;0;pi/2;a4;0;d4;0;R;0;0;pi/2;a5;0;d5;0;P;0;0;0;a6;0;0;0;0;0;0;1;1;1;1;1;1;1;1;1
-S6RPPRRP6;R;0;0;0;0;0;d1;0;P;0;0;pi/2;a2;pi/2;0;0;P;0;0;pi/2;a3;0;0;0;R;0;0;pi/2;a4;0;d4;0;R;0;0;pi/2;a5;0;d5;0;P;0;0;pi/2;a6;0;0;0;0;0;0;1;1;1;1;1;1;1;1;1
-S6RPPRRP7;R;0;0;0;0;0;d1;0;P;0;0;pi/2;a2;pi/2;0;0;P;0;0;pi/2;a3;theta3;0;0;R;0;0;0;a4;0;d4;0;R;0;0;pi/2;a5;0;d5;0;P;0;0;0;a6;0;0;0;0;0;0;1;1;1;1;1;1;1;1;1
-S6RPPRRP8;R;0;0;0;0;0;d1;0;P;0;0;pi/2;a2;pi/2;0;0;P;0;0;pi/2;a3;theta3;0;0;R;0;0;0;a4;0;d4;0;R;0;0;pi/2;a5;0;d5;0;P;0;0;pi/2;a6;0;0;0;0;0;0;1;1;1;1;1;1;1;1;1
+Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;Gelenk 3;;;;;;;;Gelenk 4;;;;;;;;Gelenk 5;;;;;;;;Gelenk 6;;;;;;;;EE-Transformation (phi_N_E);;;EE-FG (Basis-KS);;;;;;;;;Weitere Eigenschaften
+;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;phix_NE;phiy_NE;phiz_NE;vx0;vy0;vz0;wx0;wy0;wz0;phix0;phiy0;phiz0;Positionsbeeinflussendes Gelenk
+S6RPPRRP1;R;0;0;0;0;q1;d1;0;P;0;0;0;a2;theta2;q2;0;P;0;0;pi/2;a3;theta3;q3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;P;0;0;0;a6;0;q6;0;0;0;0;1;1;1;1;1;1;1;1;1;6
+S6RPPRRP2;R;0;0;0;0;q1;d1;0;P;0;0;0;a2;theta2;q2;0;P;0;0;pi/2;a3;theta3;q3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;P;0;0;pi/2;a6;0;q6;0;0;0;0;1;1;1;1;1;1;1;1;1;6
+S6RPPRRP3;R;0;0;0;0;q1;d1;0;P;0;0;0;a2;theta2;q2;0;P;0;0;pi/2;a3;pi/2;q3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;P;0;0;pi/2;a6;0;q6;0;0;0;0;1;1;1;1;1;1;1;1;1;6
+S6RPPRRP4;R;0;0;0;0;q1;d1;0;P;0;0;pi/2;a2;0;q2;0;P;0;0;pi/2;a3;theta3;q3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;P;0;0;pi/2;a6;0;q6;0;0;0;0;1;1;1;1;1;1;1;1;1;6
+S6RPPRRP5;R;0;0;0;0;q1;d1;0;P;0;0;pi/2;a2;pi/2;q2;0;P;0;0;pi/2;a3;0;q3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;P;0;0;0;a6;0;q6;0;0;0;0;1;1;1;1;1;1;1;1;1;6
+S6RPPRRP6;R;0;0;0;0;q1;d1;0;P;0;0;pi/2;a2;pi/2;q2;0;P;0;0;pi/2;a3;0;q3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;P;0;0;pi/2;a6;0;q6;0;0;0;0;1;1;1;1;1;1;1;1;1;6
+S6RPPRRP7;R;0;0;0;0;q1;d1;0;P;0;0;pi/2;a2;pi/2;q2;0;P;0;0;pi/2;a3;theta3;q3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;P;0;0;0;a6;0;q6;0;0;0;0;1;1;1;1;1;1;1;1;1;6
+S6RPPRRP8;R;0;0;0;0;q1;d1;0;P;0;0;pi/2;a2;pi/2;q2;0;P;0;0;pi/2;a3;theta3;q3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;P;0;0;pi/2;a6;0;q6;0;0;0;0;1;1;1;1;1;1;1;1;1;6

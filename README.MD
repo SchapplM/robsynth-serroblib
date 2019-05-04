@@ -22,6 +22,7 @@ Im Folgenden wird unterschieden zwischen
 
 * Typ: Gekennzeichnet durch Anzahl und Art der Gelenke. Z.B. `S4RRPR` (S=Seriell, 4=4FG, RRPR=Reihenfolge der Gelenke)
 * Modell: Genaue Anordnung der Gelenke (Senkrecht, Parallel, Verschoben, in einem Punkt). Z.B. `S4RRPR1` als eine Möglichkeit, die Gelenke R,R,P,R in dieser Reihenfolge anzuordnen.
+* Variante/Modellvariante: Speziellere Wahl der Parameter für ein Modell. Z.B. setzen eines vorher frei wählbaren Längenparameters auf Null oder eines Winkelparameters auf 0 oder Pi/2. Kennzeichnung durch `S4RRPR1V1`
 * Roboter: Parametriertes Robotermodell. Z.B. "Kuka KR 5 scara R350 Z320" für Kuka-Roboter mit Kinematik vom Typ RRPR1
 
 ### Funktionen
@@ -42,9 +43,18 @@ Datenbank auslesen und benutzen:
 * `serroblib_generate_mapleinput`: Eingabedaten zur Code-Generierung für diesen Roboter erstellen
 * `serroblib_generate_code`: Kinematik- und Dynamikfunktionen symbolisch mit der HybrDyn-Toolbox berechnen lassen.
 * `serroblib_addtopath`: Matlab-Funktionen dieses Roboters zum Matlab-Pfad hinzufügen, damit die Funktionsaufrufe funktionieren.
+* `scripts/generate_variant_pkin_conv_fcns.m`: Generiere Funktionen zur Umwandlung der Kinematikparameter von Varianten und ihren zugehörigen allgemeineren Modellen
+
+Zusätzliche Eigenschaften des Roboters ermitteln und ebenfalls eintragen (ist notwendig, da manche Eigenschaften erst mit den generierten Matlab-Funktionen berechnet werden können): 
+* `scripts/correct_phi_N_E.m`
+* `scripts/determine_jointnumber_influence_ee_position.m`
 
 Datenbank prüfen:
 * Mit `scripts/check_model_enumeration.m` lässt sich prüfen, ob nach Lösung von Kinematiken Lücken in der Nummerierung auftreten.
+
+Datenbank modifizieren: Wenn nachträglich das Format der Datenbank geändert wird, geschieht dies automatisiert über Skripte (Ordner `scripts`). Die folgenden Skripte können als Beispiele für weitere Modifikationen dienen:
+* `add_csv_column_ee_phi.m` und `correct_phi_N_E.m`: Hinzufügen und Belegen von Spalten für zusätzliche EE-Drehung
+* `add_csv_column_pos_infl_joint.m` und `determine_jointnumber_influence_ee_position.m`: Zusätzliche Spalte für Nummer des Gelenks, das zuletzt die EE-Position beeinflusst.
 
 ### Übersichtsdateien
 
@@ -52,13 +62,13 @@ Alle Informationen der Roboterbibliothek liegen in csv-Dateien (Trennzeichen: Se
 
 #### Liste der Robotermodelle für eine Gelenkfolge
 
-Die Datei `mdl_xdof/SxRRRRRR.csv` enthält die MDH-Parameter aller Robotermodelle mit der entsprechenden Gelenkfolge. Dabei ist
+Die Datei `mdl_xdof/SxRRRRRR.csv` enthält die MDH-Parameter aller Robotermodelle und Modellvarianten mit der entsprechenden Gelenkfolge. Dabei ist
 
 * S die Kennzeichnung für serielle Roboter,
 * x die Anzahl der Gelenk-FG,
 * R/P die Kennzeichnung für Dreh- oder Schubgelenk.
 
-Die Tabelle enthält die MDH-Parameter in symbolischer Form und zeigt die kinematische Struktur anhand von 0-Einträgen und 90°-Einträgen in den Parametern.
+Die Tabelle enthält die MDH-Parameter in symbolischer Form und zeigt die kinematische Struktur anhand von 0-Einträgen und 90°-Einträgen in den Parametern. Modellvarianten sind durch ein angehängtes V an den Modellnamen gekennzeichnet. Stehen aber in der Tabelle immer direkt unter den allgemeinen Modellen.
 
 #### Liste der Roboterparameter für ein Robotermodell
 

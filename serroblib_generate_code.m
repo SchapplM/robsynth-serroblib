@@ -43,12 +43,29 @@ for i = 1:length(Names)
   n = Names{i};
   N = str2double(n(2));
 
+  % Prüfe, ob Modell eine Variante ist
+  mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
+  l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
+  isvariant = l.AdditionalInfo(strcmp(l.Names_Ndof,n),2);
+  variantof = l.AdditionalInfo(strcmp(l.Names_Ndof,n),3);
+  
   % Pfad zur Maple-Dynamik-Toolbox (muss im Repo abgelegt werden)
   mrp = maplerepo_path();
   
   % Maple-Toolbox-Eingabe laden (wurde an anderer Stelle erzeugt)
   % (durch serroblib_generate_mapleinput.m)
-  mapleinputfile=fullfile(repopath, sprintf('mdl_%ddof', N), n, 'hd', sprintf('robot_env_%s', n));
+  if isvariant
+    % Der Code für Varianten wird im selben Ordner wie der des Allgemeinen
+    % Modells gespeichert (andersnamiger Unterordner)
+    n_gen = l.Names_Ndof{variantof};
+    mapleinputfile=fullfile(repopath, sprintf('mdl_%ddof', N), n_gen, ...
+                            sprintf('hd_%s', n(length(n_gen)+1:end)), sprintf('robot_env_%s', n));
+  else
+    % ist keine Variante
+    mapleinputfile=fullfile(repopath, sprintf('mdl_%ddof', N), n, ...
+                            'hd', sprintf('robot_env_%s', n));
+  end
+  
   if ~exist(mapleinputfile, 'file')
     error('Datei %s existiert nicht. Wurde `serroblib_generate_mapleinput.m` ausgeführt?', fileparts(mapleinputfile) );
   end
