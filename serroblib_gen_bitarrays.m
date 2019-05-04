@@ -63,7 +63,7 @@ for N = N_update(:)'
         continue
       end
       if length(csvline) ~= 1+N*8+3+6+3+1
-        warning('Zeile %s sieht ungültig aus', tline);
+        warning('Zeile %s (Datei %s) sieht ungültig aus', tline, d.name);
         continue % nicht genug Spalten: Ungültiger Datensatz
       end
       % Prüfe, ob Zeile Roboterzeile ist
