@@ -48,6 +48,12 @@ for i = 1:length(Names)
           % Varianten-Funktion existiert. Füge Pfad hinzu
           addpath(var_dir);
         end
+        gen_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, 'hd');
+        if exist(gen_dir, 'file')
+          addpath(gen_dir);
+        else
+          warning('Verzeichnis für allgemeinen Code %s existiert nicht. Es wird aber darauf verwiesen.', gen_dir);
+        end
       end
     else
       % Ist keine Variante und Verzeichnis nicht da.
