@@ -14,6 +14,8 @@
 %   vollständige Dynamik jedes mal neu generiert werden muss
 %   1: Vollständige Generierung, alles
 %   2: Nur aus Vorlagen generierte Funktionen (z.B. Jacobi, inverse Kinematik)
+%   3: Alles generieren in Maple, aber keinen Matlab-Code exportieren
+%      (wichtig für PKM. Dort wird die Bein-Dynamik nur als Maple gebraucht)
 % 
 % Vorher: 
 % * Funktion maplerepo_path.m muss vorliegen mit Rückgabe des
@@ -64,6 +66,12 @@ for i = 1:length(Names)
   % Eingabedatei kopieren
   mapleinputfile_tb = fullfile(mrp, 'robot_codegen_definitions', 'robot_env');
   copyfile( mapleinputfile, mapleinputfile_tb );
+  if mode == 3
+    fid = fopen(mapleinputfile_tb, 'a');
+    fprintf(fid, 'codegen_act := false:\n');
+    fclose(fid);
+  end
+  
   % Datei mit Shell-Variablen auch kopieren (wird bei vollständigem
   % Durchlauf der Toolbox überschrieben, aber für Einzelaufruf von Skripten
   % benötigt
@@ -73,7 +81,7 @@ for i = 1:length(Names)
     error('Generierung der Vorlagen-Funktionen nicht möglich. %s existiert nicht', [mapleinputfile,'.sh']);
   end
   % Code-Erstellung starten
-  if mode == 1
+  if mode == 1 || mode == 3
     fprintf('Starte Code-Generierung %d/%d für %s\n', i, length(Names), n);
     system( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel', mrp) ); %  > /dev/null
   elseif mode == 2
