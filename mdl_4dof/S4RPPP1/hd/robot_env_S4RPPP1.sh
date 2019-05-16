@@ -9,3 +9,4 @@ robot_NKCP=0
 robot_KCP=""
 robot_NMPVFIXB=15
 robot_NMPVFLOATB=NOTDEFINED
+robot_NTAUJFIXBREGNN=39

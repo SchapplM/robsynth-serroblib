@@ -50,3 +50,7 @@ serroblib_generate_code({Name}, true)
 %% Vorlagen-Funktionen für ein bestimmtes Modell neu generieren
 Name = 'S4RRPR1';
 serroblib_generate_code({Name}, true, false, 2)
+
+%% Testfunktionen für ein bestimmtes Modell generieren und ausführen
+Name = 'S6RRRRRR10V3';
+serroblib_generate_code({Name}, true, false, 4)
