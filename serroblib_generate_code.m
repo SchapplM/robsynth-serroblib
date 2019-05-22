@@ -105,7 +105,7 @@ for i = 1:length(Names)
   % Code-Erstellung starten
   if mode == 1 || mode == 3
     fprintf('Starte Code-Generierung %d/%d für %s\n', i, length(Names), n);
-    system( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel', mrp) ); %  > /dev/null
+    system_gen( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel', mrp) ); %  > /dev/null
   elseif mode == 2
     warning('Achtung: Mit der gesonderten Behandlung von Vorlagen-Funktionen ist dieser Modus nicht mehr sinnvoll');
     fprintf('Generiere Matlab-Funktionen aus Vorlagen (%d/%d) für %s\n', i, length(Names), n);
@@ -113,11 +113,11 @@ for i = 1:length(Names)
       warning('Ordner %s existiert nicht. Die Code-Generierung muss vorher einmal gelaufen sein', ...
         fullfile(mrp, 'codeexport', n));
     end
-    system( sprintf('rm -rf %s/workdir/*', mrp) ); % Inhalt des tmp-Verzeichnisses leeren und neu erstellen, ...
-    system( sprintf('mkdir -p %s/workdir/tmp', mrp) ); ... damit keine alten Versionen enthalten sein können
-    system( sprintf('cd %s/robot_codegen_scripts && ./create_git_versioninfo.sh', mrp) );
-    system( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_tmpvar_matlab.sh', mrp) );
-    system( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_matlab_num_varpar.sh', mrp) );
+    system_gen( sprintf('rm -rf %s/workdir/*', mrp) ); % Inhalt des tmp-Verzeichnisses leeren und neu erstellen, ...
+    system_gen( sprintf('mkdir -p %s/workdir/tmp', mrp) ); ... damit keine alten Versionen enthalten sein können
+    system_gen( sprintf('cd %s/robot_codegen_scripts && ./create_git_versioninfo.sh', mrp) );
+    system_gen( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_tmpvar_matlab.sh', mrp) );
+    system_gen( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_matlab_num_varpar.sh', mrp) );
   else
     error('Modus nicht definiert');
   end
@@ -158,4 +158,22 @@ for i = 1:length(Names)
   % leichter Roboterspezifische Funktionen neu generieren, ohne die Toolbox
   % neu durchlaufen zu lassen
   copyfile( fullfile(mrp, 'robot_codegen_definitions', 'robot_env.sh'), [mapleinputfile, '.sh']);
+end
+end
+
+function system_gen(cmd)
+  % Betriebssystem-unabhängiger Aufruf von Befehlen in der Git Bash
+  % Ermöglicht den Aufruf der Dynamik-Berechnungen aus Windows und Linux
+  % Vorher: Wechseln in Verzeichnis aus Matlab heraus
+  %
+  % Eingabe:
+  % cmd:
+  %  Befehl, der in der Git Bash ausgeführt werden soll.
+  if isunix() || ismac()
+    system(cmd)
+  elseif ispc()
+    system(sprintf('start "" "%%PROGRAMFILES%%\\Git\\bin\\sh.exe" --login  -c "%s"', cmd));
+  else
+    error('System nicht erkannt');
+  end
 end
