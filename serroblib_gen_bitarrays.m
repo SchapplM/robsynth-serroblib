@@ -25,6 +25,9 @@
 %     3: Nummer des Modells, von dem dieses Modell eine Variante ist
 %        Die Nummer bezieht sich auf die Liste aller Modelle und Varianten
 %        in der Tabelle
+%     4: Matlab-Code für dieses Modell liegt vor (1: Code für genau dieses
+%        Modell liegt vor;0 : Kein Code vorliegend; 2: Code für
+%        Haupt-Modell einer Variante liegt vor
 %   BitArrays_Ndof_VF
 %     Bit-Array mit Filter, um Varianten eines Roboters zu erkennen
 
@@ -44,7 +47,7 @@ for N = N_update(:)'
   BitArrays_Ndof_VF = uint16(zeros(1,N));
   BitArrays_phiNE = uint16(zeros(1,1));
   BitArrays_EEdof0 = uint16(zeros(1,1));
-  AdditionalInfo = zeros(1,3);
+  AdditionalInfo = zeros(1,4);
   Names_Ndof = {};
   b = 1; % Zähler für gefundene Roboterkonfigurationen aus csv-Tabelle für N FG
   %% Durchsuche alle csv-Dateien im Ordner nach passenden Strukturen
@@ -102,13 +105,41 @@ for N = N_update(:)'
         name_haupt = ['S',tokens_var{1}{1},tokens_var{1}{2},tokens_var{1}{3}];
         variantof = find(strcmp(Names_Ndof, name_haupt));
       end
+      
+      % Prüfe, ob Matlab-Code vorliegt. Damit kann geprüft werden, ob eine
+      % Variante einen eigenen Code-Ordner hat, oder den Code des
+      % allgemeinen Haupt-Modells verwendet
+      if isvariant
+        code_dir_var = fullfile(repopath, sprintf('mdl_%ddof', N), name_haupt, ...
+                                sprintf('hd_V%s', tokens_var{1}{4}));
+        code_dir_gen = fullfile(repopath, sprintf('mdl_%ddof', N), name_haupt, ...
+                                'hd');
+        if length(dir(fullfile(code_dir_var, '*.m'))) > 10
+          % Variante hat ihren eigenen Code-Ordner
+          hascode = 1;
+        elseif length(dir(fullfile(code_dir_gen, '*.m'))) > 10
+          % Code für Variante nicht verfügbar. Haupt-Modell hat Code
+          hascode = 2;
+        else
+          % Kein Code für Hauptmodell oder Variante
+          hascode = 0;
+        end
+      else % Keine Variante
+        code_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name, 'hd');
+        if length(dir(fullfile(code_dir, '*.m'))) > 10
+          % Code verfügbar (Genug Matlab-Funktionen im Ordner
+          hascode = 1;
+        else
+          hascode = 0;
+        end
+      end
       %% Ausgabe belegen
       Names_Ndof{b} = csvline{1}; %#ok<AGROW>
       BitArrays_Ndof(b,:) = BAJ;
       BitArrays_Ndof_VF(b,:) = BAJVF;
       BitArrays_phiNE(b,:) = BAR;
       BitArrays_EEdof0(b,:) = BAE;
-      AdditionalInfo(b,:) = [lastposjoint, double(isvariant), variantof];
+      AdditionalInfo(b,:) = [lastposjoint, double(isvariant), variantof, hascode];
       b = b+1;
     end
     fclose(fid);

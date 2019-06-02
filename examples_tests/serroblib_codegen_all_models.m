@@ -16,12 +16,19 @@ serroblib_gen_bitarrays
 serroblib_create_robot_csv_all
 
 %% Code für alle Modelle generieren
+only_for_existing_code = true;
 for N = 1:7
   % Liste zusammenstellen
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
-  l = load(mdllistfile_Ndof, 'Names_Ndof');
+  l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
+  if ~only_for_existing_code
+    II = 1:length(l.Names_Ndof);
+  else
+    I = (l.AdditionalInfo(:,4) == 1); % Code liegt bereits vor
+    II = find(I);
+  end
   % alle Modelle generieren
-  for iFK = 1:length(l.Names_Ndof)
+  for iFK = II'
     Name = l.Names_Ndof{iFK};
     serroblib_generate_mapleinput({Name})
     serroblib_generate_code({Name}, true)
@@ -30,13 +37,20 @@ for N = 1:7
 end
 
 %% Nur Vorlagen-Funktionen für alle Modelle neu generieren
+% Nur für Modelle, für die bereits Code vorliegt. Sonst wird für alle
+% Varianten ohne Code-Ordner auch generiert
 for N = 1:7
   % Liste zusammenstellen
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
-  l = load(mdllistfile_Ndof, 'Names_Ndof');
+  l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
+  I = (l.AdditionalInfo(:,4) == 1); % Code liegt bereits vor
+  II = find(I);
   % alle Modelle generieren
-  for iFK = 1:length(l.Names_Ndof)
+  j = 0;
+  for iFK = II'
+    j = j + 1;
     Name = l.Names_Ndof{iFK};
+    fprintf('%d/%d (Nr. %d): Generiere Vorlagen für %s\n', j, length(II), iFK, Name);
     serroblib_generate_code({Name}, true, false, 2)
   end
 end
