@@ -103,6 +103,10 @@ for i = 1:length(Names)
     system( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel', mrp) ); %  > /dev/null
   elseif mode == 2
     fprintf('Generiere Matlab-Funktionen aus Vorlagen (%d/%d) für %s\n', i, length(Names), n);
+    if ~exist(fullfile(mrp, 'codeexport', n), 'file')
+      warning('Ordner %s existiert nicht. Die Code-Generierung muss vorher einmal gelaufen sein', ...
+        fullfile(mrp, 'codeexport', n));
+    end
     system( sprintf('cd %s/robot_codegen_scripts && ./create_git_versioninfo.sh', mrp) );
     system( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_tmpvar_matlab.sh', mrp) );
     system( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_matlab_num_varpar.sh', mrp) );
