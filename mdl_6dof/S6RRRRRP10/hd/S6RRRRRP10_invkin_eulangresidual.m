@@ -17,9 +17,12 @@
 
 % TODO: Nullraum-Optimierung ist noch nicht gut implementiert (z.B. Indizes)
 
+% Quelle:
+% [1] Aufzeichnungen Schappler vom 3.8.2018
+
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-14 16:18
-% Revision: 386a36ae716355afebba52144c67e2e472fda1cd (2019-03-13)
+% Datum: 2019-06-03 09:35
+% Revision: 7254ec7b167830f9592b38d39d95d449e6fd98ef (2019-06-02)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2019-02
@@ -41,7 +44,9 @@ function [q, Phi] = S6RRRRRP10_invkin_eulangresidual(xE_soll, q0, s)
 %$cgargs           'T_N_E', zeros(4,4),
 %$cgargs               'K', zeros(6,1),
 %$cgargs              'Kn', zeros(6,1),
-%$cgargs              'wn', 0,
+%$cgargs              'wn', zeros(2,1),
+%$cgargs       'scale_lim', 0,
+%$cgargs       'normalize', false,
 %$cgargs           'n_min', 0,
 %$cgargs           'n_max', 1000,
 %$cgargs        'Phit_tol', 1.0000e-10,
@@ -51,7 +56,6 @@ function [q, Phi] = S6RRRRRP10_invkin_eulangresidual(xE_soll, q0, s)
 %% Initialisierung
 
 % Einstellungsvariablen aus Struktur herausholen
-sigmaJ = s.sigmaJ; % Marker für Dreh-/Schubgelenk (in den Minimalkoordinaten)
 phiconv_W_E = s.phiconv_W_E;
 K = s.K;
 Kn = s.Kn;
@@ -67,9 +71,11 @@ T_N_E = s.T_N_E;
 pkin = s.pkin;
 qmin = s.qlim(:,1);
 qmax = s.qlim(:,2);
+scale_lim = s.scale_lim;
 n_Phi_t = sum(s.I_EE(1:3)); % Anzahl der translatorischen Zwangsbedingungen
+q = q0;
 
-if wn ~= 0
+if any(wn ~= 0)
   nsoptim = true;
 else
   % Keine zusätzlichen Optimierungskriterien
@@ -121,7 +127,10 @@ for rr = 1:retry_limit % Schleife über Neu-Anfänge der Berechnung
       v = zeros(s.NQJ, 1);
       if wn(1) ~= 0
         [~, hdq] = invkin_optimcrit_limits1(q1, [qmin, qmax]);
-        % [1], Gl. (25)
+        v = v - hdq'; % [1], Gl. (25)
+      end
+      if wn(2) ~= 0
+        [~, hdq] = invkin_optimcrit_limits2(q1, [qmin, qmax]);
         v = v - hdq';
       end
       % [1], Gl. (24)
@@ -131,6 +140,25 @@ for rr = 1:retry_limit % Schleife über Neu-Anfänge der Berechnung
     % [1], Gl. (23)
     delta_q = K.*delta_q_T + Kn.*delta_q_N;
     q2 = q1 + delta_q;
+    
+    % Prüfe, ob die Gelenkwinkel ihre Grenzen überschreiten und reduziere
+    % die Schrittweite, falls das der Fall ist
+    delta_ul_rel = (qmax - q2)./(qmax-q1);
+    delta_ll_rel = (-qmin + q2)./(q1-qmin);
+    if scale_lim && any([delta_ul_rel;delta_ll_rel] < 0)
+      % Berechne die prozentual stärkste Überschreitung
+      % und nutze diese als Skalierung für die Winkeländerung
+      if min(delta_ul_rel)<min(delta_ll_rel)
+        % Verletzung nach oben ist die größere
+        [~,I_max] = min(delta_ul_rel);
+        scale = (qmax(I_max)-q1(I_max))./(delta_q(I_max));
+      else
+        % Verletzung nach unten ist maßgeblich
+        [~,I_min] = min(delta_ll_rel);
+        scale = (qmax(I_min)-q1(I_min))./(delta_q(I_min));
+      end
+      q2 = q1 + scale_lim*scale*delta_q;
+    end
 
     if any(isnan(q2)) || any(isinf(q2))
       break; % ab hier kann das Ergebnis nicht mehr besser werden wegen NaN/Inf
@@ -138,7 +166,6 @@ for rr = 1:retry_limit % Schleife über Neu-Anfänge der Berechnung
 
     % Nachverarbeitung der Ergebnisse der Iteration
     q1 = q2;
-    q1(sigmaJ==0) = normalize_angle(q1(sigmaJ==0)); % nur Winkel normalisieren
 
     % Abbruchbedingungen prüfen
     if jj > n_min ... % Mindestzahl Iterationen erfüllt
@@ -156,4 +183,7 @@ for rr = 1:retry_limit % Schleife über Neu-Anfänge der Berechnung
   q0 = qmin + rand(s.NQJ,1).*(qmax-qmin);
 end
 q = q1;
-
+if s.normalize
+  sigmaJ = s.sigmaJ; % Marker für Dreh-/Schubgelenk (in den Minimalkoordinaten)
+  q(sigmaJ==0) = normalize_angle(q(sigmaJ==0)); % nur Winkel normalisieren
+end

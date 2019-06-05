@@ -21,8 +21,8 @@
 % [1] Aufzeichnungen Schappler vom 3.8.2018
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-04-11 14:56
-% Revision: b693519ea345eb34ae9622239e7f1167217e9d53 (2019-04-09)
+% Datum: 2019-06-03 09:36
+% Revision: 7254ec7b167830f9592b38d39d95d449e6fd98ef (2019-06-02)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2019-02
@@ -119,9 +119,6 @@ for rr = 1:retry_limit % Schleife über Neu-Anfänge der Berechnung
     %% Nullstellensuche für Positions- und Orientierungsfehler
     % (Optimierung der Aufgabe)
     % Normale Invertierung der Jacobi-Matrix der seriellen Kette
-    if cond(Jdk) < 1e-10
-      return
-    end
     delta_q_T = Jdk \ (-Phi);
     %% Optimierung der Nebenbedingungen (Nullraum)
     delta_q_N = zeros(size(delta_q_T));
@@ -160,13 +157,7 @@ for rr = 1:retry_limit % Schleife über Neu-Anfänge der Berechnung
         [~,I_min] = min(delta_ll_rel);
         scale = (qmax(I_min)-q1(I_min))./(delta_q(I_min));
       end
-%       qmed = (qmax+qmin)/2;
-%       delta_ul_rel = (delta_ul)./(qmax-qmin)
-%       delta_ll_rel = (delta_ll)./(qmax-qmin)
-%       delta_rel_min = min([delta_ul_rel;delta_ll_rel]);
-%       scale = 1+delta_rel_min;
       q2 = q1 + scale_lim*scale*delta_q;
-%       q2 = q1 + s(5)*delta_q;
     end
 
     if any(isnan(q2)) || any(isinf(q2))

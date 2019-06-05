@@ -46,8 +46,8 @@
 % [2] Aufzeichnungen Schappler vom 11.12.2018
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-04-11 14:56
-% Revision: b693519ea345eb34ae9622239e7f1167217e9d53 (2019-04-09)
+% Datum: 2019-06-03 09:36
+% Revision: 7254ec7b167830f9592b38d39d95d449e6fd98ef (2019-06-02)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2019-02
