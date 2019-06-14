@@ -107,6 +107,8 @@ for i = 1:length(Names)
       warning('Ordner %s existiert nicht. Die Code-Generierung muss vorher einmal gelaufen sein', ...
         fullfile(mrp, 'codeexport', n));
     end
+    system( sprintf('rm -rf %s/workdir/*', mrp) ); % Inhalt des tmp-Verzeichnisses leeren und neu erstellen, ...
+    system( sprintf('mkdir -p %s/workdir/tmp', mrp) ); ... damit keine alten Versionen enthalten sein können
     system( sprintf('cd %s/robot_codegen_scripts && ./create_git_versioninfo.sh', mrp) );
     system( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_tmpvar_matlab.sh', mrp) );
     system( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_matlab_num_varpar.sh', mrp) );
