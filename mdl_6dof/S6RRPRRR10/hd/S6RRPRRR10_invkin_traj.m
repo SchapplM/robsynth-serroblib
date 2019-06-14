@@ -46,8 +46,8 @@
 % [2] Aufzeichnungen Schappler vom 11.12.2018
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-03 09:31
-% Revision: 7254ec7b167830f9592b38d39d95d449e6fd98ef (2019-06-02)
+% Datum: 2019-06-13 00:50
+% Revision: 88490aa672e88eb5e20d9a0a8e70ae692d9b9fe6 (2019-06-12)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2019-02
@@ -73,6 +73,7 @@ function [Q, QD, QDD, PHI] = S6RRPRRR10_invkin_traj(X, XD, XDD, T, q0, s)
 %$cgargs              'Kn', zeros(6,1),
 %$cgargs              'wn', zeros(2,1),
 %$cgargs       'scale_lim', 0,
+%$cgargs      'maxrelstep', 0.1,
 %$cgargs       'normalize', false,
 %$cgargs           'n_min', 0,
 %$cgargs           'n_max', 1000,
@@ -139,4 +140,5 @@ for k = 1:nt
   QDD(k,:) = qDD_k;
   PHI(k,:) = Phi_k;
 end
+
 
