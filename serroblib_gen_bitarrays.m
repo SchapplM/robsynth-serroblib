@@ -28,6 +28,8 @@
 %     4: Matlab-Code für dieses Modell liegt vor (1: Code für genau dieses
 %        Modell liegt vor;0 : Kein Code vorliegend; 2: Code für
 %        Haupt-Modell einer Variante liegt vor
+%     5: Anzahl Drehgelenke. Damit kann schneller auf die prinzipielle
+%        Struktur geschlossen werden (ist aber auch im Namen enthalten)
 %   BitArrays_Ndof_VF
 %     Bit-Array mit Filter, um Varianten eines Roboters zu erkennen
 
@@ -47,7 +49,7 @@ for N = N_update(:)'
   BitArrays_Ndof_VF = uint16(zeros(1,N));
   BitArrays_phiNE = uint16(zeros(1,1));
   BitArrays_EEdof0 = uint16(zeros(1,1));
-  AdditionalInfo = zeros(1,4);
+  AdditionalInfo = zeros(1,5);
   Names_Ndof = {};
   b = 1; % Zähler für gefundene Roboterkonfigurationen aus csv-Tabelle für N FG
   %% Durchsuche alle csv-Dateien im Ordner nach passenden Strukturen
@@ -133,13 +135,16 @@ for N = N_update(:)'
           hascode = 0;
         end
       end
+      
+      % Anzahl Drehgelenke zählen
+      numrotjoints = sum(Name=='R');
       %% Ausgabe belegen
       Names_Ndof{b} = csvline{1}; %#ok<AGROW>
       BitArrays_Ndof(b,:) = BAJ;
       BitArrays_Ndof_VF(b,:) = BAJVF;
       BitArrays_phiNE(b,:) = BAR;
       BitArrays_EEdof0(b,:) = BAE;
-      AdditionalInfo(b,:) = [lastposjoint, double(isvariant), variantof, hascode];
+      AdditionalInfo(b,:) = [lastposjoint, double(isvariant), variantof, hascode, numrotjoints];
       b = b+1;
     end
     fclose(fid);
