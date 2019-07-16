@@ -9,7 +9,7 @@
 % 
 % Ausgabe:
 % success
-%   true, falls Roboter erfolgreich entfernt wurde
+%   true, falls Roboter aus Datenbank entfernt wurde
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2019-02
 % (C) Institut für Mechatronische Systeme, Universität Hannover
@@ -48,15 +48,37 @@ if ~found
   success = false;
   warning('Zu löschendes Modell %s nicht in %s gefunden', ...
     Name, filepath_csv);
-  return
+else
+  success = true;
+  % Modifizierte Tabelle zurückkopieren
+  copyfile(filepath_csv_copy, filepath_csv);
+  % Kopie-Tabelle löschen
+  delete(filepath_csv_copy);
 end
-% Modifizierte Tabelle zurückkopieren
-copyfile(filepath_csv_copy, filepath_csv);
-% Kopie-Tabelle löschen
-delete(filepath_csv_copy);
-% Ordner mit Code und Parameter-Modellen löschen
-% Aktuell muss noch manuell geprüft werden, ob dabei wichtige Daten verloren gehen
-robdir = fullfile(repopath, sprintf('mdl_%ddof', N), Name);
-rmdir(robdir, 's');
 
-success = true;
+%% Ordner mit Code und Parameter-Modellen löschen
+% Aktuell muss noch manuell geprüft werden (über git), ob dabei wichtige
+% Daten verloren gehen. Die Löschung wird vorgenommen, auch wenn der
+% Roboter nicht in der Datenbank war.
+
+% Prüfe, ob Modellname eine Variante ist
+exp_var = '^S(\d)([RP]+)(\d+)V(\d+)$'; % Format "S3RRR1V1" für Varianten
+[tokens_var, ~] = regexp(Name,exp_var,'tokens','match');
+
+if isempty(tokens_var)
+  % Keine Variante: Lösche komplettes Verzeichnis
+  robdir = fullfile(repopath, sprintf('mdl_%ddof', N), Name);
+  if exist(robdir, 'file')
+    rmdir(robdir, 's');
+    fprintf('Ordner %s entfernt\n', robdir);
+  end
+else
+  % Variante: Lösche nur Code-Ordner der Variante
+  Name_GenMdl = sprintf('S%s%s%s', tokens_var{1}{1}, tokens_var{1}{2}, tokens_var{1}{3});
+  fcn_dir_var = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
+    sprintf('hd_V%s', tokens_var{1}{4}));
+  if exist(fcn_dir_var, 'file')
+    rmpath(fcn_dir_var);
+    fprintf('Ordner %s entfernt\n', fcn_dir_var);
+  end
+end

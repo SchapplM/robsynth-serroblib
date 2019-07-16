@@ -106,6 +106,10 @@ for N = N_update(:)'
       else
         name_haupt = ['S',tokens_var{1}{1},tokens_var{1}{2},tokens_var{1}{3}];
         variantof = find(strcmp(Names_Ndof, name_haupt));
+        if isempty(variantof)
+          warning('Modellvariante %s kann keinem Hauptmodell zugeordnet werden', Name);
+          variantof = 0;
+        end
       end
       
       % Prüfe, ob Matlab-Code vorliegt. Damit kann geprüft werden, ob eine
