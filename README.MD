@@ -48,6 +48,7 @@ Datenbank auslesen und benutzen:
 Zusätzliche Eigenschaften des Roboters ermitteln und ebenfalls eintragen (ist notwendig, da manche Eigenschaften erst mit den generierten Matlab-Funktionen berechnet werden können): 
 * `scripts/correct_phi_N_E.m`
 * `scripts/determine_jointnumber_influence_ee_position.m`
+* `scripts/determine_ee_dof.m`
 
 Datenbank prüfen:
 * Mit `scripts/check_model_enumeration.m` lässt sich prüfen, ob nach Lösung von Kinematiken Lücken in der Nummerierung auftreten.
