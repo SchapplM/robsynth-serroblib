@@ -19,8 +19,8 @@
 %   Translatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-12 14:37
-% Revision: aab8d7cd0cba739f5e0ec8d53b8419901d1154b0 (2019-06-12)
+% Datum: 2019-07-18 13:26
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -39,16 +39,16 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 %% Symbolic Calculation
 % From jacobia_transl_3_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-06-12 14:37:33
-% EndTime: 2019-06-12 14:37:33
-% DurationCPUTime: 0.05s
+% StartTime: 2019-07-18 13:26:25
+% EndTime: 2019-07-18 13:26:25
+% DurationCPUTime: 0.06s
 % Computational Cost: add. (10->6), mult. (22->10), div. (0->0), fcn. (24->4), ass. (0->8)
 t7 = r_i_i_C(3) + qJ(2);
 t1 = sin(qJ(3));
 t3 = cos(qJ(3));
-t6 = r_i_i_C(1) * t3 - r_i_i_C(2) * t1;
+t6 = t3 * r_i_i_C(1) - t1 * r_i_i_C(2);
 t5 = -r_i_i_C(1) * t1 - r_i_i_C(2) * t3;
 t4 = cos(qJ(1));
 t2 = sin(qJ(1));
-t8 = [-t2 * t6 + t4 * t7, t2, t5 * t4, 0, 0; t2 * t7 + t4 * t6, -t4, t5 * t2, 0, 0; 0, 0, t6, 0, 0;];
+t8 = [-t6 * t2 + t7 * t4, t2, t5 * t4, 0, 0; t7 * t2 + t6 * t4, -t4, t5 * t2, 0, 0; 0, 0, t6, 0, 0;];
 Ja_transl  = t8;

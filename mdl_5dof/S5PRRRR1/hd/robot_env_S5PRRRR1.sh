@@ -1,0 +1,12 @@
+robot_NQJ=5
+robot_NJ=5
+robot_name="S5PRRRR1"
+robot_NL=6
+robot_NKP=2
+robot_KP="a2 a4"
+robot_kinconstr_exist=0
+robot_NKCP=0
+robot_KCP=""
+robot_NMPVFIXB=25
+robot_NMPVFLOATB=NOTDEFINED
+robot_NTAUJFIXBREGNN=73

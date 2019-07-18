@@ -13,7 +13,7 @@
 % pkin [1x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[dummy]';
-% MDP [NOTDEFINEDx1]
+% MDP [27x1]
 %   Minimal dynamic parameter vector (fixed base model)
 %   see S5RPRRR1_convert_par2_MPV_fixb.m
 %
@@ -22,8 +22,8 @@
 %   Time series of inverse Dynamics joint torque
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-12 14:37
-% Revision: aab8d7cd0cba739f5e0ec8d53b8419901d1154b0 (2019-06-12)
+% Datum: 2019-07-18 13:26
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -34,7 +34,7 @@ function TAU = S5RPRRR1_invdynJ_fixb_mdp_slag_vp_traj(Q, QD, QDD, g, pkin, MDP)
 %$cgargs {coder.newtype('double',[inf,5]),
 %$cgargs  coder.newtype('double',[inf,5]),
 %$cgargs  coder.newtype('double',[inf,5]),
-%$cgargs  zeros(3,1), zeros(1,1), zeros(NOTDEFINED,1)}
+%$cgargs  zeros(3,1), zeros(1,1), zeros(27,1)}
 assert(isreal(Q) && all(size(Q,2) == 5), ...
   'S5RPRRR1_invdynJ_fixb_mdp_slag_vp_traj: Q needs to be [NTx5] (double)');
 assert(isreal(QD) && all(size(QD,2) == 5), ...
@@ -45,8 +45,8 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S5RPRRR1_invdynJ_fixb_mdp_slag_vp_traj: Gravity vector g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
   'S5RPRRR1_invdynJ_fixb_mdp_slag_vp_traj: Kinematic parameters pkin have to be [1x1] (double)');
-assert(isreal(MDP) && all(size(MDP) == [NOTDEFINED 1]), ...
-  'S5RPRRR1_invdynJ_fixb_mdp_slag_vp_traj: Dynamics parameter vector MDP has to be [NOTDEFINEDx1] (double)');
+assert(isreal(MDP) && all(size(MDP) == [27 1]), ...
+  'S5RPRRR1_invdynJ_fixb_mdp_slag_vp_traj: Dynamics parameter vector MDP has to be [27x1] (double)');
 
 %% Inverse Dynamik für jeden Zeitschritt der Trajektorie berechnen
 TAU = NaN(size(Q));

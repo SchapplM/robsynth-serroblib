@@ -23,8 +23,8 @@
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-12 14:37
-% Revision: aab8d7cd0cba739f5e0ec8d53b8419901d1154b0 (2019-06-12)
+% Datum: 2019-07-18 13:26
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 

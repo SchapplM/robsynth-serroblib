@@ -21,8 +21,8 @@
 %   Zeitableitung der translatorischen Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-05-31 10:31
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 17:19
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,11 +43,11 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
 %% Symbolic Calculation
 % From jacobiaD_transl_1_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-05-31 10:31:13
-% EndTime: 2019-05-31 10:31:13
-% DurationCPUTime: 0.02s
+% StartTime: 2019-07-18 17:19:38
+% EndTime: 2019-07-18 17:19:38
+% DurationCPUTime: 0.01s
 % Computational Cost: add. (2->2), mult. (8->6), div. (0->0), fcn. (4->2), ass. (0->3)
-t6 = cos(qJ(1));
-t5 = sin(qJ(1));
-t1 = [(-r_i_i_C(1) * t6 + r_i_i_C(2) * t5) * qJD(1), 0, 0, 0, 0; (-r_i_i_C(1) * t5 - r_i_i_C(2) * t6) * qJD(1), 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+t27 = cos(qJ(1));
+t26 = sin(qJ(1));
+t1 = [(-r_i_i_C(1) * t27 + r_i_i_C(2) * t26) * qJD(1), 0, 0, 0, 0; (-r_i_i_C(1) * t26 - r_i_i_C(2) * t27) * qJD(1), 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 JaD_transl  = t1;

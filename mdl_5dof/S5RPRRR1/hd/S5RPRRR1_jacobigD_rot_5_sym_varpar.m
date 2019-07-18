@@ -20,8 +20,8 @@
 %   Zeitableitung der rotatorischen Teilmatrix der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-12 14:37
-% Revision: aab8d7cd0cba739f5e0ec8d53b8419901d1154b0 (2019-06-12)
+% Datum: 2019-07-18 13:26
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,22 +40,22 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 %% Symbolic Calculation
 % From jacobigD_rot_5_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-06-12 14:37:34
-% EndTime: 2019-06-12 14:37:34
-% DurationCPUTime: 0.05s
+% StartTime: 2019-07-18 13:26:25
+% EndTime: 2019-07-18 13:26:25
+% DurationCPUTime: 0.03s
 % Computational Cost: add. (11->9), mult. (41->23), div. (0->0), fcn. (41->6), ass. (0->14)
-t72 = sin(qJ(1));
-t82 = qJD(1) * t72;
-t75 = cos(qJ(1));
-t81 = qJD(1) * t75;
-t71 = sin(qJ(3));
-t80 = qJD(3) * t71;
-t74 = cos(qJ(3));
-t79 = qJD(3) * t74;
-t78 = qJD(3) * t75;
-t77 = qJD(1) * t74 - qJD(4);
-t73 = cos(qJ(4));
-t76 = (qJD(4) * t74 - qJD(1)) * t73;
-t70 = sin(qJ(4));
-t1 = [0, 0, t81, -t71 * t82 + t74 * t78, t75 * t76 + (-t71 * t78 - t77 * t72) * t70; 0, 0, t82, t71 * t81 + t72 * t79, t72 * t76 + (-t72 * t80 + t77 * t75) * t70; 0, 0, 0, t80, t71 * qJD(4) * t73 + t70 * t79;];
+t116 = sin(qJ(1));
+t126 = qJD(1) * t116;
+t119 = cos(qJ(1));
+t125 = qJD(1) * t119;
+t115 = sin(qJ(3));
+t124 = qJD(3) * t115;
+t118 = cos(qJ(3));
+t123 = qJD(3) * t118;
+t122 = qJD(3) * t119;
+t121 = qJD(1) * t118 - qJD(4);
+t117 = cos(qJ(4));
+t120 = (qJD(4) * t118 - qJD(1)) * t117;
+t114 = sin(qJ(4));
+t1 = [0, 0, t125, -t115 * t126 + t118 * t122, t119 * t120 + (-t115 * t122 - t121 * t116) * t114; 0, 0, t126, t115 * t125 + t116 * t123, t116 * t120 + (-t116 * t124 + t121 * t119) * t114; 0, 0, 0, t124, t115 * qJD(4) * t117 + t114 * t123;];
 JgD_rot  = t1;

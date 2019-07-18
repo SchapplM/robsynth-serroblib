@@ -11,17 +11,17 @@
 %   Generalized joint coordinates (joint angles)
 % qJD [5x1]
 %   Generalized joint velocities
-% pkin [1x1]
+% pkin [6x1]
 %   kinematic parameters (e.g. lengths of the links)
-%   pkin=[a4]';
+%   pkin=[a2,a3,a4,d3,d4,d5]';
 %
 % Output:
 % JgD_rot [3x5]
 %   Zeitableitung der rotatorischen Teilmatrix der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-03 15:11
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 13:30
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -29,28 +29,22 @@ function JgD_rot = S5PRRRR2_jacobigD_rot_5_sym_varpar(qJ, qJD, ...
   pkin)
 %% Coder Information
 %#codegen
-%$cgargs {zeros(5,1),zeros(5,1),zeros(1,1)}
+%$cgargs {zeros(5,1),zeros(5,1),zeros(6,1)}
 assert(isreal(qJ) && all(size(qJ) == [5 1]), ...
   'S5PRRRR2_jacobigD_rot_5_sym_varpar: qJ has to be [5x1] (double)');
 assert(isreal(qJD) && all(size(qJD) == [5 1]), ...
   'S5PRRRR2_jacobigD_rot_5_sym_varpar: qJD has to be [5x1] (double)');
-assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
-  'S5PRRRR2_jacobigD_rot_5_sym_varpar: pkin has to be [1x1] (double)');
+assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
+  'S5PRRRR2_jacobigD_rot_5_sym_varpar: pkin has to be [6x1] (double)');
 
 %% Symbolic Calculation
 % From jacobigD_rot_5_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-06-03 15:11:34
-% EndTime: 2019-06-03 15:11:34
-% DurationCPUTime: 0.02s
-% Computational Cost: add. (11->5), mult. (13->8), div. (0->0), fcn. (13->4), ass. (0->9)
-t67 = qJD(3) + qJD(4);
-t68 = qJ(3) + qJ(4);
-t71 = cos(t68) * t67;
-t69 = sin(qJ(2));
-t63 = qJD(2) * t69;
-t70 = cos(qJ(2));
-t64 = qJD(2) * t70;
-t65 = sin(t68);
-t1 = [0, 0, t64, t64, -t65 * t63 + t70 * t71; 0, 0, 0, 0, -t67 * t65; 0, 0, t63, t63, t65 * t64 + t69 * t71;];
+% StartTime: 2019-07-18 13:30:34
+% EndTime: 2019-07-18 13:30:34
+% DurationCPUTime: 0.01s
+% Computational Cost: add. (8->2), mult. (2->2), div. (0->0), fcn. (2->2), ass. (0->3)
+t35 = qJ(2) + qJ(3) + qJ(4);
+t34 = qJD(2) + qJD(3) + qJD(4);
+t1 = [0, 0, 0, 0, t34 * cos(t35); 0, 0, 0, 0, t34 * sin(t35); 0, 0, 0, 0, 0;];
 JgD_rot  = t1;

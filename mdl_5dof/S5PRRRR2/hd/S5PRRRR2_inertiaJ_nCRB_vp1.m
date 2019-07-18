@@ -3,9 +3,9 @@
 % Input:
 % q [5x1]
 %   Joint Angles [rad]
-% pkin [1x1]
+% pkin [6x1]
 %   kinematic parameters (e.g. lengths of the links)
-%   pkin=[a4]';
+%   pkin=[a2,a3,a4,d3,d4,d5]';
 % m_mdh [6x1]
 %   mass of all robot links (including the base)
 % rSges [6x3]
@@ -27,8 +27,8 @@
 % TODO: Funktioniert noch nicht für Schubgelenke
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-03 15:11
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 13:30
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 % Moritz Schappler, schappler@irt.uni-hannover.de, 2016-12
@@ -37,11 +37,11 @@
 function H = S5PRRRR2_inertiaJ_nCRB_vp1(q, pkin, m_num, rSges_num_mdh, Icges_num_mdh)
 %%Coder Information
 %#codegen
-%$cgargs {zeros(5,1),zeros(1,1),zeros(6,1),zeros(6,3),zeros(6,6)}
+%$cgargs {zeros(5,1),zeros(6,1),zeros(6,1),zeros(6,3),zeros(6,6)}
 assert(isreal(q) && all(size(q) == [5 1]), ...
   'S5PRRRR2_inertiaJ_nCRB_vp1: q has to be [5x1] (double)');
-assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
-  'S5PRRRR2_inertiaJ_nCRB_vp1: Kinematic parameters pkin have to be [1x1] (double)');
+assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
+  'S5PRRRR2_inertiaJ_nCRB_vp1: Kinematic parameters pkin have to be [6x1] (double)');
 assert(isreal(m_num) && all(size(m_num) == [6 1]), ...
   'S5PRRRR2_inertiaJ_nCRB_vp1: m_num has to be [6x1] (double)');
 assert(isreal(rSges_num_mdh) && all(size(rSges_num_mdh) == [6,3]), ...

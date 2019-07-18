@@ -2,9 +2,9 @@
 % S5PRRRR2
 %
 % Input:
-% pkin [1x1]
+% pkin [6x1]
 %   kinematic parameters (e.g. lengths of the links)
-%   pkin=[a4]';
+%   pkin=[a2,a3,a4,d3,d4,d5]';
 %
 % Output: MDH parameter in order of transformation
 % beta_mdh [5x1]
@@ -23,8 +23,8 @@
 %   Offset on joint coordinate q
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-03 15:11
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 13:30
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -32,9 +32,9 @@ function [beta_mdh, b_mdh, alpha_mdh, a_mdh, theta_mdh, d_mdh, qoffset_mdh] = S5
 
 %% Init
 %#codegen
-%$cgargs {zeros(1,1)}
-assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
-  'S5PRRRR2_pkin2mdhparam: Kinematic parameters pkin have to be [1x1] (double)');
+%$cgargs {zeros(6,1)}
+assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
+  'S5PRRRR2_pkin2mdhparam: Kinematic parameters pkin have to be [6x1] (double)');
 
 %% Zuweisung der Parameter
 
@@ -48,12 +48,11 @@ t1 = [0; 0; 0; 0; 0;];
 b_mdh = t1;
 
 % Aus parameters_mdh_alpha_matlab.m
-t1 = pi / 0.2e1;
-t2 = [0; t1; t1; 0; t1;];
-alpha_mdh = t2;
+t1 = [0; 0; 0; 0; pi / 0.2e1;];
+alpha_mdh = t1;
 
 % Aus parameters_mdh_a_matlab.m
-t1 = [0; 0; 0; pkin(1); 0;];
+t1 = [0; pkin(1); pkin(2); pkin(3); 0;];
 a_mdh = t1;
 
 % Aus parameters_mdh_theta_matlab.m
@@ -61,7 +60,7 @@ t1 = [0; 0; 0; 0; 0;];
 theta_mdh = t1;
 
 % Aus parameters_mdh_d_matlab.m
-t1 = [0; 0; 0; 0; 0;];
+t1 = [0; 0; pkin(4); pkin(5); pkin(6);];
 d_mdh = t1;
 
 % Aus parameters_mdh_qoffset_matlab.m

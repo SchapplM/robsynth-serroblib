@@ -18,8 +18,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-12 14:37
-% Revision: aab8d7cd0cba739f5e0ec8d53b8419901d1154b0 (2019-06-12)
+% Datum: 2019-07-18 13:26
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,38 +36,35 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 %% Symbolic Calculation
 % From jacobiR_rot_5_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-06-12 14:37:34
-% EndTime: 2019-06-12 14:37:34
+% StartTime: 2019-07-18 13:26:25
+% EndTime: 2019-07-18 13:26:25
 % DurationCPUTime: 0.05s
-% Computational Cost: add. (37->20), mult. (118->39), div. (0->0), fcn. (180->8), ass. (0->30)
-t47 = sin(qJ(5));
-t49 = sin(qJ(3));
-t69 = t49 * t47;
-t51 = cos(qJ(5));
-t68 = t49 * t51;
-t52 = cos(qJ(4));
-t67 = t49 * t52;
-t54 = cos(qJ(1));
-t66 = t49 * t54;
-t48 = sin(qJ(4));
-t50 = sin(qJ(1));
-t65 = t50 * t48;
-t64 = t50 * t52;
-t53 = cos(qJ(3));
-t63 = t53 * t47;
-t62 = t53 * t48;
-t61 = t53 * t51;
-t60 = t54 * t48;
-t59 = t54 * t52;
-t42 = t53 * t64 - t60;
-t58 = -t42 * t47 + t50 * t68;
-t57 = -t42 * t51 - t50 * t69;
-t56 = -t51 * t67 + t63;
-t55 = t47 * t67 + t61;
-t44 = t53 * t59 + t65;
-t43 = t53 * t60 - t64;
-t41 = -t50 * t62 - t59;
-t40 = t44 * t51 + t47 * t66;
-t39 = -t44 * t47 + t51 * t66;
-t1 = [t57, 0, t56 * t54, -t43 * t51, t39; t40, 0, t56 * t50, t41 * t51, t58; 0, 0, t52 * t61 + t69, -t48 * t68, -t55; -t58, 0, t55 * t54, t43 * t47, -t40; t39, 0, t55 * t50, -t41 * t47, t57; 0, 0, -t52 * t63 + t68, t48 * t69, t56; t41, 0, -t49 * t60, t44, 0; t43, 0, -t49 * t65, t42, 0; 0, 0, t62, t67, 0;];
+% Computational Cost: add. (37->20), mult. (118->41), div. (0->0), fcn. (180->8), ass. (0->27)
+t94 = sin(qJ(5));
+t96 = sin(qJ(3));
+t113 = t96 * t94;
+t98 = cos(qJ(5));
+t112 = t96 * t98;
+t99 = cos(qJ(4));
+t111 = t96 * t99;
+t95 = sin(qJ(4));
+t97 = sin(qJ(1));
+t110 = t97 * t95;
+t100 = cos(qJ(3));
+t109 = t100 * t95;
+t108 = t100 * t99;
+t101 = cos(qJ(1));
+t107 = t101 * t96;
+t106 = t100 * t101;
+t89 = -t101 * t95 + t97 * t108;
+t105 = t97 * t112 - t89 * t94;
+t104 = -t97 * t113 - t89 * t98;
+t103 = t100 * t94 - t98 * t111;
+t102 = t100 * t98 + t94 * t111;
+t91 = t99 * t106 + t110;
+t90 = t95 * t106 - t97 * t99;
+t88 = -t101 * t99 - t97 * t109;
+t87 = t94 * t107 + t91 * t98;
+t86 = t98 * t107 - t91 * t94;
+t1 = [t104, 0, t103 * t101, -t90 * t98, t86; t87, 0, t103 * t97, t88 * t98, t105; 0, 0, t98 * t108 + t113, -t95 * t112, -t102; -t105, 0, t102 * t101, t90 * t94, -t87; t86, 0, t102 * t97, -t88 * t94, t104; 0, 0, -t94 * t108 + t112, t95 * t113, t103; t88, 0, -t95 * t107, t91, 0; t90, 0, -t96 * t110, t89, 0; 0, 0, t109, t111, 0;];
 JR_rot  = t1;

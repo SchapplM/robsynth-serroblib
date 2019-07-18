@@ -9,9 +9,9 @@
 %   Siehe auch: S5PRRRR2_fkine_fixb_rotmat_mdh_sym_varpar.m
 % r_i_i_C [3x1]
 %   Ortsvektor vom KörperKS-Ursprung zum gesuchten Punkt
-% pkin [1x1]
+% pkin [6x1]
 %   kinematic parameters (e.g. lengths of the links)
-%   pkin=[a4]';
+%   pkin=[a2,a3,a4,d3,d4,d5]';
 %
 % Output:
 % Jg_C [6x5]
@@ -21,8 +21,8 @@
 % [1] Ortmaier: Robotik I Skript
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-03 15:11
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 13:30
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 % Moritz Schappler, schappler@irt.uni-hannover.de, 2016-03
@@ -31,15 +31,15 @@
 function Jg_C = S5PRRRR2_jacobig_mdh_num(qJ, link_index, r_i_i_C, pkin)
 %% Init
 %#codegen
-%$cgargs {zeros(5,1),uint8(zeros(1,1)),zeros(3,1),zeros(1,1)}
+%$cgargs {zeros(5,1),uint8(zeros(1,1)),zeros(3,1),zeros(6,1)}
 assert(isreal(qJ) && all(size(qJ) == [5 1]), ...
   'S5PRRRR2_jacobig_mdh_num: Joint angles qJ have to be [5x1] (double)');
 assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
   'S5PRRRR2_jacobig_mdh_num: link_index has to be [1x1] uint8');
 assert(isreal(r_i_i_C) && all(size(r_i_i_C) == [3 1]), ...
   'S5PRRRR2_jacobig_mdh_num: Position vector r_i_i_C has to be [3x1] (double)');
-assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
-  'S5PRRRR2_jacobig_mdh_num: Kinematic parameters pkin have to be [1x1] (double)');
+assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
+  'S5PRRRR2_jacobig_mdh_num: Kinematic parameters pkin have to be [6x1] (double)');
 
 if link_index > 6-1
   error('Index exceeds number of bodies');

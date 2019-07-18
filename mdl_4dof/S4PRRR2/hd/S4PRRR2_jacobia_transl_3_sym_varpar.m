@@ -19,8 +19,8 @@
 %   Translatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-06 14:21
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 13:27
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -39,9 +39,9 @@ assert(isreal(pkin) && all(size(pkin) == [2 1]), ...
 %% Symbolic Calculation
 % From jacobia_transl_3_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-06-06 14:21:04
-% EndTime: 2019-06-06 14:21:05
-% DurationCPUTime: 0.11s
+% StartTime: 2019-07-18 13:27:29
+% EndTime: 2019-07-18 13:27:29
+% DurationCPUTime: 0.06s
 % Computational Cost: add. (14->5), mult. (10->6), div. (0->0), fcn. (10->4), ass. (0->6)
 t4 = qJ(2) + qJ(3);
 t2 = sin(t4);

@@ -9,17 +9,17 @@
 % Input:
 % qJ [5x1]
 %   Generalized joint coordinates (joint angles)
-% pkin [1x1]
+% pkin [6x1]
 %   kinematic parameters (e.g. lengths of the links)
-%   pkin=[a4]';
+%   pkin=[a2,a3,a4,d3,d4,d5]';
 %
 % Output:
 % JR_rot [9x5]
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-03 15:11
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 13:30
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -27,41 +27,27 @@ function JR_rot = S5PRRRR2_jacobiR_rot_5_sym_varpar(qJ, ...
   pkin)
 %% Coder Information
 %#codegen
-%$cgargs {zeros(5,1),zeros(1,1)}
+%$cgargs {zeros(5,1),zeros(6,1)}
 assert(isreal(qJ) && all(size(qJ) == [5 1]), ...
   'S5PRRRR2_jacobiR_rot_5_sym_varpar: qJ has to be [5x1] (double)');
-assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
-  'S5PRRRR2_jacobiR_rot_5_sym_varpar: pkin has to be [1x1] (double)');
+assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
+  'S5PRRRR2_jacobiR_rot_5_sym_varpar: pkin has to be [6x1] (double)');
 
 %% Symbolic Calculation
 % From jacobiR_rot_5_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-06-03 15:11:34
-% EndTime: 2019-06-03 15:11:34
-% DurationCPUTime: 0.05s
-% Computational Cost: add. (47->16), mult. (52->20), div. (0->0), fcn. (90->6), ass. (0->24)
-t51 = qJ(3) + qJ(4);
-t50 = cos(t51);
-t54 = cos(qJ(5));
-t62 = t50 * t54;
-t52 = sin(qJ(5));
-t53 = sin(qJ(2));
-t61 = t53 * t52;
-t60 = t53 * t54;
-t55 = cos(qJ(2));
-t59 = t55 * t52;
-t58 = t55 * t54;
-t49 = sin(t51);
-t57 = t49 * t60;
-t56 = t49 * t58;
-t48 = t55 * t50;
-t47 = t50 * t52;
-t46 = t53 * t50;
-t45 = t49 * t59;
-t44 = t49 * t61;
-t43 = t50 * t58 + t61;
-t42 = -t50 * t59 + t60;
-t41 = -t50 * t60 + t59;
-t40 = t50 * t61 + t58;
-t1 = [0, t41, -t56, -t56, t42; 0, 0, -t62, -t62, t49 * t52; 0, t43, -t57, -t57, -t40; 0, t40, t45, t45, -t43; 0, 0, t47, t47, t49 * t54; 0, t42, t44, t44, t41; 0, -t53 * t49, t48, t48, 0; 0, 0, -t49, -t49, 0; 0, t55 * t49, t46, t46, 0;];
+% StartTime: 2019-07-18 13:30:34
+% EndTime: 2019-07-18 13:30:34
+% DurationCPUTime: 0.02s
+% Computational Cost: add. (55->12), mult. (16->4), div. (0->0), fcn. (40->4), ass. (0->10)
+t29 = qJ(2) + qJ(3) + qJ(4);
+t27 = sin(t29);
+t31 = cos(qJ(5));
+t33 = t27 * t31;
+t28 = cos(t29);
+t30 = sin(qJ(5));
+t32 = t28 * t30;
+t26 = t28 * t31;
+t25 = t27 * t30;
+t1 = [0, -t33, -t33, -t33, -t32; 0, t26, t26, t26, -t25; 0, 0, 0, 0, t31; 0, t25, t25, t25, -t26; 0, -t32, -t32, -t32, -t33; 0, 0, 0, 0, -t30; 0, t28, t28, t28, 0; 0, t27, t27, t27, 0; 0, 0, 0, 0, 0;];
 JR_rot  = t1;

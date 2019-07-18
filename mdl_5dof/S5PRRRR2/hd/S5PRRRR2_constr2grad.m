@@ -38,8 +38,8 @@
 % [D] Aufzeichnungen Schappler vom 21.08.2018
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-03 15:11
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 13:30
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-07
@@ -49,7 +49,7 @@ function Phi_dq = S5PRRRR2_constr2grad(q, xE, pkin, T_N_E, phiconv_W_E, I_EElink
 
 %% Coder Information
 %#codegen
-%$cgargs {zeros(5,1),zeros(6,1),zeros(1,1),zeros(4,4),uint8(2),uint8(0), true}
+%$cgargs {zeros(5,1),zeros(6,1),zeros(6,1),zeros(4,4),uint8(2),uint8(0), true}
 
 %% Translatorisch
 % Bein-Jacobi

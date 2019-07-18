@@ -15,13 +15,13 @@
 %   pkin=[a3,a4,a5,d1,d4]';
 %
 % Output:
-% RV_Traj [NTxNOTDEFINED]
+% RV_Traj [NTx99]
 %   time series of regressor matrices as vectors
 %   see S5RRRRR3_invdynJ_fixb_regmin2vec.m
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-05-31 10:31
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 17:19
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -44,7 +44,7 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
   'S5RRRRR3_invdynJ_fixb_regmin_slag_vp_traj: Kinematic parameters pkin have to be [5x1] (double)');
   
 %% Trajektorie der Regressor-Vektoren aufbauen
-RV_Traj = NaN(size(Q,1), NOTDEFINED);
+RV_Traj = NaN(size(Q,1), 99);
 for ii = 1:size(Q,1)
   RV_Traj(ii,:) = S5RRRRR3_invdynJ_fixb_regmin2vec( ...
     S5RRRRR3_invdynJ_fixb_regmin_slag_vp(Q(ii,:)', QD(ii,:)', QDD(ii,:)', g, pkin) );

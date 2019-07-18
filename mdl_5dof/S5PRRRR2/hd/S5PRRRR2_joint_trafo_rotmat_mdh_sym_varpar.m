@@ -5,9 +5,9 @@
 % Input:
 % qJ [5x1]
 %   Generalized joint coordinates (joint angles)
-% pkin [1x1]
+% pkin [6x1]
 %   kinematic parameters (e.g. lengths of the links)
-%   pkin=[a4]';
+%   pkin=[a2,a3,a4,d3,d4,d5]';
 % 
 % Output:
 % T_mdh [4x4x5]
@@ -15,8 +15,8 @@
 %   Transformation matrices from one joint to the next (not: from base to joints)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-06-03 15:11
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 13:30
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -24,28 +24,28 @@ function T_mdh = S5PRRRR2_joint_trafo_rotmat_mdh_sym_varpar(qJ, ...
   pkin)
 %% Coder Information
 %#codegen
-%$cgargs {zeros(5,1),zeros(1,1)}
+%$cgargs {zeros(5,1),zeros(6,1)}
 assert(isreal(qJ) && all(size(qJ) == [5 1]), ...
   'S5PRRRR2_joint_trafo_rotmat_mdh_sym_varpar: qJ has to be [5x1] (double)');
-assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
-  'S5PRRRR2_joint_trafo_rotmat_mdh_sym_varpar: pkin has to be [1x1] (double)');
+assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
+  'S5PRRRR2_joint_trafo_rotmat_mdh_sym_varpar: pkin has to be [6x1] (double)');
 
 %% Symbolic Calculation
 % From joint_transformation_mdh_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-06-03 15:11:16
-% EndTime: 2019-06-03 15:11:16
+% StartTime: 2019-07-18 13:30:08
+% EndTime: 2019-07-18 13:30:08
 % DurationCPUTime: 0.03s
-% Computational Cost: add. (4->4), mult. (0->0), div. (0->0), fcn. (16->8), ass. (0->9)
-t29 = cos(qJ(2));
-t28 = cos(qJ(3));
-t27 = cos(qJ(4));
-t26 = cos(qJ(5));
-t25 = sin(qJ(2));
-t24 = sin(qJ(3));
-t23 = sin(qJ(4));
-t22 = sin(qJ(5));
-t1 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, qJ(1); 0, 0, 0, 1; t29, -t25, 0, 0; 0, 0, -1, 0; t25, t29, 0, 0; 0, 0, 0, 1; t28, -t24, 0, 0; 0, 0, -1, 0; t24, t28, 0, 0; 0, 0, 0, 1; t27, -t23, 0, pkin(1); t23, t27, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1; t26, -t22, 0, 0; 0, 0, -1, 0; t22, t26, 0, 0; 0, 0, 0, 1;];
+% Computational Cost: add. (5->5), mult. (0->0), div. (0->0), fcn. (16->8), ass. (0->9)
+t30 = cos(qJ(2));
+t29 = cos(qJ(3));
+t28 = cos(qJ(4));
+t27 = cos(qJ(5));
+t26 = sin(qJ(2));
+t25 = sin(qJ(3));
+t24 = sin(qJ(4));
+t23 = sin(qJ(5));
+t1 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, qJ(1); 0, 0, 0, 1; t30, -t26, 0, pkin(1); t26, t30, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1; t29, -t25, 0, pkin(2); t25, t29, 0, 0; 0, 0, 1, pkin(4); 0, 0, 0, 1; t28, -t24, 0, pkin(3); t24, t28, 0, 0; 0, 0, 1, pkin(5); 0, 0, 0, 1; t27, -t23, 0, 0; 0, 0, -1, -pkin(6); t23, t27, 0, 0; 0, 0, 0, 1;];
 T_ges = t1;
 %% Postprocessing: Reshape Output
 % Convert Maple format (2-dimensional tensor) to Matlab format (3-dimensional tensor)

@@ -18,8 +18,8 @@
 %   Rotatorische Teilmatrix der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-05-31 10:31
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 17:19
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,16 +36,16 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
 %% Symbolic Calculation
 % From jacobig_rot_5_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-05-31 10:31:13
-% EndTime: 2019-05-31 10:31:13
+% StartTime: 2019-07-18 17:19:38
+% EndTime: 2019-07-18 17:19:38
 % DurationCPUTime: 0.02s
 % Computational Cost: add. (10->5), mult. (4->2), div. (0->0), fcn. (14->4), ass. (0->8)
-t61 = cos(qJ(1));
-t60 = sin(qJ(1));
-t59 = qJ(2) + qJ(3);
-t58 = cos(t59);
-t57 = sin(t59);
-t56 = t61 * t57;
-t55 = t60 * t57;
-t1 = [0, t60, t60, t56, t56; 0, -t61, -t61, t55, t55; 1, 0, 0, -t58, -t58;];
+t102 = cos(qJ(1));
+t101 = sin(qJ(1));
+t100 = qJ(2) + qJ(3);
+t99 = cos(t100);
+t98 = sin(t100);
+t97 = t102 * t98;
+t96 = t101 * t98;
+t1 = [0, t101, t101, t97, t97; 0, -t102, -t102, t96, t96; 1, 0, 0, -t99, -t99;];
 Jg_rot  = t1;
