@@ -26,8 +26,8 @@
 %   joint torques required to compensate Coriolis and centrifugal load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-05-28 15:34
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 18:16
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Icges) && all(size(Icges) == [5 6]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-05-28 15:34:02
-% EndTime: 2019-05-28 15:34:04
-% DurationCPUTime: 0.67s
+% StartTime: 2019-07-18 18:16:31
+% EndTime: 2019-07-18 18:16:32
+% DurationCPUTime: 0.68s
 % Computational Cost: add. (1535->122), mult. (1375->137), div. (0->0), fcn. (900->6), ass. (0->83)
 t70 = qJD(1) + qJD(2);
 t65 = -qJD(4) + t70;
@@ -138,5 +138,5 @@ t10 = (t116 * t70 - t25) * t70 + t91;
 t9 = t70 * (-rSges(4,1) * t105 + t48) + t85;
 t2 = -t70 * t25 - t5 * t65 - t69 * t63 + t91;
 t1 = -t69 * t110 + t6 * t65 + t85;
-t3 = [m(3) * (t24 * (-t38 - t111) + t23 * (t41 + t68) + (-t29 - t95 + t27) * t26) + (t2 * (t78 - t111) + t7 * (t82 - t95) + t1 * (t68 + t88) + t77 + (t84 + t7 + t96 + t119) * t8) * m(5) + (t10 * (t83 - t111) - t13 * t89 + t9 * (t68 + t92) + t76 + (t84 + t13 + t32 - t90 + t117) * t14) * m(4); (t1 * t88 + t2 * t78 + t77 + (t102 + t119) * t8 + (t115 - t56 + t82) * t7) * m(5) + (t10 * t83 + t76 + (-t101 + t102 + t117) * t14 + (t13 * t70 + t9) * t92) * m(4) + (-(-t26 * t41 - t27 * t38) * t70 + t23 * t41 - t24 * t38 - t26 * t29 - t27 * t106) * m(3); 0.2e1 * (t1 * t113 + t2 * t114) * m(5) + 0.2e1 * (t10 * t114 + t9 * t113) * m(4); (t1 * t118 - t2 * t86 + t7 * t5 - t8 * t6 - (-t118 * t7 - t8 * t86) * t65) * m(5);];
+t3 = [m(3) * (t24 * (-t38 - t111) + t23 * (t41 + t68) + (-t29 - t95 + t27) * t26) + (t2 * (t78 - t111) + t7 * (t82 - t95) + t1 * (t68 + t88) + t77 + (t84 + t7 + t96 + t119) * t8) * m(5) + (t10 * (t83 - t111) - t13 * t89 + t9 * (t68 + t92) + t76 + (t84 + t13 + t32 - t90 + t117) * t14) * m(4); (t1 * t88 + t2 * t78 + t77 + (t102 + t119) * t8 + (t115 - t56 + t82) * t7) * m(5) + (t10 * t83 + t76 + (-t101 + t102 + t117) * t14 + (t13 * t70 + t9) * t92) * m(4) + (-(-t26 * t41 - t27 * t38) * t70 + t23 * t41 - t24 * t38 - t26 * t29 - t27 * t106) * m(3); 0.2e1 * (t1 * t113 + t2 * t114) * m(5) + 0.2e1 * (t10 * t114 + t9 * t113) * m(4); (t1 * t118 - t2 * t86 + t7 * t5 - t8 * t6 - (-t7 * t118 - t8 * t86) * t65) * m(5);];
 tauc  = t3(:);

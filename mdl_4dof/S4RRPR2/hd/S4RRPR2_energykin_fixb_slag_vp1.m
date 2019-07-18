@@ -26,8 +26,8 @@
 %   kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-05-28 15:34
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 18:16
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Icges) && all(size(Icges) == [5 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-05-28 15:33:55
-% EndTime: 2019-05-28 15:33:55
-% DurationCPUTime: 0.05s
+% StartTime: 2019-07-18 18:16:29
+% EndTime: 2019-07-18 18:16:29
+% DurationCPUTime: 0.06s
 % Computational Cost: add. (91->40), mult. (94->66), div. (0->0), fcn. (48->6), ass. (0->26)
 t169 = pkin(1) * qJD(1);
 t164 = cos(qJ(1));

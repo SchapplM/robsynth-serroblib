@@ -22,8 +22,8 @@
 %   Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-05-28 15:34
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 18:16
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -46,8 +46,8 @@ assert(isreal(rSges) && all(size(rSges) == [5,3]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-05-28 15:33:54
-% EndTime: 2019-05-28 15:33:55
+% StartTime: 2019-07-18 18:16:28
+% EndTime: 2019-07-18 18:16:29
 % DurationCPUTime: 0.08s
 % Computational Cost: add. (75->43), mult. (60->48), div. (0->0), fcn. (44->6), ass. (0->15)
 t37 = pkin(4) + pkin(5);

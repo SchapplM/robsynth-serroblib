@@ -30,8 +30,8 @@
 %   joint torques of inverse dynamics (contains inertial, gravitational coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-05-28 15:34
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 18:16
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,9 +60,9 @@ assert(isreal(Icges) && all(size(Icges) == [5 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-05-28 15:34:02
-% EndTime: 2019-05-28 15:34:04
-% DurationCPUTime: 1.08s
+% StartTime: 2019-07-18 18:16:31
+% EndTime: 2019-07-18 18:16:33
+% DurationCPUTime: 1.09s
 % Computational Cost: add. (1968->159), mult. (1704->168), div. (0->0), fcn. (1158->6), ass. (0->92)
 t94 = sin(qJ(1));
 t95 = cos(qJ(1));
@@ -87,7 +87,7 @@ t74 = t87 * qJ(3);
 t48 = pkin(2) * t86 - t74;
 t22 = t144 * t104;
 t23 = t144 * t135;
-t7 = -rSges(5,1) * t22 - rSges(5,2) * t23;
+t7 = -rSges(5,1) * t22 - t23 * rSges(5,2);
 t90 = qJDD(1) + qJDD(2);
 t84 = -qJDD(4) + t90;
 t89 = t91 ^ 2;

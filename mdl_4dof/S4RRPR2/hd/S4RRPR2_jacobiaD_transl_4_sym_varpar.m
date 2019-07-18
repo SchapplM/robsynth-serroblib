@@ -21,8 +21,8 @@
 %   Zeitableitung der translatorischen Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-05-28 15:34
-% Revision: 36f6366a01c4a552c0708fcd8ed3e0fb9da693e2 (2019-05-16)
+% Datum: 2019-07-18 18:16
+% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,27 +43,27 @@ assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
 %% Symbolic Calculation
 % From jacobiaD_transl_4_floatb_twist_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-05-28 15:34:22
-% EndTime: 2019-05-28 15:34:22
-% DurationCPUTime: 0.08s
+% StartTime: 2019-07-18 18:16:41
+% EndTime: 2019-07-18 18:16:41
+% DurationCPUTime: 0.04s
 % Computational Cost: add. (164->19), mult. (142->27), div. (0->0), fcn. (116->6), ass. (0->19)
-t50 = qJ(1) + qJ(2);
-t47 = sin(t50);
-t48 = cos(t50);
-t49 = qJD(1) + qJD(2);
-t51 = sin(qJ(4));
-t52 = cos(qJ(4));
-t55 = qJD(4) * t52;
-t56 = qJD(4) * t51;
-t38 = -t47 * t56 - t48 * t55 + (t47 * t51 + t48 * t52) * t49;
-t58 = t49 * t48;
-t59 = t49 * t47;
-t39 = t47 * t55 - t48 * t56 + t51 * t58 - t52 * t59;
-t62 = t38 * r_i_i_C(1) - t39 * r_i_i_C(2);
-t61 = -t39 * r_i_i_C(1) - t38 * r_i_i_C(2);
-t60 = -pkin(2) - pkin(3);
-t57 = pkin(1) * qJD(1);
-t54 = qJ(3) * t58 + t47 * qJD(3) + t59 * t60 - t61;
-t53 = t48 * qJD(3) + (-qJ(3) * t47 + t48 * t60) * t49 - t62;
-t1 = [-cos(qJ(1)) * t57 + t53, t53, t58, t62; -sin(qJ(1)) * t57 + t54, t54, t59, t61; 0, 0, 0, 0;];
+t103 = qJ(1) + qJ(2);
+t100 = sin(t103);
+t101 = cos(t103);
+t102 = qJD(1) + qJD(2);
+t104 = sin(qJ(4));
+t105 = cos(qJ(4));
+t108 = qJD(4) * t105;
+t109 = qJD(4) * t104;
+t91 = -t100 * t109 - t101 * t108 + (t100 * t104 + t101 * t105) * t102;
+t110 = t102 * t101;
+t111 = t102 * t100;
+t92 = t100 * t108 - t101 * t109 + t104 * t110 - t105 * t111;
+t115 = t91 * r_i_i_C(1) - t92 * r_i_i_C(2);
+t114 = -t92 * r_i_i_C(1) - t91 * r_i_i_C(2);
+t113 = -pkin(2) - pkin(3);
+t112 = pkin(1) * qJD(1);
+t107 = qJ(3) * t110 + t100 * qJD(3) + t113 * t111 - t114;
+t106 = t101 * qJD(3) + (-qJ(3) * t100 + t113 * t101) * t102 - t115;
+t1 = [-cos(qJ(1)) * t112 + t106, t106, t110, t115; -sin(qJ(1)) * t112 + t107, t107, t111, t114; 0, 0, 0, 0;];
 JaD_transl  = t1;
