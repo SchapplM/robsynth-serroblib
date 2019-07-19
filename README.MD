@@ -2,8 +2,8 @@
 
 Dieses Repo enthält eine Sammlung von Modellen serieller Roboter. Die Modelle beinhalten symbolisch generierte Kinematik und Dynamik der Roboter. Außerdem stehen Parameter-Datensätze für existierende Roboter zur Verfügung.
 
-Moritz Schappler, schappler@imes.uni-hannover.de, 2018-08  
-(C) Institut für mechatronische Systeme, Universität Hannover
+Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08  
+(C) Institut für Mechatronische Systeme, Universität Hannover
 
 ## Benutzung
 
@@ -98,6 +98,14 @@ Im Ordner `hd` sind nur Funktionsdateien mit spezifischer symbolischer Berechnun
 Einige Funktionen werden aus Vorlagen-Dateien generiert und im Ordner `tpl` (Abkürzung für "Templates") gespeichert.
 Diese Struktur ermöglicht eine Neu-Generierung der Vorlagen-Funktionen ohne Abspeichern einer neuen Version in Git.
 Die Vorlagen-Funktionen sind notwendig, um die Funktionen als mex-Datei kompilieren zu können.
+
+#### Benutzerspezifische Vorlagen-Funktionen
+
+Die Vorlagen-Funktionen werden im Ordner `template_functions` abgelegt.
+Hier können auch benutzerspezifische Funktionen eingefügt werden, die dann für den jeweiligen Roboter erstellt werden.
+Damit ist es möglich, kompilierbare Funktionen für alle Roboter aus der Modelldatenbank zu erzeugen. Vorlagen-Funktionen müssen das Präfix "robot_" und die Endung ".m.template" haben.
+Informationen zu den Ersetzungsausdrücken sind in den vorhandenen Vorlagen aus dem HybrDyn-Repo (Ordner `robot_codegen_scripts/templates_num`) und der für jeden Roboter erstellten Liste `codeexport/SxRRPRy/matlabfcn/SxRRPRy_matlab_code_substitution_expressions.md` zu entnehmen.
+
 
 #### Simulink-Modelle
 

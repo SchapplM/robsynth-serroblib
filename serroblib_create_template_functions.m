@@ -19,7 +19,7 @@ function serroblib_create_template_functions(Names, skip_existing, mex_results)
 %% Initialisierung
 % Prüfe Eingabeargument
 repopath=fileparts(which('serroblib_path_init.m'));
-if nargin < 1
+if nargin < 1 || isempty(Names)
   % Stelle Liste aller Roboter zusammen
   Names = {};
   for N = 2:7
@@ -51,7 +51,7 @@ end
 %% Alle Vorlagen-Funktionen aus HybrDyn-Repo kopieren
 % Alle Funktionen dieser Liste werden roboterspezifisch aus der Liste
 % erstellt. Die Anpassung sind nur geringfügig und ermöglichen Kompilierung
-function_list = {...
+function_list_copy_hybrdyn = {...
   'gravload_floatb_eulxyz_nnew_vp1.m', ...
   'jacobig_mdh_num.m', ...
   'jacobigD_mdh_num.m', ...
@@ -72,12 +72,21 @@ end
 mrp = maplerepo_path();
 
 % Alle Vorlagen-Funktionen aus Maple-Repo in Vorlagen-Ordner kopieren
-for tmp = function_list
+for tmp = function_list_copy_hybrdyn
   tplf = tmp{1};
   copyfile(fullfile(mrp, 'robot_codegen_scripts', 'templates_num', ['robot_',tplf,'.template']), ...
        fullfile(repopath, 'template_functions'));
 end
 
+% Generiere die Liste der Vorlagen-Funktionen aus den tatsächlich
+% existierenden Dateien. Dadurch können durch Benutzer hinzugefügte
+% Funktionen auch generiert werden
+fl_tmp = dir(fullfile(repopath, 'template_functions', '*.template'));
+function_list = cell(1,length(fl_tmp));
+for i = 1:length(fl_tmp)
+  % Präfix "robot_" und Suffix ".template" entfernen
+  function_list{i} = strrep(fl_tmp(i).name(7:end), '.template', '');
+end
 %% Gehe alle Modellnamen durch und erstelle alle Vorlagen-Funktionen
 for i = 1:length(Names)
   Name_i = Names{i};
