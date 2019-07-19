@@ -1,0 +1,189 @@
+% Erstelle die Vorlagen-Funktionen aller Robotermodelle in der Bibliothek
+% 
+% Eingabe:
+% Names
+%   Cell array mit Namen der zu erstellenden Robotermodelle
+%   Optional: Wenn nicht angegeben, werden alle erstellt.
+% skip_existing
+%   true: Bereits existierende tpl-Ordner überspringen (Standard)
+%   false: Alle Dateien immer neu erstellen
+% mex_results
+%   true: Die aus Vorlagen generierten Funktionen werden zum testen direkt
+%   kompiliert.
+
+% Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2019-07
+% (C) Institut für Mechatronische Systeme, Universität Hannover
+
+function serroblib_create_template_functions(Names, skip_existing, mex_results)
+
+%% Initialisierung
+% Prüfe Eingabeargument
+repopath=fileparts(which('serroblib_path_init.m'));
+if nargin < 1
+  % Stelle Liste aller Roboter zusammen
+  Names = {};
+  for N = 2:7
+    mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
+    if ~exist(mdllistfile_Ndof, 'file')
+      continue
+    end
+    % Lade in .mat gespeicherte Datenbank
+    l = load(mdllistfile_Ndof, 'Names_Ndof');
+    Names = {Names{:}, l.Names_Ndof{:}}; %#ok<CCAT>
+  end
+end
+if nargin < 2
+  skip_existing = true;
+end
+if nargin < 3
+  mex_results = false;
+end
+% Kopier-/Ersetz-Befehl vorbereiten (zwei Alternativen
+if ispc()
+  % Der sed-Befehl unter Windows ist möglich (wenn Git for Windows
+  % installiert ist), ist aber sehr langsam und wird nicht benutzt.
+  sedcmd = '"C:\\Program Files\\Git\\usr\\bin\\sed.exe" -i ''s/%s/%s/g'' %s';
+  copycommand = 'linewise';
+else
+  sedcmd = 'sed -i ''s/%s/%s/g'' %s';
+  copycommand = 'sed';
+end
+%% Alle Vorlagen-Funktionen aus HybrDyn-Repo kopieren
+% Alle Funktionen dieser Liste werden roboterspezifisch aus der Liste
+% erstellt. Die Anpassung sind nur geringfügig und ermöglichen Kompilierung
+function_list = {...
+  'gravload_floatb_eulxyz_nnew_vp1.m', ...
+  'jacobig_mdh_num.m', ...
+  'jacobigD_mdh_num.m', ...
+  'invkin_traj.m', ...
+  'invkin_eulangresidual.m', ...
+  'constr2.m', ...
+  'constr2grad.m', ...
+  'inertiaJ_nCRB_vp1.m', ...
+  'invdynJ_fixb_mdp_slag_vp_traj.m', ...
+  'invdynJ_fixb_mdp_slag_vr_traj.m', ...
+  'invdynJ_fixb_regmin_slag_vp_traj.m'};
+
+% Pfad zur Maple-Dynamik-Toolbox (muss im Repo abgelegt werden)
+if isempty(which('maplerepo_path.m'))
+  warning('Es muss eine Datei maplerepo_path.m angelegt werden (siehe README.MD)');
+  return
+end
+mrp = maplerepo_path();
+
+% Alle Vorlagen-Funktionen aus Maple-Repo in Vorlagen-Ordner kopieren
+for tmp = function_list
+  tplf = tmp{1};
+  copyfile(fullfile(mrp, 'robot_codegen_scripts', 'templates_num', ['robot_',tplf,'.template']), ...
+       fullfile(repopath, 'template_functions'));
+end
+
+%% Gehe alle Modellnamen durch und erstelle alle Vorlagen-Funktionen
+for i = 1:length(Names)
+  Name_i = Names{i};
+  N = str2double(Name_i(2)); % Anzahl FG
+  % Daten des Robotermodells laden
+  mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
+  l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
+  addinfo = l.AdditionalInfo(strcmp(l.Names_Ndof,Name_i),:);
+  isvariant = addinfo(2);
+  variantof = addinfo(3);
+  hascode   = addinfo(4);
+	% Prüfe, ob Roboter einen Code-Ordner hat. Wenn nicht, ist die Erstellung
+	% nicht sinnvoll (weil die robot_env.sh nicht existiert)
+  if hascode ~= 1
+    continue
+  end
+  % Bestimme Ziel-Ordner des Codes für die Vorlagen-Funktionen
+  if isvariant
+    % Prüfe, ob der Ordner des Variantenmodells existiert
+    Name_GenMdl = l.Names_Ndof{variantof};
+    fcn_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
+      sprintf('tpl_%s', Name_i(length(Name_GenMdl)+1:end)));
+    def_file = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
+      sprintf('hd_%s', Name_i(length(Name_GenMdl)+1:end)), sprintf('robot_env_%s.sh', Name_i));
+  else
+    fcn_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name_i, 'tpl');
+    def_file = fullfile(repopath, sprintf('mdl_%ddof', N), Name_i, 'hd', sprintf('robot_env_%s.sh', Name_i));
+  end
+  
+  % Definitionsdatei lesen
+  filetext = fileread(def_file);
+  
+  % Platzhalter-Ausdrücke für diesen Roboter erhalten (aus robot_env.sh)
+  subsexp_array = {'robot_name', 'RN', {}; ...
+                   'robot_NQJ', 'NQJ', {}; ...
+                   'robot_NJ',  'NJ',  {}; ...
+                   'robot_NL',  'NL',  {}; ...
+                   'robot_NMPVFIXB',  'NMPVFIXB',  {}; ...
+                   'robot_NMPVFLOATB',  'NMPVFLOATB',  {}; ...
+                   'robot_NKP',  'NKP',  {}; ...
+                   'robot_KP',  'KPDEF',  {}; ...
+                   'robot_NTAUJFIXBREGNN',  'NTAUJFIXBREGNN',  {}};
+  for ii = 1:size(subsexp_array,1)
+    expr = [subsexp_array{ii,1}, '=(.*)'];
+    tokens = regexp(filetext,expr,'tokens','dotexceptnewline');
+    subsexp_array(ii,3) = strrep(tokens{1},'"','');
+    if strcmp(subsexp_array{ii,2}, 'KPDEF')
+      subsexp_array{ii,3} = sprintf('pkin: %s', subsexp_array{ii,3});
+    end
+  end
+  subsexp_array{10,2} = 'VERSIONINFO';
+  subsexp_array{10,3} = 'Generated in SerRobLib from HybrDyn-Template';
+  
+  % Kopiere alle Vorlagen-Funktionen an die Ziel-Orte und Ersetze die
+  % Platzhalter-Ausdrücke
+  if exist(fcn_dir, 'file')
+    if skip_existing
+      continue % Ordner existiert schon. Überspringe.
+    end
+  else
+    mkdir(fcn_dir);  % Ordner existiert noch nicht. Neu erstellen.
+  end
+  cd(fcn_dir); % In Ordner wechseln für kürzeren sed-Befehl
+  for tmp = function_list
+    tplf = tmp{1};
+    file1=fullfile(repopath, 'template_functions', ['robot_',tplf,'.template']);
+    file2=fullfile(fcn_dir, [Name_i,'_',tplf]);
+    % Ersetzungsausdruck für Dateinamen vorbereiten
+    subsexp_array{11,2} = 'FN';
+    [~,subsexp_array{11,3},~] = fileparts(file2);
+    % Kopieren und Ausdrücke ersetzen
+    if strcmp(copycommand, 'sed')
+      % Variante für Linux: Vorlagen-Datei kopieren und anschließend
+      % Text-Ersetzung mit sed-Befehl durchführen
+      copyfile(file1, file2);
+      for ii = 1:size(subsexp_array,1)
+        sedcmd_ii = sprintf(sedcmd, ['%',subsexp_array{ii,2},'%'], subsexp_array{ii,3}, [Name_i,'_',tplf]);
+        system(sedcmd_ii);
+      end
+    elseif strcmp(copycommand, 'linewise')
+      % Variante für Windows: Text ersetzen mit sed ist sehr langsam.
+      % Nutze daher die Zeilenweise kopier-Funktion von Matlab.
+      fid1 = fopen(file1);
+      fid2 = fopen(file2, 'w');
+      tline = fgetl(fid1);
+      while ischar(tline)
+        % Zeile weiterverarbeiten: Platzhalter-Ausdrücke ersetzen
+        for ii = 1:size(subsexp_array,1)
+          tline = strrep(tline, ['%',subsexp_array{ii,2},'%'], subsexp_array{ii,3});
+        end
+        fwrite(fid2, [tline, newline()]); % Zeile in Zieldatei schreiben
+        tline = fgetl(fid1); % nächste Zeile
+      end
+      fclose(fid1);fclose(fid2);
+    else
+      error('Befehl nicht definiert');
+    end
+    % fprintf('%d/%d: Vorlagen-Funktion %s erstellt.\n', i, length(Names), tplf);
+  end
+  fprintf('%d/%d: Vorlagen-Funktionen für %s erstellt.\n', i, length(Names), Name_i);
+  
+  % Testen: Kompilieren aller Funktionen im Zielordner
+  if mex_results
+    serroblib_addtopath({Name_i})
+    cd(fcn_dir)
+    mex_all_matlabfcn_in_dir(fcn_dir)
+    serroblib_removefrompath({Name_i})
+  end
+end

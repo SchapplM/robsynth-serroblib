@@ -42,6 +42,7 @@ Datenbank auslesen und benutzen:
 * `serroblib_create_robot_class`: Instanz einer Matlab-Klasse für einen Roboter erstellen, damit sind dann weitere Berechnungen mit dem Modell des Roboters möglich
 * `serroblib_generate_mapleinput`: Eingabedaten zur Code-Generierung für diesen Roboter erstellen
 * `serroblib_generate_code`: Kinematik- und Dynamikfunktionen symbolisch mit der HybrDyn-Toolbox berechnen lassen.
+* `serroblib_create_template_functions`: Vorlagen-Funktionen der HybrDyn-Toolbox generieren.
 * `serroblib_addtopath`: Matlab-Funktionen dieses Roboters zum Matlab-Pfad hinzufügen, damit die Funktionsaufrufe funktionieren.
 * `scripts/generate_variant_pkin_conv_fcns.m`: Generiere Funktionen zur Umwandlung der Kinematikparameter von Varianten und ihren zugehörigen allgemeineren Modellen
 
@@ -86,10 +87,21 @@ Die csv-Dateien enhalten alle Informationen der Roboterbibliothek. Die Daten wer
 
 ### Kinematik- und Dynamikfunktionen
 
+#### Ordner "hd"
+
 Die Modelle für Kinematik und Dynamik, die den Kern dieser Sammlung darstellt, sind in den jeweiligen Modellordnern `mdl_xdof/SxRRRRRRyyyyy` im Unterordner `hd` (Abkürzung für "HybrDyn") als Matlab-Funktionen abgelegt.
 Die Bedeutung der Funktionsnamen ist in der README von HybrDyn dargestellt. Es werden Abkürzungen für Funktionsart, Art der Herleitung und verwendete Parameter verwendet.
+Im Ordner `hd` sind nur Funktionsdateien mit spezifischer symbolischer Berechnung für das System abgelegt.
 
-Zusätzlich werden hier auch Simulink-Bibliotheken abgelegt (mdl-Format, beginnend mit dem Präfix "lib"). Die Simulink-Bibliotheken können für Simulationen oder auch direkt für Regler auf Echtzeitsystemen verwendet werden.
+#### Ordner "tpl"
+
+Einige Funktionen werden aus Vorlagen-Dateien generiert und im Ordner `tpl` (Abkürzung für "Templates") gespeichert.
+Diese Struktur ermöglicht eine Neu-Generierung der Vorlagen-Funktionen ohne Abspeichern einer neuen Version in Git.
+Die Vorlagen-Funktionen sind notwendig, um die Funktionen als mex-Datei kompilieren zu können.
+
+#### Simulink-Modelle
+
+Zusätzlich werden im Ordner `hd` auch Simulink-Bibliotheken abgelegt (mdl-Format, beginnend mit dem Präfix "lib"). Die Simulink-Bibliotheken können für Simulationen oder auch direkt für Regler auf Echtzeitsystemen verwendet werden.
 
 ### CAD-Modelle
 
