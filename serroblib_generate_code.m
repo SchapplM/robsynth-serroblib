@@ -38,6 +38,8 @@ if nargin < 4
   mode = 1;
 end
 repopath=fileparts(which('serroblib_path_init.m'));
+% Pfad zur Maple-Dynamik-Toolbox (muss im Repo abgelegt werden)
+mrp = maplerepo_path();
 
 for i = 1:length(Names)
   n = Names{i};
@@ -48,10 +50,7 @@ for i = 1:length(Names)
   l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
   isvariant = l.AdditionalInfo(strcmp(l.Names_Ndof,n),2);
   variantof = l.AdditionalInfo(strcmp(l.Names_Ndof,n),3);
-  
-  % Pfad zur Maple-Dynamik-Toolbox (muss im Repo abgelegt werden)
-  mrp = maplerepo_path();
-  
+
   % Maple-Toolbox-Eingabe laden (wurde an anderer Stelle erzeugt)
   % (durch serroblib_generate_mapleinput.m)
   if isvariant
