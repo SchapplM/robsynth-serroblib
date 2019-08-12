@@ -51,9 +51,12 @@ for N = 1:7
     j = j + 1;
     Name = l.Names_Ndof{iFK};
     fprintf('%d/%d (Nr. %d): Generiere Vorlagen für %s\n', j, length(II), iFK, Name);
-    serroblib_generate_code({Name}, true, false, 2)
+    % serroblib_generate_code({Name}, true, false, 2)
+    serroblib_create_template_functions({Name}, false, true)
   end
 end
+% Einfacherer Aufruf:
+% serroblib_create_template_functions({}, false, true)
 
 %% Code für ein bestimmtes Modell neu generieren
 % Beispiel: S6RRPRRR14 (z.B. UPS-Kette)
@@ -63,8 +66,8 @@ serroblib_generate_code({Name}, true)
 
 %% Vorlagen-Funktionen für ein bestimmtes Modell neu generieren
 Name = 'S4RRPR1';
-serroblib_generate_code({Name}, true, false, 2)
-
+% serroblib_generate_code({Name}, true, false, 2)
+serroblib_create_template_functions({Name}, false, true)
 %% Testfunktionen für ein bestimmtes Modell generieren und ausführen
 Name = 'S6RRRRRR10V3';
 serroblib_generate_code({Name}, true, false, 4)

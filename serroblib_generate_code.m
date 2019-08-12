@@ -14,6 +14,8 @@
 %   vollständige Dynamik jedes mal neu generiert werden muss
 %   1: Vollständige Generierung, alles
 %   2: Nur aus Vorlagen generierte Funktionen (z.B. Jacobi, inverse Kinematik)
+%      (Diese Option ist nicht mehr sinnvoll, da Vorlagen-Funktionen jetzt
+%      im Ordner "tpl" gespeichert werden)
 %   3: Alles generieren in Maple, aber keinen Matlab-Code exportieren
 %      (wichtig für PKM. Dort wird die Bein-Dynamik nur als Maple gebraucht)
 % 
@@ -24,7 +26,7 @@
 %   serroblib_generate_mapleinput.m erzeugt werden
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function serroblib_generate_code(Names, force, nocopy, mode)
 
@@ -101,6 +103,7 @@ for i = 1:length(Names)
     fprintf('Starte Code-Generierung %d/%d für %s\n', i, length(Names), n);
     system( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel', mrp) ); %  > /dev/null
   elseif mode == 2
+    warning('Achtung: Mit der gesonderten Behandlung von Vorlagen-Funktionen ist dieser Modus nicht mehr sinnvoll');
     fprintf('Generiere Matlab-Funktionen aus Vorlagen (%d/%d) für %s\n', i, length(Names), n);
     if ~exist(fullfile(mrp, 'codeexport', n), 'file')
       warning('Ordner %s existiert nicht. Die Code-Generierung muss vorher einmal gelaufen sein', ...
@@ -115,11 +118,36 @@ for i = 1:length(Names)
     error('Modus nicht definiert');
   end
   % generierten Code zurückkopieren (alle .m-Dateien)
-  % TODO: Hier sind noch viele automatisch generierte Dateien dabei, die
-  % eigentlich nicht relevant sind (z.B. eulxyz-Floatbase)
+  % Nicht relevante automatisch generierte Dateien werden nicht kopiert.
+  blacklist_exp = {...
+    'gravload_floatb_eulxyz_nnew_vp1.m', ...
+    'jacobig_mdh_num.m', ...
+    'jacobigD_mdh_num.m', ...
+    'invkin_traj.m', ...
+    'invkin_eulangresidual.m', ...
+    'constr2.m', ...
+    'constr2grad.m', ...
+    'inertiaJ_nCRB_vp1.m', ...
+    'jacobi(.*)_floatb_twist', ...
+    'invdynJ_fixb_mdp_slag_vp_traj.m', ...
+    'invdynJ_fixb_mdp_slag_vr_traj.m', ...
+    'invdynJ_fixb_regmin_slag_vp_traj.m', ...
+    'kinconstr_expl_mdh_num_varpar.m', ...
+    'eulxyz'};
   if ~nocopy
     for f = dir(fullfile(outputdir_tb, '*.m'))'
-      copyfile(fullfile(outputdir_tb, f.name), fullfile(outputdir_local, f.name));
+      file_is_blacklisted = false;
+      for bli = 1:length(blacklist_exp)
+        match = regexp(f.name,blacklist_exp{bli},'match');
+        if ~isempty(match)
+          file_is_blacklisted = true;
+          % fprintf('File %s is blacklisted\n', f.name);
+          break;
+        end
+      end
+      if ~file_is_blacklisted
+        copyfile(fullfile(outputdir_tb, f.name), fullfile(outputdir_local, f.name));
+      end
     end
   end
   % Definitionen des Roboters zurückkopieren. Damit lassen sich später

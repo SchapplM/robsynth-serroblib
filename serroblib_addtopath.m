@@ -21,6 +21,12 @@ for i = 1:length(Names)
   fcn_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name, 'hd');
   if exist(fcn_dir, 'file')
     addpath(fcn_dir);
+    tpl_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name, 'tpl');
+    if exist(tpl_dir, 'file')
+      addpath(tpl_dir);
+    else
+      warning('Vorlagen-Verzeichnis %s existiert nicht. serroblib_create_template_functions ausführen.', tpl_dir);
+    end
   else
     % Prüfe, ob Modell eine Variante ist, für die der Code des Hauptmodells
     % existiert
@@ -36,6 +42,14 @@ for i = 1:length(Names)
       if exist(fullfile(fcn_dir_var, sprintf('%s_structural_kinematic_parameters.m', Name)), 'file')
         % Es wurde schon Code spezifisch für diese Variante generiert
         addpath(fcn_dir_var);
+        % Vorlagen-Funktionen sollten dann im selben Format vorliegen
+        tpl_dir_var = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
+          sprintf('tpl_%s', Name(length(Name_GenMdl)+1:end)));
+        if exist(tpl_dir_var, 'file')
+          addpath(tpl_dir_var);
+        else
+          warning('Vorlagen-Verzeichnis %s existiert nicht. serroblib_create_template_functions ausführen.', tpl_dir_var);
+        end
       else % Kein spezifischer Code da
         % Prüfe, ob Funktionen zur Umwandlung von Allgemein zu Variante da
         % ist
