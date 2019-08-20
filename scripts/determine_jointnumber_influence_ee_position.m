@@ -26,9 +26,9 @@ for N = 2:7
     RobName = l.Names_Ndof{j};
     fprintf('%d/%d: Prüfe Struktur %s\n', j, length(l.Names_Ndof), RobName);
     RS = serroblib_create_robot_class(RobName);
-    RS.gen_testsettings(true, true);
+    RS.gen_testsettings(false, true); % Kinematik-Parameter zufällig setzen
     %% Prüfe, welches Gelenk die EE-Position beeinflusst
-    %Prüfe, für jedes Gelenk beginnend von hinten, ob es die EE-Position
+    % Prüfe, für jedes Gelenk beginnend von hinten, ob es die EE-Position
     % beeinflusst
     idx_joint_posinfl = 0;
     q = rand(N,1);
