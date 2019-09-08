@@ -38,7 +38,7 @@ for i = 1:length(Names)
     % Entferne den Dateien-Ordner dieses expliziten (allgemeinen
     % Robotermodells aus dem Pfad
     fcn_dir = fullfile(repopath, sprintf('mdl_%ddof', N), n, 'hd');
-    tpl_dir = fullfile(repopath, sprintf('mdl_%ddof', N), n, 'hd');
+    tpl_dir = fullfile(repopath, sprintf('mdl_%ddof', N), n, 'tpl');
     if exist(fcn_dir, 'file')
       rmpath(fcn_dir);
     end
