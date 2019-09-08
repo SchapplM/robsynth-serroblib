@@ -188,6 +188,38 @@ for i = 1:length(Names)
   end
   fprintf('%d/%d: Vorlagen-Funktionen für %s erstellt.\n', i, length(Names), Name_i);
   
+  % Prüfe, ob mex-Datei im tpl-Ordner liegt. Wenn nicht, ist wahrscheinlich
+  % noch eine alte Version vorhanden. Diese Funktion ist sinnvoll zur
+  % Aktualisierung der Repo-Version auf das tpl-Format
+  serroblib_addtopath({Name_i});
+  for tmp = function_list
+    [~,f_basename] = fileparts([Name_i, '_', tmp{1}]);
+    [dir_mexfcn, ~, mex_ext] = fileparts(which(sprintf('%s_mex', f_basename)));
+    if isempty(dir_mexfcn)
+      % mex-Datei existiert nicht (in irgendeinem Ordner im Pfad).
+      continue
+    elseif ~strcmp(dir_mexfcn, fcn_dir)
+      if exist(fullfile(fcn_dir,[f_basename, '_mex', mex_ext]), 'file')
+        % Die Mex-Datei liegt im Matlab-Pfad nicht nur im vorgesehenen
+        % tpl-Ordner, sondern zusätzlich woanders. Lösche die "falsche"
+        % mex-Datei, die wahrscheinlich veraltet ist
+        delete(fullfile(dir_mexfcn, [f_basename, '_mex', mex_ext]));
+        fprintf('Doppelte mex-Funktion %s in % s gelöscht\n', f_basename, dir_mexfcn);
+      else
+        % Die mex-Datei existiert nur im "falschen" Ordner. Verschiebe in
+        % tpl-Ordner
+        movefile(fullfile(dir_mexfcn, [f_basename, '_mex', mex_ext]), ...
+                 fullfile(fcn_dir,    [f_basename, '_mex', mex_ext]));
+        fprintf('Mex-Datei %s_mex%s an richtigen Ort (%s) verschoben (von %s)\n', ...
+          f_basename, mex_ext, fcn_dir, dir_mexfcn);
+      end
+    else
+      % Die mex-Datei existiert im vorgesehenen Ordner. Alles i.O.
+      continue
+    end
+  end
+  serroblib_removefrompath({Name_i});
+  
   % Testen: Kompilieren aller Funktionen im Zielordner
   if mex_results
     serroblib_addtopath({Name_i})
