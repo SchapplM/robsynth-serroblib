@@ -231,7 +231,7 @@ else
 end
 
 % Klassen-Instanz vorbereiten
-RS = RS.fill_fcn_handles(false);
+RS.fill_fcn_handles(false);
 
 % Setze Euler-Winkel für Transformation zum EE-KS
 RS.update_EE(zeros(3,1), phi_N_E, uint8(2));
