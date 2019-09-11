@@ -94,7 +94,11 @@ for i = 1:length(Names)
   % Daten des Robotermodells laden
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
   l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
-  addinfo = l.AdditionalInfo(strcmp(l.Names_Ndof,Name_i),:);
+  I_robot = find(strcmp(l.Names_Ndof,Name_i));
+  if isempty(I_robot)
+    error('Modell %s ist nicht in der Datenbank', Name_i);
+  end
+  addinfo = l.AdditionalInfo(I_robot,:);
   isvariant = addinfo(2);
   variantof = addinfo(3);
   hascode   = addinfo(4);

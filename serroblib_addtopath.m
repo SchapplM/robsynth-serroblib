@@ -62,11 +62,17 @@ for i = 1:length(Names)
           % Varianten-Funktion existiert. Füge Pfad hinzu
           addpath(var_dir);
         end
-        gen_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, 'hd');
-        if exist(gen_dir, 'file')
-          addpath(gen_dir);
+        fcn_dir_gen = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, 'hd');
+        if exist(fcn_dir_gen, 'file')
+          addpath(fcn_dir_gen);
         else
-          warning('Verzeichnis für allgemeinen Code %s existiert nicht. Es wird aber darauf verwiesen.', gen_dir);
+          warning('Verzeichnis für allgemeinen Code %s existiert nicht. Es wird aber darauf verwiesen.', fcn_dir_gen);
+        end
+        tpl_dir_gen = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, 'tpl');
+        if exist(tpl_dir_gen, 'file')
+          addpath(tpl_dir_gen);
+        else
+          warning('Verzeichnis für allgemeinen Vorlagen-Code %s existiert nicht. Es wird aber darauf verwiesen.', tpl_dir_gen);
         end
       end
     else

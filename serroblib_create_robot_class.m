@@ -33,23 +33,24 @@ repopath=fileparts(which('serroblib_path_init.m'));
 mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
 l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_phiNE', ...
   'BitArrays_EEdof0', 'AdditionalInfo');
+I_robot = find(strcmp(l.Names_Ndof,Name));
+if isempty(I_robot)
+  error('Roboter %s ist nicht bekannt', Name);
+end
 
 % Informationen über Variante extrahieren
-isvariant = l.AdditionalInfo(strcmp(l.Names_Ndof,Name),2);
-variantof = l.AdditionalInfo(strcmp(l.Names_Ndof,Name),3);
+isvariant = l.AdditionalInfo(I_robot,2);
+variantof = l.AdditionalInfo(I_robot,3);
 Name_GenMdl = l.Names_Ndof{variantof};% Name des Hauptmodells herausfinden
   
 % Bit-Array für Namen
-BA = l.BitArrays_Ndof(strcmp(l.Names_Ndof,Name),:);
-if isempty(BA)
-  error('Roboter %s ist nicht bekannt', Name);
-end
+BA = l.BitArrays_Ndof(I_robot,:);
 [~, csvbits] = serroblib_bits2csvline(BA);
 % Bit-Array für EE-Eigenschaften
-BAE = l.BitArrays_EEdof0(strcmp(l.Names_Ndof,Name),:);
+BAE = l.BitArrays_EEdof0(I_robot,:);
 [~, EEFG0] = serroblib_bits2csvline_EE(BAE);
 % Bit-Array für Endeffektor-Rotation
-BAR = l.BitArrays_phiNE(strcmp(l.Names_Ndof,Name),:);
+BAR = l.BitArrays_phiNE(I_robot,:);
 %% Parameter-Struktur erstellen
 
 % Mögliche Zustände für MDH-Parameterstruktur bei Eingabe in die
