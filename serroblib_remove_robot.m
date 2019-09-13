@@ -81,4 +81,14 @@ else
     rmpath(fcn_dir_var);
     fprintf('Ordner %s entfernt\n', fcn_dir_var);
   end
+  % Lösche außerdem Konvertierungsfunktionen, falls die Variante keinen
+  % Code-Ordner hat
+  fcnlist = {'pkin_gen2var', 'pkin_var2gen'};
+  for f = fcnlist
+    fcndat = fullfile(fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
+      'var', [Name, '_', f{1}, '.m']));
+    if exist(fcndat, 'file')
+      delete(fcndat);
+    end
+  end
 end
