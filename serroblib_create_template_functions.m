@@ -122,7 +122,6 @@ for i = 1:length(Names)
   
   % Definitionsdatei lesen
   filetext = fileread(def_file);
-  
   % Platzhalter-Ausdrücke für diesen Roboter erhalten (aus robot_env.sh)
   subsexp_array = {'robot_name', 'RN', {}; ...
                    'robot_NQJ', 'NQJ', {}; ...
@@ -137,6 +136,7 @@ for i = 1:length(Names)
     expr = [subsexp_array{ii,1}, '=(.*)'];
     tokens = regexp(filetext,expr,'tokens','dotexceptnewline');
     subsexp_array(ii,3) = strrep(tokens{1},'"','');
+    subsexp_array(ii,3) = strrep(subsexp_array(ii,3),sprintf('\r'),''); % CR-Zeichen entfernen (Windows/Linux-Problem)
     if strcmp(subsexp_array{ii,2}, 'KPDEF')
       subsexp_array{ii,3} = sprintf('pkin: %s', subsexp_array{ii,3});
     end
