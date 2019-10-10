@@ -18,8 +18,8 @@
 %   Namen aller Kinematik-Parameter im Vektor `pkin`
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-04-11 14:56
-% Revision: b693519ea345eb34ae9622239e7f1167217e9d53 (2019-04-09)
+% Datum: 2019-10-10 13:38
+% Revision: eb1f267a533306f0f157b6776e21de13647fd8af (2019-10-10)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 

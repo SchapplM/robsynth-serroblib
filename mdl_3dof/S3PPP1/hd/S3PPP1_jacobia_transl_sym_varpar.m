@@ -21,8 +21,8 @@
 %   Translatorischer Teil der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-04-17 09:48
-% Revision: 3acd05283b8979b361f80d69cfa1c98d98241298 (2019-04-12)
+% Datum: 2019-10-09 20:04
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -41,15 +41,48 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S3PPP1_jacobia_transl_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [3 1]), ...
   'S3PPP1_jacobia_transl_sym_varpar: pkin has to be [3x1] (double)');
-%% Function calls
 if link_index == 0
-	Ja_transl=S3PPP1_jacobia_transl_0_sym_varpar(qJ, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobia_transl_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:04:05
+	% EndTime: 2019-10-09 20:04:05
+	% DurationCPUTime: 0.08s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0; 0, 0, 0; 0, 0, 0;];
+	Ja_transl = t1;
 elseif link_index == 1
-	Ja_transl=S3PPP1_jacobia_transl_1_sym_varpar(qJ, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobia_transl_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:04:05
+	% EndTime: 2019-10-09 20:04:05
+	% DurationCPUTime: 0.07s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0; 0, 0, 0; 1, 0, 0;];
+	Ja_transl = t1;
 elseif link_index == 2
-	Ja_transl=S3PPP1_jacobia_transl_2_sym_varpar(qJ, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobia_transl_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:04:05
+	% EndTime: 2019-10-09 20:04:05
+	% DurationCPUTime: 0.07s
+	% Computational Cost: add. (1->1), mult. (0->0), div. (0->0), fcn. (2->2), ass. (0->1)
+	t1 = [0, sin(pkin(3)), 0; 0, -cos(pkin(3)), 0; 1, 0, 0;];
+	Ja_transl = t1;
 elseif link_index == 3
-	Ja_transl=S3PPP1_jacobia_transl_3_sym_varpar(qJ, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobia_transl_3_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:04:05
+	% EndTime: 2019-10-09 20:04:05
+	% DurationCPUTime: 0.08s
+	% Computational Cost: add. (1->1), mult. (0->0), div. (0->0), fcn. (4->2), ass. (0->3)
+	t2 = cos(pkin(3));
+	t1 = sin(pkin(3));
+	t3 = [0, t1, t2; 0, -t2, t1; 1, 0, 0;];
+	Ja_transl = t3;
 else
 	Ja_transl=NaN(3,3);
 end

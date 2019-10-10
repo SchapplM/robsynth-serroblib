@@ -23,8 +23,8 @@
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-26 19:11
-% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
+% Datum: 2019-10-09 20:02
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -39,13 +39,40 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S2RR2_jacobia_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
   'S2RR2_jacobia_rot_sym_varpar: pkin has to be [1x1] (double)');
-%% Function calls
 if link_index == 0
-	Ja_rot=S2RR2_jacobia_rot_0_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobia_rot_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:02:34
+	% EndTime: 2019-10-09 20:02:34
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0; 0, 0; 0, 0;];
+	Ja_rot = t1;
 elseif link_index == 1
-	Ja_rot=S2RR2_jacobia_rot_1_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobia_rot_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:02:34
+	% EndTime: 2019-10-09 20:02:34
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [NaN, NaN; NaN, NaN; NaN, NaN;];
+	Ja_rot = t1;
 elseif link_index == 2
-	Ja_rot=S2RR2_jacobia_rot_2_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobia_rot_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:02:34
+	% EndTime: 2019-10-09 20:02:34
+	% DurationCPUTime: 0.03s
+	% Computational Cost: add. (6->2), mult. (13->3), div. (14->4), fcn. (24->3), ass. (0->5)
+	t17 = sin(qJ(1));
+	t19 = cos(qJ(1));
+	t20 = t17 ^ 2 / t19 ^ 2;
+	t11 = cos(atan2(0, t19));
+	t1 = [0, 0; (0.1e1 + t20) / (0.1e1 + 0.1e1 / t11 ^ 2 * t20) / t11, 0; 0, 1;];
+	Ja_rot = t1;
 else
 	Ja_rot=NaN(3,2);
 end

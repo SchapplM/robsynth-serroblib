@@ -21,8 +21,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-26 20:54
-% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
+% Datum: 2019-10-10 01:02
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,21 +36,130 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S6RPRPRR10_jacobiR_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [10 1]), ...
   'S6RPRPRR10_jacobiR_rot_sym_varpar: pkin has to be [10x1] (double)');
-%% Function calls
 if link_index == 0
-	JR_rot=S6RPRPRR10_jacobiR_rot_0_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 01:02:11
+	% EndTime: 2019-10-10 01:02:11
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 1
-	JR_rot=S6RPRPRR10_jacobiR_rot_1_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 01:02:11
+	% EndTime: 2019-10-10 01:02:11
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (3->3), mult. (0->0), div. (0->0), fcn. (4->2), ass. (0->3)
+	t9 = cos(qJ(1));
+	t8 = sin(qJ(1));
+	t1 = [-t8, 0, 0, 0, 0, 0; t9, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; -t9, 0, 0, 0, 0, 0; -t8, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 2
-	JR_rot=S6RPRPRR10_jacobiR_rot_2_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 01:02:11
+	% EndTime: 2019-10-10 01:02:11
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (1->1), mult. (0->0), div. (0->0), fcn. (4->2), ass. (0->3)
+	t6 = cos(qJ(1));
+	t5 = sin(qJ(1));
+	t1 = [0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; t5, 0, 0, 0, 0, 0; -t6, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; t6, 0, 0, 0, 0, 0; t5, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 3
-	JR_rot=S6RPRPRR10_jacobiR_rot_3_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_3_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 01:02:11
+	% EndTime: 2019-10-10 01:02:11
+	% DurationCPUTime: 0.04s
+	% Computational Cost: add. (5->5), mult. (8->4), div. (0->0), fcn. (20->4), ass. (0->9)
+	t11 = sin(qJ(3));
+	t12 = sin(qJ(1));
+	t16 = t12 * t11;
+	t13 = cos(qJ(3));
+	t14 = cos(qJ(1));
+	t15 = t14 * t13;
+	t10 = t14 * t11;
+	t9 = t12 * t13;
+	t1 = [t10, 0, t9, 0, 0, 0; t16, 0, -t15, 0, 0, 0; 0, 0, -t11, 0, 0, 0; t15, 0, -t16, 0, 0, 0; t9, 0, t10, 0, 0, 0; 0, 0, -t13, 0, 0, 0; -t12, 0, 0, 0, 0, 0; t14, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 4
-	JR_rot=S6RPRPRR10_jacobiR_rot_4_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_4_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 01:02:11
+	% EndTime: 2019-10-10 01:02:11
+	% DurationCPUTime: 0.04s
+	% Computational Cost: add. (10->10), mult. (26->18), div. (0->0), fcn. (45->6), ass. (0->11)
+	t50 = sin(qJ(3));
+	t51 = sin(qJ(1));
+	t57 = t51 * t50;
+	t52 = cos(qJ(3));
+	t56 = t51 * t52;
+	t53 = cos(qJ(1));
+	t55 = t53 * t50;
+	t54 = t53 * t52;
+	t49 = cos(pkin(10));
+	t48 = sin(pkin(10));
+	t1 = [-t51 * t48 + t49 * t55, 0, t49 * t56, 0, 0, 0; t53 * t48 + t49 * t57, 0, -t49 * t54, 0, 0, 0; 0, 0, -t50 * t49, 0, 0, 0; -t48 * t55 - t51 * t49, 0, -t48 * t56, 0, 0, 0; -t48 * t57 + t53 * t49, 0, t48 * t54, 0, 0, 0; 0, 0, t50 * t48, 0, 0, 0; -t54, 0, t57, 0, 0, 0; -t56, 0, -t55, 0, 0, 0; 0, 0, t52, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 5
-	JR_rot=S6RPRPRR10_jacobiR_rot_5_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_5_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 01:02:11
+	% EndTime: 2019-10-10 01:02:11
+	% DurationCPUTime: 0.05s
+	% Computational Cost: add. (40->15), mult. (40->20), div. (0->0), fcn. (69->6), ass. (0->17)
+	t70 = sin(qJ(3));
+	t71 = sin(qJ(1));
+	t78 = t71 * t70;
+	t69 = pkin(10) + qJ(5);
+	t67 = sin(t69);
+	t72 = cos(qJ(3));
+	t77 = t72 * t67;
+	t68 = cos(t69);
+	t76 = t72 * t68;
+	t73 = cos(qJ(1));
+	t75 = t73 * t70;
+	t74 = t73 * t72;
+	t66 = -t71 * t67 + t68 * t75;
+	t65 = t67 * t75 + t71 * t68;
+	t64 = t73 * t67 + t68 * t78;
+	t63 = -t67 * t78 + t73 * t68;
+	t1 = [t66, 0, t71 * t76, 0, t63, 0; t64, 0, -t68 * t74, 0, t65, 0; 0, 0, -t70 * t68, 0, -t77, 0; -t65, 0, -t71 * t77, 0, -t64, 0; t63, 0, t67 * t74, 0, t66, 0; 0, 0, t70 * t67, 0, -t76, 0; -t74, 0, t78, 0, 0, 0; -t71 * t72, 0, -t75, 0, 0, 0; 0, 0, t72, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 6
-	JR_rot=S6RPRPRR10_jacobiR_rot_6_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_6_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 01:02:11
+	% EndTime: 2019-10-10 01:02:11
+	% DurationCPUTime: 0.05s
+	% Computational Cost: add. (90->18), mult. (54->20), div. (0->0), fcn. (93->6), ass. (0->17)
+	t86 = sin(qJ(3));
+	t87 = sin(qJ(1));
+	t94 = t87 * t86;
+	t85 = pkin(10) + qJ(5) + qJ(6);
+	t83 = sin(t85);
+	t88 = cos(qJ(3));
+	t93 = t88 * t83;
+	t84 = cos(t85);
+	t92 = t88 * t84;
+	t89 = cos(qJ(1));
+	t91 = t89 * t86;
+	t90 = t89 * t88;
+	t82 = -t87 * t83 + t84 * t91;
+	t81 = t83 * t91 + t87 * t84;
+	t80 = t89 * t83 + t84 * t94;
+	t79 = -t83 * t94 + t89 * t84;
+	t1 = [t82, 0, t87 * t92, 0, t79, t79; t80, 0, -t84 * t90, 0, t81, t81; 0, 0, -t86 * t84, 0, -t93, -t93; -t81, 0, -t87 * t93, 0, -t80, -t80; t79, 0, t83 * t90, 0, t82, t82; 0, 0, t86 * t83, 0, -t92, -t92; -t90, 0, t94, 0, 0, 0; -t87 * t88, 0, -t91, 0, 0, 0; 0, 0, t88, 0, 0, 0;];
+	JR_rot = t1;
 else
 	JR_rot=NaN(9,6);
 end

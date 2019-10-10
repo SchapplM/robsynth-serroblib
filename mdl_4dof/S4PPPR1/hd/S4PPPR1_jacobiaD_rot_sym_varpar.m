@@ -25,8 +25,8 @@
 %   Zeitableitung der rotatorischen Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-26 19:17
-% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
+% Datum: 2019-10-09 20:15
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,17 +43,70 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S4PPPR1_jacobiaD_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
   'S4PPPR1_jacobiaD_rot_sym_varpar: pkin has to be [5x1] (double)');
-%% Function calls
 if link_index == 0
-	JaD_rot=S4PPPR1_jacobiaD_rot_0_sym_varpar(qJ, qJD, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_rot_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:15:07
+	% EndTime: 2019-10-09 20:15:07
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
+	JaD_rot = t1;
 elseif link_index == 1
-	JaD_rot=S4PPPR1_jacobiaD_rot_1_sym_varpar(qJ, qJD, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_rot_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:15:06
+	% EndTime: 2019-10-09 20:15:06
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
+	JaD_rot = t1;
 elseif link_index == 2
-	JaD_rot=S4PPPR1_jacobiaD_rot_2_sym_varpar(qJ, qJD, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_rot_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:15:07
+	% EndTime: 2019-10-09 20:15:07
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
+	JaD_rot = t1;
 elseif link_index == 3
-	JaD_rot=S4PPPR1_jacobiaD_rot_3_sym_varpar(qJ, qJD, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_rot_3_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:15:06
+	% EndTime: 2019-10-09 20:15:06
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
+	JaD_rot = t1;
 elseif link_index == 4
-	JaD_rot=S4PPPR1_jacobiaD_rot_4_sym_varpar(qJ, qJD, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_rot_4_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:15:07
+	% EndTime: 2019-10-09 20:15:07
+	% DurationCPUTime: 0.05s
+	% Computational Cost: add. (46->7), mult. (124->20), div. (18->4), fcn. (140->4), ass. (0->15)
+	t36 = cos(pkin(5));
+	t37 = cos(qJ(4));
+	t42 = sin(pkin(5));
+	t46 = sin(qJ(4));
+	t31 = t36 * t46 + t42 * t37;
+	t27 = 0.1e1 / t31 ^ 2;
+	t47 = qJD(4) * t27;
+	t30 = t36 * t37 - t42 * t46;
+	t29 = t30 ^ 2;
+	t24 = t29 * t27 + 0.1e1;
+	t43 = t31 * t47;
+	t44 = t30 / t31 * t47;
+	t45 = (-t29 * t44 - t30 * t43) / t24 ^ 2;
+	t22 = 0.1e1 / t24;
+	t1 = [0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, -0.2e1 * t45 + 0.2e1 * (-t22 * t43 + (-t22 * t44 - t27 * t45) * t30) * t30;];
+	JaD_rot = t1;
 else
 	JaD_rot=NaN(3,4);
 end

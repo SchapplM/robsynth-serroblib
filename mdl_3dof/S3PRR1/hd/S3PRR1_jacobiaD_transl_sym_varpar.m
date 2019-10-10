@@ -23,8 +23,8 @@
 %   Translatorischer Teil der analytischen Jacobi-Matrix (Zeitableitung)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-26 19:13
-% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
+% Datum: 2019-10-09 20:08
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -45,15 +45,55 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S3PRR1_jacobiaD_transl_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [4 1]), ...
   'S3PRR1_jacobiaD_transl_sym_varpar: pkin has to be [4x1] (double)');
-%% Function calls
 if link_index == 0
-	JaD_transl=S3PRR1_jacobiaD_transl_0_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_transl_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:08:14
+	% EndTime: 2019-10-09 20:08:14
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0; 0, 0, 0; 0, 0, 0;];
+	JaD_transl = t1;
 elseif link_index == 1
-	JaD_transl=S3PRR1_jacobiaD_transl_1_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_transl_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:08:14
+	% EndTime: 2019-10-09 20:08:14
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0; 0, 0, 0; 0, 0, 0;];
+	JaD_transl = t1;
 elseif link_index == 2
-	JaD_transl=S3PRR1_jacobiaD_transl_2_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_transl_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:08:14
+	% EndTime: 2019-10-09 20:08:14
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (2->2), mult. (8->6), div. (0->0), fcn. (4->2), ass. (0->3)
+	t27 = cos(qJ(2));
+	t26 = sin(qJ(2));
+	t1 = [0, (-r_i_i_C(1) * t27 + r_i_i_C(2) * t26) * qJD(2), 0; 0, (-r_i_i_C(1) * t26 - r_i_i_C(2) * t27) * qJD(2), 0; 0, 0, 0;];
+	JaD_transl = t1;
 elseif link_index == 3
-	JaD_transl=S3PRR1_jacobiaD_transl_3_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_transl_3_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:08:14
+	% EndTime: 2019-10-09 20:08:14
+	% DurationCPUTime: 0.03s
+	% Computational Cost: add. (22->6), mult. (20->9), div. (0->0), fcn. (10->4), ass. (0->8)
+	t43 = pkin(2) * qJD(2);
+	t40 = qJ(2) + qJ(3);
+	t37 = sin(t40);
+	t38 = cos(t40);
+	t39 = qJD(2) + qJD(3);
+	t42 = (-r_i_i_C(1) * t38 + r_i_i_C(2) * t37) * t39;
+	t41 = (-r_i_i_C(1) * t37 - r_i_i_C(2) * t38) * t39;
+	t1 = [0, -cos(qJ(2)) * t43 + t42, t42; 0, -sin(qJ(2)) * t43 + t41, t41; 0, 0, 0;];
+	JaD_transl = t1;
 else
 	JaD_transl=NaN(3,3);
 end

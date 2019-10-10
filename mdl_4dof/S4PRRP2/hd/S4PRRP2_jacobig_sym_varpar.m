@@ -1,9 +1,9 @@
-% Geometrischen Jacobi-Matrix für beliebiges Segment von
+% Geometrische Jacobi-Matrix für beliebiges Segment von
 % S4PRRP2
 % Use Code from Maple symbolic Code Generation
 % 
-% geometrische Jacobi-Matrix: Differentieller Zusammenhang zwischen
-% Endeffektorposition und verallgemeinerten Koordinaten.
+% Geometrische Jacobi-Matrix: Differentieller Zusammenhang zwischen
+% Endeffektorgeschwindigkeit und Geschw. der verallgemeinerten Koordinaten.
 % 
 % Input:
 % qJ [4x1]
@@ -19,17 +19,15 @@
 % 
 % Output:
 % Jg [6x4]
-%   Geometrischen Jacobi-Matrix
+%   Geometrische Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-26 19:28
-% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
+% Datum: 2019-10-09 20:34
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Jg = S4PRRP2_jacobig_sym_varpar(qJ, link_index, r_i_i_C, pkin)
-
-
 %% Coder Information
 %#codegen
 %$cgargs {zeros(4,1),uint8(0),zeros(3,1),zeros(5,1)}
@@ -41,17 +39,12 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S4PRRP2_jacobig_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
   'S4PRRP2_jacobig_sym_varpar: pkin has to be [5x1] (double)');
-%% Function calls
-if link_index == 0
-	Jg=S4PRRP2_jacobig_0_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 1
-	Jg=S4PRRP2_jacobig_1_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 2
-	Jg=S4PRRP2_jacobig_2_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 3
-	Jg=S4PRRP2_jacobig_3_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 4
-	Jg=S4PRRP2_jacobig_4_sym_varpar(qJ, r_i_i_C, pkin);
-else
-	Jg=NaN(6,4);
+
+% Function calls
+Ja_transl = S4PRRP2_jacobia_transl_sym_varpar(qJ, link_index, r_i_i_C, ...
+  pkin);
+Jg_rot = S4PRRP2_jacobig_rot_sym_varpar(qJ, link_index, ...
+  pkin);
+
+Jg = [Ja_transl; Jg_rot];
 end

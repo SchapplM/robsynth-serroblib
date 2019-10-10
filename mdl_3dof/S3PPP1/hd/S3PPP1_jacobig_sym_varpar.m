@@ -22,14 +22,12 @@
 %   Geometrische Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-04-17 09:48
-% Revision: 3acd05283b8979b361f80d69cfa1c98d98241298 (2019-04-12)
+% Datum: 2019-10-09 20:04
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Jg = S3PPP1_jacobig_sym_varpar(qJ, link_index, r_i_i_C, pkin)
-
-
 %% Coder Information
 %#codegen
 %$cgargs {zeros(3,1),uint8(0),zeros(3,1),zeros(3,1)}
@@ -41,15 +39,12 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S3PPP1_jacobig_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [3 1]), ...
   'S3PPP1_jacobig_sym_varpar: pkin has to be [3x1] (double)');
-%% Function calls
-if link_index == 0
-	Jg=S3PPP1_jacobig_0_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 1
-	Jg=S3PPP1_jacobig_1_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 2
-	Jg=S3PPP1_jacobig_2_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 3
-	Jg=S3PPP1_jacobig_3_sym_varpar(qJ, r_i_i_C, pkin);
-else
-	Jg=NaN(6,3);
+
+% Function calls
+Ja_transl = S3PPP1_jacobia_transl_sym_varpar(qJ, link_index, r_i_i_C, ...
+  pkin);
+Jg_rot = S3PPP1_jacobig_rot_sym_varpar(qJ, link_index, ...
+  pkin);
+
+Jg = [Ja_transl; Jg_rot];
 end

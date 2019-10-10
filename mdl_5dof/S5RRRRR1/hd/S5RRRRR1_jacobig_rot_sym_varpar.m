@@ -1,9 +1,9 @@
 % Rotatorische Teilmatrix der geometrischen Jacobi-Matrix für beliebiges Segment von
 % S5RRRRR1
 % Use Code from Maple symbolic Code Generation
-% 
-% geometrische Jacobi-Matrix: Differentieller Zusammenhang zwischen
-% Endeffektorposition und verallgemeinerten Koordinaten.
+%
+% Geometrische Jacobi-Matrix: Differentieller Zusammenhang zwischen
+% Endeffektorgeschwindigkeit und Geschw. der verallgemeinerten Koordinaten.
 % 
 % 
 % Input:
@@ -21,8 +21,8 @@
 %   Rotatorische Teilmatrix der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-26 19:37
-% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
+% Datum: 2019-10-09 21:00
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,19 +36,74 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S5RRRRR1_jacobig_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
   'S5RRRRR1_jacobig_rot_sym_varpar: pkin has to be [6x1] (double)');
-%% Function calls
 if link_index == 0
-	Jg_rot=S5RRRRR1_jacobig_rot_0_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobig_rot_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:00:52
+	% EndTime: 2019-10-09 21:00:52
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	Jg_rot = t1;
 elseif link_index == 1
-	Jg_rot=S5RRRRR1_jacobig_rot_1_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobig_rot_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:00:52
+	% EndTime: 2019-10-09 21:00:52
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 1, 0, 0, 0, 0;];
+	Jg_rot = t1;
 elseif link_index == 2
-	Jg_rot=S5RRRRR1_jacobig_rot_2_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobig_rot_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:00:52
+	% EndTime: 2019-10-09 21:00:52
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (1->1), mult. (0->0), div. (0->0), fcn. (2->2), ass. (0->1)
+	t1 = [0, -sin(qJ(1)), 0, 0, 0; 0, cos(qJ(1)), 0, 0, 0; 1, 0, 0, 0, 0;];
+	Jg_rot = t1;
 elseif link_index == 3
-	Jg_rot=S5RRRRR1_jacobig_rot_3_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobig_rot_3_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:00:52
+	% EndTime: 2019-10-09 21:00:52
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (2->2), mult. (0->0), div. (0->0), fcn. (4->2), ass. (0->3)
+	t18 = cos(qJ(1));
+	t17 = sin(qJ(1));
+	t1 = [0, -t17, -t17, 0, 0; 0, t18, t18, 0, 0; 1, 0, 0, 0, 0;];
+	Jg_rot = t1;
 elseif link_index == 4
-	Jg_rot=S5RRRRR1_jacobig_rot_4_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobig_rot_4_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:00:52
+	% EndTime: 2019-10-09 21:00:52
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (3->3), mult. (0->0), div. (0->0), fcn. (6->2), ass. (0->3)
+	t25 = cos(qJ(1));
+	t24 = sin(qJ(1));
+	t1 = [0, -t24, -t24, -t24, 0; 0, t25, t25, t25, 0; 1, 0, 0, 0, 0;];
+	Jg_rot = t1;
 elseif link_index == 5
-	Jg_rot=S5RRRRR1_jacobig_rot_5_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobig_rot_5_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:00:53
+	% EndTime: 2019-10-09 21:00:53
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (9->4), mult. (2->2), div. (0->0), fcn. (11->4), ass. (0->5)
+	t92 = cos(qJ(1));
+	t91 = sin(qJ(1));
+	t90 = qJ(2) + qJ(3) + qJ(4);
+	t89 = sin(t90);
+	t1 = [0, -t91, -t91, -t91, t92 * t89; 0, t92, t92, t92, t91 * t89; 1, 0, 0, 0, cos(t90);];
+	Jg_rot = t1;
 else
 	Jg_rot=NaN(3,5);
 end

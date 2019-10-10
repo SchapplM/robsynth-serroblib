@@ -21,8 +21,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:30
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-10-09 20:56
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,19 +36,83 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S5PRRRR2_jacobiR_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
   'S5PRRRR2_jacobiR_rot_sym_varpar: pkin has to be [6x1] (double)');
-%% Function calls
 if link_index == 0
-	JR_rot=S5PRRRR2_jacobiR_rot_0_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:56:14
+	% EndTime: 2019-10-09 20:56:14
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 1
-	JR_rot=S5PRRRR2_jacobiR_rot_1_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:56:14
+	% EndTime: 2019-10-09 20:56:14
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 2
-	JR_rot=S5PRRRR2_jacobiR_rot_2_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:56:14
+	% EndTime: 2019-10-09 20:56:14
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (3->3), mult. (0->0), div. (0->0), fcn. (4->2), ass. (0->3)
+	t9 = cos(qJ(2));
+	t8 = sin(qJ(2));
+	t1 = [0, -t8, 0, 0, 0; 0, t9, 0, 0, 0; 0, 0, 0, 0, 0; 0, -t9, 0, 0, 0; 0, -t8, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 3
-	JR_rot=S5PRRRR2_jacobiR_rot_3_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_3_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:56:14
+	% EndTime: 2019-10-09 20:56:14
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (14->7), mult. (0->0), div. (0->0), fcn. (8->2), ass. (0->4)
+	t16 = qJ(2) + qJ(3);
+	t15 = cos(t16);
+	t14 = sin(t16);
+	t1 = [0, -t14, -t14, 0, 0; 0, t15, t15, 0, 0; 0, 0, 0, 0, 0; 0, -t15, -t15, 0, 0; 0, -t14, -t14, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 4
-	JR_rot=S5PRRRR2_jacobiR_rot_4_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_4_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:56:14
+	% EndTime: 2019-10-09 20:56:14
+	% DurationCPUTime: 0.03s
+	% Computational Cost: add. (33->10), mult. (0->0), div. (0->0), fcn. (12->2), ass. (0->4)
+	t21 = qJ(2) + qJ(3) + qJ(4);
+	t20 = cos(t21);
+	t19 = sin(t21);
+	t1 = [0, -t19, -t19, -t19, 0; 0, t20, t20, t20, 0; 0, 0, 0, 0, 0; 0, -t20, -t20, -t20, 0; 0, -t19, -t19, -t19, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 5
-	JR_rot=S5PRRRR2_jacobiR_rot_5_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_5_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:56:14
+	% EndTime: 2019-10-09 20:56:14
+	% DurationCPUTime: 0.03s
+	% Computational Cost: add. (55->12), mult. (16->4), div. (0->0), fcn. (40->4), ass. (0->10)
+	t29 = qJ(2) + qJ(3) + qJ(4);
+	t27 = sin(t29);
+	t31 = cos(qJ(5));
+	t33 = t27 * t31;
+	t28 = cos(t29);
+	t30 = sin(qJ(5));
+	t32 = t28 * t30;
+	t26 = t28 * t31;
+	t25 = t27 * t30;
+	t1 = [0, -t33, -t33, -t33, -t32; 0, t26, t26, t26, -t25; 0, 0, 0, 0, t31; 0, t25, t25, t25, -t26; 0, -t32, -t32, -t32, -t33; 0, 0, 0, 0, -t30; 0, t28, t28, t28, 0; 0, t27, t27, t27, 0; 0, 0, 0, 0, 0;];
+	JR_rot = t1;
 else
 	JR_rot=NaN(9,5);
 end

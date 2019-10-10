@@ -23,8 +23,8 @@
 %   Zeitableitung der rotatorischen Teilmatrix der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-29 15:26
-% Revision: 932832b1be1be80f59b7f1a581a1a8f328bdb39d (2019-03-29)
+% Datum: 2019-10-09 21:02
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,19 +40,82 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S5RRRRR2_jacobigD_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [2 1]), ...
   'S5RRRRR2_jacobigD_rot_sym_varpar: pkin has to be [2x1] (double)');
-%% Function calls
 if link_index == 0
-	JgD_rot=S5RRRRR2_jacobigD_rot_0_sym_varpar(qJ, qJD, pkin);
+	%% Symbolic Calculation
+	% From jacobigD_rot_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:02:47
+	% EndTime: 2019-10-09 21:02:47
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	JgD_rot = t1;
 elseif link_index == 1
-	JgD_rot=S5RRRRR2_jacobigD_rot_1_sym_varpar(qJ, qJD, pkin);
+	%% Symbolic Calculation
+	% From jacobigD_rot_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:02:47
+	% EndTime: 2019-10-09 21:02:47
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	JgD_rot = t1;
 elseif link_index == 2
-	JgD_rot=S5RRRRR2_jacobigD_rot_2_sym_varpar(qJ, qJD, pkin);
+	%% Symbolic Calculation
+	% From jacobigD_rot_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:02:47
+	% EndTime: 2019-10-09 21:02:47
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	JgD_rot = t1;
 elseif link_index == 3
-	JgD_rot=S5RRRRR2_jacobigD_rot_3_sym_varpar(qJ, qJD, pkin);
+	%% Symbolic Calculation
+	% From jacobigD_rot_3_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:02:47
+	% EndTime: 2019-10-09 21:02:47
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (4->2), mult. (2->2), div. (0->0), fcn. (2->2), ass. (0->3)
+	t27 = qJ(1) + qJ(2);
+	t26 = qJD(1) + qJD(2);
+	t1 = [0, 0, t26 * cos(t27), 0, 0; 0, 0, t26 * sin(t27), 0, 0; 0, 0, 0, 0, 0;];
+	JgD_rot = t1;
 elseif link_index == 4
-	JgD_rot=S5RRRRR2_jacobigD_rot_4_sym_varpar(qJ, qJD, pkin);
+	%% Symbolic Calculation
+	% From jacobigD_rot_4_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:02:47
+	% EndTime: 2019-10-09 21:02:47
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (8->2), mult. (4->2), div. (0->0), fcn. (4->2), ass. (0->5)
+	t40 = qJ(1) + qJ(2);
+	t39 = qJD(1) + qJD(2);
+	t38 = t39 * cos(t40);
+	t37 = t39 * sin(t40);
+	t1 = [0, 0, t38, t38, 0; 0, 0, t37, t37, 0; 0, 0, 0, 0, 0;];
+	JgD_rot = t1;
 elseif link_index == 5
-	JgD_rot=S5RRRRR2_jacobigD_rot_5_sym_varpar(qJ, qJD, pkin);
+	%% Symbolic Calculation
+	% From jacobigD_rot_5_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 21:02:47
+	% EndTime: 2019-10-09 21:02:47
+	% DurationCPUTime: 0.03s
+	% Computational Cost: add. (24->6), mult. (13->8), div. (0->0), fcn. (13->4), ass. (0->11)
+	t122 = qJD(3) + qJD(4);
+	t124 = qJ(3) + qJ(4);
+	t126 = cos(t124) * t122;
+	t125 = qJ(1) + qJ(2);
+	t119 = sin(t125);
+	t123 = qJD(1) + qJD(2);
+	t116 = t123 * t119;
+	t121 = cos(t125);
+	t117 = t123 * t121;
+	t118 = sin(t124);
+	t1 = [0, 0, t117, t117, -t118 * t116 + t121 * t126; 0, 0, t116, t116, t118 * t117 + t119 * t126; 0, 0, 0, 0, t122 * t118;];
+	JgD_rot = t1;
 else
 	JgD_rot=NaN(3,5);
 end

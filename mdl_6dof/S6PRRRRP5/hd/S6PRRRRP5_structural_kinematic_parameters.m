@@ -18,8 +18,8 @@
 %   Namen aller Kinematik-Parameter im Vektor `pkin`
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-04-09 16:45
-% Revision: 6c14de6f4c9ff4dbe46db99908a97716657f1d1c (2019-04-09)
+% Datum: 2019-10-09 23:09
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -41,7 +41,6 @@ mu_mdh = t1;
 % Anzahl der Robotersegmente (inkl Basis)
 NL = 7;
 % Anzahl der Kinematikparameter
-% pkin = [a2 a3 a4 a5 a6 alpha2 alpha3 d2 d3 d4 d5 theta1]'
 NKP = 12;
 % Anzahl der Minimalkoordinaten (für hybride Systeme)
 NQJ = 6;

@@ -23,8 +23,8 @@
 %   Translatorischer Teil der analytischen Jacobi-Matrix (Zeitableitung)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-04-17 09:48
-% Revision: 3acd05283b8979b361f80d69cfa1c98d98241298 (2019-04-12)
+% Datum: 2019-10-09 20:04
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -45,15 +45,46 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S3PPP1_jacobiaD_transl_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [3 1]), ...
   'S3PPP1_jacobiaD_transl_sym_varpar: pkin has to be [3x1] (double)');
-%% Function calls
 if link_index == 0
-	JaD_transl=S3PPP1_jacobiaD_transl_0_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_transl_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:04:05
+	% EndTime: 2019-10-09 20:04:05
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0; 0, 0, 0; 0, 0, 0;];
+	JaD_transl = t1;
 elseif link_index == 1
-	JaD_transl=S3PPP1_jacobiaD_transl_1_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_transl_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:04:05
+	% EndTime: 2019-10-09 20:04:05
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0; 0, 0, 0; 0, 0, 0;];
+	JaD_transl = t1;
 elseif link_index == 2
-	JaD_transl=S3PPP1_jacobiaD_transl_2_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_transl_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:04:05
+	% EndTime: 2019-10-09 20:04:05
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0; 0, 0, 0; 0, 0, 0;];
+	JaD_transl = t1;
 elseif link_index == 3
-	JaD_transl=S3PPP1_jacobiaD_transl_3_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_transl_3_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:04:05
+	% EndTime: 2019-10-09 20:04:05
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0; 0, 0, 0; 0, 0, 0;];
+	JaD_transl = t1;
 else
 	JaD_transl=NaN(3,3);
 end

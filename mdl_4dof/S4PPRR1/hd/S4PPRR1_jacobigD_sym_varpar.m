@@ -24,15 +24,12 @@
 %   Zeitableitung der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-26 19:21
-% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
+% Datum: 2019-10-09 20:23
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function JgD = S4PPRR1_jacobigD_sym_varpar(qJ, qJD, link_index, r_i_i_C, pkin)
-
-
-
 %% Coder Information
 %#codegen
 %$cgargs {zeros(4,1),zeros(4,1),uint8(0),zeros(3,1),zeros(6,1)}
@@ -46,17 +43,12 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S4PPRR1_jacobigD_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
   'S4PPRR1_jacobigD_sym_varpar: pkin has to be [6x1] (double)');
-%% Function calls
-if link_index == 0
-	JgD=S4PPRR1_jacobigD_0_sym_varpar(qJ, qJD, r_i_i_C, pkin);
-elseif link_index == 1
-	JgD=S4PPRR1_jacobigD_1_sym_varpar(qJ, qJD, r_i_i_C, pkin);
-elseif link_index == 2
-	JgD=S4PPRR1_jacobigD_2_sym_varpar(qJ, qJD, r_i_i_C, pkin);
-elseif link_index == 3
-	JgD=S4PPRR1_jacobigD_3_sym_varpar(qJ, qJD, r_i_i_C, pkin);
-elseif link_index == 4
-	JgD=S4PPRR1_jacobigD_4_sym_varpar(qJ, qJD, r_i_i_C, pkin);
-else
-	JgD=NaN(6,4);
+
+% Function calls
+JaD_transl = S4PPRR1_jacobiaD_transl_sym_varpar(qJ, qJD, link_index, r_i_i_C, ...
+  pkin);
+JgD_rot = S4PPRR1_jacobigD_rot_sym_varpar(qJ, qJD, link_index, ...
+  pkin);
+
+JgD = [JaD_transl; JgD_rot];
 end

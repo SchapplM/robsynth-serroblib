@@ -21,8 +21,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:27
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-10-09 20:37
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,17 +36,64 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S4PRRR2_jacobiR_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [2 1]), ...
   'S4PRRR2_jacobiR_rot_sym_varpar: pkin has to be [2x1] (double)');
-%% Function calls
 if link_index == 0
-	JR_rot=S4PRRR2_jacobiR_rot_0_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:37:37
+	% EndTime: 2019-10-09 20:37:38
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 1
-	JR_rot=S4PRRR2_jacobiR_rot_1_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:37:37
+	% EndTime: 2019-10-09 20:37:38
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 2
-	JR_rot=S4PRRR2_jacobiR_rot_2_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:37:38
+	% EndTime: 2019-10-09 20:37:38
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (3->3), mult. (0->0), div. (0->0), fcn. (4->2), ass. (0->3)
+	t4 = cos(qJ(2));
+	t3 = sin(qJ(2));
+	t1 = [0, -t4, 0, 0; 0, 0, 0, 0; 0, -t3, 0, 0; 0, t3, 0, 0; 0, 0, 0, 0; 0, -t4, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 3
-	JR_rot=S4PRRR2_jacobiR_rot_3_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_3_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:37:38
+	% EndTime: 2019-10-09 20:37:38
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (14->7), mult. (0->0), div. (0->0), fcn. (8->2), ass. (0->4)
+	t9 = qJ(2) + qJ(3);
+	t8 = cos(t9);
+	t7 = sin(t9);
+	t1 = [0, -t8, -t8, 0; 0, 0, 0, 0; 0, -t7, -t7, 0; 0, t7, t7, 0; 0, 0, 0, 0; 0, -t8, -t8, 0; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
+	JR_rot = t1;
 elseif link_index == 4
-	JR_rot=S4PRRR2_jacobiR_rot_4_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobiR_rot_4_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:37:38
+	% EndTime: 2019-10-09 20:37:38
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (33->10), mult. (0->0), div. (0->0), fcn. (12->2), ass. (0->4)
+	t14 = qJ(2) + qJ(3) + qJ(4);
+	t13 = cos(t14);
+	t12 = sin(t14);
+	t1 = [0, -t13, -t13, -t13; 0, 0, 0, 0; 0, -t12, -t12, -t12; 0, t12, t12, t12; 0, 0, 0, 0; 0, -t13, -t13, -t13; 0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
+	JR_rot = t1;
 else
 	JR_rot=NaN(9,4);
 end

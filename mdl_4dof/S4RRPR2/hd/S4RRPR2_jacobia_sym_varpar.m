@@ -25,15 +25,13 @@
 %   Analytische Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 18:16
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-10-09 20:51
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Ja = S4RRPR2_jacobia_sym_varpar(qJ, link_index, r_i_i_C, ...
   pkin)
-
-
 %% Coder Information
 %#codegen
 %$cgargs {zeros(4,1),uint8(0),zeros(3,1),zeros(5,1)}
@@ -45,17 +43,12 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S4RRPR2_jacobia_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [5 1]), ...
   'S4RRPR2_jacobia_sym_varpar: pkin has to be [5x1] (double)');
-%% Function calls
-if link_index == 0
-	Ja=S4RRPR2_jacobia_0_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 1
-	Ja=S4RRPR2_jacobia_1_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 2
-	Ja=S4RRPR2_jacobia_2_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 3
-	Ja=S4RRPR2_jacobia_3_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 4
-	Ja=S4RRPR2_jacobia_4_sym_varpar(qJ, r_i_i_C, pkin);
-else
-	Ja=NaN(6,4);
+
+% Function calls
+Ja_transl = S4RRPR2_jacobia_transl_sym_varpar(qJ, link_index, r_i_i_C, ...
+  pkin);
+Ja_rot = S4RRPR2_jacobia_rot_sym_varpar(qJ, link_index, ...
+  pkin);
+
+Ja = [Ja_transl; Ja_rot];
 end

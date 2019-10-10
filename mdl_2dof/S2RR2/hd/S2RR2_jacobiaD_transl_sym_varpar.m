@@ -23,8 +23,8 @@
 %   Translatorischer Teil der analytischen Jacobi-Matrix (Zeitableitung)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-26 19:11
-% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
+% Datum: 2019-10-09 20:02
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -45,13 +45,49 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S2RR2_jacobiaD_transl_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
   'S2RR2_jacobiaD_transl_sym_varpar: pkin has to be [1x1] (double)');
-%% Function calls
 if link_index == 0
-	JaD_transl=S2RR2_jacobiaD_transl_0_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_transl_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:02:34
+	% EndTime: 2019-10-09 20:02:34
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0; 0, 0; 0, 0;];
+	JaD_transl = t1;
 elseif link_index == 1
-	JaD_transl=S2RR2_jacobiaD_transl_1_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_transl_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:02:34
+	% EndTime: 2019-10-09 20:02:34
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (2->2), mult. (8->6), div. (0->0), fcn. (4->2), ass. (0->3)
+	t6 = cos(qJ(1));
+	t5 = sin(qJ(1));
+	t1 = [(-r_i_i_C(1) * t6 + r_i_i_C(2) * t5) * qJD(1), 0; 0, 0; (r_i_i_C(1) * t5 + r_i_i_C(2) * t6) * qJD(1), 0;];
+	JaD_transl = t1;
 elseif link_index == 2
-	JaD_transl=S2RR2_jacobiaD_transl_2_sym_varpar(qJ, qJD, r_i_i_C, pkin);
+	%% Symbolic Calculation
+	% From jacobiaD_transl_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-09 20:02:34
+	% EndTime: 2019-10-09 20:02:34
+	% DurationCPUTime: 0.09s
+	% Computational Cost: add. (17->14), mult. (60->29), div. (0->0), fcn. (38->4), ass. (0->12)
+	t66 = sin(qJ(2));
+	t68 = cos(qJ(2));
+	t70 = qJD(2) * (r_i_i_C(1) * t66 + r_i_i_C(2) * t68);
+	t77 = -pkin(1) - r_i_i_C(3);
+	t67 = sin(qJ(1));
+	t76 = qJD(1) * t67;
+	t69 = cos(qJ(1));
+	t75 = qJD(1) * t69;
+	t74 = qJD(2) * t67;
+	t73 = qJD(2) * t69;
+	t72 = r_i_i_C(1) * t68 - r_i_i_C(2) * t66;
+	t1 = [t67 * t70 + (t77 * t67 - t72 * t69) * qJD(1), (t66 * t73 + t68 * t76) * r_i_i_C(2) + (t66 * t76 - t68 * t73) * r_i_i_C(1); 0, -t70; t69 * t70 + (t72 * t67 + t77 * t69) * qJD(1), (-t66 * t74 + t68 * t75) * r_i_i_C(2) + (t66 * t75 + t68 * t74) * r_i_i_C(1);];
+	JaD_transl = t1;
 else
 	JaD_transl=NaN(3,2);
 end

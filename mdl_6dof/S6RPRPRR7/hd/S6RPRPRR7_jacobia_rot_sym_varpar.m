@@ -23,8 +23,8 @@
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-26 20:52
-% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
+% Datum: 2019-10-10 00:56
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -39,21 +39,113 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S6RPRPRR7_jacobia_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [10 1]), ...
   'S6RPRPRR7_jacobia_rot_sym_varpar: pkin has to be [10x1] (double)');
-%% Function calls
 if link_index == 0
-	Ja_rot=S6RPRPRR7_jacobia_rot_0_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobia_rot_0_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 00:56:39
+	% EndTime: 2019-10-10 00:56:39
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0;];
+	Ja_rot = t1;
 elseif link_index == 1
-	Ja_rot=S6RPRPRR7_jacobia_rot_1_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobia_rot_1_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 00:56:39
+	% EndTime: 2019-10-10 00:56:39
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (3->0), mult. (6->0), div. (5->0), fcn. (6->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0; 1, 0, 0, 0, 0, 0;];
+	Ja_rot = t1;
 elseif link_index == 2
-	Ja_rot=S6RPRPRR7_jacobia_rot_2_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobia_rot_2_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 00:56:39
+	% EndTime: 2019-10-10 00:56:39
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [NaN, NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN, NaN;];
+	Ja_rot = t1;
 elseif link_index == 3
-	Ja_rot=S6RPRPRR7_jacobia_rot_3_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobia_rot_3_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 00:56:39
+	% EndTime: 2019-10-10 00:56:39
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [NaN, NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN, NaN;];
+	Ja_rot = t1;
 elseif link_index == 4
-	Ja_rot=S6RPRPRR7_jacobia_rot_4_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobia_rot_4_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 00:56:39
+	% EndTime: 2019-10-10 00:56:39
+	% DurationCPUTime: 0.03s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [NaN, NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN, NaN;];
+	Ja_rot = t1;
 elseif link_index == 5
-	Ja_rot=S6RPRPRR7_jacobia_rot_5_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobia_rot_5_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 00:56:39
+	% EndTime: 2019-10-10 00:56:39
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [NaN, NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN, NaN;];
+	Ja_rot = t1;
 elseif link_index == 6
-	Ja_rot=S6RPRPRR7_jacobia_rot_6_sym_varpar(qJ, pkin);
+	%% Symbolic Calculation
+	% From jacobia_rot_6_floatb_twist_matlab.m
+	% OptimizationMode: 2
+	% StartTime: 2019-10-10 00:56:39
+	% EndTime: 2019-10-10 00:56:39
+	% DurationCPUTime: 0.16s
+	% Computational Cost: add. (519->20), mult. (332->54), div. (79->9), fcn. (489->9), ass. (0->38)
+	t64 = qJ(3) + pkin(10) + qJ(5);
+	t62 = sin(t64);
+	t63 = cos(t64);
+	t68 = cos(qJ(1));
+	t72 = t68 * t63;
+	t57 = atan2(-t72, t62);
+	t51 = sin(t57);
+	t52 = cos(t57);
+	t48 = -t51 * t72 + t52 * t62;
+	t47 = 0.1e1 / t48 ^ 2;
+	t66 = sin(qJ(1));
+	t80 = t47 * t66 ^ 2;
+	t79 = t51 * t62;
+	t65 = sin(qJ(6));
+	t71 = t68 * t65;
+	t67 = cos(qJ(6));
+	t74 = t66 * t67;
+	t56 = t62 * t74 + t71;
+	t54 = 0.1e1 / t56 ^ 2;
+	t70 = t68 * t67;
+	t75 = t66 * t65;
+	t55 = t62 * t75 - t70;
+	t78 = t54 * t55;
+	t61 = t63 ^ 2;
+	t77 = 0.1e1 / t62 ^ 2 * t61;
+	t76 = t63 * t66;
+	t58 = 0.1e1 / (t68 ^ 2 * t77 + 0.1e1);
+	t73 = t68 * t58;
+	t69 = t55 ^ 2 * t54 + 0.1e1;
+	t59 = 0.1e1 / t62;
+	t53 = 0.1e1 / t56;
+	t50 = 0.1e1 / t69;
+	t49 = (0.1e1 + t77) * t73;
+	t46 = 0.1e1 / t48;
+	t45 = 0.1e1 / (t61 * t80 + 0.1e1);
+	t44 = (t53 * t65 - t67 * t78) * t50 * t76;
+	t43 = (t62 * t46 + (t68 * t79 + t52 * t63 + (-t52 * t72 - t79) * t49) * t63 * t47) * t66 * t45;
+	t1 = [t59 * t58 * t76, 0, t49, 0, t49, 0; (-t46 * t72 + (-t52 * t59 * t61 * t73 + (-t58 + 0.1e1) * t63 * t51) * t63 * t80) * t45, 0, t43, 0, t43, 0; ((t62 * t71 + t74) * t53 - (t62 * t70 - t75) * t78) * t50, 0, t44, 0, t44, t69 * t50;];
+	Ja_rot = t1;
 else
 	Ja_rot=NaN(3,6);
 end

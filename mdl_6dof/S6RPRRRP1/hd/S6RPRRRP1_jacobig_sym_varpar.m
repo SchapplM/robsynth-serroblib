@@ -1,9 +1,9 @@
-% Geometrischen Jacobi-Matrix für beliebiges Segment von
+% Geometrische Jacobi-Matrix für beliebiges Segment von
 % S6RPRRRP1
 % Use Code from Maple symbolic Code Generation
 % 
-% geometrische Jacobi-Matrix: Differentieller Zusammenhang zwischen
-% Endeffektorposition und verallgemeinerten Koordinaten.
+% Geometrische Jacobi-Matrix: Differentieller Zusammenhang zwischen
+% Endeffektorgeschwindigkeit und Geschw. der verallgemeinerten Koordinaten.
 % 
 % Input:
 % qJ [6x1]
@@ -19,17 +19,15 @@
 % 
 % Output:
 % Jg [6x6]
-%   Geometrischen Jacobi-Matrix
+%   Geometrische Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-02-26 21:08
-% Revision: d75aae1ac561373cd3be920984c3df29a1c2ecc8 (2019-02-26)
+% Datum: 2019-10-10 01:45
+% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Jg = S6RPRRRP1_jacobig_sym_varpar(qJ, link_index, r_i_i_C, pkin)
-
-
 %% Coder Information
 %#codegen
 %$cgargs {zeros(6,1),uint8(0),zeros(3,1),zeros(10,1)}
@@ -41,21 +39,12 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S6RPRRRP1_jacobig_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [10 1]), ...
   'S6RPRRRP1_jacobig_sym_varpar: pkin has to be [10x1] (double)');
-%% Function calls
-if link_index == 0
-	Jg=S6RPRRRP1_jacobig_0_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 1
-	Jg=S6RPRRRP1_jacobig_1_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 2
-	Jg=S6RPRRRP1_jacobig_2_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 3
-	Jg=S6RPRRRP1_jacobig_3_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 4
-	Jg=S6RPRRRP1_jacobig_4_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 5
-	Jg=S6RPRRRP1_jacobig_5_sym_varpar(qJ, r_i_i_C, pkin);
-elseif link_index == 6
-	Jg=S6RPRRRP1_jacobig_6_sym_varpar(qJ, r_i_i_C, pkin);
-else
-	Jg=NaN(6,6);
+
+% Function calls
+Ja_transl = S6RPRRRP1_jacobia_transl_sym_varpar(qJ, link_index, r_i_i_C, ...
+  pkin);
+Jg_rot = S6RPRRRP1_jacobig_rot_sym_varpar(qJ, link_index, ...
+  pkin);
+
+Jg = [Ja_transl; Jg_rot];
 end
