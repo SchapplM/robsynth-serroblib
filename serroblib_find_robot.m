@@ -9,6 +9,9 @@
 %   Aktivieren des Filters für die reine Betrachtung der relativen
 %   Kinematik zwischen den Gelenken. Beim Finden des Roboters ist es egal,
 %   ob die erste Achse in z-Richtung verläuft oder gedreht ist.
+% filter_var
+%   prüfe, ob neue Struktur eine Variante eines bestehenden Hauptmodells
+%   ist
 % 
 % Rückgabe:
 % found
@@ -17,10 +20,10 @@
 %   1: Nummer des Roboters in der Liste aller Roboter mit dieser
 %      Gelenkanzahl
 %   2: Nummer des Roboters in der Liste aller Roboter dieser Gelenkreihenfolge
-%      (falls gefunden). Nummer des letzten Roboters, falls nicht gefunden.
+%      (falls gefunden). Nummer des letzten freien Roboters, falls nicht gefunden.
 %      Die Liste beinhaltet Hauptmodelle und Varianten
 %   3: Nummer des gefundenen Roboters in allen Hauptmodellen. Falls nicht
-%      gefunden: Anzahl der Hauptmodelle dieser Gelenkreihenfolge
+%      gefunden: Erste freie Nummer.
 %   4: Nummer des gefundenen Roboters in den Varianten des Hauptmodells. Falls
 %      nicht gefunden: Anzahl der Varianten dieses Hauptmodells
 % num [2x1] (num_all, num_gen)
@@ -96,6 +99,8 @@ end
 num_all = 0;
 num_gen = 0;
 num_var = 0;
+firstfree_gen = 0;
+idx_gen_last = 0;
 for i = 1:size(l.BitArrays_Ndof, 1) % Alle Roboterstrukturen aus Datenbank durchgehen
   % Zähle, wie viele Roboter dieser Gelenkreihenfolge existieren
   % (das erste Bit kennzeichnet den Gelenktyp)
@@ -106,6 +111,11 @@ for i = 1:size(l.BitArrays_Ndof, 1) % Alle Roboterstrukturen aus Datenbank durch
     if ~isempty(tokens_mdl)
       num_gen = num_gen + 1;
       index_var = 0; % Neue Hauptstruktur führt zum Zurücksetzen des Zählers für Varianten
+      % Prüfe, ob die fortlaufende Nummerierung stimmt
+      if firstfree_gen == 0 && str2double(tokens_mdl{1}{3}) ~= idx_gen_last + 1
+        firstfree_gen = idx_gen_last + 1;
+      end
+      idx_gen_last = str2double(tokens_mdl{1}{3}); % Nummer des vorherigen Modells für nächsten Durchlauf
     end
     % Zähle, wie viele Varianten dieses Haupt-Modells es waren
     % Annahme: Hauptmodelle und Varianten stehen alle untereinander
@@ -121,14 +131,22 @@ for i = 1:size(l.BitArrays_Ndof, 1) % Alle Roboterstrukturen aus Datenbank durch
   if(all( bitand(BA,BAJ_Iso_Filter) == bitand(l.BitArrays_Ndof(i,:),BAJ_Iso_Filter) ))
     % Eintrag ist die gesuchte Nummer (bezogen auf die Roboter derselben
     % Gelenkreihenfolge)
-    index_type = num_all; %Index in den Robotern mit derselben Gelenkreihenfolge
+    index_type = num_all; % Index in den Robotern mit derselben Gelenkreihenfolge
     index_gen = num_gen; % Index in den Hauptmodellen mit derselben Gelenkreihenfolge
     index_all = i; % Index in allen Robotern mit derselben Anzahl Gelenk-FG
     found = true;
     break
   end
 end
-
+if ~found
+  if firstfree_gen == 0
+    % Es wurde keine Lücke zum Eintragen gefunden. Die nächste freie Nummer
+    % wird ans Ende angehängt
+    firstfree_gen = num_gen + 1;
+  end
+  % Rückgabe des letzten freien Index dieser Gelenkreihenfolge
+  index_gen = firstfree_gen;
+end
 %% Variante suchen
 
 if ~found && filter_var

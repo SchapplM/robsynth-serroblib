@@ -16,7 +16,7 @@
 %   theta  Rotation z (Gelenkkoordinate)
 %   d      Translation z (Gelenkkoordinate)
 %   offset Gelenk-Offset
-% EEdof0 [1x9] oder [1x6]
+% EEdof0 [1x9] oder [1x6] Char
 %   Vektor mit beweglichen EE-FG des Roboters (Geschw. und Winkelgeschw. im
 %   Basis-KS. Entspricht Vorgabe in der Struktursynthese von Ramirez)
 %   Zusätzlich Euler-Winkel Basis-Endeffektor (letzte 3 Komponenten)
@@ -40,7 +40,9 @@ function [Name_DB, new] = serroblib_add_robot(MDH_struct, EEdof0)
 if nargin == 1
   EEdof0 = []; % 6 Leerzeichen
 end
-
+if ~isa(EEdof0, 'char')
+  error('serroblib_add_robot: Eingabe EEdof0 muss char sein.');
+end
 if length(EEdof0) == 6
   % Altes Format: Ignoriere die Erweiterung um die Euler-Winkel des EE
   % Setze gewünschte Euler-Winkel auf Winkelgeschwindigkeit (passt bei 1R
@@ -61,6 +63,7 @@ for i = 1:N
   end
 end
 
+exp_mdl = '^S(\d)([RP]+)(\d+)$'; % Format "S3RRR1" für Hauptmodelle
 %% Modell in csv-Tabelle eintragen
 % Die Tabelle enthält alle möglichen MDH-Parameter für diesen Robotertyp
 % (z.B. alle Varianten für RRR)
@@ -175,7 +178,7 @@ end
 % Spalten für EE-Freiheitsgrade
 if ~isempty(EEdof0)
   for i = 1:9
-    c = c+1; csvline{c} = sprintf('%d', EEdof0(i)); %#ok<AGROW>
+    c = c+1; csvline{c} = sprintf('%s', EEdof0(i)); %#ok<AGROW>
   end
 else
   for i = 1:9
@@ -187,7 +190,7 @@ end
 c = c+1; csvline{c} = '?';
 %% Zeile für den Roboter finden
 % Suche Roboter in den bestehenden csv-Tabellen
-[found, idx_direct, num_direct, Name] = serroblib_find_robot(csvline);
+[found, idx_direct, ~, Name] = serroblib_find_robot(csvline);
 
 % Prüfe, ob der Roboter identisch in der Datenbank ist (ohne Betrachtung
 % von Basis-Isomorphismen)
@@ -200,10 +203,11 @@ if ~found
     % Hauptmodell des Roboters existiert, aber noch nicht diese Variante.
     % Erhöhe nur die Variantennummer um eins
     index = idx_var(3);
-    index_var = idx_var(4) + 1;
+    index_var = idx_var(4) + 1; % TODO: Hier können Lücken in der Varianten-Nummerierung sein
   else
-    % Roboter existiert noch nicht. Erhöhe die letzte Nummer um eins
-    index = num_direct(2)+1;
+    % Roboter existiert noch nicht. Nehme die erste freie Nummer. Falls die
+    % Nummerierung fortlaufend ist, ist das die erste freie Nummer
+    index = idx_direct(3);
   end
 else
   index = idx_direct(3);
@@ -239,7 +243,7 @@ else
 end
 
 %% Zeile eines neuen Hauptmodells in Datei hinzufügen
-% Zeile ans Ende anhängen
+% Zeile an die richtige Stelle eintragen
 if new && ~new_var
   csvline{1} = mdlname_gen;
   % Cell-Array in csv-Zeile umwandeln (da das Schreiben von Strings nur mit
@@ -250,9 +254,32 @@ if new && ~new_var
     line_robot = sprintf('%s;%s', line_robot, csvline{i});
   end
 
-  fid = fopen(filepath_csv, 'a');
-  fwrite(fid, [line_robot, newline]);
+  filepath_csv_copy = [filepath_csv, '.copy']; % Kopie der Tabelle zur Bearbeitung
+  fid = fopen(filepath_csv);
+  fidc = fopen(filepath_csv_copy, 'w');
+  tline = fgetl(fid);
+  done = false;
+  while ischar(tline)
+    % Spaltenweise als Cell-Array
+    csvline_file = strsplit(tline, ';', 'CollapseDelimiters', false);
+    [tokens_mdl, ~] = regexp(csvline_file{1},exp_mdl,'tokens','match');
+    if ~isempty(tokens_mdl)
+      number_next = str2double(tokens_mdl{1}{3});
+      if ~done && number_next > index
+        % Schreibe die Zeile mit dem neuen Roboter
+        fwrite(fidc, [line_robot, newline()]);
+        done = true;
+      end
+    end
+    fwrite(fidc, [tline, newline()]); % Zeile der Ursprungs-Tabelle kopieren
+    tline = fgetl(fid); % nächste Zeile
+  end
   fclose(fid);
+  fclose(fidc);
+  % Modifizierte Tabelle zurückkopieren
+  copyfile(filepath_csv_copy, filepath_csv);
+  % Kopie-Tabelle löschen
+  delete(filepath_csv_copy);
 end
 
 %% Zeile einer neuen Variante in Datei hinzufügen
