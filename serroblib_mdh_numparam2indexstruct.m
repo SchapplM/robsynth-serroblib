@@ -24,6 +24,16 @@ MDH_struct_idx = struct(          'type', 255*uint8(ones(1,N)), ...
   'alpha',  255*uint8(ones(1,N)), 'a', 255*uint8(ones(1,N)), ...
   'theta',  255*uint8(ones(1,N)), 'd', 255*uint8(ones(1,N)), ...
   'offset', 255*uint8(ones(1,N)));
+% Nicht belegte Eingabefelder ergänzen, falls diese selten benötigt werden
+if ~isfield(MDH_struct_num, 'beta')
+  MDH_struct_num.beta = zeros(1,N);
+end
+if ~isfield(MDH_struct_num, 'b')
+  MDH_struct_num.b = zeros(1,N);
+end
+if ~isfield(MDH_struct_num, 'offset')
+  MDH_struct_num.offset = zeros(1,N);
+end
 
 % Die Indizes verweisen auf die Reihenfolge möglicher Zustände:
 values_angles = [0, pi/2, pi, -pi/2, NaN];
