@@ -30,6 +30,10 @@
 
 function serroblib_generate_code(Names, force, nocopy, mode)
 
+if ispc()
+  error('Die Code-Generierung funktioniert aktuell nur unter Linux, nicht unter Windows');
+end
+  
 if nargin < 2
   force = false;
 end

@@ -4,3 +4,6 @@
 % Pfad auf dem Rechner angepasst werden.
 function maplerepo_path = maplerepo_path()
 maplerepo_path = '/home/schappler/IMES/REPO/maple';
+if ~exist(maplerepo_path, 'file')
+  error('Der Pfad %s ist ungültig.');
+end
