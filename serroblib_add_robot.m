@@ -274,6 +274,11 @@ if new && ~new_var
     fwrite(fidc, [tline, newline()]); % Zeile der Ursprungs-Tabelle kopieren
     tline = fgetl(fid); % nächste Zeile
   end
+  if ~done
+    % Die neue Zeile wurde noch nicht eingetragen, weil es die erste
+    % Datenzeile der Tabelle wird
+    fwrite(fidc, [line_robot, newline()]);
+  end
   fclose(fid);
   fclose(fidc);
   % Modifizierte Tabelle zurückkopieren
