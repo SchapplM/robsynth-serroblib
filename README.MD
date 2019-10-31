@@ -64,7 +64,7 @@ Datenbank modifizieren: Wenn nachträglich das Format der Datenbank geändert wi
 
 Alle Informationen der Roboterbibliothek liegen in csv-Dateien (Trennzeichen: Semikolon) vor. Dadurch ist eine automatische Verarbeitung und eine Versionsverwaltung möglich.
 
-#### Liste der Robotermodelle für eine Gelenkfolge
+#### Liste der Robotermodelle für eine Gelenkfolge (SxRPR..R.csv)
 
 Die Datei `mdl_xdof/SxRRRRRR.csv` enthält die MDH-Parameter aller Robotermodelle und Modellvarianten mit der entsprechenden Gelenkfolge. Dabei ist
 
@@ -74,7 +74,24 @@ Die Datei `mdl_xdof/SxRRRRRR.csv` enthält die MDH-Parameter aller Robotermodell
 
 Die Tabelle enthält die MDH-Parameter in symbolischer Form und zeigt die kinematische Struktur anhand von 0-Einträgen und 90°-Einträgen in den Parametern. Modellvarianten sind durch ein angehängtes V an den Modellnamen gekennzeichnet. Stehen aber in der Tabelle immer direkt unter den allgemeinen Modellen.
 
-#### Liste der Roboterparameter für ein Robotermodell
+Die Tabellen werden automatisch von `serroblib_add_robot.m` erstellt. Es gibt folgende Spalten:
+
+* Name
+* Gelenk 1: Spalte über mehrere Unterspalten mit den Kinematik-Parametern der Gelenke (MDH)
+* ...
+* Gelenk N: Für jedes Gelenk gibt es eine große Spalte mit Unterspalten
+* EE-Transformation (phi_N_E): Konstante Rotation (in XYZ-Euler-Winkeln) vom letzten Roboter-Körper-KS nach MDH-Notation zum Endeffektor. Diese Rotation wird so eingestellt, dass
+  * EE- und Basis-KS übereinstimmen (im Fall von 2T1R und 3T1R)
+  * die z-Achse des EE nur indirekt beeinflusst wird (im Fall 3T2R)
+* EE-FG (Basis-KS): Freiheitsgrade des Endeffektors, angegeben als 
+  * Geschwindigkeit (erste drei Spalten) und 
+  * Winkelgeschwindigkeit (Spalte 4 bis 6) im Basis-KS und als 
+  * Euler-Winkel-Zeitableitung (Spalte 7 bis 9) der XYZ-Euler-Winkel der Rotationsmatrix vom Endeffektor- ins Basis-KS.
+
+  Die ersten sechs Einträge entsprechen der üblichen Twist-Notation in der Schraubentheorie und in [Ramirez2018].
+* Weitere Eigenschaften: Enthält für die Berechnungen nützliche Eigenschaften, wie die Nummer des letzten, die EE-Position beeinflussenden Gelenks.
+
+#### Liste der Roboterparameter für ein Robotermodell (models.csv)
 
 Die Datei `mdl_xdof/SxRRRRRRyyyyy/models.csv` enthält mögliche Roboterparameter für das entsprechende Robotermodell. Dabei ist
 
@@ -127,4 +144,5 @@ Weitere Beispiele befinden sich im Robotik-Repo für die Roboterklasse `SerRob` 
 
 ## Quellen
 
+* [Ramirez2018] Ramirez, D.: Automatic Generation of Task-specific Mechanisms using Combined Structural and Dimensional Synthesis, Dissertation, Uni Hannover (2018)
 * [KhalilKle1986] Khalil, W. and Kleinfinger, J.-F.: "A new geometric notation for open and closed-loop robots" (1986) <a name="KhalilKle1986"></a> 
