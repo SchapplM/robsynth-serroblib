@@ -1,5 +1,5 @@
 Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;Gelenk 3;;;;;;;;Gelenk 4;;;;;;;;Gelenk 5;;;;;;;;EE-Transformation (phi_N_E);;;EE-FG (Basis-KS);;;;;;;;;Weitere Eigenschaften
 ;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;phix_NE;phiy_NE;phiz_NE;vx0;vy0;vz0;wx0;wy0;wz0;phix0;phiy0;phiz0;Positionsbeeinflussendes Gelenk
-S5PRRPP1;P;0;0;0;0;theta1;q1;0;R;0;0;0;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;P;0;0;0;a4;theta4;q4;0;P;0;0;pi/2;a5;0;q5;0;?;?;?;1;1;1;1;1;0;1;1;0;?
-S5PRRPP2;P;0;0;0;0;theta1;q1;0;R;0;0;pi/2;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;P;0;0;0;a4;theta4;q4;0;P;0;0;pi/2;a5;0;q5;0;?;?;?;1;1;1;1;1;0;1;1;0;?
-S5PRRPP3;P;0;0;0;0;theta1;q1;0;R;0;0;pi/2;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;P;0;0;pi/2;a4;theta4;q4;0;P;0;0;pi/2;a5;0;q5;0;?;?;?;1;1;1;1;1;0;1;1;0;?
+S5PRRPP1;P;0;0;0;0;theta1;q1;0;R;0;0;0;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;P;0;0;0;a4;theta4;q4;0;P;0;0;pi/2;a5;0;q5;0;0;0;0;1;1;1;1;1;1;1;1;0;5
+S5PRRPP2;P;0;0;0;0;theta1;q1;0;R;0;0;pi/2;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;P;0;0;0;a4;theta4;q4;0;P;0;0;pi/2;a5;0;q5;0;0;0;0;1;1;1;1;1;1;1;1;0;5
+S5PRRPP3;P;0;0;0;0;theta1;q1;0;R;0;0;pi/2;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;P;0;0;pi/2;a4;theta4;q4;0;P;0;0;pi/2;a5;0;q5;0;0;0;0;1;1;1;1;1;1;1;1;0;5
