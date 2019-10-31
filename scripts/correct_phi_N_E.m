@@ -46,23 +46,25 @@ for N = 1:7
         disp_array(RS.phi_N_E', '%1.3f'));
       continue
     end
+    
+    % Kinematik-Parameter zufällig wählen. Muss für Rotation egal sein.
+    RS.update_mdh( rand(length(RS.pkin),1) );
+    q0 = rand(RS.NQJ,1);
     %% Neue Transformation berechnen
     phi_N_E_neu = NaN(3,1);
     % Prüfe mit direkter Kinematik, ob die EE-FG erfüllt werden
-    % Überprüfung: dec2bin(l.BitArrays_EEdof0(j))
-    if all(bitget(l.BitArrays_EEdof0(j),4:6) == [1 1 1])
+    % Überprüfung: dec2bin(l.BitArrays_EEdof0(j),9)
+    if all(bitget(l.BitArrays_EEdof0(j),[4:6 7:9]) == [[1 1 1] [1 1 1]])
       % 3 Rotations-FG: Die Orientierung des End-Effektors ist kinematisch
       % egal. Setze daher zu Null
       phi_N_E_neu = zeros(3,1);
       fprintf('Setze Transformation N-E auf Null, da 3 Rotations-FG\n');
-    elseif all(bitget(l.BitArrays_EEdof0(j),4:6) == [0 0 1])
+    elseif all(bitget(l.BitArrays_EEdof0(j),[4:6 7:9]) == [[0 0 1] [0 0 1]])
       % Nur ein Rotations-FG (als Standard definiert um z-Achse).
       % Hier tritt das Problem mit phi_N_E besonders auf.
       
-      % Kinematik-Parameter zufällig wählen. Muss für Rotation egal sein.
-      RS.update_mdh( rand(length(RS.pkin),1) );
+
       % Direkte Kinematik bestimmen (ohne zusätzliche Rotation N-E)
-      q0 = rand(RS.NQJ,1);
       T_0_N = RS.fkineEE(q0);
       R_0_N = T_0_N(1:3,1:3);
       % x-y-Teil dieser Rotation entnehmen. Siehe Aufzeichnungen vom 7.2.19
@@ -85,9 +87,28 @@ for N = 1:7
       % Zwangsbedingungen ausgewählt werden
       % (Betrifft sowieso nur PPP-Kette)
       phi_N_E_neu = zeros(3,1);
+    elseif all(bitget(l.BitArrays_EEdof0(j),7:9) == [1 1 0])
+      % Nur zwei Rotations-FG in Euler-Winkeln (es gibt also nur zwei Paare
+      % Von Drehgelenken und damit Rotations-Mobilität 2).
+      % Probiere verschiedene Winkel aus und prüfe, ob voller Rang besteht
+      Phi_N_E_Komb = [[0;0;0], [0;0;pi/2], [pi/2;0;0]];     
+      for pp = 1:size(Phi_N_E_Komb,2)
+        RS.update_EE([], Phi_N_E_Komb(:,pp));
+        Ja = RS.jacobia(q0);
+        if rank(Ja(1:5,:)) == 5
+          % Voller Rang auf gewünschten Freiheitsgraden. Behalte diese
+          % Einstellung.
+          phi_N_E_neu = Phi_N_E_Komb(:,pp);
+          break;
+        end
+      end
+      if any(isnan(phi_N_E_neu))
+        warning('Es konnte keine sinnvolle EE-Trafo für gefunden werden. Überspringe');
+        continue
+      end  
     else
       warning('EE-Kombination [%s] nicht in Tabelle hinterlegt. Überspringe.', ...
-        disp_array(bitget(l.BitArrays_EEdof0(j),4:6), '%d'));
+        disp_array(bitget(l.BitArrays_EEdof0(j),4:9), '%d'));
       continue
     end
     %% Durchsuche die csv-Tabelle und ändere die Werte
