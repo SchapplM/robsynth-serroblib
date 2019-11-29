@@ -2,9 +2,11 @@
 % Eingabe:
 % pkin_var (0x1) double
 %   Kinematikparameter (pkin) von S6RRPRRR14V3
+%   pkin_var=[]
 % Ausgabe:
 % pkin_gen (14x1) double
 %   Kinematikparameter (pkin) von S6RRPRRR14
+%   pkin_gen=[a2 a3 a4 a5 a6 alpha2 alpha3 alpha4 d1 d2 d4 d5 d6 theta3]
 %
 % Siehe auch: S6RRPRRR14_structural_kinematic_parameters.m
 function pkin_gen = S6RRPRRR14V3_pkin_var2gen(pkin_var)

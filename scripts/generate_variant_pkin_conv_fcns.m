@@ -18,7 +18,7 @@ clc
 
 %% Initialisierung
 roblibpath=fileparts(which('serroblib_path_init.m'));
-only_add_new = true;
+only_add_new = false;
 
 %% Alle Modelle durchgehen
 for N = 1:7
@@ -63,9 +63,11 @@ for N = 1:7
       fprintf(fid, '%% Eingabe:\n');
       fprintf(fid, '%% pkin_gen (%dx1) double\n', length(pkinGV));
       fprintf(fid, '%%   Kinematikparameter (pkin) von %s\n', Name_GenMdl);
+      fprintf(fid, '%%   pkin_gen=[%s]\n', strjoin(pkin_names_gen));
       fprintf(fid, '%% Ausgabe:\n');
       fprintf(fid, '%% pkin_var (%dx1) double\n', length(I_pkinV));
       fprintf(fid, '%%   Kinematikparameter (pkin) von %s\n', Name);
+      fprintf(fid, '%%   pkin_var=[%s]\n', strjoin(pkin_names_gen(I_pkinV)));
       fprintf(fid, '%% I_gv (%dx1)\n', length(I_pkinV));
       fprintf(fid, '%%   Vektor mit Indizes zur Selektion von Kinematikparametern\n');
       fprintf(fid, 'function [pkin_var, I_gv] = %s_pkin_gen2var(pkin_gen)\n', Name);
@@ -86,9 +88,11 @@ for N = 1:7
       fprintf(fid, '%% Eingabe:\n');
       fprintf(fid, '%% pkin_var (%dx1) double\n', length(I_pkinV));
       fprintf(fid, '%%   Kinematikparameter (pkin) von %s\n', Name);
+      fprintf(fid, '%%   pkin_var=[%s]\n', strjoin(pkin_names_gen(I_pkinV)));
       fprintf(fid, '%% Ausgabe:\n');
       fprintf(fid, '%% pkin_gen (%dx1) double\n', length(pkinGV));
       fprintf(fid, '%%   Kinematikparameter (pkin) von %s\n', Name_GenMdl);
+      fprintf(fid, '%%   pkin_gen=[%s]\n', strjoin(pkin_names_gen));
       fprintf(fid, '%%\n');
       fprintf(fid, '%% Siehe auch: %s_structural_kinematic_parameters.m\n', Name_GenMdl);
       fprintf(fid, 'function pkin_gen = %s_pkin_var2gen(pkin_var)\n', Name);
