@@ -2,8 +2,23 @@
 % aus https://phabricator.imes.uni-hannover.de/source/robot_dynamics-hybriddyn/
 % Diese Toolbox muss heruntergeladen werden und der Pfad hier an den tatsächlichen
 % Pfad auf dem Rechner angepasst werden.
-function maplerepo_path = maplerepo_path()
-maplerepo_path = '/home/schappler/IMES/REPO/maple';
+% Das ".template" muss aus dem Dateinamen entfernt werden und das der richtige
+% Pfad und Code für das Betriebssystem ausgewählt werden.
+% 
+% Ausgabe:
+% maplerepo_path
+%   Pfad des HybrDyn-Repos im Dateisystem des aktuellen Betriebssystems
+% maplerepo_path_bash
+%   Pfad in Git-Bash (nur unter Windows)
+function [maplerepo_path, maplerepo_path_bash] = maplerepo_path()
+% Linux:
+% maplerepo_path = '/home/schappler/IMES/REPO/maple';
+% maplerepo_path_bash = maplerepo_path;
+
+% Windows:
+% maplerepo_path = 'Z:\REPO_WIN\maple';
+% maplerepo_path_bash = '/z/REPO_WIN/maple'; % Git Bash
+
 if ~exist(maplerepo_path, 'file')
   error('Der Pfad %s ist ungültig.');
 end
