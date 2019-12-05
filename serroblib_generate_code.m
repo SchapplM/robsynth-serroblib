@@ -76,6 +76,7 @@ for i = 1:length(Names)
   end
   % Verzeichnisse für die zu erzeugenden Matlab-Funktionen
   outputdir_tb = fullfile(mrp, 'codeexport', n, 'matlabfcn'); % Verzeichnis in der Maple-Toolbox
+  lockfile = fullfile(mrp, 'codeexport', n, 'codegen.lock');
   outputdir_local = fileparts(mapleinputfile); % Verzeichnis in der Bibliothek
   
   % Prüfe, ob Code schon einmal generiert wurde 
@@ -105,7 +106,7 @@ for i = 1:length(Names)
   % Code-Erstellung starten
   if mode == 1 || mode == 3
     fprintf('Starte Code-Generierung %d/%d für %s\n', i, length(Names), n);
-    system_gen( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel', mrp) ); %  > /dev/null
+    system_gen( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel', mrp), lockfile); %  > /dev/null
   elseif mode == 2
     warning('Achtung: Mit der gesonderten Behandlung von Vorlagen-Funktionen ist dieser Modus nicht mehr sinnvoll');
     fprintf('Generiere Matlab-Funktionen aus Vorlagen (%d/%d) für %s\n', i, length(Names), n);
@@ -161,7 +162,7 @@ for i = 1:length(Names)
 end
 end
 
-function system_gen(cmd)
+function system_gen(cmd, lockfile)
   % Betriebssystem-unabhängiger Aufruf von Befehlen in der Git Bash
   % Ermöglicht den Aufruf der Dynamik-Berechnungen aus Windows und Linux
   % Vorher: Wechseln in Verzeichnis aus Matlab heraus
@@ -169,10 +170,20 @@ function system_gen(cmd)
   % Eingabe:
   % cmd:
   %  Befehl, der in der Git Bash ausgeführt werden soll.
+  % lockfile:
+  %  Pfad zur Sperrdatei, die existiert, solange noch Code generiert wird.
   if isunix() || ismac()
     system(cmd)
   elseif ispc()
     system(sprintf('start "" "%%PROGRAMFILES%%\\Git\\bin\\sh.exe" --login  -c "%s"', cmd));
+    if nargin == 2
+      while true
+        pause(5); % Warte auf den Start der Code-Generierung
+        if ~exist(lockfile, 'file')
+          break; % Die Sperr-Datei existiert nicht mehr. Wahrscheinlich fertig.
+        end
+      end
+    end
   else
     error('System nicht erkannt');
   end
