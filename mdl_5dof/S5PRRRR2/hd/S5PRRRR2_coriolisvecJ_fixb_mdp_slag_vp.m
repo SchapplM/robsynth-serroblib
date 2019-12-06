@@ -19,8 +19,8 @@
 %   joint torques required to compensate Coriolis and centrifugal load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:30
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:05
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,9 +40,9 @@ assert(isreal(MDP) && all(size(MDP) == [17 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:30:19
-% EndTime: 2019-07-18 13:30:21
-% DurationCPUTime: 0.45s
+% StartTime: 2019-12-05 17:04:52
+% EndTime: 2019-12-05 17:04:53
+% DurationCPUTime: 0.41s
 % Computational Cost: add. (337->89), mult. (735->133), div. (0->0), fcn. (364->6), ass. (0->58)
 t104 = sin(qJ(5));
 t107 = cos(qJ(5));
@@ -102,4 +102,4 @@ t99 = t100 ^ 2;
 t97 = t105 * pkin(3) + pkin(6);
 t89 = t117 * t149;
 t1 = [-t153 * t110; (-t127 - t148) * MDP(9) + (-t79 * t100 + t116) * MDP(10) + ((-t120 - t78) * MDP(16) + MDP(17) * t119) * t107 + (MDP(16) * t119 + t120 * MDP(17) - t133) * t104 + (-qJD(2) * t123 + ((-t106 * MDP(6) - t109 * MDP(7)) * t101 + ((-MDP(6) - t141) * t106 + t114 * t109) * qJD(2)) * qJD(3)) * pkin(2) + t112; -MDP(9) * t127 + t116 * MDP(10) - t104 * t133 + (-t78 * t107 - t97 * t142 + t82) * MDP(16) + (t110 * t104 * t97 + t151) * MDP(17) + (t89 * MDP(10) + t113 * t118 * t149 + (-t108 * t154 + (-t105 * t113 - t134) * qJD(4)) * pkin(3)) * t100 + ((t101 * MDP(7) + qJD(3) * t114) * t109 + ((-qJD(3) + t101) * MDP(6) + t132 * t141) * t106) * t149 + t131 + (-pkin(3) * t137 + t89) * t154; (-t127 + t146) * MDP(9) + (t116 - t147) * MDP(10) + ((-t121 - t78) * MDP(16) - MDP(17) * t145) * t107 + (-MDP(16) * t145 + t121 * MDP(17) - t133) * t104 + (-t123 + (-t118 * MDP(9) - t109 * t134) * qJD(3)) * t149 + t112; t99 * t152 + t125 * t135 + (t125 * MDP(16) - t99 * t139) * t104;];
-tauc  = t1;
+tauc = t1;

@@ -30,8 +30,8 @@
 %   vector of cutting torques (contains inertial, gravitational coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 17:19
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 18:57
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,9 +60,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_NewtonEuler_linkframe_m_i_i_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 17:17:18
-% EndTime: 2019-07-18 17:17:33
-% DurationCPUTime: 6.45s
+% StartTime: 2019-12-05 18:55:15
+% EndTime: 2019-12-05 18:55:29
+% DurationCPUTime: 6.86s
 % Computational Cost: add. (86951->287), mult. (176266->367), div. (0->0), fcn. (132333->10), ass. (0->111)
 t242 = sin(qJ(1));
 t247 = cos(qJ(1));
@@ -175,4 +175,4 @@ t115 = m(2) * t229 - qJDD(1) * mrSges(2,2) - t248 * mrSges(2,1) + t246 * (m(3) *
 t113 = mrSges(2,1) * g(3) + mrSges(2,3) * t229 + t248 * Ifges(2,5) + Ifges(2,6) * qJDD(1) - t263;
 t108 = -mrSges(2,2) * g(3) - mrSges(2,3) * t228 + Ifges(2,5) * qJDD(1) - t248 * Ifges(2,6) - t241 * t110 + t246 * t112;
 t1 = [-mrSges(1,2) * g(3) + mrSges(1,3) * g(2) + t247 * t108 - t242 * t113 - pkin(4) * (t242 * t115 + t247 * t118), t108, t112, t114, t127, t135; mrSges(1,1) * g(3) - mrSges(1,3) * g(1) + t242 * t108 + t247 * t113 + pkin(4) * (t247 * t115 - t242 * t118), t113, t110, t116, t125, t134; -mrSges(1,1) * g(2) + mrSges(1,2) * g(1) + t256, t256, t263, -t253, t249, -t254;];
-m_new  = t1;
+m_new = t1;

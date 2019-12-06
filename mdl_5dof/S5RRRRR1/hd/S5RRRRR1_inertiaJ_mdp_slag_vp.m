@@ -17,8 +17,8 @@
 %   inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:38
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2019-12-05 18:52
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(MDP) && all(size(MDP) == [31 1]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 18:37:48
-% EndTime: 2019-03-08 18:37:48
-% DurationCPUTime: 0.27s
+% StartTime: 2019-12-05 18:51:02
+% EndTime: 2019-12-05 18:51:03
+% DurationCPUTime: 0.29s
 % Computational Cost: add. (389->92), mult. (747->120), div. (0->0), fcn. (838->8), ass. (0->51)
 t89 = sin(qJ(5));
 t93 = cos(qJ(5));
@@ -93,5 +93,5 @@ t55 = t63 * pkin(4) - t64 * pkin(6) + t66;
 t1 = [MDP(1) + t92 ^ 2 * MDP(4) + 0.2e1 * t92 * t96 * MDP(5) - 0.2e1 * t81 * t105 * MDP(16) + 0.2e1 * (-t92 * MDP(10) + t96 * MDP(9)) * pkin(1) + (MDP(11) * t74 + 0.2e1 * t105 * MDP(12) + 0.2e1 * t81 * MDP(17)) * t74 + (MDP(23) * t125 + t127 * t55 + t116) * t63 + (MDP(24) * t125 + 0.2e1 * (-MDP(19) + t103) * t63 + (t88 * MDP(25) + MDP(18) - 0.2e1 * t111) * t64) * t64; -t92 * MDP(6) - t96 * MDP(7) + t99 + t126 * (-t63 * t68 + t64 * t67); MDP(8) - t67 * t127 + 0.2e1 * (-t91 * MDP(17) + t112) * pkin(2) + 0.2e1 * t115 + 0.2e1 * t114 + t109; t99 + t126 * (-t63 * t78 + t64 * t79); (t75 + t122) * MDP(23) + (t76 + t65) * MDP(31) + (-t67 - t79) * t118 + (-pkin(3) - t80) * t113 + (t112 + (-MDP(23) * t90 - MDP(24) * t94 - MDP(17)) * t91) * pkin(2) + t109; -t127 * t79 + 0.2e1 * t100 + t109; t104 + t126 * (-pkin(4) * t64 - pkin(6) * t63); t115 + t114 + (-t67 * t93 + t86) * MDP(30) + (t65 - t123) * MDP(31) + t110; (-t79 * t93 + t86) * MDP(30) + (t76 - t123) * MDP(31) + t100 + t110; pkin(4) * t127 + t110; t102 * t55 + t103 * t64 + t116; -t126 * t68 + t120; -t126 * t78 + t120; -pkin(6) * t126 + t120; MDP(29);];
 %% Postprocessing: Reshape Output
 % From vec2symmat_5_matlab.m
-res = [t1(1) t1(2) t1(4) t1(7) t1(11); t1(2) t1(3) t1(5) t1(8) t1(12); t1(4) t1(5) t1(6) t1(9) t1(13); t1(7) t1(8) t1(9) t1(10) t1(14); t1(11) t1(12) t1(13) t1(14) t1(15);];
-Mq  = res;
+res = [t1(1), t1(2), t1(4), t1(7), t1(11); t1(2), t1(3), t1(5), t1(8), t1(12); t1(4), t1(5), t1(6), t1(9), t1(13); t1(7), t1(8), t1(9), t1(10), t1(14); t1(11), t1(12), t1(13), t1(14), t1(15);];
+Mq = res;

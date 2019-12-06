@@ -26,8 +26,8 @@
 %   time derivative of inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:30
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:05
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_time_derivative_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:30:12
-% EndTime: 2019-07-18 13:30:13
-% DurationCPUTime: 0.29s
+% StartTime: 2019-12-05 17:04:43
+% EndTime: 2019-12-05 17:04:45
+% DurationCPUTime: 0.31s
 % Computational Cost: add. (288->69), mult. (829->110), div. (0->0), fcn. (474->6), ass. (0->53)
 t31 = sin(qJ(4));
 t65 = t31 * pkin(3);
@@ -112,4 +112,4 @@ t11 = [0; 0; -0.2e1 * t5 * mrSges(5,2) + 0.2e1 * t1 + 0.2e1 * t2 + 0.2e1 * t3 - 
 %% Postprocessing: Reshape Output
 % From vec2symmat_5_matlab.m
 res = [t11(1), t11(2), t11(4), t11(7), t11(11); t11(2), t11(3), t11(5), t11(8), t11(12); t11(4), t11(5), t11(6), t11(9), t11(13); t11(7), t11(8), t11(9), t11(10), t11(14); t11(11), t11(12), t11(13), t11(14), t11(15);];
-Mq  = res;
+Mq = res;

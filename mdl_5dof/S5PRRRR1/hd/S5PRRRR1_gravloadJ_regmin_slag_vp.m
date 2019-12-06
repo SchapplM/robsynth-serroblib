@@ -16,8 +16,8 @@
 %   minimal parameter regressor of gravitation joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:29
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:03
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,4 +60,4 @@ t4 = t19 * t10 - t25;
 t2 = t3 * t15;
 t1 = t3 * t12;
 t24 = [-g(3), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, t18, t19, 0, 0, 0, 0, 0, t18 * t16, -t18 * t13, 0, 0, 0, 0, 0, t18 * t10, -t18 * t9, 0, 0, 0, 0, 0, -g(1) * t6 - g(3) * t8, -g(1) * t5 - g(3) * t7; 0, 0, 0, 0, 0, 0, 0, 0, 0, g(2) * t16 + t19 * t13, -g(2) * t13 + t19 * t16, 0, 0, 0, 0, 0, t3, t4, 0, 0, 0, 0, 0, t2, -t1; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t3, t4, 0, 0, 0, 0, 0, t2, -t1; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -g(1) * t7 + g(3) * t5 - t12 * t25, g(1) * t8 - g(3) * t6 - t15 * t25;];
-taug_reg  = t24;
+taug_reg = t24;

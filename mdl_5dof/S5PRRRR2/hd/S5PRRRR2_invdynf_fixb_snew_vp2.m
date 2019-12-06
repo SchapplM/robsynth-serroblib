@@ -30,8 +30,8 @@
 %   vector of cutting forces (contains inertial, gravitational coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:30
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:05
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,9 +60,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_NewtonEuler_linkframe_f_i_i_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:30:13
-% EndTime: 2019-07-18 13:30:13
-% DurationCPUTime: 0.33s
+% StartTime: 2019-12-05 17:04:45
+% EndTime: 2019-12-05 17:04:46
+% DurationCPUTime: 0.36s
 % Computational Cost: add. (4641->72), mult. (5229->98), div. (0->0), fcn. (2728->8), ass. (0->52)
 t39 = qJDD(2) + qJDD(3);
 t31 = qJDD(4) + t39;
@@ -116,4 +116,4 @@ t57 = m(4) * t41 + t61;
 t56 = m(3) * t41 + t57;
 t52 = m(2) * t41 + t56;
 t1 = [t68 * g(1) + t60, -m(2) * g(1) + t60, t5, t7, t8, t13; t68 * g(2) + t67, -m(2) * g(2) + t67, t4, t6, t9, t12; -m(1) * g(3) + t52, t52, t56, t57, t61, t69;];
-f_new  = t1;
+f_new = t1;

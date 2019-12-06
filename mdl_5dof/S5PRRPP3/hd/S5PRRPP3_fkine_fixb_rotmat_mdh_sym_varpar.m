@@ -19,8 +19,8 @@
 %   5+1:  mdh base (link 0) -> mdh frame (5)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-10-24 10:29
-% Revision: 5d02717ba55fba3c5445be8d9f6bf09c2cd6665f (2019-10-14)
+% Datum: 2019-12-05 16:14
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
 %% Symbolic Calculation
 % From fkine_mdh_floatb_twist_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-10-24 10:29:28
-% EndTime: 2019-10-24 10:29:29
-% DurationCPUTime: 0.11s
+% StartTime: 2019-12-05 16:11:51
+% EndTime: 2019-12-05 16:11:52
+% DurationCPUTime: 0.12s
 % Computational Cost: add. (109->44), mult. (216->50), div. (0->0), fcn. (301->8), ass. (0->36)
 t29 = sin(pkin(7));
 t33 = sin(qJ(2));

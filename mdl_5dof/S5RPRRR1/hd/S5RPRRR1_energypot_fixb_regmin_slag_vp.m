@@ -16,8 +16,8 @@
 %   minimal parameter regressor of Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:26
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 18:10
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,8 +36,8 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:26:01
-% EndTime: 2019-07-18 13:26:01
+% StartTime: 2019-12-05 18:09:50
+% EndTime: 2019-12-05 18:09:50
 % DurationCPUTime: 0.06s
 % Computational Cost: add. (31->26), mult. (78->46), div. (0->0), fcn. (90->8), ass. (0->19)
 t96 = sin(qJ(3));
@@ -59,4 +59,4 @@ t94 = sin(qJ(5));
 t91 = t99 * t103 + t97 * t95;
 t90 = -t101 * t95 + t99 * t105;
 t1 = [0, -t102, t92, -t102, -t92, -t92 * qJ(2), 0, 0, 0, 0, 0, -t102 * t100 - t108, -g(3) * t100 + t102 * t96, 0, 0, 0, 0, 0, -g(1) * t91 - g(2) * t90 - g(3) * t106, -g(1) * (-t95 * t103 + t97 * t99) - g(2) * (-t101 * t99 - t95 * t105) + t95 * t108, 0, 0, 0, 0, 0, -g(1) * (t94 * t104 + t91 * t98) - g(2) * (t94 * t107 + t90 * t98) - g(3) * (-t100 * t94 + t98 * t106), -g(1) * (t98 * t104 - t91 * t94) - g(2) * (t98 * t107 - t90 * t94) - g(3) * (-t100 * t98 - t94 * t106);];
-U_reg  = t1;
+U_reg = t1;

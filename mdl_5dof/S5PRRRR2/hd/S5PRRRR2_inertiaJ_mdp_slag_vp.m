@@ -17,8 +17,8 @@
 %   inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:30
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:05
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,8 +36,8 @@ assert(isreal(MDP) && all(size(MDP) == [17 1]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:30:19
-% EndTime: 2019-07-18 13:30:19
+% StartTime: 2019-12-05 17:04:51
+% EndTime: 2019-12-05 17:04:52
 % DurationCPUTime: 0.07s
 % Computational Cost: add. (86->35), mult. (172->40), div. (0->0), fcn. (118->6), ass. (0->24)
 t34 = sin(qJ(5));
@@ -67,4 +67,4 @@ t1 = [MDP(1); 0; 0.2e1 * t51 + MDP(2) + t45 + 0.2e1 * (-t36 * MDP(7) + t52) * pk
 %% Postprocessing: Reshape Output
 % From vec2symmat_5_matlab.m
 res = [t1(1), t1(2), t1(4), t1(7), t1(11); t1(2), t1(3), t1(5), t1(8), t1(12); t1(4), t1(5), t1(6), t1(9), t1(13); t1(7), t1(8), t1(9), t1(10), t1(14); t1(11), t1(12), t1(13), t1(14), t1(15);];
-Mq  = res;
+Mq = res;

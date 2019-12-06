@@ -21,8 +21,8 @@
 %   Rotatorische Teilmatrix der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-10-24 10:21
-% Revision: 5d02717ba55fba3c5445be8d9f6bf09c2cd6665f (2019-10-14)
+% Datum: 2019-12-05 15:20
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,8 +40,8 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobig_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:21:42
-	% EndTime: 2019-10-24 10:21:42
+	% StartTime: 2019-12-05 15:20:39
+	% EndTime: 2019-12-05 15:20:39
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
@@ -50,8 +50,8 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobig_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:21:42
-	% EndTime: 2019-10-24 10:21:42
+	% StartTime: 2019-12-05 15:20:38
+	% EndTime: 2019-12-05 15:20:38
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
@@ -60,8 +60,8 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobig_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:21:42
-	% EndTime: 2019-10-24 10:21:42
+	% StartTime: 2019-12-05 15:20:39
+	% EndTime: 2019-12-05 15:20:39
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
@@ -70,8 +70,8 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobig_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:21:42
-	% EndTime: 2019-10-24 10:21:42
+	% StartTime: 2019-12-05 15:20:39
+	% EndTime: 2019-12-05 15:20:39
 	% DurationCPUTime: 0.02s
 	% Computational Cost: add. (5->5), mult. (15->13), div. (0->0), fcn. (23->8), ass. (0->11)
 	t41 = sin(pkin(5));
@@ -90,8 +90,8 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobig_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:21:42
-	% EndTime: 2019-10-24 10:21:42
+	% StartTime: 2019-12-05 15:20:39
+	% EndTime: 2019-12-05 15:20:39
 	% DurationCPUTime: 0.04s
 	% Computational Cost: add. (15->13), mult. (46->32), div. (0->0), fcn. (67->10), ass. (0->17)
 	t89 = sin(pkin(10));
@@ -116,8 +116,8 @@ elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobig_rot_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:21:43
-	% EndTime: 2019-10-24 10:21:43
+	% StartTime: 2019-12-05 15:20:39
+	% EndTime: 2019-12-05 15:20:39
 	% DurationCPUTime: 0.06s
 	% Computational Cost: add. (33->20), mult. (98->46), div. (0->0), fcn. (140->12), ass. (0->28)
 	t138 = sin(pkin(10));

@@ -15,8 +15,8 @@
 %   Transformation matrices from one joint to the next (not: from base to joints)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:29
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:03
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -33,9 +33,9 @@ assert(isreal(pkin) && all(size(pkin) == [2 1]), ...
 %% Symbolic Calculation
 % From joint_transformation_mdh_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:28:16
-% EndTime: 2019-07-18 13:28:16
-% DurationCPUTime: 0.02s
+% StartTime: 2019-12-05 17:02:46
+% EndTime: 2019-12-05 17:02:46
+% DurationCPUTime: 0.03s
 % Computational Cost: add. (4->4), mult. (0->0), div. (0->0), fcn. (16->8), ass. (0->9)
 t30 = cos(qJ(2));
 t29 = cos(qJ(3));

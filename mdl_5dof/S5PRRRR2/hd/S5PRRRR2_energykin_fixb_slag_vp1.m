@@ -26,8 +26,8 @@
 %   kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:30
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:05
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,8 +52,8 @@ assert(isreal(Icges) && all(size(Icges) == [6 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:30:10
-% EndTime: 2019-07-18 13:30:10
+% StartTime: 2019-12-05 17:04:42
+% EndTime: 2019-12-05 17:04:42
 % DurationCPUTime: 0.37s
 % Computational Cost: add. (340->57), mult. (265->106), div. (0->0), fcn. (192->8), ass. (0->42)
 t193 = qJ(2) + qJ(3);
@@ -98,4 +98,4 @@ t165 = qJD(1) + (t174 * t185 + t175 * t186) * qJD(5);
 t164 = t188 * t175 + t207 * t185 + t210;
 t163 = -t188 * t174 + t207 * t186 + t200;
 t1 = m(2) * t199 / 0.2e1 + m(3) * (t199 + (t183 ^ 2 + t184 ^ 2) * t198) / 0.2e1 + t198 * Icges(3,3) / 0.2e1 + m(4) * (t176 ^ 2 + t177 ^ 2 + t199) / 0.2e1 + t192 ^ 2 * Icges(4,3) / 0.2e1 + m(5) * (t166 ^ 2 + t167 ^ 2 + t199) / 0.2e1 + t188 ^ 2 * Icges(5,3) / 0.2e1 + m(6) * (t163 ^ 2 + t164 ^ 2 + t165 ^ 2) / 0.2e1 + qJD(5) * t185 * (t185 * t216 + (-t168 * t215 + t219 * t169) * qJD(5)) / 0.2e1 - qJD(5) * t186 * (-t186 * t216 + (t218 * t168 - t169 * t215) * qJD(5)) / 0.2e1 + t188 * ((Icges(6,2) * t196 ^ 2 + (Icges(6,1) * t194 + 0.2e1 * Icges(6,4) * t196) * t194) * t188 + (t218 + t219) * t217 * qJD(5)) / 0.2e1;
-T  = t1;
+T = t1;

@@ -22,8 +22,8 @@
 %   Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 17:22
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 18:26
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -46,8 +46,8 @@ assert(isreal(rSges) && all(size(rSges) == [6,3]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 17:20:38
-% EndTime: 2019-07-18 17:20:38
+% StartTime: 2019-12-05 18:23:46
+% EndTime: 2019-12-05 18:23:47
 % DurationCPUTime: 0.26s
 % Computational Cost: add. (90->56), mult. (115->79), div. (0->0), fcn. (95->8), ass. (0->26)
 t62 = rSges(4,1) + pkin(1);
@@ -76,4 +76,4 @@ t48 = -rSges(4,2) * t42 + t62 * t45;
 t36 = t42 * t47;
 t34 = t46 * t54;
 t1 = -m(1) * (g(1) * rSges(1,1) + g(2) * rSges(1,2) + g(3) * rSges(1,3)) - m(2) * (g(1) * (t46 * rSges(2,1) - t43 * rSges(2,2)) + g(2) * (t43 * rSges(2,1) + t46 * rSges(2,2)) + g(3) * rSges(2,3)) - m(3) * (g(1) * (t43 * rSges(3,3) + t49 * t46) + g(2) * (-t46 * rSges(3,3) + t49 * t43) + g(3) * (t42 * rSges(3,1) + t45 * rSges(3,2))) - m(4) * (g(3) * (t45 * rSges(4,2) + t62 * t42) + (g(1) * t48 - g(2) * t50) * t46 + (g(1) * t50 + g(2) * t48) * t43) - m(5) * (g(1) * (t60 * t46 + t34) + g(2) * (-t46 * rSges(5,3) + t51) + g(3) * (t37 * rSges(5,1) + t38 * rSges(5,2) + t36) + (g(1) * (rSges(5,3) - t40) + g(2) * t60) * t43) - m(6) * (g(1) * (t34 - t43 * t40 + (t38 * t52 + t56) * rSges(6,1) + (-t38 * t53 + t55) * rSges(6,2)) + g(2) * ((t38 * t55 - t53) * rSges(6,1) + (-t38 * t56 - t52) * rSges(6,2) + t51) + g(3) * (-t61 * t38 + t36) + (g(3) * (rSges(6,1) * t44 - rSges(6,2) * t41) + (g(1) * t46 + g(2) * t43) * t61) * t37);
-U  = t1;
+U = t1;

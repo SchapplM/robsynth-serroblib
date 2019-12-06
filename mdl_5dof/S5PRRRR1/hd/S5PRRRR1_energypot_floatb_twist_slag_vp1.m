@@ -24,8 +24,8 @@
 %   Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:29
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:03
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -50,9 +50,9 @@ assert(isreal(rSges) && all(size(rSges) == [6,3]), ...
 %% Symbolic Calculation
 % From energy_potential_floatb_twist_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:28:17
-% EndTime: 2019-07-18 13:28:17
-% DurationCPUTime: 0.16s
+% StartTime: 2019-12-05 17:02:48
+% EndTime: 2019-12-05 17:02:48
+% DurationCPUTime: 0.17s
 % Computational Cost: add. (87->61), mult. (87->67), div. (0->0), fcn. (67->8), ass. (0->23)
 t6 = sin(qJ(5));
 t8 = sin(qJ(2));
@@ -72,9 +72,9 @@ t17 = qJ(1) + r_base(3);
 t16 = t11 * t22 + t18;
 t15 = t8 * t22 + t17;
 t7 = sin(qJ(3));
-t14 = -pkin(2) * t7 + r_base(2);
+t14 = -t7 * pkin(2) + r_base(2);
 t4 = cos(t5);
 t13 = rSges(5,1) * t4 - rSges(5,2) * t3;
 t12 = rSges(4,1) * t10 - rSges(4,2) * t7;
 t1 = -m(1) * (g(1) * (r_base(1) + rSges(1,1)) + g(2) * (r_base(2) + rSges(1,2)) + g(3) * (r_base(3) + rSges(1,3))) - m(2) * (g(1) * (r_base(1) + rSges(2,1)) + g(2) * (r_base(2) + rSges(2,2)) + g(3) * (rSges(2,3) + t17)) - m(3) * (g(1) * (rSges(3,1) * t11 - t8 * rSges(3,2) + t18) + g(2) * (r_base(2) - rSges(3,3)) + g(3) * (t8 * rSges(3,1) + rSges(3,2) * t11 + t17)) - m(4) * (g(1) * (t8 * rSges(4,3) + t12 * t11 + t18) + g(2) * (-rSges(4,1) * t7 - rSges(4,2) * t10 + r_base(2)) + g(3) * (-rSges(4,3) * t11 + t12 * t8 + t17)) - m(5) * (g(1) * (t8 * rSges(5,3) + t13 * t11 + t16) + g(2) * (-rSges(5,1) * t3 - rSges(5,2) * t4 + t14) + g(3) * (-rSges(5,3) * t11 + t13 * t8 + t15)) - m(6) * (g(1) * ((t4 * t20 + t24) * rSges(6,1) + (-t4 * t21 + t23) * rSges(6,2) + t11 * t19 + t16) + g(2) * (rSges(6,3) * t4 + (-rSges(6,1) * t9 + rSges(6,2) * t6) * t3 + t14) + g(3) * ((t4 * t23 - t21) * rSges(6,1) + (-t4 * t24 - t20) * rSges(6,2) + t8 * t19 + t15));
-U  = t1;
+U = t1;

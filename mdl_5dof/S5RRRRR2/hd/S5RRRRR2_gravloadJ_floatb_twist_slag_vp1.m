@@ -22,8 +22,8 @@
 %   joint torques required to compensate gravitation load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-29 15:26
-% Revision: 932832b1be1be80f59b7f1a581a1a8f328bdb39d (2019-03-29)
+% Datum: 2019-12-05 18:54
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -46,19 +46,19 @@ assert(isreal(rSges) && all(size(rSges) == [6,3]), ...
 %% Symbolic Calculation
 % From gravload_joint_floatb_twist_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-29 15:25:51
-% EndTime: 2019-03-29 15:25:52
-% DurationCPUTime: 0.32s
+% StartTime: 2019-12-05 18:52:56
+% EndTime: 2019-12-05 18:52:57
+% DurationCPUTime: 0.37s
 % Computational Cost: add. (272->78), mult. (269->117), div. (0->0), fcn. (230->10), ass. (0->47)
 t39 = cos(qJ(3));
 t31 = t39 * pkin(2);
 t33 = qJ(3) + qJ(4);
 t27 = sin(t33);
 t29 = cos(t33);
-t50 = rSges(5,1) * t29 - rSges(5,2) * t27;
+t50 = t29 * rSges(5,1) - t27 * rSges(5,2);
 t72 = t31 + t50;
 t36 = sin(qJ(3));
-t71 = rSges(4,1) * t39 - rSges(4,2) * t36;
+t71 = t39 * rSges(4,1) - t36 * rSges(4,2);
 t34 = qJ(1) + qJ(2);
 t28 = sin(t34);
 t30 = cos(t34);
@@ -82,19 +82,19 @@ t54 = rSges(6,1) * t27 * t38;
 t19 = t30 * t31;
 t7 = t28 * t38 - t29 * t59;
 t8 = t28 * t35 + t29 * t58;
-t52 = rSges(6,1) * t8 + rSges(6,2) * t7 + rSges(6,3) * t63 + t19;
-t51 = rSges(3,1) * t30 - rSges(3,2) * t28;
-t49 = -rSges(3,1) * t28 - rSges(3,2) * t30;
+t52 = t8 * rSges(6,1) + t7 * rSges(6,2) + rSges(6,3) * t63 + t19;
+t51 = t30 * rSges(3,1) - t28 * rSges(3,2);
+t49 = -t28 * rSges(3,1) - t30 * rSges(3,2);
 t48 = -rSges(5,1) * t27 - rSges(5,2) * t29;
-t47 = t30 * rSges(4,3) - t28 * t71;
-t46 = t28 * rSges(4,3) + t30 * t71;
+t47 = t30 * rSges(4,3) - t71 * t28;
+t46 = t28 * rSges(4,3) + t71 * t30;
 t45 = rSges(6,1) * t60 - rSges(6,2) * t61 + t20;
-t44 = rSges(5,1) * t62 - rSges(5,2) * t63 + rSges(5,3) * t28 + t19;
+t44 = rSges(5,1) * t62 - rSges(5,2) * t63 + t28 * rSges(5,3) + t19;
 t5 = t28 * t61 + t58;
 t6 = -t28 * t60 + t59;
 t43 = t5 * rSges(6,2) + t6 * rSges(6,1) + (-t20 - t31) * t28;
-t42 = t30 * rSges(5,3) - t28 * t72;
+t42 = t30 * rSges(5,3) - t72 * t28;
 t40 = cos(qJ(1));
 t32 = t40 * pkin(1);
-t1 = [-m(2) * (g(1) * (-rSges(2,1) * t37 - rSges(2,2) * t40) + g(2) * (rSges(2,1) * t40 - rSges(2,2) * t37)) - m(3) * (g(1) * (t49 - t66) + g(2) * (t32 + t51)) - m(4) * (g(1) * (t47 - t66) + g(2) * (t32 + t46)) - m(5) * (g(1) * (t42 - t66) + g(2) * (t32 + t44)) - m(6) * (g(1) * (t43 - t66) + g(2) * (t32 + t52)) -m(3) * (g(1) * t49 + g(2) * t51) - m(4) * (g(1) * t47 + g(2) * t46) - m(5) * (g(1) * t42 + g(2) * t44) - m(6) * (g(1) * t43 + g(2) * t52) -m(6) * (g(1) * t55 + g(2) * t65) + (-m(4) * t71 - m(5) * t72 - m(6) * (t31 + t45)) * g(3) + t70 * (-m(4) * (-rSges(4,1) * t36 - rSges(4,2) * t39) - m(5) * (t48 - t69) - m(6) * (-t54 - t69)) -m(5) * (g(3) * t50 + t48 * t70) - m(6) * (g(1) * (-t30 * t54 + t55) + g(2) * (-t28 * t54 + t65) + g(3) * t45) -m(6) * (g(1) * (rSges(6,1) * t7 - rSges(6,2) * t8) + g(2) * (-rSges(6,1) * t5 + rSges(6,2) * t6) + g(3) * (-rSges(6,1) * t35 - rSges(6,2) * t38) * t27)];
-taug  = t1(:);
+t1 = [-m(2) * (g(1) * (-t37 * rSges(2,1) - t40 * rSges(2,2)) + g(2) * (t40 * rSges(2,1) - t37 * rSges(2,2))) - m(3) * (g(1) * (t49 - t66) + g(2) * (t32 + t51)) - m(4) * (g(1) * (t47 - t66) + g(2) * (t32 + t46)) - m(5) * (g(1) * (t42 - t66) + g(2) * (t32 + t44)) - m(6) * (g(1) * (t43 - t66) + g(2) * (t32 + t52)), -m(3) * (g(1) * t49 + g(2) * t51) - m(4) * (g(1) * t47 + g(2) * t46) - m(5) * (g(1) * t42 + g(2) * t44) - m(6) * (g(1) * t43 + g(2) * t52), -m(6) * (g(1) * t55 + g(2) * t65) + (-m(4) * t71 - m(5) * t72 - m(6) * (t31 + t45)) * g(3) + t70 * (-m(4) * (-rSges(4,1) * t36 - rSges(4,2) * t39) - m(5) * (t48 - t69) - m(6) * (-t54 - t69)), -m(5) * (g(3) * t50 + t70 * t48) - m(6) * (g(1) * (-t30 * t54 + t55) + g(2) * (-t28 * t54 + t65) + g(3) * t45), -m(6) * (g(1) * (t7 * rSges(6,1) - t8 * rSges(6,2)) + g(2) * (-t5 * rSges(6,1) + t6 * rSges(6,2)) + g(3) * (-rSges(6,1) * t35 - rSges(6,2) * t38) * t27)];
+taug = t1(:);

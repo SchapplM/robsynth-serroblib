@@ -21,8 +21,8 @@
 %   Translatorischer Teil der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-10-24 10:28
-% Revision: 5d02717ba55fba3c5445be8d9f6bf09c2cd6665f (2019-10-14)
+% Datum: 2019-12-05 16:01
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -45,8 +45,8 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobia_transl_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:27:59
-	% EndTime: 2019-10-24 10:27:59
+	% StartTime: 2019-12-05 16:01:10
+	% EndTime: 2019-12-05 16:01:10
 	% DurationCPUTime: 0.05s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
@@ -55,8 +55,8 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobia_transl_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:27:59
-	% EndTime: 2019-10-24 10:27:59
+	% StartTime: 2019-12-05 16:01:10
+	% EndTime: 2019-12-05 16:01:10
 	% DurationCPUTime: 0.05s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 1, 0, 0, 0, 0;];
@@ -65,8 +65,8 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobia_transl_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:27:59
-	% EndTime: 2019-10-24 10:27:59
+	% StartTime: 2019-12-05 16:01:10
+	% EndTime: 2019-12-05 16:01:10
 	% DurationCPUTime: 0.06s
 	% Computational Cost: add. (3->2), mult. (10->6), div. (0->0), fcn. (10->4), ass. (0->4)
 	t3 = sin(qJ(2));
@@ -78,9 +78,9 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobia_transl_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:27:59
-	% EndTime: 2019-10-24 10:27:59
-	% DurationCPUTime: 0.06s
+	% StartTime: 2019-12-05 16:01:10
+	% EndTime: 2019-12-05 16:01:10
+	% DurationCPUTime: 0.07s
 	% Computational Cost: add. (10->5), mult. (22->8), div. (0->0), fcn. (25->4), ass. (0->8)
 	t7 = pkin(2) - r_i_i_C(2);
 	t6 = r_i_i_C(3) + qJ(3);
@@ -95,8 +95,8 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobia_transl_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:27:59
-	% EndTime: 2019-10-24 10:27:59
+	% StartTime: 2019-12-05 16:01:10
+	% EndTime: 2019-12-05 16:01:10
 	% DurationCPUTime: 0.08s
 	% Computational Cost: add. (23->13), mult. (58->27), div. (0->0), fcn. (65->6), ass. (0->12)
 	t3 = sin(qJ(4));
@@ -116,9 +116,9 @@ elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobia_transl_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:27:59
-	% EndTime: 2019-10-24 10:27:59
-	% DurationCPUTime: 0.11s
+	% StartTime: 2019-12-05 16:01:10
+	% EndTime: 2019-12-05 16:01:10
+	% DurationCPUTime: 0.12s
 	% Computational Cost: add. (67->21), mult. (98->35), div. (0->0), fcn. (109->8), ass. (0->20)
 	t8 = qJ(4) + qJ(5);
 	t7 = cos(t8);

@@ -22,8 +22,8 @@
 %   joint torques required to compensate gravitation load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 17:22
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 18:26
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -46,9 +46,9 @@ assert(isreal(mrSges) && all(size(mrSges) == [6,3]), ...
 %% Symbolic Calculation
 % From gravload_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 17:20:44
-% EndTime: 2019-07-18 17:20:47
-% DurationCPUTime: 0.40s
+% StartTime: 2019-12-05 18:23:53
+% EndTime: 2019-12-05 18:23:55
+% DurationCPUTime: 0.44s
 % Computational Cost: add. (182->68), mult. (264->82), div. (0->0), fcn. (217->8), ass. (0->41)
 t65 = m(4) * pkin(1) + mrSges(3,1) + mrSges(4,1);
 t64 = mrSges(3,2) + mrSges(4,2);
@@ -91,4 +91,4 @@ t3 = -t14 * t41 + t44;
 t2 = -t14 * t44 + t41;
 t1 = t14 * t45 + t40;
 t5 = [(-t4 * mrSges(6,1) - t3 * mrSges(6,2) - t13 * t42 - t59 * (-t19 * t16 + t22 * t43) + (-m(6) * t51 - mrSges(2,1) + t63) * t22 + t57 * t19) * g(2) + (-t2 * mrSges(6,1) - t1 * mrSges(6,2) + (t59 * t16 + t57) * t22 + (mrSges(2,1) + t11 - t61) * t19) * g(1), -g(1) * (t25 * t22 + t54) - g(2) * (t25 * t19 + t55) + (-t30 + t61) * g(3) + t62 * (m(5) * t46 + mrSges(5,1) * t13 + mrSges(5,2) * t14 + t65 * t18 + t64 * t21), (-g(1) * t19 + g(2) * t22) * (m(4) + t59), -g(1) * t54 - g(2) * t55 + (t36 * t13 - t12 - t30) * g(3) + t62 * (t36 * t14 + (mrSges(5,1) + t50) * t13), -g(1) * (mrSges(6,1) * t3 - mrSges(6,2) * t4) - g(2) * (-mrSges(6,1) * t1 + mrSges(6,2) * t2) - g(3) * (-mrSges(6,1) * t17 - mrSges(6,2) * t20) * t13];
-taug  = t5(:);
+taug = t5(:);

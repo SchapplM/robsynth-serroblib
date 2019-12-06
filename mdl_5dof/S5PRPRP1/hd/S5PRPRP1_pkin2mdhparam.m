@@ -23,8 +23,8 @@
 %   Offset on joint coordinate q
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-10-24 10:23
-% Revision: 5d02717ba55fba3c5445be8d9f6bf09c2cd6665f (2019-10-14)
+% Datum: 2019-12-05 15:29
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 

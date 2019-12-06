@@ -23,8 +23,8 @@
 %   pkin=[dummy]';
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:26
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 18:10
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -32,5 +32,5 @@ function pkin = S5RPRRR1_mdhparam2pkin(beta_mdh, b_mdh, alpha_mdh, a_mdh, theta_
 
 % Aus parameter_kin_from_mdh_matlab.m
 t1 = [];
-pkin  = t1;
+pkin = t1;
 pkin = NaN;% Dummy-Wert, da pkin nicht leer sein soll

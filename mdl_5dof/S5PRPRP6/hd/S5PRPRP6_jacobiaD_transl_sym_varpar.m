@@ -23,8 +23,8 @@
 %   Translatorischer Teil der analytischen Jacobi-Matrix (Zeitableitung)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-10-24 10:25
-% Revision: 5d02717ba55fba3c5445be8d9f6bf09c2cd6665f (2019-10-14)
+% Datum: 2019-12-05 15:41
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -49,8 +49,8 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobiaD_transl_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:25:11
-	% EndTime: 2019-10-24 10:25:11
+	% StartTime: 2019-12-05 15:41:38
+	% EndTime: 2019-12-05 15:41:38
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
@@ -59,8 +59,8 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobiaD_transl_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:25:11
-	% EndTime: 2019-10-24 10:25:11
+	% StartTime: 2019-12-05 15:41:38
+	% EndTime: 2019-12-05 15:41:38
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
@@ -69,8 +69,8 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobiaD_transl_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:25:11
-	% EndTime: 2019-10-24 10:25:11
+	% StartTime: 2019-12-05 15:41:38
+	% EndTime: 2019-12-05 15:41:38
 	% DurationCPUTime: 0.02s
 	% Computational Cost: add. (3->2), mult. (16->8), div. (0->0), fcn. (10->4), ass. (0->4)
 	t12 = sin(qJ(2));
@@ -82,8 +82,8 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobiaD_transl_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:25:12
-	% EndTime: 2019-10-24 10:25:12
+	% StartTime: 2019-12-05 15:41:38
+	% EndTime: 2019-12-05 15:41:38
 	% DurationCPUTime: 0.03s
 	% Computational Cost: add. (12->6), mult. (42->14), div. (0->0), fcn. (30->4), ass. (0->9)
 	t97 = -pkin(2) + r_i_i_C(2);
@@ -100,8 +100,8 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobiaD_transl_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:25:12
-	% EndTime: 2019-10-24 10:25:12
+	% StartTime: 2019-12-05 15:41:38
+	% EndTime: 2019-12-05 15:41:38
 	% DurationCPUTime: 0.07s
 	% Computational Cost: add. (37->20), mult. (134->45), div. (0->0), fcn. (102->6), ass. (0->18)
 	t131 = sin(qJ(4));
@@ -127,15 +127,15 @@ elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobiaD_transl_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-24 10:25:12
-	% EndTime: 2019-10-24 10:25:12
-	% DurationCPUTime: 0.13s
+	% StartTime: 2019-12-05 15:41:39
+	% EndTime: 2019-12-05 15:41:39
+	% DurationCPUTime: 0.12s
 	% Computational Cost: add. (78->30), mult. (264->51), div. (0->0), fcn. (214->6), ass. (0->23)
 	t181 = sin(qJ(4));
 	t183 = cos(qJ(4));
 	t196 = r_i_i_C(3) + qJ(5);
-	t197 = -r_i_i_C(1) - pkin(4);
-	t198 = t197 * t181 + t196 * t183 - qJ(3);
+	t197 = pkin(4) + r_i_i_C(1);
+	t198 = t197 * t181 - t196 * t183 + qJ(3);
 	t182 = sin(qJ(2));
 	t195 = t181 * t182;
 	t194 = t182 * t183;
@@ -149,11 +149,11 @@ elseif link_index == 5
 	t189 = t180 * t192;
 	t188 = t179 * t183 + t180 * t195;
 	t187 = -t179 * t195 + t180 * t183;
-	t186 = -qJD(5) * t183 + qJD(3) + (-pkin(2) - pkin(6) - r_i_i_C(2)) * qJD(2) + (t196 * t181 - t197 * t183) * qJD(4);
-	t185 = t186 * t184 + t198 * t193;
+	t186 = -qJD(5) * t183 + qJD(3) + (-pkin(2) - pkin(6) - r_i_i_C(2)) * qJD(2) + (t196 * t181 + t197 * t183) * qJD(4);
+	t185 = t186 * t184 - t198 * t193;
 	t177 = t187 * qJD(4) + t183 * t190;
 	t175 = t188 * qJD(4) - t183 * t189;
-	t1 = [0, t185 * t180, t189, t188 * qJD(5) + t197 * t175 - t196 * (-t181 * t189 + (t179 * t181 - t180 * t194) * qJD(4)), t175; 0, t185 * t179, t190, -t187 * qJD(5) - t197 * t177 + t196 * (t181 * t190 + (t179 * t194 + t180 * t181) * qJD(4)), -t177; 0, t186 * t182 - t198 * t192, t193, (-t196 * t191 - t197 * t193) * t183 + (t196 * t193 + (-t197 * qJD(4) - qJD(5)) * t184) * t181, -t181 * t191 - t183 * t193;];
+	t1 = [0, t185 * t180, t189, t188 * qJD(5) - t197 * t175 - t196 * (-t181 * t189 + (t179 * t181 - t180 * t194) * qJD(4)), t175; 0, t185 * t179, t190, -t187 * qJD(5) + t197 * t177 + t196 * (t181 * t190 + (t179 * t194 + t180 * t181) * qJD(4)), -t177; 0, t186 * t182 + t198 * t192, t193, (-t196 * t191 + t197 * t193) * t183 + (t196 * t193 + (t197 * qJD(4) - qJD(5)) * t184) * t181, -t181 * t191 - t183 * t193;];
 	JaD_transl = t1;
 else
 	JaD_transl=NaN(3,5);
