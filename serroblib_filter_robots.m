@@ -41,7 +41,7 @@ end
 EE_FG_BA = serroblib_csvline2bits_EE(EE_FG_cell);
 
 % Bitmaske als Variable speichern
-EE_FG_Mask_bin = uint16(Inf);
+EE_FG_Mask_bin = uint16(0);
 for i = 1:9
   if EE_FG_Mask(i)
     EE_FG_Mask_bin = bitset(EE_FG_Mask_bin, i);
@@ -59,7 +59,10 @@ IndB = false(length(l.Names_Ndof),1);
 for i = 1:size(l.BitArrays_Ndof, 1)
   if (all( bitand(EE_FG_BA,EE_FG_Mask_bin) == bitand(l.BitArrays_EEdof0(i,:),EE_FG_Mask_bin) ))
     % Roboter mit passenden EE-FG
-    IndB(i) = true;  
+    IndB(i) = true;
   end
+  % Debug:
+  % fprintf('%s: %s vs %s. Maske %s\n', l.Names_Ndof{i}, fliplr(dec2bin(EE_FG_BA,9)), ...
+  % fliplr(dec2bin(l.BitArrays_EEdof0(i,:),9)), fliplr(dec2bin(EE_FG_Mask_bin,9)));
 end
 IndZ = find(IndB);
