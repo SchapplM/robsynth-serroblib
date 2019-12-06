@@ -19,8 +19,8 @@
 %   joint torques required to compensate gravitation load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 17:22
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 18:26
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -38,8 +38,8 @@ assert(isreal(MDP) && all(size(MDP) == [26 1]), ...
 %% Symbolic Calculation
 % From gravload_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 17:22:27
-% EndTime: 2019-07-18 17:22:27
+% StartTime: 2019-12-05 18:25:33
+% EndTime: 2019-12-05 18:25:34
 % DurationCPUTime: 0.12s
 % Computational Cost: add. (104->37), mult. (162->56), div. (0->0), fcn. (141->8), ass. (0->23)
 t45 = cos(qJ(2));
@@ -57,7 +57,7 @@ t52 = t46 * t41;
 t51 = t46 * t44;
 t39 = cos(t40);
 t49 = g(1) * t46 + g(2) * t43;
-t50 = (t49 * t39 + t56) * MDP(19) + (MDP(25) * t44 - MDP(26) * t41 + MDP(18)) * (-g(3) * t39 + t49 * t38);
+t50 = (t49 * t39 + t56) * MDP(19) + (t44 * MDP(25) - t41 * MDP(26) + MDP(18)) * (-g(3) * t39 + t49 * t38);
 t36 = g(1) * t43 - g(2) * t46;
 t42 = sin(qJ(2));
 t35 = t39 * t51 + t54;
@@ -65,4 +65,4 @@ t34 = -t39 * t52 + t53;
 t33 = -t39 * t53 + t52;
 t32 = t39 * t54 + t51;
 t1 = [(-g(1) * (t46 * qJ(3) - t43 * t57) - g(2) * (t43 * qJ(3) + t46 * t57)) * MDP(12) + (-g(1) * t33 - g(2) * t35) * MDP(25) + (-g(1) * t32 - g(2) * t34) * MDP(26) + (MDP(3) - MDP(11)) * t49 + (-t42 * MDP(10) + MDP(18) * t39 - MDP(19) * t38 + t45 * MDP(9) + MDP(2)) * t36; (g(3) * t42 + t49 * t45) * MDP(10) + t50 + (MDP(12) * pkin(1) + MDP(9)) * (-g(3) * t45 + t49 * t42); -t36 * MDP(12); t50; (-g(1) * t34 + g(2) * t32 + t41 * t56) * MDP(25) + (g(1) * t35 - g(2) * t33 + t44 * t56) * MDP(26);];
-taug  = t1;
+taug = t1;

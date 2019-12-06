@@ -15,8 +15,11 @@ roblibpath=fileparts(which('serroblib_path_init.m'));
 serroblib_gen_bitarrays(1:7);
 
 % Einstellungen
+usr_dryrun = false; % Nur Anzeigen, was gemacht werden würde, nichts schreiben
 usr_overwrite = true; % Überschreibe auch bestehende Einträge. Sinnvoll, wenn die Spalten vorher leer sind
 usr_abortonerror = true; % Bei irgendeinem Fehler anhalten
+only_look_at_robot = {}; % Nur eine Liste namentlich genannter Roboter bearbeiten; z.B. S5PRPRR4 
+
 %% Durchsuche alle Roboter und prüfe die Kinematikparameter
 % Zuordnung der Zahlenwerte in der csv-Tabelle zu den physikalischen Werten
 % Die in der mat-Datei abgelegte Binär-Kodierung entspricht der Reihenfolge
@@ -27,10 +30,13 @@ for N = 1:7
   l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_EEdof0');
   for j = 1:length(l.Names_Ndof)
     RobName = l.Names_Ndof{j};
+    if ~isempty(only_look_at_robot) && ~any(strcmp(only_look_at_robot, RobName))
+      continue
+    end
     fprintf('%d/%d: Prüfe Struktur %s\n', j, length(l.Names_Ndof), RobName);
     RS = serroblib_create_robot_class(RobName);
     try
-     RS.gen_testsettings(true, true);
+     RS.gen_testsettings(false, true);
     catch
       warning('Fehler für Modell %s', RobName);
       if usr_abortonerror
@@ -39,6 +45,11 @@ for N = 1:7
         continue
       end
     end
+    if any(isnan(RS.phi_N_E))
+      warning('EE-Transformation N-E wurde noch nicht gesetzt. Setze vorerst zu Null');
+      RS.update_EE(zeros(3,1), zeros(3,1));
+    end
+    
     %% Prüfe, welche EE-FG die Struktur hat
     % Prüfe, für jedes Gelenk beginnend von hinten, ob es die EE-Position
     % beeinflusst
@@ -62,19 +73,31 @@ for N = 1:7
     % Bestimme die EE-FG aufgrund der Existenz der
     % Geschwindigkeits-Komponenten
     I_EE_0 = abs([v;xD(4:6)]) > 1e-9;
+    
+    % Sonderfall 3T2R: Setze die letzte Rotation (nur Euler-Winkel) auf
+    % Null (Konvention zum Abspeichern und kennzeichnen)
+    if rank(Ja(4:6,:)) == 2 && rank(Ja(4:5,:)) == 2
+      I_EE_0(9) = 0;
+    end
+    
     csvline_EE_FG_calc = cell(1,9);
     csvline_EE_FG_calc(I_EE_0) = {'1'};
     csvline_EE_FG_calc(~I_EE_0) = {'0'};
     
     if serroblib_csvline2bits_EE(csvline_EE_FG_calc) ~= l.BitArrays_EEdof0(j)
       warning('Der Roboter hat in der DB andere EE-FG (%s) als aus der Berechnung (%s)', ...
-        dec2bin(l.BitArrays_EEdof0(j)), dec2bin(serroblib_csvline2bits_EE(csvline_EE_FG_calc)));
+        dec2bin(l.BitArrays_EEdof0(j),9), dec2bin(serroblib_csvline2bits_EE(csvline_EE_FG_calc),9));
     elseif ~usr_overwrite
-      fprintf('Die EE-FG von %s sind bereits richtig in DB. Nichts unternehmen\n', RobName);
+      fprintf('Die EE-FG von %s sind bereits richtig in DB (%s). Nichts unternehmen\n', ...
+        RobName, dec2bin(l.BitArrays_EEdof0(j),9));
+      continue
     else
-      fprintf('Die EE-FG von %s sind bereits richtig in DB. Überschreibe trotzdem\n', RobName);
+      fprintf('Die EE-FG von %s sind bereits richtig in DB (%s). Überschreibe trotzdem\n', ...
+        RobName, dec2bin(l.BitArrays_EEdof0(j),9));
     end
-    
+    if usr_dryrun
+      continue
+    end
     %% Eintragen der EE-FG in die Tabelle
     % Dateinamen der csv-Tabellen bestimmen
     typestring = RobName(3:3+N-1); % Roboterdaten aus Namen extrahieren
@@ -119,6 +142,6 @@ for N = 1:7
     copyfile(filepath_csv_copy, filepath_csv);
     % Kopie-Tabelle löschen
     delete(filepath_csv_copy);
-    fprintf('\tWert EE-FG auf %s gesetzt.\n', dec2bin(serroblib_csvline2bits_EE(csvline_EE_FG_calc)));
+    fprintf('\tWert EE-FG auf %s gesetzt.\n', dec2bin(serroblib_csvline2bits_EE(csvline_EE_FG_calc),9));
   end
 end

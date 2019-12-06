@@ -24,8 +24,8 @@
 %   inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:30
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:05
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -48,9 +48,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:30:12
-% EndTime: 2019-07-18 13:30:12
-% DurationCPUTime: 0.19s
+% StartTime: 2019-12-05 17:04:43
+% EndTime: 2019-12-05 17:04:44
+% DurationCPUTime: 0.21s
 % Computational Cost: add. (198->67), mult. (410->86), div. (0->0), fcn. (245->6), ass. (0->46)
 t31 = cos(qJ(5));
 t27 = t31 ^ 2;
@@ -101,4 +101,4 @@ t5 = [m(2) + m(3) + m(4) + m(5) + t43; 0; -0.2e1 * t51 + Ifges(3,3) + 0.2e1 * t1
 %% Postprocessing: Reshape Output
 % From vec2symmat_5_matlab.m
 res = [t5(1), t5(2), t5(4), t5(7), t5(11); t5(2), t5(3), t5(5), t5(8), t5(12); t5(4), t5(5), t5(6), t5(9), t5(13); t5(7), t5(8), t5(9), t5(10), t5(14); t5(11), t5(12), t5(13), t5(14), t5(15);];
-Mq  = res;
+Mq = res;

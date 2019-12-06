@@ -16,8 +16,8 @@
 %   minimal parameter regressor of kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:26
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 18:10
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,8 +35,8 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:26:01
-% EndTime: 2019-07-18 13:26:01
+% StartTime: 2019-12-05 18:09:50
+% EndTime: 2019-12-05 18:09:50
 % DurationCPUTime: 0.05s
 % Computational Cost: add. (59->22), mult. (175->67), div. (0->0), fcn. (118->6), ass. (0->23)
 t82 = qJD(1) ^ 2;
@@ -62,4 +62,4 @@ t67 = qJD(5) + t70;
 t66 = t79 * t71 - t76 * t73;
 t65 = t76 * t71 + t79 * t73;
 t1 = [t89, 0, 0, -qJD(2) * qJD(1), t82 * qJ(2), qJ(2) ^ 2 * t89 + qJD(2) ^ 2 / 0.2e1, t78 ^ 2 * t89, t78 * t82 * t81, t78 * t85, t81 * t85, qJD(3) ^ 2 / 0.2e1, (-qJD(2) * t81 - t78 * t86) * qJD(1), (qJD(2) * t78 - t81 * t86) * qJD(1), t71 ^ 2 / 0.2e1, -t71 * t70, -t71 * t73, t70 * t73, t73 ^ 2 / 0.2e1, t68 * t73 + t70 * t84, t69 * t73 + t71 * t84, t66 ^ 2 / 0.2e1, -t66 * t65, t66 * t67, -t65 * t67, t67 ^ 2 / 0.2e1, (-t76 * t69 + t79 * t84) * t67 + t68 * t65, -(t79 * t69 + t76 * t84) * t67 + t68 * t66;];
-T_reg  = t1;
+T_reg = t1;

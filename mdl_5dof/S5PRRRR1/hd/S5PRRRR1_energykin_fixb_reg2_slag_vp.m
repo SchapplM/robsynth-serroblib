@@ -16,8 +16,8 @@
 %   inertial parameter regressor of kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:29
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:03
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [2 1]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:28:48
-% EndTime: 2019-07-18 13:28:48
-% DurationCPUTime: 0.13s
+% StartTime: 2019-12-05 17:03:21
+% EndTime: 2019-12-05 17:03:22
+% DurationCPUTime: 0.14s
 % Computational Cost: add. (117->33), mult. (375->96), div. (0->0), fcn. (267->8), ass. (0->38)
 t28 = qJD(2) ^ 2;
 t44 = t28 / 0.2e1;
@@ -77,4 +77,4 @@ t3 = t22 * t12 - t41 * t18;
 t2 = t22 * t14 + t41 * t8;
 t1 = t41 * t14 - t22 * t8;
 t4 = [0, 0, 0, 0, 0, 0, 0, 0, 0, t43, 0, 0, 0, 0, 0, t44, t27 * t34, -t31, 0, t40 / 0.2e1 + t17, t19 * t44, t24 * t28 * t26, t24 * t33, t21 * t44, t26 * t33, qJD(3) ^ 2 / 0.2e1, (-t24 * t35 + t26 * t36) * qJD(1), (-t24 * t36 - t26 * t35) * qJD(1), (t19 + t21) * t31, t17 + (t21 / 0.2e1 + t19 / 0.2e1) * t40, t12 ^ 2 / 0.2e1, -t12 * t10, t12 * t18, t10 ^ 2 / 0.2e1, -t10 * t18, t18 ^ 2 / 0.2e1, t14 * t10 - t6 * t18, t14 * t12 - t8 * t18, -t8 * t10 + t6 * t12, t8 ^ 2 / 0.2e1 + t38 + t14 ^ 2 / 0.2e1, t5 ^ 2 / 0.2e1, -t5 * t3, t5 * t9, t3 ^ 2 / 0.2e1, -t3 * t9, t9 ^ 2 / 0.2e1, t1 * t9 + t6 * t3, -t2 * t9 + t6 * t5, -t1 * t5 - t2 * t3, t2 ^ 2 / 0.2e1 + t1 ^ 2 / 0.2e1 + t38;];
-T_reg  = t4;
+T_reg = t4;

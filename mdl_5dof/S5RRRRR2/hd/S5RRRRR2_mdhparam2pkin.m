@@ -23,8 +23,8 @@
 %   pkin=[a2,a4]';
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-29 15:26
-% Revision: 932832b1be1be80f59b7f1a581a1a8f328bdb39d (2019-03-29)
+% Datum: 2019-12-05 18:54
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -32,4 +32,4 @@ function pkin = S5RRRRR2_mdhparam2pkin(beta_mdh, b_mdh, alpha_mdh, a_mdh, theta_
 
 % Aus parameter_kin_from_mdh_matlab.m
 t1 = [a_mdh(2); a_mdh(4);];
-pkin  = t1;
+pkin = t1;

@@ -22,8 +22,8 @@
 %   base parameter vector (minimal parameter vector)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-29 15:26
-% Revision: 932832b1be1be80f59b7f1a581a1a8f328bdb39d (2019-03-29)
+% Datum: 2019-12-05 18:54
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -48,4 +48,4 @@ t76 = pkin(2) ^ 2 * t77;
 t79 = -Ifges(4,2) - t76;
 t75 = m(3) + m(4) + t77;
 t1 = [pkin(1) ^ 2 * t75 + Ifges(2,3); pkin(1) * t75 + mrSges(2,1); mrSges(2,2); Ifges(3,3) + Ifges(5,2) - t79; mrSges(3,1); mrSges(3,2) - mrSges(4,3) - mrSges(5,3); Ifges(4,1) + t79; Ifges(4,4); -pkin(2) * mrSges(5,3) + Ifges(4,5); Ifges(4,6); Ifges(4,3) + t76; pkin(2) * t77 + mrSges(4,1); mrSges(4,2); Ifges(5,1) + Ifges(6,2) - Ifges(5,2); Ifges(5,4); Ifges(5,5); Ifges(5,6); Ifges(5,3) + Ifges(6,2); mrSges(5,1); mrSges(5,2) - mrSges(6,3); Ifges(6,1) - Ifges(6,2); Ifges(6,4); Ifges(6,5); Ifges(6,6); Ifges(6,3); mrSges(6,1); mrSges(6,2);];
-MPV  = t1;
+MPV = t1;

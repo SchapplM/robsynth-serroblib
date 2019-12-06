@@ -24,8 +24,8 @@
 %   Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-29 15:26
-% Revision: 932832b1be1be80f59b7f1a581a1a8f328bdb39d (2019-03-29)
+% Datum: 2019-12-05 18:54
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -50,9 +50,9 @@ assert(isreal(mrSges) && all(size(mrSges) == [6,3]), ...
 %% Symbolic Calculation
 % From energy_potential_floatb_twist_worldframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-29 15:25:40
-% EndTime: 2019-03-29 15:25:40
-% DurationCPUTime: 0.16s
+% StartTime: 2019-12-05 18:52:52
+% EndTime: 2019-12-05 18:52:52
+% DurationCPUTime: 0.17s
 % Computational Cost: add. (118->46), mult. (111->37), div. (0->0), fcn. (79->10), ass. (0->23)
 t29 = -m(1) - m(2);
 t28 = -m(3) - m(4);
@@ -77,4 +77,4 @@ t13 = qJ(1) + qJ(2);
 t9 = cos(t13);
 t7 = sin(t13);
 t1 = (-mrSges(4,1) * t15 - mrSges(4,2) * t18 - mrSges(1,3) - mrSges(2,3) - mrSges(3,3) - t25 * t8 + t27 * (pkin(2) * t15 + r_base(3)) + t22 * t6 + (t28 + t29) * r_base(3)) * g(3) + (-t16 * mrSges(2,1) - mrSges(2,2) * t19 - mrSges(1,2) + t29 * r_base(2) + t28 * t24 + t27 * (t7 * t26 + t24) + t21 * t9 + t20 * t7) * g(2) + (-mrSges(2,1) * t19 + t16 * mrSges(2,2) - mrSges(1,1) + t29 * r_base(1) + t28 * t23 + t27 * (t9 * t26 + t23) - t21 * t7 + t20 * t9) * g(1);
-U  = t1;
+U = t1;

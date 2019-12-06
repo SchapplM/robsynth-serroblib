@@ -2,6 +2,7 @@ robot_NQJ=5
 robot_NJ=5
 robot_name="S5RRRRR3"
 robot_NL=6
+robot_gVec=1,1,1
 robot_NKP=5
 robot_KP="a3 a4 a5 d1 d4"
 robot_kinconstr_exist=0

@@ -30,8 +30,8 @@
 %   vector of cutting torques (contains inertial, gravitational coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:30
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:05
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,9 +60,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_NewtonEuler_linkframe_m_i_i_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:30:13
-% EndTime: 2019-07-18 13:30:15
-% DurationCPUTime: 1.26s
+% StartTime: 2019-12-05 17:04:46
+% EndTime: 2019-12-05 17:04:48
+% DurationCPUTime: 1.35s
 % Computational Cost: add. (22976->160), mult. (25726->203), div. (0->0), fcn. (13492->8), ass. (0->74)
 t156 = sin(qJ(2));
 t160 = cos(qJ(2));
@@ -137,5 +137,5 @@ t168 = mrSges(5,1) * t114 - mrSges(5,2) * t115 + Ifges(5,3) * t142 + pkin(6) * t
 t167 = mrSges(4,1) * t121 - mrSges(4,2) * t122 + Ifges(4,3) * t149 + pkin(3) * t91 + t168;
 t165 = mrSges(3,1) * t137 - mrSges(3,2) * t138 + Ifges(3,3) * qJDD(2) + pkin(2) * t83 + t167;
 t164 = mrSges(2,2) * g(1) + pkin(1) * t181 + t165;
-t1 = [-mrSges(1,2) * g(3) + mrSges(1,3) * g(2) - qJ(1) * (-m(2) * g(2) + t181) + t170, t170, t74, t77, t84, t101; mrSges(1,1) * g(3) + qJ(1) * (-t156 * t80 + t160 * t81) + (-qJ(1) * m(2) - mrSges(1,3) - mrSges(2,3)) * g(1) + t169, -mrSges(2,3) * g(1) + t169, t71, t76, t95, t100; mrSges(1,2) * g(1) + (-mrSges(1,1) - mrSges(2,1)) * g(2) + t164, -mrSges(2,1) * g(2) + t164, t165, t167, t168, t182;];
-m_new  = t1;
+t1 = [-mrSges(1,2) * g(3) + mrSges(1,3) * g(2) - qJ(1) * (-m(2) * g(2) + t181) + t170, t170, t74, t77, t84, t101; mrSges(1,1) * g(3) + qJ(1) * (-t156 * t80 + t160 * t81) + (-qJ(1) * m(2) - mrSges(1,3) - mrSges(2,3)) * g(1) + t169, -mrSges(2,3) * g(1) + t169, t71, t76, t95, t100; t164 + mrSges(1,2) * g(1) + (-mrSges(1,1) - mrSges(2,1)) * g(2), -mrSges(2,1) * g(2) + t164, t165, t167, t168, t182;];
+m_new = t1;

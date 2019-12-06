@@ -20,8 +20,8 @@
 %   inertial parameter regressor of inverse dynamics joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:30
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:05
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,9 +43,9 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_NewtonEuler_tauJ_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:30:18
-% EndTime: 2019-07-18 13:30:20
-% DurationCPUTime: 0.36s
+% StartTime: 2019-12-05 17:04:51
+% EndTime: 2019-12-05 17:04:53
+% DurationCPUTime: 0.38s
 % Computational Cost: add. (1373->84), mult. (1772->124), div. (0->0), fcn. (1068->8), ass. (0->75)
 t73 = sin(qJ(2));
 t77 = cos(qJ(2));
@@ -122,4 +122,4 @@ t21 = t74 * t40 + t70 * t41;
 t6 = t75 * t15 + t71 * t16;
 t5 = pkin(3) * t6;
 t1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, t69, 0, 0, 0, 0, 0, 0, 0, 0, 0, t69, 0, 0, 0, 0, 0, 0, 0, 0, 0, t69, 0, 0, 0, 0, 0, 0, 0, 0, 0, t69, 0, 0, 0, 0, 0, 0, t74 * t47 + t70 * t52, -t70 * t48 + t74 * t51, 0, t70 * t10 - t74 * t9; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, qJDD(2), t84, t81, 0, 0, 0, 0, 0, 0, 0, t65, pkin(2) * (-t72 * t64 + t76 * t65) + t31, pkin(2) * (-t76 * t64 - t72 * t65) - t32, 0, pkin(2) * (t76 * t31 + t72 * t32), 0, 0, 0, 0, 0, t61, pkin(2) * (t72 * t43 - t76 * t80) + t82, pkin(2) * (t76 * t43 + t72 * t80) + t79, 0, pkin(2) * (t72 * (-t71 * t15 + t75 * t16) + t76 * t6) + t5, t28, t21, t34, t27, t33, 0, pkin(2) * (t72 * (t75 * t35 - t71 * t41) + t76 * t19) + t85, pkin(2) * (t72 * (t75 * t36 + t71 * t40) + t76 * t20) + t86, pkin(2) * (t72 * (t75 * t42 - t71 * t45) + t76 * t23) + t83, pkin(2) * (t72 * (t71 * t14 + t75 * t4) + t76 * t2) + t94; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t65, t31, -t32, 0, 0, 0, 0, 0, 0, 0, t61, t82, t79, 0, t5, t28, t21, t34, t27, t33, 0, t85, t86, t83, t94; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t61, t15, -t16, 0, 0, t28, t21, t34, t27, t33, 0, t89, t90, t87, t3; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t53, t56 - t57, t92, t53, t55, qJDD(5), -t9, -t10, 0, 0;];
-tauJ_reg  = t1;
+tauJ_reg = t1;

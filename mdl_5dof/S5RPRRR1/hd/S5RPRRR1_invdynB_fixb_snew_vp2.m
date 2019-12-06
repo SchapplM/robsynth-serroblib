@@ -30,8 +30,8 @@
 %   base forces of inverse dynamics (contains inertial, gravitational coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:26
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 18:10
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,9 +60,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_NewtonEuler_linkframe_tauB_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:25:01
-% EndTime: 2019-07-18 13:25:03
-% DurationCPUTime: 0.76s
+% StartTime: 2019-12-05 18:08:45
+% EndTime: 2019-12-05 18:08:47
+% DurationCPUTime: 0.68s
 % Computational Cost: add. (5162->219), mult. (9148->273), div. (0->0), fcn. (6375->8), ass. (0->77)
 t307 = mrSges(2,1) + mrSges(3,1);
 t306 = -mrSges(2,2) + mrSges(3,3);
@@ -141,4 +141,4 @@ t228 = mrSges(4,1) * t266 + mrSges(3,2) * t272 + mrSges(4,2) * t267 + mrSges(2,3
 t227 = m(2) * t287 - qJDD(1) * mrSges(2,2) - t307 * t298 + t299;
 t226 = -mrSges(2,3) * t286 + mrSges(3,2) * t277 + t296 * t229 - t292 * t234 - qJ(2) * t303 - t304 * t298 + t305 * qJDD(1) + (qJ(2) * m(3) + t306) * g(3);
 t1 = [-m(1) * g(1) + t297 * t227 - t293 * t230; -m(1) * g(2) + t293 * t227 + t297 * t230; (-m(1) - m(2) - m(3)) * g(3) + t303; -mrSges(1,2) * g(3) + mrSges(1,3) * g(2) + t297 * t226 - t293 * t228; mrSges(1,1) * g(3) - mrSges(1,3) * g(1) + t293 * t226 + t297 * t228; -mrSges(1,1) * g(2) + mrSges(1,2) * g(1) + mrSges(2,1) * t286 - mrSges(2,2) * t287 - mrSges(3,1) * t277 + mrSges(3,3) * t272 + t292 * t229 + t296 * t234 + qJ(2) * (-t298 * mrSges(3,1) + t299) + (Ifges(3,2) + Ifges(2,3)) * qJDD(1);];
-tauB  = t1;
+tauB = t1;

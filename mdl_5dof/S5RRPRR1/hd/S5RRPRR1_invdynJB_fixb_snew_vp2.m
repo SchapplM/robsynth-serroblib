@@ -30,8 +30,8 @@
 %   joint torques and base forces of inverse dynamics (contains inertial, gravitational coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 17:22
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 18:26
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,9 +60,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_NewtonEuler_linkframe_tauJB_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 17:21:09
-% EndTime: 2019-07-18 17:21:16
-% DurationCPUTime: 2.62s
+% StartTime: 2019-12-05 18:24:15
+% EndTime: 2019-12-05 18:24:20
+% DurationCPUTime: 2.59s
 % Computational Cost: add. (22117->281), mult. (47676->340), div. (0->0), fcn. (28769->8), ass. (0->115)
 t729 = Ifges(3,1) + Ifges(4,1);
 t720 = Ifges(3,4) + Ifges(4,4);
@@ -179,4 +179,4 @@ t569 = m(2) * t667 - t688 * mrSges(2,1) - qJDD(1) * mrSges(2,2) - t682 * t571 + 
 t568 = mrSges(2,1) * g(3) + mrSges(2,3) * t667 + t688 * Ifges(2,5) + Ifges(2,6) * qJDD(1) - t726;
 t563 = -mrSges(2,2) * g(3) - mrSges(2,3) * t666 + Ifges(2,5) * qJDD(1) - t688 * Ifges(2,6) - t682 * t565 + t686 * t567;
 t1 = [-m(1) * g(1) + t687 * t569 - t683 * t575; -m(1) * g(2) + t683 * t569 + t687 * t575; t686 * t571 + t682 * t572 + (-m(1) - m(2)) * g(3); -mrSges(1,2) * g(3) + mrSges(1,3) * g(2) + t687 * t563 - t683 * t568; mrSges(1,1) * g(3) - mrSges(1,3) * g(1) + t683 * t563 + t687 * t568; -mrSges(1,1) * g(2) + mrSges(1,2) * g(1) + t696; t696; t726; t576; -t691; t690;];
-tauJB  = t1;
+tauJB = t1;

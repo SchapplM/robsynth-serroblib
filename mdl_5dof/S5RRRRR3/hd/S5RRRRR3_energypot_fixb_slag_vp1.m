@@ -22,8 +22,8 @@
 %   Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 17:19
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 18:57
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -46,9 +46,9 @@ assert(isreal(rSges) && all(size(rSges) == [6,3]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 17:17:04
-% EndTime: 2019-07-18 17:17:04
-% DurationCPUTime: 0.22s
+% StartTime: 2019-12-05 18:55:02
+% EndTime: 2019-12-05 18:55:02
+% DurationCPUTime: 0.23s
 % Computational Cost: add. (126->72), mult. (144->99), div. (0->0), fcn. (128->10), ass. (0->31)
 t53 = cos(qJ(2));
 t69 = pkin(1) * t53;
@@ -81,4 +81,4 @@ t44 = cos(t47);
 t42 = sin(t47);
 t41 = t52 * pkin(3) + pkin(2);
 t1 = -m(1) * (g(1) * rSges(1,1) + g(2) * rSges(1,2) + g(3) * rSges(1,3)) - m(2) * (g(1) * (t54 * rSges(2,1) - t51 * rSges(2,2)) + g(2) * (t51 * rSges(2,1) + t54 * rSges(2,2)) + g(3) * (pkin(4) + rSges(2,3))) - m(3) * (g(1) * (t51 * rSges(3,3) + t56 * t54) + g(2) * (-t54 * rSges(3,3) + t56 * t51) + g(3) * (t50 * rSges(3,1) + t53 * rSges(3,2) + pkin(4))) - m(4) * (g(1) * (t51 * rSges(4,3) + t55 * t54 + t40) + g(2) * (-t54 * rSges(4,3) + t55 * t51 + t39) + g(3) * (t43 * rSges(4,1) + t45 * rSges(4,2) + t67)) - m(5) * (g(1) * (pkin(2) * t63 + (t45 * t61 + t65) * rSges(5,1) + (-t45 * t62 + t64) * rSges(5,2) + t59) + g(2) * (pkin(2) * t66 + (t45 * t64 - t62) * rSges(5,1) + (-t45 * t65 - t61) * rSges(5,2) + t60) + g(3) * (-t45 * rSges(5,3) + t58) + (g(3) * (rSges(5,1) * t52 - rSges(5,2) * t49 + pkin(2)) + t57 * rSges(5,3)) * t43) - m(6) * (g(1) * (t41 * t63 + pkin(3) * t65 + (t51 * t42 + t44 * t63) * rSges(6,1) + (-t42 * t63 + t51 * t44) * rSges(6,2) + t59) + g(2) * (t41 * t66 - pkin(3) * t62 + (-t54 * t42 + t44 * t66) * rSges(6,1) + (-t42 * t66 - t54 * t44) * rSges(6,2) + t60) + g(3) * (-t45 * rSges(6,3) + t58) + (g(3) * (rSges(6,1) * t44 - rSges(6,2) * t42 + t41) + t57 * rSges(6,3)) * t43);
-U  = t1;
+U = t1;

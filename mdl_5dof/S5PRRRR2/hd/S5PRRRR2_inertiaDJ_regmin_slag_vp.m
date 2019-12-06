@@ -13,12 +13,12 @@
 % 
 % Output:
 % MMD_reg [((5+1)*5/2)x17]
-%   minimal parameter regressor of inerta matrix time derivative
+%   minimal parameter regressor of inertia matrix time derivative
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:30
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:05
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -37,9 +37,9 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From inertiaD_joint_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:30:18
-% EndTime: 2019-07-18 13:30:19
-% DurationCPUTime: 0.18s
+% StartTime: 2019-12-05 17:04:51
+% EndTime: 2019-12-05 17:04:52
+% DurationCPUTime: 0.19s
 % Computational Cost: add. (112->36), mult. (378->61), div. (0->0), fcn. (236->6), ass. (0->32)
 t21 = sin(qJ(4));
 t22 = sin(qJ(3));
@@ -73,4 +73,4 @@ t16 = 0.2e1 * t20 * t19;
 t12 = 0.2e1 * (-t20 ^ 2 + t23 ^ 2) * qJD(5);
 t8 = pkin(2) * t38 + t21 * t18 + pkin(6);
 t3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, -0.2e1 * t31, -0.2e1 * t30, 0, -0.2e1 * t5, 0.2e1 * t4, t16, t12, 0, 0, 0, 0.2e1 * t2, 0.2e1 * t1; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, -t31, -t30, 0, (-pkin(3) - t18) * t36 - t40, t4 - t28, t16, t12, 0, 0, 0, t10 + t2, t9 + t1; 0, 0, 0, 0, 0, 0, 0, 0, -0.2e1 * t29, -0.2e1 * t28, t16, t12, 0, 0, 0, 0.2e1 * t10, 0.2e1 * t9; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, -t5, t4, t16, t12, 0, 0, 0, t2, t1; 0, 0, 0, 0, 0, 0, 0, 0, -t29, -t28, t16, t12, 0, 0, 0, t10, t9; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t16, t12, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t34, -t19; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t19, -t34, 0, -t8 * t19 + t20 * t4, t23 * t4 + t8 * t34; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t19, -t34, 0, -t17 * t19 - t20 * t28, t17 * t34 - t23 * t28; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t19, -t34, 0, -pkin(6) * t19, pkin(6) * t34; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;];
-MMD_reg  = t3;
+MMD_reg = t3;

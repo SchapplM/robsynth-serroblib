@@ -19,8 +19,8 @@
 %   joint torques required to compensate gravitation load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:38
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2019-12-05 18:52
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -38,8 +38,8 @@ assert(isreal(MDP) && all(size(MDP) == [31 1]), ...
 %% Symbolic Calculation
 % From gravload_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 18:37:56
-% EndTime: 2019-03-08 18:37:57
+% StartTime: 2019-12-05 18:51:00
+% EndTime: 2019-12-05 18:51:01
 % DurationCPUTime: 0.12s
 % Computational Cost: add. (199->37), mult. (202->54), div. (0->0), fcn. (180->10), ass. (0->25)
 t46 = qJ(2) + qJ(3);
@@ -56,7 +56,7 @@ t59 = t52 * t47;
 t58 = t52 * t50;
 t42 = cos(t45);
 t56 = g(1) * t52 + g(2) * t49;
-t57 = (t56 * t42 - t63) * MDP(24) + (t50 * MDP(30) - t47 * MDP(31) + MDP(23)) * (g(3) * t42 + t56 * t41);
+t57 = (t42 * t56 - t63) * MDP(24) + (MDP(30) * t50 - MDP(31) * t47 + MDP(23)) * (g(3) * t42 + t41 * t56);
 t43 = sin(t46);
 t44 = cos(t46);
 t54 = (g(3) * t44 + t43 * t56) * MDP(16) + (-g(3) * t43 + t44 * t56) * MDP(17) + t57;
@@ -66,5 +66,5 @@ t40 = t42 * t58 - t61;
 t39 = -t42 * t59 - t60;
 t38 = -t42 * t60 - t59;
 t37 = t42 * t61 - t58;
-t1 = [t56 * MDP(3) + (-g(1) * t38 - g(2) * t40) * MDP(30) + (-g(1) * t37 - g(2) * t39) * MDP(31) + (-MDP(10) * t48 + MDP(16) * t44 - MDP(17) * t43 + MDP(23) * t42 - MDP(24) * t41 + MDP(9) * t51 + MDP(2)) * (g(1) * t49 - g(2) * t52); (g(3) * t51 + t48 * t56) * MDP(9) + (-g(3) * t48 + t56 * t51) * MDP(10) + t54; t54; t57; (-g(1) * t39 + g(2) * t37 - t47 * t63) * MDP(30) + (g(1) * t40 - g(2) * t38 - t50 * t63) * MDP(31);];
-taug  = t1;
+t1 = [t56 * MDP(3) + (-g(1) * t38 - g(2) * t40) * MDP(30) + (-g(1) * t37 - g(2) * t39) * MDP(31) + (-MDP(10) * t48 + MDP(16) * t44 - MDP(17) * t43 + MDP(23) * t42 - MDP(24) * t41 + MDP(9) * t51 + MDP(2)) * (g(1) * t49 - g(2) * t52); (g(3) * t51 + t48 * t56) * MDP(9) + (-g(3) * t48 + t51 * t56) * MDP(10) + t54; t54; t57; (-g(1) * t39 + g(2) * t37 - t47 * t63) * MDP(30) + (g(1) * t40 - g(2) * t38 - t50 * t63) * MDP(31);];
+taug = t1;

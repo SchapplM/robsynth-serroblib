@@ -22,8 +22,8 @@
 %   joint torques required to compensate gravitation load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:38
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2019-12-05 18:52
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -46,9 +46,9 @@ assert(isreal(mrSges) && all(size(mrSges) == [6,3]), ...
 %% Symbolic Calculation
 % From gravload_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 18:36:55
-% EndTime: 2019-03-08 18:36:57
-% DurationCPUTime: 0.42s
+% StartTime: 2019-12-05 18:49:46
+% EndTime: 2019-12-05 18:49:48
+% DurationCPUTime: 0.45s
 % Computational Cost: add. (359->81), mult. (350->95), div. (0->0), fcn. (292->10), ass. (0->52)
 t23 = qJ(2) + qJ(3);
 t21 = qJ(4) + t23;
@@ -101,5 +101,5 @@ t4 = t17 * t55 - t59;
 t3 = -t17 * t56 - t58;
 t2 = -t17 * t58 - t56;
 t1 = t17 * t59 - t55;
-t5 = [(-t4 * mrSges(6,1) - t3 * mrSges(6,2) + t74 * t26 - t73 * t29) * g(2) + (-t2 * mrSges(6,1) - t1 * mrSges(6,2) + t73 * t26 + t74 * t29) * g(1), -g(1) * (t32 * t29 + t48) - g(2) * (t32 * t26 + t49) + (-t46 + m(4) * t22 + m(5) * t52 - m(6) * (-t22 + t39) + t76) * g(3) + t81 * (m(4) * t67 - m(5) * t8 + mrSges(3,1) * t25 + mrSges(3,2) * t28 + t82) -g(1) * (t31 * t29 + t48) - g(2) * (t31 * t26 + t49) + (m(5) * t71 - m(6) * t39 + t76) * g(3) + (m(5) * t72 + t82) * t81 (t83 * t16 + t41 * t17 - t10 - t14) * g(3) + (t30 * t26 - t49) * g(2) + (t30 * t29 - t48) * g(1), -g(1) * (t3 * mrSges(6,1) - t4 * mrSges(6,2)) - g(2) * (-t1 * mrSges(6,1) + t2 * mrSges(6,2)) - g(3) * (mrSges(6,1) * t24 + mrSges(6,2) * t27) * t16];
-taug  = t5(:);
+t5 = [(-t4 * mrSges(6,1) - t3 * mrSges(6,2) + t74 * t26 - t73 * t29) * g(2) + (-t2 * mrSges(6,1) - t1 * mrSges(6,2) + t73 * t26 + t74 * t29) * g(1), -g(1) * (t32 * t29 + t48) - g(2) * (t32 * t26 + t49) + (-t46 + m(4) * t22 + m(5) * t52 - m(6) * (-t22 + t39) + t76) * g(3) + t81 * (m(4) * t67 - m(5) * t8 + mrSges(3,1) * t25 + mrSges(3,2) * t28 + t82), -g(1) * (t31 * t29 + t48) - g(2) * (t31 * t26 + t49) + (m(5) * t71 - m(6) * t39 + t76) * g(3) + (m(5) * t72 + t82) * t81, (t83 * t16 + t41 * t17 - t10 - t14) * g(3) + (t30 * t26 - t49) * g(2) + (t30 * t29 - t48) * g(1), -g(1) * (t3 * mrSges(6,1) - t4 * mrSges(6,2)) - g(2) * (-t1 * mrSges(6,1) + t2 * mrSges(6,2)) - g(3) * (mrSges(6,1) * t24 + mrSges(6,2) * t27) * t16];
+taug = t5(:);

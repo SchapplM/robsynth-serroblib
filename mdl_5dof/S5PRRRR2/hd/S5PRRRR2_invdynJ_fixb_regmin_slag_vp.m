@@ -20,8 +20,8 @@
 %   minimal parameter regressor of inverse dynamics joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-07-18 13:30
-% Revision: 08c8d617a845f5dd194efdf9aca2774760f7818f (2019-07-16)
+% Datum: 2019-12-05 17:05
+% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -44,9 +44,9 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From invdyn_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-07-18 13:30:20
-% EndTime: 2019-07-18 13:30:22
-% DurationCPUTime: 0.43s
+% StartTime: 2019-12-05 17:04:53
+% EndTime: 2019-12-05 17:04:55
+% DurationCPUTime: 0.46s
 % Computational Cost: add. (570->109), mult. (938->145), div. (0->0), fcn. (531->12), ass. (0->84)
 t46 = qJD(2) + qJD(3);
 t56 = cos(qJ(3));
@@ -56,7 +56,7 @@ t51 = sin(qJ(4));
 t55 = cos(qJ(4));
 t52 = sin(qJ(3));
 t85 = t52 * t95;
-t10 = -t55 * t20 + t51 * t85;
+t10 = -t20 * t55 + t51 * t85;
 t41 = qJD(4) + t46;
 t49 = qJ(2) + qJ(3);
 t44 = qJ(4) + t49;
@@ -93,12 +93,12 @@ t107 = pkin(3) * t40;
 t50 = sin(qJ(5));
 t54 = cos(qJ(5));
 t90 = qJD(5) * t10;
-t105 = t54 * t28 + t50 * t90;
+t105 = t28 * t54 + t50 * t90;
 t103 = (t20 * t51 + t55 * t85) * t41;
 t101 = t51 * t52;
 t99 = t54 * t40;
 t37 = pkin(3) + t108;
-t98 = pkin(2) * t100 + t51 * t37;
+t98 = pkin(2) * t100 + t37 * t51;
 t42 = sin(t49);
 t43 = cos(t49);
 t97 = g(1) * t43 + g(2) * t42;
@@ -112,13 +112,13 @@ t79 = qJD(3) * (-qJD(2) - t46);
 t77 = g(1) * t42 - g(2) * t43 + t38;
 t75 = pkin(6) * t58 - t103;
 t18 = pkin(2) * t101 - t37 * t55;
-t74 = -t18 * t40 - (t37 * t92 + (t72 * qJD(3) + t84) * pkin(2)) * t41;
+t74 = -t18 * t40 - (t37 * t92 + (qJD(3) * t72 + t84) * pkin(2)) * t41;
 t71 = t55 * t56 - t101;
 t70 = -pkin(6) * qJDD(5) - t90;
 t15 = pkin(6) + t98;
 t67 = t15 * t58 - t74;
 t65 = -t40 * pkin(6) + t117;
-t4 = t37 * t91 + (t71 * qJD(3) - t52 * t92) * pkin(2);
+t4 = t37 * t91 + (qJD(3) * t71 - t52 * t92) * pkin(2);
 t63 = -qJDD(5) * t15 + (t18 * t41 - t4) * qJD(5);
 t17 = t71 * t95;
 t62 = -qJDD(5) * t36 + (t17 + (-qJD(4) - t41) * t55 * pkin(3)) * qJD(5);
@@ -130,6 +130,6 @@ t39 = t41 ^ 2;
 t22 = qJDD(5) * t54 - t50 * t58;
 t21 = qJDD(5) * t50 + t54 * t58;
 t13 = 0.2e1 * t41 * t50 * t89 + t40 * t47;
-t6 = -0.2e1 * t96 * t41 * qJD(5) + 0.2e1 * t50 * t99;
-t1 = [t88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t22, -t21; 0, qJDD(2), g(1) * t53 - g(2) * t57, g(1) * t57 + g(2) * t53, t45, (t45 * t56 + t52 * t79) * pkin(2) + t77, ((-qJDD(2) - t45) * t52 + t56 * t79) * pkin(2) + t97, t40, t59 + t74, -t4 * t41 - t98 * t40 + t60, t13, t6, t21, t22, 0, t63 * t50 + (-t67 - t116) * t54 + t105, t63 * t54 + (t67 - t28) * t50 + t86; 0, 0, 0, 0, t45, t52 * pkin(2) * t80 + t77, (t56 * t80 - t87) * pkin(2) + t97, t40, t102 + t12 + (-t78 + t107) * t55 + t61 * t51 + t112, t17 * t41 + (-t14 - t107) * t51 + t61 * t55 + t114, t13, t6, t21, t22, 0, t62 * t50 + (-t110 - t116) * t54 + t105, t62 * t54 + (t110 - t28) * t50 + t86; 0, 0, 0, 0, 0, 0, 0, t40, t59 + t103, t117, t13, t6, t21, t22, 0, t70 * t50 + (-t75 - t116) * t54 + t105, t70 * t54 + (t75 - t28) * t50 + t86; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t50 * t39 * t54, t96 * t39, t50 * t40, t99, qJDD(5), t65 * t50 + t88 * t54, -t88 * t50 + t65 * t54;];
-tau_reg  = t1;
+t6 = -0.2e1 * qJD(5) * t41 * t96 + 0.2e1 * t50 * t99;
+t1 = [t88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t22, -t21; 0, qJDD(2), g(1) * t53 - g(2) * t57, g(1) * t57 + g(2) * t53, t45, (t45 * t56 + t52 * t79) * pkin(2) + t77, ((-qJDD(2) - t45) * t52 + t56 * t79) * pkin(2) + t97, t40, t59 + t74, -t4 * t41 - t40 * t98 + t60, t13, t6, t21, t22, 0, t63 * t50 + (-t67 - t116) * t54 + t105, t63 * t54 + (t67 - t28) * t50 + t86; 0, 0, 0, 0, t45, pkin(2) * t52 * t80 + t77, (t56 * t80 - t87) * pkin(2) + t97, t40, t102 + t12 + (-t78 + t107) * t55 + t61 * t51 + t112, t17 * t41 + (-t14 - t107) * t51 + t61 * t55 + t114, t13, t6, t21, t22, 0, t62 * t50 + (-t110 - t116) * t54 + t105, t62 * t54 + (t110 - t28) * t50 + t86; 0, 0, 0, 0, 0, 0, 0, t40, t59 + t103, t117, t13, t6, t21, t22, 0, t70 * t50 + (-t75 - t116) * t54 + t105, t70 * t54 + (t75 - t28) * t50 + t86; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t50 * t39 * t54, t96 * t39, t50 * t40, t99, qJDD(5), t50 * t65 + t54 * t88, -t50 * t88 + t54 * t65;];
+tau_reg = t1;
