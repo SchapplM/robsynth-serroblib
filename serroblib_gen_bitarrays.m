@@ -87,7 +87,7 @@ for N = N_update(:)'
 
       %% Weitere Eigenschaften bestimmen bzw. Auslesen
       % Lese die Nummer des letzten Positionsbestimmenden Gelenks aus
-      lastposjoint = str2double(csvline{end});
+      lastposjoint = str2double(csvline{end-4});
       
       % Bestimme, ob der Roboter eine Variante oder ein Hauptmodell ist
       exp_mdl = 'S(\d)([RP]+)(\d+)'; % Format "S3RRR1" für Hauptmodelle
