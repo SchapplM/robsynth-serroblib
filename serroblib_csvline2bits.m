@@ -45,18 +45,27 @@
 %   Bits entsprechen denen aus BAJ, sind auf 0 gesetzt, wenn Parameter/Bits
 %   nicht betrachtet werden müssen
 % 
+% BAO [1x1] uint16
+%   Bit-Array zur Kennzeichnung der Modellherkunft
+%   Bits:
+%   01 (LSB): Spalte "Manuell" (Kette wurde vom Benutzer erstellt)
+%   02: Spalte "Roboter" (Kette kommt aus Struktursynthese mit EE-FG)
+%   03: Spalte "3T0R-PKM" (Beinkette für PKM mit EE-FG)
+%   04: Spalte "3T1R-PKM"
+% 
 % Siehe auch: serroblib_bits2csvline
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function [BAJ, BAR, BAE, BAJVF] = serroblib_csvline2bits(csvline)
+function [BAJ, BAR, BAE, BAJVF, BAO] = serroblib_csvline2bits(csvline)
 
 %% Initialisierung
 % Prüfe Eingabe
 % Nicht Teil der Gelenk-Einträge: Name (1 Spalte), EE-Trafo (3), EE-FG (6
-% Spalten), EE-FG Euler-Winkel (3), Nummer des Pos.-beeinfl. Gelenks (1)
-N1 = (length(csvline)-1-3-6-3-1);
+% Spalten), EE-FG Euler-Winkel (3), Nummer des Pos.-beeinfl. Gelenks (1),
+% Herkunft der Kinematik (4 Spalten)
+N1 = (length(csvline)-1-3-6-3-1-4);
 if mod(N1,8) ~= 0
   error('falsche Anzahl Einträge in csvline');
 end
@@ -66,6 +75,7 @@ N = N1/8; % 8 Spalten pro Gelenk. So herausfinden der Gelenkzahl
 BAJ = uint16(zeros(1,N));
 BAJVF = uint16(Inf(1,N));
 BAR = uint16(0);
+BAO = uint16(0);
 %% Bit-Vektor für Gelenk-Parameter aus csv-Zeile gewinnen
 c = 1;
 for kk = 1:N % über alle Gelenk-FG
@@ -140,6 +150,17 @@ for kk = 1:3
 	% Prüfen mit: `dec2bin(Bit_phi)`
 end
 % Prüfen mit: `dec2bin(BAR)`
-
 %% Bit-Vektor für EE-FG aus csv-Zeile gewinnen
-BAE = serroblib_csvline2bits_EE(csvline(c+1:end-1));
+BAE = serroblib_csvline2bits_EE(csvline(c+1:c+9));
+c = c+9;
+% Spalte für Gelenk-Anzahl überspringen
+c = c+1;
+%% Bit-Vektor für Modellherkunft
+b = 0; % Bit-Offset zur Verschiebung der Parameter-Bits in der Gesamtvariable
+for kk = 1:4
+  c=c+1; Bit_phi = uint16( strcmp(csvline{c},'1') );
+  BAO = bitor( BAO, bitshift(Bit_phi,b)); b = b+1;
+  % Prüfen mit: `dec2bin(Bit_phi)`
+end
+return
+% Prüfen mit: `dec2bin(BAO)`

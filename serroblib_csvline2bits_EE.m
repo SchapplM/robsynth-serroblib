@@ -47,4 +47,5 @@ for i = 1:9
     BAE = bitor( BAE, bitshift(1,b)); b = b+1;
   end
 end
-% dec2bin(BAE)
+% Prüfen mit: `dec2bin(BAE)`
+return
