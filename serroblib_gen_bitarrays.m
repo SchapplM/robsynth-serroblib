@@ -32,6 +32,8 @@
 %        Struktur geschlossen werden (ist aber auch im Namen enthalten)
 %   BitArrays_Ndof_VF
 %     Bit-Array mit Filter, um Varianten eines Roboters zu erkennen
+%   BitArrays_Origin
+%     Bit-Array mit Herkunft der Kinematik kodiert als Bits
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für Mechatronische Systeme, Universität Hannover
@@ -49,6 +51,7 @@ for N = N_update(:)'
   BitArrays_Ndof_VF = uint16(zeros(1,N));
   BitArrays_phiNE = uint16(zeros(1,1));
   BitArrays_EEdof0 = uint16(zeros(1,1));
+  BitArrays_Origin = uint16(zeros(1,1));
   AdditionalInfo = zeros(1,5);
   Names_Ndof = {};
   b = 1; % Zähler für gefundene Roboterkonfigurationen aus csv-Tabelle für N FG
@@ -67,7 +70,7 @@ for N = N_update(:)'
       if isempty(csvline) || strcmp(csvline{1}, '')
         continue
       end
-      if length(csvline) ~= 1+N*8+3+6+3+1
+      if length(csvline) ~= 1+N*8+3+6+3+1+3
         warning('Zeile %s (Datei %s) sieht ungültig aus', tline, d.name);
         continue % nicht genug Spalten: Ungültiger Datensatz
       end
@@ -80,7 +83,7 @@ for N = N_update(:)'
       Name = csvline{1};
       
       % Roboterzeile in Binär-kodierte Informationen umrechnen
-      [BAJ, BAR, BAE, BAJVF] = serroblib_csvline2bits(csvline);
+      [BAJ, BAR, BAE, BAJVF, BAO] = serroblib_csvline2bits(csvline);
 
       %% Weitere Eigenschaften bestimmen bzw. Auslesen
       % Lese die Nummer des letzten Positionsbestimmenden Gelenks aus
@@ -148,6 +151,7 @@ for N = N_update(:)'
       BitArrays_Ndof_VF(b,:) = BAJVF;
       BitArrays_phiNE(b,:) = BAR;
       BitArrays_EEdof0(b,:) = BAE;
+      BitArrays_Origin(b,:) = BAO;
       AdditionalInfo(b,:) = [lastposjoint, double(isvariant), variantof, hascode, numrotjoints];
       b = b+1;
     end
@@ -158,5 +162,5 @@ for N = N_update(:)'
   % fprintf('serroblib_gen_bitarrays: Datei %s mit %d Einträgen gespeichert \n', mdllistfile_Ndof, size(BitArrays_Ndof,1));
   mkdirs(fileparts(mdllistfile_Ndof));
   save(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_Ndof_VF', ...
-    'BitArrays_phiNE', 'BitArrays_EEdof0', 'AdditionalInfo');
+    'BitArrays_phiNE', 'BitArrays_EEdof0', 'BitArrays_Origin', 'AdditionalInfo');
 end

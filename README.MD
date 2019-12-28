@@ -52,6 +52,7 @@ Zusätzliche Eigenschaften des Roboters ermitteln und ebenfalls eintragen (ist n
 * `scripts/correct_phi_N_E.m`
 * `scripts/determine_jointnumber_influence_ee_position.m`
 * `scripts/determine_ee_dof.m`
+* `scripts/write_structsynth_origin.m`
 
 Datenbank prüfen:
 * Mit `scripts/check_model_enumeration.m` lässt sich prüfen, ob nach Lösung von Kinematiken Lücken in der Nummerierung auftreten.
@@ -59,6 +60,7 @@ Datenbank prüfen:
 Datenbank modifizieren: Wenn nachträglich das Format der Datenbank geändert wird, geschieht dies automatisiert über Skripte (Ordner `scripts`). Die folgenden Skripte können als Beispiele für weitere Modifikationen dienen:
 * `add_csv_column_ee_phi.m` und `correct_phi_N_E.m`: Hinzufügen und Belegen von Spalten für zusätzliche EE-Drehung
 * `add_csv_column_pos_infl_joint.m` und `determine_jointnumber_influence_ee_position.m`: Zusätzliche Spalte für Nummer des Gelenks, das zuletzt die EE-Position beeinflusst.
+* `add_csv_column_structsynth_origin.m`: Zusätzliche Spalten für Herkunft des Modells
 
 ### Übersichtsdateien
 
@@ -90,6 +92,7 @@ Die Tabellen werden automatisch von `serroblib_add_robot.m` erstellt. Es gibt fo
 
   Die ersten sechs Einträge entsprechen der üblichen Twist-Notation in der Schraubentheorie und in [Ramirez2018].
 * Weitere Eigenschaften: Enthält für die Berechnungen nützliche Eigenschaften, wie die Nummer des letzten, die EE-Position beeinflussenden Gelenks.
+* Herkunft der kinematischen Kette: Enthält eine "1", wenn die kinematische Kette aus der jeweiligen Struktursynthese stammt. Dadurch wird direkt erkennbar, ob eine Kinematik aus der Struktursynthese serieller Roboter stammt oder als Beinkette einer PKM erzeugt wurde. Beinketten für PKM z.B. mit 3T0R FG haben typischerweise mehr Gelenke und FG als die Plattform. Manuell eingetragene Strukturen lassen sich so ebenfalls erkennen.
 
 #### Liste der Roboterparameter für ein Robotermodell (models.csv)
 
@@ -103,6 +106,10 @@ Die Tabelle enthält Zahlenwerte für die einzelnen MDH-Parameter.
 #### Matlab-Datei mit Modellübersicht
 
 Die csv-Dateien enhalten alle Informationen der Roboterbibliothek. Die Daten werden zusätzlich in komprimierter Form gespeichert. In `mdl_xdof/Sx_list.mat` liegen die gleichen Daten wie in den csv-Tabellen zur einfacheren Verarbeitung in Matlab.
+
+#### Ordner mit Ergebnissen der Struktursynthese
+
+Im Ordner `synthesis_result_lists` sind alle Ergebnisse der Struktursynthese serieller Ketten als Text-Dateien abgelegt. Die Ergebnisse einer Struktursynthese mit bestimmten Einstellungen werden jeweils in einer eigenen Datei abgelegt. Die Dateien werden im Skript `write_structsynth_origin.m` dafür benutzt, die Herkunft der Modelle in der Datenbank einzutragen.
 
 ### Kinematik- und Dynamikfunktionen
 
