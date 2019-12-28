@@ -56,6 +56,7 @@ Zusätzliche Eigenschaften des Roboters ermitteln und ebenfalls eintragen (ist n
 
 Datenbank prüfen:
 * Mit `scripts/check_model_enumeration.m` lässt sich prüfen, ob nach Lösung von Kinematiken Lücken in der Nummerierung auftreten.
+* Mit `scripts/check_structsynth_origin.m` wird geprüft, ob für jedes Modell in der Datenbank mindestens eine Herkunft angegeben ist (Manuell erstellt oder automatische Struktursynthese mit bestimmten Einstellungen).
 
 Datenbank modifizieren: Wenn nachträglich das Format der Datenbank geändert wird, geschieht dies automatisiert über Skripte (Ordner `scripts`). Die folgenden Skripte können als Beispiele für weitere Modifikationen dienen:
 * `add_csv_column_ee_phi.m` und `correct_phi_N_E.m`: Hinzufügen und Belegen von Spalten für zusätzliche EE-Drehung
