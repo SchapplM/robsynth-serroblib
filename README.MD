@@ -92,7 +92,10 @@ Die Tabellen werden automatisch von `serroblib_add_robot.m` erstellt. Es gibt fo
 
   Die ersten sechs Einträge entsprechen der üblichen Twist-Notation in der Schraubentheorie und in [Ramirez2018].
 * Weitere Eigenschaften: Enthält für die Berechnungen nützliche Eigenschaften, wie die Nummer des letzten, die EE-Position beeinflussenden Gelenks.
-* Herkunft der kinematischen Kette: Enthält eine "1", wenn die kinematische Kette aus der jeweiligen Struktursynthese stammt. Dadurch wird direkt erkennbar, ob eine Kinematik aus der Struktursynthese serieller Roboter stammt oder als Beinkette einer PKM erzeugt wurde. Beinketten für PKM z.B. mit 3T0R FG haben typischerweise mehr Gelenke und FG als die Plattform. Manuell eingetragene Strukturen lassen sich so ebenfalls erkennen.
+* Herkunft der kinematischen Kette: Enthält eine "1", wenn die kinematische Kette aus der jeweiligen Struktursynthese stammt. Dadurch wird direkt erkennbar, ob eine Kinematik 
+  * Händisch erstellt wurde (Spalte 1)
+  * aus der Struktursynthese serieller Roboter stammt (Spalte 2)
+  * oder als Beinkette einer PKM erzeugt wurde (Spalte 3 und 4). Beinketten für PKM z.B. mit 3T0R FG haben typischerweise mehr Gelenke und FG als die Plattform.
 
 #### Liste der Roboterparameter für ein Robotermodell (models.csv)
 

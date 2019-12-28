@@ -20,30 +20,30 @@ for idx_case = 1:6
     case 1
       % Name der Datei mit abgespeicherten Namen der kinematischen Ketten
       reslist='structsynth_ser_2T1R';
-      % Nummer der Herkunftsspalte (1="Roboter",2="3T0R-PKM",3="3T1R-PKM")
-      idx_oc = 1;
+      % Nummer der Herkunftsspalte (1="Manuell",2="Roboter",3="3T0R-PKM",4="3T1R-PKM")
+      idx_oc = 2;
       % Alle Einträge für Roboter mit bestimmten Eigenschaften zurücksetzen
       flush_data = true; flush_Njoint = 3; flush_EEFG = [1 1 0 0 0 1];
     case 2
       reslist='structsynth_ser_3T0R';
-      idx_oc = 1;
+      idx_oc = 2;
       flush_data = true; flush_Njoint = 3; flush_EEFG = [1 1 1 0 0 0];
     case 3
       reslist='structsynth_ser_3T1R';
-      idx_oc = 1;
+      idx_oc = 2;
       flush_data = true; flush_Njoint = 4; flush_EEFG = [1 1 1 0 0 1];
     case 4
       reslist='structsynth_ser_3T3R';
-      idx_oc = 1;
+      idx_oc = 2;
       flush_data = true; flush_Njoint = 6; flush_EEFG = [1 1 1 1 1 1];
     case 5
       reslist='structsynth_ser_3T2R_fixrot';
-      idx_oc = 1;
+      idx_oc = 2;
       flush_data = true; flush_Njoint = 5; flush_EEFG = [1 1 1 1 1 0];
     case 6
       % Die Ergebnisse sind aktuell identisch zu structsynth_ser_3T2R_fixrot
       reslist='structsynth_ser_3T2R_varrot';
-      idx_oc = 1;
+      idx_oc = 2;
   end
   fprintf('Teil %d: Feststellung der Ergebnisse aus Liste %s\n', idx_case, reslist);
   %% Alle Einträge für bestimmte Roboter zurücksetzen

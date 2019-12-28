@@ -1,4 +1,4 @@
-Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;EE-Transformation (phi_N_E);;;EE-FG (Basis-KS);;;;;;;;;Weitere Eigenschaften;Herkunft Struktursynthese;;
-;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;phix_NE;phiy_NE;phiz_NE;vx0;vy0;vz0;wx0;wy0;wz0;phix0;phiy0;phiz0;Positionsbeeinflussendes Gelenk;Roboter;3T0R-PKM;3T1R-PKM
-S2RR1;R;0;0;-pi/2;0;0;0;-pi/2;R;0;0;-pi/2;0;0;d2;0;0;0;0;1;0;1;1;1;1;1;1;1;1;?;?;?
-S2RR2;R;0;0;-pi/2;0;0;0;0;R;0;0;pi/2;0;0;d2;0;0;0;0;1;1;1;1;1;1;1;1;1;1;?;?;?
+Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;EE-Transformation (phi_N_E);;;EE-FG (Basis-KS);;;;;;;;;Weitere Eigenschaften;Herkunft Struktursynthese;;;
+;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;phix_NE;phiy_NE;phiz_NE;vx0;vy0;vz0;wx0;wy0;wz0;phix0;phiy0;phiz0;Positionsbeeinflussendes Gelenk;Manuell;Roboter;3T0R-PKM;3T1R-PKM
+S2RR1;R;0;0;-pi/2;0;0;0;-pi/2;R;0;0;-pi/2;0;0;d2;0;0;0;0;1;0;1;1;1;1;1;1;1;1;0;?;?;?
+S2RR2;R;0;0;-pi/2;0;0;0;0;R;0;0;pi/2;0;0;d2;0;0;0;0;1;1;1;1;1;1;1;1;1;1;0;?;?;?

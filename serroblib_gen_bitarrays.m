@@ -70,7 +70,7 @@ for N = N_update(:)'
       if isempty(csvline) || strcmp(csvline{1}, '')
         continue
       end
-      if length(csvline) ~= 1+N*8+3+6+3+1+3
+      if length(csvline) ~= 1+N*8+3+6+3+1+4
         warning('Zeile %s (Datei %s) sieht ungültig aus', tline, d.name);
         continue % nicht genug Spalten: Ungültiger Datensatz
       end
