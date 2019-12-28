@@ -118,8 +118,8 @@ if ~exist(filepath_csv, 'file')
   
   % Kopfzeile für Herkunft der Kinematik
   c = length(csvline_head1)+4;
-  csvline_head1{c-3:c} = {'Weitere Eigenschaften', '', ''};
-  csvline_head2{c-3:c} = {'Manuell', 'Roboter', '3T0R-PKM', '3T1R-PKM'};
+  csvline_head1(c-3:c) = {'Herkunft Struktursynthese', '', '', ''};
+  csvline_head2(c-3:c) = {'Manuell', 'Roboter', '3T0R-PKM', '3T1R-PKM'};
   
   % String aus Cell-Array erzeugen
   line_head1 = csvline_head1{1};
