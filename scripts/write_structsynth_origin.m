@@ -13,7 +13,7 @@ roblibpath=fileparts(which('serroblib_path_init.m'));
 robot_list_dir = fullfile(roblibpath, 'synthesis_result_lists');
 serroblib_gen_bitarrays(1:7);
 
-for idx_case = 1:4
+for idx_case = 1:6
   %% Optionen zur Bearbeitung der Tabellen
   flush_data = false;
   switch idx_case
@@ -36,6 +36,14 @@ for idx_case = 1:4
       reslist='structsynth_ser_3T3R';
       idx_oc = 1;
       flush_data = true; flush_Njoint = 6; flush_EEFG = [1 1 1 1 1 1];
+    case 5
+      reslist='structsynth_ser_3T2R_fixrot';
+      idx_oc = 1;
+      flush_data = true; flush_Njoint = 5; flush_EEFG = [1 1 1 1 1 0];
+    case 6
+      % Die Ergebnisse sind aktuell identisch zu structsynth_ser_3T2R_fixrot
+      reslist='structsynth_ser_3T2R_varrot';
+      idx_oc = 1;
   end
   fprintf('Teil %d: Feststellung der Ergebnisse aus Liste %s\n', idx_case, reslist);
   %% Alle Einträge für bestimmte Roboter zurücksetzen
@@ -165,8 +173,10 @@ for idx_case = 1:4
       fprintf('\tWert für Modellherkunft Spalte %d auf 1 gesetzt.\n', idx_oc);
     end
   end
+  Names_existing = unique(Names_existing);
   % Speichere die (reduzierte) Liste der tatsächlich in der Datenbank
   % enthaltenen Roboter ab. Durch nachträgliches Entfernen von Ergebnissen
   % der Synthese kann diese Liste kürzer sein.
-  writecell(unique(Names_existing(:)), [roblist_existing, '.txt']);
+  writecell(Names_existing(:), [roblist_existing, '.txt']);
+  fprintf('Namen der %d aktualisierten Modelle in %s eingetragen.\n', length(Names_existing), roblist_existing);
 end
