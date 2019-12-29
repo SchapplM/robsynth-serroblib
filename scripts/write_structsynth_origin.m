@@ -13,7 +13,7 @@ roblibpath=fileparts(which('serroblib_path_init.m'));
 robot_list_dir = fullfile(roblibpath, 'synthesis_result_lists');
 serroblib_gen_bitarrays(1:7);
 
-for idx_case = 1:7
+for idx_case = 1:9
   %% Optionen zur Bearbeitung der Tabellen
   flush_data = false;
   flush_EEFG_mask = [1 1 1 1 1 1];
@@ -52,6 +52,16 @@ for idx_case = 1:7
       flush_EEFG = [1 1 1 1 1 1];
       flush_EEFG_mask = [1 1 1 0 0 0]; % Die Rotations-FG sind egal
       reslist = 'structsynth_pkm_3T0R_4J';
+    case 8
+      idx_oc = 3; % Spalte für 3T0R-PKM
+      reslist = 'structsynth_pkm_3T0R_5J';
+    case 9
+      idx_oc = 4; % Spalte für 3T1R-PKM
+      flush_data = true;
+      flush_Njoint = 5; 
+      flush_EEFG = [1 1 1 1 1 1];
+      flush_EEFG_mask = [1 1 1 0 0 0]; % Die Rotations-FG sind egal
+      reslist = 'structsynth_pkm_3T1R_5J';
   end
   fprintf('Teil %d: Feststellung der Ergebnisse aus Liste %s\n', idx_case, reslist);
   %% Alle Einträge für bestimmte Roboter zurücksetzen
@@ -124,6 +134,11 @@ for idx_case = 1:7
   % Nach der Struktursynthese serieller Roboter werden die Ergebnisse als
   % Liste gespeichert. Es wird angenommen, dass die Listen jeweils
   % vollständig sind.
+  if isempty(reslist)
+    % Falls keine Liste angegeben ist, wird nur eine Löschung vorgenommen
+    % (s.o.)
+    continue
+  end
   roblist = fullfile(robot_list_dir, reslist);
   roblist_existing = fullfile(robot_list_dir, [reslist, '_in_DB']);
   Names = readcell([roblist, '.txt']);
