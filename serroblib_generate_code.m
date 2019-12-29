@@ -1,32 +1,33 @@
-% Generiere Matlab-Code mit Maple-Dynamik-Toolbox für eine Roboterstruktur
+% Generiere Matlab-Code mit Maple-Dynamik-Toolbox fÃ¼r eine Roboterstruktur
 % 
 % Eingabe:
 % Names
-%   Cell-Array mit Liste der Namen der Roboterstrukturen, für die der Code
+%   Cell-Array mit Liste der Namen der Roboterstrukturen, fÃ¼r die der Code
 %   erzeugt werden soll. Der Name entspricht dem Schema "SxRRRyyy" mit
-%   x=Anzahl Gelenk-FG und yyy laufende Nummer für "RRR".
+%   x=Anzahl Gelenk-FG und yyy laufende Nummer fÃ¼r "RRR".
 % force [1x1 logical]
 %   Erzwinge die Neu-Generierung des Codes
 % nocopy [1x1 logical]
-%   Nur Code generieren, aber nicht zurück kopieren
+%   Nur Code generieren, aber nicht zurÃ¼ck kopieren
 % mode
 %   Modus, welche Dateien generiert werden sollen, damit nicht die
-%   vollständige Dynamik jedes mal neu generiert werden muss
-%   1: Vollständige Generierung, alles
+%   vollstÃ¤ndige Dynamik jedes mal neu generiert werden muss
+%   1: VollstÃ¤ndige Generierung, alles
 %   2: Nur aus Vorlagen generierte Funktionen (z.B. Jacobi, inverse Kinematik)
 %      (Diese Option ist nicht mehr sinnvoll, da Vorlagen-Funktionen jetzt
 %      im Ordner "tpl" gespeichert werden)
 %   3: Alles generieren in Maple, aber keinen Matlab-Code exportieren
-%      (wichtig für PKM. Dort wird die Bein-Dynamik nur als Maple gebraucht)
+%      (wichtig fÃ¼r PKM. Dort wird die Bein-Dynamik nur als Maple gebraucht)
+%   4: Nur Kinematik generieren (ansonsten, wie Modus 1)
 % 
 % Vorher: 
-% * Funktion maplerepo_path.m muss vorliegen mit Rückgabe des
+% * Funktion maplerepo_path.m muss vorliegen mit RÃ¼ckgabe des
 %   Repo-Pfades der Maple-Dynamik-Toolbox ("HybrDyn")
-% * Maple-Eingabedaten müssen für die Roboterstruktur mit
+% * Maple-Eingabedaten mÃ¼ssen fÃ¼r die Roboterstruktur mit
 %   serroblib_generate_mapleinput.m erzeugt werden
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
-% (C) Institut für Mechatronische Systeme, Universität Hannover
+% (C) Institut fÃ¼r Mechatronische Systeme, UniversitÃ¤t Hannover
 
 function serroblib_generate_code(Names, force, nocopy, mode)
 
@@ -43,14 +44,19 @@ end
 if nargin < 4
   mode = 1;
 end
+if mode == 4
+  kinematics_arg = '--kinematics_only';
+else
+  kinematics_arg = '';
+end
 repopath=fileparts(which('serroblib_path_init.m'));
 % Pfad zur Maple-Dynamik-Toolbox (muss im Repo abgelegt werden)
 if ispc()
-  % Windows: Benutze zwei verschiedene Pfade, für Git Bash und Windows
+  % Windows: Benutze zwei verschiedene Pfade, fÃ¼r Git Bash und Windows
   % Dateizugriff
   [mrp, mrp_cmd] = maplerepo_path();
 else
-  % Linux: Ein Pfad für beide Zugriffe
+  % Linux: Ein Pfad fÃ¼r beide Zugriffe
   mrp_cmd = maplerepo_path();
   mrp = mrp_cmd;
 end
@@ -59,7 +65,7 @@ for i = 1:length(Names)
   n = Names{i};
   N = str2double(n(2));
 
-  % Prüfe, ob Modell eine Variante ist
+  % PrÃ¼fe, ob Modell eine Variante ist
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
   l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
   isvariant = l.AdditionalInfo(strcmp(l.Names_Ndof,n),2);
@@ -68,7 +74,7 @@ for i = 1:length(Names)
   % Maple-Toolbox-Eingabe laden (wurde an anderer Stelle erzeugt)
   % (durch serroblib_generate_mapleinput.m)
   if isvariant
-    % Der Code für Varianten wird im selben Ordner wie der des Allgemeinen
+    % Der Code fÃ¼r Varianten wird im selben Ordner wie der des Allgemeinen
     % Modells gespeichert (andersnamiger Unterordner)
     n_gen = l.Names_Ndof{variantof};
     mapleinputfile=fullfile(repopath, sprintf('mdl_%ddof', N), n_gen, ...
@@ -80,14 +86,14 @@ for i = 1:length(Names)
   end
   
   if ~exist(mapleinputfile, 'file')
-    error('Datei %s existiert nicht. Wurde `serroblib_generate_mapleinput.m` ausgeführt?', fileparts(mapleinputfile) );
+    error('Datei %s existiert nicht. Wurde `serroblib_generate_mapleinput.m` ausgefÃ¼hrt?', fileparts(mapleinputfile) );
   end
-  % Verzeichnisse für die zu erzeugenden Matlab-Funktionen
+  % Verzeichnisse fÃ¼r die zu erzeugenden Matlab-Funktionen
   outputdir_tb = fullfile(mrp, 'codeexport', n, 'matlabfcn'); % Verzeichnis in der Maple-Toolbox
   lockfile = fullfile(mrp, 'codeexport', n, 'codegen.lock');
   outputdir_local = fileparts(mapleinputfile); % Verzeichnis in der Bibliothek
   
-  % Prüfe, ob Code schon einmal generiert wurde 
+  % PrÃ¼fe, ob Code schon einmal generiert wurde 
   % (und im Zielverzeichnis vorliegt)
   if ~force && length(dir(fullfile(outputdir_local, '*.m'))) > 20
     % das werden wohl schon genug .m-Dateien sein.
@@ -103,34 +109,34 @@ for i = 1:length(Names)
     fclose(fid);
   end
   
-  % Datei mit Shell-Variablen auch kopieren (wird bei vollständigem
-  % Durchlauf der Toolbox überschrieben, aber für Einzelaufruf von Skripten
-  % benötigt
+  % Datei mit Shell-Variablen auch kopieren (wird bei vollstÃ¤ndigem
+  % Durchlauf der Toolbox Ã¼berschrieben, aber fÃ¼r Einzelaufruf von Skripten
+  % benÃ¶tigt
   if exist([mapleinputfile,'.sh'], 'file')
     copyfile( [mapleinputfile,'.sh'], [mapleinputfile_tb, '.sh'] );
   elseif mode == 2
-    error('Generierung der Vorlagen-Funktionen nicht möglich. %s existiert nicht', [mapleinputfile,'.sh']);
+    error('Generierung der Vorlagen-Funktionen nicht mÃ¶glich. %s existiert nicht', [mapleinputfile,'.sh']);
   end
   % Code-Erstellung starten
-  if mode == 1 || mode == 3
-    fprintf('Starte Code-Generierung %d/%d für %s\n', i, length(Names), n);
-    system_gen( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel', mrp_cmd), lockfile); %  > /dev/null
+  if mode == 1 || mode == 3 || mode == 4
+    fprintf('Starte Code-Generierung %d/%d fÃ¼r %s\n', i, length(Names), n);
+    system_gen( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel %s', mrp_cmd, kinematics_arg), lockfile); %  > /dev/null
   elseif mode == 2
     warning('Achtung: Mit der gesonderten Behandlung von Vorlagen-Funktionen ist dieser Modus nicht mehr sinnvoll');
-    fprintf('Generiere Matlab-Funktionen aus Vorlagen (%d/%d) für %s\n', i, length(Names), n);
+    fprintf('Generiere Matlab-Funktionen aus Vorlagen (%d/%d) fÃ¼r %s\n', i, length(Names), n);
     if ~exist(fullfile(mrp, 'codeexport', n), 'file')
       warning('Ordner %s existiert nicht. Die Code-Generierung muss vorher einmal gelaufen sein', ...
         fullfile(mrp, 'codeexport', n));
     end
     system_gen( sprintf('rm -rf %s/workdir/*', mrp_cmd) ); % Inhalt des tmp-Verzeichnisses leeren und neu erstellen, ...
-    system_gen( sprintf('mkdir -p %s/workdir/tmp', mrp_cmd) ); ... damit keine alten Versionen enthalten sein können
+    system_gen( sprintf('mkdir -p %s/workdir/tmp', mrp_cmd) ); ... damit keine alten Versionen enthalten sein kÃ¶nnen
     system_gen( sprintf('cd %s/robot_codegen_scripts && ./create_git_versioninfo.sh', mrp_cmd) );
     system_gen( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_tmpvar_matlab.sh', mrp_cmd) );
     system_gen( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_matlab_num_varpar.sh', mrp_cmd) );
   else
     error('Modus nicht definiert');
   end
-  % generierten Code zurückkopieren (alle .m-Dateien)
+  % generierten Code zurÃ¼ckkopieren (alle .m-Dateien)
   % Nicht relevante automatisch generierte Dateien werden nicht kopiert.
   blacklist_exp = {...
     'gravload_floatb_eulxyz_nnew_vp1.m', ...
@@ -163,7 +169,7 @@ for i = 1:length(Names)
       end
     end
   end
-  % Definitionen des Roboters zurückkopieren. Damit lassen sich später
+  % Definitionen des Roboters zurÃ¼ckkopieren. Damit lassen sich spÃ¤ter
   % leichter Roboterspezifische Funktionen neu generieren, ohne die Toolbox
   % neu durchlaufen zu lassen
   copyfile( fullfile(mrp, 'robot_codegen_definitions', 'robot_env.sh'), [mapleinputfile, '.sh']);
@@ -171,19 +177,19 @@ end
 end
 
 function system_gen(cmd, lockfile)
-  % Betriebssystem-unabhängiger Aufruf von Befehlen in der Git Bash
-  % Ermöglicht den Aufruf der Dynamik-Berechnungen aus Windows und Linux
+  % Betriebssystem-unabhÃ¤ngiger Aufruf von Befehlen in der Git Bash
+  % ErmÃ¶glicht den Aufruf der Dynamik-Berechnungen aus Windows und Linux
   % Vorher: Wechseln in Verzeichnis aus Matlab heraus
   %
   % Eingabe:
   % cmd:
-  %  Befehl, der in der Git Bash ausgeführt werden soll.
+  %  Befehl, der in der Git Bash ausgefÃ¼hrt werden soll.
   % lockfile:
   %  Pfad zur Sperrdatei, die existiert, solange noch Code generiert wird.
   if isunix() || ismac()
     system(cmd)
   elseif ispc()
-    % Befehl über Git Bash ausführen und nach Ausführung noch 3 Minuten anzeigen
+    % Befehl Ã¼ber Git Bash ausfÃ¼hren und nach AusfÃ¼hrung noch 3 Minuten anzeigen
     system(sprintf('start "" "%%PROGRAMFILES%%\\Git\\bin\\sh.exe" --login  -c "%s || sleep 180"', cmd));
     if nargin == 2
       while true
