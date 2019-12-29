@@ -13,9 +13,10 @@ roblibpath=fileparts(which('serroblib_path_init.m'));
 robot_list_dir = fullfile(roblibpath, 'synthesis_result_lists');
 serroblib_gen_bitarrays(1:7);
 
-for idx_case = 1:6
+for idx_case = 1:7
   %% Optionen zur Bearbeitung der Tabellen
   flush_data = false;
+  flush_EEFG_mask = [1 1 1 1 1 1];
   switch idx_case
     case 1
       % Name der Datei mit abgespeicherten Namen der kinematischen Ketten
@@ -44,6 +45,13 @@ for idx_case = 1:6
       % Die Ergebnisse sind aktuell identisch zu structsynth_ser_3T2R_fixrot
       reslist='structsynth_ser_3T2R_varrot';
       idx_oc = 2;
+    case 7
+      idx_oc = 3; % Spalte für 3T0R-PKM
+      flush_data = true;
+      flush_Njoint = [4 5]; 
+      flush_EEFG = [1 1 1 1 1 1];
+      flush_EEFG_mask = [1 1 1 0 0 0]; % Die Rotations-FG sind egal
+      reslist = 'structsynth_pkm_3T0R';
   end
   fprintf('Teil %d: Feststellung der Ergebnisse aus Liste %s\n', idx_case, reslist);
   %% Alle Einträge für bestimmte Roboter zurücksetzen
@@ -51,12 +59,11 @@ for idx_case = 1:6
   % definierende Roboter wird eine "0" gesetzt und anschließend für einige mit
   % einer "1" überschrieben.
   if flush_data
-    EE_FG = flush_EEFG;
     for N = flush_Njoint
       % Alle Roboter aus Datenbank laden
       mdllistfile_Ndof = fullfile(roblibpath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
       l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_EEdof0');
-      [IndZ, IndB] = serroblib_filter_robots(N, EE_FG, EE_FG);
+      [IndZ, IndB] = serroblib_filter_robots(N, flush_EEFG, flush_EEFG_mask);
       k = 0;
       for j = IndZ'
         k = k+1;
