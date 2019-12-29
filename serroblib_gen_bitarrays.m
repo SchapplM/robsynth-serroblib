@@ -30,6 +30,8 @@
 %        Haupt-Modell einer Variante liegt vor
 %     5: Anzahl Drehgelenke. Damit kann schneller auf die prinzipielle
 %        Struktur geschlossen werden (ist aber auch im Namen enthalten)
+%     6: Anzahl technischer Gelenke. Ein mögliches Kugelgelenk zählt als 3,
+%        ein Kardangelenk als 2, einfache Dreh- und Schubgelenke als 1
 %   BitArrays_Ndof_VF
 %     Bit-Array mit Filter, um Varianten eines Roboters zu erkennen
 %   BitArrays_Origin
@@ -52,7 +54,7 @@ for N = N_update(:)'
   BitArrays_phiNE = uint16(zeros(1,1));
   BitArrays_EEdof0 = uint16(zeros(1,1));
   BitArrays_Origin = uint16(zeros(1,1));
-  AdditionalInfo = zeros(1,5);
+  AdditionalInfo = zeros(1,6);
   Names_Ndof = {};
   b = 1; % Zähler für gefundene Roboterkonfigurationen aus csv-Tabelle für N FG
   %% Durchsuche alle csv-Dateien im Ordner nach passenden Strukturen
@@ -70,7 +72,7 @@ for N = N_update(:)'
       if isempty(csvline) || strcmp(csvline{1}, '')
         continue
       end
-      if length(csvline) ~= 1+N*8+3+6+3+1+4
+      if length(csvline) ~= 1+N*8+3+6+3+2+5 % Siehe serroblib_gen_bitarrays.m
         warning('Zeile %s (Datei %s) sieht ungültig aus', tline, d.name);
         continue % nicht genug Spalten: Ungültiger Datensatz
       end
@@ -145,6 +147,14 @@ for N = N_update(:)'
       
       % Anzahl Drehgelenke zählen
       numrotjoints = sum(Name=='R');
+      
+      % Anzahl technischer Gelenke bestimmen
+      joints_string = csvline{end-5}; % die letzten 5 Spalten geben die Modellherkunft an
+      if isempty(joints_string)
+        numtechjoints = N; % Ohne Angabe werden einzelne Dreh- und Schubgelenke angenommen
+      else
+        numtechjoints = length(joints_string);
+      end
       %% Ausgabe belegen
       Names_Ndof{b} = csvline{1}; %#ok<AGROW>
       BitArrays_Ndof(b,:) = BAJ;
@@ -152,7 +162,7 @@ for N = N_update(:)'
       BitArrays_phiNE(b,:) = BAR;
       BitArrays_EEdof0(b,:) = BAE;
       BitArrays_Origin(b,:) = BAO;
-      AdditionalInfo(b,:) = [lastposjoint, double(isvariant), variantof, hascode, numrotjoints];
+      AdditionalInfo(b,:) = [lastposjoint, double(isvariant), variantof, hascode, numrotjoints, numtechjoints];
       b = b+1;
     end
     fclose(fid);

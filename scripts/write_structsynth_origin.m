@@ -13,7 +13,7 @@ roblibpath=fileparts(which('serroblib_path_init.m'));
 robot_list_dir = fullfile(roblibpath, 'synthesis_result_lists');
 serroblib_gen_bitarrays(1:7);
 
-for idx_case = 1:6
+for idx_case = 1:7
   %% Optionen zur Bearbeitung der Tabellen
   flush_data = false;
   switch idx_case
@@ -44,6 +44,11 @@ for idx_case = 1:6
       % Die Ergebnisse sind aktuell identisch zu structsynth_ser_3T2R_fixrot
       reslist='structsynth_ser_3T2R_varrot';
       idx_oc = 2;
+    case 7
+      % Die Ergebnisse sind aktuell identisch zu structsynth_ser_3T2R_fixrot
+      reslist='multi_dof_joints';
+      idx_oc = 5; % Spalte für Mehr-FG-Gelenke
+      flush_data = true; flush_Njoint = 5:6; flush_EEFG = [1 1 1 1 1 1];
   end
   fprintf('Teil %d: Feststellung der Ergebnisse aus Liste %s\n', idx_case, reslist);
   %% Alle Einträge für bestimmte Roboter zurücksetzen
@@ -80,7 +85,7 @@ for idx_case = 1:6
             found = true;
             % Zeile modifizieren
             csvline_mod = csvline;
-            csvline_mod{1+8*N+3+9+1+idx_oc} = '0'; % Setze auf Null
+            csvline_mod{1+8*N+3+9+2+idx_oc} = '0'; % Setze auf Null
             % modifizierte csv-Zeile in Textzeile umwandeln
             line_copy = csvline_mod{1};
             for i = 2:length(csvline_mod)
@@ -143,7 +148,7 @@ for idx_case = 1:6
         found = true;
         % Zeile modifizieren
         csvline_mod = csvline;
-        csvline_mod{1+8*N+3+9+1+idx_oc} = '1'; % Setze auf Eins
+        csvline_mod{1+8*N+3+9+2+idx_oc} = '1'; % Setze auf Eins
         % modifizierte csv-Zeile in Textzeile umwandeln
         line_copy = csvline_mod{1};
         for i = 2:length(csvline_mod)

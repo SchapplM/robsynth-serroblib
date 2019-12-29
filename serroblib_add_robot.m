@@ -194,8 +194,11 @@ end
 % Spalte für Gelenknummer, dass die Position als letztes Beeinflusst
 c = c+1; csvline{c} = '?';
 
+% Spalte für Gelenkfolge für mehrwertige Gelenke
+c = c+1; csvline{c} = '';
+
 % Spalten für Herkunft der Kinematik (Manuell, Struktsynth. Roboter, ...)
-c = c+4; csvline(c-3:c) = {'?', '?', '?', '?'};
+c = c+5; csvline(c-4:c) = {'?', '?', '?', '?', '?'};
 %% Zeile für den Roboter finden
 % Suche Roboter in den bestehenden csv-Tabellen
 [found, idx_direct, ~, Name] = serroblib_find_robot(csvline);
