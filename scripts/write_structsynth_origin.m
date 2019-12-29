@@ -51,7 +51,7 @@ for idx_case = 1:7
       flush_Njoint = [4 5]; 
       flush_EEFG = [1 1 1 1 1 1];
       flush_EEFG_mask = [1 1 1 0 0 0]; % Die Rotations-FG sind egal
-      reslist = 'structsynth_pkm_3T0R';
+      reslist = 'structsynth_pkm_3T0R_4J';
   end
   fprintf('Teil %d: Feststellung der Ergebnisse aus Liste %s\n', idx_case, reslist);
   %% Alle Einträge für bestimmte Roboter zurücksetzen
