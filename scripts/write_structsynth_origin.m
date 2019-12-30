@@ -13,9 +13,12 @@ roblibpath=fileparts(which('serroblib_path_init.m'));
 robot_list_dir = fullfile(roblibpath, 'synthesis_result_lists');
 serroblib_gen_bitarrays(1:7);
 
-for idx_case = 1:7
+for idx_case = 1:11
   %% Optionen zur Bearbeitung der Tabellen
   flush_data = false;
+  set_undef_to_zero = false;
+  flush_EEFG_mask = [1 1 1 1 1 1];
+  reslist = '';
   switch idx_case
     case 1
       % Name der Datei mit abgespeicherten Namen der kinematischen Ketten
@@ -37,31 +40,59 @@ for idx_case = 1:7
       idx_oc = 2;
       flush_data = true; flush_Njoint = 6; flush_EEFG = [1 1 1 1 1 1];
     case 5
-      reslist='structsynth_ser_3T2R_fixrot';
+      % Nutze bereits die Ergebnis-Datei mit reduzierten Ergebnissen (nach
+      % Lösung ungültiger Strukturen). Notwendig, da nachträglich
+      % gleichnamige Strukturen eingefügt werden können.
+      reslist='structsynth_ser_3T2R_fixrot_in_DB';
       idx_oc = 2;
       flush_data = true; flush_Njoint = 5; flush_EEFG = [1 1 1 1 1 0];
     case 6
       % Die Ergebnisse sind aktuell identisch zu structsynth_ser_3T2R_fixrot
-      reslist='structsynth_ser_3T2R_varrot';
+      reslist='structsynth_ser_3T2R_varrot_in_DB';
       idx_oc = 2;
     case 7
+      idx_oc = 3; % Spalte für 3T0R-PKM
+      flush_data = true;
+      flush_Njoint = [4 5]; 
+      flush_EEFG = [1 1 1 1 1 1];
+      flush_EEFG_mask = [1 1 1 0 0 0]; % Die Rotations-FG sind egal
+      reslist = 'structsynth_pkm_3T0R_4J';
+    case 8
+      idx_oc = 3; % Spalte für 3T0R-PKM
+      reslist = 'structsynth_pkm_3T0R_5J';
+    case 9
+      idx_oc = 4; % Spalte für 3T1R-PKM
+      flush_data = true;
+      flush_Njoint = 5; 
+      flush_EEFG = [1 1 1 1 1 1];
+      flush_EEFG_mask = [1 1 1 0 0 0]; % Die Rotations-FG sind egal
+      reslist = 'structsynth_pkm_3T1R_5J';
+    case 10
       % Die Ergebnisse sind aktuell identisch zu structsynth_ser_3T2R_fixrot
       reslist='multi_dof_joints';
       idx_oc = 5; % Spalte für Mehr-FG-Gelenke
       flush_data = true; flush_Njoint = 5:6; flush_EEFG = [1 1 1 1 1 1];
+    case 11
+      % Letzter Durchgang: Setze alle Felder, in denen bis jetzt ein "?"
+      % steht auf 0. Annahme: Alle möglichen Herkünfte der seriellen Ketten
+      % wurden bereits vorher aus den Ergebnisliste generiert
+      flush_Njoint = 2:7;
+      idx_oc = 1:5;
+      set_undef_to_zero = true;
+      flush_EEFG = [1 1 1 1 1 1];
+      flush_EEFG_mask = [0 0 0 0 0 0]; % alle seriellen Ketten bearbeiten
   end
   fprintf('Teil %d: Feststellung der Ergebnisse aus Liste %s\n', idx_case, reslist);
   %% Alle Einträge für bestimmte Roboter zurücksetzen
   % Standardmäßig ist ein Fragezeichen in der csv-Datei gesetzt. Für zu
   % definierende Roboter wird eine "0" gesetzt und anschließend für einige mit
   % einer "1" überschrieben.
-  if flush_data
-    EE_FG = flush_EEFG;
+  if flush_data || set_undef_to_zero
     for N = flush_Njoint
       % Alle Roboter aus Datenbank laden
       mdllistfile_Ndof = fullfile(roblibpath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
       l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_EEdof0');
-      [IndZ, IndB] = serroblib_filter_robots(N, EE_FG, EE_FG);
+      [IndZ, IndB] = serroblib_filter_robots(N, flush_EEFG, flush_EEFG_mask);
       k = 0;
       for j = IndZ'
         k = k+1;
@@ -85,7 +116,13 @@ for idx_case = 1:7
             found = true;
             % Zeile modifizieren
             csvline_mod = csvline;
-            csvline_mod{1+8*N+3+9+2+idx_oc} = '0'; % Setze auf Null
+            if flush_data
+              csvline_mod{1+8*N+3+9+2+idx_oc} = '0'; % Setze auf Null
+            else % set_undef_to_zero
+              % Setze alle Fragezeichen auf Null
+              idx = 1+8*N+3+9+2+idx_oc; % Indizes der Spalten zur Modellherkunft
+              csvline_mod(idx) = strrep(csvline_mod(idx), '?', '0');
+            end
             % modifizierte csv-Zeile in Textzeile umwandeln
             line_copy = csvline_mod{1};
             for i = 2:length(csvline_mod)
@@ -113,7 +150,11 @@ for idx_case = 1:7
         % Kopie-Tabelle löschen
         delete(filepath_csv_copy);
         if found
-          fprintf('\tWert für Modellherkunft Spalte %d auf 0 gesetzt.\n', idx_oc);
+          if flush_data
+            fprintf('\tWert für Modellherkunft Spalte %d auf 0 gesetzt.\n', idx_oc);
+          else
+            fprintf('\tWert für Modellherkunft Spalte [%s] auf 0 gesetzt, falls vorher undefiniert.\n', disp_array(idx_oc,'%d'));
+          end
         end
       end
     end
@@ -122,8 +163,17 @@ for idx_case = 1:7
   % Nach der Struktursynthese serieller Roboter werden die Ergebnisse als
   % Liste gespeichert. Es wird angenommen, dass die Listen jeweils
   % vollständig sind.
+  if isempty(reslist)
+    % Falls keine Liste angegeben ist, wird nur eine Löschung vorgenommen
+    % (s.o.)
+    continue
+  end
   roblist = fullfile(robot_list_dir, reslist);
-  roblist_existing = fullfile(robot_list_dir, [reslist, '_in_DB']);
+  if contains(roblist, 'in_DB')
+    roblist_existing = roblist;
+  else
+    roblist_existing = fullfile(robot_list_dir, [reslist, '_in_DB']);
+  end
   Names = readcell([roblist, '.txt']);
   Names_existing = {}; % reduzierte Liste von tatsächlich existierenden Robotern in der Datenbank
   for j = 1:length(Names) % Robternamen aus Ergebnisliste durchgehen
