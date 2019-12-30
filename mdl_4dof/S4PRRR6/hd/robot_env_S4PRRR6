@@ -1,0 +1,13 @@
+robot_name := "S4PRRR6":
+NJ := 4:
+NQJ := 4:
+v := Matrix(NJ,1,[0,1,2,3]):
+mu := Matrix(NJ,1,[1,1,1,1]):
+sigma := Matrix(NJ,1,[1,0,0,0]):
+beta := Matrix(NJ,1,[0,0,0,0]):
+b := Matrix(NJ,1,[0,0,0,0]):
+alpha := Matrix(NJ,1,[0,Pi/2,Pi/2,0]):
+a := Matrix(NJ,1,[0,a2,a3,a4]):
+theta := Matrix(NJ,1,[theta1,qJ_t(2,1) + 0,qJ_t(3,1) + 0,qJ_t(4,1) + 0]):
+d := Matrix(NJ,1,[qJ_t(1,1) + 0,d2,d3,d4]):
+qoffset := Matrix(NJ,1,[0,0,0,0]):
