@@ -13,10 +13,12 @@ roblibpath=fileparts(which('serroblib_path_init.m'));
 robot_list_dir = fullfile(roblibpath, 'synthesis_result_lists');
 serroblib_gen_bitarrays(1:7);
 
-for idx_case = 1:9
+for idx_case = 1:10
   %% Optionen zur Bearbeitung der Tabellen
   flush_data = false;
+  set_undef_to_zero = false;
   flush_EEFG_mask = [1 1 1 1 1 1];
+  reslist = '';
   switch idx_case
     case 1
       % Name der Datei mit abgespeicherten Namen der kinematischen Ketten
@@ -62,13 +64,22 @@ for idx_case = 1:9
       flush_EEFG = [1 1 1 1 1 1];
       flush_EEFG_mask = [1 1 1 0 0 0]; % Die Rotations-FG sind egal
       reslist = 'structsynth_pkm_3T1R_5J';
+    case 10
+      % Letzter Durchgang: Setze alle Felder, in denen bis jetzt ein "?"
+      % steht auf 0. Annahme: Alle möglichen Herkünfte der seriellen Ketten
+      % wurden bereits vorher aus den Ergebnisliste generiert
+      flush_Njoint = 4:5;
+      idx_oc = 1:4;
+      set_undef_to_zero = true;
+      flush_EEFG = [1 1 1 1 1 1];
+      flush_EEFG_mask = [0 0 0 0 0 0]; % alle seriellen Ketten bearbeiten
   end
   fprintf('Teil %d: Feststellung der Ergebnisse aus Liste %s\n', idx_case, reslist);
   %% Alle Einträge für bestimmte Roboter zurücksetzen
   % Standardmäßig ist ein Fragezeichen in der csv-Datei gesetzt. Für zu
   % definierende Roboter wird eine "0" gesetzt und anschließend für einige mit
   % einer "1" überschrieben.
-  if flush_data
+  if flush_data || set_undef_to_zero
     for N = flush_Njoint
       % Alle Roboter aus Datenbank laden
       mdllistfile_Ndof = fullfile(roblibpath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
@@ -97,7 +108,13 @@ for idx_case = 1:9
             found = true;
             % Zeile modifizieren
             csvline_mod = csvline;
-            csvline_mod{1+8*N+3+9+1+idx_oc} = '0'; % Setze auf Null
+            if flush_data
+              csvline_mod{1+8*N+3+9+1+idx_oc} = '0'; % Setze auf Null
+            else % set_undef_to_zero
+              % Setze alle Fragezeichen auf Null
+              idx = 1+8*N+3+9+1+idx_oc; % Indizes der Spalten zur Modellherkunft
+              csvline_mod(idx) = strrep(csvline_mod(idx), '?', '0');
+            end
             % modifizierte csv-Zeile in Textzeile umwandeln
             line_copy = csvline_mod{1};
             for i = 2:length(csvline_mod)
@@ -125,7 +142,11 @@ for idx_case = 1:9
         % Kopie-Tabelle löschen
         delete(filepath_csv_copy);
         if found
-          fprintf('\tWert für Modellherkunft Spalte %d auf 0 gesetzt.\n', idx_oc);
+          if flush_data
+            fprintf('\tWert für Modellherkunft Spalte %d auf 0 gesetzt.\n', idx_oc);
+          else
+            fprintf('\tWert für Modellherkunft Spalte [%s] auf 0 gesetzt, falls vorher undefiniert.\n', disp_array(idx_oc,'%d'));
+          end
         end
       end
     end
