@@ -138,7 +138,7 @@ for kk = 1:N % über alle Gelenk-FG
     BAJVF(kk) = bitset(BAJVF(kk), i, 0);
   end
 end
-% Prüfen mit: `dec2bin(BAJVF)`
+% Prüfen mit: `dec2bin(BAJ, 16)`, `dec2bin(BAJVF, 16)`
 %% Bit-Vektor für EE-Transformation von letztem Körper
 % Mögliche diskrete Zustände für die phi-Winkel in der csv-Tabelle. 
 % "?" steht für einen noch undefinierten Winkel

@@ -45,7 +45,8 @@ for kk = 1:N
   Bit_a      = bitand( bitshift( BA(kk), -b), bin2dec('1'));   b = b+1;
   Bit_theta  = bitand( bitshift( BA(kk), -b), bin2dec('111')); b = b+3;
   Bit_d      = bitand( bitshift( BA(kk), -b), bin2dec('1'));   b = b+1;
-  Bit_offset = bitand( bitshift( BA(kk), -b), bin2dec('1'));
+  Bit_offset = bitand( bitshift( BA(kk), -b), bin2dec('111'));
+  % Prüfen: `dec2bin(BA(kk),16)`
 
   % Index aus Bit-Vektor wieder herausholen
   % Das hier ist doppelt mit serroblib_add_robot.m.
@@ -68,6 +69,12 @@ for kk = 1:N
   c=c+1; csvline{c} = descr_alpha{Bit_alpha+1};   csvbits(c) = Bit_alpha+1; %#ok<AGROW>
   c=c+1; csvline{c} = descr_a{Bit_a+1};           csvbits(c) = Bit_a+1;     %#ok<AGROW>
   c=c+1; csvline{c} = descr_theta{Bit_theta+1};   csvbits(c) = Bit_theta+1; %#ok<AGROW>
+  if Bit_type == 0 % Drehgelenk
+    csvline{c} = sprintf('q%d', kk);
+  end
   c=c+1; csvline{c} = descr_d{Bit_d+1};           csvbits(c) = Bit_d+1;     %#ok<AGROW>
+  if Bit_type == 1 % Schubgelenk
+    csvline{c} = sprintf('q%d', kk);
+  end
   c=c+1; csvline{c} = descr_offset{Bit_offset+1}; csvbits(c) = Bit_offset+1;%#ok<AGROW>
 end

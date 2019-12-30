@@ -87,6 +87,12 @@ for N = N_update(:)'
       % Roboterzeile in Binär-kodierte Informationen umrechnen
       [BAJ, BAR, BAE, BAJVF, BAO] = serroblib_csvline2bits(csvline);
 
+      % Debug: Prüfe, die Hin- und Rückrechnung mit den Bit-Funktionen
+%       [csvline_test] = serroblib_bits2csvline(BAJ);
+%       I_nomatch = ~strcmp(csvline_test(2:end), csvline(2:length(csvline_test)));
+%       if any(I_nomatch)
+%         warning('%s: Die Hin- und Rückrechnung von CSV-Zeile und Bit-Arrays funktioniert nicht', Name);
+%       end
       %% Weitere Eigenschaften bestimmen bzw. Auslesen
       % Lese die Nummer des letzten Positionsbestimmenden Gelenks aus
       lastposjoint = str2double(csvline{end-4});
