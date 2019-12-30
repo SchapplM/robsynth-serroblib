@@ -40,12 +40,15 @@ for idx_case = 1:10
       idx_oc = 2;
       flush_data = true; flush_Njoint = 6; flush_EEFG = [1 1 1 1 1 1];
     case 5
-      reslist='structsynth_ser_3T2R_fixrot';
+      % Nutze bereits die Ergebnis-Datei mit reduzierten Ergebnissen (nach
+      % Lösung ungültiger Strukturen). Notwendig, da nachträglich
+      % gleichnamige Strukturen eingefügt werden können.
+      reslist='structsynth_ser_3T2R_fixrot_in_DB';
       idx_oc = 2;
       flush_data = true; flush_Njoint = 5; flush_EEFG = [1 1 1 1 1 0];
     case 6
       % Die Ergebnisse sind aktuell identisch zu structsynth_ser_3T2R_fixrot
-      reslist='structsynth_ser_3T2R_varrot';
+      reslist='structsynth_ser_3T2R_varrot_in_DB';
       idx_oc = 2;
     case 7
       idx_oc = 3; % Spalte für 3T0R-PKM
@@ -161,7 +164,11 @@ for idx_case = 1:10
     continue
   end
   roblist = fullfile(robot_list_dir, reslist);
-  roblist_existing = fullfile(robot_list_dir, [reslist, '_in_DB']);
+  if contains(roblist, 'in_DB')
+    roblist_existing = roblist;
+  else
+    roblist_existing = fullfile(robot_list_dir, [reslist, '_in_DB']);
+  end
   Names = readcell([roblist, '.txt']);
   Names_existing = {}; % reduzierte Liste von tatsächlich existierenden Robotern in der Datenbank
   for j = 1:length(Names) % Robternamen aus Ergebnisliste durchgehen
