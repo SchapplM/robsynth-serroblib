@@ -153,11 +153,14 @@ end
 %% Bit-Vektor für EE-FG aus csv-Zeile gewinnen
 BAE = serroblib_csvline2bits_EE(csvline(c+1:c+9));
 c = c+9;
-% Spalte für Gelenk-Anzahl überspringen
+%% Weitere Spalten für zusätzliche Eigenschaften
+% Spalte für Nummer des Positionsbeeinflussenden Gelenks überspringen
+c = c+1;
+% Spalte für Gelenkfolge (z.B. "UPS") überspringen
 c = c+1;
 %% Bit-Vektor für Modellherkunft
 b = 0; % Bit-Offset zur Verschiebung der Parameter-Bits in der Gesamtvariable
-for kk = 1:4
+for kk = 1:5 % 5 Tabellenspalten -> 5 Bits
   c=c+1; Bit_phi = uint16( strcmp(csvline{c},'1') );
   BAO = bitor( BAO, bitshift(Bit_phi,b)); b = b+1;
   % Prüfen mit: `dec2bin(Bit_phi)`
