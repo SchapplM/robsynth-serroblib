@@ -8,7 +8,8 @@
 clear
 clc
 
-only_general_model = true;
+%% Benutzereingaben
+only_general_model = false; % Prüfe alle Modelle, auch Varianten
 %% Initialisierung
 roblibpath=fileparts(which('serroblib_path_init.m'));
 serroblib_gen_bitarrays(1:7);
@@ -20,7 +21,11 @@ for N = 2:7
   mdllistfile_Ndof = fullfile(roblibpath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
   l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo', 'BitArrays_Origin');
   I_novar = (l.AdditionalInfo(:,2) == 0);
-  I = find(I_novar);
+  if only_general_model
+    I = find(I_novar);
+  else
+    I = 1:length(I_novar);
+  end
   for j = I(:)'
     Name = l.Names_Ndof{j};
     if l.BitArrays_Origin(j) == 0
