@@ -23,7 +23,7 @@ for idx_case = 1:11
     case 1
       % Name der Datei mit abgespeicherten Namen der kinematischen Ketten
       reslist='structsynth_ser_2T1R';
-      % Nummer der Herkunftsspalte (1="Manuell",2="Roboter",3="3T0R-PKM",4="3T1R-PKM")
+      % Nummer der Herkunftsspalte (1="Manuell",2="Roboter",3="3T0R-PKM",4="3T1R-PKM",5="Gelenkfolge")
       idx_oc = 2;
       % Alle Einträge für Roboter mit bestimmten Eigenschaften zurücksetzen
       flush_data = true; flush_Njoint = 3; flush_EEFG = [1 1 0 0 0 1];
@@ -68,10 +68,9 @@ for idx_case = 1:11
       flush_EEFG_mask = [1 1 1 0 0 0]; % Die Rotations-FG sind egal
       reslist = 'structsynth_pkm_3T1R_5J';
     case 10
-      % Die Ergebnisse sind aktuell identisch zu structsynth_ser_3T2R_fixrot
       reslist='multi_dof_joints';
       idx_oc = 5; % Spalte für Mehr-FG-Gelenke
-      flush_data = true; flush_Njoint = 5:6; flush_EEFG = [1 1 1 1 1 1];
+      flush_data = true; flush_Njoint = 4:6; flush_EEFG = [1 1 1 1 1 1];
     case 11
       % Letzter Durchgang: Setze alle Felder, in denen bis jetzt ein "?"
       % steht auf 0. Annahme: Alle möglichen Herkünfte der seriellen Ketten

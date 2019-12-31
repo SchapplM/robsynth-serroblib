@@ -35,8 +35,8 @@ for N = 4:6
     %% Prüfe, welche mehrwertigen Gelenke möglich sind
     % Alle Gelenke durchgehen (siehe Code aus MA Zilin He: optimal_new.m)
     for ii = 1:N
-      % Prüfe auf zylindrisches Gelenk
-      if ii > 1 && ... % Vorkommen erst ab dem zweiten 1FG-Gelenk auffindbar
+      % Prüfe auf zylindrisches Gelenk. Deaktiviert.
+      if false && ii > 1 && ... % Vorkommen erst ab dem zweiten 1FG-Gelenk auffindbar
           RS.MDH.sigma(ii-1) ~= RS.MDH.sigma(ii) && ... % Dreh- und Schubgelenk nacheinander (Reihenfolge egal)
           RS.MDH.alpha(ii) == 0 ... % Achsen parallel
         % TODO: Ist das so korrekt? Kein Bezug auf Kreuzungsabstand?
