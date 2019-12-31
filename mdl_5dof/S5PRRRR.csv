@@ -1,11 +1,20 @@
-Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;Gelenk 3;;;;;;;;Gelenk 4;;;;;;;;Gelenk 5;;;;;;;;EE-Transformation (phi_N_E);;;EE-FG (Basis-KS);;;;;;;;;Weitere Eigenschaften;Herkunft Struktursynthese;;;
-;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;phix_NE;phiy_NE;phiz_NE;vx0;vy0;vz0;wx0;wy0;wz0;phix0;phiy0;phiz0;Positionsbeeinflussendes Gelenk;Manuell;Roboter;3T0R-PKM;3T1R-PKM
-S5PRRRR1;P;0;0;0;0;0;q1;0;R;0;0;pi/2;a2;q2;0;0;R;0;0;pi/2;0;q3;0;0;R;0;0;0;a4;q4;0;0;R;0;0;pi/2;0;q5;0;0;0;0;0;1;1;1;1;1;1;1;1;1;3;1;0;0;0
-S5PRRRR2;P;0;0;0;0;0;q1;0;R;0;0;0;a2;q2;0;0;R;0;0;0;a3;q3;d3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;0;q5;d5;0;0;0;0;1;1;1;1;1;1;0;1;1;4;1;0;0;0
-S5PRRRR3;P;0;0;0;0;theta1;q1;0;R;0;0;0;a2;q2;d2;0;R;0;0;0;a3;q3;d3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;0;4;0;1;1;1
-S5PRRRR4;P;0;0;0;0;theta1;q1;0;R;0;0;0;a2;q2;d2;0;R;0;0;0;a3;q3;d3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;0;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;0;4;0;1;1;1
-S5PRRRR6;P;0;0;0;0;theta1;q1;0;R;0;0;pi/2;a2;q2;d2;0;R;0;0;0;a3;q3;d3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;0;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;0;4;0;1;1;1
-S5PRRRR7;P;0;0;0;0;theta1;q1;0;R;0;0;pi/2;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;R;0;0;0;a4;q4;d4;0;R;0;0;0;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;0;4;0;1;1;1
-S5PRRRR8;P;0;0;0;0;theta1;q1;0;R;0;0;alpha2;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;1;4;0;1;1;1
-S5PRRRR9;P;0;0;0;0;theta1;q1;0;R;0;0;alpha2;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;0;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;1;4;0;1;1;1
-S5PRRRR10;P;0;0;0;0;theta1;q1;0;R;0;0;alpha2;a2;q2;d2;0;R;0;0;alpha3;a3;q3;d3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;1;4;0;1;1;1
+Name;Gelenk 1;;;;;;;;Gelenk 2;;;;;;;;Gelenk 3;;;;;;;;Gelenk 4;;;;;;;;Gelenk 5;;;;;;;;EE-Transformation (phi_N_E);;;EE-FG (Basis-KS);;;;;;;;;Weitere Eigenschaften;;Herkunft Struktursynthese;;;;
+;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;Typ;beta;b;alpha;a;theta;d;offset;phix_NE;phiy_NE;phiz_NE;vx0;vy0;vz0;wx0;wy0;wz0;phix0;phiy0;phiz0;Positionsbeeinflussendes Gelenk;Gelenkfolge;Manuell;Roboter;3T0R-PKM;3T1R-PKM;Gelenkfolge
+S5PRRRR1;P;0;0;0;0;0;q1;0;R;0;0;pi/2;a2;q2;0;0;R;0;0;pi/2;0;q3;0;0;R;0;0;0;a4;q4;0;0;R;0;0;pi/2;0;q5;0;0;0;0;0;1;1;1;1;1;1;1;1;1;3;PUU;1;0;0;0;0
+S5PRRRR2;P;0;0;0;0;0;q1;0;R;0;0;0;a2;q2;0;0;R;0;0;0;a3;q3;d3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;0;q5;d5;0;0;0;0;1;1;1;1;1;1;0;1;1;4;;1;0;0;0;0
+S5PRRRR2V1;P;0;0;0;0;0;q1;0;R;0;0;0;a2;q2;0;0;R;0;0;0;a3;q3;d3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;0;q5;0;0;0;0;0;1;1;1;1;1;1;0;1;1;3;PRRU;0;0;0;0;1
+S5PRRRR3;P;0;0;0;0;theta1;q1;0;R;0;0;0;a2;q2;d2;0;R;0;0;0;a3;q3;d3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;0;4;;0;1;1;1;0
+S5PRRRR3V1;P;0;0;0;0;theta1;q1;0;R;0;0;0;a2;q2;d2;0;R;0;0;0;a3;q3;d3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;0;q5;0;0;0;0;0;1;1;1;1;1;1;0;1;1;3;PRRU;0;0;0;0;1
+S5PRRRR4;P;0;0;0;0;theta1;q1;0;R;0;0;0;a2;q2;d2;0;R;0;0;0;a3;q3;d3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;0;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;0;4;;0;1;1;1;0
+S5PRRRR4V1;P;0;0;0;0;theta1;q1;0;R;0;0;0;a2;q2;d2;0;R;0;0;0;a3;q3;d3;0;R;0;0;pi/2;0;q4;0;0;R;0;0;0;a5;q5;d5;0;0;0;0;1;1;1;1;1;1;0;1;1;4;PRUR;0;0;0;0;1
+S5PRRRR6;P;0;0;0;0;theta1;q1;0;R;0;0;pi/2;a2;q2;d2;0;R;0;0;0;a3;q3;d3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;0;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;0;4;;0;1;1;1;0
+S5PRRRR6V1;P;0;0;0;0;theta1;q1;0;R;0;0;pi/2;a2;q2;d2;0;R;0;0;0;a3;q3;d3;0;R;0;0;pi/2;0;q4;0;0;R;0;0;0;a5;q5;d5;0;0;0;0;1;1;1;1;1;1;1;1;1;4;PRUR;0;0;0;0;1
+S5PRRRR7;P;0;0;0;0;theta1;q1;0;R;0;0;pi/2;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;R;0;0;0;a4;q4;d4;0;R;0;0;0;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;0;4;;0;1;1;1;0
+S5PRRRR7V1;P;0;0;0;0;theta1;q1;0;R;0;0;pi/2;a2;q2;d2;0;R;0;0;pi/2;0;q3;0;0;R;0;0;0;a4;q4;d4;0;R;0;0;0;a5;q5;d5;0;0;0;0;1;1;1;1;1;1;1;1;1;4;PURR;0;0;0;0;1
+S5PRRRR8;P;0;0;0;0;theta1;q1;0;R;0;0;alpha2;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;1;4;;0;1;1;1;0
+S5PRRRR8V1;P;0;0;0;0;theta1;q1;0;R;0;0;alpha2;a2;q2;d2;0;R;0;0;pi/2;0;q3;0;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;0;q5;0;0;0;0;0;1;1;1;1;1;1;1;1;1;3;PUU;0;0;0;0;1
+S5PRRRR8V2;P;0;0;0;0;theta1;q1;0;R;0;0;alpha2;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;R;0;0;0;a4;q4;d4;0;R;0;0;pi/2;0;q5;0;0;0;0;0;1;1;1;1;1;1;1;1;1;3;PRRU;0;0;0;0;1
+S5PRRRR9;P;0;0;0;0;theta1;q1;0;R;0;0;alpha2;a2;q2;d2;0;R;0;0;pi/2;a3;q3;d3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;0;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;1;4;;0;1;1;1;0
+S5PRRRR9V1;P;0;0;0;0;theta1;q1;0;R;0;0;alpha2;a2;q2;d2;0;R;0;0;pi/2;0;q3;0;0;R;0;0;pi/2;0;q4;0;0;R;0;0;0;a5;q5;d5;0;0;0;0;1;1;1;1;1;1;1;1;1;4;PSR;0;0;0;0;1
+S5PRRRR10;P;0;0;0;0;theta1;q1;0;R;0;0;alpha2;a2;q2;d2;0;R;0;0;alpha3;a3;q3;d3;0;R;0;0;pi/2;a4;q4;d4;0;R;0;0;pi/2;a5;q5;d5;0;pi/2;0;0;1;1;1;1;1;1;1;1;1;4;;0;1;1;1;0
+S5PRRRR10V1;P;0;0;0;0;theta1;q1;0;R;0;0;alpha2;a2;q2;d2;0;R;0;0;alpha3;a3;q3;d3;0;R;0;0;pi/2;0;q4;0;0;R;0;0;pi/2;0;q5;0;0;0;0;0;1;1;1;1;1;1;1;1;1;2;PRS;0;0;0;0;1
