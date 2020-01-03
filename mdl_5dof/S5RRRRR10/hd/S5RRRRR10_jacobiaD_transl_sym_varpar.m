@@ -23,8 +23,8 @@
 %   Translatorischer Teil der analytischen Jacobi-Matrix (Zeitableitung)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-29 21:01
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2019-12-31 22:37
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -49,9 +49,9 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobiaD_transl_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 21:01:26
-	% EndTime: 2019-12-29 21:01:26
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 22:37:49
+	% EndTime: 2019-12-31 22:37:49
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JaD_transl = t1;
@@ -59,9 +59,9 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobiaD_transl_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 21:01:26
-	% EndTime: 2019-12-29 21:01:26
-	% DurationCPUTime: 0.03s
+	% StartTime: 2019-12-31 22:37:49
+	% EndTime: 2019-12-31 22:37:49
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (2->2), mult. (8->6), div. (0->0), fcn. (4->2), ass. (0->3)
 	t27 = cos(qJ(1));
 	t26 = sin(qJ(1));
@@ -71,9 +71,9 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobiaD_transl_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 21:01:27
-	% EndTime: 2019-12-29 21:01:27
-	% DurationCPUTime: 0.12s
+	% StartTime: 2019-12-31 22:37:49
+	% EndTime: 2019-12-31 22:37:50
+	% DurationCPUTime: 0.05s
 	% Computational Cost: add. (35->18), mult. (110->35), div. (0->0), fcn. (94->6), ass. (0->20)
 	t136 = sin(pkin(5));
 	t151 = t136 * (pkin(7) + r_i_i_C(3));
@@ -100,9 +100,9 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobiaD_transl_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 21:01:28
-	% EndTime: 2019-12-29 21:01:28
-	% DurationCPUTime: 0.33s
+	% StartTime: 2019-12-31 22:37:50
+	% EndTime: 2019-12-31 22:37:50
+	% DurationCPUTime: 0.16s
 	% Computational Cost: add. (145->51), mult. (441->91), div. (0->0), fcn. (412->8), ass. (0->38)
 	t242 = cos(pkin(5));
 	t244 = sin(qJ(2));
@@ -147,9 +147,9 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobiaD_transl_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 21:01:28
-	% EndTime: 2019-12-29 21:01:28
-	% DurationCPUTime: 0.51s
+	% StartTime: 2019-12-31 22:37:50
+	% EndTime: 2019-12-31 22:37:50
+	% DurationCPUTime: 0.25s
 	% Computational Cost: add. (332->69), mult. (663->114), div. (0->0), fcn. (618->10), ass. (0->55)
 	t280 = cos(pkin(5));
 	t282 = sin(qJ(2));
@@ -211,51 +211,55 @@ elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobiaD_transl_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 21:01:31
-	% EndTime: 2019-12-29 21:01:32
-	% DurationCPUTime: 1.61s
-	% Computational Cost: add. (953->125), mult. (1772->206), div. (0->0), fcn. (1760->12), ass. (0->81)
+	% StartTime: 2019-12-31 22:37:51
+	% EndTime: 2019-12-31 22:37:52
+	% DurationCPUTime: 0.70s
+	% Computational Cost: add. (953->124), mult. (1772->205), div. (0->0), fcn. (1760->12), ass. (0->81)
 	t491 = pkin(10) + r_i_i_C(3);
 	t435 = sin(qJ(5));
 	t439 = cos(qJ(5));
-	t453 = t439 * r_i_i_C(1) - t435 * r_i_i_C(2);
+	t453 = r_i_i_C(1) * t439 - r_i_i_C(2) * t435;
 	t451 = pkin(4) + t453;
+	t438 = sin(qJ(1));
+	t434 = cos(pkin(5));
+	t455 = qJD(2) * t434 + qJD(1);
+	t437 = sin(qJ(2));
+	t476 = t437 * t438;
+	t462 = t434 * t476;
+	t471 = qJD(2) * t437;
+	t441 = cos(qJ(2));
+	t442 = cos(qJ(1));
+	t473 = t441 * t442;
+	t406 = -qJD(1) * t462 - t438 * t471 + t455 * t473;
+	t431 = qJD(3) + qJD(4);
+	t433 = sin(pkin(5));
+	t477 = t433 * t442;
+	t500 = t431 * t477 - t406;
 	t467 = qJD(5) * t439;
 	t468 = qJD(5) * t435;
 	t499 = -r_i_i_C(1) * t468 - t467 * r_i_i_C(2);
-	t434 = cos(pkin(5));
-	t437 = sin(qJ(2));
-	t442 = cos(qJ(1));
-	t474 = t442 * t437;
-	t438 = sin(qJ(1));
-	t441 = cos(qJ(2));
-	t475 = t438 * t441;
-	t417 = t434 * t474 + t475;
+	t474 = t438 * t441;
+	t475 = t437 * t442;
+	t417 = t434 * t475 + t474;
 	t432 = qJ(3) + qJ(4);
 	t429 = sin(t432);
 	t430 = cos(t432);
-	t433 = sin(pkin(5));
-	t477 = t433 * t442;
 	t409 = -t417 * t430 + t429 * t477;
-	t473 = t442 * t441;
 	t461 = t434 * t473;
-	t476 = t437 * t438;
 	t416 = -t461 + t476;
 	t498 = -t409 * t435 - t416 * t439;
 	t497 = t409 * t439 - t416 * t435;
-	t431 = qJD(3) + qJD(4);
 	t436 = sin(qJ(3));
 	t496 = -qJD(3) * t436 * pkin(3) - (t451 * t429 - t491 * t430) * t431;
 	t494 = t435 * r_i_i_C(1) + t439 * r_i_i_C(2);
 	t440 = cos(qJ(3));
 	t428 = pkin(3) * t440 + pkin(2);
 	t492 = t491 * t429 + t451 * t430 + t428;
-	t418 = t434 * t475 + t474;
+	t418 = t434 * t474 + t475;
 	t405 = t418 * qJD(1) + t417 * qJD(2);
 	t487 = t405 * t435;
 	t486 = t405 * t439;
-	t463 = t434 * t476;
-	t419 = -t463 + t473;
+	t419 = -t462 + t473;
 	t483 = t419 * t430;
 	t482 = t429 * t431;
 	t481 = t433 * t437;
@@ -263,25 +267,21 @@ elseif link_index == 5
 	t479 = t433 * t440;
 	t478 = t433 * t441;
 	t472 = qJD(1) * t433;
-	t471 = qJD(2) * t437;
 	t470 = qJD(2) * t441;
 	t469 = qJD(5) * t430;
 	t464 = t431 * t481;
-	t462 = t430 * t477;
 	t460 = t438 * t472;
 	t459 = t442 * t472;
 	t458 = t433 * t471;
 	t457 = t433 * t470;
-	t455 = qJD(2) * t434 + qJD(1);
-	t406 = -qJD(1) * t463 - t438 * t471 + t455 * t473;
-	t456 = -t406 * t430 + t431 * t462;
+	t456 = t500 * t430;
 	t404 = t417 * qJD(1) + t418 * qJD(2);
 	t452 = t431 * t480 - t404;
 	t450 = -t417 * t431 + t460;
 	t449 = t431 * t434 + t457;
-	t394 = t450 * t430 + (t431 * t477 - t406) * t429;
+	t394 = t500 * t429 + t450 * t430;
 	t395 = -t417 * t482 + t429 * t460 - t456;
-	t447 = t499 * (-t417 * t429 - t462) + t491 * t395 + t451 * t394;
+	t447 = t499 * (-t417 * t429 - t430 * t477) + t491 * t395 + t451 * t394;
 	t392 = t452 * t429 - t430 * t459 + t431 * t483;
 	t393 = -t419 * t482 + t429 * t459 + t452 * t430;
 	t446 = t499 * (-t419 * t429 + t430 * t480) + t491 * t393 - t451 * t392;

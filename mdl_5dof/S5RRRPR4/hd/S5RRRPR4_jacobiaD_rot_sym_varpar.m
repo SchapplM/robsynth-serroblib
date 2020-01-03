@@ -25,8 +25,8 @@
 %   Zeitableitung der rotatorischen Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-29 19:57
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2019-12-31 21:12
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -47,9 +47,9 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobiaD_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:56:53
-	% EndTime: 2019-12-29 19:56:53
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 21:12:10
+	% EndTime: 2019-12-31 21:12:10
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JaD_rot = t1;
@@ -57,9 +57,9 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobiaD_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:56:53
-	% EndTime: 2019-12-29 19:56:53
-	% DurationCPUTime: 0.04s
+	% StartTime: 2019-12-31 21:12:10
+	% EndTime: 2019-12-31 21:12:10
+	% DurationCPUTime: 0.02s
 	% Computational Cost: add. (9->0), mult. (37->0), div. (15->0), fcn. (22->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JaD_rot = t1;
@@ -67,9 +67,9 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobiaD_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:56:48
-	% EndTime: 2019-12-29 19:56:49
-	% DurationCPUTime: 0.04s
+	% StartTime: 2019-12-31 21:12:10
+	% EndTime: 2019-12-31 21:12:10
+	% DurationCPUTime: 0.02s
 	% Computational Cost: add. (74->0), mult. (74->0), div. (30->0), fcn. (44->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JaD_rot = t1;
@@ -77,9 +77,9 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobiaD_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:56:53
-	% EndTime: 2019-12-29 19:56:53
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 21:12:10
+	% EndTime: 2019-12-31 21:12:10
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JaD_rot = t1;
@@ -87,9 +87,9 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobiaD_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:56:53
-	% EndTime: 2019-12-29 19:56:54
-	% DurationCPUTime: 1.43s
+	% StartTime: 2019-12-31 21:12:10
+	% EndTime: 2019-12-31 21:12:11
+	% DurationCPUTime: 0.67s
 	% Computational Cost: add. (2232->71), mult. (2645->160), div. (674->13), fcn. (3179->7), ass. (0->78)
 	t109 = qJ(1) + qJ(2);
 	t101 = sin(t109);
@@ -133,7 +133,7 @@ elseif link_index == 4
 	t70 = t162 * t148 + (-t86 * t143 + (qJD(3) - t151) * t87) * t110;
 	t156 = t70 * t81 * t82;
 	t78 = t105 * t82 * t97 + 0.1e1;
-	t157 = (t110 * t97 * t128 + (-t102 * t133 - t97 * t156) * t105) / t78 ^ 2;
+	t157 = (t97 * t110 * t128 + (-t102 * t133 - t97 * t156) * t105) / t78 ^ 2;
 	t76 = 0.1e1 / t78;
 	t155 = t76 * t82;
 	t104 = t110 * t105;
@@ -152,11 +152,11 @@ elseif link_index == 4
 	t139 = t107 * t110;
 	t136 = 0.2e1 * t156;
 	t90 = t107 * t152 + 0.1e1;
-	t135 = 0.2e1 * (qJD(3) * t108 * t110 * t152 + t107 * t161) / t90 ^ 2;
+	t135 = 0.2e1 * (t108 * qJD(3) * t110 * t152 + t107 * t161) / t90 ^ 2;
 	t134 = t81 * t157;
 	t132 = t105 * t106 * t92;
 	t130 = 0.1e1 + t152;
-	t129 = t158 * t110;
+	t129 = t110 * t158;
 	t126 = 0.2e1 * t82 * t157;
 	t124 = -0.2e1 * t106 * t154;
 	t123 = t101 * t132;
@@ -174,9 +174,9 @@ elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobiaD_rot_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:56:48
-	% EndTime: 2019-12-29 19:56:48
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 21:12:10
+	% EndTime: 2019-12-31 21:12:10
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JaD_rot = t1;

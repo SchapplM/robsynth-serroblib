@@ -23,8 +23,8 @@
 %   Zeitableitung der Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-29 15:26
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2019-12-31 17:35
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -44,9 +44,9 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobiRD_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 15:26:01
-	% EndTime: 2019-12-29 15:26:01
-	% DurationCPUTime: 0.08s
+	% StartTime: 2019-12-31 17:35:59
+	% EndTime: 2019-12-31 17:35:59
+	% DurationCPUTime: 0.03s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JRD_rot = t1;
@@ -54,9 +54,9 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobiRD_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 15:26:06
-	% EndTime: 2019-12-29 15:26:06
-	% DurationCPUTime: 0.07s
+	% StartTime: 2019-12-31 17:35:59
+	% EndTime: 2019-12-31 17:35:59
+	% DurationCPUTime: 0.04s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JRD_rot = t1;
@@ -64,9 +64,9 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobiRD_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 15:26:00
-	% EndTime: 2019-12-29 15:26:01
-	% DurationCPUTime: 0.08s
+	% StartTime: 2019-12-31 17:35:59
+	% EndTime: 2019-12-31 17:35:59
+	% DurationCPUTime: 0.04s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JRD_rot = t1;
@@ -74,9 +74,9 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobiRD_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 15:26:01
-	% EndTime: 2019-12-29 15:26:01
-	% DurationCPUTime: 0.04s
+	% StartTime: 2019-12-31 17:35:59
+	% EndTime: 2019-12-31 17:35:59
+	% DurationCPUTime: 0.02s
 	% Computational Cost: add. (4->3), mult. (16->6), div. (0->0), fcn. (16->4), ass. (0->7)
 	t55 = cos(qJ(3));
 	t54 = sin(qJ(3));
@@ -90,9 +90,9 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobiRD_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 15:25:53
-	% EndTime: 2019-12-29 15:25:53
-	% DurationCPUTime: 0.04s
+	% StartTime: 2019-12-31 17:35:59
+	% EndTime: 2019-12-31 17:35:59
+	% DurationCPUTime: 0.02s
 	% Computational Cost: add. (40->6), mult. (32->6), div. (0->0), fcn. (32->4), ass. (0->9)
 	t83 = cos(pkin(8));
 	t82 = sin(pkin(8));
@@ -108,9 +108,9 @@ elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobiRD_rot_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 15:26:06
-	% EndTime: 2019-12-29 15:26:06
-	% DurationCPUTime: 0.09s
+	% StartTime: 2019-12-31 17:35:59
+	% EndTime: 2019-12-31 17:35:59
+	% DurationCPUTime: 0.05s
 	% Computational Cost: add. (128->15), mult. (126->20), div. (0->0), fcn. (138->6), ass. (0->21)
 	t118 = sin(pkin(8));
 	t117 = qJ(3) + qJ(4);

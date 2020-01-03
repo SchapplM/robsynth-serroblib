@@ -23,8 +23,8 @@
 %   Zeitableitung der Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-29 20:36
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2019-12-31 21:58
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -44,9 +44,9 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobiRD_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:36:00
-	% EndTime: 2019-12-29 20:36:00
-	% DurationCPUTime: 0.08s
+	% StartTime: 2019-12-31 21:58:45
+	% EndTime: 2019-12-31 21:58:45
+	% DurationCPUTime: 0.04s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JRD_rot = t1;
@@ -54,9 +54,9 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobiRD_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:36:00
-	% EndTime: 2019-12-29 20:36:00
-	% DurationCPUTime: 0.08s
+	% StartTime: 2019-12-31 21:58:45
+	% EndTime: 2019-12-31 21:58:45
+	% DurationCPUTime: 0.04s
 	% Computational Cost: add. (3->3), mult. (4->2), div. (0->0), fcn. (4->2), ass. (0->3)
 	t31 = qJD(1) * sin(qJ(1));
 	t30 = qJD(1) * cos(qJ(1));
@@ -66,9 +66,9 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobiRD_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:36:00
-	% EndTime: 2019-12-29 20:36:00
-	% DurationCPUTime: 0.06s
+	% StartTime: 2019-12-31 21:58:46
+	% EndTime: 2019-12-31 21:58:46
+	% DurationCPUTime: 0.02s
 	% Computational Cost: add. (11->9), mult. (36->13), div. (0->0), fcn. (36->4), ass. (0->14)
 	t34 = sin(qJ(1));
 	t41 = qJD(1) * t34;
@@ -89,9 +89,9 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobiRD_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:36:00
-	% EndTime: 2019-12-29 20:36:00
-	% DurationCPUTime: 0.06s
+	% StartTime: 2019-12-31 21:58:46
+	% EndTime: 2019-12-31 21:58:46
+	% DurationCPUTime: 0.03s
 	% Computational Cost: add. (61->14), mult. (54->14), div. (0->0), fcn. (54->4), ass. (0->17)
 	t71 = qJ(2) + qJ(3);
 	t68 = sin(t71);
@@ -115,9 +115,9 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobiRD_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:36:03
-	% EndTime: 2019-12-29 20:36:03
-	% DurationCPUTime: 0.20s
+	% StartTime: 2019-12-31 21:58:47
+	% EndTime: 2019-12-31 21:58:47
+	% DurationCPUTime: 0.09s
 	% Computational Cost: add. (164->29), mult. (226->57), div. (0->0), fcn. (226->6), ass. (0->41)
 	t329 = qJD(2) + qJD(3);
 	t331 = sin(qJ(4));
@@ -165,15 +165,15 @@ elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobiRD_rot_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:36:03
-	% EndTime: 2019-12-29 20:36:04
-	% DurationCPUTime: 0.33s
+	% StartTime: 2019-12-31 21:58:47
+	% EndTime: 2019-12-31 21:58:47
+	% DurationCPUTime: 0.14s
 	% Computational Cost: add. (164->29), mult. (226->57), div. (0->0), fcn. (226->6), ass. (0->41)
 	t395 = cos(qJ(1));
 	t391 = qJ(2) + qJ(3);
 	t389 = cos(t391);
 	t397 = qJD(1) * t389 - qJD(4);
-	t414 = t397 * t395;
+	t414 = t395 * t397;
 	t393 = sin(qJ(1));
 	t388 = sin(t391);
 	t390 = qJD(2) + qJD(3);
@@ -207,8 +207,8 @@ elseif link_index == 5
 	t379 = -t392 * t399 + (t392 * t408 - t394 * t404) * t388;
 	t378 = t394 * t414 + (t392 * t398 - t403) * t393;
 	t377 = t398 * t394 * t393 + (t402 - t414) * t392;
-	t376 = t392 * t396 - t394 * t413;
-	t375 = t392 * t413 + t394 * t396;
+	t376 = t392 * t396 - t413 * t394;
+	t375 = t413 * t392 + t394 * t396;
 	t1 = [-t378, t380, t380, t375, 0; t376, t382, t382, t377, 0; 0, t384, t384, -t388 * t405 - t389 * t412, 0; -t388 * t407 - t401, t385, t385, 0, 0; -t388 * t408 + t399, t386, t386, 0, 0; 0, t387, t387, 0, 0; t377, t379, t379, t376, 0; -t375, t381, t381, t378, 0; 0, t383, t383, -t388 * t406 + t389 * t410, 0;];
 	JRD_rot = t1;
 else

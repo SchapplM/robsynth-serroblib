@@ -25,8 +25,8 @@
 %   Zeitableitung der rotatorischen Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-29 16:05
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2019-12-31 17:54
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -47,9 +47,9 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobiaD_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 16:05:12
-	% EndTime: 2019-12-29 16:05:12
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 17:54:09
+	% EndTime: 2019-12-31 17:54:09
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JaD_rot = t1;
@@ -57,9 +57,9 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobiaD_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 16:05:12
-	% EndTime: 2019-12-29 16:05:12
-	% DurationCPUTime: 0.04s
+	% StartTime: 2019-12-31 17:54:09
+	% EndTime: 2019-12-31 17:54:09
+	% DurationCPUTime: 0.02s
 	% Computational Cost: add. (9->0), mult. (37->0), div. (15->0), fcn. (22->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JaD_rot = t1;
@@ -67,9 +67,9 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobiaD_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 16:05:07
-	% EndTime: 2019-12-29 16:05:07
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 17:54:09
+	% EndTime: 2019-12-31 17:54:09
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JaD_rot = t1;
@@ -77,9 +77,9 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobiaD_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 16:05:13
-	% EndTime: 2019-12-29 16:05:13
-	% DurationCPUTime: 0.46s
+	% StartTime: 2019-12-31 17:54:10
+	% EndTime: 2019-12-31 17:54:10
+	% DurationCPUTime: 0.22s
 	% Computational Cost: add. (213->24), mult. (456->71), div. (110->13), fcn. (596->7), ass. (0->33)
 	t68 = sin(qJ(1));
 	t80 = qJD(1) * t68;
@@ -119,9 +119,9 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobiaD_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 16:05:13
-	% EndTime: 2019-12-29 16:05:13
-	% DurationCPUTime: 0.03s
+	% StartTime: 2019-12-31 17:54:09
+	% EndTime: 2019-12-31 17:54:09
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JaD_rot = t1;
@@ -129,9 +129,9 @@ elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobiaD_rot_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 16:05:12
-	% EndTime: 2019-12-29 16:05:14
-	% DurationCPUTime: 1.34s
+	% StartTime: 2019-12-31 17:54:10
+	% EndTime: 2019-12-31 17:54:10
+	% DurationCPUTime: 0.60s
 	% Computational Cost: add. (1478->65), mult. (4561->146), div. (413->12), fcn. (5923->9), ass. (0->67)
 	t124 = cos(pkin(7));
 	t125 = sin(qJ(4));
@@ -149,7 +149,7 @@ elseif link_index == 5
 	t106 = t114 * t126;
 	t169 = cos(qJ(1));
 	t133 = t115 * t169;
-	t88 = -qJD(1) * t133 + qJD(4) * t106;
+	t88 = -t133 * qJD(1) + qJD(4) * t106;
 	t99 = t171 ^ 2;
 	t94 = t112 * t99 + 0.1e1;
 	t166 = (-t112 * t171 * t88 - t99 * t154) / t94 ^ 2;
@@ -186,14 +186,14 @@ elseif link_index == 5
 	t156 = t171 * t115;
 	t100 = t133 ^ 2;
 	t79 = t100 * t82 + 0.1e1;
-	t86 = -qJD(1) * t171 - qJD(4) * t108;
+	t86 = -t171 * qJD(1) - t108 * qJD(4);
 	t152 = 0.2e1 * (-t100 * t167 + t86 * t163) / t79 ^ 2;
 	t151 = 0.2e1 * t167;
 	t150 = -0.2e1 * t166;
 	t149 = -0.2e1 * t164;
 	t135 = -t106 * t111 - t112 * t156;
 	t109 = t114 * qJD(4);
-	t89 = t108 * qJD(1) + qJD(4) * t171;
+	t89 = t108 * qJD(1) + t171 * qJD(4);
 	t77 = 0.1e1 / t79;
 	t76 = t135 * t92;
 	t74 = t170 * t133;

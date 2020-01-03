@@ -23,8 +23,8 @@
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-29 19:30
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2019-12-31 20:48
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,9 +43,9 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobia_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:30:31
-	% EndTime: 2019-12-29 19:30:31
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 20:48:27
+	% EndTime: 2019-12-31 20:48:27
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	Ja_rot = t1;
@@ -53,9 +53,9 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobia_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:30:29
-	% EndTime: 2019-12-29 19:30:29
-	% DurationCPUTime: 0.03s
+	% StartTime: 2019-12-31 20:48:28
+	% EndTime: 2019-12-31 20:48:28
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (3->0), mult. (6->0), div. (5->0), fcn. (6->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 1, 0, 0, 0, 0;];
 	Ja_rot = t1;
@@ -63,9 +63,9 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobia_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:30:35
-	% EndTime: 2019-12-29 19:30:35
-	% DurationCPUTime: 0.10s
+	% StartTime: 2019-12-31 20:48:28
+	% EndTime: 2019-12-31 20:48:28
+	% DurationCPUTime: 0.05s
 	% Computational Cost: add. (35->13), mult. (116->34), div. (25->9), fcn. (175->9), ass. (0->25)
 	t30 = cos(pkin(5));
 	t29 = sin(pkin(5));
@@ -97,9 +97,9 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobia_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:30:29
-	% EndTime: 2019-12-29 19:30:30
-	% DurationCPUTime: 0.14s
+	% StartTime: 2019-12-31 20:48:28
+	% EndTime: 2019-12-31 20:48:28
+	% DurationCPUTime: 0.07s
 	% Computational Cost: add. (126->20), mult. (316->53), div. (70->11), fcn. (497->9), ass. (0->33)
 	t43 = sin(qJ(2));
 	t44 = sin(qJ(1));
@@ -139,9 +139,9 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobia_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:30:30
-	% EndTime: 2019-12-29 19:30:30
-	% DurationCPUTime: 0.23s
+	% StartTime: 2019-12-31 20:48:28
+	% EndTime: 2019-12-31 20:48:28
+	% DurationCPUTime: 0.09s
 	% Computational Cost: add. (149->24), mult. (451->64), div. (72->11), fcn. (673->11), ass. (0->40)
 	t54 = sin(qJ(2));
 	t57 = cos(qJ(2));
@@ -173,7 +173,7 @@ elseif link_index == 4
 	t50 = 0.1e1 / t54;
 	t66 = t49 * t50;
 	t63 = t52 * t58;
-	t61 = t35 * t36 ^ 2 + 0.1e1;
+	t61 = t36 ^ 2 * t35 + 0.1e1;
 	t51 = 0.1e1 / t54 ^ 2;
 	t42 = t55 * t54 - t57 * t59;
 	t40 = 0.1e1 / (0.1e1 + t43 ^ 2 / t52 ^ 2 * t51);
@@ -182,15 +182,15 @@ elseif link_index == 4
 	t30 = 0.1e1 / t32;
 	t29 = 0.1e1 / (0.1e1 + t67);
 	t28 = (t43 * t51 * t57 + t42 * t50) * t49 * t40;
-	t1 = [-t46 * t40 * t66, t28, 0, 0, 0; (-t43 * t30 - (-t38 + (t66 * t68 + t38) * t40) * t67) * t29, (-t45 * t30 - (t39 * t52 * t57 + t38 * t42 + (-t38 * t65 - t68) * t28) * t46 * t31) * t29, 0, 0, 0; ((t42 * t56 + t53 * t63) * t34 - (-t42 * t53 + t56 * t63) * t69) * t33, (-t34 * t56 - t53 * t69) * t46 * t33, 0, t61 * t33, 0;];
+	t1 = [-t46 * t40 * t66, t28, 0, 0, 0; (-t43 * t30 - (-t38 + (t66 * t68 + t38) * t40) * t67) * t29, (-t45 * t30 - (t39 * t52 * t57 + t38 * t42 + (-t38 * t65 - t68) * t28) * t46 * t31) * t29, 0, 0, 0; ((t42 * t56 + t53 * t63) * t34 - (-t42 * t53 + t56 * t63) * t69) * t33, (-t56 * t34 - t53 * t69) * t46 * t33, 0, t61 * t33, 0;];
 	Ja_rot = t1;
 elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobia_rot_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 19:30:30
-	% EndTime: 2019-12-29 19:30:30
-	% DurationCPUTime: 0.38s
+	% StartTime: 2019-12-31 20:48:28
+	% EndTime: 2019-12-31 20:48:28
+	% DurationCPUTime: 0.18s
 	% Computational Cost: add. (459->36), mult. (1300->90), div. (85->9), fcn. (1858->13), ass. (0->55)
 	t72 = cos(pkin(5));
 	t79 = cos(qJ(2));

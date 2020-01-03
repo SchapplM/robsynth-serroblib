@@ -21,8 +21,8 @@
 %   Rotatorische Teilmatrix der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-29 20:47
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2019-12-31 22:20
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,9 +40,9 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobig_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:47:10
-	% EndTime: 2019-12-29 20:47:10
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 22:20:25
+	% EndTime: 2019-12-31 22:20:25
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	Jg_rot = t1;
@@ -50,9 +50,9 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobig_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:47:10
-	% EndTime: 2019-12-29 20:47:10
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 22:20:25
+	% EndTime: 2019-12-31 22:20:25
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 1, 0, 0, 0, 0;];
 	Jg_rot = t1;
@@ -60,9 +60,9 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobig_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:47:10
-	% EndTime: 2019-12-29 20:47:10
-	% DurationCPUTime: 0.03s
+	% StartTime: 2019-12-31 22:20:25
+	% EndTime: 2019-12-31 22:20:25
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (1->1), mult. (2->2), div. (0->0), fcn. (5->4), ass. (0->2)
 	t43 = sin(pkin(5));
 	t1 = [0, sin(qJ(1)) * t43, 0, 0, 0; 0, -cos(qJ(1)) * t43, 0, 0, 0; 1, cos(pkin(5)), 0, 0, 0;];
@@ -71,9 +71,9 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobig_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:47:10
-	% EndTime: 2019-12-29 20:47:11
-	% DurationCPUTime: 0.04s
+	% StartTime: 2019-12-31 22:20:25
+	% EndTime: 2019-12-31 22:20:25
+	% DurationCPUTime: 0.02s
 	% Computational Cost: add. (4->4), mult. (9->8), div. (0->0), fcn. (17->6), ass. (0->8)
 	t70 = cos(pkin(5));
 	t73 = cos(qJ(2));
@@ -88,9 +88,9 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobig_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:47:16
-	% EndTime: 2019-12-29 20:47:16
-	% DurationCPUTime: 0.06s
+	% StartTime: 2019-12-31 22:20:25
+	% EndTime: 2019-12-31 22:20:25
+	% DurationCPUTime: 0.03s
 	% Computational Cost: add. (9->9), mult. (24->18), div. (0->0), fcn. (40->8), ass. (0->15)
 	t101 = sin(pkin(5));
 	t105 = sin(qJ(1));
@@ -112,25 +112,25 @@ elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobig_rot_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 20:47:11
-	% EndTime: 2019-12-29 20:47:11
-	% DurationCPUTime: 0.12s
+	% StartTime: 2019-12-31 22:20:26
+	% EndTime: 2019-12-31 22:20:26
+	% DurationCPUTime: 0.05s
 	% Computational Cost: add. (9->9), mult. (24->18), div. (0->0), fcn. (40->8), ass. (0->15)
-	t137 = sin(qJ(2));
-	t141 = cos(qJ(1));
-	t147 = t137 * t141;
 	t134 = sin(pkin(5));
 	t138 = sin(qJ(1));
-	t146 = t138 * t134;
-	t145 = t138 * t137;
+	t147 = t138 * t134;
+	t137 = sin(qJ(2));
+	t146 = t138 * t137;
 	t140 = cos(qJ(2));
-	t144 = t138 * t140;
-	t143 = t140 * t141;
-	t142 = t141 * t134;
+	t145 = t138 * t140;
+	t141 = cos(qJ(1));
+	t144 = t141 * t134;
+	t143 = t141 * t137;
+	t142 = t141 * t140;
 	t139 = cos(qJ(3));
 	t136 = sin(qJ(3));
 	t135 = cos(pkin(5));
-	t1 = [0, t146, t135 * t144 + t147, (-t135 * t145 + t143) * t136 - t139 * t146, 0; 0, -t142, -t135 * t143 + t145, (t135 * t147 + t144) * t136 + t139 * t142, 0; 1, t135, -t134 * t140, t134 * t136 * t137 - t135 * t139, 0;];
+	t1 = [0, t147, t135 * t145 + t143, (-t135 * t146 + t142) * t136 - t139 * t147, 0; 0, -t144, -t135 * t142 + t146, (t135 * t143 + t145) * t136 + t139 * t144, 0; 1, t135, -t134 * t140, t134 * t136 * t137 - t135 * t139, 0;];
 	Jg_rot = t1;
 else
 	Jg_rot=NaN(3,5);

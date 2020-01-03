@@ -23,8 +23,8 @@
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-29 18:06
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2019-12-31 19:22
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,9 +43,9 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobia_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 18:05:37
-	% EndTime: 2019-12-29 18:05:37
-	% DurationCPUTime: 0.03s
+	% StartTime: 2019-12-31 19:22:21
+	% EndTime: 2019-12-31 19:22:21
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	Ja_rot = t1;
@@ -53,9 +53,9 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobia_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 18:05:37
-	% EndTime: 2019-12-29 18:05:37
-	% DurationCPUTime: 0.03s
+	% StartTime: 2019-12-31 19:22:21
+	% EndTime: 2019-12-31 19:22:21
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (3->0), mult. (6->0), div. (5->0), fcn. (6->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 1, 0, 0, 0, 0;];
 	Ja_rot = t1;
@@ -63,9 +63,9 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobia_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 18:05:37
-	% EndTime: 2019-12-29 18:05:37
-	% DurationCPUTime: 0.10s
+	% StartTime: 2019-12-31 19:22:21
+	% EndTime: 2019-12-31 19:22:21
+	% DurationCPUTime: 0.05s
 	% Computational Cost: add. (25->13), mult. (89->32), div. (20->9), fcn. (140->9), ass. (0->23)
 	t28 = cos(pkin(5));
 	t26 = sin(pkin(5));
@@ -95,9 +95,9 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobia_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 18:05:37
-	% EndTime: 2019-12-29 18:05:37
-	% DurationCPUTime: 0.22s
+	% StartTime: 2019-12-31 19:22:21
+	% EndTime: 2019-12-31 19:22:21
+	% DurationCPUTime: 0.08s
 	% Computational Cost: add. (156->21), mult. (450->48), div. (25->9), fcn. (637->13), ass. (0->38)
 	t61 = cos(pkin(5));
 	t59 = cos(pkin(11));
@@ -142,9 +142,9 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobia_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 18:05:37
-	% EndTime: 2019-12-29 18:05:38
-	% DurationCPUTime: 0.49s
+	% StartTime: 2019-12-31 19:22:21
+	% EndTime: 2019-12-31 19:22:21
+	% DurationCPUTime: 0.25s
 	% Computational Cost: add. (559->39), mult. (1669->87), div. (55->9), fcn. (2293->15), ass. (0->57)
 	t115 = sin(qJ(1));
 	t88 = sin(pkin(5));
@@ -208,9 +208,9 @@ elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobia_rot_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 18:05:37
-	% EndTime: 2019-12-29 18:05:38
-	% DurationCPUTime: 0.88s
+	% StartTime: 2019-12-31 19:22:21
+	% EndTime: 2019-12-31 19:22:21
+	% DurationCPUTime: 0.41s
 	% Computational Cost: add. (1440->49), mult. (4121->118), div. (85->9), fcn. (5660->17), ass. (0->69)
 	t119 = cos(pkin(5));
 	t117 = cos(pkin(11));
@@ -230,7 +230,7 @@ elseif link_index == 5
 	t116 = sin(pkin(5));
 	t141 = t116 * t126;
 	t131 = t110 * t118 + t115 * t141;
-	t100 = -t111 * t125 + t122 * t131;
+	t100 = -t111 * t125 + t131 * t122;
 	t107 = -t110 * t115 + t118 * t141;
 	t121 = sin(qJ(4));
 	t124 = cos(qJ(4));
@@ -251,13 +251,13 @@ elseif link_index == 5
 	t76 = 0.1e1 / t77 ^ 2;
 	t112 = -t119 * t135 + t138;
 	t102 = t112 * t125 - t153 * t122;
-	t127 = t115 * t130 + t118 * t136;
-	t91 = t102 * t121 - t124 * t127;
+	t127 = t130 * t115 + t118 * t136;
+	t91 = t102 * t121 - t127 * t124;
 	t151 = t76 * t91;
 	t101 = t112 * t122 + t153 * t125;
 	t120 = sin(qJ(5));
 	t123 = cos(qJ(5));
-	t92 = t102 * t124 + t121 * t127;
+	t92 = t102 * t124 + t127 * t121;
 	t82 = t101 * t120 + t92 * t123;
 	t80 = 0.1e1 / t82 ^ 2;
 	t81 = -t101 * t123 + t92 * t120;
@@ -269,7 +269,7 @@ elseif link_index == 5
 	t146 = t101 * t124;
 	t137 = t81 ^ 2 * t80 + 0.1e1;
 	t132 = -t83 * t95 + t149;
-	t128 = -t111 * t122 - t125 * t131;
+	t128 = -t111 * t122 - t131 * t125;
 	t105 = t125 * t142 + (-t114 * t122 + t125 * t140) * t116;
 	t96 = t106 * t124 + t109 * t121;
 	t93 = 0.1e1 / t95;

@@ -19,8 +19,8 @@
 %   5+1:  mdh base (link 0) -> mdh frame (5)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-29 16:05
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2019-12-31 17:54
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [7 1]), ...
 %% Symbolic Calculation
 % From fkine_mdh_floatb_twist_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-29 16:03:37
-% EndTime: 2019-12-29 16:03:38
-% DurationCPUTime: 0.24s
+% StartTime: 2019-12-31 17:53:14
+% EndTime: 2019-12-31 17:53:14
+% DurationCPUTime: 0.12s
 % Computational Cost: add. (81->37), mult. (134->36), div. (0->0), fcn. (188->6), ass. (0->27)
 t24 = sin(pkin(7));
 t27 = sin(qJ(1));
@@ -63,9 +63,9 @@ t31 = pkin(3) * t16 - t27 * pkin(6) + t35;
 t30 = pkin(3) * t15 + t29 * pkin(6) + t32;
 t6 = t24 * t28 - t25 * t26;
 t4 = t5 * t29;
-t3 = t26 * t16 - t28 * t39;
+t3 = t16 * t26 - t28 * t39;
 t2 = t5 * t27;
-t1 = t26 * t15 - t28 * t40;
+t1 = t15 * t26 - t28 * t40;
 t7 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1; t29, -t27, 0, 0; t27, t29, 0, 0; 0, 0, 1, t23; 0, 0, 0, 1; t16, -t39, t27, t37; t15, -t40, -t29, t36; t24, t25, 0, t23; 0, 0, 0, 1; t16, t27, t39, t35; t15, -t29, t40, t32; t24, 0, -t25, t34; 0, 0, 0, 1; t4, -t3, -t27, t31; t2, -t1, t29, t30; t6, -t5, 0, t33; 0, 0, 0, 1; t4, -t27, t3, t4 * pkin(4) + t3 * qJ(5) + t31; t2, t29, t1, t2 * pkin(4) + t1 * qJ(5) + t30; t6, 0, t5, t6 * pkin(4) + t5 * qJ(5) + t33; 0, 0, 0, 1;];
 T_ges = t7;
 %% Postprocessing: Reshape Output

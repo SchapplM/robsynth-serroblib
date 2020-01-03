@@ -23,8 +23,8 @@
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-29 15:15
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2019-12-31 17:31
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,9 +43,9 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobia_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 15:15:06
-	% EndTime: 2019-12-29 15:15:06
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 17:31:28
+	% EndTime: 2019-12-31 17:31:28
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
 	Ja_rot = t1;
@@ -53,9 +53,9 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobia_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 15:15:01
-	% EndTime: 2019-12-29 15:15:01
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 17:31:28
+	% EndTime: 2019-12-31 17:31:28
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (3->0), mult. (6->0), div. (5->0), fcn. (6->0), ass. (0->1)
 	t1 = [0, 0, 0, 0; 0, 0, 0, 0; 1, 0, 0, 0;];
 	Ja_rot = t1;
@@ -63,9 +63,9 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobia_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 15:15:06
-	% EndTime: 2019-12-29 15:15:06
-	% DurationCPUTime: 0.10s
+	% StartTime: 2019-12-31 17:31:28
+	% EndTime: 2019-12-31 17:31:28
+	% DurationCPUTime: 0.05s
 	% Computational Cost: add. (35->13), mult. (116->34), div. (25->9), fcn. (175->9), ass. (0->25)
 	t30 = cos(pkin(4));
 	t29 = sin(pkin(4));
@@ -97,9 +97,9 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobia_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 15:15:06
-	% EndTime: 2019-12-29 15:15:06
-	% DurationCPUTime: 0.25s
+	% StartTime: 2019-12-31 17:31:28
+	% EndTime: 2019-12-31 17:31:28
+	% DurationCPUTime: 0.12s
 	% Computational Cost: add. (173->24), mult. (451->64), div. (72->11), fcn. (673->11), ass. (0->40)
 	t53 = sin(qJ(2));
 	t56 = cos(qJ(2));
@@ -146,9 +146,9 @@ elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobia_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 15:15:06
-	% EndTime: 2019-12-29 15:15:07
-	% DurationCPUTime: 0.47s
+	% StartTime: 2019-12-31 17:31:28
+	% EndTime: 2019-12-31 17:31:29
+	% DurationCPUTime: 0.24s
 	% Computational Cost: add. (459->37), mult. (1300->91), div. (85->9), fcn. (1858->13), ass. (0->54)
 	t76 = cos(pkin(4));
 	t79 = sin(qJ(2));
@@ -190,7 +190,7 @@ elseif link_index == 4
 	t96 = t63 ^ 2 * t48;
 	t95 = t71 * t82;
 	t92 = t75 * t83;
-	t86 = t53 ^ 2 * t52 + 0.1e1;
+	t86 = t52 * t53 ^ 2 + 0.1e1;
 	t61 = t70 * t82 - t78 * t91;
 	t85 = -t55 * t67 - t98;
 	t69 = t76 * t87 - t90;
@@ -203,7 +203,7 @@ elseif link_index == 4
 	t46 = 0.1e1 / (0.1e1 + t96);
 	t45 = (-t65 * t69 + t92 * t97) * t78 * t57;
 	t44 = (-t61 * t65 + t68 * t97) * t57;
-	t1 = [-t63 * t65 * t57, t45, t44, 0; (-t59 * t47 - (-t55 + (t65 * t98 + t55) * t57) * t96) * t46, (-t71 * t78 * t47 - ((-t55 * t69 + t56 * t92) * t78 + t85 * t45) * t100) * t46, (t64 * t47 - (t85 * t44 - t55 * t61 + t56 * t68) * t100) * t46, 0; ((-t61 * t77 - t69 * t81) * t51 - (-t61 * t81 + t69 * t77) * t99) * t50, ((-t72 * t81 - t77 * t95) * t51 - (t72 * t77 - t81 * t95) * t99) * t50, (-t77 * t51 + t81 * t99) * t63 * t50, t86 * t50;];
+	t1 = [-t63 * t65 * t57, t45, t44, 0; (-t59 * t47 - (-t55 + (t65 * t98 + t55) * t57) * t96) * t46, (-t71 * t78 * t47 - ((-t55 * t69 + t56 * t92) * t78 + t85 * t45) * t100) * t46, (t64 * t47 - (t44 * t85 - t55 * t61 + t56 * t68) * t100) * t46, 0; ((-t61 * t77 - t69 * t81) * t51 - (-t61 * t81 + t69 * t77) * t99) * t50, ((-t72 * t81 - t77 * t95) * t51 - (t72 * t77 - t81 * t95) * t99) * t50, (-t51 * t77 + t81 * t99) * t63 * t50, t86 * t50;];
 	Ja_rot = t1;
 else
 	Ja_rot=NaN(3,4);

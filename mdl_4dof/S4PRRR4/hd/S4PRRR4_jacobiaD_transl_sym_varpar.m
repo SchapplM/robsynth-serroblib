@@ -23,8 +23,8 @@
 %   Translatorischer Teil der analytischen Jacobi-Matrix (Zeitableitung)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-29 12:27
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2019-12-31 16:32
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -49,9 +49,9 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobiaD_transl_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 12:27:11
-	% EndTime: 2019-12-29 12:27:11
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 16:32:52
+	% EndTime: 2019-12-31 16:32:52
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
 	JaD_transl = t1;
@@ -59,9 +59,9 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobiaD_transl_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 12:27:08
-	% EndTime: 2019-12-29 12:27:08
-	% DurationCPUTime: 0.02s
+	% StartTime: 2019-12-31 16:32:52
+	% EndTime: 2019-12-31 16:32:52
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0; 0, 0, 0, 0; 0, 0, 0, 0;];
 	JaD_transl = t1;
@@ -69,9 +69,9 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobiaD_transl_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 12:27:15
-	% EndTime: 2019-12-29 12:27:15
-	% DurationCPUTime: 0.03s
+	% StartTime: 2019-12-31 16:32:52
+	% EndTime: 2019-12-31 16:32:52
+	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (6->3), mult. (8->6), div. (0->0), fcn. (4->2), ass. (0->4)
 	t32 = pkin(7) + qJ(2);
 	t31 = cos(t32);
@@ -82,9 +82,9 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobiaD_transl_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 12:27:15
-	% EndTime: 2019-12-29 12:27:15
-	% DurationCPUTime: 0.15s
+	% StartTime: 2019-12-31 16:32:52
+	% EndTime: 2019-12-31 16:32:52
+	% DurationCPUTime: 0.07s
 	% Computational Cost: add. (41->16), mult. (64->29), div. (0->0), fcn. (40->4), ass. (0->13)
 	t24 = sin(qJ(3));
 	t25 = cos(qJ(3));
@@ -98,15 +98,15 @@ elseif link_index == 3
 	t23 = pkin(7) + qJ(2);
 	t22 = cos(t23);
 	t21 = sin(t23);
-	t1 = [0, t21 * t26 + (-t33 * t21 + t27 * t22) * qJD(2), (t21 * t31 + t22 * t30) * r_i_i_C(2) + (t21 * t32 - t22 * t29) * r_i_i_C(1), 0; 0, -t22 * t26 + (t27 * t21 + t33 * t22) * qJD(2), (t21 * t30 - t22 * t31) * r_i_i_C(2) + (-t21 * t29 - t22 * t32) * r_i_i_C(1), 0; 0, 0, -t26, 0;];
+	t1 = [0, t21 * t26 + (-t21 * t33 + t22 * t27) * qJD(2), (t21 * t31 + t22 * t30) * r_i_i_C(2) + (t21 * t32 - t22 * t29) * r_i_i_C(1), 0; 0, -t22 * t26 + (t21 * t27 + t22 * t33) * qJD(2), (t21 * t30 - t22 * t31) * r_i_i_C(2) + (-t21 * t29 - t22 * t32) * r_i_i_C(1), 0; 0, 0, -t26, 0;];
 	JaD_transl = t1;
 elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobiaD_transl_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-29 12:27:15
-	% EndTime: 2019-12-29 12:27:16
-	% DurationCPUTime: 0.20s
+	% StartTime: 2019-12-31 16:32:52
+	% EndTime: 2019-12-31 16:32:52
+	% DurationCPUTime: 0.10s
 	% Computational Cost: add. (117->27), mult. (114->38), div. (0->0), fcn. (73->6), ass. (0->26)
 	t45 = qJD(3) + qJD(4);
 	t46 = qJ(3) + qJ(4);
@@ -133,7 +133,7 @@ elseif link_index == 4
 	t41 = cos(t44);
 	t51 = (t57 - t58) * t41 + (t60 * r_i_i_C(1) + t56) * t40;
 	t35 = t40 * t57;
-	t1 = [0, t66 * t40 + (-t62 * t40 + t53 * t41) * qJD(2), (qJD(2) * t40 * t47 - t41 * t59) * pkin(3) + t51, t51; 0, -t66 * t41 + (t53 * t40 + t62 * t41) * qJD(2), t35 + (-pkin(3) * t59 - t58) * t40 + (-t54 - t65) * t41 * qJD(2), -t41 * t56 + t35 + (-t40 * t61 - t41 * t60) * r_i_i_C(1); 0, 0, -t66, -t52;];
+	t1 = [0, t66 * t40 + (-t40 * t62 + t41 * t53) * qJD(2), (qJD(2) * t40 * t47 - t41 * t59) * pkin(3) + t51, t51; 0, -t66 * t41 + (t53 * t40 + t41 * t62) * qJD(2), t35 + (-pkin(3) * t59 - t58) * t40 + (-t54 - t65) * t41 * qJD(2), -t41 * t56 + t35 + (-t40 * t61 - t41 * t60) * r_i_i_C(1); 0, 0, -t66, -t52;];
 	JaD_transl = t1;
 else
 	JaD_transl=NaN(3,4);
