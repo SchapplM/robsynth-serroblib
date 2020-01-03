@@ -20,8 +20,8 @@
 %   minimal parameter regressor of inverse dynamics joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -44,9 +44,9 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 %% Symbolic Calculation
 % From invdyn_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 18:00:12
-% EndTime: 2019-03-08 18:00:12
-% DurationCPUTime: 0.06s
+% StartTime: 2020-01-03 11:19:10
+% EndTime: 2020-01-03 11:19:11
+% DurationCPUTime: 0.07s
 % Computational Cost: add. (23->16), mult. (70->35), div. (0->0), fcn. (45->4), ass. (0->18)
 t3 = sin(qJ(2));
 t5 = cos(qJ(2));
@@ -59,11 +59,11 @@ t14 = t5 * qJDD(1);
 t13 = qJD(1) * qJD(2);
 t4 = sin(qJ(1));
 t6 = cos(qJ(1));
-t12 = g(1) * t6 - g(3) * t4;
-t11 = -g(1) * t4 - g(3) * t6;
+t12 = -g(1) * t6 + g(3) * t4;
+t11 = g(1) * t4 + g(3) * t6;
 t7 = qJD(2) ^ 2;
 t10 = pkin(1) * t7 + t12;
 t9 = pkin(1) * qJDD(1) + t11;
 t8 = qJD(1) ^ 2;
 t2 = [qJDD(1), t12, t11, t1 * qJDD(1) + 0.2e1 * t13 * t18, -0.2e1 * t17 * t13 + 0.2e1 * t3 * t14, -t7 * t5 - t16, t7 * t3 - t15, 0, pkin(1) * t16 + t10 * t5, pkin(1) * t15 - t10 * t3; 0, 0, 0, -t8 * t18, t17 * t8, -t3 * qJDD(1), -t14, qJDD(2), g(2) * t5 + t9 * t3, -g(2) * t3 + t9 * t5;];
-tau_reg  = t2;
+tau_reg = t2;

@@ -16,8 +16,8 @@
 %   inertial parameter regressor of Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:58
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:44
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,50 +35,46 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:57:11
-% EndTime: 2019-12-05 17:57:11
-% DurationCPUTime: 0.17s
-% Computational Cost: add. (132->73), mult. (169->98), div. (0->0), fcn. (168->10), ass. (0->42)
-t102 = g(1) * pkin(5);
-t75 = sin(pkin(8));
-t101 = g(1) * t75;
-t79 = sin(qJ(1));
-t100 = g(2) * t79;
-t78 = sin(qJ(3));
-t99 = t78 * pkin(3);
-t80 = cos(qJ(3));
-t65 = t80 * pkin(3) + pkin(2);
-t81 = cos(qJ(1));
-t98 = t75 * t81;
-t76 = cos(pkin(8));
-t97 = t76 * t81;
-t74 = qJ(3) + pkin(9);
-t68 = qJ(5) + t74;
+% StartTime: 2020-01-03 11:43:00
+% EndTime: 2020-01-03 11:43:01
+% DurationCPUTime: 0.24s
+% Computational Cost: add. (132->71), mult. (169->96), div. (0->0), fcn. (168->10), ass. (0->38)
+t76 = sin(qJ(3));
+t84 = pkin(3) * t76 + qJ(2);
+t98 = g(1) * pkin(5);
+t73 = sin(pkin(8));
+t96 = g(1) * t73;
+t77 = sin(qJ(1));
+t69 = t77 * pkin(1);
+t95 = g(2) * t69;
+t78 = cos(qJ(3));
+t65 = t78 * pkin(3) + pkin(2);
+t74 = cos(pkin(8));
+t79 = cos(qJ(1));
+t94 = t74 * t79;
+t93 = t76 * t79;
+t72 = qJ(3) + pkin(9);
+t68 = qJ(5) + t72;
 t63 = sin(t68);
-t96 = t79 * t63;
+t92 = t77 * t63;
 t64 = cos(t68);
-t95 = t79 * t64;
-t66 = sin(t74);
-t94 = t79 * t66;
-t67 = cos(t74);
-t93 = t79 * t67;
-t92 = t79 * t78;
-t91 = t79 * t80;
-t90 = t81 * t63;
-t89 = t81 * t64;
-t88 = t81 * t66;
-t87 = t81 * t67;
-t86 = t81 * t78;
-t85 = t81 * t80;
-t77 = -qJ(4) - pkin(6);
-t84 = t81 * pkin(1) + t79 * qJ(2);
-t83 = pkin(2) * t76 + pkin(6) * t75;
-t82 = -g(3) * t81 + t100;
-t73 = -pkin(7) + t77;
-t70 = t81 * qJ(2);
-t62 = g(2) * t81 + g(3) * t79;
-t61 = pkin(4) * t66 + t99;
+t91 = t77 * t64;
+t66 = sin(t72);
+t90 = t77 * t66;
+t67 = cos(t72);
+t89 = t77 * t67;
+t88 = t77 * t76;
+t87 = t77 * t78;
+t86 = t78 * t79;
+t75 = -qJ(4) - pkin(6);
+t85 = pkin(4) * t66 + t84;
+t83 = pkin(2) * t74 + pkin(6) * t73;
+t82 = -g(2) * t77 + g(3) * t79;
 t60 = pkin(4) * t67 + t65;
-t59 = g(1) * t76 + t82 * t75;
-t1 = [0, 0, 0, 0, 0, 0, t82, t62, -g(1), -t102, 0, 0, 0, 0, 0, 0, t82 * t76 - t101, -t59, -t62, -t102 - g(2) * (-t79 * pkin(1) + t70) - g(3) * t84, 0, 0, 0, 0, 0, 0, -t80 * t101 - g(2) * (-t76 * t91 + t86) - g(3) * (t76 * t85 + t92), t78 * t101 - g(2) * (t76 * t92 + t85) - g(3) * (-t76 * t86 + t91), t59, -g(1) * (t75 * pkin(2) - t76 * pkin(6) + pkin(5)) - g(2) * t70 - g(3) * (t83 * t81 + t84) - (-pkin(1) - t83) * t100, 0, 0, 0, 0, 0, 0, -t67 * t101 - g(2) * (-t76 * t93 + t88) - g(3) * (t76 * t87 + t94), t66 * t101 - g(2) * (t76 * t94 + t87) - g(3) * (-t76 * t88 + t93), t59, -g(1) * (t75 * t65 + t76 * t77 + pkin(5)) - g(2) * (pkin(3) * t86 + t70) - g(3) * (t65 * t97 - t77 * t98 + t84) + (-g(2) * (-t65 * t76 + t75 * t77 - pkin(1)) - g(3) * t99) * t79, 0, 0, 0, 0, 0, 0, -t64 * t101 - g(2) * (-t76 * t95 + t90) - g(3) * (t76 * t89 + t96), t63 * t101 - g(2) * (t76 * t96 + t89) - g(3) * (-t76 * t90 + t95), t59, -g(1) * (t75 * t60 + t76 * t73 + pkin(5)) - g(2) * (t81 * t61 + t70) - g(3) * (t60 * t97 - t73 * t98 + t84) + (-g(2) * (-t60 * t76 + t73 * t75 - pkin(1)) - g(3) * t61) * t79;];
+t71 = -pkin(7) + t75;
+t81 = t60 * t74 - t71 * t73;
+t80 = t65 * t74 - t73 * t75;
+t62 = g(2) * t79 + g(3) * t77;
+t59 = g(1) * t74 + t82 * t73;
+t1 = [0, 0, 0, 0, 0, 0, t82, -t62, -g(1), -t98, 0, 0, 0, 0, 0, 0, t82 * t74 - t96, -t59, t62, -t98 - g(2) * (-t79 * qJ(2) + t69) - g(3) * (-t79 * pkin(1) - t77 * qJ(2)), 0, 0, 0, 0, 0, 0, -t78 * t96 - g(2) * (t74 * t87 - t93) - g(3) * (-t74 * t86 - t88), t76 * t96 - g(2) * (-t74 * t88 - t86) - g(3) * (t74 * t93 - t87), t59, -g(1) * (pkin(2) * t73 - pkin(6) * t74 + pkin(5)) - t95 + (-g(2) * t83 + g(3) * qJ(2)) * t77 + (g(2) * qJ(2) - g(3) * (-pkin(1) - t83)) * t79, 0, 0, 0, 0, 0, 0, -t67 * t96 - g(2) * (-t66 * t79 + t74 * t89) - g(3) * (-t67 * t94 - t90), t66 * t96 - g(2) * (-t67 * t79 - t74 * t90) - g(3) * (t66 * t94 - t89), t59, -g(1) * (t65 * t73 + t74 * t75 + pkin(5)) - t95 + (-g(2) * t80 + g(3) * t84) * t77 + (g(2) * t84 - g(3) * (-pkin(1) - t80)) * t79, 0, 0, 0, 0, 0, 0, -t64 * t96 - g(2) * (-t63 * t79 + t74 * t91) - g(3) * (-t64 * t94 - t92), t63 * t96 - g(2) * (-t64 * t79 - t74 * t92) - g(3) * (t63 * t94 - t91), t59, -g(1) * (t60 * t73 + t71 * t74 + pkin(5)) - t95 + (-g(2) * t81 + g(3) * t85) * t77 + (g(2) * t85 - g(3) * (-pkin(1) - t81)) * t79;];
 U_reg = t1;

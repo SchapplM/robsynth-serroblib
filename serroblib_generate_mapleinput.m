@@ -80,7 +80,7 @@ for i = 1:length(Names)
     maple_a = {'0', sprintf('a%d',kk)};
     maple_theta = {'0', 'Pi/2', 'Pi', '-Pi/2', sprintf('theta%d',kk)};
     maple_d = {'0', sprintf('d%d',kk)};
-    maple_offset = {'0', 'Pi/2', 'Pi', '-Pi/2', sprintf('qoffset%d',kk)};
+    maple_offset = {'0', 'Pi/2', 'Pi', '(-Pi/2)', sprintf('qoffset%d',kk)};
     
     
     line_v     = [line_v,     sprintf('%d,', kk-1)];

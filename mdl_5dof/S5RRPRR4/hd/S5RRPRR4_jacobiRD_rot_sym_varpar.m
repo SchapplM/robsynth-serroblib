@@ -23,8 +23,8 @@
 %   Zeitableitung der Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:32
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:02
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -44,9 +44,9 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobiRD_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-05 18:32:46
-	% EndTime: 2019-12-05 18:32:46
-	% DurationCPUTime: 0.04s
+	% StartTime: 2020-01-03 12:02:38
+	% EndTime: 2020-01-03 12:02:38
+	% DurationCPUTime: 0.03s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JRD_rot = t1;
@@ -54,93 +54,93 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobiRD_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-05 18:32:46
-	% EndTime: 2019-12-05 18:32:46
+	% StartTime: 2020-01-03 12:02:38
+	% EndTime: 2020-01-03 12:02:38
 	% DurationCPUTime: 0.04s
-	% Computational Cost: add. (1->1), mult. (4->2), div. (0->0), fcn. (4->2), ass. (0->3)
+	% Computational Cost: add. (3->3), mult. (4->2), div. (0->0), fcn. (4->2), ass. (0->3)
+	t10 = qJD(1) * sin(qJ(1));
 	t9 = qJD(1) * cos(qJ(1));
-	t7 = qJD(1) * sin(qJ(1));
-	t1 = [0, 0, 0, 0, 0; t7, 0, 0, 0, 0; -t9, 0, 0, 0, 0; 0, 0, 0, 0, 0; t9, 0, 0, 0, 0; t7, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	t1 = [0, 0, 0, 0, 0; -t10, 0, 0, 0, 0; t9, 0, 0, 0, 0; 0, 0, 0, 0, 0; -t9, 0, 0, 0, 0; -t10, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JRD_rot = t1;
 elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobiRD_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-05 18:32:45
-	% EndTime: 2019-12-05 18:32:46
+	% StartTime: 2020-01-03 12:02:38
+	% EndTime: 2020-01-03 12:02:38
 	% DurationCPUTime: 0.04s
-	% Computational Cost: add. (18->4), mult. (8->2), div. (0->0), fcn. (8->2), ass. (0->5)
-	t26 = qJ(1) + qJ(2);
-	t25 = qJD(1) + qJD(2);
-	t23 = t25 * cos(t26);
-	t22 = t25 * sin(t26);
-	t1 = [0, 0, 0, 0, 0; t22, t22, 0, 0, 0; -t23, -t23, 0, 0, 0; 0, 0, 0, 0, 0; t23, t23, 0, 0, 0; t22, t22, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	% Computational Cost: add. (22->8), mult. (8->2), div. (0->0), fcn. (8->2), ass. (0->5)
+	t23 = qJD(1) + qJD(2);
+	t24 = qJ(1) + qJ(2);
+	t25 = t23 * sin(t24);
+	t20 = t23 * cos(t24);
+	t1 = [0, 0, 0, 0, 0; -t25, -t25, 0, 0, 0; t20, t20, 0, 0, 0; 0, 0, 0, 0, 0; -t20, -t20, 0, 0, 0; -t25, -t25, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JRD_rot = t1;
 elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobiRD_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-05 18:32:46
-	% EndTime: 2019-12-05 18:32:46
+	% StartTime: 2020-01-03 12:02:38
+	% EndTime: 2020-01-03 12:02:38
 	% DurationCPUTime: 0.04s
-	% Computational Cost: add. (26->4), mult. (8->2), div. (0->0), fcn. (8->2), ass. (0->5)
-	t31 = qJD(1) + qJD(2);
-	t30 = qJ(1) + qJ(2) + pkin(9);
-	t28 = t31 * cos(t30);
-	t27 = t31 * sin(t30);
-	t1 = [0, 0, 0, 0, 0; t27, t27, 0, 0, 0; -t28, -t28, 0, 0, 0; 0, 0, 0, 0, 0; t28, t28, 0, 0, 0; t27, t27, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
+	% Computational Cost: add. (30->8), mult. (8->2), div. (0->0), fcn. (8->2), ass. (0->5)
+	t29 = qJ(1) + qJ(2) + pkin(9);
+	t30 = qJD(1) + qJD(2);
+	t31 = t30 * sin(t29);
+	t26 = t30 * cos(t29);
+	t1 = [0, 0, 0, 0, 0; -t31, -t31, 0, 0, 0; t26, t26, 0, 0, 0; 0, 0, 0, 0, 0; -t26, -t26, 0, 0, 0; -t31, -t31, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
 	JRD_rot = t1;
 elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobiRD_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-05 18:32:46
-	% EndTime: 2019-12-05 18:32:46
+	% StartTime: 2020-01-03 12:02:38
+	% EndTime: 2020-01-03 12:02:38
 	% DurationCPUTime: 0.03s
-	% Computational Cost: add. (90->16), mult. (54->14), div. (0->0), fcn. (54->4), ass. (0->17)
-	t121 = qJ(1) + qJ(2) + pkin(9);
-	t119 = sin(t121);
-	t122 = qJD(1) + qJD(2);
-	t130 = t122 * t119;
-	t120 = cos(t121);
-	t129 = t122 * t120;
-	t123 = sin(qJ(4));
-	t128 = t122 * t123;
-	t124 = cos(qJ(4));
-	t127 = t122 * t124;
-	t126 = qJD(4) * t123;
-	t125 = qJD(4) * t124;
-	t116 = -t119 * t126 + t120 * t127;
-	t115 = t119 * t125 + t120 * t128;
-	t114 = t119 * t127 + t120 * t126;
-	t113 = t119 * t128 - t120 * t125;
-	t1 = [0, 0, 0, -t126, 0; t114, t114, 0, t115, 0; -t116, -t116, 0, t113, 0; 0, 0, 0, -t125, 0; -t113, -t113, 0, t116, 0; t115, t115, 0, t114, 0; 0, 0, 0, 0, 0; -t129, -t129, 0, 0, 0; -t130, -t130, 0, 0, 0;];
+	% Computational Cost: add. (86->10), mult. (54->14), div. (0->0), fcn. (54->4), ass. (0->17)
+	t123 = qJD(1) + qJD(2);
+	t124 = sin(qJ(4));
+	t129 = t123 * t124;
+	t125 = cos(qJ(4));
+	t128 = t123 * t125;
+	t127 = qJD(4) * t124;
+	t126 = qJD(4) * t125;
+	t122 = qJ(1) + qJ(2) + pkin(9);
+	t121 = cos(t122);
+	t120 = sin(t122);
+	t119 = t123 * t121;
+	t118 = t123 * t120;
+	t117 = -t120 * t127 + t121 * t128;
+	t116 = -t120 * t126 - t121 * t129;
+	t115 = -t120 * t128 - t121 * t127;
+	t114 = t120 * t129 - t121 * t126;
+	t1 = [0, 0, 0, -t127, 0; t115, t115, 0, t116, 0; t117, t117, 0, -t114, 0; 0, 0, 0, -t126, 0; t114, t114, 0, -t117, 0; t116, t116, 0, t115, 0; 0, 0, 0, 0, 0; t119, t119, 0, 0, 0; t118, t118, 0, 0, 0;];
 	JRD_rot = t1;
 elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobiRD_rot_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-12-05 18:32:46
-	% EndTime: 2019-12-05 18:32:46
-	% DurationCPUTime: 0.07s
-	% Computational Cost: add. (172->20), mult. (72->12), div. (0->0), fcn. (72->4), ass. (0->17)
-	t170 = qJ(4) + qJ(5);
-	t166 = sin(t170);
-	t168 = qJD(4) + qJD(5);
-	t174 = t168 * t166;
-	t167 = cos(t170);
-	t173 = t168 * t167;
-	t165 = qJ(1) + qJ(2) + pkin(9);
-	t163 = sin(t165);
-	t169 = qJD(1) + qJD(2);
-	t172 = t169 * t163;
-	t164 = cos(t165);
-	t171 = t169 * t164;
-	t160 = -t163 * t174 + t167 * t171;
-	t159 = t163 * t173 + t166 * t171;
-	t158 = t164 * t174 + t167 * t172;
-	t157 = -t164 * t173 + t166 * t172;
-	t1 = [0, 0, 0, -t174, -t174; t158, t158, 0, t159, t159; -t160, -t160, 0, t157, t157; 0, 0, 0, -t173, -t173; -t157, -t157, 0, t160, t160; t159, t159, 0, t158, t158; 0, 0, 0, 0, 0; -t171, -t171, 0, 0, 0; -t172, -t172, 0, 0, 0;];
+	% StartTime: 2020-01-03 12:02:38
+	% EndTime: 2020-01-03 12:02:38
+	% DurationCPUTime: 0.04s
+	% Computational Cost: add. (168->16), mult. (72->12), div. (0->0), fcn. (72->4), ass. (0->17)
+	t160 = qJ(4) + qJ(5);
+	t156 = sin(t160);
+	t158 = qJD(4) + qJD(5);
+	t162 = t158 * t156;
+	t157 = cos(t160);
+	t161 = t158 * t157;
+	t155 = qJ(1) + qJ(2) + pkin(9);
+	t153 = sin(t155);
+	t159 = qJD(1) + qJD(2);
+	t151 = t159 * t153;
+	t154 = cos(t155);
+	t152 = t159 * t154;
+	t148 = t157 * t152 - t153 * t162;
+	t147 = -t156 * t152 - t153 * t161;
+	t146 = -t157 * t151 - t154 * t162;
+	t145 = t156 * t151 - t154 * t161;
+	t1 = [0, 0, 0, -t162, -t162; t146, t146, 0, t147, t147; t148, t148, 0, -t145, -t145; 0, 0, 0, -t161, -t161; t145, t145, 0, -t148, -t148; t147, t147, 0, t146, t146; 0, 0, 0, 0, 0; t152, t152, 0, 0, 0; t151, t151, 0, 0, 0;];
 	JRD_rot = t1;
 else
 	JRD_rot=NaN(9,5);

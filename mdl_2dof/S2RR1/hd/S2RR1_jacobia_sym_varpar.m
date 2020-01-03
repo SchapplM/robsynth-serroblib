@@ -25,8 +25,8 @@
 %   Analytische Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-10-09 20:00
-% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 

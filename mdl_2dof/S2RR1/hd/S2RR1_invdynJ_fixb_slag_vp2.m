@@ -30,8 +30,8 @@
 %   joint torques of inverse dynamics (contains inertial, gravitational coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,8 +60,8 @@ assert(isreal(Ifges) && all(size(Ifges) == [3 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 17:59:55
-% EndTime: 2019-03-08 17:59:56
+% StartTime: 2020-01-03 11:19:06
+% EndTime: 2020-01-03 11:19:07
 % DurationCPUTime: 0.25s
 % Computational Cost: add. (90->50), mult. (239->78), div. (0->0), fcn. (108->4), ass. (0->20)
 t11 = cos(qJ(2));
@@ -75,7 +75,7 @@ t27 = -t28 * qJD(2) * pkin(1) + ((-Ifges(3,1) * t11 + t25) * t26 + (Ifges(3,2) *
 t24 = Ifges(3,6) * t9;
 t22 = Ifges(3,5) * t11;
 t20 = qJD(1) * qJD(2);
-t19 = -m(3) * pkin(1) - mrSges(2,2) - mrSges(3,3);
+t19 = m(3) * pkin(1) + mrSges(2,2) + mrSges(3,3);
 t10 = sin(qJ(1));
 t12 = cos(qJ(1));
 t17 = g(1) * t12 - g(3) * t10;
@@ -83,5 +83,5 @@ t5 = -t11 * qJDD(1) + t9 * t20;
 t14 = t9 * qJDD(1) + t11 * t20;
 t4 = t14 * pkin(1);
 t3 = pkin(1) * t5;
-t1 = [Ifges(2,3) * qJDD(1) + (-t10 * mrSges(2,1) + t19 * t12) * g(3) + (t12 * mrSges(2,1) + t19 * t10) * g(1) + (t4 * mrSges(3,3) + Ifges(3,1) * t14 - Ifges(3,4) * t5 - Ifges(3,5) * qJDD(2) + (m(3) * t4 + qJDD(2) * mrSges(3,1) + mrSges(3,3) * t14) * pkin(1) - t17 * mrSges(3,2)) * t9 + (-t3 * mrSges(3,3) + Ifges(3,4) * t14 - Ifges(3,2) * t5 - Ifges(3,6) * qJDD(2) + (-m(3) * t3 + qJDD(2) * mrSges(3,2) - t5 * mrSges(3,3)) * pkin(1) + t17 * mrSges(3,1)) * t11 + ((-t22 / 0.2e1 + t24 / 0.2e1) * qJD(2) - t27) * qJD(2); -Ifges(3,5) * t14 + Ifges(3,6) * t5 + Ifges(3,3) * qJDD(2) - t3 * mrSges(3,2) + t4 * mrSges(3,1) + g(2) * t28 + (-qJD(2) * (-t22 + t24) / 0.2e1 + t27) * qJD(1) + (-g(1) * t10 - g(3) * t12) * (mrSges(3,1) * t9 + mrSges(3,2) * t11);];
-tau  = t1;
+t1 = [Ifges(2,3) * qJDD(1) + (t10 * mrSges(2,1) + t19 * t12) * g(3) + (-t12 * mrSges(2,1) + t19 * t10) * g(1) + (t4 * mrSges(3,3) + Ifges(3,1) * t14 - Ifges(3,4) * t5 - Ifges(3,5) * qJDD(2) + (m(3) * t4 + qJDD(2) * mrSges(3,1) + mrSges(3,3) * t14) * pkin(1) + t17 * mrSges(3,2)) * t9 + (-t3 * mrSges(3,3) + Ifges(3,4) * t14 - Ifges(3,2) * t5 - Ifges(3,6) * qJDD(2) + (-m(3) * t3 + qJDD(2) * mrSges(3,2) - t5 * mrSges(3,3)) * pkin(1) - t17 * mrSges(3,1)) * t11 + ((-t22 / 0.2e1 + t24 / 0.2e1) * qJD(2) - t27) * qJD(2); -Ifges(3,5) * t14 + Ifges(3,6) * t5 + Ifges(3,3) * qJDD(2) - t3 * mrSges(3,2) + t4 * mrSges(3,1) + g(2) * t28 + (-qJD(2) * (-t22 + t24) / 0.2e1 + t27) * qJD(1) + (g(1) * t10 + g(3) * t12) * (mrSges(3,1) * t9 + mrSges(3,2) * t11);];
+tau = t1;

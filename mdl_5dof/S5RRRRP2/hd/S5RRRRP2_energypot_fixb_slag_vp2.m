@@ -22,8 +22,8 @@
 %   Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:48
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:12
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -46,9 +46,9 @@ assert(isreal(mrSges) && all(size(mrSges) == [6,3]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_worldframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:47:29
-% EndTime: 2019-12-05 18:47:29
-% DurationCPUTime: 0.30s
+% StartTime: 2020-01-03 12:11:01
+% EndTime: 2020-01-03 12:11:01
+% DurationCPUTime: 0.26s
 % Computational Cost: add. (129->45), mult. (104->31), div. (0->0), fcn. (73->8), ass. (0->20)
 t66 = m(5) + m(6);
 t65 = -mrSges(5,2) - mrSges(6,2);
@@ -62,12 +62,12 @@ t47 = sin(qJ(3));
 t49 = cos(qJ(3));
 t59 = m(4) * pkin(2) + t49 * mrSges(4,1) - t47 * mrSges(4,2) + mrSges(3,1) + t66 * (t49 * pkin(3) + pkin(2)) + t64 * t39 + t65 * t37;
 t51 = -pkin(8) - pkin(7);
-t58 = -m(4) * pkin(7) + m(5) * t51 + m(6) * (-qJ(5) + t51) + mrSges(3,2) - mrSges(4,3) - mrSges(5,3) - mrSges(6,3);
+t58 = m(4) * pkin(7) - m(5) * t51 - m(6) * (-qJ(5) + t51) - mrSges(3,2) + mrSges(4,3) + mrSges(5,3) + mrSges(6,3);
 t52 = pkin(6) + pkin(5);
 t50 = cos(qJ(1));
 t48 = sin(qJ(1));
 t46 = qJ(1) + qJ(2);
 t40 = cos(t46);
 t38 = sin(t46);
-t1 = (t48 * mrSges(2,2) + t58 * t38 - t59 * t40 - t63 * t50 - mrSges(1,3)) * g(3) + (t50 * mrSges(2,2) + t59 * t38 + t58 * t40 + t63 * t48 - mrSges(1,2)) * g(2) + (-m(2) * pkin(5) - t47 * mrSges(4,1) - t49 * mrSges(4,2) - mrSges(1,1) - mrSges(2,3) - mrSges(3,3) - t66 * (t47 * pkin(3) + t52) + t62 * t52 + t65 * t39 - t64 * t37) * g(1);
+t1 = (-t48 * mrSges(2,2) + t58 * t38 + t59 * t40 + t63 * t50 - mrSges(1,3)) * g(3) + (-t50 * mrSges(2,2) - t59 * t38 + t58 * t40 - t63 * t48 - mrSges(1,2)) * g(2) + (-m(2) * pkin(5) - t47 * mrSges(4,1) - t49 * mrSges(4,2) - mrSges(1,1) - mrSges(2,3) - mrSges(3,3) - t66 * (t47 * pkin(3) + t52) + t62 * t52 + t65 * t39 - t64 * t37) * g(1);
 U = t1;

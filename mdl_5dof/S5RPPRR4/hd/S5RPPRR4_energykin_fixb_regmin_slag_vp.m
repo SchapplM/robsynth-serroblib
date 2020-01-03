@@ -16,8 +16,8 @@
 %   minimal parameter regressor of kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:45
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:32
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,45 +35,45 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:44:54
-% EndTime: 2019-12-05 17:44:54
-% DurationCPUTime: 0.17s
+% StartTime: 2020-01-03 11:31:21
+% EndTime: 2020-01-03 11:31:21
+% DurationCPUTime: 0.16s
 % Computational Cost: add. (184->43), mult. (523->95), div. (0->0), fcn. (355->8), ass. (0->37)
-t153 = sin(pkin(8));
-t154 = cos(pkin(9));
-t168 = t153 * t154;
-t155 = cos(pkin(8));
-t139 = qJD(2) + (-pkin(2) * t155 - qJ(3) * t153 - pkin(1)) * qJD(1);
-t138 = t154 * t139;
-t152 = sin(pkin(9));
-t128 = t138 + (-pkin(6) * t168 + (-qJ(2) * t152 - pkin(3)) * t155) * qJD(1);
-t165 = t155 * qJD(1);
-t164 = qJ(2) * t165;
-t133 = t152 * t139 + t154 * t164;
-t166 = qJD(1) * t153;
-t163 = t152 * t166;
-t131 = -pkin(6) * t163 + t133;
-t157 = sin(qJ(4));
-t159 = cos(qJ(4));
-t167 = t157 * t128 + t159 * t131;
-t145 = qJ(2) * t166 + qJD(3);
-t140 = pkin(3) * t163 + t145;
-t162 = t159 * t128 - t157 * t131;
-t146 = -qJD(4) + t165;
-t160 = qJD(1) ^ 2;
-t158 = cos(qJ(5));
-t156 = sin(qJ(5));
-t151 = t155 ^ 2;
-t150 = t153 ^ 2;
-t149 = -qJD(1) * pkin(1) + qJD(2);
-t143 = -qJD(5) + t146;
-t136 = (-t152 * t157 + t154 * t159) * t166;
-t135 = (t152 * t159 + t154 * t157) * t166;
-t132 = -t152 * t164 + t138;
-t130 = t135 * pkin(4) + t140;
-t125 = -t156 * t135 + t158 * t136;
-t124 = t158 * t135 + t156 * t136;
-t123 = -t135 * pkin(7) + t167;
-t122 = -t146 * pkin(4) - t136 * pkin(7) + t162;
-t1 = [t160 / 0.2e1, 0, 0, -t149 * t165, t149 * t166, (t150 + t151) * t160 * qJ(2), t149 ^ 2 / 0.2e1 + (t151 / 0.2e1 + t150 / 0.2e1) * qJ(2) ^ 2 * t160, (t145 * t152 * t153 - t132 * t155) * qJD(1), (t133 * t155 + t145 * t168) * qJD(1), (-t132 * t154 - t133 * t152) * t166, t133 ^ 2 / 0.2e1 + t132 ^ 2 / 0.2e1 + t145 ^ 2 / 0.2e1, t136 ^ 2 / 0.2e1, -t136 * t135, -t136 * t146, t135 * t146, t146 ^ 2 / 0.2e1, t140 * t135 - t162 * t146, t140 * t136 + t167 * t146, t125 ^ 2 / 0.2e1, -t125 * t124, -t125 * t143, t124 * t143, t143 ^ 2 / 0.2e1, -(t158 * t122 - t156 * t123) * t143 + t130 * t124, (t156 * t122 + t158 * t123) * t143 + t130 * t125;];
+t152 = sin(pkin(8));
+t153 = cos(pkin(9));
+t167 = t152 * t153;
+t154 = cos(pkin(8));
+t138 = qJD(2) + (-pkin(2) * t154 - qJ(3) * t152 - pkin(1)) * qJD(1);
+t137 = t153 * t138;
+t151 = sin(pkin(9));
+t127 = t137 + (-pkin(6) * t167 + (-qJ(2) * t151 - pkin(3)) * t154) * qJD(1);
+t164 = t154 * qJD(1);
+t163 = qJ(2) * t164;
+t132 = t151 * t138 + t153 * t163;
+t165 = qJD(1) * t152;
+t162 = t151 * t165;
+t130 = -pkin(6) * t162 + t132;
+t156 = sin(qJ(4));
+t158 = cos(qJ(4));
+t166 = t156 * t127 + t158 * t130;
+t144 = qJ(2) * t165 + qJD(3);
+t139 = pkin(3) * t162 + t144;
+t161 = t158 * t127 - t156 * t130;
+t145 = -qJD(4) + t164;
+t159 = qJD(1) ^ 2;
+t157 = cos(qJ(5));
+t155 = sin(qJ(5));
+t150 = t154 ^ 2;
+t149 = t152 ^ 2;
+t148 = -qJD(1) * pkin(1) + qJD(2);
+t142 = -qJD(5) + t145;
+t135 = (-t151 * t156 + t153 * t158) * t165;
+t134 = (t151 * t158 + t153 * t156) * t165;
+t131 = -t151 * t163 + t137;
+t129 = t134 * pkin(4) + t139;
+t124 = -t155 * t134 + t157 * t135;
+t123 = t157 * t134 + t155 * t135;
+t122 = -t134 * pkin(7) + t166;
+t121 = -t145 * pkin(4) - t135 * pkin(7) + t161;
+t1 = [t159 / 0.2e1, 0, 0, -t148 * t164, t148 * t165, (t149 + t150) * t159 * qJ(2), t148 ^ 2 / 0.2e1 + (t150 / 0.2e1 + t149 / 0.2e1) * qJ(2) ^ 2 * t159, (t144 * t151 * t152 - t131 * t154) * qJD(1), (t132 * t154 + t144 * t167) * qJD(1), (-t131 * t153 - t132 * t151) * t165, t132 ^ 2 / 0.2e1 + t131 ^ 2 / 0.2e1 + t144 ^ 2 / 0.2e1, t135 ^ 2 / 0.2e1, -t135 * t134, -t135 * t145, t134 * t145, t145 ^ 2 / 0.2e1, t139 * t134 - t161 * t145, t139 * t135 + t166 * t145, t124 ^ 2 / 0.2e1, -t124 * t123, -t124 * t142, t123 * t142, t142 ^ 2 / 0.2e1, -(t157 * t121 - t155 * t122) * t142 + t129 * t123, (t155 * t121 + t157 * t122) * t142 + t129 * t124;];
 T_reg = t1;

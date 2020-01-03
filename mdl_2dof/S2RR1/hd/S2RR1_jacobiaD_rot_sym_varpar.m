@@ -25,8 +25,8 @@
 %   Zeitableitung der rotatorischen Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-10-09 20:00
-% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -47,8 +47,8 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobiaD_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:51
-	% EndTime: 2019-10-09 20:00:51
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0; 0, 0; 0, 0;];
@@ -57,8 +57,8 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobiaD_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:51
-	% EndTime: 2019-10-09 20:00:51
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0; 0, 0; 0, 0;];
@@ -67,18 +67,18 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobiaD_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:52
-	% EndTime: 2019-10-09 20:00:52
-	% DurationCPUTime: 0.05s
-	% Computational Cost: add. (18->3), mult. (82->10), div. (42->6), fcn. (80->3), ass. (0->8)
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
+	% DurationCPUTime: 0.04s
+	% Computational Cost: add. (30->4), mult. (82->10), div. (42->6), fcn. (80->4), ass. (0->8)
 	t51 = sin(qJ(1));
 	t53 = cos(qJ(1));
 	t62 = 0.1e1 / t51 ^ 2 * t53 ^ 2;
 	t65 = -0.1e1 - t62;
-	t39 = cos(atan2(0, t51));
-	t38 = 0.1e1 / t39 ^ 2;
-	t33 = t38 * t62 + 0.1e1;
-	t1 = [0, 0; 0.2e1 * (0.1e1 / t33 + t65 / t33 ^ 2 * t38) * qJD(1) * t65 / t51 * t53 / t39, 0; 0, 0;];
+	t39 = cos(atan2(0, -t51));
+	t37 = 0.1e1 / t39 ^ 2;
+	t33 = t37 * t62 + 0.1e1;
+	t1 = [0, 0; 0.2e1 * (0.1e1 / t33 + t65 / t33 ^ 2 * t37) * qJD(1) * t65 / t51 * t53 / t39, 0; 0, 0;];
 	JaD_rot = t1;
 else
 	JaD_rot=NaN(3,2);

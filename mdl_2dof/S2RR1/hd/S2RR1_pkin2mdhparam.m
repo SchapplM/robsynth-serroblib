@@ -22,13 +22,21 @@
 % qoffset_mdh [2x1]
 %   Offset on joint coordinate q
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 16:45
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function [beta_mdh, b_mdh, alpha_mdh, a_mdh, theta_mdh, d_mdh, qoffset_mdh] = S2RR1_pkin2mdhparam(pkin)
+
+%% Init
+%#codegen
+%$cgargs {zeros(1,1)}
+assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
+  'S2RR1_pkin2mdhparam: Kinematic parameters pkin have to be [1x1] (double)');
+
+%% Zuweisung der Parameter
 
 
 % Aus parameters_mdh_beta_matlab.m
@@ -57,5 +65,5 @@ t1 = [0; pkin(1);];
 d_mdh = t1;
 
 % Aus parameters_mdh_qoffset_matlab.m
-t1 = [pi / 0.2e1; 0;];
+t1 = [-pi / 0.2e1; 0;];
 qoffset_mdh = t1;

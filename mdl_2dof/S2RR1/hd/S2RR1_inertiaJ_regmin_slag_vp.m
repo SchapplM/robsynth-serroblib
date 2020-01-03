@@ -15,8 +15,8 @@
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -34,4 +34,4 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 t2 = cos(qJ(2));
 t1 = sin(qJ(2));
 t3 = [1, 0, 0, t1 ^ 2, 0.2e1 * t1 * t2, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, -t1, -t2, 0, t1 * pkin(1), t2 * pkin(1); 0, 0, 0, 0, 0, 0, 0, 1, 0, 0;];
-MM_reg  = t3;
+MM_reg = t3;

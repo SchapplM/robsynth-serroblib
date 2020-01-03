@@ -26,8 +26,8 @@
 %   matrix of coriolis and centrifugal joint torques
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:54
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:40
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:53:13
-% EndTime: 2019-12-05 17:53:17
-% DurationCPUTime: 1.26s
+% StartTime: 2020-01-03 11:38:21
+% EndTime: 2020-01-03 11:38:26
+% DurationCPUTime: 1.32s
 % Computational Cost: add. (4621->107), mult. (8453->149), div. (0->0), fcn. (9237->8), ass. (0->61)
 t115 = cos(pkin(9));
 t88 = sin(pkin(9));
@@ -109,12 +109,12 @@ t114 = t13 * qJD(1);
 t112 = t164 * qJD(1);
 t27 = -mrSges(6,1) * t73 - mrSges(6,2) * t72;
 t111 = t27 * qJD(5);
-t1 = (t110 * mrSges(4,1) - Ifges(4,4) * t91) * t91 + (-mrSges(5,2) * t135 - Ifges(5,4) * t80) * t80 + (Ifges(4,4) * t93 + t110 * mrSges(4,2) + (Ifges(4,1) - Ifges(4,2)) * t91) * t93 + (-mrSges(5,1) * t135 + Ifges(5,4) * t79 + (-Ifges(5,1) + Ifges(5,2)) * t80) * t79 + (t156 + t159) * t81 + t3 + (m(6) * t64 - mrSges(6,1) * t106 + t63 * mrSges(6,2)) * t66;
+t1 = (t110 * mrSges(4,1) - Ifges(4,4) * t91) * t91 + (-mrSges(5,2) * t135 - Ifges(5,4) * t80) * t80 + (Ifges(4,4) * t93 + t110 * mrSges(4,2) + (-Ifges(4,2) + Ifges(4,1)) * t91) * t93 + (-mrSges(5,1) * t135 + Ifges(5,4) * t79 + (-Ifges(5,1) + Ifges(5,2)) * t80) * t79 + (t156 + t159) * t81 + t3 + (m(6) * t64 - mrSges(6,1) * t106 + t63 * mrSges(6,2)) * t66;
 t102 = t1 * qJD(1);
 t8 = (t106 ^ 2 + t63 ^ 2) * mrSges(6,3) + (t79 ^ 2 + t80 ^ 2) * mrSges(5,3) + m(6) * (t106 * t31 - t153 * t63) + m(5) * (t147 * t80 - t44 * t79);
 t100 = qJD(1) * t8;
 t5 = (t139 + t138) * Ifges(6,6) + (t140 - t106 / 0.2e1) * Ifges(6,5);
 t96 = t5 * qJD(1) + t27 * qJD(3);
 t18 = t94 + t98;
-t2 = [qJD(3) * t1 + qJD(4) * t8 + qJD(5) * t3, 0, (m(6) * (t153 * t73 - t31 * t72) - t147 * mrSges(5,2) + t44 * mrSges(5,1) + (t115 * t44 + t147 * t88) * t141 - Ifges(4,6) * t91 + Ifges(5,5) * t79 + Ifges(5,6) * t80 + Ifges(4,5) * t93 + (-t93 * mrSges(4,1) + t91 * mrSges(4,2)) * t85 + (-t106 * t72 - t63 * t73) * mrSges(6,3) + (-t79 * t108 + t80 * t137) * mrSges(5,3) + t4) * qJD(3) + t18 * qJD(4) + t165 + t102, qJD(3) * t18 + t100, t4 * qJD(3) + t117 + t165; 0, 0, (-t91 * mrSges(4,1) - t93 * mrSges(4,2) + t95 - t97 + t99) * qJD(3) - t162, 0, -qJD(3) * t164 - t162; -qJD(4) * t13 + qJD(5) * t5 - t102, 0, t111, -t114, t96 + t111; qJD(3) * t13 - t100 + t162, 0, t114, 0, t112; -t5 * qJD(3) - qJD(4) * t164 - t117, 0, -t96, -t112, 0;];
+t2 = [qJD(3) * t1 + qJD(4) * t8 + qJD(5) * t3, 0, (m(6) * (t153 * t73 - t31 * t72) + (t115 * t44 + t147 * t88) * t141 - t147 * mrSges(5,2) + t44 * mrSges(5,1) + Ifges(5,5) * t79 + Ifges(5,6) * t80 + Ifges(4,5) * t93 - Ifges(4,6) * t91 + (-t93 * mrSges(4,1) + t91 * mrSges(4,2)) * t85 + (-t106 * t72 - t63 * t73) * mrSges(6,3) + (-t79 * t108 + t80 * t137) * mrSges(5,3) + t4) * qJD(3) + t18 * qJD(4) + t165 + t102, qJD(3) * t18 + t100, t4 * qJD(3) + t117 + t165; 0, 0, (-t91 * mrSges(4,1) - t93 * mrSges(4,2) + t95 - t97 + t99) * qJD(3) - t162, 0, -qJD(3) * t164 - t162; -qJD(4) * t13 + qJD(5) * t5 - t102, 0, t111, -t114, t96 + t111; qJD(3) * t13 - t100 + t162, 0, t114, 0, t112; -t5 * qJD(3) - qJD(4) * t164 - t117, 0, -t96, -t112, 0;];
 Cq = t2;

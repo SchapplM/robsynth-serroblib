@@ -26,8 +26,8 @@
 %   matrix of coriolis and centrifugal joint torques
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:02
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:45
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,11 +52,11 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:01:26
-% EndTime: 2019-12-05 18:01:28
-% DurationCPUTime: 0.65s
+% StartTime: 2020-01-03 11:45:10
+% EndTime: 2020-01-03 11:45:12
+% DurationCPUTime: 0.71s
 % Computational Cost: add. (1429->115), mult. (2805->134), div. (0->0), fcn. (2011->6), ass. (0->76)
-t102 = Ifges(6,4) + Ifges(5,4);
+t102 = Ifges(5,4) + Ifges(6,4);
 t69 = sin(qJ(4));
 t125 = t102 * t69;
 t133 = Ifges(5,2) + Ifges(6,2);

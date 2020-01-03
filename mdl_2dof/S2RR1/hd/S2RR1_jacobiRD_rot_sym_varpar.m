@@ -23,8 +23,8 @@
 %   Zeitableitung der Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-10-09 20:00
-% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -44,8 +44,8 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobiRD_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:51
-	% EndTime: 2019-10-09 20:00:52
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0; 0, 0; 0, 0; 0, 0; 0, 0; 0, 0; 0, 0; 0, 0; 0, 0;];
@@ -54,21 +54,21 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobiRD_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:52
-	% EndTime: 2019-10-09 20:00:52
-	% DurationCPUTime: 0.02s
-	% Computational Cost: add. (1->1), mult. (4->2), div. (0->0), fcn. (4->2), ass. (0->3)
-	t9 = qJD(1) * sin(qJ(1));
-	t7 = qJD(1) * cos(qJ(1));
-	t1 = [t9, 0; 0, 0; t7, 0; t7, 0; 0, 0; -t9, 0; 0, 0; 0, 0; 0, 0;];
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (3->3), mult. (4->2), div. (0->0), fcn. (4->2), ass. (0->3)
+	t10 = qJD(1) * sin(qJ(1));
+	t9 = qJD(1) * cos(qJ(1));
+	t1 = [-t10, 0; 0, 0; -t9, 0; -t9, 0; 0, 0; t10, 0; 0, 0; 0, 0; 0, 0;];
 	JRD_rot = t1;
 elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobiRD_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:52
-	% EndTime: 2019-10-09 20:00:52
-	% DurationCPUTime: 0.03s
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
+	% DurationCPUTime: 0.02s
 	% Computational Cost: add. (9->7), mult. (36->13), div. (0->0), fcn. (36->4), ass. (0->14)
 	t83 = sin(qJ(1));
 	t90 = qJD(1) * t83;
@@ -79,11 +79,11 @@ elseif link_index == 2
 	t84 = cos(qJ(2));
 	t87 = qJD(2) * t84;
 	t86 = qJD(2) * t85;
-	t81 = -t83 * t88 + t84 * t89;
+	t81 = t83 * t88 - t84 * t89;
 	t80 = t82 * t89 + t83 * t87;
 	t79 = t82 * t86 + t84 * t90;
-	t78 = -t82 * t90 + t84 * t86;
-	t1 = [t79, t80; 0, t88; t81, t78; t78, t81; 0, t87; -t80, -t79; t89, 0; 0, 0; -t90, 0;];
+	t78 = t82 * t90 - t84 * t86;
+	t1 = [-t79, -t80; 0, t88; t81, t78; t78, t81; 0, t87; t80, t79; -t89, 0; 0, 0; t90, 0;];
 	JRD_rot = t1;
 else
 	JRD_rot=NaN(9,2);

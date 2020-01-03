@@ -16,8 +16,8 @@
 %   minimal parameter regressor of gravitation joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:42
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:29
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,13 +43,13 @@ t18 = g(2) * t8 + g(3) * t6;
 t17 = g(2) * t6 - g(3) * t8;
 t14 = sin(qJ(1));
 t15 = cos(qJ(1));
-t16 = g(2) * t15 + g(3) * t14;
+t16 = -g(2) * t15 - g(3) * t14;
 t9 = qJ(5) + t10;
 t7 = cos(t10);
 t5 = sin(t10);
 t4 = cos(t9);
 t3 = sin(t9);
-t2 = -g(1) * t4 - t17 * t3;
-t1 = g(1) * t3 - t17 * t4;
-t12 = [0, t16, -g(2) * t14 + g(3) * t15, t16 * pkin(1), t18 * cos(pkin(9)), -t18 * sin(pkin(9)), t17, -g(2) * (-t15 * pkin(1) - t8 * pkin(2) - t6 * qJ(3)) - g(3) * (-t14 * pkin(1) - t6 * pkin(2) + t8 * qJ(3)), 0, 0, 0, 0, 0, t18 * t7, -t18 * t5, 0, 0, 0, 0, 0, t18 * t4, -t18 * t3; 0, 0, 0, -g(1), 0, 0, 0, -g(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, -t18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -g(1) * t7 - t17 * t5, g(1) * t5 - t17 * t7, 0, 0, 0, 0, 0, t2, t1; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t2, t1;];
+t2 = -g(1) * t4 + t17 * t3;
+t1 = g(1) * t3 + t17 * t4;
+t12 = [0, t16, g(2) * t14 - g(3) * t15, t16 * pkin(1), -t18 * cos(pkin(9)), t18 * sin(pkin(9)), -t17, -g(2) * (t15 * pkin(1) + t8 * pkin(2) + t6 * qJ(3)) - g(3) * (t14 * pkin(1) + t6 * pkin(2) - t8 * qJ(3)), 0, 0, 0, 0, 0, -t18 * t7, t18 * t5, 0, 0, 0, 0, 0, -t18 * t4, t18 * t3; 0, 0, 0, -g(1), 0, 0, 0, -g(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, t18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -g(1) * t7 + t17 * t5, g(1) * t5 + t17 * t7, 0, 0, 0, 0, 0, t2, t1; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t2, t1;];
 taug_reg = t12;

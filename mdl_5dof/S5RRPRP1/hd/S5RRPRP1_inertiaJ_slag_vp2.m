@@ -24,8 +24,8 @@
 %   inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:22
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:59
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -48,9 +48,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:22:00
-% EndTime: 2019-12-05 18:22:02
-% DurationCPUTime: 0.33s
+% StartTime: 2020-01-03 11:58:55
+% EndTime: 2020-01-03 11:58:55
+% DurationCPUTime: 0.31s
 % Computational Cost: add. (313->104), mult. (563->131), div. (0->0), fcn. (373->6), ass. (0->44)
 t38 = cos(qJ(4));
 t61 = t38 ^ 2;

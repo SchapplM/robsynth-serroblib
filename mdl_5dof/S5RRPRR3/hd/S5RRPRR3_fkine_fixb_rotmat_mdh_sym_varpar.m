@@ -19,8 +19,8 @@
 %   5+1:  mdh base (link 0) -> mdh frame (5)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:31
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:00
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,34 +36,34 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From fkine_mdh_floatb_twist_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:30:13
-% EndTime: 2019-12-05 18:30:13
-% DurationCPUTime: 0.08s
-% Computational Cost: add. (118->31), mult. (26->14), div. (0->0), fcn. (50->10), ass. (0->24)
+% StartTime: 2020-01-03 12:00:16
+% EndTime: 2020-01-03 12:00:16
+% DurationCPUTime: 0.07s
+% Computational Cost: add. (112->25), mult. (26->14), div. (0->0), fcn. (50->10), ass. (0->24)
 t13 = qJ(1) + qJ(2);
 t26 = pkin(5) + 0;
-t17 = cos(qJ(1));
-t25 = t17 * pkin(1) + 0;
-t24 = pkin(6) + t26;
-t11 = cos(t13);
-t23 = pkin(2) * t11 + t25;
-t9 = pkin(9) + t13;
 t15 = sin(qJ(1));
-t22 = -t15 * pkin(1) + 0;
-t6 = cos(t9);
-t21 = pkin(3) * t6 + t23;
-t20 = qJ(3) + t24;
+t25 = t15 * pkin(1) + 0;
+t24 = pkin(6) + t26;
 t10 = sin(t13);
-t19 = -pkin(2) * t10 + t22;
+t23 = pkin(2) * t10 + t25;
+t9 = pkin(9) + t13;
+t17 = cos(qJ(1));
+t22 = -t17 * pkin(1) + 0;
 t5 = sin(t9);
-t18 = -pkin(3) * t5 + t19;
+t21 = pkin(3) * t5 + t23;
+t20 = qJ(3) + t24;
+t11 = cos(t13);
+t19 = -pkin(2) * t11 + t22;
+t6 = cos(t9);
+t18 = -pkin(3) * t6 + t19;
 t16 = cos(qJ(5));
 t14 = sin(qJ(5));
 t8 = qJ(4) + t9;
 t4 = pkin(7) + t20;
 t3 = cos(t8);
 t2 = sin(t8);
-t1 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1; 0, 0, 1, t26; -t15, -t17, 0, 0; t17, -t15, 0, 0; 0, 0, 0, 1; 0, 0, 1, t24; -t10, -t11, 0, t22; t11, -t10, 0, t25; 0, 0, 0, 1; 0, 0, 1, t20; -t5, -t6, 0, t19; t6, -t5, 0, t23; 0, 0, 0, 1; 0, 0, 1, t4; -t2, -t3, 0, t18; t3, -t2, 0, t21; 0, 0, 0, 1; t14, t16, 0, t4; -t2 * t16, t2 * t14, t3, -t2 * pkin(4) + t3 * pkin(8) + t18; t3 * t16, -t3 * t14, t2, t3 * pkin(4) + t2 * pkin(8) + t21; 0, 0, 0, 1;];
+t1 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1; 0, 0, 1, t26; t15, t17, 0, 0; -t17, t15, 0, 0; 0, 0, 0, 1; 0, 0, 1, t24; t10, t11, 0, t25; -t11, t10, 0, t22; 0, 0, 0, 1; 0, 0, 1, t20; t5, t6, 0, t23; -t6, t5, 0, t19; 0, 0, 0, 1; 0, 0, 1, t4; t2, t3, 0, t21; -t3, t2, 0, t18; 0, 0, 0, 1; t14, t16, 0, t4; t2 * t16, -t2 * t14, -t3, t2 * pkin(4) - t3 * pkin(8) + t21; -t3 * t16, t3 * t14, -t2, -t3 * pkin(4) - t2 * pkin(8) + t18; 0, 0, 0, 1;];
 T_ges = t1;
 %% Postprocessing: Reshape Output
 % Convert Maple format (2-dimensional tensor) to Matlab format (3-dimensional tensor)

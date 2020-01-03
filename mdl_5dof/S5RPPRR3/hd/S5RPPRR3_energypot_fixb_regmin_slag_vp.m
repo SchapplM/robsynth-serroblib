@@ -16,8 +16,8 @@
 %   minimal parameter regressor of Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:42
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:29
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,8 +36,8 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:42:04
-% EndTime: 2019-12-05 17:42:04
+% StartTime: 2020-01-03 11:28:13
+% EndTime: 2020-01-03 11:28:13
 % DurationCPUTime: 0.04s
 % Computational Cost: add. (61->21), mult. (50->30), div. (0->0), fcn. (44->10), ass. (0->17)
 t144 = g(1) * (qJ(2) + pkin(5));
@@ -48,7 +48,7 @@ t133 = cos(t136);
 t143 = g(2) * t131 - g(3) * t133;
 t140 = sin(qJ(1));
 t141 = cos(qJ(1));
-t142 = g(2) * t140 - g(3) * t141;
+t142 = -g(2) * t140 + g(3) * t141;
 t138 = cos(pkin(9));
 t137 = sin(pkin(9));
 t134 = qJ(5) + t135;
@@ -56,5 +56,5 @@ t132 = cos(t135);
 t130 = sin(t135);
 t129 = cos(t134);
 t128 = sin(t134);
-t1 = [0, t142, g(2) * t141 + g(3) * t140, t142 * pkin(1) - t144, -g(1) * t137 + t143 * t138, -g(1) * t138 - t143 * t137, -g(2) * t133 - g(3) * t131, -t144 - g(2) * (-t140 * pkin(1) - t131 * pkin(2) + t133 * qJ(3)) - g(3) * (t141 * pkin(1) + t133 * pkin(2) + t131 * qJ(3)), 0, 0, 0, 0, 0, -g(1) * t130 + t143 * t132, -g(1) * t132 - t143 * t130, 0, 0, 0, 0, 0, -g(1) * t128 + t143 * t129, -g(1) * t129 - t143 * t128;];
+t1 = [0, t142, -g(2) * t141 - g(3) * t140, t142 * pkin(1) - t144, -g(1) * t137 - t143 * t138, -g(1) * t138 + t143 * t137, g(2) * t133 + g(3) * t131, -t144 - g(2) * (t140 * pkin(1) + t131 * pkin(2) - t133 * qJ(3)) - g(3) * (-t141 * pkin(1) - t133 * pkin(2) - t131 * qJ(3)), 0, 0, 0, 0, 0, -g(1) * t130 - t143 * t132, -g(1) * t132 + t143 * t130, 0, 0, 0, 0, 0, -g(1) * t128 - t143 * t129, -g(1) * t129 + t143 * t128;];
 U_reg = t1;

@@ -19,8 +19,8 @@
 %   joint torques required to compensate Coriolis and centrifugal load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:52
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:37
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,9 +40,9 @@ assert(isreal(MDP) && all(size(MDP) == [18 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:51:35
-% EndTime: 2019-12-05 17:51:37
-% DurationCPUTime: 0.59s
+% StartTime: 2020-01-03 11:36:24
+% EndTime: 2020-01-03 11:36:28
+% DurationCPUTime: 0.66s
 % Computational Cost: add. (631->111), mult. (1331->177), div. (0->0), fcn. (719->8), ass. (0->70)
 t143 = qJD(1) + qJD(3);
 t138 = cos(pkin(8)) * pkin(1) + pkin(2);
@@ -64,7 +64,7 @@ t207 = t148 * MDP(8) + MDP(6);
 t150 = sin(qJ(5));
 t152 = cos(qJ(5));
 t193 = t141 * t152;
-t206 = -MDP(12) * t150 * t193 + (t150 ^ 2 - t152 ^ 2) * MDP(13) * t141;
+t206 = -t150 * MDP(12) * t193 + (t150 ^ 2 - t152 ^ 2) * MDP(13) * t141;
 t202 = -t138 * t153 + t151 * t201;
 t174 = qJD(1) * t201;
 t122 = t153 * t134 - t151 * t174;

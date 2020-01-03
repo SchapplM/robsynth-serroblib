@@ -23,8 +23,8 @@
 %   Offset on joint coordinate q
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:36
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:06
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -65,5 +65,5 @@ t1 = [pkin(5); pkin(6); 0; pkin(7); pkin(8);];
 d_mdh = t1;
 
 % Aus parameters_mdh_qoffset_matlab.m
-t1 = [pi / 0.2e1; 0; 0; 0; 0;];
+t1 = [-pi / 0.2e1; 0; 0; 0; 0;];
 qoffset_mdh = t1;

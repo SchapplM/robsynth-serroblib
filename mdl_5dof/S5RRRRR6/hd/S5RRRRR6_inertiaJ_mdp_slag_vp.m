@@ -17,8 +17,8 @@
 %   inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 19:01
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:16
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(MDP) && all(size(MDP) == [27 1]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 19:00:36
-% EndTime: 2019-12-05 19:00:37
-% DurationCPUTime: 0.25s
+% StartTime: 2020-01-03 12:15:20
+% EndTime: 2020-01-03 12:15:21
+% DurationCPUTime: 0.24s
 % Computational Cost: add. (467->92), mult. (815->113), div. (0->0), fcn. (859->8), ass. (0->59)
 t117 = sin(qJ(5));
 t121 = cos(qJ(5));
@@ -98,7 +98,7 @@ t125 = 0.2e1 * t158;
 t111 = -pkin(2) - t154;
 t103 = t112 - t154;
 t88 = t89 - t154;
-t1 = [t103 * t125 - 0.2e1 * t111 * t133 + t88 * t126 + MDP(1) + t130 + 0.2e1 * t131; t130 + t131 + t133 * (pkin(2) - t111) + t157 * (t88 + t89) + t158 * (t103 + t112); 0.2e1 * pkin(2) * t133 + t112 * t125 + t89 * t126 + t130; t132 * t109 + t128 + t159; t132 * pkin(7) + t127 + t159; MDP(11) + 0.2e1 * (-t118 * MDP(20) + t141) * pkin(3) + 0.2e1 * t148 + 0.2e1 * t147 + t139; t128; t127; (t121 * pkin(4) + t106) * MDP(26) + (-pkin(4) - t110) * t143 + (t141 + (-MDP(26) * t117 - MDP(27) * t121 - MDP(20)) * t118) * pkin(3) + t139; 0.2e1 * t129 + t139; t152 + t161; t152 + t160; MDP(25) + t147 + t148; MDP(25) + t129; MDP(25);];
+t1 = [t103 * t125 - 0.2e1 * t111 * t133 + t88 * t126 + MDP(1) + t130 + 0.2e1 * t131; t130 + t131 + t133 * (pkin(2) - t111) + t157 * (t88 + t89) + t158 * (t103 + t112); 0.2e1 * pkin(2) * t133 + t112 * t125 + t89 * t126 + t130; t109 * t132 + t128 + t159; pkin(7) * t132 + t127 + t159; MDP(11) + 0.2e1 * (-t118 * MDP(20) + t141) * pkin(3) + 0.2e1 * t148 + 0.2e1 * t147 + t139; t128; t127; (t121 * pkin(4) + t106) * MDP(26) + (-pkin(4) - t110) * t143 + (t141 + (-MDP(26) * t117 - MDP(27) * t121 - MDP(20)) * t118) * pkin(3) + t139; 0.2e1 * t129 + t139; t152 + t161; t152 + t160; MDP(25) + t147 + t148; MDP(25) + t129; MDP(25);];
 %% Postprocessing: Reshape Output
 % From vec2symmat_5_matlab.m
 res = [t1(1), t1(2), t1(4), t1(7), t1(11); t1(2), t1(3), t1(5), t1(8), t1(12); t1(4), t1(5), t1(6), t1(9), t1(13); t1(7), t1(8), t1(9), t1(10), t1(14); t1(11), t1(12), t1(13), t1(14), t1(15);];

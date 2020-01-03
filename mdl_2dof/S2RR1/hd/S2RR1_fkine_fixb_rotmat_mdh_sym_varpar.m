@@ -18,11 +18,11 @@
 %   ...
 %   2+1:  mdh base (link 0) -> mdh frame (2)
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 16:44
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function T_c_mdh = S2RR1_fkine_fixb_rotmat_mdh_sym_varpar(qJ, pkin)
 %% Coder Information
@@ -36,15 +36,15 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 %% Symbolic Calculation
 % From fkine_mdh_floatb_twist_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-16 16:44:13
-% EndTime: 2018-11-16 16:44:13
-% DurationCPUTime: 0.06s
-% Computational Cost: add. (10->10), mult. (6->6), div. (0->0), fcn. (18->4), ass. (0->5)
+% StartTime: 2020-01-03 11:19:04
+% EndTime: 2020-01-03 11:19:04
+% DurationCPUTime: 0.04s
+% Computational Cost: add. (8->8), mult. (6->6), div. (0->0), fcn. (18->4), ass. (0->5)
 t4 = cos(qJ(1));
 t3 = cos(qJ(2));
 t2 = sin(qJ(1));
 t1 = sin(qJ(2));
-t5 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1; -t2, -t4, 0, 0; 0, 0, 1, 0; -t4, t2, 0, 0; 0, 0, 0, 1; -t2 * t3, t2 * t1, -t4, -t4 * pkin(1) + 0; -t1, -t3, 0, 0; -t4 * t3, t4 * t1, t2, t2 * pkin(1) + 0; 0, 0, 0, 1;];
+t5 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1; t2, t4, 0, 0; 0, 0, 1, 0; t4, -t2, 0, 0; 0, 0, 0, 1; t2 * t3, -t2 * t1, t4, t4 * pkin(1) + 0; -t1, -t3, 0, 0; t4 * t3, -t4 * t1, -t2, -t2 * pkin(1) + 0; 0, 0, 0, 1;];
 T_ges = t5;
 %% Postprocessing: Reshape Output
 % Convert Maple format (2-dimensional tensor) to Matlab format (3-dimensional tensor)

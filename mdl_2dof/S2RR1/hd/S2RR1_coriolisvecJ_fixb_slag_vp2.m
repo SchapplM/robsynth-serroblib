@@ -26,8 +26,8 @@
 %   joint torques required to compensate Coriolis and centrifugal load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [3 6]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 17:59:55
-% EndTime: 2019-03-08 17:59:55
-% DurationCPUTime: 0.10s
+% StartTime: 2020-01-03 11:19:06
+% EndTime: 2020-01-03 11:19:07
+% DurationCPUTime: 0.11s
 % Computational Cost: add. (42->26), mult. (138->50), div. (0->0), fcn. (52->2), ass. (0->14)
 t5 = sin(qJ(2));
 t13 = t5 / 0.2e1;
@@ -70,4 +70,4 @@ t3 = qJD(2) * mrSges(3,1) + t5 * t9;
 t2 = t8 + (-Ifges(3,1) * t5 - t10) * qJD(1);
 t1 = t7 + (-Ifges(3,2) * t6 - t11) * qJD(1);
 t14 = [((-t2 / 0.2e1 + pkin(1) * t3 - t8 / 0.2e1 + 0.3e1 / 0.2e1 * qJD(1) * t10) * t6 + (t1 / 0.2e1 + pkin(1) * t4 + t7 / 0.2e1 + (-0.3e1 / 0.2e1 * t11 + (0.3e1 / 0.2e1 * Ifges(3,1) - 0.3e1 / 0.2e1 * Ifges(3,2)) * t6) * qJD(1)) * t5) * qJD(2); (t2 * t12 - t5 * t1 / 0.2e1 + ((-Ifges(3,1) * t6 + t11) * t13 + (Ifges(3,2) * t5 - t10) * t12) * qJD(1) + (-t6 * t3 - t5 * t4) * pkin(1) + (-Ifges(3,5) * t6 / 0.2e1 + Ifges(3,6) * t13 + (t6 * mrSges(3,1) - t5 * mrSges(3,2)) * pkin(1)) * qJD(2)) * qJD(1);];
-tauc  = t14(:);
+tauc = t14(:);

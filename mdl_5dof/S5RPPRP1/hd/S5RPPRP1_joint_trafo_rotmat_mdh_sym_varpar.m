@@ -15,8 +15,8 @@
 %   Transformation matrices from one joint to the next (not: from base to joints)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:36
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:26
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -33,19 +33,19 @@ assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
 %% Symbolic Calculation
 % From joint_transformation_mdh_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:35:27
-% EndTime: 2019-12-05 17:35:27
+% StartTime: 2020-01-03 11:25:00
+% EndTime: 2020-01-03 11:25:00
 % DurationCPUTime: 0.07s
-% Computational Cost: add. (8->8), mult. (0->0), div. (0->0), fcn. (16->8), ass. (0->9)
-t43 = cos(qJ(1));
-t42 = cos(qJ(4));
-t41 = sin(qJ(1));
-t40 = sin(qJ(4));
-t39 = cos(pkin(7));
-t38 = cos(pkin(8));
-t37 = sin(pkin(7));
-t36 = sin(pkin(8));
-t1 = [0, 0, 1, pkin(5); -t41, -t43, 0, 0; t43, -t41, 0, 0; 0, 0, 0, 1; t39, -t37, 0, pkin(1); t37, t39, 0, 0; 0, 0, 1, qJ(2); 0, 0, 0, 1; t38, -t36, 0, pkin(2); 0, 0, -1, -qJ(3); t36, t38, 0, 0; 0, 0, 0, 1; t42, -t40, 0, pkin(3); 0, 0, -1, -pkin(6); t40, t42, 0, 0; 0, 0, 0, 1; 1, 0, 0, pkin(4); 0, 1, 0, 0; 0, 0, 1, qJ(5); 0, 0, 0, 1;];
+% Computational Cost: add. (6->6), mult. (0->0), div. (0->0), fcn. (16->8), ass. (0->9)
+t41 = cos(qJ(1));
+t40 = cos(qJ(4));
+t39 = sin(qJ(1));
+t38 = sin(qJ(4));
+t37 = cos(pkin(7));
+t36 = cos(pkin(8));
+t35 = sin(pkin(7));
+t34 = sin(pkin(8));
+t1 = [0, 0, 1, pkin(5); t39, t41, 0, 0; -t41, t39, 0, 0; 0, 0, 0, 1; t37, -t35, 0, pkin(1); t35, t37, 0, 0; 0, 0, 1, qJ(2); 0, 0, 0, 1; t36, -t34, 0, pkin(2); 0, 0, -1, -qJ(3); t34, t36, 0, 0; 0, 0, 0, 1; t40, -t38, 0, pkin(3); 0, 0, -1, -pkin(6); t38, t40, 0, 0; 0, 0, 0, 1; 1, 0, 0, pkin(4); 0, 1, 0, 0; 0, 0, 1, qJ(5); 0, 0, 0, 1;];
 T_ges = t1;
 %% Postprocessing: Reshape Output
 % Convert Maple format (2-dimensional tensor) to Matlab format (3-dimensional tensor)

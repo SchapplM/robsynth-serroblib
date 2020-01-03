@@ -24,8 +24,8 @@
 %   inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:31
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:00
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -48,9 +48,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:30:19
-% EndTime: 2019-12-05 18:30:19
-% DurationCPUTime: 0.24s
+% StartTime: 2020-01-03 12:00:22
+% EndTime: 2020-01-03 12:00:23
+% DurationCPUTime: 0.26s
 % Computational Cost: add. (432->88), mult. (770->122), div. (0->0), fcn. (566->8), ass. (0->55)
 t43 = cos(qJ(5));
 t37 = t43 ^ 2;
@@ -106,7 +106,7 @@ t50 = (t45 * mrSges(3,1) - t42 * mrSges(3,2)) * pkin(1);
 t32 = pkin(8) * t62;
 t33 = pkin(8) * t61;
 t49 = t32 + t33 + t55 - t65;
-t5 = [0.2e1 * t60 - 0.2e1 * t59 - 0.2e1 * t63 + Ifges(2,3) + 0.2e1 * t1 + 0.2e1 * t2 + 0.2e1 * t3 + 0.2e1 * t4 + 0.2e1 * t50 + m(6) * (t56 * t7 ^ 2 + t6 ^ 2) + m(5) * (t8 ^ 2 + t9 ^ 2) + m(4) * (t20 ^ 2 + t22 ^ 2) + m(3) * (t42 ^ 2 + t45 ^ 2) * pkin(1) ^ 2 + t53; t53 + t50 + (m(4) * (t20 * t39 + t22 * t38) + t52) * pkin(2) + m(6) * (t18 * t6 + t7 * t54) + m(5) * (t21 * t8 + t23 * t9) + (-t9 - t23) * mrSges(5,2) + t60 - t59 + t67 + t68; -0.2e1 * t58 + 0.2e1 * t10 + 0.2e1 * t11 + 0.2e1 * t12 + 0.2e1 * t15 + m(6) * (t56 * t19 ^ 2 + t18 ^ 2) + m(5) * (t21 ^ 2 + t23 ^ 2) + t53 + (0.2e1 * t52 + m(4) * (t38 ^ 2 + t39 ^ 2) * pkin(2)) * pkin(2); 0; 0; m(6) * t56 + m(4) + m(5); m(6) * (t56 * t7 * pkin(8) - pkin(4) * t6) - t63 + t49 + t68; m(6) * (-pkin(4) * t18 + pkin(8) * t54) - t58 + t49 + t67; 0; 0.2e1 * t33 + 0.2e1 * t32 - 0.2e1 * t65 + m(6) * (t56 * pkin(8) ^ 2 + pkin(4) ^ 2) + t55; t51 * t7 + t57; t51 * t19 + t57; -t26; t51 * pkin(8) + t57; Ifges(6,3);];
+t5 = [0.2e1 * t60 - 0.2e1 * t59 - 0.2e1 * t63 + Ifges(2,3) + 0.2e1 * t1 + 0.2e1 * t2 + 0.2e1 * t3 + 0.2e1 * t4 + 0.2e1 * t50 + m(6) * (t56 * t7 ^ 2 + t6 ^ 2) + m(5) * (t8 ^ 2 + t9 ^ 2) + m(4) * (t20 ^ 2 + t22 ^ 2) + m(3) * (t42 ^ 2 + t45 ^ 2) * pkin(1) ^ 2 + t53; t53 + (m(4) * (t20 * t39 + t22 * t38) + t52) * pkin(2) + t50 + m(6) * (t18 * t6 + t7 * t54) + m(5) * (t21 * t8 + t23 * t9) + (-t9 - t23) * mrSges(5,2) + t60 - t59 + t67 + t68; -0.2e1 * t58 + 0.2e1 * t10 + 0.2e1 * t11 + 0.2e1 * t12 + 0.2e1 * t15 + m(6) * (t56 * t19 ^ 2 + t18 ^ 2) + m(5) * (t21 ^ 2 + t23 ^ 2) + t53 + (0.2e1 * t52 + m(4) * (t38 ^ 2 + t39 ^ 2) * pkin(2)) * pkin(2); 0; 0; m(6) * t56 + m(4) + m(5); m(6) * (t56 * t7 * pkin(8) - pkin(4) * t6) - t63 + t49 + t68; m(6) * (-pkin(4) * t18 + pkin(8) * t54) - t58 + t49 + t67; 0; 0.2e1 * t33 + 0.2e1 * t32 - 0.2e1 * t65 + m(6) * (t56 * pkin(8) ^ 2 + pkin(4) ^ 2) + t55; t51 * t7 + t57; t51 * t19 + t57; -t26; t51 * pkin(8) + t57; Ifges(6,3);];
 %% Postprocessing: Reshape Output
 % From vec2symmat_5_matlab.m
 res = [t5(1), t5(2), t5(4), t5(7), t5(11); t5(2), t5(3), t5(5), t5(8), t5(12); t5(4), t5(5), t5(6), t5(9), t5(13); t5(7), t5(8), t5(9), t5(10), t5(14); t5(11), t5(12), t5(13), t5(14), t5(15);];

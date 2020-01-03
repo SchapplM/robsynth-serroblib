@@ -17,8 +17,8 @@
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:36
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:06
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From inertiaD_joint_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:36:10
-% EndTime: 2019-12-05 18:36:15
-% DurationCPUTime: 1.34s
+% StartTime: 2020-01-03 12:05:54
+% EndTime: 2020-01-03 12:05:59
+% DurationCPUTime: 1.37s
 % Computational Cost: add. (2148->192), mult. (4760->301), div. (0->0), fcn. (4004->8), ass. (0->140)
 t114 = sin(pkin(9));
 t116 = sin(qJ(5));

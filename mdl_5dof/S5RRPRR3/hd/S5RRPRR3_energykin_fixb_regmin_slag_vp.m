@@ -16,8 +16,8 @@
 %   minimal parameter regressor of kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:31
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:00
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:30:32
-% EndTime: 2019-12-05 18:30:32
-% DurationCPUTime: 0.10s
+% StartTime: 2020-01-03 12:00:34
+% EndTime: 2020-01-03 12:00:34
+% DurationCPUTime: 0.09s
 % Computational Cost: add. (101->18), mult. (163->49), div. (0->0), fcn. (81->8), ass. (0->23)
 t78 = qJD(1) + qJD(2);
 t77 = qJD(4) + t78;
@@ -60,6 +60,6 @@ t92 = t82 * t70 + t85 * t73;
 t90 = qJD(5) * t77;
 t84 = cos(qJ(5));
 t81 = sin(qJ(5));
-t68 = t77 * pkin(8) + t92;
+t68 = pkin(8) * t77 + t92;
 t1 = [qJD(1) ^ 2 / 0.2e1, 0, 0, t78 ^ 2 / 0.2e1, t78 * t88, -t78 * t89, t73 ^ 2 / 0.2e1 + t72 ^ 2 / 0.2e1 + qJD(3) ^ 2 / 0.2e1, t94, t87 * t77, -t92 * t77, t81 ^ 2 * t94, t81 * t76 * t84, t81 * t90, t84 * t90, qJD(5) ^ 2 / 0.2e1, -t84 * t93 + (t84 * qJD(3) - t81 * t68) * qJD(5), t81 * t93 - (t81 * qJD(3) + t84 * t68) * qJD(5);];
 T_reg = t1;
