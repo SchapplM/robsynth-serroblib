@@ -13,23 +13,36 @@ clc
 repopath=fileparts(which('serroblib_path_init.m'));
 %% Alle Robotermodell initialisieren
 serroblib_gen_bitarrays
-serroblib_create_robot_csv_all
+% serroblib_create_robot_csv_all
 
 %% Code für alle Modelle generieren
-only_for_existing_code = true;
+generate_for_existing_code = false;
+only_general_models = true;
+generate_for_missing_code = true;
+
 for N = 1:7
   % Liste zusammenstellen
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
   l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
-  if ~only_for_existing_code
-    II = 1:length(l.Names_Ndof);
-  else
-    I = (l.AdditionalInfo(:,4) == 1); % Code liegt bereits vor
-    II = find(I);
+  I_missing_code = (l.AdditionalInfo(:,4) == 0);
+  I_existing_code = (l.AdditionalInfo(:,4) == 1);
+  I_general_mdl = (l.AdditionalInfo(:,2) == 0);
+  I = false(length(l.Names_Ndof),1);
+  if generate_for_existing_code
+    I = I | I_existing_code;
   end
+  if generate_for_missing_code
+    I = I | I_missing_code;
+  end
+  if only_general_models
+    I = I & I_general_mdl;
+  end
+  II = find(I);
   % alle Modelle generieren
+  fprintf('Generiere Code für %d/%d Modelle mit %d FG\n', length(II), length(I), N);
   for iFK = II'
     Name = l.Names_Ndof{iFK};
+    fprintf('Generiere Matlab-Code für %s\n', Name);
     serroblib_generate_mapleinput({Name})
     serroblib_generate_code({Name}, true)
     % serroblib_addtopath({Name})

@@ -131,10 +131,11 @@ for N = N_update(:)'
                                 sprintf('hd_V%s', tokens_var{1}{4}));
         code_dir_gen = fullfile(repopath, sprintf('mdl_%ddof', N), name_haupt, ...
                                 'hd');
-        if length(dir(fullfile(code_dir_var, '*.m'))) > 10
+        % Wenn nur Kinematik generiert wurde, liegen 16 m-Dateien vor.
+        if length(dir(fullfile(code_dir_var, '*.m'))) > 20
           % Variante hat ihren eigenen Code-Ordner
           hascode = 1;
-        elseif length(dir(fullfile(code_dir_gen, '*.m'))) > 10
+        elseif length(dir(fullfile(code_dir_gen, '*.m'))) > 20
           % Code für Variante nicht verfügbar. Haupt-Modell hat Code
           hascode = 2;
         else
@@ -143,7 +144,8 @@ for N = N_update(:)'
         end
       else % Keine Variante
         code_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name, 'hd');
-        if length(dir(fullfile(code_dir, '*.m'))) > 10
+        % Wenn nur Kinematik generiert wurde, liegen 16 m-Dateien vor.
+        if length(dir(fullfile(code_dir, '*.m'))) > 20
           % Code verfügbar (Genug Matlab-Funktionen im Ordner
           hascode = 1;
         else
