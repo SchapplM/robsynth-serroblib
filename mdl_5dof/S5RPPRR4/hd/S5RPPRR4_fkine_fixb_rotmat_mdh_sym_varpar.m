@@ -19,8 +19,8 @@
 %   5+1:  mdh base (link 0) -> mdh frame (5)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:45
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:32
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,41 +36,41 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From fkine_mdh_floatb_twist_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:43:54
-% EndTime: 2019-12-05 17:43:54
-% DurationCPUTime: 0.14s
-% Computational Cost: add. (124->60), mult. (117->64), div. (0->0), fcn. (168->10), ass. (0->30)
-t19 = cos(pkin(9));
-t6 = t19 * pkin(3) + pkin(2);
-t17 = sin(pkin(9));
-t22 = sin(qJ(1));
-t33 = t22 * t17;
-t18 = sin(pkin(8));
-t32 = t22 * t18;
-t20 = cos(pkin(8));
-t31 = t22 * t20;
-t23 = cos(qJ(1));
-t30 = t23 * t17;
-t29 = t23 * t20;
-t21 = -pkin(6) - qJ(3);
-t16 = pkin(5) + 0;
-t15 = pkin(9) + qJ(4);
-t28 = t23 * qJ(2) + 0;
-t27 = t23 * pkin(1) + t22 * qJ(2) + 0;
-t8 = cos(t15);
+% StartTime: 2020-01-03 11:30:16
+% EndTime: 2020-01-03 11:30:16
+% DurationCPUTime: 0.15s
+% Computational Cost: add. (124->61), mult. (117->64), div. (0->0), fcn. (168->10), ass. (0->30)
+t15 = sin(pkin(9));
+t27 = -t15 * pkin(3) - qJ(2);
+t17 = cos(pkin(9));
+t6 = t17 * pkin(3) + pkin(2);
+t18 = cos(pkin(8));
+t20 = sin(qJ(1));
+t32 = t20 * t18;
+t16 = sin(pkin(8));
+t21 = cos(qJ(1));
+t31 = t21 * t16;
+t30 = t21 * t18;
+t19 = -pkin(6) - qJ(3);
+t13 = pkin(9) + qJ(4);
+t7 = sin(t13);
+t29 = -pkin(4) * t7 + t27;
+t14 = pkin(5) + 0;
+t28 = t20 * pkin(1) + 0;
+t26 = -t20 * qJ(2) + 0;
+t8 = cos(t13);
 t1 = pkin(4) * t8 + t6;
-t14 = -pkin(7) + t21;
-t26 = t1 * t20 - t14 * t18;
-t25 = -t18 * t21 + t20 * t6;
-t24 = pkin(2) * t20 + qJ(3) * t18;
-t9 = qJ(5) + t15;
-t7 = sin(t15);
+t12 = -pkin(7) + t19;
+t25 = t1 * t18 - t12 * t16;
+t24 = -t16 * t19 + t18 * t6;
+t23 = pkin(2) * t18 + qJ(3) * t16;
+t22 = -t21 * qJ(2) + t28;
+t9 = qJ(5) + t13;
 t5 = cos(t9);
 t4 = sin(t9);
-t3 = t23 * t18;
-t2 = t17 * pkin(3) + pkin(4) * t7;
-t10 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1; 0, 0, 1, t16; -t22, -t23, 0, 0; t23, -t22, 0, 0; 0, 0, 0, 1; t18, t20, 0, t16; -t31, t32, t23, -t22 * pkin(1) + t28; t29, -t3, t22, t27; 0, 0, 0, 1; t18 * t19, -t18 * t17, -t20, t18 * pkin(2) - t20 * qJ(3) + t16; -t19 * t31 + t30, t17 * t31 + t23 * t19, -t32, (-pkin(1) - t24) * t22 + t28; t19 * t29 + t33, -t17 * t29 + t22 * t19, t3, t24 * t23 + t27; 0, 0, 0, 1; t18 * t8, -t18 * t7, -t20, t18 * t6 + t20 * t21 + t16; t23 * t7 - t8 * t31, t23 * t8 + t7 * t31, -t32, pkin(3) * t30 + (-pkin(1) - t25) * t22 + t28; t22 * t7 + t8 * t29, t22 * t8 - t7 * t29, t3, pkin(3) * t33 + t25 * t23 + t27; 0, 0, 0, 1; t18 * t5, -t18 * t4, -t20, t18 * t1 + t20 * t14 + t16; t23 * t4 - t5 * t31, t23 * t5 + t4 * t31, -t32, t23 * t2 + (-pkin(1) - t26) * t22 + t28; t22 * t4 + t5 * t29, t22 * t5 - t4 * t29, t3, t22 * t2 + t26 * t23 + t27; 0, 0, 0, 1;];
-T_ges = t10;
+t3 = t20 * t16;
+t2 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1; 0, 0, 1, t14; t20, t21, 0, 0; -t21, t20, 0, 0; 0, 0, 0, 1; t16, t18, 0, t14; t32, -t3, -t21, t22; -t30, t31, -t20, -t21 * pkin(1) + t26; 0, 0, 0, 1; t16 * t17, -t16 * t15, -t18, t16 * pkin(2) - t18 * qJ(3) + t14; -t21 * t15 + t17 * t32, -t15 * t32 - t21 * t17, t3, t23 * t20 + t22; -t20 * t15 - t17 * t30, t15 * t30 - t20 * t17, -t31, (-pkin(1) - t23) * t21 + t26; 0, 0, 0, 1; t16 * t8, -t16 * t7, -t18, t16 * t6 + t18 * t19 + t14; -t21 * t7 + t8 * t32, -t21 * t8 - t7 * t32, t3, t24 * t20 + t27 * t21 + t28; -t20 * t7 - t8 * t30, -t20 * t8 + t7 * t30, -t31, 0 + t27 * t20 + (-pkin(1) - t24) * t21; 0, 0, 0, 1; t16 * t5, -t16 * t4, -t18, t16 * t1 + t18 * t12 + t14; -t21 * t4 + t5 * t32, -t21 * t5 - t4 * t32, t3, t25 * t20 + t29 * t21 + t28; -t20 * t4 - t5 * t30, -t20 * t5 + t4 * t30, -t31, 0 + t29 * t20 + (-pkin(1) - t25) * t21; 0, 0, 0, 1;];
+T_ges = t2;
 %% Postprocessing: Reshape Output
 % Convert Maple format (2-dimensional tensor) to Matlab format (3-dimensional tensor)
 % Fallunterscheidung der Initialisierung für symbolische Eingabe

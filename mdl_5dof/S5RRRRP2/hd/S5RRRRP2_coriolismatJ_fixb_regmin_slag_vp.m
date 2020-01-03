@@ -16,8 +16,8 @@
 %   minimal parameter regressor of coriolis matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:48
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:12
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:48:15
-% EndTime: 2019-12-05 18:48:25
-% DurationCPUTime: 2.90s
+% StartTime: 2020-01-03 12:11:48
+% EndTime: 2020-01-03 12:11:54
+% DurationCPUTime: 2.74s
 % Computational Cost: add. (4262->268), mult. (8003->343), div. (0->0), fcn. (7976->6), ass. (0->223)
 t202 = cos(qJ(4));
 t203 = cos(qJ(3));

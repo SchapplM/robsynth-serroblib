@@ -23,8 +23,8 @@
 %   joint torques of inverse dynamics (contains inertial, gravitational Coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -48,9 +48,9 @@ assert(isreal(MDP) && all(size(MDP) == [10 1]), ...
 %% Symbolic Calculation
 % From invdyn_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 18:00:12
-% EndTime: 2019-03-08 18:00:13
-% DurationCPUTime: 0.10s
+% StartTime: 2020-01-03 11:19:11
+% EndTime: 2020-01-03 11:19:11
+% DurationCPUTime: 0.08s
 % Computational Cost: add. (34->26), mult. (86->46), div. (0->0), fcn. (45->4), ass. (0->15)
 t21 = sin(qJ(2));
 t23 = cos(qJ(2));
@@ -60,11 +60,11 @@ t32 = -t23 ^ 2 + t19;
 t31 = qJD(1) * qJD(2);
 t22 = sin(qJ(1));
 t24 = cos(qJ(1));
-t30 = -g(1) * t22 - g(3) * t24;
+t30 = g(1) * t22 + g(3) * t24;
 t25 = qJD(2) ^ 2;
 t29 = qJDD(2) * t23 - t25 * t21;
 t28 = qJDD(2) * t21 + t25 * t23;
 t27 = pkin(1) * qJDD(1) + t30;
 t26 = qJD(1) ^ 2;
-t1 = [qJDD(1) * MDP(1) + t30 * MDP(3) + (t19 * qJDD(1) + 0.2e1 * t31 * t33) * MDP(4) + 0.2e1 * (qJDD(1) * t33 - t32 * t31) * MDP(5) - t28 * MDP(6) - t29 * MDP(7) + (t29 * MDP(10) + t28 * MDP(9)) * pkin(1) + (t21 * MDP(10) - t23 * MDP(9) - MDP(2)) * (-g(1) * t24 + g(3) * t22); qJDD(2) * MDP(8) + t32 * MDP(5) * t26 + (t27 * MDP(10) - qJDD(1) * MDP(7) + g(2) * MDP(9)) * t23 + (-t26 * t23 * MDP(4) - g(2) * MDP(10) - qJDD(1) * MDP(6) + t27 * MDP(9)) * t21;];
-tau  = t1;
+t1 = [qJDD(1) * MDP(1) + t30 * MDP(3) + (t19 * qJDD(1) + 0.2e1 * t31 * t33) * MDP(4) + 0.2e1 * (qJDD(1) * t33 - t32 * t31) * MDP(5) - t28 * MDP(6) - t29 * MDP(7) + (t29 * MDP(10) + t28 * MDP(9)) * pkin(1) + (-t21 * MDP(10) + t23 * MDP(9) + MDP(2)) * (-g(1) * t24 + g(3) * t22); qJDD(2) * MDP(8) + t32 * MDP(5) * t26 + (t27 * MDP(10) - qJDD(1) * MDP(7) + g(2) * MDP(9)) * t23 + (-t26 * t23 * MDP(4) - g(2) * MDP(10) - qJDD(1) * MDP(6) + t27 * MDP(9)) * t21;];
+tau = t1;

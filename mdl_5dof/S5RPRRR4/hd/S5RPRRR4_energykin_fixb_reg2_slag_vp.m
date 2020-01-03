@@ -16,8 +16,8 @@
 %   inertial parameter regressor of kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:15
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:52
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:14:34
-% EndTime: 2019-12-05 18:14:34
-% DurationCPUTime: 0.10s
+% StartTime: 2020-01-03 11:52:19
+% EndTime: 2020-01-03 11:52:19
+% DurationCPUTime: 0.11s
 % Computational Cost: add. (173->26), mult. (347->72), div. (0->0), fcn. (172->8), ass. (0->30)
 t16 = qJD(1) + qJD(3);
 t15 = qJD(4) + t16;

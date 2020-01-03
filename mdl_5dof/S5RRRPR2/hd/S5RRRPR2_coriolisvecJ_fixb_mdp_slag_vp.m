@@ -19,8 +19,8 @@
 %   joint torques required to compensate Coriolis and centrifugal load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:41
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:08
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,9 +40,9 @@ assert(isreal(MDP) && all(size(MDP) == [17 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:41:00
-% EndTime: 2019-12-05 18:41:01
-% DurationCPUTime: 0.53s
+% StartTime: 2020-01-03 12:07:38
+% EndTime: 2020-01-03 12:07:39
+% DurationCPUTime: 0.52s
 % Computational Cost: add. (795->125), mult. (1724->184), div. (0->0), fcn. (960->8), ass. (0->84)
 t167 = sin(qJ(3));
 t171 = cos(qJ(2));
@@ -127,5 +127,5 @@ t115 = t166 * t200;
 t175 = t115 * MDP(16) + t210 * MDP(17) + t194;
 t159 = t160 ^ 2;
 t120 = t164 * t132 + t217;
-t1 = [(t130 * t160 - t193) * MDP(8) + (-t129 * t160 + t178) * MDP(9) + (-t111 * t183 + t112 * t209 - t119 * t113 + t120 * t114) * MDP(10) + ((-t111 - t185) * MDP(16) + MDP(17) * t180) * t169 + (MDP(16) * t180 + t185 * MDP(17) - t198) * t166 + (-qJD(1) * t188 + (-t225 * t161 + ((-t170 * MDP(8) - MDP(5)) * t168 + (-t167 * MDP(8) - t170 * MDP(9) - MDP(6)) * t171) * qJD(1)) * qJD(2)) * pkin(1) + t175; (-t144 * t160 + t167 * t186 + t173) * MDP(8) + (t145 * t160 + (t186 - t189) * t170 + t206) * MDP(9) + (-t111 * t177 + t112 * t205 + t208 * t119 + t207 * t120) * MDP(10) - t166 * t198 + (t115 + t166 * t176 + (-t111 - t223) * t169) * MDP(16) + (t166 * t223 + t169 * t176 + t210) * MDP(17) + t194 + t225 * (-qJD(2) + t161) * t222; (t136 * t160 - t193) * MDP(8) + (t135 * t160 + t178) * MDP(9) + (t119 * t121 - t120 * t122 + (-t111 * t165 + t112 * t164) * pkin(3)) * MDP(10) + (-t188 + (t182 * MDP(8) - MDP(9) * t212) * qJD(2)) * t222 + ((-t111 - t184) * MDP(16) + MDP(17) * t179) * t169 + (MDP(16) * t179 + t184 * MDP(17) - t198) * t166 + t175; (-t166 * MDP(16) - t199) * t172; t191 * t199 + t159 * t224 + (t191 * MDP(16) - t159 * t203) * t166;];
+t1 = [(t130 * t160 - t193) * MDP(8) + (-t129 * t160 + t178) * MDP(9) + (-t111 * t183 + t112 * t209 - t119 * t113 + t120 * t114) * MDP(10) + ((-t111 - t185) * MDP(16) + MDP(17) * t180) * t169 + (MDP(16) * t180 + t185 * MDP(17) - t198) * t166 + (-qJD(1) * t188 + (-t225 * t161 + ((-t170 * MDP(8) - MDP(5)) * t168 + (-t167 * MDP(8) - t170 * MDP(9) - MDP(6)) * t171) * qJD(1)) * qJD(2)) * pkin(1) + t175; (-t144 * t160 + t167 * t186 + t173) * MDP(8) + (t145 * t160 + (t186 - t189) * t170 + t206) * MDP(9) + (-t111 * t177 + t112 * t205 + t208 * t119 + t207 * t120) * MDP(10) - t166 * t198 + (t115 + t166 * t176 + (-t111 - t223) * t169) * MDP(16) + (t223 * t166 + t169 * t176 + t210) * MDP(17) + t194 + t225 * (-qJD(2) + t161) * t222; (t136 * t160 - t193) * MDP(8) + (t135 * t160 + t178) * MDP(9) + (t119 * t121 - t120 * t122 + (-t111 * t165 + t112 * t164) * pkin(3)) * MDP(10) + (-t188 + (t182 * MDP(8) - MDP(9) * t212) * qJD(2)) * t222 + ((-t111 - t184) * MDP(16) + MDP(17) * t179) * t169 + (MDP(16) * t179 + t184 * MDP(17) - t198) * t166 + t175; (-t166 * MDP(16) - t199) * t172; t191 * t199 + t159 * t224 + (t191 * MDP(16) - t159 * t203) * t166;];
 tauc = t1;

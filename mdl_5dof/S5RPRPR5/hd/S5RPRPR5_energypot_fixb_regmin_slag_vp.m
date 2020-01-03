@@ -16,8 +16,8 @@
 %   minimal parameter regressor of Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:58
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:44
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,35 +36,35 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:57:11
-% EndTime: 2019-12-05 17:57:11
-% DurationCPUTime: 0.09s
+% StartTime: 2020-01-03 11:43:01
+% EndTime: 2020-01-03 11:43:01
+% DurationCPUTime: 0.11s
 % Computational Cost: add. (67->39), mult. (92->57), div. (0->0), fcn. (94->8), ass. (0->27)
-t186 = cos(qJ(3));
-t176 = t186 * pkin(3) + pkin(2);
-t181 = sin(pkin(8));
-t182 = cos(pkin(8));
-t183 = -qJ(4) - pkin(6);
-t201 = t176 * t182 - t181 * t183;
-t200 = g(1) * t181;
-t177 = qJ(3) + pkin(9) + qJ(5);
-t174 = sin(t177);
-t185 = sin(qJ(1));
-t197 = t185 * t174;
-t175 = cos(t177);
-t196 = t185 * t175;
-t184 = sin(qJ(3));
-t195 = t185 * t184;
-t194 = t185 * t186;
-t187 = cos(qJ(1));
-t193 = t187 * t174;
-t192 = t187 * t175;
-t191 = t187 * t184;
-t190 = t187 * t186;
-t189 = t187 * pkin(1) + t185 * qJ(2);
-t188 = g(2) * t185 - g(3) * t187;
-t179 = t187 * qJ(2);
-t173 = g(2) * t187 + g(3) * t185;
-t172 = g(1) * t182 + t188 * t181;
-t1 = [0, t188, t173, t188 * t182 - t200, -t172, -t173, -g(1) * pkin(5) - g(2) * (-t185 * pkin(1) + t179) - g(3) * t189, 0, 0, 0, 0, 0, -t186 * t200 - g(2) * (-t182 * t194 + t191) - g(3) * (t182 * t190 + t195), t184 * t200 - g(2) * (t182 * t195 + t190) - g(3) * (-t182 * t191 + t194), t172, -g(1) * (t181 * t176 + t182 * t183 + pkin(5)) - g(2) * (pkin(3) * t191 + t179) - g(3) * (t201 * t187 + t189) + (-g(2) * (-pkin(1) - t201) - g(3) * pkin(3) * t184) * t185, 0, 0, 0, 0, 0, -t175 * t200 - g(2) * (-t182 * t196 + t193) - g(3) * (t182 * t192 + t197), t174 * t200 - g(2) * (t182 * t197 + t192) - g(3) * (-t182 * t193 + t196);];
+t174 = sin(pkin(8));
+t192 = g(1) * t174;
+t172 = qJ(3) + pkin(9) + qJ(5);
+t169 = sin(t172);
+t178 = sin(qJ(1));
+t191 = t178 * t169;
+t170 = cos(t172);
+t190 = t178 * t170;
+t177 = sin(qJ(3));
+t189 = t178 * t177;
+t179 = cos(qJ(3));
+t188 = t178 * t179;
+t180 = cos(qJ(1));
+t187 = t180 * t169;
+t186 = t180 * t170;
+t185 = t180 * t177;
+t184 = t180 * t179;
+t183 = pkin(3) * t177 + qJ(2);
+t182 = -g(2) * t178 + g(3) * t180;
+t171 = t179 * pkin(3) + pkin(2);
+t175 = cos(pkin(8));
+t176 = -qJ(4) - pkin(6);
+t181 = t171 * t175 - t174 * t176;
+t173 = t178 * pkin(1);
+t168 = g(2) * t180 + g(3) * t178;
+t167 = g(1) * t175 + t182 * t174;
+t1 = [0, t182, -t168, t182 * t175 - t192, -t167, t168, -g(1) * pkin(5) - g(2) * (-t180 * qJ(2) + t173) - g(3) * (-t180 * pkin(1) - t178 * qJ(2)), 0, 0, 0, 0, 0, -t179 * t192 - g(2) * (t175 * t188 - t185) - g(3) * (-t175 * t184 - t189), t177 * t192 - g(2) * (-t175 * t189 - t184) - g(3) * (t175 * t185 - t188), t167, -g(1) * (t174 * t171 + t175 * t176 + pkin(5)) - g(2) * t173 + (-g(2) * t181 + g(3) * t183) * t178 + (g(2) * t183 - g(3) * (-pkin(1) - t181)) * t180, 0, 0, 0, 0, 0, -t170 * t192 - g(2) * (t175 * t190 - t187) - g(3) * (-t175 * t186 - t191), t169 * t192 - g(2) * (-t175 * t191 - t186) - g(3) * (t175 * t187 - t190);];
 U_reg = t1;

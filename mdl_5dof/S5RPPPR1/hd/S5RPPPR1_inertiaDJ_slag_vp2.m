@@ -26,8 +26,8 @@
 %   time derivative of inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:29
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:21
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_time_derivative_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:28:46
-% EndTime: 2019-12-05 17:28:47
-% DurationCPUTime: 0.37s
+% StartTime: 2020-01-03 11:20:06
+% EndTime: 2020-01-03 11:20:09
+% DurationCPUTime: 0.36s
 % Computational Cost: add. (465->86), mult. (1084->153), div. (0->0), fcn. (971->8), ass. (0->45)
 t32 = sin(pkin(8));
 t29 = t32 ^ 2;
@@ -90,7 +90,7 @@ t6 = -pkin(6) * t44 + t17 + (-t28 * t31 - pkin(4)) * t34;
 t7 = -pkin(6) * t45 + t42;
 t3 = -t35 * t7 + t36 * t6;
 t4 = t35 * t6 + t36 * t7;
-t5 = -mrSges(6,1) * t13 - mrSges(6,2) * t12;
+t5 = -t13 * mrSges(6,1) - t12 * mrSges(6,2);
 t30 = t34 ^ 2;
 t27 = t29 * t41;
 t20 = -t31 * t38 + t33 * t39;
@@ -100,7 +100,7 @@ t9 = -mrSges(6,1) * t34 + t15 * mrSges(6,3);
 t8 = mrSges(6,2) * t34 - t14 * mrSges(6,3);
 t2 = -t4 * qJD(5) + t36 * t19 - t35 * t20;
 t1 = t3 * qJD(5) + t35 * t19 + t36 * t20;
-t10 = [0.2e1 * t1 * t8 + 0.2e1 * t2 * t9 - t34 * t43 + 0.2e1 * t18 * t5 + 0.2e1 * t20 * (t34 * mrSges(5,2) - mrSges(5,3) * t45) + 0.2e1 * t19 * (-t34 * mrSges(5,1) - mrSges(5,3) * t44) + (0.2e1 * mrSges(6,3) * t4 + Ifges(6,4) * t47 + Ifges(6,2) * t48 - Ifges(6,6) * t34) * t13 - (-0.2e1 * mrSges(6,3) * t3 + Ifges(6,1) * t47 + Ifges(6,4) * t48 - Ifges(6,5) * t34) * t12 + ((0.2e1 * t14 * mrSges(6,1) + mrSges(6,2) * t47) * t32 + 0.2e1 * (mrSges(5,1) * t31 + mrSges(5,2) * t33) * t29 + 0.2e1 * (t30 + t29) * mrSges(4,3)) * qJD(3) + (t1 * t4 + t18 * t40 + t2 * t3) * t49 + 0.2e1 * m(4) * (t30 * t41 + t27) + 0.2e1 * m(5) * (t42 * t20 + (-t31 * t46 + t17) * t19 + t27); -t12 * t8 + t13 * t9 - t34 * t5 + (-t12 * t14 - t13 * t15) * mrSges(6,3) + m(5) * (-t19 * t31 + t20 * t33 - t39) * t32 + (-t1 * t15 - t12 * t4 + t13 * t3 - t14 * t2 - t39 * t32) * m(6); (t12 * t15 - t13 * t14) * t49; -t21 * t8 - t22 * t9 + (-t12 * t37 + t13 * t25) * mrSges(6,3) + m(6) * (t1 * t25 - t2 * t37 - t21 * t4 - t22 * t3) + m(5) * (t19 * t33 + t20 * t31); m(6) * (-t12 * t25 - t13 * t37 + t14 * t22 + t15 * t21); (-t21 * t25 + t22 * t37) * t49; (m(5) + m(6)) * t40 + t5; 0; 0; 0; mrSges(6,1) * t2 - mrSges(6,2) * t1 + t43; -t5; -mrSges(6,1) * t22 + mrSges(6,2) * t21; 0; 0;];
+t10 = [0.2e1 * t20 * (t34 * mrSges(5,2) - mrSges(5,3) * t45) + 0.2e1 * t19 * (-t34 * mrSges(5,1) - mrSges(5,3) * t44) + 0.2e1 * t18 * t5 - t34 * t43 + 0.2e1 * t1 * t8 + 0.2e1 * t2 * t9 + (0.2e1 * mrSges(6,3) * t4 + Ifges(6,4) * t47 + Ifges(6,2) * t48 - Ifges(6,6) * t34) * t13 - (-0.2e1 * mrSges(6,3) * t3 + Ifges(6,1) * t47 + Ifges(6,4) * t48 - Ifges(6,5) * t34) * t12 + ((0.2e1 * t14 * mrSges(6,1) + mrSges(6,2) * t47) * t32 + 0.2e1 * (mrSges(5,1) * t31 + mrSges(5,2) * t33) * t29 + 0.2e1 * (t30 + t29) * mrSges(4,3)) * qJD(3) + 0.2e1 * m(4) * (t30 * t41 + t27) + 0.2e1 * m(5) * (t42 * t20 + (-t31 * t46 + t17) * t19 + t27) + (t1 * t4 + t18 * t40 + t2 * t3) * t49; -t12 * t8 + t13 * t9 - t34 * t5 + (-t12 * t14 - t13 * t15) * mrSges(6,3) + m(5) * (-t19 * t31 + t20 * t33 - t39) * t32 + (-t1 * t15 - t12 * t4 + t13 * t3 - t14 * t2 - t39 * t32) * m(6); (t12 * t15 - t13 * t14) * t49; -t21 * t8 - t22 * t9 + (-t12 * t37 + t13 * t25) * mrSges(6,3) + m(6) * (t1 * t25 - t2 * t37 - t21 * t4 - t22 * t3) + m(5) * (t19 * t33 + t20 * t31); m(6) * (-t12 * t25 - t13 * t37 + t14 * t22 + t15 * t21); (-t21 * t25 + t22 * t37) * t49; (m(5) + m(6)) * t40 + t5; 0; 0; 0; mrSges(6,1) * t2 - mrSges(6,2) * t1 + t43; -t5; -mrSges(6,1) * t22 + mrSges(6,2) * t21; 0; 0;];
 %% Postprocessing: Reshape Output
 % From vec2symmat_5_matlab.m
 res = [t10(1), t10(2), t10(4), t10(7), t10(11); t10(2), t10(3), t10(5), t10(8), t10(12); t10(4), t10(5), t10(6), t10(9), t10(13); t10(7), t10(8), t10(9), t10(10), t10(14); t10(11), t10(12), t10(13), t10(14), t10(15);];

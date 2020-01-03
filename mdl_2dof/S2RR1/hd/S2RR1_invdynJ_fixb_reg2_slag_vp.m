@@ -20,8 +20,8 @@
 %   inertial parameter regressor of inverse dynamics joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,31 +43,31 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 %% Symbolic Calculation
 % From invdyn_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 18:00:03
-% EndTime: 2019-03-08 18:00:03
-% DurationCPUTime: 0.10s
+% StartTime: 2020-01-03 11:19:11
+% EndTime: 2020-01-03 11:19:11
+% DurationCPUTime: 0.11s
 % Computational Cost: add. (30->20), mult. (101->40), div. (0->0), fcn. (58->4), ass. (0->23)
-t24 = pkin(1) * qJDD(1);
-t3 = sin(qJ(2));
-t1 = t3 ^ 2;
-t5 = cos(qJ(2));
-t2 = t5 ^ 2;
-t23 = (t1 + t2) * t24;
-t22 = t3 * t5;
-t21 = t1 - t2;
-t20 = qJDD(2) * t3;
-t19 = qJDD(2) * t5;
-t18 = t5 * qJDD(1);
-t8 = qJD(1) ^ 2;
-t17 = t8 * t22;
-t16 = qJD(1) * qJD(2);
-t14 = t16 * t22;
-t4 = sin(qJ(1));
-t6 = cos(qJ(1));
-t13 = g(1) * t6 - g(3) * t4;
-t12 = -g(1) * t4 - g(3) * t6;
-t7 = qJD(2) ^ 2;
-t11 = pkin(1) * t7 + t13;
-t10 = t12 + t24;
-t9 = [0, 0, 0, 0, 0, qJDD(1), t13, t12, 0, 0, t1 * qJDD(1) + 0.2e1 * t14, -0.2e1 * t21 * t16 + 0.2e1 * t3 * t18, -t7 * t5 - t20, t2 * qJDD(1) - 0.2e1 * t14, t7 * t3 - t19, 0, pkin(1) * t20 + t11 * t5, pkin(1) * t19 - t11 * t3, t12 + 0.2e1 * t23 (t12 + t23) * pkin(1); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t17, t21 * t8, -t3 * qJDD(1), t17, -t18, qJDD(2), g(2) * t5 + t10 * t3, -g(2) * t3 + t10 * t5, 0, 0;];
-tau_reg  = t9;
+t28 = pkin(1) * qJDD(1);
+t6 = sin(qJ(1));
+t8 = cos(qJ(1));
+t27 = g(1) * t6 + g(3) * t8;
+t5 = sin(qJ(2));
+t3 = t5 ^ 2;
+t7 = cos(qJ(2));
+t4 = t7 ^ 2;
+t26 = (t3 + t4) * t28;
+t25 = t5 * t7;
+t23 = t3 - t4;
+t22 = qJDD(2) * t5;
+t21 = qJDD(2) * t7;
+t20 = t7 * qJDD(1);
+t19 = qJD(1) * qJD(2);
+t10 = qJD(1) ^ 2;
+t18 = t10 * t25;
+t16 = t19 * t25;
+t15 = -g(1) * t8 + g(3) * t6;
+t9 = qJD(2) ^ 2;
+t13 = pkin(1) * t9 + t15;
+t12 = t27 + t28;
+t1 = [0, 0, 0, 0, 0, qJDD(1), t15, t27, 0, 0, t3 * qJDD(1) + 0.2e1 * t16, -0.2e1 * t23 * t19 + 0.2e1 * t5 * t20, -t9 * t7 - t22, t4 * qJDD(1) - 0.2e1 * t16, t9 * t5 - t21, 0, pkin(1) * t22 + t13 * t7, pkin(1) * t21 - t13 * t5, t27 + 0.2e1 * t26, (t27 + t26) * pkin(1); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t18, t23 * t10, -t5 * qJDD(1), t18, -t20, qJDD(2), g(2) * t7 + t12 * t5, -g(2) * t5 + t12 * t7, 0, 0;];
+tau_reg = t1;

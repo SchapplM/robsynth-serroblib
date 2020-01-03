@@ -26,8 +26,8 @@
 %   kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,12 +52,12 @@ assert(isreal(Ifges) && all(size(Ifges) == [3 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_linkframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 17:59:54
-% EndTime: 2019-03-08 17:59:54
+% StartTime: 2020-01-03 11:19:05
+% EndTime: 2020-01-03 11:19:06
 % DurationCPUTime: 0.07s
 % Computational Cost: add. (15->11), mult. (50->24), div. (0->0), fcn. (14->2), ass. (0->4)
-t21 = cos(qJ(2));
-t26 = t21 ^ 2;
-t20 = sin(qJ(2));
-t1 = Ifges(3,3) * qJD(2) ^ 2 / 0.2e1 + ((t26 * Ifges(3,2) / 0.2e1 + (Ifges(3,4) * t21 + Ifges(3,1) * t20 / 0.2e1) * t20 + Ifges(2,3) / 0.2e1 + (mrSges(3,3) + m(3) * pkin(1) / 0.2e1) * (t20 ^ 2 + t26) * pkin(1)) * qJD(1) + (-Ifges(3,5) * t20 - Ifges(3,6) * t21 + (t20 * mrSges(3,1) + t21 * mrSges(3,2)) * pkin(1)) * qJD(2)) * qJD(1);
-T  = t1;
+t23 = cos(qJ(2));
+t28 = t23 ^ 2;
+t22 = sin(qJ(2));
+t1 = Ifges(3,3) * qJD(2) ^ 2 / 0.2e1 + ((t28 * Ifges(3,2) / 0.2e1 + (Ifges(3,4) * t23 + Ifges(3,1) * t22 / 0.2e1) * t22 + Ifges(2,3) / 0.2e1 + (mrSges(3,3) + m(3) * pkin(1) / 0.2e1) * (t22 ^ 2 + t28) * pkin(1)) * qJD(1) + (-Ifges(3,5) * t22 - Ifges(3,6) * t23 + (t22 * mrSges(3,1) + t23 * mrSges(3,2)) * pkin(1)) * qJD(2)) * qJD(1);
+T = t1;

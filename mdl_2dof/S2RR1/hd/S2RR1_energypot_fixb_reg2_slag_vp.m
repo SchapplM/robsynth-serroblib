@@ -16,8 +16,8 @@
 %   inertial parameter regressor of Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,15 +35,15 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 18:00:02
-% EndTime: 2019-03-08 18:00:02
+% StartTime: 2020-01-03 11:19:09
+% EndTime: 2020-01-03 11:19:09
 % DurationCPUTime: 0.02s
-% Computational Cost: add. (9->5), mult. (20->9), div. (0->0), fcn. (18->4), ass. (0->7)
+% Computational Cost: add. (9->6), mult. (20->9), div. (0->0), fcn. (18->4), ass. (0->7)
 t13 = sin(qJ(1));
 t15 = cos(qJ(1));
-t11 = g(1) * t15 - g(3) * t13;
+t11 = -g(1) * t15 + g(3) * t13;
 t16 = g(1) * t13 + g(3) * t15;
 t14 = cos(qJ(2));
 t12 = sin(qJ(2));
-t1 = [0, 0, 0, 0, 0, 0, t16, t11, -g(2), 0, 0, 0, 0, 0, 0, 0, g(2) * t12 + t16 * t14, g(2) * t14 - t16 * t12, t11, t11 * pkin(1);];
-U_reg  = t1;
+t1 = [0, 0, 0, 0, 0, 0, -t16, t11, -g(2), 0, 0, 0, 0, 0, 0, 0, g(2) * t12 - t16 * t14, g(2) * t14 + t16 * t12, t11, t11 * pkin(1);];
+U_reg = t1;

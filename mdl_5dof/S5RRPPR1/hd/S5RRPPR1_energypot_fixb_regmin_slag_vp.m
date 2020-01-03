@@ -16,8 +16,8 @@
 %   minimal parameter regressor of Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:19
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:56
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,18 +36,18 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:18:26
-% EndTime: 2019-12-05 18:18:26
-% DurationCPUTime: 0.05s
+% StartTime: 2020-01-03 11:55:59
+% EndTime: 2020-01-03 11:55:59
+% DurationCPUTime: 0.04s
 % Computational Cost: add. (71->25), mult. (48->33), div. (0->0), fcn. (42->10), ass. (0->18)
 t128 = g(1) * (qJ(3) + pkin(6) + pkin(5));
 t120 = qJ(1) + qJ(2);
-t116 = cos(t120);
-t124 = cos(qJ(1));
-t127 = t124 * pkin(1) + pkin(2) * t116;
 t115 = sin(t120);
 t123 = sin(qJ(1));
-t126 = -t123 * pkin(1) - pkin(2) * t115;
+t127 = t123 * pkin(1) + pkin(2) * t115;
+t116 = cos(t120);
+t124 = cos(qJ(1));
+t126 = -t124 * pkin(1) - pkin(2) * t116;
 t114 = pkin(8) + t120;
 t109 = sin(t114);
 t110 = cos(t114);
@@ -57,5 +57,5 @@ t121 = sin(pkin(9));
 t119 = pkin(9) + qJ(5);
 t113 = cos(t119);
 t112 = sin(t119);
-t1 = [0, g(2) * t123 - g(3) * t124, g(2) * t124 + g(3) * t123, 0, g(2) * t115 - g(3) * t116, g(2) * t116 + g(3) * t115, -g(2) * t126 - g(3) * t127 - t128, -g(1) * t121 + t125 * t122, -g(1) * t122 - t125 * t121, -g(2) * t110 - g(3) * t109, -t128 - g(2) * (-t109 * pkin(3) + t110 * qJ(4) + t126) - g(3) * (t110 * pkin(3) + t109 * qJ(4) + t127), 0, 0, 0, 0, 0, -g(1) * t112 + t125 * t113, -g(1) * t113 - t125 * t112;];
+t1 = [0, -g(2) * t123 + g(3) * t124, -g(2) * t124 - g(3) * t123, 0, -g(2) * t115 + g(3) * t116, -g(2) * t116 - g(3) * t115, -g(2) * t127 - g(3) * t126 - t128, -g(1) * t121 - t125 * t122, -g(1) * t122 + t125 * t121, g(2) * t110 + g(3) * t109, -t128 - g(2) * (t109 * pkin(3) - t110 * qJ(4) + t127) - g(3) * (-t110 * pkin(3) - t109 * qJ(4) + t126), 0, 0, 0, 0, 0, -g(1) * t112 - t125 * t113, -g(1) * t113 + t125 * t112;];
 U_reg = t1;

@@ -13,11 +13,11 @@
 % 
 % Output:
 % T_reg [1x(2*10)]
-%   minimal parameter regressor of kinetic energy
+%   inertial parameter regressor of kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,8 +35,8 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 18:00:02
-% EndTime: 2019-03-08 18:00:02
+% StartTime: 2020-01-03 11:19:09
+% EndTime: 2020-01-03 11:19:09
 % DurationCPUTime: 0.06s
 % Computational Cost: add. (4->4), mult. (45->22), div. (0->0), fcn. (12->2), ass. (0->10)
 t5 = qJD(1) ^ 2;
@@ -48,5 +48,5 @@ t4 = cos(qJ(2));
 t7 = t4 * t9;
 t2 = t4 ^ 2;
 t1 = t3 ^ 2;
-t6 = [0, 0, 0, 0, 0, t10, 0, 0, 0, 0, t1 * t10, t3 * t5 * t4, -t8, t2 * t10, -t7, qJD(2) ^ 2 / 0.2e1, pkin(1) * t8, pkin(1) * t7 (t1 + t2) * t5 * pkin(1) (t2 / 0.2e1 + t1 / 0.2e1) * pkin(1) ^ 2 * t5;];
-T_reg  = t6;
+t6 = [0, 0, 0, 0, 0, t10, 0, 0, 0, 0, t1 * t10, t3 * t5 * t4, -t8, t2 * t10, -t7, qJD(2) ^ 2 / 0.2e1, pkin(1) * t8, pkin(1) * t7, (t1 + t2) * t5 * pkin(1), (t2 / 0.2e1 + t1 / 0.2e1) * pkin(1) ^ 2 * t5;];
+T_reg = t6;

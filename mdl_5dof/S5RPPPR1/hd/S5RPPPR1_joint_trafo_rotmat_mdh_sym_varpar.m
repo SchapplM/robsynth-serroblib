@@ -15,8 +15,8 @@
 %   Transformation matrices from one joint to the next (not: from base to joints)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:29
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:21
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -33,21 +33,21 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From joint_transformation_mdh_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:28:39
-% EndTime: 2019-12-05 17:28:39
+% StartTime: 2020-01-03 11:19:57
+% EndTime: 2020-01-03 11:19:57
 % DurationCPUTime: 0.03s
-% Computational Cost: add. (9->9), mult. (0->0), div. (0->0), fcn. (20->10), ass. (0->11)
-t44 = cos(qJ(1));
-t43 = cos(qJ(5));
-t42 = sin(qJ(1));
-t41 = sin(qJ(5));
-t40 = cos(pkin(7));
-t39 = cos(pkin(8));
-t38 = cos(pkin(9));
-t37 = sin(pkin(7));
-t36 = sin(pkin(8));
-t35 = sin(pkin(9));
-t1 = [0, 0, 1, pkin(5); -t42, -t44, 0, 0; t44, -t42, 0, 0; 0, 0, 0, 1; t40, -t37, 0, pkin(1); t37, t40, 0, 0; 0, 0, 1, qJ(2); 0, 0, 0, 1; t39, -t36, 0, pkin(2); 0, 0, -1, -qJ(3); t36, t39, 0, 0; 0, 0, 0, 1; t38, -t35, 0, pkin(3); 0, 0, -1, -qJ(4); t35, t38, 0, 0; 0, 0, 0, 1; t43, -t41, 0, pkin(4); t41, t43, 0, 0; 0, 0, 1, pkin(6); 0, 0, 0, 1;];
+% Computational Cost: add. (7->7), mult. (0->0), div. (0->0), fcn. (20->10), ass. (0->11)
+t42 = cos(qJ(1));
+t41 = cos(qJ(5));
+t40 = sin(qJ(1));
+t39 = sin(qJ(5));
+t38 = cos(pkin(7));
+t37 = cos(pkin(8));
+t36 = cos(pkin(9));
+t35 = sin(pkin(7));
+t34 = sin(pkin(8));
+t33 = sin(pkin(9));
+t1 = [0, 0, 1, pkin(5); t40, t42, 0, 0; -t42, t40, 0, 0; 0, 0, 0, 1; t38, -t35, 0, pkin(1); t35, t38, 0, 0; 0, 0, 1, qJ(2); 0, 0, 0, 1; t37, -t34, 0, pkin(2); 0, 0, -1, -qJ(3); t34, t37, 0, 0; 0, 0, 0, 1; t36, -t33, 0, pkin(3); 0, 0, -1, -qJ(4); t33, t36, 0, 0; 0, 0, 0, 1; t41, -t39, 0, pkin(4); t39, t41, 0, 0; 0, 0, 1, pkin(6); 0, 0, 0, 1;];
 T_ges = t1;
 %% Postprocessing: Reshape Output
 % Convert Maple format (2-dimensional tensor) to Matlab format (3-dimensional tensor)

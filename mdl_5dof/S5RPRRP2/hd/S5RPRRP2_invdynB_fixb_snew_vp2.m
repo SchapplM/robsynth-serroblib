@@ -30,8 +30,8 @@
 %   base forces of inverse dynamics (contains inertial, gravitational coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:02
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:45
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,99 +60,99 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_NewtonEuler_linkframe_tauB_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:01:33
-% EndTime: 2019-12-05 18:01:35
-% DurationCPUTime: 1.70s
+% StartTime: 2020-01-03 11:45:16
+% EndTime: 2020-01-03 11:45:18
+% DurationCPUTime: 1.75s
 % Computational Cost: add. (19107->209), mult. (26070->250), div. (0->0), fcn. (12664->8), ass. (0->91)
-t481 = Ifges(5,1) + Ifges(6,1);
-t474 = Ifges(5,4) + Ifges(6,4);
-t473 = Ifges(5,5) + Ifges(6,5);
-t480 = Ifges(5,2) + Ifges(6,2);
-t479 = Ifges(5,6) + Ifges(6,6);
-t478 = Ifges(5,3) + Ifges(6,3);
-t438 = qJD(1) + qJD(3);
-t436 = t438 ^ 2;
-t446 = sin(qJ(1));
-t449 = cos(qJ(1));
-t428 = t449 * g(2) + t446 * g(3);
-t420 = qJDD(1) * pkin(1) + t428;
-t427 = t446 * g(2) - t449 * g(3);
-t450 = qJD(1) ^ 2;
-t421 = -t450 * pkin(1) + t427;
-t442 = sin(pkin(8));
-t443 = cos(pkin(8));
-t398 = t443 * t420 - t442 * t421;
-t396 = qJDD(1) * pkin(2) + t398;
-t399 = t442 * t420 + t443 * t421;
-t397 = -t450 * pkin(2) + t399;
-t445 = sin(qJ(3));
-t448 = cos(qJ(3));
-t391 = t448 * t396 - t445 * t397;
-t437 = qJDD(1) + qJDD(3);
-t452 = -t437 * pkin(3) - t391;
-t389 = -t436 * pkin(7) + t452;
-t444 = sin(qJ(4));
-t447 = cos(qJ(4));
-t465 = qJD(4) * t438;
-t460 = t447 * t465;
-t414 = t444 * t437 + t460;
-t415 = t447 * t437 - t444 * t465;
-t470 = t438 * t447;
-t426 = -qJD(4) * mrSges(5,2) + mrSges(5,3) * t470;
-t471 = t438 * t444;
-t422 = qJD(4) * pkin(4) - qJ(5) * t471;
-t440 = t447 ^ 2;
-t385 = t422 * t471 - t415 * pkin(4) + qJDD(5) + (-qJ(5) * t440 - pkin(7)) * t436 + t452;
-t425 = -qJD(4) * mrSges(6,2) + mrSges(6,3) * t470;
-t454 = m(6) * t385 - t415 * mrSges(6,1) - t425 * t470;
-t475 = -mrSges(5,2) - mrSges(6,2);
-t477 = -m(5) * t389 + t415 * mrSges(5,1) + t475 * t414 + t426 * t470 - t454;
-t476 = pkin(4) * t436;
-t392 = t445 * t396 + t448 * t397;
-t390 = -t436 * pkin(3) + t437 * pkin(7) + t392;
-t441 = -g(1) + qJDD(2);
-t387 = t447 * t390 + t444 * t441;
-t413 = (-mrSges(5,1) * t447 + mrSges(5,2) * t444) * t438;
-t464 = qJD(5) * t438;
-t384 = t415 * qJ(5) - qJD(4) * t422 - t440 * t476 + 0.2e1 * t447 * t464 + t387;
-t412 = (-mrSges(6,1) * t447 + mrSges(6,2) * t444) * t438;
-t462 = m(6) * t384 + t415 * mrSges(6,3) + t412 * t470;
-t423 = qJD(4) * mrSges(6,1) - mrSges(6,3) * t471;
-t466 = -qJD(4) * mrSges(5,1) + mrSges(5,3) * t471 - t423;
-t379 = m(5) * t387 + t415 * mrSges(5,3) + t466 * qJD(4) + t475 * qJDD(4) + t413 * t470 + t462;
-t377 = t447 * t379;
-t430 = t447 * t441;
-t386 = -t444 * t390 + t430;
-t383 = qJDD(4) * pkin(4) + t430 + (-t414 + t460) * qJ(5) + (t447 * t476 - t390 - 0.2e1 * t464) * t444;
-t463 = m(6) * t383 + qJDD(4) * mrSges(6,1) + qJD(4) * t425;
-t378 = m(5) * t386 + qJDD(4) * mrSges(5,1) + qJD(4) * t426 + (-t412 - t413) * t471 + (-mrSges(5,3) - mrSges(6,3)) * t414 + t463;
-t371 = m(4) * t392 - t436 * mrSges(4,1) - t437 * mrSges(4,2) - t444 * t378 + t377;
-t459 = t438 * t466;
-t374 = m(4) * t391 + t437 * mrSges(4,1) - t436 * mrSges(4,2) + t444 * t459 + t477;
-t366 = t445 * t371 + t448 * t374;
-t364 = m(3) * t398 + qJDD(1) * mrSges(3,1) - t450 * mrSges(3,2) + t366;
-t456 = t448 * t371 - t445 * t374;
-t365 = m(3) * t399 - t450 * mrSges(3,1) - qJDD(1) * mrSges(3,2) + t456;
-t359 = t443 * t364 + t442 * t365;
-t372 = t447 * t378 + t444 * t379;
-t469 = (t473 * t444 + t479 * t447) * t438 + t478 * qJD(4);
-t468 = (-t474 * t444 - t480 * t447) * t438 - t479 * qJD(4);
-t467 = (t481 * t444 + t474 * t447) * t438 + t473 * qJD(4);
-t461 = m(4) * t441 + t372;
-t457 = -t442 * t364 + t443 * t365;
-t357 = m(2) * t427 - t450 * mrSges(2,1) - qJDD(1) * mrSges(2,2) + t457;
-t358 = m(2) * t428 + qJDD(1) * mrSges(2,1) - t450 * mrSges(2,2) + t359;
-t458 = t449 * t357 - t446 * t358;
-t455 = m(3) * t441 + t461;
-t453 = -t446 * t357 - t449 * t358;
-t380 = -t414 * mrSges(6,3) - t412 * t471 + t463;
-t368 = mrSges(5,2) * t389 + mrSges(6,2) * t385 - mrSges(5,3) * t386 - mrSges(6,3) * t383 - qJ(5) * t380 + t468 * qJD(4) + t473 * qJDD(4) + t481 * t414 + t474 * t415 + t469 * t470;
-t367 = -mrSges(5,1) * t389 + mrSges(5,3) * t387 - mrSges(6,1) * t385 + mrSges(6,3) * t384 - pkin(4) * t454 + qJ(5) * t462 + (-pkin(4) * t423 - t469) * t471 + t480 * t415 + (-pkin(4) * mrSges(6,2) + t474) * t414 + (-qJ(5) * mrSges(6,2) + t479) * qJDD(4) + (-qJ(5) * t423 + t467) * qJD(4);
-t360 = -mrSges(4,1) * t441 - mrSges(5,1) * t386 - mrSges(6,1) * t383 + mrSges(5,2) * t387 + mrSges(6,2) * t384 + mrSges(4,3) * t392 + t436 * Ifges(4,5) + Ifges(4,6) * t437 - pkin(3) * t372 - pkin(4) * t380 - t479 * t415 - t473 * t414 - t478 * qJDD(4) + (t468 * t444 + t467 * t447) * t438;
-t355 = mrSges(4,2) * t441 - mrSges(4,3) * t391 + Ifges(4,5) * t437 - t436 * Ifges(4,6) - pkin(7) * t372 - t444 * t367 + t447 * t368;
-t354 = mrSges(3,2) * t441 - mrSges(3,3) * t398 + Ifges(3,5) * qJDD(1) - t450 * Ifges(3,6) - pkin(6) * t366 + t448 * t355 - t445 * t360;
-t353 = -mrSges(3,1) * t441 + mrSges(3,3) * t399 + t450 * Ifges(3,5) + Ifges(3,6) * qJDD(1) - pkin(2) * t461 + pkin(6) * t456 + t445 * t355 + t448 * t360;
-t352 = -mrSges(2,2) * g(1) - mrSges(2,3) * t428 + Ifges(2,5) * qJDD(1) - t450 * Ifges(2,6) - qJ(2) * t359 - t442 * t353 + t443 * t354;
-t351 = mrSges(2,1) * g(1) + mrSges(2,3) * t427 + t450 * Ifges(2,5) + Ifges(2,6) * qJDD(1) - pkin(1) * t455 + qJ(2) * t457 + t443 * t353 + t442 * t354;
-t1 = [(-m(1) - m(2)) * g(1) + t455; -m(1) * g(2) + t453; -m(1) * g(3) + t458; pkin(1) * t359 + pkin(2) * t366 + mrSges(3,1) * t398 - mrSges(3,2) * t399 + pkin(3) * t477 + pkin(7) * t377 + t447 * t367 + mrSges(4,1) * t391 - mrSges(4,2) * t392 + mrSges(2,1) * t428 - mrSges(2,2) * t427 + Ifges(4,3) * t437 - mrSges(1,2) * g(3) + mrSges(1,3) * g(2) + (pkin(3) * t459 - pkin(7) * t378 + t368) * t444 + (Ifges(2,3) + Ifges(3,3)) * qJDD(1); mrSges(1,1) * g(3) - mrSges(1,3) * g(1) - pkin(5) * t458 - t449 * t351 - t446 * t352; -mrSges(1,1) * g(2) + mrSges(1,2) * g(1) + pkin(5) * t453 - t446 * t351 + t449 * t352;];
+t475 = Ifges(5,1) + Ifges(6,1);
+t468 = Ifges(5,4) + Ifges(6,4);
+t467 = Ifges(5,5) + Ifges(6,5);
+t474 = Ifges(5,2) + Ifges(6,2);
+t473 = Ifges(5,6) + Ifges(6,6);
+t472 = Ifges(5,3) + Ifges(6,3);
+t432 = qJD(1) + qJD(3);
+t430 = t432 ^ 2;
+t440 = sin(qJ(1));
+t443 = cos(qJ(1));
+t424 = -t443 * g(2) - t440 * g(3);
+t416 = qJDD(1) * pkin(1) + t424;
+t423 = -t440 * g(2) + t443 * g(3);
+t444 = qJD(1) ^ 2;
+t417 = -t444 * pkin(1) + t423;
+t436 = sin(pkin(8));
+t437 = cos(pkin(8));
+t394 = t437 * t416 - t436 * t417;
+t392 = qJDD(1) * pkin(2) + t394;
+t395 = t436 * t416 + t437 * t417;
+t393 = -t444 * pkin(2) + t395;
+t439 = sin(qJ(3));
+t442 = cos(qJ(3));
+t387 = t442 * t392 - t439 * t393;
+t431 = qJDD(1) + qJDD(3);
+t446 = -t431 * pkin(3) - t387;
+t385 = -t430 * pkin(7) + t446;
+t438 = sin(qJ(4));
+t441 = cos(qJ(4));
+t458 = qJD(4) * t432;
+t453 = t441 * t458;
+t410 = t438 * t431 + t453;
+t411 = t441 * t431 - t438 * t458;
+t464 = t432 * t441;
+t422 = -qJD(4) * mrSges(5,2) + mrSges(5,3) * t464;
+t465 = t432 * t438;
+t418 = qJD(4) * pkin(4) - qJ(5) * t465;
+t434 = t441 ^ 2;
+t381 = t418 * t465 - t411 * pkin(4) + qJDD(5) + (-qJ(5) * t434 - pkin(7)) * t430 + t446;
+t421 = -qJD(4) * mrSges(6,2) + mrSges(6,3) * t464;
+t447 = m(6) * t381 - t411 * mrSges(6,1) - t421 * t464;
+t469 = -mrSges(5,2) - mrSges(6,2);
+t471 = -m(5) * t385 + t411 * mrSges(5,1) + t410 * t469 + t422 * t464 - t447;
+t470 = pkin(4) * t430;
+t388 = t439 * t392 + t442 * t393;
+t386 = -t430 * pkin(3) + t431 * pkin(7) + t388;
+t435 = -g(1) + qJDD(2);
+t383 = t441 * t386 + t438 * t435;
+t409 = (-mrSges(5,1) * t441 + mrSges(5,2) * t438) * t432;
+t457 = qJD(5) * t432;
+t380 = t411 * qJ(5) - qJD(4) * t418 - t434 * t470 + 0.2e1 * t441 * t457 + t383;
+t408 = (-mrSges(6,1) * t441 + mrSges(6,2) * t438) * t432;
+t455 = m(6) * t380 + t411 * mrSges(6,3) + t408 * t464;
+t419 = qJD(4) * mrSges(6,1) - mrSges(6,3) * t465;
+t459 = -qJD(4) * mrSges(5,1) + mrSges(5,3) * t465 - t419;
+t375 = m(5) * t383 + t411 * mrSges(5,3) + qJD(4) * t459 + qJDD(4) * t469 + t409 * t464 + t455;
+t373 = t441 * t375;
+t426 = t441 * t435;
+t382 = -t438 * t386 + t426;
+t379 = qJDD(4) * pkin(4) + t426 + (-t410 + t453) * qJ(5) + (t441 * t470 - t386 - 0.2e1 * t457) * t438;
+t456 = m(6) * t379 + qJDD(4) * mrSges(6,1) + qJD(4) * t421;
+t374 = m(5) * t382 + qJDD(4) * mrSges(5,1) + qJD(4) * t422 + (-t408 - t409) * t465 + (-mrSges(5,3) - mrSges(6,3)) * t410 + t456;
+t367 = m(4) * t388 - t430 * mrSges(4,1) - t431 * mrSges(4,2) - t438 * t374 + t373;
+t452 = t432 * t459;
+t370 = m(4) * t387 + t431 * mrSges(4,1) - t430 * mrSges(4,2) + t438 * t452 + t471;
+t362 = t439 * t367 + t442 * t370;
+t360 = m(3) * t394 + qJDD(1) * mrSges(3,1) - t444 * mrSges(3,2) + t362;
+t449 = t442 * t367 - t439 * t370;
+t361 = m(3) * t395 - t444 * mrSges(3,1) - qJDD(1) * mrSges(3,2) + t449;
+t450 = -t436 * t360 + t437 * t361;
+t353 = m(2) * t423 - t444 * mrSges(2,1) - qJDD(1) * mrSges(2,2) + t450;
+t355 = t437 * t360 + t436 * t361;
+t354 = m(2) * t424 + qJDD(1) * mrSges(2,1) - t444 * mrSges(2,2) + t355;
+t463 = t440 * t353 + t443 * t354;
+t368 = t441 * t374 + t438 * t375;
+t462 = (t467 * t438 + t473 * t441) * t432 + t472 * qJD(4);
+t461 = (-t468 * t438 - t474 * t441) * t432 - t473 * qJD(4);
+t460 = (t475 * t438 + t468 * t441) * t432 + t467 * qJD(4);
+t454 = m(4) * t435 + t368;
+t451 = -t443 * t353 + t440 * t354;
+t448 = m(3) * t435 + t454;
+t376 = -t410 * mrSges(6,3) - t408 * t465 + t456;
+t364 = mrSges(5,2) * t385 + mrSges(6,2) * t381 - mrSges(5,3) * t382 - mrSges(6,3) * t379 - qJ(5) * t376 + t461 * qJD(4) + t467 * qJDD(4) + t475 * t410 + t468 * t411 + t462 * t464;
+t363 = -mrSges(5,1) * t385 + mrSges(5,3) * t383 - mrSges(6,1) * t381 + mrSges(6,3) * t380 - pkin(4) * t447 + qJ(5) * t455 + (-pkin(4) * t419 - t462) * t465 + t474 * t411 + (-pkin(4) * mrSges(6,2) + t468) * t410 + (-qJ(5) * mrSges(6,2) + t473) * qJDD(4) + (-qJ(5) * t419 + t460) * qJD(4);
+t356 = -mrSges(4,1) * t435 - mrSges(5,1) * t382 - mrSges(6,1) * t379 + mrSges(5,2) * t383 + mrSges(6,2) * t380 + mrSges(4,3) * t388 + t430 * Ifges(4,5) + Ifges(4,6) * t431 - pkin(3) * t368 - pkin(4) * t376 - t473 * t411 - t467 * t410 - t472 * qJDD(4) + (t438 * t461 + t460 * t441) * t432;
+t349 = mrSges(4,2) * t435 - mrSges(4,3) * t387 + Ifges(4,5) * t431 - t430 * Ifges(4,6) - pkin(7) * t368 - t438 * t363 + t441 * t364;
+t348 = mrSges(3,2) * t435 - mrSges(3,3) * t394 + Ifges(3,5) * qJDD(1) - t444 * Ifges(3,6) - pkin(6) * t362 + t442 * t349 - t439 * t356;
+t347 = -mrSges(3,1) * t435 + mrSges(3,3) * t395 + t444 * Ifges(3,5) + Ifges(3,6) * qJDD(1) - pkin(2) * t454 + pkin(6) * t449 + t439 * t349 + t442 * t356;
+t346 = -mrSges(2,2) * g(1) - mrSges(2,3) * t424 + Ifges(2,5) * qJDD(1) - t444 * Ifges(2,6) - qJ(2) * t355 - t436 * t347 + t437 * t348;
+t345 = mrSges(2,1) * g(1) + mrSges(2,3) * t423 + t444 * Ifges(2,5) + Ifges(2,6) * qJDD(1) - pkin(1) * t448 + qJ(2) * t450 + t437 * t347 + t436 * t348;
+t1 = [(-m(1) - m(2)) * g(1) + t448; -m(1) * g(2) + t463; -m(1) * g(3) + t451; pkin(1) * t355 + pkin(2) * t362 + mrSges(3,1) * t394 - mrSges(3,2) * t395 + t441 * t363 + pkin(3) * t471 + pkin(7) * t373 + mrSges(4,1) * t387 - mrSges(4,2) * t388 + mrSges(2,1) * t424 - mrSges(2,2) * t423 + Ifges(4,3) * t431 - mrSges(1,2) * g(3) + mrSges(1,3) * g(2) + (pkin(3) * t452 - pkin(7) * t374 + t364) * t438 + (Ifges(2,3) + Ifges(3,3)) * qJDD(1); mrSges(1,1) * g(3) - mrSges(1,3) * g(1) - pkin(5) * t451 + t443 * t345 + t440 * t346; -mrSges(1,1) * g(2) + mrSges(1,2) * g(1) + pkin(5) * t463 + t440 * t345 - t443 * t346;];
 tauB = t1;

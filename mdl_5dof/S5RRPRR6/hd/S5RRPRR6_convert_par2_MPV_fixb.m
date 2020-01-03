@@ -22,8 +22,8 @@
 %   base parameter vector (minimal parameter vector)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:36
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:06
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,15 +43,15 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 
 %% Symbolic Calculation
 % From minimal_parameter_vector_fixb_matlab.m
-t91 = m(5) + m(6);
-t96 = (pkin(7) * t91);
-t95 = -pkin(8) * m(6) - mrSges(6,3);
-t87 = (mrSges(5,3) - t95);
-t94 = t87 + t96;
-t93 = (pkin(4) ^ 2);
-t92 = (pkin(8) ^ 2);
-t90 = cos(pkin(9));
-t89 = sin(pkin(9));
-t88 = (t92 + t93);
-t1 = [pkin(1) ^ 2 * m(3) + Ifges(2,3); m(3) * pkin(1) + mrSges(2,1); mrSges(2,2); Ifges(3,3) + t90 ^ 2 * (pkin(3) ^ 2 * t91 + Ifges(4,2)) + (0.2e1 * t90 * (pkin(3) * t94 + Ifges(4,4)) + (t88 * m(6) + 2 * pkin(8) * mrSges(6,3) + Ifges(4,1) + Ifges(5,2) + Ifges(6,2) + (2 * t87 + t96) * pkin(7)) * t89) * t89; mrSges(3,1); mrSges(3,2); pkin(3) * t91 + mrSges(4,1); mrSges(4,2) - t94; mrSges(4,3); m(4) + t91; Ifges(5,1) - Ifges(5,2) + (-t88 + t92) * m(6); Ifges(5,4); pkin(4) * t95 + Ifges(5,5); Ifges(5,6); m(6) * t93 + Ifges(5,3); m(6) * pkin(4) + mrSges(5,1); mrSges(5,2); Ifges(6,1) - Ifges(6,2); Ifges(6,4); Ifges(6,5); Ifges(6,6); Ifges(6,3); mrSges(6,1); mrSges(6,2);];
+t89 = m(5) + m(6);
+t94 = (pkin(7) * t89);
+t93 = -pkin(8) * m(6) - mrSges(6,3);
+t85 = (mrSges(5,3) - t93);
+t92 = t85 + t94;
+t91 = (pkin(4) ^ 2);
+t90 = (pkin(8) ^ 2);
+t88 = cos(pkin(9));
+t87 = sin(pkin(9));
+t86 = (t90 + t91);
+t1 = [pkin(1) ^ 2 * m(3) + Ifges(2,3); m(3) * pkin(1) + mrSges(2,1); mrSges(2,2); Ifges(3,3) + t88 ^ 2 * (pkin(3) ^ 2 * t89 + Ifges(4,2)) + (0.2e1 * t88 * (t92 * pkin(3) + Ifges(4,4)) + (t86 * m(6) + 2 * pkin(8) * mrSges(6,3) + Ifges(4,1) + Ifges(5,2) + Ifges(6,2) + (2 * t85 + t94) * pkin(7)) * t87) * t87; mrSges(3,1); mrSges(3,2); pkin(3) * t89 + mrSges(4,1); mrSges(4,2) - t92; mrSges(4,3); m(4) + t89; Ifges(5,1) - Ifges(5,2) + (-t86 + t90) * m(6); Ifges(5,4); t93 * pkin(4) + Ifges(5,5); Ifges(5,6); t91 * m(6) + Ifges(5,3); m(6) * pkin(4) + mrSges(5,1); mrSges(5,2); Ifges(6,1) - Ifges(6,2); Ifges(6,4); Ifges(6,5); Ifges(6,6); Ifges(6,3); mrSges(6,1); mrSges(6,2);];
 MPV = t1;

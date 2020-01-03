@@ -22,8 +22,8 @@
 %   base parameter vector (minimal parameter vector)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -45,4 +45,4 @@ assert(isreal(Ifges) && all(size(Ifges) == [3 6]), ...
 % From minimal_parameter_vector_fixb_matlab.m
 t17 = (pkin(1) * m(3));
 t1 = [Ifges(3,2) + Ifges(2,3) + (2 * mrSges(3,3) + t17) * pkin(1); mrSges(2,1); mrSges(2,2) + mrSges(3,3) + t17; Ifges(3,1) - Ifges(3,2); Ifges(3,4); Ifges(3,5); Ifges(3,6); Ifges(3,3); mrSges(3,1); mrSges(3,2);];
-MPV  = t1;
+MPV = t1;

@@ -16,8 +16,8 @@
 %   minimal parameter regressor of kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:34
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:04
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:34:03
-% EndTime: 2019-12-05 18:34:03
-% DurationCPUTime: 0.12s
+% StartTime: 2020-01-03 12:03:57
+% EndTime: 2020-01-03 12:03:57
+% DurationCPUTime: 0.11s
 % Computational Cost: add. (210->33), mult. (311->73), div. (0->0), fcn. (197->8), ass. (0->32)
 t129 = cos(qJ(4));
 t114 = cos(pkin(9));
@@ -70,5 +70,5 @@ t94 = -t115 * t103 + t118 * t104;
 t93 = t118 * t103 + t115 * t104;
 t92 = -t103 * pkin(8) + t128;
 t91 = qJD(4) * pkin(4) - t104 * pkin(8) + t121;
-t1 = [qJD(1) ^ 2 / 0.2e1, 0, 0, t112 ^ 2 / 0.2e1, t112 * t123, -t112 * t124, -t105 * t125, t105 * t126, (t109 + t110) * t112 * t107, t105 ^ 2 / 0.2e1 + (t110 / 0.2e1 + t109 / 0.2e1) * t107 ^ 2, t104 ^ 2 / 0.2e1, -t104 * t103, t104 * qJD(4), -t103 * qJD(4), qJD(4) ^ 2 / 0.2e1, t121 * qJD(4) + t102 * t103, -t128 * qJD(4) + t102 * t104, t94 ^ 2 / 0.2e1, -t94 * t93, t94 * t111, -t93 * t111, t111 ^ 2 / 0.2e1, t95 * t93 + (-t115 * t92 + t118 * t91) * t111, t95 * t94 - (t115 * t91 + t118 * t92) * t111;];
+t1 = [qJD(1) ^ 2 / 0.2e1, 0, 0, t112 ^ 2 / 0.2e1, t112 * t123, -t112 * t124, -t105 * t125, t105 * t126, (t109 + t110) * t112 * t107, t105 ^ 2 / 0.2e1 + (t110 / 0.2e1 + t109 / 0.2e1) * t107 ^ 2, t104 ^ 2 / 0.2e1, -t104 * t103, t104 * qJD(4), -t103 * qJD(4), qJD(4) ^ 2 / 0.2e1, qJD(4) * t121 + t102 * t103, -t128 * qJD(4) + t102 * t104, t94 ^ 2 / 0.2e1, -t94 * t93, t94 * t111, -t93 * t111, t111 ^ 2 / 0.2e1, t95 * t93 + (-t115 * t92 + t118 * t91) * t111, t95 * t94 - (t115 * t91 + t118 * t92) * t111;];
 T_reg = t1;

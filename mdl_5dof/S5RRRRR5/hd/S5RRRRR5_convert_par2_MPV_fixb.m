@@ -22,8 +22,8 @@
 %   base parameter vector (minimal parameter vector)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:59
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:13
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -51,5 +51,5 @@ t75 = (pkin(4) ^ 2);
 t74 = (pkin(9) ^ 2);
 t71 = (t74 + t75);
 t70 = m(3) + t72;
-t1 = [pkin(1) ^ 2 * t70 + Ifges(2,3); pkin(1) * t70 + mrSges(2,1); mrSges(2,2); pkin(2) ^ 2 * t72 + Ifges(3,3); pkin(2) * t72 + mrSges(3,1); mrSges(3,2); Ifges(4,3) + Ifges(5,2) + Ifges(6,2) + 2 * pkin(9) * mrSges(6,3) + t71 * m(6) + 2 * pkin(8) * t76 + (pkin(3) ^ 2 + pkin(8) ^ 2) * t73; pkin(3) * t73 + mrSges(4,1); -pkin(8) * t73 + mrSges(4,2) - t76; Ifges(5,1) - Ifges(5,2) + (-t71 + t74) * m(6); Ifges(5,4); t77 * pkin(4) + Ifges(5,5); Ifges(5,6); m(6) * t75 + Ifges(5,3); m(6) * pkin(4) + mrSges(5,1); mrSges(5,2); Ifges(6,1) - Ifges(6,2); Ifges(6,4); Ifges(6,5); Ifges(6,6); Ifges(6,3); mrSges(6,1); mrSges(6,2);];
+t1 = [pkin(1) ^ 2 * t70 + Ifges(2,3); pkin(1) * t70 + mrSges(2,1); mrSges(2,2); pkin(2) ^ 2 * t72 + Ifges(3,3); pkin(2) * t72 + mrSges(3,1); mrSges(3,2); Ifges(4,3) + Ifges(5,2) + Ifges(6,2) + 2 * pkin(9) * mrSges(6,3) + t71 * m(6) + 2 * pkin(8) * t76 + (pkin(3) ^ 2 + pkin(8) ^ 2) * t73; pkin(3) * t73 + mrSges(4,1); -pkin(8) * t73 + mrSges(4,2) - t76; Ifges(5,1) - Ifges(5,2) + (-t71 + t74) * m(6); Ifges(5,4); t77 * pkin(4) + Ifges(5,5); Ifges(5,6); t75 * m(6) + Ifges(5,3); m(6) * pkin(4) + mrSges(5,1); mrSges(5,2); Ifges(6,1) - Ifges(6,2); Ifges(6,4); Ifges(6,5); Ifges(6,6); Ifges(6,3); mrSges(6,1); mrSges(6,2);];
 MPV = t1;

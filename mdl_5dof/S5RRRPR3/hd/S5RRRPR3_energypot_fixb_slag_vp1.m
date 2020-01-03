@@ -22,8 +22,8 @@
 %   Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:43
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:10
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -46,25 +46,25 @@ assert(isreal(rSges) && all(size(rSges) == [6,3]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:42:15
-% EndTime: 2019-12-05 18:42:15
-% DurationCPUTime: 0.22s
+% StartTime: 2020-01-03 12:08:47
+% EndTime: 2020-01-03 12:08:47
+% DurationCPUTime: 0.20s
 % Computational Cost: add. (135->59), mult. (97->64), div. (0->0), fcn. (73->10), ass. (0->27)
 t62 = pkin(5) + pkin(6);
-t50 = sin(qJ(1));
-t61 = pkin(1) * t50;
-t60 = rSges(4,3) + pkin(7);
+t52 = cos(qJ(1));
+t61 = pkin(1) * t52;
+t60 = -rSges(4,3) - pkin(7);
 t51 = cos(qJ(3));
 t36 = t51 * pkin(3) + pkin(2);
 t48 = -qJ(4) - pkin(7);
-t59 = rSges(5,3) - t48;
-t58 = rSges(6,3) + pkin(8) - t48;
+t59 = -rSges(5,3) + t48;
+t58 = -rSges(6,3) - pkin(8) + t48;
 t46 = qJ(3) + pkin(9);
 t49 = sin(qJ(3));
 t57 = t49 * pkin(3) + t62;
-t52 = cos(qJ(1));
-t44 = t52 * pkin(1);
-t56 = -g(2) * t61 + g(3) * t44;
+t50 = sin(qJ(1));
+t43 = t50 * pkin(1);
+t56 = g(2) * t43 - g(3) * t61;
 t55 = rSges(4,1) * t51 - rSges(4,2) * t49 + pkin(2);
 t37 = sin(t46);
 t38 = cos(t46);
@@ -76,5 +76,5 @@ t53 = rSges(6,1) * t35 - rSges(6,2) * t34 + pkin(4) * t38 + t36;
 t47 = qJ(1) + qJ(2);
 t41 = cos(t47);
 t40 = sin(t47);
-t1 = -m(1) * (g(1) * rSges(1,1) + g(2) * rSges(1,2) + g(3) * rSges(1,3)) - m(2) * (g(1) * (pkin(5) + rSges(2,3)) + g(2) * (-t50 * rSges(2,1) - rSges(2,2) * t52) + g(3) * (rSges(2,1) * t52 - t50 * rSges(2,2))) - m(3) * (g(1) * (rSges(3,3) + t62) + g(2) * (-rSges(3,1) * t40 - rSges(3,2) * t41 - t61) + g(3) * (rSges(3,1) * t41 - rSges(3,2) * t40 + t44)) - m(4) * (g(1) * (rSges(4,1) * t49 + rSges(4,2) * t51 + t62) + (g(2) * t60 + g(3) * t55) * t41 + (-g(2) * t55 + g(3) * t60) * t40 + t56) - m(5) * (g(1) * (rSges(5,1) * t37 + rSges(5,2) * t38 + t57) + (g(2) * t59 + g(3) * t54) * t41 + (-g(2) * t54 + g(3) * t59) * t40 + t56) - m(6) * (g(1) * (rSges(6,1) * t34 + rSges(6,2) * t35 + pkin(4) * t37 + t57) + (g(2) * t58 + g(3) * t53) * t41 + (-g(2) * t53 + g(3) * t58) * t40 + t56);
+t1 = -m(1) * (g(1) * rSges(1,1) + g(2) * rSges(1,2) + g(3) * rSges(1,3)) - m(2) * (g(1) * (pkin(5) + rSges(2,3)) + g(2) * (t50 * rSges(2,1) + rSges(2,2) * t52) + g(3) * (-rSges(2,1) * t52 + t50 * rSges(2,2))) - m(3) * (g(1) * (rSges(3,3) + t62) + g(2) * (rSges(3,1) * t40 + rSges(3,2) * t41 + t43) + g(3) * (-t41 * rSges(3,1) + t40 * rSges(3,2) - t61)) - m(4) * (g(1) * (rSges(4,1) * t49 + rSges(4,2) * t51 + t62) + (g(2) * t60 - g(3) * t55) * t41 + (g(2) * t55 + g(3) * t60) * t40 + t56) - m(5) * (g(1) * (rSges(5,1) * t37 + rSges(5,2) * t38 + t57) + (g(2) * t59 - g(3) * t54) * t41 + (g(2) * t54 + g(3) * t59) * t40 + t56) - m(6) * (g(1) * (rSges(6,1) * t34 + rSges(6,2) * t35 + pkin(4) * t37 + t57) + (g(2) * t58 - g(3) * t53) * t41 + (g(2) * t53 + g(3) * t58) * t40 + t56);
 U = t1;

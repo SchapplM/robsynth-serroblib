@@ -26,8 +26,8 @@
 %   joint torques required to compensate Coriolis and centrifugal load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:31
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:00
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:30:18
-% EndTime: 2019-12-05 18:30:21
-% DurationCPUTime: 0.84s
+% StartTime: 2020-01-03 12:00:21
+% EndTime: 2020-01-03 12:00:23
+% DurationCPUTime: 0.82s
 % Computational Cost: add. (2004->157), mult. (4024->236), div. (0->0), fcn. (2242->8), ass. (0->89)
 t68 = cos(pkin(9));
 t71 = sin(qJ(2));
@@ -144,5 +144,5 @@ t32 = t65 * t82;
 t18 = pkin(8) + t108;
 t17 = -pkin(4) - t88;
 t9 = t108 * qJD(4) - t73 * t50 + t52 * t70;
-t1 = [m(6) * (t13 * t9 + t17 * t7) + t18 * t77 + ((-t72 * t56 - t69 * t57) * t18 + t90 * mrSges(6,3)) * qJD(5) + t75 - t94 * t9 + m(5) * (t108 * t6 - t15 * t9 - t7 * t88) + m(4) * (t26 * t50 + t27 * t52 + t38 * t93 + t39 * t53) + (-t52 * t66 - t39) * mrSges(4,2) + t17 * t32 + t50 * t113 - t3 * t110 + t126 * pkin(1) * qJD(2) * (-qJD(1) - t66) + (m(5) * t16 + t127 - t81) * (qJD(4) * t88 + t50 * t70 + t52 * t73); (t51 * t66 - t39) * mrSges(4,2) + t75 + (-qJD(5) * t48 * t57 + t109 * t56 + (-t3 - t102) * mrSges(6,3)) * t69 + (-mrSges(5,1) * t107 + mrSges(5,2) * t109) * t65 + (-t109 * t57 + (-t48 * t56 - t117) * qJD(5)) * t72 + t47 * t32 - t49 * t113 + t107 * t45 + t48 * t77 + t126 * t105 * (-qJD(2) + t66) + (t107 * t13 - t109 * t89 + t47 * t7) * m(6) + (t106 * t6 - t107 * t15 - t109 * t16 - t7 * t86) * m(5) + ((t38 * t68 + t39 * t67) * pkin(2) - t26 * t49 - t27 * t51) * m(4); m(6) * (t2 * t69 + t3 * t72) + (t127 + (-t69 ^ 2 - t72 ^ 2) * t65 * mrSges(6,3) + t87) * qJD(5); t76 + t80 * mrSges(6,3) + t94 * t16 + t81 * t15 - pkin(4) * t32 + (-t56 * t100 - t57 * t101) * pkin(8) + (-t7 * pkin(4) + (-t100 * t11 - t101 * t12 - t123 + t124) * pkin(8) - t13 * t16 - t89 * t15) * m(6); t3 * mrSges(6,1) - t2 * mrSges(6,2) - t11 * t57 + t12 * t56 + ((t104 / 0.2e1 - t13 * mrSges(6,2) - t30 / 0.2e1 - t61 / 0.2e1 + t117) * t72 + (-t103 / 0.2e1 - t13 * mrSges(6,1) + t29 / 0.2e1 + t12 * mrSges(6,3) + (t119 / 0.2e1 + (-Ifges(6,1) / 0.2e1 + Ifges(6,2) / 0.2e1) * t72) * t65) * t69) * t65;];
+t1 = [t18 * t77 + m(6) * (t13 * t9 + t17 * t7) + ((-t72 * t56 - t69 * t57) * t18 + t90 * mrSges(6,3)) * qJD(5) + t75 - t94 * t9 + m(4) * (t26 * t50 + t27 * t52 + t38 * t93 + t39 * t53) + m(5) * (t108 * t6 - t15 * t9 - t7 * t88) + (-t52 * t66 - t39) * mrSges(4,2) - t3 * t110 + t50 * t113 + t17 * t32 + t126 * pkin(1) * qJD(2) * (-qJD(1) - t66) + (m(5) * t16 + t127 - t81) * (qJD(4) * t88 + t50 * t70 + t52 * t73); (t51 * t66 - t39) * mrSges(4,2) + t75 + (-qJD(5) * t48 * t57 + t109 * t56 + (-t3 - t102) * mrSges(6,3)) * t69 + (-mrSges(5,1) * t107 + mrSges(5,2) * t109) * t65 + (-t109 * t57 + (-t48 * t56 - t117) * qJD(5)) * t72 - t49 * t113 + t47 * t32 + t107 * t45 + t48 * t77 + t126 * t105 * (-qJD(2) + t66) + (t107 * t13 - t109 * t89 + t47 * t7) * m(6) + (t106 * t6 - t107 * t15 - t109 * t16 - t7 * t86) * m(5) + (-t26 * t49 - t27 * t51 + (t38 * t68 + t39 * t67) * pkin(2)) * m(4); m(6) * (t2 * t69 + t3 * t72) + (t127 + (-t69 ^ 2 - t72 ^ 2) * t65 * mrSges(6,3) + t87) * qJD(5); t76 + t80 * mrSges(6,3) + t94 * t16 + t81 * t15 - pkin(4) * t32 + (-t56 * t100 - t57 * t101) * pkin(8) + (-t7 * pkin(4) + (-t100 * t11 - t101 * t12 - t123 + t124) * pkin(8) - t13 * t16 - t89 * t15) * m(6); t3 * mrSges(6,1) - t2 * mrSges(6,2) - t11 * t57 + t12 * t56 + ((t104 / 0.2e1 - t13 * mrSges(6,2) - t30 / 0.2e1 - t61 / 0.2e1 + t117) * t72 + (-t103 / 0.2e1 - t13 * mrSges(6,1) + t29 / 0.2e1 + t12 * mrSges(6,3) + (t119 / 0.2e1 + (-Ifges(6,1) / 0.2e1 + Ifges(6,2) / 0.2e1) * t72) * t65) * t69) * t65;];
 tauc = t1(:);

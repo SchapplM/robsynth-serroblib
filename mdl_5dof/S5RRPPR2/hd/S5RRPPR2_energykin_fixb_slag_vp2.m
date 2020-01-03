@@ -26,8 +26,8 @@
 %   kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:20
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:58
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,34 +52,34 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_linkframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:20:01
-% EndTime: 2019-12-05 18:20:01
-% DurationCPUTime: 0.20s
+% StartTime: 2020-01-03 11:57:18
+% EndTime: 2020-01-03 11:57:19
+% DurationCPUTime: 0.19s
 % Computational Cost: add. (208->51), mult. (327->86), div. (0->0), fcn. (160->8), ass. (0->26)
-t76 = qJD(1) + qJD(2);
-t84 = cos(qJ(2));
-t89 = qJD(1) * pkin(1);
-t70 = t76 * pkin(2) + t84 * t89;
-t78 = sin(pkin(8));
-t80 = cos(pkin(8));
-t82 = sin(qJ(2));
-t88 = t82 * t89;
-t68 = t78 * t70 + t80 * t88;
-t66 = t76 * qJ(4) + t68;
-t77 = sin(pkin(9));
-t79 = cos(pkin(9));
-t62 = -t79 * qJD(3) + t77 * t66;
-t91 = t62 ^ 2;
-t90 = t79 * t76;
-t67 = t80 * t70 - t78 * t88;
-t87 = qJD(4) - t67;
-t83 = cos(qJ(5));
-t81 = sin(qJ(5));
-t71 = qJD(5) - t90;
-t65 = -t76 * pkin(3) + t87;
-t64 = t77 * qJD(3) + t79 * t66;
-t61 = (-pkin(4) * t79 - pkin(7) * t77 - pkin(3)) * t76 + t87;
-t60 = t81 * t61 + t83 * t64;
-t59 = t83 * t61 - t81 * t64;
-t1 = m(6) * (t59 ^ 2 + t60 ^ 2 + t91) / 0.2e1 + m(4) * (qJD(3) ^ 2 + t67 ^ 2 + t68 ^ 2) / 0.2e1 + m(5) * (t64 ^ 2 + t65 ^ 2 + t91) / 0.2e1 + (Ifges(2,3) / 0.2e1 + m(3) * (t82 ^ 2 + t84 ^ 2) * pkin(1) ^ 2 / 0.2e1) * qJD(1) ^ 2 + (t59 * mrSges(6,1) - t60 * mrSges(6,2) + Ifges(6,3) * t71 / 0.2e1) * t71 + (t67 * mrSges(4,1) - t68 * mrSges(4,2) + (mrSges(3,1) * t84 - mrSges(3,2) * t82) * t89 + (-t65 * mrSges(5,1) + t64 * mrSges(5,3) + Ifges(5,2) * t90 / 0.2e1) * t79 + (t65 * mrSges(5,2) + (mrSges(6,1) * t81 + mrSges(6,2) * t83 + mrSges(5,3)) * t62 + (-t59 * t83 - t60 * t81) * mrSges(6,3) + t71 * (Ifges(6,5) * t83 - Ifges(6,6) * t81)) * t77 + (Ifges(3,3) / 0.2e1 + Ifges(4,3) / 0.2e1 + (Ifges(5,4) * t79 + (Ifges(6,1) * t83 ^ 2 / 0.2e1 + Ifges(5,1) / 0.2e1 + (-Ifges(6,4) * t83 + Ifges(6,2) * t81 / 0.2e1) * t81) * t77) * t77) * t76) * t76;
+t78 = qJD(1) + qJD(2);
+t86 = cos(qJ(2));
+t91 = qJD(1) * pkin(1);
+t72 = t78 * pkin(2) + t86 * t91;
+t80 = sin(pkin(8));
+t82 = cos(pkin(8));
+t84 = sin(qJ(2));
+t90 = t84 * t91;
+t70 = t80 * t72 + t82 * t90;
+t68 = qJ(4) * t78 + t70;
+t79 = sin(pkin(9));
+t81 = cos(pkin(9));
+t64 = -t81 * qJD(3) + t68 * t79;
+t93 = t64 ^ 2;
+t92 = t78 * t81;
+t69 = t72 * t82 - t80 * t90;
+t89 = qJD(4) - t69;
+t85 = cos(qJ(5));
+t83 = sin(qJ(5));
+t73 = qJD(5) - t92;
+t67 = -pkin(3) * t78 + t89;
+t66 = qJD(3) * t79 + t68 * t81;
+t63 = (-pkin(4) * t81 - pkin(7) * t79 - pkin(3)) * t78 + t89;
+t62 = t83 * t63 + t85 * t66;
+t61 = t85 * t63 - t83 * t66;
+t1 = m(5) * (t66 ^ 2 + t67 ^ 2 + t93) / 0.2e1 + m(6) * (t61 ^ 2 + t62 ^ 2 + t93) / 0.2e1 + m(4) * (qJD(3) ^ 2 + t69 ^ 2 + t70 ^ 2) / 0.2e1 + (Ifges(2,3) / 0.2e1 + m(3) * (t84 ^ 2 + t86 ^ 2) * pkin(1) ^ 2 / 0.2e1) * qJD(1) ^ 2 + (t61 * mrSges(6,1) - t62 * mrSges(6,2) + Ifges(6,3) * t73 / 0.2e1) * t73 + (t69 * mrSges(4,1) - t70 * mrSges(4,2) + (mrSges(3,1) * t86 - mrSges(3,2) * t84) * t91 + (-t67 * mrSges(5,1) + t66 * mrSges(5,3) + Ifges(5,2) * t92 / 0.2e1) * t81 + (t67 * mrSges(5,2) + (mrSges(6,1) * t83 + mrSges(6,2) * t85 + mrSges(5,3)) * t64 + (-t61 * t85 - t62 * t83) * mrSges(6,3) + t73 * (Ifges(6,5) * t85 - Ifges(6,6) * t83)) * t79 + (Ifges(4,3) / 0.2e1 + Ifges(3,3) / 0.2e1 + (Ifges(5,4) * t81 + (Ifges(6,1) * t85 ^ 2 / 0.2e1 + Ifges(5,1) / 0.2e1 + (-Ifges(6,4) * t85 + Ifges(6,2) * t83 / 0.2e1) * t83) * t79) * t79) * t78) * t78;
 T = t1;

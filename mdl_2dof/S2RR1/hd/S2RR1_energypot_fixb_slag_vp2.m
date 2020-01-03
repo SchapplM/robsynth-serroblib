@@ -22,8 +22,8 @@
 %   Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -46,15 +46,15 @@ assert(isreal(mrSges) && all(size(mrSges) == [3,3]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_worldframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 17:59:54
-% EndTime: 2019-03-08 17:59:54
+% StartTime: 2020-01-03 11:19:05
+% EndTime: 2020-01-03 11:19:05
 % DurationCPUTime: 0.03s
 % Computational Cost: add. (17->13), mult. (29->12), div. (0->0), fcn. (18->4), ass. (0->7)
 t14 = m(3) * pkin(1) + mrSges(2,2) + mrSges(3,3);
 t11 = cos(qJ(2));
 t9 = sin(qJ(2));
-t13 = mrSges(3,1) * t11 - mrSges(3,2) * t9 + mrSges(2,1);
+t13 = -mrSges(3,1) * t11 + mrSges(3,2) * t9 - mrSges(2,1);
 t12 = cos(qJ(1));
 t10 = sin(qJ(1));
-t1 = (-t14 * t10 + t13 * t12 - mrSges(1,3)) * g(3) + (t9 * mrSges(3,1) + t11 * mrSges(3,2) - mrSges(1,2) - mrSges(2,3)) * g(2) + (t13 * t10 + t14 * t12 - mrSges(1,1)) * g(1);
-U  = t1;
+t1 = (t14 * t10 + t13 * t12 - mrSges(1,3)) * g(3) + (t9 * mrSges(3,1) + t11 * mrSges(3,2) - mrSges(1,2) - mrSges(2,3)) * g(2) + (t13 * t10 - t14 * t12 - mrSges(1,1)) * g(1);
+U = t1;

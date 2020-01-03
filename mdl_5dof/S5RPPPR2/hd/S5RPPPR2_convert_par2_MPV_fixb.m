@@ -22,8 +22,8 @@
 %   base parameter vector (minimal parameter vector)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:32
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:23
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,22 +43,22 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 
 %% Symbolic Calculation
 % From minimal_parameter_vector_fixb_matlab.m
-t130 = 2 * pkin(6) * mrSges(6,3) + Ifges(6,2);
-t119 = sin(pkin(9));
-t122 = cos(pkin(9));
-t129 = t122 * t119;
-t128 = pkin(6) * m(6) + mrSges(6,3);
-t114 = t128 * pkin(4) + Ifges(5,4);
-t127 = t114 * t129;
-t126 = pkin(4) ^ 2;
-t125 = pkin(6) ^ 2;
-t124 = cos(pkin(7));
-t123 = cos(pkin(8));
-t121 = sin(pkin(7));
-t120 = sin(pkin(8));
-t117 = t122 ^ 2;
-t116 = t119 ^ 2;
-t115 = t126 * m(6) + Ifges(5,2);
-t113 = m(6) * t125 + Ifges(5,1) + t130;
-t1 = [Ifges(2,3) + t124 ^ 2 * (t116 * t113 + t117 * t115 + Ifges(3,2) + Ifges(4,3) + 0.2e1 * t127) + (0.2e1 * t124 * (Ifges(3,4) - t123 * (Ifges(4,5) + (t117 - t116) * t114 + (t113 - t115) * t129) + t120 * (-t119 * Ifges(5,5) - t122 * Ifges(5,6) + Ifges(4,6))) + (Ifges(3,1) + t123 ^ 2 * (t117 * t113 + t116 * t115 + Ifges(4,1) - 0.2e1 * t127) + (-0.2e1 * t123 * (-t122 * Ifges(5,5) + t119 * Ifges(5,6) + Ifges(4,4)) + (Ifges(4,2) + Ifges(5,3) + (t125 + t126) * m(6) + t130) * t120) * t120) * t121) * t121; mrSges(2,1); mrSges(2,2); mrSges(3,1); mrSges(3,2); mrSges(3,3); m(3); mrSges(4,1); mrSges(4,2); mrSges(4,3); m(4); m(6) * pkin(4) + mrSges(5,1); mrSges(5,2) - t128; mrSges(5,3); m(5) + m(6); Ifges(6,1) - Ifges(6,2); Ifges(6,4); Ifges(6,5); Ifges(6,6); Ifges(6,3); mrSges(6,1); mrSges(6,2);];
+t127 = 2 * pkin(6) * mrSges(6,3) + Ifges(6,2);
+t116 = sin(pkin(9));
+t119 = cos(pkin(9));
+t126 = t119 * t116;
+t125 = pkin(6) * m(6) + mrSges(6,3);
+t111 = t125 * pkin(4) + Ifges(5,4);
+t124 = t111 * t126;
+t123 = pkin(4) ^ 2;
+t122 = pkin(6) ^ 2;
+t121 = cos(pkin(7));
+t120 = cos(pkin(8));
+t118 = sin(pkin(7));
+t117 = sin(pkin(8));
+t114 = t119 ^ 2;
+t113 = t116 ^ 2;
+t112 = t123 * m(6) + Ifges(5,2);
+t110 = m(6) * t122 + Ifges(5,1) + t127;
+t1 = [Ifges(2,3) + t121 ^ 2 * (t113 * t110 + t114 * t112 + Ifges(3,2) + Ifges(4,3) + 0.2e1 * t124) + (0.2e1 * t121 * (Ifges(3,4) - t120 * (Ifges(4,5) + (t114 - t113) * t111 + (t110 - t112) * t126) + t117 * (-t116 * Ifges(5,5) - t119 * Ifges(5,6) + Ifges(4,6))) + (Ifges(3,1) + t120 ^ 2 * (t114 * t110 + t113 * t112 + Ifges(4,1) - 0.2e1 * t124) + (-0.2e1 * t120 * (-t119 * Ifges(5,5) + t116 * Ifges(5,6) + Ifges(4,4)) + (Ifges(4,2) + Ifges(5,3) + (t122 + t123) * m(6) + t127) * t117) * t117) * t118) * t118; mrSges(2,1); mrSges(2,2); mrSges(3,1); mrSges(3,2); mrSges(3,3); m(3); mrSges(4,1); mrSges(4,2); mrSges(4,3); m(4); m(6) * pkin(4) + mrSges(5,1); mrSges(5,2) - t125; mrSges(5,3); m(5) + m(6); Ifges(6,1) - Ifges(6,2); Ifges(6,4); Ifges(6,5); Ifges(6,6); Ifges(6,3); mrSges(6,1); mrSges(6,2);];
 MPV = t1;

@@ -16,8 +16,8 @@
 %   minimal parameter regressor of Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:59
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:13
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,10 +36,10 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:58:29
-% EndTime: 2019-12-05 18:58:29
+% StartTime: 2020-01-03 12:13:22
+% EndTime: 2020-01-03 12:13:22
 % DurationCPUTime: 0.03s
-% Computational Cost: add. (48->13), mult. (32->20), div. (0->0), fcn. (32->10), ass. (0->15)
+% Computational Cost: add. (48->14), mult. (32->20), div. (0->0), fcn. (32->10), ass. (0->15)
 t121 = qJ(1) + qJ(2);
 t119 = qJ(3) + t121;
 t113 = sin(t119);
@@ -54,5 +54,5 @@ t118 = cos(t121);
 t117 = cos(t120);
 t116 = sin(t121);
 t115 = sin(t120);
-t1 = [0, g(2) * t123 - g(3) * t125, g(2) * t125 + g(3) * t123, 0, g(2) * t116 - g(3) * t118, g(2) * t118 + g(3) * t116, 0, t126, g(2) * t114 + g(3) * t113, 0, 0, 0, 0, 0, -g(1) * t122 + t126 * t124, -g(1) * t124 - t126 * t122, 0, 0, 0, 0, 0, -g(1) * t115 + t126 * t117, -g(1) * t117 - t126 * t115;];
+t1 = [0, -g(2) * t123 + g(3) * t125, -g(2) * t125 - g(3) * t123, 0, -g(2) * t116 + g(3) * t118, -g(2) * t118 - g(3) * t116, 0, -t126, -g(2) * t114 - g(3) * t113, 0, 0, 0, 0, 0, -g(1) * t122 - t126 * t124, -g(1) * t124 + t126 * t122, 0, 0, 0, 0, 0, -g(1) * t115 - t126 * t117, -g(1) * t117 + t126 * t115;];
 U_reg = t1;

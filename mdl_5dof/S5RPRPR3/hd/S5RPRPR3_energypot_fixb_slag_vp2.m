@@ -22,8 +22,8 @@
 %   Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:52
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:37
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -46,31 +46,31 @@ assert(isreal(mrSges) && all(size(mrSges) == [6,3]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_worldframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:51:10
-% EndTime: 2019-12-05 17:51:11
-% DurationCPUTime: 0.30s
-% Computational Cost: add. (152->54), mult. (112->46), div. (0->0), fcn. (85->10), ass. (0->23)
-t50 = sin(qJ(5));
-t52 = cos(qJ(5));
-t67 = -m(6) * pkin(4) - t52 * mrSges(6,1) + t50 * mrSges(6,2) - mrSges(5,1);
-t66 = -m(5) - m(6);
-t65 = -t50 * mrSges(6,1) - t52 * mrSges(6,2) + mrSges(4,2) - mrSges(5,3);
-t64 = m(6) * pkin(7) + mrSges(6,3);
-t48 = sin(pkin(9));
-t49 = cos(pkin(9));
-t63 = t48 * mrSges(5,2) + t67 * t49 - mrSges(4,1);
-t51 = sin(qJ(1));
-t62 = pkin(1) * t51;
-t53 = cos(qJ(1));
-t45 = t53 * pkin(1);
-t61 = qJ(2) + pkin(5);
-t47 = qJ(1) + pkin(8);
-t43 = cos(t47);
-t60 = pkin(2) * t43 + t45;
-t42 = sin(t47);
-t58 = -pkin(2) * t42 - t62;
-t44 = qJ(3) + t47;
-t41 = cos(t44);
-t40 = sin(t44);
-t1 = (-m(3) * t45 - m(4) * t60 - t53 * mrSges(2,1) - t43 * mrSges(3,1) + t51 * mrSges(2,2) + t42 * mrSges(3,2) - mrSges(1,3) + t66 * (t41 * pkin(3) + t40 * qJ(4) + t60) + (-t64 * t48 + t63) * t41 + t65 * t40) * g(3) + (m(3) * t62 - m(4) * t58 + t51 * mrSges(2,1) + t42 * mrSges(3,1) + t53 * mrSges(2,2) + t43 * mrSges(3,2) - mrSges(1,2) + t66 * (t41 * qJ(4) + t58) + t65 * t41 + (m(5) * pkin(3) - m(6) * (-pkin(7) * t48 - pkin(3)) + t48 * mrSges(6,3) - t63) * t40) * g(2) + (-m(2) * pkin(5) - m(3) * t61 - mrSges(1,1) - mrSges(2,3) - mrSges(3,3) - mrSges(4,3) + t67 * t48 + (-mrSges(5,2) + t64) * t49 + (-m(4) + t66) * (pkin(6) + t61)) * g(1);
+% StartTime: 2020-01-03 11:35:52
+% EndTime: 2020-01-03 11:35:53
+% DurationCPUTime: 0.36s
+% Computational Cost: add. (152->52), mult. (112->44), div. (0->0), fcn. (85->10), ass. (0->23)
+t65 = m(5) + m(6);
+t47 = sin(qJ(5));
+t49 = cos(qJ(5));
+t64 = -m(6) * pkin(4) - t49 * mrSges(6,1) + t47 * mrSges(6,2) - mrSges(5,1);
+t62 = -m(4) - t65;
+t61 = m(6) * pkin(7) + mrSges(6,3);
+t45 = sin(pkin(9));
+t46 = cos(pkin(9));
+t60 = t45 * mrSges(5,2) + t64 * t46 - mrSges(4,1);
+t59 = t47 * mrSges(6,1) + t49 * mrSges(6,2) + t65 * qJ(4) - mrSges(4,2) + mrSges(5,3);
+t50 = cos(qJ(1));
+t58 = pkin(1) * t50;
+t48 = sin(qJ(1));
+t42 = t48 * pkin(1);
+t57 = qJ(2) + pkin(5);
+t44 = qJ(1) + pkin(8);
+t39 = sin(t44);
+t56 = pkin(2) * t39 + t42;
+t41 = qJ(3) + t44;
+t40 = cos(t44);
+t38 = cos(t41);
+t37 = sin(t41);
+t1 = (m(3) * t58 + t50 * mrSges(2,1) + t40 * mrSges(3,1) - t48 * mrSges(2,2) - t39 * mrSges(3,2) - mrSges(1,3) + t62 * (-pkin(2) * t40 - t58) + (m(5) * pkin(3) - m(6) * (-pkin(7) * t45 - pkin(3)) + t45 * mrSges(6,3) - t60) * t38 + t59 * t37) * g(3) + (-m(3) * t42 - m(4) * t56 - t48 * mrSges(2,1) - t39 * mrSges(3,1) - t50 * mrSges(2,2) - t40 * mrSges(3,2) - mrSges(1,2) - t65 * (t37 * pkin(3) + t56) + t59 * t38 + (-t61 * t45 + t60) * t37) * g(2) + (-m(2) * pkin(5) - m(3) * t57 - mrSges(1,1) - mrSges(2,3) - mrSges(3,3) - mrSges(4,3) + t64 * t45 + (-mrSges(5,2) + t61) * t46 + t62 * (pkin(6) + t57)) * g(1);
 U = t1;

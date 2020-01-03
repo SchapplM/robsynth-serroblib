@@ -16,8 +16,8 @@
 %   inertial parameter regressor of coriolis matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 19:01
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:16
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 19:00:41
-% EndTime: 2019-12-05 19:01:02
-% DurationCPUTime: 15.46s
+% StartTime: 2020-01-03 12:15:24
+% EndTime: 2020-01-03 12:15:44
+% DurationCPUTime: 15.55s
 % Computational Cost: add. (17699->493), mult. (33393->590), div. (0->0), fcn. (35628->8), ass. (0->377)
 t599 = qJD(3) + qJD(4);
 t479 = cos(qJ(3));
@@ -66,7 +66,7 @@ t640 = t478 * t476;
 t641 = t475 * t479;
 t439 = t640 + t641;
 t430 = t439 * pkin(9);
-t557 = t478 * t431 + t475 * t432;
+t557 = t431 * t478 + t475 * t432;
 t712 = -t430 - t557;
 t739 = t474 * t712;
 t568 = -t739 / 0.2e1;
@@ -81,7 +81,7 @@ t370 = -t441 + t643;
 t325 = t370 - t682;
 t759 = t686 * t325;
 t306 = -t759 / 0.2e1;
-t556 = -t478 * t453 - t475 * t454;
+t556 = -t453 * t478 - t454 * t475;
 t713 = -t430 - t556;
 t738 = t474 * t713;
 t567 = -t738 / 0.2e1;
@@ -134,7 +134,7 @@ t768 = qJD(5) * t101;
 t766 = -t57 * qJD(1) - t101 * qJD(2);
 t754 = qJD(5) + t599;
 t600 = qJD(1) + qJD(2);
-t355 = t686 * t437 + t474 * t439;
+t355 = t437 * t686 + t439 * t474;
 t424 = t686 * t439;
 t647 = t474 * t437;
 t714 = t424 - t647;
@@ -146,8 +146,8 @@ t683 = pkin(4) * t439;
 t684 = pkin(3) * t476;
 t399 = t683 + t684;
 t268 = t399 * t355;
-t466 = -t479 * pkin(3) - pkin(2);
-t394 = t437 * pkin(4) + t466;
+t466 = -pkin(3) * t479 - pkin(2);
+t394 = pkin(4) * t437 + t466;
 t480 = cos(qJ(2));
 t681 = t480 * pkin(1);
 t383 = t394 - t681;
@@ -294,7 +294,7 @@ t30 = t399 * t394;
 t481 = t564 * t399;
 t512 = t292 * t692 + t293 * t691;
 t8 = t481 + t512;
-t534 = t8 * qJD(1) + t30 * qJD(2);
+t534 = qJD(1) * t8 + qJD(2) * t30;
 t31 = t394 * t683;
 t504 = t292 * t596 + t293 * t687;
 t9 = (-t439 * t564 + t504) * pkin(4);
@@ -342,10 +342,10 @@ t112 = t355 * t564 + t627;
 t509 = qJD(1) * t112 + t355 * t614;
 t508 = qJD(1) * t222 - t439 * t613;
 t507 = qJD(1) * t223 + t437 * t613;
-t485 = t776 * t169 + t773 * t775;
+t485 = t169 * t776 + t773 * t775;
 t490 = (-t169 * t596 + t687 * t773) * pkin(4);
 t13 = t490 + t485;
-t484 = t776 * t196 + t774 * t775;
+t484 = t196 * t776 + t774 * t775;
 t489 = (-t196 * t596 + t687 * t774) * pkin(4);
 t15 = t489 + t484;
 t226 = t418 * t427 + t419 * t428;

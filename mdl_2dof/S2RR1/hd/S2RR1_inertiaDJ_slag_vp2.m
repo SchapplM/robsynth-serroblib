@@ -26,8 +26,8 @@
 %   time derivative of inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:00
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,14 +52,14 @@ assert(isreal(Ifges) && all(size(Ifges) == [3 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_time_derivative_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 17:59:55
-% EndTime: 2019-03-08 17:59:55
-% DurationCPUTime: 0.06s
+% StartTime: 2020-01-03 11:19:07
+% EndTime: 2020-01-03 11:19:07
+% DurationCPUTime: 0.07s
 % Computational Cost: add. (10->6), mult. (28->14), div. (0->0), fcn. (16->2), ass. (0->3)
 t2 = cos(qJ(2));
 t1 = sin(qJ(2));
 t3 = [(0.2e1 * t2 ^ 2 * Ifges(3,4) + 0.2e1 * (-Ifges(3,4) * t1 + (Ifges(3,1) - Ifges(3,2)) * t2) * t1) * qJD(2); (-Ifges(3,5) * t2 + Ifges(3,6) * t1 + (mrSges(3,1) * t2 - mrSges(3,2) * t1) * pkin(1)) * qJD(2); 0;];
 %% Postprocessing: Reshape Output
 % From vec2symmat_2_matlab.m
-res = [t3(1) t3(2); t3(2) t3(3);];
-Mq  = res;
+res = [t3(1), t3(2); t3(2), t3(3);];
+Mq = res;

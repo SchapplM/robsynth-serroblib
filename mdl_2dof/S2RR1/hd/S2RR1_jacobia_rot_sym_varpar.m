@@ -23,8 +23,8 @@
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-10-09 20:00
-% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,8 +43,8 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobia_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:51
-	% EndTime: 2019-10-09 20:00:51
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0; 0, 0; 0, 0;];
@@ -53,8 +53,8 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobia_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:51
-	% EndTime: 2019-10-09 20:00:51
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [NaN, NaN; NaN, NaN; NaN, NaN;];
@@ -63,14 +63,14 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobia_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:51
-	% EndTime: 2019-10-09 20:00:51
-	% DurationCPUTime: 0.03s
-	% Computational Cost: add. (6->2), mult. (13->3), div. (14->4), fcn. (24->3), ass. (0->5)
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (10->3), mult. (13->3), div. (14->4), fcn. (24->4), ass. (0->5)
 	t17 = sin(qJ(1));
 	t19 = cos(qJ(1));
 	t20 = 0.1e1 / t17 ^ 2 * t19 ^ 2;
-	t11 = cos(atan2(0, t17));
+	t11 = cos(atan2(0, -t17));
 	t1 = [0, 0; (0.1e1 + t20) / (0.1e1 + 0.1e1 / t11 ^ 2 * t20) / t11, 0; 0, 1;];
 	Ja_rot = t1;
 else

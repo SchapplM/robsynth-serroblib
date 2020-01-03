@@ -21,8 +21,8 @@
 %   Jacobi-Matrix der Endeffektor-Rotationsmatrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-10-09 20:00
-% Revision: ee6bc4d0f60ba4b3bab3f447780ef990a2753b00 (2019-10-09)
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,8 +40,8 @@ if link_index == 0
 	%% Symbolic Calculation
 	% From jacobiR_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:51
-	% EndTime: 2019-10-09 20:00:51
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0; 0, 0; 0, 0; 0, 0; 0, 0; 0, 0; 0, 0; 0, 0; 0, 0;];
@@ -50,31 +50,31 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobiR_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:51
-	% EndTime: 2019-10-09 20:00:51
-	% DurationCPUTime: 0.02s
-	% Computational Cost: add. (1->1), mult. (0->0), div. (0->0), fcn. (4->2), ass. (0->3)
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
+	% DurationCPUTime: 0.01s
+	% Computational Cost: add. (3->3), mult. (0->0), div. (0->0), fcn. (4->2), ass. (0->3)
 	t4 = cos(qJ(1));
 	t3 = sin(qJ(1));
-	t1 = [-t4, 0; 0, 0; t3, 0; t3, 0; 0, 0; t4, 0; 0, 0; 0, 0; 0, 0;];
+	t1 = [t4, 0; 0, 0; -t3, 0; -t3, 0; 0, 0; -t4, 0; 0, 0; 0, 0; 0, 0;];
 	JR_rot = t1;
 elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobiR_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2019-10-09 20:00:51
-	% EndTime: 2019-10-09 20:00:52
+	% StartTime: 2020-01-03 11:19:12
+	% EndTime: 2020-01-03 11:19:12
 	% DurationCPUTime: 0.02s
-	% Computational Cost: add. (3->3), mult. (8->4), div. (0->0), fcn. (20->4), ass. (0->9)
-	t23 = sin(qJ(2));
-	t24 = sin(qJ(1));
-	t28 = t24 * t23;
-	t25 = cos(qJ(2));
-	t26 = cos(qJ(1));
-	t27 = t26 * t25;
-	t22 = t26 * t23;
-	t21 = t24 * t25;
-	t1 = [-t27, t28; 0, -t25; t21, t22; t22, t21; 0, t23; -t28, t27; t24, 0; 0, 0; t26, 0;];
+	% Computational Cost: add. (9->9), mult. (8->4), div. (0->0), fcn. (20->4), ass. (0->9)
+	t21 = sin(qJ(2));
+	t22 = sin(qJ(1));
+	t28 = t22 * t21;
+	t23 = cos(qJ(2));
+	t27 = t22 * t23;
+	t24 = cos(qJ(1));
+	t26 = t24 * t21;
+	t25 = t24 * t23;
+	t1 = [t25, -t28; 0, -t23; -t27, -t26; -t26, -t27; 0, t21; t28, -t25; -t22, 0; 0, 0; -t24, 0;];
 	JR_rot = t1;
 else
 	JR_rot=NaN(9,2);

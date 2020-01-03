@@ -20,8 +20,8 @@
 %   inertial parameter regressor of inverse dynamics joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 17:42
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 11:29
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,18 +43,18 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_NewtonEuler_tauJ_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 17:42:06
-% EndTime: 2019-12-05 17:42:15
-% DurationCPUTime: 2.38s
+% StartTime: 2020-01-03 11:28:18
+% EndTime: 2020-01-03 11:28:34
+% DurationCPUTime: 2.50s
 % Computational Cost: add. (7501->276), mult. (17010->410), div. (0->0), fcn. (12044->10), ass. (0->162)
 t195 = sin(qJ(1));
 t196 = cos(qJ(1));
-t164 = -t195 * g(2) + t196 * g(3);
+t164 = t195 * g(2) - t196 * g(3);
 t197 = qJD(1) ^ 2;
 t128 = -t197 * pkin(1) - t164;
 t148 = sin(pkin(8));
 t150 = cos(pkin(8));
-t165 = t196 * g(2) + t195 * g(3);
+t165 = -t196 * g(2) - t195 * g(3);
 t161 = qJDD(1) * pkin(1) + t165;
 t179 = t150 * t128 + t148 * t161;
 t208 = -t197 * pkin(2) + qJDD(1) * qJ(3) + (2 * qJD(1) * qJD(3)) + t179;
@@ -111,7 +111,7 @@ t118 = t122 ^ 2;
 t141 = t143 ^ 2;
 t160 = pkin(4) * t205 + t198;
 t109 = qJD(4) * pkin(4) - pkin(7) * t122;
-t51 = t152 * t200 + t154 * t76;
+t51 = t200 * t152 + t154 * t76;
 t33 = -t117 * pkin(4) + t105 * pkin(7) - qJD(4) * t109 + t51;
 t17 = t151 * t33 - t153 * t160;
 t188 = t153 * t33;

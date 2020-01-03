@@ -14,11 +14,11 @@
 %   homogenous transformation matrices for joint transformation (MDH)
 %   Transformation matrices from one joint to the next (not: from base to joints)
 
-% Quelle: HybrDyn-Toolbox (ehem. IRT-Maple-Toolbox)
-% Datum: 2018-11-16 16:44
-% Revision: ea61b7cc8771fdd0208f11149c97a676b461e858
+% Quelle: HybrDyn-Toolbox
+% Datum: 2020-01-03 11:19
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function T_mdh = S2RR1_joint_trafo_rotmat_mdh_sym_varpar(qJ, ...
   pkin)
@@ -33,15 +33,15 @@ assert(isreal(pkin) && all(size(pkin) == [1 1]), ...
 %% Symbolic Calculation
 % From joint_transformation_mdh_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2018-11-16 16:44:13
-% EndTime: 2018-11-16 16:44:13
-% DurationCPUTime: 0.01s
-% Computational Cost: add. (6->6), mult. (0->0), div. (0->0), fcn. (8->4), ass. (0->5)
+% StartTime: 2020-01-03 11:19:04
+% EndTime: 2020-01-03 11:19:04
+% DurationCPUTime: 0.02s
+% Computational Cost: add. (4->4), mult. (0->0), div. (0->0), fcn. (8->4), ass. (0->5)
 t8 = cos(qJ(1));
 t7 = cos(qJ(2));
 t6 = sin(qJ(1));
 t5 = sin(qJ(2));
-t1 = [-t6, -t8, 0, 0; 0, 0, 1, 0; -t8, t6, 0, 0; 0, 0, 0, 1; t7, -t5, 0, 0; 0, 0, 1, pkin(1); -t5, -t7, 0, 0; 0, 0, 0, 1;];
+t1 = [t6, t8, 0, 0; 0, 0, 1, 0; t8, -t6, 0, 0; 0, 0, 0, 1; t7, -t5, 0, 0; 0, 0, 1, pkin(1); -t5, -t7, 0, 0; 0, 0, 0, 1;];
 T_ges = t1;
 %% Postprocessing: Reshape Output
 % Convert Maple format (2-dimensional tensor) to Matlab format (3-dimensional tensor)

@@ -15,8 +15,8 @@
 %   Transformation matrices from one joint to the next (not: from base to joints)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 18:31
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2020-01-03 12:00
+% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -33,10 +33,10 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From joint_transformation_mdh_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 18:30:13
-% EndTime: 2019-12-05 18:30:13
-% DurationCPUTime: 0.05s
-% Computational Cost: add. (8->8), mult. (0->0), div. (0->0), fcn. (20->10), ass. (0->11)
+% StartTime: 2020-01-03 12:00:16
+% EndTime: 2020-01-03 12:00:16
+% DurationCPUTime: 0.03s
+% Computational Cost: add. (6->6), mult. (0->0), div. (0->0), fcn. (20->10), ass. (0->11)
 t36 = cos(qJ(1));
 t35 = cos(qJ(2));
 t34 = cos(qJ(4));
@@ -47,7 +47,7 @@ t30 = sin(qJ(4));
 t29 = sin(qJ(5));
 t28 = cos(pkin(9));
 t27 = sin(pkin(9));
-t1 = [0, 0, 1, pkin(5); -t32, -t36, 0, 0; t36, -t32, 0, 0; 0, 0, 0, 1; t35, -t31, 0, pkin(1); t31, t35, 0, 0; 0, 0, 1, pkin(6); 0, 0, 0, 1; t28, -t27, 0, pkin(2); t27, t28, 0, 0; 0, 0, 1, qJ(3); 0, 0, 0, 1; t34, -t30, 0, pkin(3); t30, t34, 0, 0; 0, 0, 1, pkin(7); 0, 0, 0, 1; t33, -t29, 0, pkin(4); 0, 0, -1, -pkin(8); t29, t33, 0, 0; 0, 0, 0, 1;];
+t1 = [0, 0, 1, pkin(5); t32, t36, 0, 0; -t36, t32, 0, 0; 0, 0, 0, 1; t35, -t31, 0, pkin(1); t31, t35, 0, 0; 0, 0, 1, pkin(6); 0, 0, 0, 1; t28, -t27, 0, pkin(2); t27, t28, 0, 0; 0, 0, 1, qJ(3); 0, 0, 0, 1; t34, -t30, 0, pkin(3); t30, t34, 0, 0; 0, 0, 1, pkin(7); 0, 0, 0, 1; t33, -t29, 0, pkin(4); 0, 0, -1, -pkin(8); t29, t33, 0, 0; 0, 0, 0, 1;];
 T_ges = t1;
 %% Postprocessing: Reshape Output
 % Convert Maple format (2-dimensional tensor) to Matlab format (3-dimensional tensor)
