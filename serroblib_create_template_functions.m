@@ -17,6 +17,7 @@
 function serroblib_create_template_functions(Names, skip_existing, mex_results)
 
 %% Initialisierung
+old_dir = pwd();
 % Prüfe Eingabeargument
 repopath=fileparts(which('serroblib_path_init.m'));
 if nargin < 1 || isempty(Names)
@@ -153,7 +154,7 @@ for i = 1:length(Names)
   else
     mkdir(fcn_dir);  % Ordner existiert noch nicht. Neu erstellen.
   end
-  cd(fcn_dir); % In Ordner wechseln für kürzeren sed-Befehl
+  cd(fcn_dir); % In Ordner wechseln für kürzeren sed-Befehl (und zum Finden der Dateien)
   for tmp = function_list
     tplf = tmp{1};
     file1=fullfile(repopath, 'template_functions', ['robot_',tplf,'.template']);
@@ -214,7 +215,6 @@ for i = 1:length(Names)
   % Prüfe, ob mex-Datei im tpl-Ordner liegt. Wenn nicht, ist wahrscheinlich
   % noch eine alte Version vorhanden. Diese Funktion ist sinnvoll zur
   % Aktualisierung der Repo-Version auf das tpl-Format
-  serroblib_addtopath({Name_i});
   for tmp = function_list
     [~,f_basename] = fileparts([Name_i, '_', tmp{1}]);
     [dir_mexfcn, ~, mex_ext] = fileparts(which(sprintf('%s_mex', f_basename)));
@@ -241,13 +241,11 @@ for i = 1:length(Names)
       continue
     end
   end
-  serroblib_removefrompath({Name_i});
   
   % Testen: Kompilieren aller Funktionen im Zielordner
   if mex_results
-    serroblib_addtopath({Name_i})
-    cd(fcn_dir)
     mex_all_matlabfcn_in_dir(fcn_dir)
-    serroblib_removefrompath({Name_i})
   end
 end
+% Zurückwechseln in vorheriges Verzeichnis
+cd(old_dir);
