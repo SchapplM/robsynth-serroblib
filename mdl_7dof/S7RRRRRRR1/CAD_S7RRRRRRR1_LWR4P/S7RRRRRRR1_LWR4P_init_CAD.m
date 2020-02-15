@@ -25,6 +25,18 @@ N = RS.NJ;
 repopath = fileparts(which('serroblib_path_init.m'));
 CAD_basepath = fullfile(repopath, sprintf('mdl_%ddof', N), Name, sprintf('CAD_%s',RobName));
 CAD_filenames = {'base.STL', 'link_1.STL', 'link_2.STL', 'link_3.STL', 'link_4.STL', 'link_5.STL', 'link_6.STL', 'link_7.STL'};
+CAD_urlpath = 'https://github.com/CentroEPiaggio/kuka-lwr/raw/master/lwr_description/meshes/lwr4plus/visual/';
+
+% CAD-Dateien herunterladen. Die Dateien sollen nicht in diesem Repo
+% eingecheckt werden, damit es nicht zu Lizenproblemen kommt
+for i = 1:length(CAD_filenames)
+  if ~exist(fullfile(CAD_basepath, CAD_filenames{i}), 'file')
+    % Versuche, herunterzuladen
+    websave(fullfile(CAD_basepath, CAD_filenames{i}), ...
+            fullfile(CAD_urlpath,  CAD_filenames{i}));
+    fprintf('Datei %s von Github heruntergeladen\n', CAD_filenames{i});
+  end
+end
 
 % Das Robotermodell wurde mit Körper-Koordinatensystemen nach URDF-Notation
 % aufgestellt, die Transformationen der STL-Dateien beziehen sich darauf

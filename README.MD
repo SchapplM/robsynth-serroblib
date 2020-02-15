@@ -150,7 +150,8 @@ Zusätzlich werden im Ordner `hd` auch Simulink-Bibliotheken abgelegt (mdl-Forma
 
 Zu den Parametrierten Robotermodellen können in der Datenbank auch CAD-Modelle abgelegt werden. Diese können dann mit Hilfe der Matlab-Klasse `SerRob` zur Visualisierung verwendet werden.
 Die CAD-Modelle werden im Unterordner `CAD_Robotername` von `mdl_xdof/Typbezeichnung` abgelegt.  
-In jedem CAD-Ordner liegen die CAD-Modelle der einzelnen Roboterkörper im STL-Format (binär, nicht ASCI) und eine Initialisierungsdatei `Robotername_init_CAD.m`. Dort werden z.B. die Koordinatentransformationen zwischen den Körper-Koordinatensystemen und dem Ursprung und der Ausrichtung in den STL-Dateien definiert.
+In jedem CAD-Ordner liegen die CAD-Modelle der einzelnen Roboterkörper im STL-Format (binär, nicht ASCI) und eine Initialisierungsdatei `Robotername_init_CAD.m`. Dort werden z.B. die Koordinatentransformationen zwischen den Körper-Koordinatensystemen und dem Ursprung und der Ausrichtung in den STL-Dateien definiert.  
+Da nur die Datei `Robotername_init_CAD.m` entscheidend ist, werden die CAD-Modelle im ursprünglichen Repo nicht mit eingecheckt (damit das Repo nicht zu groß wird und keine Lizenzprobleme auftreten).
 
 ### Tests
 
