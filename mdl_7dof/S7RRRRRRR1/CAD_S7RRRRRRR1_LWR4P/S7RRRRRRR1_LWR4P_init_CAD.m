@@ -31,10 +31,14 @@ CAD_urlpath = 'https://github.com/CentroEPiaggio/kuka-lwr/raw/master/lwr_descrip
 % eingecheckt werden, damit es nicht zu Lizenproblemen kommt
 for i = 1:length(CAD_filenames)
   if ~exist(fullfile(CAD_basepath, CAD_filenames{i}), 'file')
-    % Versuche, herunterzuladen
-    websave(fullfile(CAD_basepath, CAD_filenames{i}), ...
-            fullfile(CAD_urlpath,  CAD_filenames{i}));
-    fprintf('Datei %s von Github heruntergeladen\n', CAD_filenames{i});
+    try  % Versuche, herunterzuladen, falls Datei fehlt
+      websave(fullfile(CAD_basepath, CAD_filenames{i}), ...
+              [CAD_urlpath,  CAD_filenames{i}]); % URL to file on GitHub
+      fprintf('Datei %s von Github heruntergeladen\n', CAD_filenames{i});
+    catch
+      warning('Fehler beim Herunterladen der Datei: %s', CAD_filenames{i});
+      CAD_filenames{i} = '';
+    end
   end
 end
 
@@ -65,6 +69,9 @@ T_urdf_visual(:,:,7) = trotz(pi);
 T_urdf_visual(:,:,8) = trotz(pi);% <link name="${name}_7_link">
 
 for i = 0:7
+  if isempty(CAD_filenames{i+1})
+    continue
+  end
   T_mdh_CAD = T_mdh_urdf(:,:,i+1)*T_urdf_visual(:,:,i+1);
   RS.CAD_add(fullfile(CAD_basepath, CAD_filenames{i+1}), i, T_mdh_CAD);
 end
