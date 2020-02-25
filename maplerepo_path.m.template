@@ -20,5 +20,5 @@ function [maplerepo_path, maplerepo_path_bash] = maplerepo_path()
 % maplerepo_path_bash = '/z/REPO_WIN/maple'; % Git Bash
 
 if ~exist(maplerepo_path, 'file')
-  error('Der Pfad %s ist ungültig.');
+  error('Der Pfad %s ist ungültig.', maplerepo_path);
 end
