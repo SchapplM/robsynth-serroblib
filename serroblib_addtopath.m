@@ -25,6 +25,7 @@ for i = 1:length(Names)
     tpl_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name, 'tpl');
     if ~exist(tpl_dir, 'file')
       serroblib_create_template_functions({Name});
+      addpath(fcn_dir); % Pfad wird durch create_template_functions wieder gelöscht
     end
     addpath(tpl_dir);
   else
@@ -47,6 +48,7 @@ for i = 1:length(Names)
           sprintf('tpl_%s', Name(length(Name_GenMdl)+1:end)));
         if ~exist(tpl_dir_var, 'file')
           serroblib_create_template_functions({Name});
+          addpath(fcn_dir_var); % Pfad wird durch create_template_functions wieder gelöscht
         end
         addpath(tpl_dir_var);
       else % Kein spezifischer Code da
