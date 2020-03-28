@@ -16,7 +16,7 @@
 %   theta  Rotation z (Gelenkkoordinate)
 %   d      Translation z (Gelenkkoordinate)
 %   offset Gelenk-Offset
-% EEdof0 [1x9] oder [1x6] Char
+% EEdof0 [1x9] oder [1x6] char
 %   Vektor mit beweglichen EE-FG des Roboters (Geschw. und Winkelgeschw. im
 %   Basis-KS. Entspricht Vorgabe in der Struktursynthese von Ramirez)
 %   Zusätzlich Euler-Winkel Basis-Endeffektor (letzte 3 Komponenten)
@@ -40,8 +40,8 @@ function [Name_DB, new] = serroblib_add_robot(MDH_struct, EEdof0)
 if nargin == 1
   EEdof0 = []; % 6 Leerzeichen
 end
-if ~isa(EEdof0, 'char')
-  error('serroblib_add_robot: Eingabe EEdof0 muss char sein.');
+if ~isa(EEdof0, 'char') || any(EEdof0~='0' & EEdof0~='1')
+  error('serroblib_add_robot: Eingabe EEdof0 muss char sein. Inhalt nur 1 oder 0.');
 end
 if length(EEdof0) == 6
   % Altes Format: Ignoriere die Erweiterung um die Euler-Winkel des EE
