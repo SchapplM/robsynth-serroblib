@@ -62,7 +62,7 @@ for i = 1:size(l.BitArrays_Ndof, 1)
     IndB(i) = true;
   end
   % Debug:
-  % fprintf('%s: %s vs %s. Maske %s\n', l.Names_Ndof{i}, fliplr(dec2bin(EE_FG_BA,9)), ...
-  % fliplr(dec2bin(l.BitArrays_EEdof0(i,:),9)), fliplr(dec2bin(EE_FG_Mask_bin,9)));
+%   fprintf('%s: Soll: %s. Ist: %s. Maske %s. Passend: %d\n', l.Names_Ndof{i}, fliplr(dec2bin(EE_FG_BA,9)), ...
+%     fliplr(dec2bin(l.BitArrays_EEdof0(i,:),9)), fliplr(dec2bin(EE_FG_Mask_bin,9)), IndB(i));
 end
 IndZ = find(IndB);
