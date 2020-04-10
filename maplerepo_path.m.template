@@ -1,5 +1,6 @@
 % Diese Datei ist eine Vorlage für die Verknüpfung zur HybrDyn-Toolbox
-% aus https://phabricator.imes.uni-hannover.de/source/robot_dynamics-hybriddyn/
+% aus https://github.com/SchapplM/robsynth-modelgen oder
+% https://gitlab.projekt.uni-hannover.de/imes-gruppe-robotik/hybriddyn
 % Diese Toolbox muss heruntergeladen werden und der Pfad hier an den tatsächlichen
 % Pfad auf dem Rechner angepasst werden.
 % Das ".template" muss aus dem Dateinamen entfernt werden und das der richtige
