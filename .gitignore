@@ -17,6 +17,7 @@ maplerepo_path.m
 *jacobigD_mdh_num.m
 *jacobig_mdh_eulxyz_num.m
 *jacobigD_mdh_eulxyz_num.m
+*jacobig_cutforce_mdh_num.m
 *kinconstr_expl_mdh_num_varpar.m
 *invkin_traj.m
 *invkin_eulangresidual.m
