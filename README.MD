@@ -11,9 +11,12 @@ Für die Benutzung des Repos muss mit dem Skript `serroblib_path_init.m` aus dem
 
 ### Abhängigkeiten
 
-Die Robotermodelle setzen die Toolbox imes-matlab und imes-matlab-robotics mit initialisiertem Pfad voraus.
+Die Robotermodelle setzen folgende ebenfalls herunterzuladenden Toolboxen mit initialisiertem Pfad voraus:
+* imes-matlab: [GitHub](https://github.com/SchapplM/matlab_toolbox), [LUH-intern](https://gitlab.projekt.uni-hannover.de/imes-material/matlab-toolbox)
+* imes-matlab-robotics [GitHub](https://github.com/SchapplM/robotics-toolbox), [LUH-intern](https://gitlab.projekt.uni-hannover.de/imes-gruppe-robotik/matlab-robotik-toolbox)
+* robot-dynamics-hybriddyn: [GitHub](https://github.com/SchapplM/robsynth-modelgen), [LUH-intern](https://gitlab.projekt.uni-hannover.de/imes-gruppe-robotik/hybriddyn)
 Für die Code-Generierung muss die Datei `maplerepo_path.m` aus der Vorlage `maplerepo_path.m.template` so erstellt werden, dass diese auf den Pfad zur 
-Toolbox robot-dynamics-hybriddyn zeigt (diese muss ebenfalls heruntergeladen werden).
+Toolbox robot-dynamics-hybriddyn zeigt.
 
 ## Inhalt
 

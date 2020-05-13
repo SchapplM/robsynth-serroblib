@@ -66,12 +66,12 @@ function_list_copy_robotics = {...
   {'kinematics', 'invkin_traj.m'}, ...
   {'kinematics', 'invkin_eulangresidual.m'}};
 
-% Pfad zur Maple-Dynamik-Toolbox (muss im Repo abgelegt werden)
-if isempty(which('maplerepo_path.m'))
-  warning('Es muss eine Datei maplerepo_path.m angelegt werden (siehe README.MD)');
+% Pfad zur Maple-Dynamik-Toolbox, in der einige Vorlagen liegen
+mrp = fileparts(which('hybrdyn_path_init.m'));
+if isempty(mrp)
+  warning('Die HybridDyn-Toolbox muss im Pfad sein (siehe README.MD)');
   return
 end
-mrp = maplerepo_path();
 % Alle Vorlagen-Funktionen aus Maple-Repo in Vorlagen-Ordner kopieren
 for tmp = function_list_copy_hybrdyn
   tplf = tmp{1};
