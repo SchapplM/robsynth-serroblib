@@ -10,21 +10,24 @@
 %   pkin=[a2,a3,a4,d1,d4,d6]';
 % 
 % Output:
-% T_c_mdh [4x4x(6+1)]
+% Tc_mdh [4x4x(6+1)]
 %   homogenous transformation matrices for each (body) frame (MDH)
 %   1:  mdh base (link 0) -> mdh base link 0 (unit matrix, no information)
 %   ...
 %   7:  mdh base (link 0) -> mdh frame (7-1), link (7-1)
 %   ...
 %   6+1:  mdh base (link 0) -> mdh frame (6)
+% T_c_stack [(6+1)*3 x 4]
+%   stacked matrices from Tc_mdh into one 2D array, last row left out.
+%   Last row only contains [0 0 0 1].
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-04-11 14:56
-% Revision: b693519ea345eb34ae9622239e7f1167217e9d53 (2019-04-09)
+% Datum: 2020-06-19 10:07
+% Revision: caa0dbda1e8a16d11faaa29ba3bbef6afcd619f7 (2020-05-25)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function [T_c_mdh, Tc_stack] = S6RRRRRR10V2_fkine_fixb_rotmat_mdh_sym_varpar(qJ, pkin)
+function [Tc_mdh, Tc_stack] = S6RRRRRR10V2_fkine_fixb_rotmat_mdh_sym_varpar(qJ, pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(6,1),zeros(6,1)}
@@ -36,9 +39,9 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From fkine_mdh_floatb_twist_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-04-11 14:41:14
-% EndTime: 2019-04-11 14:41:15
-% DurationCPUTime: 0.14s
+% StartTime: 2020-06-19 10:07:09
+% EndTime: 2020-06-19 10:07:09
+% DurationCPUTime: 0.32s
 % Computational Cost: add. (182->47), mult. (202->57), div. (0->0), fcn. (295->12), ass. (0->42)
 t28 = qJ(2) + qJ(3);
 t24 = sin(t28);
@@ -81,16 +84,13 @@ t4 = t13 * t35 + t30 * t45;
 t3 = t13 * t30 - t35 * t45;
 t2 = t11 * t35 + t30 * t49;
 t1 = t11 * t30 - t35 * t49;
-t14 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1; t38, -t33, 0, 0; t33, t38, 0, 0; 0, 0, 1, t27; 0, 0, 0, 1; t38 * t37, -t38 * t32, t33, t38 * pkin(1) + 0; t33 * t37, -t33 * t32, -t38, t33 * pkin(1) + 0; t32, t37, 0, t27; 0, 0, 0, 1; t44, -t45, t33, t40; t48, -t49, -t38, t41; t24, t25, 0, t39; 0, 0, 0, 1; t13, -t12, t45, t6; t11, -t10, t49, t5; t50, -t51, -t25, t7; 0, 0, 0, 1; t4, -t3, t12, t6; t2, -t1, t10, t5; t9, -t8, t51, t7; 0, 0, 0, 1; t12 * t29 + t4 * t34, t12 * t34 - t4 * t29, t3, t3 * pkin(6) + t6; t10 * t29 + t2 * t34, t10 * t34 - t2 * t29, t1, t1 * pkin(6) + t5; t29 * t51 + t9 * t34, -t9 * t29 + t34 * t51, t8, t8 * pkin(6) + t7; 0, 0, 0, 1;];
-T_ges = t14;
+t14 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; t38, -t33, 0, 0; t33, t38, 0, 0; 0, 0, 1, t27; t38 * t37, -t38 * t32, t33, t38 * pkin(1) + 0; t33 * t37, -t33 * t32, -t38, t33 * pkin(1) + 0; t32, t37, 0, t27; t44, -t45, t33, t40; t48, -t49, -t38, t41; t24, t25, 0, t39; t13, -t12, t45, t6; t11, -t10, t49, t5; t50, -t51, -t25, t7; t4, -t3, t12, t6; t2, -t1, t10, t5; t9, -t8, t51, t7; t12 * t29 + t4 * t34, t12 * t34 - t4 * t29, t3, t3 * pkin(6) + t6; t10 * t29 + t2 * t34, t10 * t34 - t2 * t29, t1, t1 * pkin(6) + t5; t29 * t51 + t9 * t34, -t9 * t29 + t34 * t51, t8, t8 * pkin(6) + t7;];
+Tc_stack = t14;
 %% Postprocessing: Reshape Output
 % Convert Maple format (2-dimensional tensor) to Matlab format (3-dimensional tensor)
 % Fallunterscheidung der Initialisierung für symbolische Eingabe
-if isa([qJ; pkin], 'double'), T_c_mdh = NaN(4,4,6+1);               % numerisch
-else,                         T_c_mdh = sym('xx', [4,4,6+1]); end % symbolisch
+if isa([qJ; pkin], 'double'), Tc_mdh = NaN(4,4,6+1);               % numerisch
+else,                         Tc_mdh = sym('xx', [4,4,6+1]); end % symbolisch
 for i = 1:6+1
-  T_c_mdh(:,:,i) = T_ges((i-1)*4+1 : 4*i, :);
+  Tc_mdh(:,:,i) = [Tc_stack((i-1)*3+1 : 3*i, :);[0 0 0 1]];
 end
-Tc_stack = NaN(3*size(T_c_mdh,3),4);
-% Zusätzliche Ausgabe: Als 2D-array gestapelt, ohne Zeile mit 0001
-for i = 1:size(T_c_mdh,3), Tc_stack((i-1)*3+1:3*i,1:4) = T_c_mdh(1:3,1:4,i); end
