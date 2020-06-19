@@ -1,0 +1,13 @@
+robot_NQJ=2
+robot_NJ=2
+robot_name="S2RR3"
+robot_NL=3
+robot_gVec=1,1,1
+robot_NKP=3
+robot_KP="a2 d1 d2"
+robot_kinconstr_exist=0
+robot_NKCP=0
+robot_KCP=""
+robot_NMPVFIXB=6
+robot_NMPVFLOATB=NOTDEFINED
+robot_NTAUJFIXBREGNN=9
