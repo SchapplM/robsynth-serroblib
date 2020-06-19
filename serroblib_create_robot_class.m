@@ -27,6 +27,12 @@ if nargin < 3
   only_mdh = false;
 end
 
+% Prüfe Namensschema. Format "S3RRR1" oder "S3RRR1V1".
+[tokens, ~] = regexp(Name,'S(\d)([RP]+)(\d+)[V]?(\d*)','tokens','match');
+if isempty(tokens)
+  error('Eingegebener Name %s entspricht nicht dem Namensschema S3RPR1', Name);
+end
+
 %% Daten laden
 N = str2double(Name(2)); % Annahme: Namensschema SxRRR; mit x="Anzahl Gelenk-FG"
 repopath=fileparts(which('serroblib_path_init.m'));
