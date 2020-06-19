@@ -17,7 +17,7 @@ serroblib_gen_bitarrays(1:7);
 %% Durchsuche alle Roboter und prüfe die Kinematikparameter
 % Zuordnung der Zahlenwerte in der csv-Tabelle zu den physikalischen Werten
 % Die in der mat-Datei abgelegte Binär-Kodierung entspricht der Reihenfolge
-for N = 2:7
+for N = 1:7
   fprintf('Prüfe Strukturen mit %d FG\n', N);
   % Alle Roboter aus Datenbank laden
   mdllistfile_Ndof = fullfile(roblibpath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));

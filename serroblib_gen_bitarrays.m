@@ -49,12 +49,12 @@ end
 repopath=fileparts(which('serroblib_path_init.m'));
 for N = N_update(:)'
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
-  BitArrays_Ndof = uint16(zeros(1,N));
-  BitArrays_Ndof_VF = uint16(zeros(1,N));
-  BitArrays_phiNE = uint16(zeros(1,1));
-  BitArrays_EEdof0 = uint16(zeros(1,1));
-  BitArrays_Origin = uint16(zeros(1,1));
-  AdditionalInfo = zeros(1,6);
+  BitArrays_Ndof = uint16(zeros(0,N));
+  BitArrays_Ndof_VF = uint16(zeros(0,N));
+  BitArrays_phiNE = uint16(zeros(0,1));
+  BitArrays_EEdof0 = uint16(zeros(0,1));
+  BitArrays_Origin = uint16(zeros(0,1));
+  AdditionalInfo = zeros(0,6);
   Names_Ndof = {};
   b = 1; % Zähler für gefundene Roboterkonfigurationen aus csv-Tabelle für N FG
   %% Durchsuche alle csv-Dateien im Ordner nach passenden Strukturen

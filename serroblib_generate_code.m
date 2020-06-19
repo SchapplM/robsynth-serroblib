@@ -14,8 +14,9 @@
 %   vollständige Dynamik jedes mal neu generiert werden muss
 %   1: Vollständige Generierung, alles
 %   2: Nur aus Vorlagen generierte Funktionen (z.B. Jacobi, inverse Kinematik)
-%      (Diese Option ist nicht mehr sinnvoll, da Vorlagen-Funktionen jetzt
-%      im Ordner "tpl" gespeichert werden)
+%      und Testskripte (enthält auch Simulink-Modelle aus Vorlagen).
+%      (Diese Option ist nicht mehr unbedingt sinnvoll, da Vorlagen-Funktionen
+%      jetzt im Ordner "tpl" gespeichert werden)
 %   3: Alles generieren in Maple, aber keinen Matlab-Code exportieren
 %      (wichtig für PKM. Dort wird die Bein-Dynamik nur als Maple gebraucht)
 %   4: Nur Kinematik generieren (ansonsten, wie Modus 1)
@@ -127,12 +128,18 @@ for i = 1:length(Names)
     if ~exist(fullfile(mrp, 'codeexport', n), 'file')
       warning('Ordner %s existiert nicht. Die Code-Generierung muss vorher einmal gelaufen sein', ...
         fullfile(mrp, 'codeexport', n));
+      continue % folgende Befehle funktionieren so nicht, da im tmp-Ordner generierter Code liegen muss
+      mkdir(fullfile(mrp, 'codeexport', n)); %#ok<UNRCH>
+      mkdir(fullfile(mrp, 'codeexport', n, 'tmp'));
+      % Kopiere sh-Datei, damit die Skripte funktionieren
+      copyfile( [mapleinputfile, '.sh'], fullfile(mrp, 'robot_codegen_definitions', 'robot_env.sh') );
     end
     system_gen( sprintf('rm -rf %s/workdir/*', mrp_cmd) ); % Inhalt des tmp-Verzeichnisses leeren und neu erstellen, ...
-    system_gen( sprintf('mkdir -p %s/workdir/tmp', mrp_cmd) ); ... damit keine alten Versionen enthalten sein können
+    system_gen( sprintf('mkdir -p %s/workdir/tmp', mrp_cmd) ); % damit keine alten Versionen enthalten sein können
     system_gen( sprintf('cd %s/robot_codegen_scripts && ./create_git_versioninfo.sh', mrp_cmd) );
     system_gen( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_tmpvar_matlab.sh', mrp_cmd) );
     system_gen( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_matlab_num_varpar.sh', mrp_cmd) );
+    system_gen( sprintf('cd %s/robot_codegen_scripts && ./testfunctions_generate.sh', mrp_cmd) );
   else
     error('Modus nicht definiert');
   end

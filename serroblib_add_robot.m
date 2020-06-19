@@ -112,14 +112,14 @@ if ~exist(filepath_csv, 'file')
     csvline_head2{c} = eestr{jj}; c=c+1;
   end
   % Kopfzeile für weitere Eigenschaften des Roboters
-  c = length(csvline_head1)+1;
-  csvline_head1{c} = 'Weitere Eigenschaften';
-  csvline_head2{c} = 'Positionsbeeinflussendes Gelenk';
+  c = length(csvline_head1)+2;
+  csvline_head1(c-1:c) = {'Weitere Eigenschaften', ''};
+  csvline_head2(c-1:c) = {'Positionsbeeinflussendes Gelenk', 'Gelenkfolge'};
   
   % Kopfzeile für Herkunft der Kinematik
-  c = length(csvline_head1)+4;
-  csvline_head1(c-3:c) = {'Herkunft Struktursynthese', '', '', ''};
-  csvline_head2(c-3:c) = {'Manuell', 'Roboter', '3T0R-PKM', '3T1R-PKM'};
+  c = length(csvline_head1)+5;
+  csvline_head1(c-4:c) = {'Herkunft Struktursynthese', '', '', '', ''};
+  csvline_head2(c-4:c) = {'Manuell', 'Roboter', '3T0R-PKM', '3T1R-PKM', 'Gelenkfolge'};
   
   % String aus Cell-Array erzeugen
   line_head1 = csvline_head1{1};
