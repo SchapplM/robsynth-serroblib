@@ -19,7 +19,7 @@ clc
 roblibpath=fileparts(which('serroblib_path_init.m'));
 
 %% Durchsuche alle csv-Tabellen und füge Spalten hinzu
-for N = 2:7
+for N = 1:7
   mdldir = fullfile(roblibpath, sprintf('mdl_%ddof', N));
   for d = dir(fullfile(mdldir, '*.csv'))'
     % Initialisierung der Dateien

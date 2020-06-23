@@ -75,7 +75,7 @@ for idx_case = 1:11
       % Letzter Durchgang: Setze alle Felder, in denen bis jetzt ein "?"
       % steht auf 0. Annahme: Alle möglichen Herkünfte der seriellen Ketten
       % wurden bereits vorher aus den Ergebnisliste generiert
-      flush_Njoint = 2:7;
+      flush_Njoint = 1:7;
       idx_oc = 1:5;
       set_undef_to_zero = true;
       flush_EEFG = [1 1 1 1 1 1];

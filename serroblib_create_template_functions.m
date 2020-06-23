@@ -23,7 +23,7 @@ repopath=fileparts(which('serroblib_path_init.m'));
 if nargin < 1 || isempty(Names)
   % Stelle Liste aller Roboter zusammen
   Names = {};
-  for N = 2:7
+  for N = 1:7
     mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
     if ~exist(mdllistfile_Ndof, 'file')
       continue
