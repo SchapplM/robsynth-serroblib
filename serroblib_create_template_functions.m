@@ -161,18 +161,17 @@ for i = 1:length(Names)
   
   % Kopiere alle Vorlagen-Funktionen an die Ziel-Orte und Ersetze die
   % Platzhalter-Ausdrücke
-  if exist(fcn_dir, 'file')
-    if skip_existing
-      continue % Ordner existiert schon. Überspringe.
-    end
-  else
-    mkdir(fcn_dir);  % Ordner existiert noch nicht. Neu erstellen.
-  end
+  mkdirs(fcn_dir);  % Ordner existiert noch nicht. Neu erstellen.
   cd(fcn_dir); % In Ordner wechseln für kürzeren sed-Befehl (und zum Finden der Dateien)
+  function_list_mex = {};
   for tmp = function_list
     tplf = tmp{1};
     file1=fullfile(repopath, 'template_functions', ['robot_',tplf,'.template']);
     file2=fullfile(fcn_dir, [Name_i,'_',tplf]);
+    function_list_mex = [function_list_mex(:); [Name_i,'_',tplf(1:end-2)]];
+    if skip_existing && exist(file2, 'file')
+      continue % Keine Datei erzeugen. Nur mex-Liste erstellen.
+    end
     % Ersetzungsausdruck für Dateinamen vorbereiten
     subsexp_array{11,2} = 'FN';
     [~,subsexp_array{11,3},~] = fileparts(file2);
@@ -261,7 +260,7 @@ for i = 1:length(Names)
   if mex_results
     serroblib_addtopath({Name_i})
     cd(fcn_dir)
-    mex_all_matlabfcn_in_dir(fcn_dir)
+    matlabfcn2mex(function_list_mex);
     serroblib_removefrompath({Name_i})
   end
 end
