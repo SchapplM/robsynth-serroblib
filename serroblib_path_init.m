@@ -12,4 +12,6 @@ serroblib_gen_bitarrays
 
 % Alle Vorlagen-Funktionen erstellen. Diese Funktionen sind nicht im Repo,
 % da sie im wesentlichen identisch sind bis auf wenige Zeilen.
-serroblib_create_template_functions
+% Nicht hier machen, da es viel zu lange dauert. Vorlagen werden
+% automatisch erzeugt, wenn die Roboterklasse zuerst initialisiert wird.
+% serroblib_create_template_functions
