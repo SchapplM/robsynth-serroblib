@@ -120,6 +120,11 @@ for i = 1:length(Names)
 	% Prüfe, ob Roboter einen Code-Ordner hat. Wenn nicht, ist die Erstellung
 	% nicht sinnvoll (weil die robot_env.sh nicht existiert)
   if hascode ~= 1
+    if isvariant
+      % Stattdessen die Funktionen für das allgemeine Modell erzeugen
+      Name_Gen_i = l.Names_Ndof{variantof};
+      serroblib_create_template_functions({Name_Gen_i}, skip_existing, mex_results);
+    end
     continue
   end
   % Bestimme Ziel-Ordner des Codes für die Vorlagen-Funktionen
