@@ -32,6 +32,8 @@
 %        Struktur geschlossen werden (ist aber auch im Namen enthalten)
 %     6: Anzahl technischer Gelenke. Ein mögliches Kugelgelenk zählt als 3,
 %        ein Kardangelenk als 2, einfache Dreh- und Schubgelenke als 1
+%     7: Reihenfolge technischer Gelenke. Dezimal kodiert.
+%        1=R,2=P,3=C,4=U,5=S. 10er-Potenz entspricht Gelenknummer
 %   BitArrays_Ndof_VF
 %     Bit-Array mit Filter, um Varianten eines Roboters zu erkennen
 %   BitArrays_Origin
@@ -54,7 +56,7 @@ for N = N_update(:)'
   BitArrays_phiNE = uint16(zeros(0,1));
   BitArrays_EEdof0 = uint16(zeros(0,1));
   BitArrays_Origin = uint16(zeros(0,1));
-  AdditionalInfo = zeros(0,6);
+  AdditionalInfo = zeros(0,7);
   Names_Ndof = {};
   b = 1; % Zähler für gefundene Roboterkonfigurationen aus csv-Tabelle für N FG
   %% Durchsuche alle csv-Dateien im Ordner nach passenden Strukturen
@@ -159,10 +161,20 @@ for N = N_update(:)'
       % Anzahl technischer Gelenke bestimmen
       joints_string = csvline{end-5}; % die letzten 5 Spalten geben die Modellherkunft an
       if isempty(joints_string)
-        numtechjoints = N; % Ohne Angabe werden einzelne Dreh- und Schubgelenke angenommen
-      else
-        numtechjoints = length(joints_string);
+        % Ohne Angabe werden einzelne Dreh- und Schubgelenke angenommen
+        % (stehen schon direkt im Namen drin)
+        joints_string = Name(3:3+N-1);
       end
+      numtechjoints = length(joints_string);
+      % Technische Gelenke als Zahl kodieren
+      factors = 10.^(0:numtechjoints-1);
+      joints_number = 0;
+      joints_number = joints_number + sum(1*double(joints_string=='R').*factors);
+      joints_number = joints_number + sum(2*double(joints_string=='P').*factors);
+      joints_number = joints_number + sum(3*double(joints_string=='C').*factors);
+      joints_number = joints_number + sum(4*double(joints_string=='U').*factors);
+      joints_number = joints_number + sum(5*double(joints_string=='S').*factors);
+      
       %% Ausgabe belegen
       Names_Ndof{b} = csvline{1}; %#ok<AGROW>
       BitArrays_Ndof(b,:) = BAJ;
@@ -170,7 +182,7 @@ for N = N_update(:)'
       BitArrays_phiNE(b,:) = BAR;
       BitArrays_EEdof0(b,:) = BAE;
       BitArrays_Origin(b,:) = BAO;
-      AdditionalInfo(b,:) = [lastposjoint, double(isvariant), variantof, hascode, numrotjoints, numtechjoints];
+      AdditionalInfo(b,:) = [lastposjoint, double(isvariant), variantof, hascode, numrotjoints, numtechjoints, joints_number];
       b = b+1;
     end
     fclose(fid);
