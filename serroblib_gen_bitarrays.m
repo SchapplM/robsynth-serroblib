@@ -187,10 +187,28 @@ for N = N_update(:)'
     end
     fclose(fid);
   end
-  
   % Alle Modelle neu in Ergebnisdatei (.mat) speichern
-  % fprintf('serroblib_gen_bitarrays: Datei %s mit %d Einträgen gespeichert \n', mdllistfile_Ndof, size(BitArrays_Ndof,1));
-  mkdirs(fileparts(mdllistfile_Ndof));
-  save(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_Ndof_VF', ...
-    'BitArrays_phiNE', 'BitArrays_EEdof0', 'BitArrays_Origin', 'AdditionalInfo');
+  Ndof_struct_new = struct( ...
+    'Names_Ndof', {Names_Ndof}, 'BitArrays_Ndof',  BitArrays_Ndof, ...
+    'BitArrays_Ndof_VF', BitArrays_Ndof_VF, 'BitArrays_phiNE',  BitArrays_phiNE, ...
+    'BitArrays_EEdof0', BitArrays_EEdof0, 'BitArrays_Origin',  BitArrays_Origin, ...
+    'AdditionalInfo', AdditionalInfo);
+  % Prüfe, ob die Datei schon existiert und ob sie sich ändern würde. Ver-
+  % meide das Schreiben identischer Daten in die Datei. Durch parallele
+  % Schreibprozesse kann die Datei beschädigt werden (Rechencluster)
+  write_new = false;
+  if exist(mdllistfile_Ndof, 'file')
+    Ndof_struct_old = load(mdllistfile_Ndof);
+    if ~isequaln(Ndof_struct_old, Ndof_struct_new)
+      write_new = true; % Dateiinhalt wird sich ändern. Schreibe neu.
+    end
+  else
+    mkdirs(fileparts(mdllistfile_Ndof)); % Ordner könnte nicht existieren
+    write_new = true; % Schreibe mat-Datei neu, sie existiert noch nicht
+  end
+  if write_new
+    save(mdllistfile_Ndof, '-struct', 'Ndof_struct_new');
+%     fprintf('serroblib_gen_bitarrays: Datei %s mit %d Einträgen gespeichert \n', ...
+%       mdllistfile_Ndof, size(BitArrays_Ndof,1));
+  end
 end
