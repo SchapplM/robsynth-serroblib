@@ -257,12 +257,12 @@ RS.descr = descr;
 
 if nargin > 1
   % CAD-Modelle initialisieren, falls vorhanden
-  cadinidat = fullfile(repopath, sprintf('mdl_%ddof', N), Name, ...
+  cadinidat = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
     sprintf('CAD_%s',RobName), sprintf('%s_init_CAD.m', RobName));
   [p,f]=fileparts(cadinidat);
   if exist(cadinidat, 'file')
     addpath(p);
-    eval(sprintf('RS = %s(RS, Name, RobName);', f));
+    eval(sprintf('RS = %s(RS, Name_GenMdl, RobName);', f));
     rmpath(p);
   end
 end
