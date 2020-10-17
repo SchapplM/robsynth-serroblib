@@ -31,5 +31,10 @@ assert(isreal(pkin) && all(size(pkin) == [3 1]), ...
 
 %% Symbolic Calculation
 % From inertia_joint_joint_fixb_regressor_minpar_matlab.m
+% OptimizationMode: 2
+% StartTime: 2019-05-04 18:20:09
+% EndTime: 2019-05-04 18:20:09
+% DurationCPUTime: 0.05s
+% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 t1 = [1, 1, 1; 0, 0, 0; 0, 1, 1; 0, 0, 0; 0, 0, 0; 0, 0, 1;];
 MM_reg  = t1;

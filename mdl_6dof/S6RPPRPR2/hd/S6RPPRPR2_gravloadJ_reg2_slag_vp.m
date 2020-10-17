@@ -34,6 +34,11 @@ assert(isreal(pkin) && all(size(pkin) == [10 1]), ...
 
 %% Symbolic Calculation
 % From gravload_joint_fixb_regressor_matlab.m
+% OptimizationMode: 2
+% StartTime: 2019-05-05 14:02:49
+% EndTime: 2019-05-05 14:02:50
+% DurationCPUTime: 0.29s
+% Computational Cost: add. (289->74), mult. (232->83), div. (0->0), fcn. (224->10), ass. (0->45)
 t27 = qJ(1) + pkin(9);
 t22 = sin(t27);
 t24 = cos(t27);

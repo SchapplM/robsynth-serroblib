@@ -31,6 +31,11 @@ assert(isreal(pkin) && all(size(pkin) == [10 1]), ...
 
 %% Symbolic Calculation
 % From inertia_joint_joint_fixb_regressor_matlab.m
+% OptimizationMode: 2
+% StartTime: 2019-05-07 17:56:56
+% EndTime: 2019-05-07 17:57:03
+% DurationCPUTime: 2.58s
+% Computational Cost: add. (2373->192), mult. (4548->325), div. (0->0), fcn. (5291->8), ass. (0->128)
 t112 = sin(qJ(4));
 t106 = t112 ^ 2;
 t115 = cos(qJ(4));
