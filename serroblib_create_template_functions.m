@@ -169,6 +169,7 @@ for i = 1:length(Names)
   mkdirs(fcn_dir);  % Ordner existiert noch nicht. Neu erstellen.
   cd(fcn_dir); % In Ordner wechseln für kürzeren sed-Befehl (und zum Finden der Dateien)
   function_list_mex = {};
+  num_files_written = 0;
   for tmp = function_list
     tplf = tmp{1};
     file1=fullfile(repopath, 'template_functions', ['robot_',tplf,'.template']);
@@ -226,9 +227,12 @@ for i = 1:length(Names)
       fprintf('%d/%d: Datei %s konnte nicht erzeugt werden (Einige Variablen nicht definiert)\n', ...
         i, length(Names), tplf);
       delete(file2);
+      continue;
     end
+    num_files_written = num_files_written + 1;
   end
-  fprintf('%d/%d: Vorlagen-Funktionen für %s erstellt.\n', i, length(Names), Name_i);
+  fprintf('%d/%d: Vorlagen-Funktionen für %s erstellt (%d/%d).\n', i, ...
+    length(Names), Name_i, num_files_written, length(function_list));
   
   % Prüfe, ob mex-Datei im tpl-Ordner liegt. Wenn nicht, ist wahrscheinlich
   % noch eine alte Version vorhanden. Diese Funktion ist sinnvoll zur
