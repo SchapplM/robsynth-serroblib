@@ -7,7 +7,7 @@
 %   aktualisiert werden soll.
 % 
 % Schreibt Dateien:
-% mdl_xdof.mat (x=Anzahl FG aus Eingabe) mit Variablen:
+% mdl_xdof/Sx_list.mat (x=Anzahl FG aus Eingabe) mit Variablen:
 %   Names_Ndof
 %     Cell-Array mit Namen aller Roboter dieses FG
 %   BitArrays_Ndof
