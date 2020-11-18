@@ -4,11 +4,17 @@
 % Names
 %   Cell-Array mit Namen der Robotermodelle, deren Funktionen zum
 %   Matlab-Pfad hinzugefügt werden sollen.
+% 
+% Ausgabe:
+% added
+%   Bool-Array. "true", falls für den Eintrag aus `Names` der Pfad geändert
+%   wurde. "false", falls der Roboter schon vollständig im Pfad war.
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
-% (C) Institut für mechatronische Systeme, Universität Hannover
+% (C) Institut für mechatronische Systeme, Leibniz Universität Hannover
 
-function serroblib_addtopath(Names)
+function added = serroblib_addtopath(Names)
+added = false(length(Names),1);
 if ~iscell(Names)
   error('serroblib_addtopath: Eingegebene Roboternamen müssen ein Cell-Array sein');
 end
@@ -20,14 +26,18 @@ for i = 1:length(Names)
   % Prüfe, ob Code für dieses Modell existiert
   fcn_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name, 'hd');
   if exist(fcn_dir, 'file')
-    addpath(fcn_dir);
+    added(i) = added(i) | addpath2(fcn_dir);
     % Falls Ordner für Vorlagen-Funktionen nicht existiert, erstelle neu
     tpl_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name, 'tpl');
     if ~exist(tpl_dir, 'file')
       serroblib_create_template_functions({Name});
-      addpath(fcn_dir); % Pfad wird durch create_template_functions wieder gelöscht
+      % Pfad kann durch create_template_functions wieder gelöscht werden.
+      % Laufzeitverhalten durch mehrfache Rekursion nicht genau bestimmbar.
+      % Daher Zeile behalten (diese Funktion kann von template-Funktion
+      % aufgerufen werden.
+      added(i) = added(i) | addpath2(fcn_dir);
     end
-    addpath(tpl_dir);
+    added(i) = added(i) | addpath2(tpl_dir);
   else
     % Prüfe, ob Modell eine Variante ist, für die der Code des Hauptmodells
     % existiert
@@ -42,15 +52,15 @@ for i = 1:length(Names)
         sprintf('hd_%s', Name(length(Name_GenMdl)+1:end)));
       if exist(fullfile(fcn_dir_var, sprintf('%s_structural_kinematic_parameters.m', Name)), 'file')
         % Es wurde schon Code spezifisch für diese Variante generiert
-        addpath(fcn_dir_var);
+        added(i) = added(i) | addpath2(fcn_dir_var);
         % Vorlagen-Funktionen sollten dann im selben Format vorliegen
         tpl_dir_var = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
           sprintf('tpl_%s', Name(length(Name_GenMdl)+1:end)));
         if ~exist(tpl_dir_var, 'file')
           serroblib_create_template_functions({Name});
-          addpath(fcn_dir_var); % Pfad wird durch create_template_functions wieder gelöscht
+          added(i) = added(i) | addpath2(fcn_dir_var); % Pfad wird durch create_template_functions wieder gelöscht
         end
-        addpath(tpl_dir_var);
+        added(i) = added(i) | addpath2(tpl_dir_var);
       else % Kein spezifischer Code da
         % Prüfe, ob Funktionen zur Umwandlung von Allgemein zu Variante da
         % ist
@@ -61,17 +71,17 @@ for i = 1:length(Names)
             Name_GenMdl, var_dir, fcn_dir_var);
         else
           % Varianten-Funktion existiert. Füge Pfad hinzu
-          addpath(var_dir);
+          added(i) = added(i) | addpath2(var_dir);
         end
         fcn_dir_gen = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, 'hd');
         if exist(fcn_dir_gen, 'file')
-          addpath(fcn_dir_gen);
+          added(i) = added(i) | addpath2(fcn_dir_gen);
         else
           warning('Verzeichnis für allgemeinen Code %s existiert nicht. Es wird aber darauf verwiesen.', fcn_dir_gen);
         end
         tpl_dir_gen = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, 'tpl');
         if exist(tpl_dir_gen, 'file')
-          addpath(tpl_dir_gen);
+          added(i) = added(i) | addpath2(tpl_dir_gen);
         else
           warning('Verzeichnis für allgemeinen Vorlagen-Code %s existiert nicht. Es wird aber darauf verwiesen.', tpl_dir_gen);
         end
@@ -81,4 +91,17 @@ for i = 1:length(Names)
       warning('Code-Verzeichnis %s für %s existiert nicht', fcn_dir, Name);
     end
   end
+end
+end
+
+function added = addpath2(new_dir)
+% Füge einen Ordner zum Pfad hinzu, wenn dieser bislang noch gefehlt hat.
+% Daduch wird die Reihenfolge eines bereits im Pfad befindlichen Ordners
+% nicht mehr geändert.
+if ~contains(path(), [new_dir, pathsep()])
+  addpath(new_dir);
+  added = true;
+else
+  added = false;
+end
 end

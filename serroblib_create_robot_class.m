@@ -225,7 +225,7 @@ end
 PS.pkin = []; % sind hier noch gar nicht bekannt. Würde Auswahl eines bestimmten Roboters erfordern
 
 % Klassen-Instanz erstellen
-serroblib_addtopath({Name})
+serroblib_addtopath({Name});
 if ~isvariant % Keine Variante: Normale Definition der Klasse
   RS = SerRob(PS, Name);
 elseif ~isempty(which(sprintf('%s_structural_kinematic_parameters.m', Name)))

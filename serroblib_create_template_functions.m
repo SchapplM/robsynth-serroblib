@@ -237,7 +237,7 @@ for i = 1:length(Names)
   % Prüfe, ob mex-Datei im tpl-Ordner liegt. Wenn nicht, ist wahrscheinlich
   % noch eine alte Version vorhanden. Diese Funktion ist sinnvoll zur
   % Aktualisierung der Repo-Version auf das tpl-Format
-  serroblib_addtopath({Name_i});
+  path_added = serroblib_addtopath({Name_i});
   for tmp = function_list
     [~,f_basename] = fileparts([Name_i, '_', tmp{1}]);
     [dir_mexfcn, ~, mex_ext] = fileparts(which(sprintf('%s_mex', f_basename)));
@@ -264,13 +264,20 @@ for i = 1:length(Names)
       continue
     end
   end
-  serroblib_removefrompath({Name_i});
+  if path_added
+    % Entferne den Ordner wieder aus dem Suchpfad, falls er in dieser
+    % Funktion hinzugefügt wurde. Dient dazu, bei Generierung für alle
+    % Roboter nicht Hunderte Ordner dem Pfad hinzuzufügen.
+    serroblib_removefrompath({Name_i});
+  end
   % Testen: Kompilieren aller Funktionen im Zielordner
   if mex_results
-    serroblib_addtopath({Name_i})
+    path_added = serroblib_addtopath({Name_i});
     cd(fcn_dir)
     matlabfcn2mex(function_list_mex);
-    serroblib_removefrompath({Name_i})
+    if path_added % Ordner wirder aus Pfad entfernen (s.o.).
+      serroblib_removefrompath({Name_i})
+    end
   end
 end
 % Zurückwechseln in vorheriges Verzeichnis
