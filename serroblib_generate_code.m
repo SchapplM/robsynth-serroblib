@@ -194,7 +194,7 @@ function system_gen(cmd, lockfile)
   % lockfile:
   %  Pfad zur Sperrdatei, die existiert, solange noch Code generiert wird.
   if isunix() || ismac()
-    system(cmd)
+    system(cmd);
   elseif ispc()
     % Befehl über Git Bash ausführen und nach Ausführung noch 3 Minuten anzeigen
     system(sprintf('start "" "%%PROGRAMFILES%%\\Git\\bin\\sh.exe" --login  -c "%s || sleep 180"', cmd));
