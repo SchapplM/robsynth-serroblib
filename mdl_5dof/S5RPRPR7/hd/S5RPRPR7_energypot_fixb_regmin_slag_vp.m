@@ -12,12 +12,12 @@
 %   pkin=[a2,a3,a4,a5,d1,d3,d5,theta2,theta4]';
 % 
 % Output:
-% U_reg [1x20]
+% U_reg [1x22]
 %   minimal parameter regressor of Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-31 18:20
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2021-01-15 12:07
+% Revision: d12c3222fdeb2c5f3b3c8fa5751e113be2fc3aae (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,30 +36,31 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-31 18:19:50
-% EndTime: 2019-12-31 18:19:50
-% DurationCPUTime: 0.08s
-% Computational Cost: add. (54->27), mult. (53->40), div. (0->0), fcn. (51->10), ass. (0->22)
-t150 = qJ(3) + pkin(9);
-t166 = g(3) * sin(t150);
-t165 = qJ(2) + pkin(5);
-t151 = qJ(1) + pkin(8);
-t147 = sin(t151);
-t153 = sin(qJ(5));
-t164 = t147 * t153;
-t156 = cos(qJ(5));
-t163 = t147 * t156;
-t149 = cos(t151);
-t162 = t149 * t153;
-t161 = t149 * t156;
-t160 = g(1) * t149 + g(2) * t147;
-t155 = sin(qJ(1));
-t158 = cos(qJ(1));
-t159 = -g(1) * t158 - g(2) * t155;
-t157 = cos(qJ(3));
-t154 = sin(qJ(3));
-t152 = -qJ(4) - pkin(6);
-t148 = cos(t150);
-t145 = t157 * pkin(3) + pkin(2);
-t1 = [0, t159, g(1) * t155 - g(2) * t158, t159 * pkin(1) - g(3) * t165, 0, 0, 0, 0, 0, -g(3) * t154 - t160 * t157, -g(3) * t157 + t160 * t154, -g(1) * t147 + g(2) * t149, -g(1) * (t158 * pkin(1) + t149 * t145 - t147 * t152) - g(2) * (t155 * pkin(1) + t147 * t145 + t149 * t152) - g(3) * (t154 * pkin(3) + t165), 0, 0, 0, 0, 0, -g(1) * (t148 * t161 + t164) - g(2) * (t148 * t163 - t162) - t156 * t166, -g(1) * (-t148 * t162 + t163) - g(2) * (-t148 * t164 - t161) + t153 * t166;];
+% StartTime: 2021-01-15 12:06:25
+% EndTime: 2021-01-15 12:06:25
+% DurationCPUTime: 0.06s
+% Computational Cost: add. (68->29), mult. (63->43), div. (0->0), fcn. (61->10), ass. (0->23)
+t71 = qJ(3) + pkin(9);
+t67 = sin(t71);
+t87 = g(3) * t67;
+t72 = qJ(1) + pkin(8);
+t68 = sin(t72);
+t74 = sin(qJ(5));
+t86 = t68 * t74;
+t77 = cos(qJ(5));
+t85 = t68 * t77;
+t70 = cos(t72);
+t84 = t70 * t74;
+t83 = t70 * t77;
+t82 = qJ(2) + pkin(5);
+t81 = g(1) * t70 + g(2) * t68;
+t76 = sin(qJ(1));
+t79 = cos(qJ(1));
+t80 = -g(1) * t79 - g(2) * t76;
+t78 = cos(qJ(3));
+t75 = sin(qJ(3));
+t73 = -qJ(4) - pkin(6);
+t69 = cos(t71);
+t66 = t78 * pkin(3) + pkin(2);
+t1 = [0, t80, g(1) * t76 - g(2) * t79, t80 * pkin(1) - g(3) * t82, 0, 0, 0, 0, 0, -g(3) * t75 - t81 * t78, -g(3) * t78 + t81 * t75, -t81 * t69 - t87, -g(3) * t69 + t81 * t67, -g(1) * t68 + g(2) * t70, -g(1) * (t79 * pkin(1) + t70 * t66 - t68 * t73) - g(2) * (t76 * pkin(1) + t68 * t66 + t70 * t73) - g(3) * (t75 * pkin(3) + t82), 0, 0, 0, 0, 0, -g(1) * (t69 * t83 + t86) - g(2) * (t69 * t85 - t84) - t77 * t87, -g(1) * (-t69 * t84 + t85) - g(2) * (-t69 * t86 - t83) + t74 * t87;];
 U_reg = t1;

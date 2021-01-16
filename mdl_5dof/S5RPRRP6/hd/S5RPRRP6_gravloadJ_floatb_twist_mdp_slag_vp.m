@@ -10,7 +10,7 @@
 % pkin [8x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d3,d4,theta2]';
-% MDP [20x1]
+% MDP [22x1]
 %   Minimal dynamic parameter vector (fixed base model)
 %   see S5RPRRP6_convert_par2_MPV_fixb.m
 % 
@@ -19,54 +19,56 @@
 %   joint torques required to compensate gravitation load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-31 18:43
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2021-01-15 18:09
+% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug = S5RPRRP6_gravloadJ_floatb_twist_mdp_slag_vp(qJ, g, pkin, MDP)
 %% Coder Information
 %#codegen
-%$cgargs {zeros(5,1),zeros(3,1),zeros(8,1),zeros(20,1)}
+%$cgargs {zeros(5,1),zeros(3,1),zeros(8,1),zeros(22,1)}
 assert(isreal(qJ) && all(size(qJ) == [5 1]), ...
   'S5RPRRP6_gravloadJ_floatb_twist_mdp_slag_vp: qJ has to be [5x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
   'S5RPRRP6_gravloadJ_floatb_twist_mdp_slag_vp: pkin has to be [8x1] (double)');
-assert(isreal(MDP) && all(size(MDP) == [20 1]), ...
-  'S5RPRRP6_gravloadJ_floatb_twist_mdp_slag_vp: MDP has to be [20x1] (double)'); 
+assert(isreal(MDP) && all(size(MDP) == [22 1]), ...
+  'S5RPRRP6_gravloadJ_floatb_twist_mdp_slag_vp: MDP has to be [22x1] (double)'); 
 
 %% Symbolic Calculation
 % From gravload_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-31 18:43:16
-% EndTime: 2019-12-31 18:43:17
-% DurationCPUTime: 0.17s
-% Computational Cost: add. (130->44), mult. (166->66), div. (0->0), fcn. (143->8), ass. (0->27)
-t47 = qJ(1) + pkin(8);
-t45 = sin(t47);
-t46 = cos(t47);
-t61 = g(1) * t46 + g(2) * t45;
-t73 = MDP(11) - MDP(19);
-t50 = sin(qJ(3));
-t53 = cos(qJ(3));
-t37 = -g(3) * t53 + t61 * t50;
-t67 = g(3) * t50;
-t49 = sin(qJ(4));
-t65 = t49 * t53;
-t52 = cos(qJ(4));
-t64 = t52 * t53;
-t62 = pkin(4) * t49 + pkin(6);
-t51 = sin(qJ(1));
-t54 = cos(qJ(1));
-t59 = g(1) * t51 - g(2) * t54;
-t44 = t52 * pkin(4) + pkin(3);
-t48 = -qJ(5) - pkin(7);
-t58 = t53 * t44 - t50 * t48;
-t56 = pkin(2) + t58;
-t41 = t45 * t52 - t46 * t65;
-t39 = t45 * t65 + t46 * t52;
-t55 = t59 * pkin(1);
-t42 = t45 * t49 + t46 * t64;
-t40 = -t45 * t64 + t46 * t49;
-t1 = [t59 * MDP(2) + (g(1) * t54 + g(2) * t51) * MDP(3) + MDP(4) * t55 + (-g(1) * t40 - g(2) * t42) * MDP(17) + (-g(1) * t39 - g(2) * t41) * MDP(18) + (t55 + (-g(1) * t62 - g(2) * t56) * t46 + (g(1) * t56 - g(2) * t62) * t45) * MDP(20) + (t53 * MDP(10) - t73 * t50) * (g(1) * t45 - g(2) * t46); (-MDP(20) - MDP(4)) * g(3); (-g(3) * t58 + t61 * (t44 * t50 + t48 * t53)) * MDP(20) + t73 * (t61 * t53 + t67) + (MDP(17) * t52 - MDP(18) * t49 + MDP(10)) * t37; (g(1) * t42 - g(2) * t40 + t52 * t67) * MDP(18) + (pkin(4) * MDP(20) + MDP(17)) * (-g(1) * t41 + g(2) * t39 + t49 * t67); -t37 * MDP(20);];
+% StartTime: 2021-01-15 18:08:28
+% EndTime: 2021-01-15 18:08:29
+% DurationCPUTime: 0.22s
+% Computational Cost: add. (174->46), mult. (224->66), div. (0->0), fcn. (203->8), ass. (0->29)
+t58 = qJ(1) + pkin(8);
+t56 = sin(t58);
+t57 = cos(t58);
+t72 = g(1) * t57 + g(2) * t56;
+t86 = MDP(11) - MDP(21);
+t85 = MDP(17) + MDP(19);
+t84 = MDP(18) + MDP(20);
+t61 = sin(qJ(3));
+t64 = cos(qJ(3));
+t48 = -g(3) * t64 + t72 * t61;
+t78 = g(3) * t61;
+t60 = sin(qJ(4));
+t76 = t60 * t64;
+t63 = cos(qJ(4));
+t75 = t63 * t64;
+t73 = pkin(4) * t60 + pkin(6);
+t62 = sin(qJ(1));
+t65 = cos(qJ(1));
+t70 = g(1) * t62 - g(2) * t65;
+t55 = pkin(4) * t63 + pkin(3);
+t59 = -qJ(5) - pkin(7);
+t69 = t55 * t64 - t59 * t61;
+t67 = pkin(2) + t69;
+t52 = t56 * t63 - t57 * t76;
+t50 = t56 * t76 + t57 * t63;
+t66 = t70 * pkin(1);
+t53 = t56 * t60 + t57 * t75;
+t51 = -t56 * t75 + t57 * t60;
+t1 = [t70 * MDP(2) + (g(1) * t65 + g(2) * t62) * MDP(3) + MDP(4) * t66 + (t66 + (-g(1) * t73 - g(2) * t67) * t57 + (g(1) * t67 - g(2) * t73) * t56) * MDP(22) + t85 * (-g(1) * t51 - g(2) * t53) + t84 * (-g(1) * t50 - g(2) * t52) + (t64 * MDP(10) - t86 * t61) * (g(1) * t56 - g(2) * t57); (-MDP(22) - MDP(4)) * g(3); (-g(3) * t69 + t72 * (t55 * t61 + t59 * t64)) * MDP(22) + t86 * (t72 * t64 + t78) + (-t84 * t60 + t85 * t63 + MDP(10)) * t48; t84 * (g(1) * t53 - g(2) * t51 + t63 * t78) + (pkin(4) * MDP(22) + t85) * (-g(1) * t52 + g(2) * t50 + t60 * t78); -t48 * MDP(22);];
 taug = t1;

@@ -12,12 +12,12 @@
 %   pkin=[a2,a3,a4,d2,d3,theta1]';
 % 
 % Output:
-% U_reg [1x13]
+% U_reg [1x15]
 %   minimal parameter regressor of Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-31 16:29
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2021-01-14 22:36
+% Revision: beb2ba9bd8c5bd556f42a244985f3dab86917626 (2021-01-14)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,24 +36,26 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-31 16:29:21
-% EndTime: 2019-12-31 16:29:21
-% DurationCPUTime: 0.05s
-% Computational Cost: add. (33->24), mult. (60->36), div. (0->0), fcn. (60->6), ass. (0->16)
-t80 = sin(qJ(2));
-t88 = g(3) * t80;
-t79 = sin(qJ(3));
-t82 = cos(qJ(2));
-t87 = t79 * t82;
-t81 = cos(qJ(3));
-t86 = t81 * t82;
-t85 = pkin(3) * t79 + pkin(4);
-t76 = sin(pkin(6));
-t77 = cos(pkin(6));
-t84 = g(1) * t77 + g(2) * t76;
-t75 = t81 * pkin(3) + pkin(2);
-t78 = -qJ(4) - pkin(5);
-t83 = t75 * t82 - t78 * t80 + pkin(1);
-t74 = -g(3) * t82 + t84 * t80;
-t1 = [-g(3) * qJ(1), 0, -t84 * t82 - t88, t74, 0, 0, 0, 0, 0, -g(1) * (t76 * t79 + t77 * t86) - g(2) * (t76 * t86 - t77 * t79) - t81 * t88, -g(1) * (t76 * t81 - t77 * t87) - g(2) * (-t76 * t87 - t77 * t81) + t79 * t88, -t74, -g(3) * (t80 * t75 + t82 * t78 + qJ(1)) + (-g(1) * t83 + g(2) * t85) * t77 + (-g(1) * t85 - g(2) * t83) * t76;];
+% StartTime: 2021-01-14 22:36:07
+% EndTime: 2021-01-14 22:36:07
+% DurationCPUTime: 0.09s
+% Computational Cost: add. (41->24), mult. (80->36), div. (0->0), fcn. (84->6), ass. (0->18)
+t83 = sin(qJ(2));
+t91 = g(3) * t83;
+t82 = sin(qJ(3));
+t85 = cos(qJ(2));
+t90 = t82 * t85;
+t84 = cos(qJ(3));
+t89 = t84 * t85;
+t88 = pkin(3) * t82 + pkin(4);
+t79 = sin(pkin(6));
+t80 = cos(pkin(6));
+t87 = g(1) * t80 + g(2) * t79;
+t78 = t84 * pkin(3) + pkin(2);
+t81 = qJ(4) + pkin(5);
+t86 = t78 * t85 + t81 * t83 + pkin(1);
+t77 = -g(3) * t85 + t87 * t83;
+t76 = -g(1) * (t79 * t82 + t80 * t89) - g(2) * (t79 * t89 - t80 * t82) - t84 * t91;
+t75 = -g(1) * (t79 * t84 - t80 * t90) - g(2) * (-t79 * t90 - t80 * t84) + t82 * t91;
+t1 = [-g(3) * qJ(1), 0, -t87 * t85 - t91, t77, 0, 0, 0, 0, 0, t76, t75, t76, t75, -t77, -g(3) * (t83 * t78 - t85 * t81 + qJ(1)) + (-g(1) * t86 + g(2) * t88) * t80 + (-g(1) * t88 - g(2) * t86) * t79;];
 U_reg = t1;

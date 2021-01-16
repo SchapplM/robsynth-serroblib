@@ -10,13 +10,13 @@
 %   pkin=[a2,a3,a4,d1,d2,d4,theta3]';
 % 
 % Output:
-% MM_reg [((4+1)*4/2)x19]
+% MM_reg [((4+1)*4/2)x21]
 %   minimal parameter regressor of joint inertia matrix
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-31 17:05
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2021-01-15 10:46
+% Revision: d12c3222fdeb2c5f3b3c8fa5751e113be2fc3aae (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -32,35 +32,37 @@ assert(isreal(pkin) && all(size(pkin) == [7 1]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-31 17:04:54
-% EndTime: 2019-12-31 17:04:55
-% DurationCPUTime: 0.12s
-% Computational Cost: add. (123->26), mult. (257->62), div. (0->0), fcn. (293->6), ass. (0->27)
-t22 = sin(pkin(7));
-t23 = cos(pkin(7));
-t25 = sin(qJ(2));
-t27 = cos(qJ(2));
-t13 = -t22 * t25 + t23 * t27;
-t21 = -t27 * pkin(2) - pkin(1);
-t32 = -0.2e1 * t13 * pkin(3) + 0.2e1 * t21;
-t31 = 0.2e1 * t27;
-t30 = pkin(2) * t22;
-t29 = -qJ(3) - pkin(5);
-t18 = t29 * t25;
-t19 = t29 * t27;
-t8 = t22 * t18 - t23 * t19;
-t7 = t23 * t18 + t22 * t19;
-t26 = cos(qJ(4));
-t24 = sin(qJ(4));
-t20 = t23 * pkin(2) + pkin(3);
-t14 = t22 * t27 + t23 * t25;
-t11 = -t24 * t20 - t26 * t30;
-t10 = t26 * t20 - t24 * t30;
-t6 = t24 * t13 + t26 * t14;
-t5 = -t26 * t13 + t24 * t14;
-t4 = t13 * pkin(6) + t8;
+% StartTime: 2021-01-15 10:46:22
+% EndTime: 2021-01-15 10:46:23
+% DurationCPUTime: 0.14s
+% Computational Cost: add. (135->27), mult. (287->67), div. (0->0), fcn. (325->6), ass. (0->29)
+t21 = sin(pkin(7));
+t22 = cos(pkin(7));
+t24 = sin(qJ(2));
+t26 = cos(qJ(2));
+t13 = t21 * t24 - t22 * t26;
+t20 = -t26 * pkin(2) - pkin(1);
+t33 = 0.2e1 * t13 * pkin(3) + 0.2e1 * t20;
+t32 = 0.2e1 * t20;
+t31 = 0.2e1 * t26;
+t30 = t21 * pkin(2);
+t29 = t22 * pkin(2);
+t28 = -qJ(3) - pkin(5);
+t16 = t28 * t24;
+t17 = t28 * t26;
+t7 = t22 * t16 + t21 * t17;
+t8 = t21 * t16 - t22 * t17;
+t25 = cos(qJ(4));
+t23 = sin(qJ(4));
+t19 = pkin(3) + t29;
+t14 = t21 * t26 + t22 * t24;
+t11 = -t23 * t19 - t25 * t30;
+t10 = t25 * t19 - t23 * t30;
+t6 = -t23 * t13 + t25 * t14;
+t5 = t25 * t13 + t23 * t14;
+t4 = -t13 * pkin(6) + t8;
 t3 = -t14 * pkin(6) + t7;
-t2 = -t24 * t3 - t26 * t4;
-t1 = -t24 * t4 + t26 * t3;
-t9 = [1, 0, 0, t25 ^ 2, t25 * t31, 0, 0, 0, pkin(1) * t31, -0.2e1 * pkin(1) * t25, 0.2e1 * t8 * t13 - 0.2e1 * t7 * t14, t21 ^ 2 + t7 ^ 2 + t8 ^ 2, t6 ^ 2, -0.2e1 * t6 * t5, 0, 0, 0, t5 * t32, t6 * t32; 0, 0, 0, 0, 0, t25, t27, 0, -t25 * pkin(5), -t27 * pkin(5), (t13 * t22 - t14 * t23) * pkin(2), (t22 * t8 + t23 * t7) * pkin(2), 0, 0, t6, -t5, 0, t1, t2; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, (t22 ^ 2 + t23 ^ 2) * pkin(2) ^ 2, 0, 0, 0, 0, 1, 0.2e1 * t10, 0.2e1 * t11; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t21, 0, 0, 0, 0, 0, t5, t6; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t6, -t5, 0, t1, t2; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, t10, t11; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0;];
+t2 = -t23 * t3 - t25 * t4;
+t1 = -t23 * t4 + t25 * t3;
+t9 = [1, 0, 0, t24 ^ 2, t24 * t31, 0, 0, 0, pkin(1) * t31, -0.2e1 * pkin(1) * t24, t13 * t32, t14 * t32, -0.2e1 * t8 * t13 - 0.2e1 * t7 * t14, t20 ^ 2 + t7 ^ 2 + t8 ^ 2, t6 ^ 2, -0.2e1 * t6 * t5, 0, 0, 0, t5 * t33, t6 * t33; 0, 0, 0, 0, 0, t24, t26, 0, -t24 * pkin(5), -t26 * pkin(5), t7, -t8, (-t13 * t21 - t14 * t22) * pkin(2), (t21 * t8 + t22 * t7) * pkin(2), 0, 0, t6, -t5, 0, t1, t2; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0.2e1 * t29, -0.2e1 * t30, 0, (t21 ^ 2 + t22 ^ 2) * pkin(2) ^ 2, 0, 0, 0, 0, 1, 0.2e1 * t10, 0.2e1 * t11; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t13, t14, 0, t20, 0, 0, 0, 0, 0, t5, t6; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t6, -t5, 0, t1, t2; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, t10, t11; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0;];
 MM_reg = t9;
