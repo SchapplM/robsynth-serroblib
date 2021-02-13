@@ -80,11 +80,12 @@ for i = 1:length(Names)
           warning('Verzeichnis für allgemeinen Code %s existiert nicht. Es wird aber darauf verwiesen.', fcn_dir_gen);
         end
         tpl_dir_gen = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, 'tpl');
-        if exist(tpl_dir_gen, 'file')
-          added(i) = added(i) | addpath2(tpl_dir_gen);
-        else
-          warning('Verzeichnis für allgemeinen Vorlagen-Code %s existiert nicht. Es wird aber darauf verwiesen.', tpl_dir_gen);
+        if ~exist(tpl_dir_gen, 'file')
+          serroblib_create_template_functions({Name_GenMdl});
+          % Pfad kann durch create_template_functions wieder gelöscht werden.
+          added(i) = added(i) | addpath2(fcn_dir_gen);
         end
+        added(i) = added(i) | addpath2(tpl_dir_gen);
       end
     else
       % Ist keine Variante und Verzeichnis nicht da.
