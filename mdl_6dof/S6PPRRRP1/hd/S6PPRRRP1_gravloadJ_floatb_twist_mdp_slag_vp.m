@@ -10,7 +10,7 @@
 % pkin [12x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,a6,alpha2,alpha3,d3,d4,d5,theta1,theta2]';
-% MDP [21x1]
+% MDP [23x1]
 %   Minimal dynamic parameter vector (fixed base model)
 %   see S6PPRRRP1_convert_par2_MPV_fixb.m
 % 
@@ -19,79 +19,95 @@
 %   joint torques required to compensate gravitation load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-03-08 18:55
-% Revision: 8e0af74c1e634ead9bab9e082796ada77f031ee9 (2019-03-08)
+% Datum: 2021-01-16 00:51
+% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function taug = S6PPRRRP1_gravloadJ_floatb_twist_mdp_slag_vp(qJ, g, pkin, MDP)
 %% Coder Information
 %#codegen
-%$cgargs {zeros(6,1),zeros(3,1),zeros(12,1),zeros(21,1)}
+%$cgargs {zeros(6,1),zeros(3,1),zeros(12,1),zeros(23,1)}
 assert(isreal(qJ) && all(size(qJ) == [6 1]), ...
   'S6PPRRRP1_gravloadJ_floatb_twist_mdp_slag_vp: qJ has to be [6x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [12 1]), ...
   'S6PPRRRP1_gravloadJ_floatb_twist_mdp_slag_vp: pkin has to be [12x1] (double)');
-assert(isreal(MDP) && all(size(MDP) == [21 1]), ...
-  'S6PPRRRP1_gravloadJ_floatb_twist_mdp_slag_vp: MDP has to be [21x1] (double)'); 
+assert(isreal(MDP) && all(size(MDP) == [23 1]), ...
+  'S6PPRRRP1_gravloadJ_floatb_twist_mdp_slag_vp: MDP has to be [23x1] (double)'); 
 
 %% Symbolic Calculation
 % From gravload_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-03-08 18:54:25
-% EndTime: 2019-03-08 18:54:27
-% DurationCPUTime: 0.47s
-% Computational Cost: add. (467->79), mult. (1279->134), div. (0->0), fcn. (1627->14), ass. (0->52)
-t154 = MDP(12) - MDP(20);
-t137 = sin(pkin(12));
-t138 = sin(pkin(11));
-t124 = t138 * t137;
-t141 = cos(pkin(12));
-t142 = cos(pkin(11));
-t131 = t142 * t141;
-t144 = cos(pkin(6));
-t115 = -t144 * t131 + t124;
-t139 = sin(pkin(7));
-t140 = sin(pkin(6));
-t128 = t140 * t139;
-t143 = cos(pkin(7));
-t153 = t115 * t143 + t142 * t128;
-t125 = t138 * t141;
-t129 = t142 * t137;
-t116 = t144 * t125 + t129;
-t127 = t140 * t138;
-t152 = t116 * t143 - t139 * t127;
-t151 = t141 * t143 * t140 + t144 * t139;
-t145 = cos(qJ(3));
-t104 = sin(qJ(5));
-t108 = cos(qJ(4));
-t136 = t104 * t108;
-t107 = cos(qJ(5));
-t135 = t107 * t108;
-t134 = MDP(2) + MDP(21);
-t130 = t142 * t140;
-t126 = t140 * t137;
-t105 = sin(qJ(4));
-t109 = t115 * t139 - t143 * t130;
-t106 = sin(qJ(3));
-t96 = t144 * t129 + t125;
-t83 = -t153 * t106 + t96 * t145;
-t78 = t83 * t105 - t109 * t108;
-t110 = t116 * t139 + t143 * t127;
-t97 = -t144 * t124 + t131;
-t85 = -t152 * t106 + t97 * t145;
-t80 = t85 * t105 - t110 * t108;
-t114 = -t141 * t128 + t144 * t143;
-t91 = t151 * t106 + t145 * t126;
-t86 = t91 * t105 - t114 * t108;
-t122 = g(1) * t80 + g(2) * t78 + g(3) * t86;
-t103 = -qJ(6) - pkin(10);
-t102 = t107 * pkin(5) + pkin(4);
-t90 = t106 * t126 - t151 * t145;
-t87 = t114 * t105 + t91 * t108;
-t84 = t97 * t106 + t152 * t145;
-t82 = t96 * t106 + t153 * t145;
-t81 = t110 * t105 + t85 * t108;
-t79 = t109 * t105 + t83 * t108;
-t1 = [(-MDP(1) - t134) * g(3); t134 * (-g(1) * t127 + g(2) * t130 - g(3) * t144); (-g(1) * (t85 * t104 - t84 * t135) - g(2) * (t83 * t104 - t82 * t135) - g(3) * (t91 * t104 - t90 * t135)) * MDP(18) + (-g(1) * (t85 * t107 + t84 * t136) - g(2) * (t83 * t107 + t82 * t136) - g(3) * (t91 * t107 + t90 * t136)) * MDP(19) + (MDP(5) - (pkin(5) * t104 + pkin(9)) * MDP(21)) * (g(1) * t85 + g(2) * t83 + g(3) * t91) + (-t154 * t105 + MDP(4) + t108 * MDP(11) + (t102 * t108 - t103 * t105 + pkin(3)) * MDP(21)) * (g(1) * t84 + g(2) * t82 + g(3) * t90); (-g(1) * (-t80 * t102 - t81 * t103) - g(2) * (-t78 * t102 - t79 * t103) - g(3) * (-t86 * t102 - t87 * t103)) * MDP(21) + t154 * (g(1) * t81 + g(2) * t79 + g(3) * t87) + (MDP(18) * t107 - MDP(19) * t104 + MDP(11)) * t122; (-g(1) * (-t84 * t104 - t81 * t107) - g(2) * (-t82 * t104 - t79 * t107) - g(3) * (-t90 * t104 - t87 * t107)) * MDP(19) + (pkin(5) * MDP(21) + MDP(18)) * (-g(1) * (-t81 * t104 + t84 * t107) - g(2) * (-t79 * t104 + t82 * t107) - g(3) * (-t87 * t104 + t90 * t107)); -t122 * MDP(21);];
-taug  = t1;
+% StartTime: 2021-01-16 00:50:15
+% EndTime: 2021-01-16 00:50:20
+% DurationCPUTime: 1.08s
+% Computational Cost: add. (629->105), mult. (1631->181), div. (0->0), fcn. (2097->14), ass. (0->68)
+t162 = cos(pkin(12));
+t164 = cos(pkin(7));
+t165 = cos(pkin(6));
+t185 = t164 * t165;
+t160 = sin(pkin(7));
+t161 = sin(pkin(6));
+t187 = t161 * t160;
+t147 = t162 * t185 - t187;
+t159 = sin(pkin(11));
+t163 = cos(pkin(11));
+t158 = sin(pkin(12));
+t192 = t158 * t164;
+t137 = -t147 * t163 + t159 * t192;
+t191 = t158 * t165;
+t149 = t159 * t162 + t163 * t191;
+t169 = sin(qJ(3));
+t172 = cos(qJ(3));
+t124 = t137 * t169 - t149 * t172;
+t188 = t160 * t165;
+t145 = t161 * t164 + t162 * t188;
+t193 = t158 * t160;
+t133 = t145 * t163 - t159 * t193;
+t168 = sin(qJ(4));
+t171 = cos(qJ(4));
+t113 = t124 * t168 - t133 * t171;
+t134 = t147 * t159 + t163 * t192;
+t150 = -t159 * t191 + t162 * t163;
+t118 = t134 * t169 - t150 * t172;
+t132 = t145 * t159 + t163 * t193;
+t115 = t118 * t168 + t132 * t171;
+t186 = t162 * t164;
+t148 = t161 * t186 + t188;
+t189 = t158 * t172;
+t138 = t148 * t169 + t161 * t189;
+t146 = t162 * t187 - t185;
+t205 = t138 * t168 + t146 * t171;
+t211 = g(1) * t115 + g(2) * t113 - g(3) * t205;
+t112 = t118 * t171 - t132 * t168;
+t117 = t124 * t171 + t133 * t168;
+t119 = t134 * t172 + t150 * t169;
+t125 = t137 * t172 + t149 * t169;
+t178 = g(1) * t119 + g(2) * t125;
+t127 = t138 * t171 - t146 * t168;
+t204 = -MDP(12) + MDP(22);
+t180 = MDP(18) + MDP(20);
+t179 = MDP(19) + MDP(21);
+t167 = sin(qJ(5));
+t203 = t118 * t167;
+t202 = t124 * t167;
+t131 = t169 * t188 + (t169 * t186 + t189) * t161;
+t201 = t131 * t167;
+t190 = t158 * t169;
+t166 = -qJ(6) - pkin(10);
+t184 = t166 * t168;
+t183 = t167 * t171;
+t170 = cos(qJ(5));
+t182 = t170 * t171;
+t181 = MDP(2) + MDP(23);
+t154 = pkin(3) * t186 + pkin(9) * t158;
+t177 = pkin(3) * t187 - t154 * t165;
+t153 = -t158 * pkin(3) + pkin(9) * t186;
+t176 = pkin(9) * t187 - t153 * t165;
+t141 = -t148 * t172 + t161 * t190;
+t156 = pkin(5) * t170 + pkin(4);
+t152 = pkin(3) * t192 - pkin(9) * t162;
+t151 = pkin(3) * t162 + pkin(9) * t192;
+t130 = -t172 * t188 + (-t172 * t186 + t190) * t161;
+t1 = [(-MDP(1) - t181) * g(3); t181 * (-g(3) * t165 + (-g(1) * t159 + g(2) * t163) * t161); (g(3) * t130 + t178) * MDP(4) + (-g(1) * t118 - g(2) * t124 + g(3) * t131) * MDP(5) + (-g(1) * (t119 * t184 - pkin(5) * t203 - (t163 * t151 - t176 * t159) * t169 + (-t163 * t152 + t177 * t159) * t172) - g(2) * (t125 * t184 - pkin(5) * t202 - (t159 * t151 + t176 * t163) * t169 + (-t159 * t152 - t177 * t163) * t172) - g(3) * (t141 * t184 + pkin(5) * t201 - (-pkin(9) * t188 - t153 * t161) * t169 + (pkin(3) * t188 + t154 * t161) * t172)) * MDP(23) + t180 * (-g(1) * (-t119 * t182 - t203) - g(2) * (-t125 * t182 - t202) - g(3) * (-t141 * t182 + t201)) + t179 * (-g(1) * (-t118 * t170 + t119 * t183) - g(2) * (-t124 * t170 + t125 * t183) - g(3) * (t131 * t170 + t141 * t183)) + (t204 * t168 + (MDP(23) * t156 + MDP(11)) * t171) * (g(3) * t141 + t178); (-g(1) * (t112 * t166 + t115 * t156) - g(2) * (t113 * t156 + t117 * t166) - g(3) * (-t127 * t166 - t156 * t205)) * MDP(23) + t204 * (g(1) * t112 + g(2) * t117 - g(3) * t127) + (t179 * t167 - t180 * t170 - MDP(11)) * t211; t179 * (-g(1) * (t112 * t170 - t119 * t167) - g(2) * (t117 * t170 - t125 * t167) - g(3) * (-t127 * t170 - t130 * t167)) + (MDP(23) * pkin(5) + t180) * (-g(1) * (t112 * t167 + t119 * t170) - g(2) * (t117 * t167 + t125 * t170) - g(3) * (-t127 * t167 + t130 * t170)); t211 * MDP(23);];
+taug = t1;

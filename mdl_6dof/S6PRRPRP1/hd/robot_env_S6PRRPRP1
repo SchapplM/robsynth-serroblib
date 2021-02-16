@@ -11,3 +11,4 @@ a := Matrix(NJ,1,[0,a2,a3,a4,a5,a6]):
 theta := Matrix(NJ,1,[theta1,qJ_t(2,1) + 0,qJ_t(3,1) + 0,theta4,qJ_t(5,1) + 0,0]):
 d := Matrix(NJ,1,[qJ_t(1,1) + 0,d2,d3,qJ_t(4,1) + 0,d5,qJ_t(6,1) + 0]):
 qoffset := Matrix(NJ,1,[0,0,0,0,0,0]):
+dynpar_minimization_linsolve:=true:

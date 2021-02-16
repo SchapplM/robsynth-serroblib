@@ -19,8 +19,8 @@
 %   joint torques required to compensate gravitation load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-31 17:52
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2021-01-15 17:13
+% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -38,27 +38,30 @@ assert(isreal(MDP) && all(size(MDP) == [18 1]), ...
 %% Symbolic Calculation
 % From gravload_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-31 17:52:20
-% EndTime: 2019-12-31 17:52:21
-% DurationCPUTime: 0.16s
-% Computational Cost: add. (78->37), mult. (141->48), div. (0->0), fcn. (133->6), ass. (0->19)
-t57 = cos(qJ(1));
-t56 = sin(qJ(1));
-t55 = t57 * pkin(1) + t56 * qJ(2);
-t54 = cos(pkin(7));
-t53 = sin(pkin(7));
-t52 = MDP(18) + MDP(9);
-t51 = t57 * pkin(2) + t55;
-t50 = -pkin(1) * t56 + t57 * qJ(2);
-t30 = -t53 * t56 - t54 * t57;
-t31 = t53 * t57 - t54 * t56;
-t49 = g(1) * t31 - g(2) * t30;
-t48 = g(1) * t30 + g(2) * t31;
-t47 = -pkin(2) * t56 + t50;
-t45 = cos(qJ(4));
-t44 = sin(qJ(4));
-t43 = -qJ(5) - pkin(6);
-t37 = pkin(4) * t45 + pkin(3);
-t32 = g(1) * t56 - g(2) * t57;
-t1 = [(-g(1) * t50 - g(2) * t55) * MDP(6) + (-g(1) * t47 - g(2) * t51) * MDP(9) + (-g(1) * (-t30 * t43 + t31 * t37 + t47) - g(2) * (-t30 * t37 - t31 * t43 + t51)) * MDP(18) + (MDP(3) - MDP(5)) * (g(1) * t57 + g(2) * t56) + (MDP(2) + MDP(4)) * t32 + (MDP(8) - MDP(17)) * t48 + (-MDP(15) * t45 + t44 * MDP(16) - MDP(7)) * t49; (-MDP(6) - t52) * t32; t52 * g(3); (-g(3) * t44 - t45 * t48) * MDP(16) + (MDP(18) * pkin(4) + MDP(15)) * (g(3) * t45 - t44 * t48); -t49 * MDP(18);];
+% StartTime: 2021-01-15 17:13:16
+% EndTime: 2021-01-15 17:13:17
+% DurationCPUTime: 0.17s
+% Computational Cost: add. (92->40), mult. (167->52), div. (0->0), fcn. (155->6), ass. (0->22)
+t62 = MDP(13) + MDP(15);
+t61 = MDP(14) + MDP(16);
+t45 = sin(pkin(7));
+t46 = cos(pkin(7));
+t47 = qJ(5) + pkin(6);
+t50 = cos(qJ(4));
+t56 = pkin(4) * t50 + pkin(3);
+t60 = t45 * t56 - t47 * t46 + qJ(2);
+t52 = pkin(1) + pkin(2);
+t57 = MDP(18) + MDP(7);
+t49 = sin(qJ(1));
+t51 = cos(qJ(1));
+t35 = -t49 * t45 - t51 * t46;
+t36 = t45 * t51 - t49 * t46;
+t54 = g(1) * t36 - g(2) * t35;
+t53 = -g(1) * t35 - g(2) * t36;
+t48 = sin(qJ(4));
+t43 = t51 * qJ(2);
+t42 = t49 * qJ(2);
+t37 = g(1) * t49 - g(2) * t51;
+t34 = t47 * t45 + t46 * t56 + t52;
+t1 = [(-g(1) * (-pkin(1) * t49 + t43) - g(2) * (pkin(1) * t51 + t42)) * MDP(6) + (-g(1) * (-t49 * t52 + t43) - g(2) * (t51 * t52 + t42)) * MDP(7) + t53 * MDP(17) + (-g(1) * (-t34 * t49 + t51 * t60) - g(2) * (t34 * t51 + t49 * t60)) * MDP(18) + (MDP(3) - MDP(5)) * (g(1) * t51 + g(2) * t49) + (MDP(2) + MDP(4)) * t37 + (t61 * t48 - t50 * t62) * t54; (-MDP(6) - t57) * t37; t57 * g(3); t61 * (-g(3) * t48 + t50 * t53) + (MDP(18) * pkin(4) + t62) * (g(3) * t50 + t48 * t53); -t54 * MDP(18);];
 taug = t1;

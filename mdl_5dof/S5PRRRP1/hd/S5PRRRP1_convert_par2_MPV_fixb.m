@@ -6,7 +6,7 @@
 % pkin [8x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d2,d3,d4,theta1]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % mrSges [6x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -18,12 +18,12 @@
 %   columns: xx, yy, zz, xy, xz, yz (see inertial_parameters_convert_par1_par2.m)
 % 
 % Output:
-% MPV [16x1]
+% MPV [18x1]
 %   base parameter vector (minimal parameter vector)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 16:40
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2021-01-15 16:15
+% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,7 +43,7 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 
 %% Symbolic Calculation
 % From minimal_parameter_vector_fixb_matlab.m
-t61 = m(4) + m(5);
-t62 = (-Ifges(5,2) - Ifges(6,2));
-t1 = [m(2) + m(3) + t61; pkin(2) ^ 2 * t61 + Ifges(3,3); pkin(2) * t61 + mrSges(3,1); mrSges(3,2); Ifges(4,3) + 2 * pkin(7) * mrSges(5,3) + (pkin(3) ^ 2 + pkin(7) ^ 2) * m(5) - t62; m(5) * pkin(3) + mrSges(4,1); -pkin(7) * m(5) + mrSges(4,2) - mrSges(5,3); Ifges(5,1) + Ifges(6,1) + t62; Ifges(5,4) + Ifges(6,4); Ifges(5,5) + Ifges(6,5); Ifges(5,6) + Ifges(6,6); 2 * pkin(4) * mrSges(6,1) + Ifges(5,3) + Ifges(6,3); mrSges(5,1) + mrSges(6,1); mrSges(5,2) + mrSges(6,2); mrSges(6,3); m(6);];
-MPV = t1;
+t1 = m(4) + m(5);
+t2 = (-Ifges(5,2) - Ifges(6,2));
+t3 = [m(2) + m(3) + t1; t1 * pkin(2) ^ 2 + Ifges(3,3); t1 * pkin(2) + mrSges(3,1); mrSges(3,2); Ifges(4,3) + 2 * pkin(7) * mrSges(5,3) + (pkin(3) ^ 2 + pkin(7) ^ 2) * m(5) - t2; pkin(3) * m(5) + mrSges(4,1); -pkin(7) * m(5) + mrSges(4,2) - mrSges(5,3); Ifges(5,1) + Ifges(6,1) + t2; Ifges(5,4) + Ifges(6,4); Ifges(5,5) + Ifges(6,5); Ifges(5,6) + Ifges(6,6); Ifges(5,3) + Ifges(6,3); mrSges(5,1); mrSges(5,2); mrSges(6,1); mrSges(6,2); mrSges(6,3); m(6);];
+MPV = t3;

@@ -12,12 +12,12 @@
 %   pkin=[a2,a3,a4,d2,d3,theta1]';
 % 
 % Output:
-% cmat_reg [(4*%NQJ)%x13]
+% cmat_reg [(4*%NQJ)%x15]
 %   minimal parameter regressor of coriolis matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-31 16:27
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2021-01-14 22:27
+% Revision: beb2ba9bd8c5bd556f42a244985f3dab86917626 (2021-01-14)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,33 +36,42 @@ assert(isreal(pkin) && all(size(pkin) == [6 1]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-31 16:26:56
-% EndTime: 2019-12-31 16:26:57
-% DurationCPUTime: 0.11s
-% Computational Cost: add. (82->22), mult. (198->34), div. (0->0), fcn. (140->2), ass. (0->25)
-t14 = sin(qJ(3));
-t12 = t14 ^ 2;
-t30 = pkin(3) * t14;
-t29 = -qJ(4) - pkin(5);
-t15 = cos(qJ(3));
-t1 = (-pkin(3) * t15 - pkin(2)) * t30;
-t28 = qJD(2) * t1;
-t9 = t29 * t15;
-t5 = -t29 * t12 - t9 * t15;
-t27 = t5 * qJD(2);
-t26 = qJD(2) * t14;
-t25 = qJD(2) * t15;
-t13 = t15 ^ 2;
-t10 = t12 + t13;
-t24 = t10 * qJD(2);
-t11 = t13 - t12;
-t23 = t11 * qJD(2);
-t22 = t14 * qJD(3);
-t21 = t15 * qJD(3);
-t20 = pkin(2) * t26;
-t19 = pkin(2) * t25;
-t18 = pkin(3) * t22;
-t17 = pkin(3) * t26;
-t16 = t14 * t25;
-t2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, -t22, -t21, 0, -t18; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, t14 * t21, t11 * qJD(3), 0, 0, 0, -pkin(2) * t22, -pkin(2) * t21, qJD(4) * t10, qJD(3) * t1 + qJD(4) * t5; 0, 0, 0, 0, t16, t23, t21, -t22, 0, -pkin(5) * t21 - t20, pkin(5) * t22 - t19, -pkin(3) * t21, pkin(3) * qJD(3) * t9 + t28; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t24, t27; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, -t16, -t23, 0, 0, 0, t20, t19, 0, -qJD(4) * t30 - t28; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t17; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t24, t18 - t27; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t17; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;];
+% StartTime: 2021-01-14 22:27:06
+% EndTime: 2021-01-14 22:27:07
+% DurationCPUTime: 0.14s
+% Computational Cost: add. (104->33), mult. (244->45), div. (0->0), fcn. (175->2), ass. (0->34)
+t20 = cos(qJ(3));
+t39 = t20 * pkin(3);
+t15 = -pkin(2) - t39;
+t19 = sin(qJ(3));
+t38 = t15 * t19;
+t37 = pkin(5) + qJ(4);
+t1 = pkin(3) * t38;
+t36 = t1 * qJD(2);
+t10 = t37 * t19;
+t11 = t37 * t20;
+t5 = t10 * t19 + t11 * t20;
+t35 = t5 * qJD(2);
+t6 = t19 * t39 - t38;
+t34 = t6 * qJD(2);
+t17 = t19 ^ 2;
+t9 = t17 * pkin(3) + t15 * t20;
+t33 = t9 * qJD(2);
+t32 = qJD(3) * t19;
+t16 = qJD(3) * t20;
+t31 = t11 * qJD(3);
+t18 = t20 ^ 2;
+t13 = t17 + t18;
+t30 = t13 * qJD(2);
+t14 = t18 - t17;
+t29 = t14 * qJD(2);
+t28 = t19 * qJD(2);
+t27 = t19 * qJD(4);
+t26 = t20 * qJD(2);
+t25 = pkin(2) * t28;
+t24 = pkin(2) * t26;
+t23 = pkin(3) * t32;
+t22 = pkin(3) * t28;
+t21 = t19 * t26;
+t2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, -t32, -t16, -t32, -t16, 0, -t23; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, t19 * t16, t14 * qJD(3), 0, 0, 0, -pkin(2) * t32, -pkin(2) * t16, -t6 * qJD(3), t9 * qJD(3), t13 * qJD(4), t1 * qJD(3) + t5 * qJD(4); 0, 0, 0, 0, t21, t29, t16, -t32, 0, -pkin(5) * t16 - t25, pkin(5) * t32 - t24, -t31 - t34, t10 * qJD(3) + t33, -pkin(3) * t16, -pkin(3) * t31 + t36; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t30, t35; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, -t21, -t29, 0, 0, 0, t25, t24, -t27 + t34, -t20 * qJD(4) - t33, 0, -pkin(3) * t27 - t36; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t28, -t26, 0, -t22; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t32, t16, -t30, t23 - t35; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t28, t26, 0, t22; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;];
 cmat_reg = t2;

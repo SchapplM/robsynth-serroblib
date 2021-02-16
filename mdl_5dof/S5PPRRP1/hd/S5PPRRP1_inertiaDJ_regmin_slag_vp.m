@@ -12,13 +12,13 @@
 %   pkin=[a2,a3,a4,a5,d3,d4,theta1,theta2]';
 % 
 % Output:
-% MMD_reg [((5+1)*5/2)x14]
+% MMD_reg [((5+1)*5/2)x16]
 %   minimal parameter regressor of inertia matrix time derivative
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 15:07
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2021-01-15 14:48
+% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -37,34 +37,41 @@ assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
 %% Symbolic Calculation
 % From inertiaD_joint_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 15:07:14
-% EndTime: 2019-12-05 15:07:15
-% DurationCPUTime: 0.15s
-% Computational Cost: add. (89->35), mult. (260->74), div. (0->0), fcn. (210->6), ass. (0->26)
-t13 = sin(pkin(8));
-t15 = sin(qJ(3));
-t25 = cos(pkin(8));
-t28 = cos(qJ(3));
-t5 = t15 * t13 - t28 * t25;
-t26 = -qJ(5) - pkin(6);
-t14 = sin(qJ(4));
-t24 = t14 * qJD(4);
-t16 = cos(qJ(4));
-t23 = t16 * qJD(4);
-t22 = -0.2e1 * pkin(3) * qJD(4);
-t21 = pkin(4) * t24;
-t11 = t14 ^ 2;
-t12 = t16 ^ 2;
-t3 = t5 * qJD(3);
-t20 = (-t11 - t12) * t3;
-t19 = qJD(4) * t26;
-t6 = t28 * t13 + t15 * t25;
-t17 = t14 * t3 - t6 * t23;
-t10 = -t16 * pkin(4) - pkin(3);
-t8 = t26 * t16;
-t7 = t26 * t14;
-t4 = t6 * qJD(3);
-t2 = -t14 * qJD(5) + t16 * t19;
-t1 = t16 * qJD(5) + t14 * t19;
-t9 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.2e1 * t6 * t20 + 0.2e1 * t5 * t4; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, -t4, t3, 0, 0, 0, 0, 0, -t4 * t16 + t5 * t24, t4 * t14 + t5 * t23, t20, t4 * t10 + (t3 * t8 + (-qJD(4) * t7 + t1) * t6) * t16 + (-t2 * t6 + t3 * t7 + (pkin(4) * t5 + t6 * t8) * qJD(4)) * t14; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t14 * t1 + t16 * t2 + (-t14 * t7 - t16 * t8) * qJD(4); 0, 0, 0, 0, 0, 0.2e1 * t14 * t23, 0.2e1 * (-t11 + t12) * qJD(4), 0, 0, 0, t14 * t22, t16 * t22, 0.2e1 * t1 * t16 - 0.2e1 * t2 * t14 + 0.2e1 * (t14 * t8 - t16 * t7) * qJD(4), -0.2e1 * t8 * t1 + 0.2e1 * t10 * t21 + 0.2e1 * t7 * t2; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t17, t16 * t3 + t6 * t24, 0, t17 * pkin(4); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t24, -t23, 0, -t21; 0, 0, 0, 0, 0, 0, 0, t23, -t24, 0, -pkin(6) * t23, pkin(6) * t24, -pkin(4) * t23, t2 * pkin(4); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t4; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t21; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;];
-MMD_reg = t9;
+% StartTime: 2021-01-15 14:48:16
+% EndTime: 2021-01-15 14:48:17
+% DurationCPUTime: 0.17s
+% Computational Cost: add. (111->36), mult. (326->71), div. (0->0), fcn. (267->6), ass. (0->33)
+t19 = sin(pkin(8));
+t21 = sin(qJ(3));
+t30 = cos(pkin(8));
+t34 = cos(qJ(3));
+t9 = t21 * t19 - t34 * t30;
+t36 = 2 * qJD(4);
+t22 = cos(qJ(4));
+t35 = t22 * pkin(4);
+t31 = -qJ(5) - pkin(6);
+t12 = t31 * t22;
+t33 = t12 * t22;
+t20 = sin(qJ(4));
+t29 = t20 * qJD(4);
+t16 = t22 * qJD(4);
+t28 = -2 * pkin(3) * qJD(4);
+t27 = 0.2e1 * t29;
+t26 = pkin(4) * t29;
+t17 = t20 ^ 2;
+t18 = t22 ^ 2;
+t7 = t9 * qJD(3);
+t25 = (-t17 - t18) * t7;
+t10 = t34 * t19 + t21 * t30;
+t2 = -t10 * t16 + t20 * t7;
+t11 = t31 * t20;
+t5 = -t22 * qJD(5) - t31 * t29;
+t6 = -t20 * qJD(5) + t31 * t16;
+t23 = -t6 * t20 - t5 * t22 + (-t11 * t22 + t12 * t20) * qJD(4);
+t14 = -pkin(3) - t35;
+t8 = t10 * qJD(3);
+t4 = -t8 * t22 + t9 * t29;
+t3 = t9 * t16 + t8 * t20;
+t1 = t10 * t29 + t22 * t7;
+t13 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.2e1 * t10 * t25 + 0.2e1 * t9 * t8; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, -t8, t7, 0, 0, 0, 0, 0, t4, t3, t4, t3, t25, t7 * t33 + t8 * t14 + (pkin(4) * qJD(4) * t9 + t11 * t7) * t20 + t23 * t10; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t20 * t5 + t22 * t6 + (-t11 * t20 - t33) * qJD(4); 0, 0, 0, 0, 0, t22 * t27, (-t17 + t18) * t36, 0, 0, 0, t20 * t28, t22 * t28, (t14 - t35) * t27, (pkin(4) * t17 + t14 * t22) * t36, 0.2e1 * t23, 0.2e1 * t11 * t6 + 0.2e1 * t12 * t5 + 0.2e1 * t14 * t26; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t2, t1, t2, t1, 0, t2 * pkin(4); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t29, -t16, -t29, -t16, 0, -t26; 0, 0, 0, 0, 0, 0, 0, t16, -t29, 0, -pkin(6) * t16, pkin(6) * t29, t6, t5, -pkin(4) * t16, t6 * pkin(4); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t8; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t29, t16, 0, t26; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;];
+MMD_reg = t13;

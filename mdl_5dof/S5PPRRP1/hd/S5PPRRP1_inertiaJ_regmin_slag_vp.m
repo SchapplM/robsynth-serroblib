@@ -10,13 +10,13 @@
 %   pkin=[a2,a3,a4,a5,d3,d4,theta1,theta2]';
 % 
 % Output:
-% MM_reg [((5+1)*5/2)x14]
+% MM_reg [((5+1)*5/2)x16]
 %   minimal parameter regressor of joint inertia matrix
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 15:07
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2021-01-15 14:48
+% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -32,27 +32,30 @@ assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 15:07:14
-% EndTime: 2019-12-05 15:07:14
-% DurationCPUTime: 0.15s
-% Computational Cost: add. (47->22), mult. (101->40), div. (0->0), fcn. (117->6), ass. (0->19)
-t13 = cos(qJ(4));
-t20 = 0.2e1 * t13;
-t11 = sin(qJ(4));
-t7 = t11 ^ 2;
-t19 = t13 ^ 2 + t7;
-t10 = cos(pkin(8));
-t12 = sin(qJ(3));
-t14 = cos(qJ(3));
-t9 = sin(pkin(8));
-t3 = t12 * t10 + t14 * t9;
-t18 = t11 * t3;
-t17 = t13 * pkin(4);
-t16 = -qJ(5) - pkin(6);
-t4 = t16 * t11;
-t5 = t16 * t13;
-t15 = -t4 * t11 - t5 * t13;
-t6 = -pkin(3) - t17;
-t2 = -t14 * t10 + t12 * t9;
-t1 = [1, t10 ^ 2 + t9 ^ 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t19 * t3 ^ 2 + t2 ^ 2; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t19; 0, 0, 0, -t2, -t3, 0, 0, 0, 0, 0, -t2 * t13, t2 * t11, t19 * t3, t15 * t3 + t2 * t6; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t11 * t5 + t13 * t4; 0, 0, 1, 0, 0, t7, t11 * t20, 0, 0, 0, pkin(3) * t20, -0.2e1 * pkin(3) * t11, 0.2e1 * t15, t4 ^ 2 + t5 ^ 2 + t6 ^ 2; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t18, -t13 * t3, 0, -pkin(4) * t18; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t13, -t11, 0, t17; 0, 0, 0, 0, 0, 0, 0, t11, t13, 0, -t11 * pkin(6), -t13 * pkin(6), -t11 * pkin(4), t4 * pkin(4); 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, pkin(4) ^ 2; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t2; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t6; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1;];
-MM_reg = t1;
+% StartTime: 2021-01-15 14:48:17
+% EndTime: 2021-01-15 14:48:17
+% DurationCPUTime: 0.13s
+% Computational Cost: add. (60->27), mult. (124->45), div. (0->0), fcn. (149->6), ass. (0->22)
+t14 = cos(qJ(4));
+t23 = 0.2e1 * t14;
+t12 = sin(qJ(4));
+t8 = t12 ^ 2;
+t22 = t14 ^ 2 + t8;
+t10 = sin(pkin(8));
+t11 = cos(pkin(8));
+t13 = sin(qJ(3));
+t15 = cos(qJ(3));
+t4 = t15 * t10 + t13 * t11;
+t21 = t12 * t4;
+t20 = t14 * pkin(4);
+t19 = t14 * t4;
+t3 = t13 * t10 - t15 * t11;
+t18 = t3 * t14;
+t17 = -qJ(5) - pkin(6);
+t5 = t17 * t12;
+t6 = t17 * t14;
+t16 = -t5 * t12 - t6 * t14;
+t7 = -pkin(3) - t20;
+t1 = t3 * t12;
+t2 = [1, t10 ^ 2 + t11 ^ 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t22 * t4 ^ 2 + t3 ^ 2; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t22; 0, 0, 0, -t3, -t4, 0, 0, 0, 0, 0, -t18, t1, -t18, t1, t22 * t4, t16 * t4 + t3 * t7; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t12 * t6 + t14 * t5; 0, 0, 1, 0, 0, t8, t12 * t23, 0, 0, 0, pkin(3) * t23, -0.2e1 * pkin(3) * t12, -0.2e1 * t7 * t14, 0.2e1 * t7 * t12, 0.2e1 * t16, t5 ^ 2 + t6 ^ 2 + t7 ^ 2; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t21, -t19, -t21, -t19, 0, -pkin(4) * t21; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t14, -t12, t14, -t12, 0, t20; 0, 0, 0, 0, 0, 0, 0, t12, t14, 0, -t12 * pkin(6), -t14 * pkin(6), t5, t6, -t12 * pkin(4), t5 * pkin(4); 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0.2e1 * pkin(4), 0, 0, pkin(4) ^ 2; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t3; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t14, t12, 0, t7; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1;];
+MM_reg = t2;

@@ -121,7 +121,7 @@ for i = 1:length(Names)
   % Code-Erstellung starten
   if mode == 1 || mode == 3 || mode == 4
     fprintf('Starte Code-Generierung %d/%d für %s\n', i, length(Names), n);
-    system_gen( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --notest --parallel %s', mrp_cmd, kinematics_arg), lockfile); %  > /dev/null
+    system_gen( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --parallel %s', mrp_cmd, kinematics_arg), lockfile); %  > /dev/null
   elseif mode == 2
     warning('Achtung: Mit der gesonderten Behandlung von Vorlagen-Funktionen ist dieser Modus nicht mehr sinnvoll');
     fprintf('Generiere Matlab-Funktionen aus Vorlagen (%d/%d) für %s\n', i, length(Names), n);

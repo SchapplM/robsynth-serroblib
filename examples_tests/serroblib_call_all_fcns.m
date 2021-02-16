@@ -102,7 +102,16 @@ for N = 1:7
       if any(abs(t3-treg3*RS.DynPar.ipv)> 1e-10)  || any(abs(t3-t2) > 1e-10)
         error('Regressor für Inversdynamik-Moment stimmt nicht mit DynPar Methode 3');
       end
-      
+      % Prüfe gegen Dynamikparameter Nummer 2 (wird eigentlich schon bei
+      % Generierung gemacht, aber hier nochmal, falls dort nicht gemacht).
+      assert(abs(T2-T3)<1e-10, 'Kinetische Energie stimmt nicht zwischen DynPar Methode 2 und 3');
+      assert(abs(U2-U3)<1e-10, 'Kinetische Energie stimmt nicht zwischen DynPar Methode 2 und 3');
+      assert(all(abs(g2-g3)<1e-10), 'Gravitationsmoment stimmt nicht zwischen DynPar Methode 2 und 3');
+      assert(all(abs(c2-c3)<1e-10), 'Coriolismoment stimmt nicht zwischen DynPar Methode 2 und 3');
+      assert(all(abs(C2(:)-C3(:))<1e-10), 'Coriolis-Matrix stimmt nicht zwischen DynPar Methode 2 und 3');
+      assert(all(abs(t2-t3)<1e-10), 'Gelenkmoment stimmt nicht zwischen DynPar Methode 2 und 3');
+      assert(all(abs(M2(:)-M3(:))<1e-10), 'Massenmatrix stimmt nicht zwischen DynPar Methode 2 und 3');
+
       % Rufe Dynamik-Funktionen mit Minimalparametervektor als Eingang auf
       RS.DynPar.mode = 4;
       [T4,Treg4]=RS.ekin(q0,qD0);
@@ -127,6 +136,15 @@ for N = 1:7
       if any(abs(t4-treg4*RS.DynPar.mpv)> 1e-10)  || any(abs(t4-t2) > 1e-10)
         error('Regressor für Inversdynamik-Moment stimmt nicht mit DynPar Methode 4');
       end
+      % Prüfe gegen Dynamikparameter Nummer 3 (wird eigentlich schon bei
+      % Generierung gemacht, aber hier nochmal, falls dort nicht gemacht).
+      assert(abs(T2-T4)<1e-10, 'Kinetische Energie stimmt nicht zwischen DynPar Methode 2 und 4');
+      assert(abs(U2-U4)<1e-10, 'Kinetische Energie stimmt nicht zwischen DynPar Methode 2 und 4');
+      assert(all(abs(g2-g4)<1e-10), 'Gravitationsmoment stimmt nicht zwischen DynPar Methode 2 und 4');
+      assert(all(abs(c2-c4)<1e-10), 'Coriolismoment stimmt nicht zwischen DynPar Methode 2 und 4');
+      assert(all(abs(C2(:)-C4(:))<1e-10), 'Coriolis-Matrix stimmt nicht zwischen DynPar Methode 2 und 4');
+      assert(all(abs(t2-t4)<1e-10), 'Gelenkmoment stimmt nicht zwischen DynPar Methode 2 und 4');
+      assert(all(abs(M2(:)-M4(:))<1e-10), 'Massenmatrix stimmt nicht zwischen DynPar Methode 2 und 4');
       
       RS.invdyn_traj(repmat(q0',5,1),repmat(qD0',5,1),repmat(qDD0',5,1));
       RS.invdyn2_traj(repmat(q0',5,1),repmat(qD0',5,1),repmat(qDD0',5,1));

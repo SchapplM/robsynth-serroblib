@@ -14,7 +14,7 @@
 % pkin [8x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d2,d4,theta1,theta3]';
-% MDP [17x1]
+% MDP [18x1]
 %   Minimal dynamic parameter vector (fixed base model)
 %   see S5PRPRP2_convert_par2_MPV_fixb.m
 % 
@@ -23,15 +23,15 @@
 %   joint torques of inverse dynamics (contains inertial, gravitational Coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-05 15:31
-% Revision: 77da58f92bca3eff71542919beafa37024070d86 (2019-12-05)
+% Datum: 2021-01-15 15:05
+% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function tau = S5PRPRP2_invdynJ_fixb_mdp_slag_vp(qJ, qJD, qJDD, g, pkin, MDP)
 %% Coder Information
 %#codegen
-%$cgargs {zeros(5,1),zeros(5,1),zeros(5,1),zeros(3,1),zeros(8,1),zeros(17,1)}
+%$cgargs {zeros(5,1),zeros(5,1),zeros(5,1),zeros(3,1),zeros(8,1),zeros(18,1)}
 assert(isreal(qJ) && all(size(qJ) == [5 1]), ...
   'S5PRPRP2_invdynJ_fixb_mdp_slag_vp: qJ has to be [5x1] (double)');
 assert(isreal(qJD) && all(size(qJD) == [5 1]), ...
@@ -42,120 +42,136 @@ assert(isreal(g) && all(size(g) == [3 1]), ...
   'S5PRPRP2_invdynJ_fixb_mdp_slag_vp: g has to be [3x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
   'S5PRPRP2_invdynJ_fixb_mdp_slag_vp: pkin has to be [8x1] (double)');
-assert(isreal(MDP) && all(size(MDP) == [17 1]), ...
-  'S5PRPRP2_invdynJ_fixb_mdp_slag_vp: MDP has to be [17x1] (double)'); 
+assert(isreal(MDP) && all(size(MDP) == [18 1]), ...
+  'S5PRPRP2_invdynJ_fixb_mdp_slag_vp: MDP has to be [18x1] (double)'); 
 
 %% Symbolic Calculation
 % From invdyn_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-05 15:31:11
-% EndTime: 2019-12-05 15:31:15
-% DurationCPUTime: 1.46s
-% Computational Cost: add. (725->213), mult. (1463->279), div. (0->0), fcn. (925->6), ass. (0->106)
-t187 = cos(qJ(4));
-t217 = qJD(2) * qJD(4);
-t207 = t187 * t217;
-t186 = sin(qJ(4));
-t214 = qJDD(2) * t186;
-t260 = t207 + t214;
-t183 = sin(pkin(8));
-t184 = cos(pkin(8));
-t160 = -pkin(3) * t184 - pkin(6) * t183 - pkin(2);
-t153 = qJD(2) * t160 + qJD(3);
-t228 = qJD(2) * t184;
-t158 = qJ(3) * t228 + qJD(1) * t183;
-t229 = qJD(2) * t183;
-t210 = qJ(5) * t229;
-t136 = t158 * t187 + (t153 - t210) * t186;
-t259 = qJD(4) * t136;
-t180 = pkin(7) + qJ(2);
-t176 = sin(t180);
-t177 = cos(t180);
-t257 = g(1) * t176 - g(2) * t177;
-t218 = qJD(2) * qJD(3);
-t219 = qJ(3) * qJDD(2);
-t192 = t218 + t219;
-t239 = t186 * t184;
-t146 = t176 * t239 + t177 * t187;
-t148 = t176 * t187 - t177 * t239;
-t256 = -g(1) * t148 + g(2) * t146;
-t255 = t260 * pkin(4) * t183 + qJDD(5);
-t250 = qJ(5) * t183;
-t249 = qJDD(2) * pkin(2);
-t174 = t184 * qJDD(1);
-t150 = t183 * t192 - t174;
-t248 = t150 * t183;
-t246 = (pkin(4) * t187 + pkin(3)) * t184;
-t245 = t176 * t186;
-t244 = t177 * t186;
-t178 = t183 ^ 2;
-t188 = qJD(2) ^ 2;
-t243 = t178 * t188;
-t242 = t183 * t187;
-t241 = t184 * MDP(5);
-t240 = t184 * t187;
-t203 = t187 * t153 - t158 * t186;
-t135 = -t187 * t210 + t203;
-t167 = -qJD(4) + t228;
-t132 = -pkin(4) * t167 + t135;
-t238 = -t135 + t132;
-t221 = t184 * qJD(3);
-t224 = qJD(4) * t187;
-t237 = t160 * t224 + t187 * t221;
-t166 = qJ(3) * t240;
-t236 = t186 * t160 + t166;
-t235 = t177 * pkin(2) + t176 * qJ(3);
-t234 = t184 ^ 2 + t178;
-t181 = t186 ^ 2;
-t182 = t187 ^ 2;
-t233 = t181 - t182;
-t232 = MDP(10) * t178;
-t231 = MDP(12) * t183;
-t230 = MDP(16) * t183;
-t227 = qJD(2) * t186;
-t226 = qJD(4) * t167;
-t225 = qJD(4) * t186;
-t223 = qJD(5) * t183;
-t215 = qJDD(2) * t184;
-t165 = -qJDD(4) + t215;
-t222 = t165 * MDP(13);
-t220 = -qJD(4) - t167;
-t216 = qJD(2) * qJD(5);
-t213 = qJDD(2) * t187;
-t212 = qJ(3) * t239;
-t211 = qJ(5) * t242;
-t175 = t184 * qJD(1);
-t157 = qJ(3) * t229 - t175;
-t209 = t157 * t229;
-t208 = t186 * t217;
-t206 = -pkin(2) * t176 + t177 * qJ(3);
-t205 = pkin(4) * t186 + qJ(3);
-t202 = (-t181 - t182) * MDP(16);
-t152 = qJDD(2) * t160 + qJDD(3);
-t144 = t187 * t152;
-t151 = qJDD(1) * t183 + t184 * t192;
-t130 = -pkin(4) * t165 - t186 * t151 + t144 + (-qJ(5) * qJDD(2) - t216) * t242 - t259;
-t201 = -t130 - t259;
-t191 = -t187 * t151 - t186 * t152 - t153 * t224 + t158 * t225;
-t131 = (-t260 * qJ(5) - t186 * t216) * t183 - t191;
-t200 = qJD(4) * t132 - t131;
-t199 = qJD(2) * t220;
-t198 = t165 - t215;
-t197 = t165 + t215;
-t196 = g(1) * t177 + g(2) * t176;
-t194 = t151 * t184 + t248;
-t193 = t157 * t183 + t158 * t184;
-t189 = -t167 * t228 + t226 - t243;
-t173 = qJDD(3) - t249;
-t159 = t183 * t184 * t208;
-t156 = t187 * t160;
-t149 = t177 * t240 + t245;
-t147 = -t176 * t240 + t244;
-t141 = t205 * t229 + qJD(5) - t175;
-t139 = -t186 * t250 + t236;
-t138 = -t211 + t156 + (-qJ(3) * t186 - pkin(4)) * t184;
-t137 = t150 + t255;
-t134 = -t186 * t221 - t187 * t223 + (-t166 + (-t160 + t250) * t186) * qJD(4);
-t133 = -t186 * t223 + (-t211 - t212) * qJD(4) + t237;
-t1 = [(qJDD(1) - g(3)) * MDP(1) + (-t150 * t184 - g(3)) * MDP(8) + t159 * MDP(15) + (-t137 * t184 - g(3)) * MDP(17) + (t151 * MDP(8) + (MDP(14) * t198 - MDP(15) * t226 + MDP(17) * t201) * t186 + (t198 * MDP(15) + t131 * MDP(17) + ((t167 - t228) * MDP(14) - t132 * MDP(17)) * qJD(4)) * t187) * t183; qJDD(2) * MDP(2) + t257 * MDP(3) + t196 * MDP(4) + (t192 * t234 + t194 - t196) * MDP(7) + (-t173 * pkin(2) - g(1) * t206 - g(2) * t235 + qJ(3) * t194 + qJD(3) * t193) * MDP(8) + (qJDD(2) * t182 - 0.2e1 * t186 * t207) * t178 * MDP(9) + 0.2e1 * (-t186 * t213 + t217 * t233) * t232 + (t159 + (t167 * t225 - t187 * t197) * t183) * MDP(11) + (t197 * t186 + (t167 + t228) * t224) * t231 + t184 * t222 + (-g(1) * t147 - g(2) * t149 - t144 * t184 - t156 * t165 + ((qJD(2) * t178 + t167 * t184) * qJ(3) + t193) * t224 + (-(-qJD(4) * t160 - t221) * t167 - (-qJD(4) * t153 - t151) * t184 + t178 * t218 + t248 + (qJDD(2) * t178 + t165 * t184) * qJ(3)) * t186) * MDP(14) + ((-qJD(4) * t212 + t237) * t167 + t236 * t165 - t191 * t184 - g(1) * t146 - g(2) * t148 + (t150 * t187 - t157 * t225) * t183 + (t187 * t218 + (-t208 + t213) * qJ(3)) * t178) * MDP(15) + ((-qJDD(2) * t138 + (-qJD(4) * t139 - t134) * qJD(2) + t201) * t187 + (-qJDD(2) * t139 + (qJD(4) * t138 - t133) * qJD(2) + t200) * t186 + t257) * t230 + (t131 * t139 + t136 * t133 + t130 * t138 + t132 * t134 - g(1) * (pkin(4) * t244 - t176 * t246 + t206) - g(2) * (pkin(4) * t245 + t177 * t246 + t235) + (t137 * t205 + t141 * (pkin(4) * t224 + qJD(3)) - t257 * (-qJ(5) - pkin(6))) * t183) * MDP(17) + (-t183 * MDP(6) + t241) * (-t173 + t257 + t249); (-t158 * t228 + qJDD(3) - t209 - t257) * MDP(8) + (-t141 * t229 - t257) * MDP(17) - t234 * MDP(7) * t188 + (-t165 * MDP(14) + t189 * MDP(15) + (-t136 * t228 - t201) * MDP(17)) * t187 + (t189 * MDP(14) + t165 * MDP(15) + (t132 * t228 - t200) * MDP(17)) * t186 + (-t241 - pkin(2) * MDP(8) + (MDP(6) + t202) * t183) * qJDD(2); t187 * t186 * MDP(9) * t243 - t233 * t188 * t232 + (t186 * t199 + t213) * t183 * MDP(11) + (t187 * t199 - t214) * t231 - t222 + (t144 + (t158 * t220 - t209) * t187 + (g(3) * t183 + t153 * t220 - t151) * t186 + t256) * MDP(14) + (-t203 * t167 + g(1) * t149 - g(2) * t147 + (g(3) * t187 + t157 * t227) * t183 + t191) * MDP(15) + (-pkin(4) * t213 + (pkin(4) * qJD(4) - t238) * t227) * t230 + (t238 * t136 + (t130 + (-qJD(2) * t141 * t187 + g(3) * t186) * t183 + t256) * pkin(4)) * MDP(17); t202 * t243 + (g(3) * t184 - t174 + (t219 + (t132 * t187 + t136 * t186 + qJD(3)) * qJD(2) - t196) * t183 + t255) * MDP(17);];
+% StartTime: 2021-01-15 15:04:56
+% EndTime: 2021-01-15 15:05:01
+% DurationCPUTime: 2.12s
+% Computational Cost: add. (940->250), mult. (1910->326), div. (0->0), fcn. (1234->6), ass. (0->122)
+t221 = sin(pkin(8));
+t225 = cos(qJ(4));
+t263 = qJD(2) * qJD(4);
+t249 = t225 * t263;
+t224 = sin(qJ(4));
+t260 = qJDD(2) * t224;
+t308 = t249 + t260;
+t309 = t221 * t308;
+t218 = pkin(7) + qJ(2);
+t214 = sin(t218);
+t215 = cos(t218);
+t307 = g(1) * t214 - g(2) * t215;
+t264 = qJD(2) * qJD(3);
+t266 = qJ(3) * qJDD(2);
+t232 = t264 + t266;
+t222 = cos(pkin(8));
+t306 = -t221 * (-qJ(5) - pkin(6)) + (pkin(4) * t225 + pkin(3)) * t222;
+t286 = t222 * t224;
+t176 = t214 * t286 + t215 * t225;
+t178 = t214 * t225 - t215 * t286;
+t305 = -g(1) * t178 + g(2) * t176;
+t276 = qJD(2) * t222;
+t203 = -qJD(4) + t276;
+t304 = qJD(4) + t203;
+t289 = t221 * t224;
+t303 = g(3) * t289 + t305;
+t302 = pkin(4) * t309 + qJDD(5);
+t261 = qJDD(2) * t222;
+t201 = -qJDD(4) + t261;
+t301 = pkin(4) * t201;
+t299 = pkin(4) * t224;
+t295 = qJDD(2) * pkin(2);
+t212 = t222 * qJDD(1);
+t180 = t232 * t221 - t212;
+t294 = t180 * t221;
+t292 = t215 * t224;
+t216 = t221 ^ 2;
+t226 = qJD(2) ^ 2;
+t291 = t216 * t226;
+t288 = t221 * t225;
+t287 = t222 * MDP(5);
+t285 = t222 * t225;
+t194 = -pkin(3) * t222 - pkin(6) * t221 - pkin(2);
+t183 = t194 * qJD(2) + qJD(3);
+t192 = qJ(3) * t276 + qJD(1) * t221;
+t247 = t225 * t183 - t192 * t224;
+t274 = qJD(2) * t225;
+t252 = t221 * t274;
+t165 = -qJ(5) * t252 + t247;
+t158 = -pkin(4) * t203 + t165;
+t284 = -t165 + t158;
+t270 = qJD(4) * t225;
+t273 = qJD(3) * t222;
+t283 = t194 * t270 + t225 * t273;
+t202 = qJ(3) * t285;
+t282 = t224 * t194 + t202;
+t281 = t215 * pkin(2) + t214 * qJ(3);
+t280 = t222 ^ 2 + t216;
+t219 = t224 ^ 2;
+t220 = t225 ^ 2;
+t279 = t219 - t220;
+t278 = MDP(17) * t221;
+t190 = (qJ(3) + t299) * t221;
+t277 = qJD(2) * t190;
+t275 = qJD(2) * t224;
+t272 = qJD(4) * t192;
+t271 = qJD(4) * t224;
+t269 = qJD(5) * t221;
+t268 = t201 * MDP(12);
+t213 = t222 * qJD(1);
+t171 = qJD(5) - t213 + t277;
+t267 = qJD(5) + t171;
+t265 = qJ(5) * qJDD(2);
+t262 = qJD(2) * qJD(5);
+t259 = qJDD(2) * t225;
+t258 = MDP(13) + MDP(15);
+t257 = MDP(14) + MDP(16);
+t256 = qJ(3) * t286;
+t255 = qJ(5) * t288;
+t254 = t224 * t291;
+t253 = t221 * t275;
+t251 = t203 * t271;
+t250 = t224 * t263;
+t246 = MDP(17) * (-t219 - t220);
+t245 = t171 + t277;
+t181 = qJDD(1) * t221 + t232 * t222;
+t244 = -qJD(4) * t183 - t181;
+t243 = t201 - t261;
+t242 = t201 + t261;
+t182 = t194 * qJDD(2) + qJDD(3);
+t241 = t225 * t181 + t224 * t182 + t183 * t270 - t192 * t271;
+t240 = t221 * t250;
+t239 = -g(1) * t176 - g(2) * t178;
+t177 = -t214 * t285 + t292;
+t179 = t214 * t224 + t215 * t285;
+t238 = -g(1) * t177 - g(2) * t179;
+t237 = g(1) * t215 + g(2) * t214;
+t235 = t181 * t222 + t294;
+t234 = -t183 * t224 - t192 * t225;
+t191 = qJ(3) * qJD(2) * t221 - t213;
+t233 = t191 * t221 + t192 * t222;
+t167 = t180 + t302;
+t187 = (pkin(4) * t270 + qJD(3)) * t221;
+t231 = qJD(2) * t187 + qJDD(2) * t190 + t167;
+t174 = t225 * t182;
+t229 = qJ(5) * t240 + t244 * t224 + t174;
+t228 = -t203 ^ 2 - t291;
+t227 = g(1) * t179 - g(2) * t177 + g(3) * t288 - t241;
+t211 = qJDD(3) - t295;
+t207 = t215 * qJ(3);
+t199 = t221 * t259;
+t193 = t222 * t240;
+t189 = t225 * t194;
+t186 = t203 * t252;
+t169 = -qJ(5) * t289 + t282;
+t168 = -t255 + t189 + (-qJ(3) * t224 - pkin(4)) * t222;
+t166 = -qJ(5) * t253 - t234;
+t162 = -t224 * t273 - t225 * t269 + (-t202 + (qJ(5) * t221 - t194) * t224) * qJD(4);
+t161 = -t224 * t269 + (-t255 - t256) * qJD(4) + t283;
+t157 = (-qJ(5) * t308 - t224 * t262) * t221 + t241;
+t156 = -t301 + (-t272 + (-t262 - t265) * t221) * t225 + t229;
+t1 = [(qJDD(1) - g(3)) * MDP(1) + (-t180 * t222 - g(3)) * MDP(7) + (-t167 * t222 - g(3)) * MDP(18) + t257 * t193 + (t258 * (t243 * t224 + (t203 - t276) * t270) + t257 * (t243 * t225 - t251) + t181 * MDP(7) + (-t156 * t224 + t157 * t225 - t158 * t270 - t166 * t271) * MDP(18)) * t221; qJDD(2) * MDP(2) + t307 * MDP(3) + t237 * MDP(4) + (-t211 + t307 + t295) * t287 + (t232 * t280 + t235 - t237) * MDP(6) + (-t211 * pkin(2) - g(1) * (-pkin(2) * t214 + t207) - g(2) * t281 + t233 * qJD(3) + t235 * qJ(3)) * MDP(7) + (qJDD(2) * t220 - 0.2e1 * t224 * t249) * t216 * MDP(8) + 0.2e1 * (-t224 * t259 + t279 * t263) * t216 * MDP(9) + (t193 + (-t242 * t225 + t251) * t221) * MDP(10) + (t242 * t224 + (t203 + t276) * t270) * t221 * MDP(11) + t222 * t268 + (-t174 * t222 - t189 * t201 + ((qJD(2) * t216 + t203 * t222) * qJ(3) + t233) * t270 + (-(-qJD(4) * t194 - t273) * t203 - t244 * t222 + t216 * t264 + t294 + (qJDD(2) * t216 + t201 * t222) * qJ(3)) * t224 + t238) * MDP(13) + ((-qJD(4) * t256 + t283) * t203 + t282 * t201 + t241 * t222 + (t180 * t225 - t191 * t271) * t221 + (t225 * t264 + (-t250 + t259) * qJ(3)) * t216 + t239) * MDP(14) + (-t156 * t222 - t162 * t203 - t168 * t201 + (t231 * t224 + t245 * t270) * t221 + t238) * MDP(15) + (t157 * t222 + t161 * t203 + t169 * t201 + (t231 * t225 - t245 * t271) * t221 + t239) * MDP(16) + ((-qJD(4) * t166 - qJDD(2) * t168 - t156 + (-qJD(4) * t169 - t162) * qJD(2)) * t225 + (qJD(4) * t158 - qJDD(2) * t169 - t157 + (qJD(4) * t168 - t161) * qJD(2)) * t224 + t307) * t278 + (t157 * t169 + t166 * t161 + t156 * t168 + t158 * t162 + t167 * t190 + t171 * t187 - g(1) * (pkin(4) * t292 + t207) - g(2) * (t306 * t215 + t281) + (-g(1) * (-pkin(2) - t306) - g(2) * t299) * t214) * MDP(18); (qJDD(3) - t307) * MDP(7) + (t156 * t225 + t157 * t224 - t158 * t271 + t166 * t270 - t307) * MDP(18) - t280 * MDP(6) * t226 + t257 * (t224 * t201 + t228 * t225) + t258 * (-t201 * t225 + t228 * t224) + (-pkin(2) * MDP(7) + t221 * t246 - t287) * qJDD(2) + (-t233 * MDP(7) + (t158 * t286 - t166 * t285 - t171 * t221) * MDP(18)) * qJD(2); t225 * MDP(8) * t254 - t279 * MDP(9) * t291 + (-t304 * t253 + t199) * MDP(10) + (-t186 - t309) * MDP(11) - t268 + (-t224 * t181 - t191 * t252 + t304 * t234 + t174 + t303) * MDP(13) + (t191 * t253 - t247 * t203 + t227) * MDP(14) + (-0.2e1 * t301 - t166 * t203 + (-pkin(4) * t254 - t272 + (-t267 * qJD(2) - t265) * t221) * t225 + t229 + t303) * MDP(15) + (-pkin(4) * t220 * t291 - t165 * t203 + (qJ(5) * t260 + (qJ(5) * t270 + t267 * t224) * qJD(2)) * t221 + t227) * MDP(16) + (-pkin(4) * t259 + (pkin(4) * qJD(4) - t284) * t275) * t278 + (t284 * t166 + (t156 + (g(3) * t224 - t171 * t274) * t221 + t305) * pkin(4)) * MDP(18); -t186 * MDP(15) + t199 * MDP(16) + (g(3) * t222 - t212 + t302) * MDP(18) + t246 * t291 + (MDP(15) * t260 + (-t237 + t266) * MDP(18) + (MDP(15) * t270 + (t158 * t225 + qJD(3)) * MDP(18) + ((-qJD(4) + t203) * MDP(16) + t166 * MDP(18)) * t224) * qJD(2)) * t221;];
 tau = t1;

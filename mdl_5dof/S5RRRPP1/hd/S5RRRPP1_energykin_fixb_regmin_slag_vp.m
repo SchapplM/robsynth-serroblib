@@ -12,12 +12,12 @@
 %   pkin=[a2,a3,a4,a5,d1,d2,d3,theta4]';
 % 
 % Output:
-% T_reg [1x19]
+% T_reg [1x21]
 %   minimal parameter regressor of kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-31 20:50
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2021-01-15 22:15
+% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,36 +35,36 @@ assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-31 20:49:57
-% EndTime: 2019-12-31 20:49:57
+% StartTime: 2021-01-15 22:14:46
+% EndTime: 2021-01-15 22:14:46
 % DurationCPUTime: 0.06s
-% Computational Cost: add. (199->28), mult. (293->66), div. (0->0), fcn. (151->6), ass. (0->28)
-t107 = qJD(1) + qJD(2);
-t106 = t107 ^ 2;
-t122 = t106 / 0.2e1;
-t108 = sin(pkin(8));
-t109 = cos(pkin(8));
-t110 = sin(qJ(3));
-t121 = pkin(1) * qJD(1);
-t116 = sin(qJ(2)) * t121;
-t103 = t107 * pkin(7) + t116;
-t114 = qJ(4) * t107 + t103;
-t98 = qJD(3) * pkin(3) - t114 * t110;
-t112 = cos(qJ(3));
-t99 = t114 * t112;
-t95 = t108 * t98 + t109 * t99;
-t120 = t107 * t110;
-t119 = t107 * t112;
-t118 = qJD(3) * t110;
-t117 = qJD(3) * t112;
-t115 = cos(qJ(2)) * t121;
-t94 = -t108 * t99 + t109 * t98;
-t100 = -t115 + qJD(4) + (-pkin(3) * t112 - pkin(2)) * t107;
-t104 = -t107 * pkin(2) - t115;
-t102 = (t108 * t112 + t109 * t110) * t107;
-t101 = t108 * t120 - t109 * t119;
-t93 = qJD(3) * qJ(5) + t95;
-t92 = -qJD(3) * pkin(4) + qJD(5) - t94;
-t91 = t101 * pkin(4) - t102 * qJ(5) + t100;
-t1 = [qJD(1) ^ 2 / 0.2e1, 0, 0, t122, t107 * t115, -t107 * t116, t110 ^ 2 * t122, t110 * t106 * t112, t107 * t118, t107 * t117, qJD(3) ^ 2 / 0.2e1, -t103 * t118 - t104 * t119, -t103 * t117 + t104 * t120, -t95 * t101 - t94 * t102, t95 ^ 2 / 0.2e1 + t94 ^ 2 / 0.2e1 + t100 ^ 2 / 0.2e1, -t92 * qJD(3) + t91 * t101, -t93 * t101 + t92 * t102, t93 * qJD(3) - t91 * t102, t93 ^ 2 / 0.2e1 + t91 ^ 2 / 0.2e1 + t92 ^ 2 / 0.2e1;];
+% Computational Cost: add. (237->30), mult. (345->70), div. (0->0), fcn. (179->6), ass. (0->28)
+t29 = qJD(1) + qJD(2);
+t28 = t29 ^ 2;
+t44 = t28 / 0.2e1;
+t32 = sin(qJ(3));
+t43 = t29 * t32;
+t34 = cos(qJ(3));
+t42 = t29 * t34;
+t41 = pkin(1) * qJD(1);
+t38 = sin(qJ(2)) * t41;
+t25 = t29 * pkin(7) + t38;
+t36 = qJ(4) * t29 + t25;
+t20 = qJD(3) * pkin(3) - t36 * t32;
+t21 = t36 * t34;
+t30 = sin(pkin(8));
+t31 = cos(pkin(8));
+t17 = t30 * t20 + t31 * t21;
+t40 = qJD(3) * t32;
+t39 = qJD(3) * t34;
+t37 = cos(qJ(2)) * t41;
+t16 = t31 * t20 - t30 * t21;
+t22 = -t37 + qJD(4) + (-pkin(3) * t34 - pkin(2)) * t29;
+t26 = -t29 * pkin(2) - t37;
+t24 = (t30 * t34 + t31 * t32) * t29;
+t23 = t30 * t43 - t31 * t42;
+t15 = qJD(3) * qJ(5) + t17;
+t14 = -qJD(3) * pkin(4) + qJD(5) - t16;
+t13 = t23 * pkin(4) - t24 * qJ(5) + t22;
+t1 = [qJD(1) ^ 2 / 0.2e1, 0, 0, t44, t29 * t37, -t29 * t38, t32 ^ 2 * t44, t32 * t28 * t34, t29 * t40, t29 * t39, qJD(3) ^ 2 / 0.2e1, -t25 * t40 - t26 * t42, -t25 * t39 + t26 * t43, t16 * qJD(3) + t22 * t23, -t17 * qJD(3) + t22 * t24, -t16 * t24 - t17 * t23, t17 ^ 2 / 0.2e1 + t16 ^ 2 / 0.2e1 + t22 ^ 2 / 0.2e1, -t14 * qJD(3) + t13 * t23, t14 * t24 - t15 * t23, t15 * qJD(3) - t13 * t24, t15 ^ 2 / 0.2e1 + t13 ^ 2 / 0.2e1 + t14 ^ 2 / 0.2e1;];
 T_reg = t1;

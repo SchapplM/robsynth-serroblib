@@ -104,3 +104,32 @@ serroblib_create_template_functions({Name}, false, true)
 %% Testfunktionen für ein bestimmtes Modell generieren und ausführen
 Name = 'S6RRRRRR10V3';
 serroblib_generate_code({Name}, true, false, 4)
+
+%% Code für Modelle generieren, die einen Fehler aufweisen
+for N = 1:7
+  % Liste zusammenstellen
+  mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
+  l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
+  I = (l.AdditionalInfo(:,4) == 1); % Code liegt bereits vor
+  II = find(I);
+  % alle Modelle generieren
+  j = 0;
+  for iFK = II'
+    j = j + 1;
+    Name = l.Names_Ndof{iFK};
+    fprintf('%d/%d (Nr. %d): Prüfe Neu-Generierung für %s\n', j, length(II), iFK, Name);
+    RS = serroblib_create_robot_class(Name);
+    RS.gen_testsettings(true, true);
+    q0 = rand(RS.NQJ,1);
+    qD0 = rand(RS.NQJ,1);
+    RS.DynPar.mode = 2;
+    T2 = RS.ekin(q0,qD0);
+    RS.DynPar.mode = 4;
+    T4=RS.ekin(q0,qD0);
+    if abs(T2-T4) < 1e-10, continue; end % alles i.O.
+    fprintf('%d/%d (Nr. %d): Generiere Vorlagen für %s (Fehler in Regressorform)\n', ...
+      j, length(II), iFK, Name);
+    serroblib_generate_mapleinput({Name});
+    serroblib_generate_code({Name}, true);
+  end
+end

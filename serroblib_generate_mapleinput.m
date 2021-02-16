@@ -70,6 +70,8 @@ for i = 1:length(Names)
   
   % Hänge die einzelnen MDH-Parameter für alle Gelenk-Transformationen an
   % die Eingabevektoren an
+  sigma_maple_ges = cell(N,1);
+  alpha_maple_ges = cell(N,1);
   for kk = 1:N
     % Namensformat für die Maple-Dynamik-Toolbox
     % Die Indizes entsprechen der Reihenfolge für die csv-Zeile
@@ -87,10 +89,12 @@ for i = 1:length(Names)
     line_mu    = [line_mu,    sprintf('%d,', 1)];
     % Benutze den Index aus csvbits zur Adressierung der Eigenschaften
     % aller MDH-Parameter
-    line_sigma = [line_sigma, maple_type{  csvbits(2+8*(kk-1)) }, ',' ];
+    sigma_maple_ges{kk} =     maple_type{  csvbits(2+8*(kk-1)) };
+    line_sigma = [line_sigma, sigma_maple_ges{kk}, ',' ];
     line_beta  = [line_beta,  maple_beta{  csvbits(3+8*(kk-1)) }, ',' ];
     line_b     = [line_b,     maple_b{     csvbits(4+8*(kk-1)) }, ',' ];
-    line_alpha = [line_alpha, maple_alpha{ csvbits(5+8*(kk-1)) }, ',' ];
+    alpha_maple_ges{kk} =     maple_alpha{ csvbits(5+8*(kk-1)) };
+    line_alpha = [line_alpha, alpha_maple_ges{kk}, ',' ];
     line_a     = [line_a,     maple_a{     csvbits(6+8*(kk-1)) }, ',' ];
     
     if csvbits(2+8*(kk-1)) == 1
@@ -134,5 +138,15 @@ for i = 1:length(Names)
   fwrite(fid, [line_d,      newline]);
   fwrite(fid, [line_offset, newline]);
   
+  % Zusätzliche Eingaben für die Code-Generierung.
+  % Bei geometrischen Sonderfällen (Schubgelenke senkrecht oder parallel
+  % zum vorherigen Gelenk) gibt es in der Dynamik-Toolbox Fehler. Hier wird
+  % eine alternative Berechnung der Minimalparameter gewählt.
+  I_alphanull = strcmp(alpha_maple_ges, '0') | strcmp(alpha_maple_ges, 'Pi');
+  I_alphapi2 = strcmp(alpha_maple_ges, 'Pi/2') | strcmp(alpha_maple_ges, '-Pi/2');
+  I_prismatic = strcmp(sigma_maple_ges, '1');
+  if any(I_prismatic & (I_alphanull|I_alphapi2))
+    fwrite(fid, ['dynpar_minimization_linsolve:=true:', newline]);
+  end
   fclose(fid);
 end

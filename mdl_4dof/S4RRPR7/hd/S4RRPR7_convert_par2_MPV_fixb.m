@@ -6,7 +6,7 @@
 % pkin [7x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,d1,d2,d4,theta3]';
-% m_mdh [5x1]
+% m [5x1]
 %   mass of all robot links (including the base)
 % mrSges [5x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -18,12 +18,12 @@
 %   columns: xx, yy, zz, xy, xz, yz (see inertial_parameters_convert_par1_par2.m)
 % 
 % Output:
-% MPV [19x1]
+% MPV [21x1]
 %   base parameter vector (minimal parameter vector)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-31 17:07
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2021-01-15 10:57
+% Revision: d12c3222fdeb2c5f3b3c8fa5751e113be2fc3aae (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -43,23 +43,20 @@ assert(isreal(Ifges) && all(size(Ifges) == [5 6]), ...
 
 %% Symbolic Calculation
 % From minimal_parameter_vector_fixb_matlab.m
-t80 = (pkin(6) ^ 2);
-t86 = 2 * pkin(6) * mrSges(5,3) + Ifges(5,2);
-t70 = m(5) * t80 + Ifges(4,1) + t86;
-t81 = (pkin(3) ^ 2);
-t73 = m(5) * t81 + Ifges(4,2);
-t88 = t70 - t73;
-t78 = sin(pkin(7));
-t79 = cos(pkin(7));
-t87 = t78 * t79;
-t75 = t78 ^ 2;
-t76 = t79 ^ 2;
-t85 = t76 - t75;
-t83 = pkin(6) * m(5) + mrSges(5,3);
-t71 = t83 * pkin(3) + Ifges(4,4);
-t84 = t71 * t87;
-t72 = mrSges(4,2) - t83;
-t74 = m(5) * pkin(3) + mrSges(4,1);
-t82 = -t72 * t78 + t74 * t79;
-t1 = [Ifges(2,3) + Ifges(3,2) + t75 * t70 + 0.2e1 * t84 + t76 * t73 + (2 * pkin(5) * mrSges(3,3)) + ((pkin(1) ^ 2 + pkin(5) ^ 2) * m(3)); m(3) * pkin(1) + mrSges(2,1); -pkin(5) * m(3) + mrSges(2,2) - mrSges(3,3); t88 * t85 + Ifges(3,1) - Ifges(3,2) - 0.4e1 * t84; t85 * t71 + t88 * t87 + Ifges(3,4); Ifges(4,5) * t79 - Ifges(4,6) * t78 + Ifges(3,5); Ifges(4,5) * t78 + Ifges(4,6) * t79 + Ifges(3,6); Ifges(3,3) + Ifges(4,3) + ((t80 + t81) * m(5)) + 0.2e1 * t82 * pkin(2) + t86; mrSges(3,1) + t82; t72 * t79 + t74 * t78 + mrSges(3,2); mrSges(4,3); m(4) + m(5); Ifges(5,1) - Ifges(5,2); Ifges(5,4); Ifges(5,5); Ifges(5,6); Ifges(5,3); mrSges(5,1); mrSges(5,2);];
-MPV = t1;
+t10 = pkin(6) ^ 2;
+t11 = pkin(3) ^ 2;
+t17 = Ifges(4,1) + Ifges(5,2);
+t12 = (Ifges(4,2) - t17 + (-t10 + t11) * m(5));
+t18 = (pkin(6) * mrSges(5,3));
+t1 = -2 * t18 + t12;
+t3 = pkin(6) * m(5) + mrSges(5,3);
+t13 = t3 * pkin(3) + Ifges(4,4);
+t8 = sin(pkin(7));
+t9 = cos(pkin(7));
+t19 = t8 * t9;
+t16 = t13 * t19;
+t6 = 2 * t18;
+t5 = t9 ^ 2;
+t15 = 0.2e1 * t5;
+t2 = [t1 * t5 + 0.2e1 * t16 + m(5) * t10 + t6 + ((pkin(1) ^ 2 + pkin(5) ^ 2) * m(3)) + (2 * pkin(5) * mrSges(3,3)) + Ifges(3,2) + Ifges(2,3) + t17; pkin(1) * m(3) + mrSges(2,1); -pkin(5) * m(3) + mrSges(2,2) - mrSges(3,3); (-t12 + t6) * t15 - 0.4e1 * t16 + Ifges(3,1) - Ifges(3,2) + t1; -t1 * t19 + t13 * t15 + Ifges(3,4) - t13; t9 * Ifges(4,5) - t8 * Ifges(4,6) + Ifges(3,5); t8 * Ifges(4,5) + t9 * Ifges(4,6) + Ifges(3,6); Ifges(3,3) + Ifges(4,3) + Ifges(5,2) + t6 + (t10 + t11) * m(5); mrSges(3,1); mrSges(3,2); pkin(3) * m(5) + mrSges(4,1); mrSges(4,2) - t3; mrSges(4,3); m(4) + m(5); Ifges(5,1) - Ifges(5,2); Ifges(5,4); Ifges(5,5); Ifges(5,6); Ifges(5,3); mrSges(5,1); mrSges(5,2);];
+MPV = t2;

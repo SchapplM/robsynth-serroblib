@@ -8,7 +8,7 @@
 % pkin [8x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d2,d3,theta4]';
-% MDP [23x1]
+% MDP [25x1]
 %   Minimal dynamic parameter vector (fixed base model)
 %   see S5RRRPP6_convert_par2_MPV_fixb.m
 % 
@@ -17,83 +17,88 @@
 %   inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-31 21:03
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2021-01-15 22:38
+% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
 function Mq = S5RRRPP6_inertiaJ_mdp_slag_vp(qJ, pkin, MDP)
 %% Coder Information
 %#codegen
-%$cgargs {zeros(5,1),zeros(8,1),zeros(23,1)}
+%$cgargs {zeros(5,1),zeros(8,1),zeros(25,1)}
 assert(isreal(qJ) && all(size(qJ) == [5 1]), ...
   'S5RRRPP6_inertiaJ_mdp_slag_vp: qJ has to be [5x1] (double)');
 assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
   'S5RRRPP6_inertiaJ_mdp_slag_vp: pkin has to be [8x1] (double)');
-assert(isreal(MDP) && all(size(MDP) == [23 1]), ...
-  'S5RRRPP6_inertiaJ_mdp_slag_vp: MDP has to be [23x1] (double)'); 
+assert(isreal(MDP) && all(size(MDP) == [25 1]), ...
+  'S5RRRPP6_inertiaJ_mdp_slag_vp: MDP has to be [25x1] (double)'); 
 
 %% Symbolic Calculation
 % From inertia_joint_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-31 21:02:00
-% EndTime: 2019-12-31 21:02:01
-% DurationCPUTime: 0.43s
-% Computational Cost: add. (604->143), mult. (1137->208), div. (0->0), fcn. (1076->6), ass. (0->54)
-t105 = sin(qJ(3));
-t107 = cos(qJ(3));
-t103 = sin(pkin(8));
-t104 = cos(pkin(8));
-t125 = -qJ(4) - pkin(7);
-t113 = t125 * t105;
-t91 = t125 * t107;
-t78 = -t103 * t91 - t104 * t113;
-t80 = t103 * t113 - t104 * t91;
-t133 = t105 * MDP(13) + t107 * MDP(14) - t78 * MDP(20) + t80 * MDP(22) - (t105 * MDP(16) + t107 * MDP(17)) * pkin(7);
-t132 = 2 * MDP(18);
-t131 = 0.2e1 * MDP(20);
-t130 = 2 * MDP(21);
-t129 = 0.2e1 * MDP(22);
-t128 = pkin(6) * t105;
-t127 = pkin(6) * t107;
-t108 = cos(qJ(2));
-t126 = pkin(6) * t108;
-t106 = sin(qJ(2));
-t122 = t106 * t107;
-t90 = -t108 * pkin(2) - t106 * pkin(7) - pkin(1);
-t87 = t107 * t90;
-t74 = -qJ(4) * t122 + t87 + (-pkin(3) - t128) * t108;
-t117 = t107 * t126;
-t76 = t117 + (-qJ(4) * t106 + t90) * t105;
-t67 = t103 * t74 + t104 * t76;
-t124 = t105 * t106;
-t89 = pkin(3) * t124 + t106 * pkin(6);
-t123 = t105 * t107;
-t85 = t103 * t105 - t104 * t107;
-t86 = t103 * t107 + t104 * t105;
-t98 = -t107 * pkin(3) - pkin(2);
-t71 = t85 * pkin(4) - t86 * qJ(5) + t98;
-t121 = t71 * MDP(23);
-t120 = t85 * MDP(20);
-t119 = t86 * MDP(22);
-t118 = t78 ^ 2 + t80 ^ 2;
-t116 = MDP(12) * t123;
-t83 = t86 * t106;
-t84 = -t103 * t124 + t104 * t122;
-t115 = t78 * t84 - t80 * t83;
-t66 = -t103 * t76 + t104 * t74;
-t112 = t107 * MDP(13) - t105 * MDP(14);
-t102 = t107 ^ 2;
-t101 = t106 ^ 2;
-t100 = t105 ^ 2;
-t96 = t104 * pkin(3) + pkin(4);
-t94 = t103 * pkin(3) + qJ(5);
-t82 = t105 * t90 + t117;
-t81 = -t105 * t126 + t87;
-t68 = t83 * pkin(4) - t84 * qJ(5) + t89;
-t65 = t108 * pkin(4) - t66;
-t64 = -t108 * qJ(5) + t67;
-t1 = [MDP(1) - 0.2e1 * pkin(1) * t106 * MDP(10) + (t66 ^ 2 + t67 ^ 2 + t89 ^ 2) * MDP(19) + (t64 ^ 2 + t65 ^ 2 + t68 ^ 2) * MDP(23) + (t102 * MDP(11) + MDP(4) - 0.2e1 * t116) * t101 + (t108 * MDP(15) + 0.2e1 * pkin(1) * MDP(9) + 0.2e1 * (MDP(5) - t112) * t106) * t108 + 0.2e1 * (t101 * t128 - t81 * t108) * MDP(16) + 0.2e1 * (t101 * t127 + t82 * t108) * MDP(17) + (-t66 * t84 - t67 * t83) * t132 + (t65 * t108 + t68 * t83) * t131 + (-t64 * t83 + t65 * t84) * t130 + (-t64 * t108 - t68 * t84) * t129; (-t66 * t86 - t67 * t85 + t115) * MDP(18) + (-t66 * t78 + t67 * t80 + t89 * t98) * MDP(19) + (t68 * t85 + t71 * t83) * MDP(20) + (-t64 * t85 + t65 * t86 + t115) * MDP(21) + (-t68 * t86 - t71 * t84) * MDP(22) + (t64 * t80 + t65 * t78 + t68 * t71) * MDP(23) + (-pkin(6) * MDP(10) + MDP(7) - t133) * t108 + (MDP(6) - pkin(6) * MDP(9) + MDP(11) * t123 + (-t100 + t102) * MDP(12) + (-pkin(2) * t105 - t127) * MDP(16) + (-pkin(2) * t107 + t128) * MDP(17)) * t106; MDP(8) + t100 * MDP(11) + 0.2e1 * t116 + (t98 ^ 2 + t118) * MDP(19) + t118 * MDP(23) + (-0.2e1 * t119 + 0.2e1 * t120 + t121) * t71 + 0.2e1 * (t107 * MDP(16) - t105 * MDP(17)) * pkin(2) + (t132 + t130) * (t78 * t86 - t80 * t85); t81 * MDP(16) - t82 * MDP(17) + t66 * MDP(20) + (-t94 * t83 - t96 * t84) * MDP(21) + t67 * MDP(22) + (t64 * t94 - t65 * t96) * MDP(23) + t112 * t106 + (-MDP(15) + (-pkin(4) - t96) * MDP(20) + (-qJ(5) - t94) * MDP(22)) * t108 + ((-t103 * t83 - t104 * t84) * MDP(18) + (t103 * t67 + t104 * t66) * MDP(19)) * pkin(3); (-t94 * t85 - t96 * t86) * MDP(21) + (-t78 * t96 + t80 * t94) * MDP(23) + ((-t103 * t85 - t104 * t86) * MDP(18) + (t103 * t80 - t104 * t78) * MDP(19)) * pkin(3) + t133; MDP(15) + (t94 ^ 2 + t96 ^ 2) * MDP(23) + (t103 ^ 2 + t104 ^ 2) * MDP(19) * pkin(3) ^ 2 + t96 * t131 + t94 * t129; t89 * MDP(19) + t83 * MDP(20) - t84 * MDP(22) + t68 * MDP(23); t98 * MDP(19) - t119 + t120 + t121; 0; MDP(19) + MDP(23); t108 * MDP(20) + t84 * MDP(21) + t65 * MDP(23); t86 * MDP(21) + t78 * MDP(23); -t96 * MDP(23) - MDP(20); 0; MDP(23);];
+% StartTime: 2021-01-15 22:37:09
+% EndTime: 2021-01-15 22:37:13
+% DurationCPUTime: 0.54s
+% Computational Cost: add. (700->161), mult. (1323->230), div. (0->0), fcn. (1254->6), ass. (0->59)
+t146 = MDP(21) + MDP(25);
+t112 = sin(qJ(3));
+t114 = cos(qJ(3));
+t145 = -(t112 * MDP(16) + t114 * MDP(17)) * pkin(7) + t112 * MDP(13) + t114 * MDP(14);
+t144 = 2 * MDP(18);
+t143 = 2 * MDP(19);
+t142 = 2 * MDP(20);
+t141 = 2 * MDP(22);
+t140 = 2 * MDP(23);
+t139 = 2 * MDP(24);
+t138 = pkin(6) * t112;
+t137 = pkin(6) * t114;
+t115 = cos(qJ(2));
+t136 = pkin(6) * t115;
+t135 = qJ(4) + pkin(7);
+t110 = sin(pkin(8));
+t111 = cos(pkin(8));
+t113 = sin(qJ(2));
+t132 = t113 * t114;
+t97 = -t115 * pkin(2) - t113 * pkin(7) - pkin(1);
+t94 = t114 * t97;
+t81 = -qJ(4) * t132 + t94 + (-pkin(3) - t138) * t115;
+t126 = t114 * t136;
+t83 = t126 + (-qJ(4) * t113 + t97) * t112;
+t74 = t110 * t81 + t111 * t83;
+t134 = t112 * t113;
+t133 = t112 * t114;
+t105 = -t114 * pkin(3) - pkin(2);
+t92 = t110 * t112 - t111 * t114;
+t93 = t110 * t114 + t111 * t112;
+t78 = t92 * pkin(4) - t93 * qJ(5) + t105;
+t131 = t78 * MDP(25);
+t96 = pkin(3) * t134 + t113 * pkin(6);
+t130 = t105 * MDP(21);
+t129 = MDP(18) + MDP(22);
+t128 = MDP(19) - MDP(24);
+t125 = MDP(12) * t133;
+t122 = t135 * t112;
+t98 = t135 * t114;
+t85 = t110 * t98 + t111 * t122;
+t87 = -t110 * t122 + t111 * t98;
+t90 = t93 * t113;
+t91 = -t110 * t134 + t111 * t132;
+t124 = t85 * t91 - t87 * t90;
+t73 = -t110 * t83 + t111 * t81;
+t103 = t111 * pkin(3) + pkin(4);
+t121 = -t103 * MDP(25) - MDP(22);
+t120 = t114 * MDP(13) - t112 * MDP(14);
+t117 = t111 * MDP(18) - t110 * MDP(19);
+t109 = t114 ^ 2;
+t108 = t113 ^ 2;
+t107 = t112 ^ 2;
+t101 = t110 * pkin(3) + qJ(5);
+t89 = t112 * t97 + t126;
+t88 = -t112 * t136 + t94;
+t75 = t90 * pkin(4) - t91 * qJ(5) + t96;
+t72 = t115 * pkin(4) - t73;
+t71 = -t115 * qJ(5) + t74;
+t1 = [MDP(1) - 0.2e1 * pkin(1) * t113 * MDP(10) + (t73 ^ 2 + t74 ^ 2 + t96 ^ 2) * MDP(21) + (t71 ^ 2 + t72 ^ 2 + t75 ^ 2) * MDP(25) + (t109 * MDP(11) + MDP(4) - 0.2e1 * t125) * t108 + (t115 * MDP(15) + 0.2e1 * pkin(1) * MDP(9) + 0.2e1 * (MDP(5) - t120) * t113) * t115 + 0.2e1 * (t108 * t138 - t88 * t115) * MDP(16) + 0.2e1 * (t108 * t137 + t89 * t115) * MDP(17) + (-t73 * t115 + t96 * t90) * t144 + (t74 * t115 + t96 * t91) * t143 + (-t73 * t91 - t74 * t90) * t142 + (t72 * t115 + t75 * t90) * t141 + (-t71 * t90 + t72 * t91) * t140 + (-t71 * t115 - t75 * t91) * t139; (t105 * t90 + t96 * t92) * MDP(18) + (t105 * t91 + t96 * t93) * MDP(19) + (-t73 * t93 - t74 * t92 + t124) * MDP(20) + (t96 * t105 - t73 * t85 + t74 * t87) * MDP(21) + (t75 * t92 + t78 * t90) * MDP(22) + (-t71 * t92 + t72 * t93 + t124) * MDP(23) + (-t75 * t93 - t78 * t91) * MDP(24) + (t71 * t87 + t72 * t85 + t75 * t78) * MDP(25) + (-pkin(6) * MDP(10) + t128 * t87 + t129 * t85 + MDP(7) - t145) * t115 + (MDP(6) - pkin(6) * MDP(9) + MDP(11) * t133 + (-t107 + t109) * MDP(12) + (-pkin(2) * t112 - t137) * MDP(16) + (-pkin(2) * t114 + t138) * MDP(17)) * t113; MDP(8) + t107 * MDP(11) + 0.2e1 * t125 + (-0.2e1 * t93 * MDP(24) + t92 * t141 + t131) * t78 + (t93 * t143 + t92 * t144 + t130) * t105 + 0.2e1 * (t114 * MDP(16) - t112 * MDP(17)) * pkin(2) + t146 * (t85 ^ 2 + t87 ^ 2) + (t142 + t140) * (t85 * t93 - t87 * t92); t88 * MDP(16) - t89 * MDP(17) + t73 * MDP(18) - t74 * MDP(19) + t73 * MDP(22) + (-t101 * t90 - t103 * t91) * MDP(23) + t74 * MDP(24) + (t71 * t101 - t72 * t103) * MDP(25) + t120 * t113 + (-MDP(15) + (-pkin(4) - t103) * MDP(22) + (-qJ(5) - t101) * MDP(24)) * t115 + ((-t110 * t90 - t111 * t91) * MDP(20) + (t110 * t74 + t111 * t73) * MDP(21) - t117 * t115) * pkin(3); (-t101 * t92 - t103 * t93) * MDP(23) + (MDP(25) * t101 - t128) * t87 + (-MDP(18) + t121) * t85 + ((-t110 * t92 - t111 * t93) * MDP(20) + (t110 * t87 - t111 * t85) * MDP(21)) * pkin(3) + t145; MDP(15) + (t101 ^ 2 + t103 ^ 2) * MDP(25) + t103 * t141 + t101 * t139 + (0.2e1 * t117 + (t110 ^ 2 + t111 ^ 2) * MDP(21) * pkin(3)) * pkin(3); t96 * MDP(21) + t75 * MDP(25) + t128 * t91 + t129 * t90; t128 * t93 + t129 * t92 + t130 + t131; 0; t146; t115 * MDP(22) + t91 * MDP(23) + t72 * MDP(25); t93 * MDP(23) + t85 * MDP(25); t121; 0; MDP(25);];
 %% Postprocessing: Reshape Output
 % From vec2symmat_5_matlab.m
 res = [t1(1), t1(2), t1(4), t1(7), t1(11); t1(2), t1(3), t1(5), t1(8), t1(12); t1(4), t1(5), t1(6), t1(9), t1(13); t1(7), t1(8), t1(9), t1(10), t1(14); t1(11), t1(12), t1(13), t1(14), t1(15);];

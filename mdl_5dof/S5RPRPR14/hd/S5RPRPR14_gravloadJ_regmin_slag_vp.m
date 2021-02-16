@@ -12,12 +12,12 @@
 %   pkin=[a2,a3,a4,a5,d1,d3,d5,theta4]';
 % 
 % Output:
-% taug_reg [5x22]
+% taug_reg [5x24]
 %   minimal parameter regressor of gravitation joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2019-12-31 18:35
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2021-01-15 12:17
+% Revision: d12c3222fdeb2c5f3b3c8fa5751e113be2fc3aae (2021-01-15)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,35 +36,33 @@ assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
 %% Symbolic Calculation
 % From gravload_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2019-12-31 18:35:16
-% EndTime: 2019-12-31 18:35:16
+% StartTime: 2021-01-15 12:17:03
+% EndTime: 2021-01-15 12:17:04
 % DurationCPUTime: 0.12s
-% Computational Cost: add. (62->34), mult. (112->47), div. (0->0), fcn. (113->8), ass. (0->27)
-t17 = sin(qJ(1));
-t20 = cos(qJ(1));
-t5 = g(1) * t17 - g(2) * t20;
-t13 = qJ(3) + pkin(8);
-t7 = sin(t13);
-t8 = cos(t13);
-t30 = -g(3) * t7 + t5 * t8;
-t28 = g(3) * t8;
-t16 = sin(qJ(3));
-t27 = pkin(3) * t16;
-t26 = t20 * pkin(1) + t17 * qJ(2);
-t15 = sin(qJ(5));
-t25 = t17 * t15;
-t18 = cos(qJ(5));
-t24 = t17 * t18;
-t23 = t20 * t15;
-t22 = t20 * t18;
-t6 = g(1) * t20 + g(2) * t17;
-t19 = cos(qJ(3));
-t21 = g(3) * t16 - t5 * t19;
-t14 = -qJ(4) - pkin(6);
-t10 = t20 * qJ(2);
-t4 = t7 * t22 - t25;
-t3 = t7 * t23 + t24;
-t2 = t7 * t24 + t23;
-t1 = -t7 * t25 + t22;
-t9 = [0, t5, t6, -t5, -t6, -g(1) * (-t17 * pkin(1) + t10) - g(2) * t26, 0, 0, 0, 0, 0, -t6 * t16, -t6 * t19, t5, -g(1) * (t20 * t27 + t10 + (-pkin(1) + t14) * t17) - g(2) * (-t20 * t14 + t17 * t27 + t26), 0, 0, 0, 0, 0, -g(1) * t4 - g(2) * t2, g(1) * t3 - g(2) * t1; 0, 0, 0, 0, 0, -t5, 0, 0, 0, 0, 0, 0, 0, 0, -t5, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t21, g(3) * t19 + t5 * t16, 0, t21 * pkin(3), 0, 0, 0, 0, 0, -t30 * t18, t30 * t15; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t6, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -g(1) * t1 - g(2) * t3 + t15 * t28, g(1) * t2 - g(2) * t4 + t18 * t28;];
-taug_reg = t9;
+% Computational Cost: add. (78->36), mult. (126->50), div. (0->0), fcn. (127->8), ass. (0->25)
+t15 = sin(qJ(1));
+t18 = cos(qJ(1));
+t5 = g(1) * t15 - g(2) * t18;
+t12 = qJ(3) + pkin(8);
+t8 = sin(t12);
+t9 = cos(t12);
+t27 = -g(3) * t8 + t5 * t9;
+t25 = g(3) * t9;
+t13 = sin(qJ(5));
+t24 = t15 * t13;
+t16 = cos(qJ(5));
+t23 = t15 * t16;
+t22 = t18 * t13;
+t21 = t18 * t16;
+t6 = g(1) * t18 + g(2) * t15;
+t14 = sin(qJ(3));
+t17 = cos(qJ(3));
+t19 = g(3) * t14 - t5 * t17;
+t11 = pkin(1) + pkin(6) + qJ(4);
+t7 = t14 * pkin(3) + qJ(2);
+t4 = t8 * t21 - t24;
+t3 = t8 * t22 + t23;
+t2 = t8 * t23 + t22;
+t1 = -t8 * t24 + t21;
+t10 = [0, t5, t6, -t5, -t6, -g(1) * (-t15 * pkin(1) + t18 * qJ(2)) - g(2) * (t18 * pkin(1) + t15 * qJ(2)), 0, 0, 0, 0, 0, -t6 * t14, -t6 * t17, -t6 * t8, -t6 * t9, t5, -g(1) * (-t11 * t15 + t7 * t18) - g(2) * (t11 * t18 + t7 * t15), 0, 0, 0, 0, 0, -g(1) * t4 - g(2) * t2, g(1) * t3 - g(2) * t1; 0, 0, 0, 0, 0, -t5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t5, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t19, g(3) * t17 + t5 * t14, -t27, t5 * t8 + t25, 0, t19 * pkin(3), 0, 0, 0, 0, 0, -t27 * t16, t27 * t13; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t6, 0, 0, 0, 0, 0, 0, 0; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -g(1) * t1 - g(2) * t3 + t13 * t25, g(1) * t2 - g(2) * t4 + t16 * t25;];
+taug_reg = t10;
