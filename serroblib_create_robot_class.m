@@ -251,6 +251,7 @@ RS.update_pkin();
 
 RS.qlim = [PS.qmin(:), PS.qmax(:)];
 RS.qDlim = [-PS.vmax(:), PS.vmax(:)];
+RS.qDDlim = NaN(PS.NQJ,2);
 RS.qref = PS.qref(:);
 
 RS.descr = descr;
