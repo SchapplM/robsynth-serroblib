@@ -19,7 +19,7 @@ clc
 %% Initialisierung
 roblibpath=fileparts(which('serroblib_path_init.m'));
 only_add_new = false;
-
+filter_genmdl_test = ''; % Bsp: "S6RRRRRR10" Prüfe nur dieses Hauptmodell
 %% Alle Modelle durchgehen
 for N = 1:7
   fprintf('Prüfe Strukturen mit %d FG\n', N);
@@ -32,10 +32,12 @@ for N = 1:7
     if ~isvariant
       continue % Nur Varianten durchgehen
     end
-    fprintf('[%d/%d] Generiere Funktionen für %s\n', j, length(l.Names_Ndof), Name);
     variantof = l.AdditionalInfo(j,3);
     Name_GenMdl = l.Names_Ndof{variantof};
-    
+    if ~isempty(filter_genmdl_test) && ~strcmp(Name_GenMdl, filter_genmdl_test)
+      continue % Filterung zu Testzwecken
+    end
+    fprintf('[%d/%d] Generiere Funktionen für %s\n', j, length(l.Names_Ndof), Name);
     % Kinematik-Parameter auslesen:
     % ... für allgemeines Modell
     [RSG, PSG] = serroblib_create_robot_class(Name_GenMdl, [], false);

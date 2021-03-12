@@ -19,7 +19,7 @@ usr_dryrun = false; % Nur Anzeigen, was gemacht werden würde, nichts schreiben
 usr_overwrite = true; % Überschreibe auch bestehende Einträge. Sinnvoll, wenn die Spalten vorher leer sind
 usr_abortonerror = true; % Bei irgendeinem Fehler anhalten
 only_look_at_robot = {}; % Nur eine Liste namentlich genannter Roboter bearbeiten; z.B. S5PRPRR4 
-
+filter_genmdl_test = ''; % Bsp: "S6RRRRRR10" Prüfe nur dieses Hauptmodell
 %% Durchsuche alle Roboter und prüfe die Kinematikparameter
 % Zuordnung der Zahlenwerte in der csv-Tabelle zu den physikalischen Werten
 % Die in der mat-Datei abgelegte Binär-Kodierung entspricht der Reihenfolge
@@ -27,11 +27,16 @@ for N = 1:7
   fprintf('Prüfe Strukturen mit %d FG\n', N);
   % Alle Roboter aus Datenbank laden
   mdllistfile_Ndof = fullfile(roblibpath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
-  l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_EEdof0');
+  l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_EEdof0', 'AdditionalInfo');
   for j = 1:length(l.Names_Ndof)
     RobName = l.Names_Ndof{j};
     if ~isempty(only_look_at_robot) && ~any(strcmp(only_look_at_robot, RobName))
-      continue
+      continue % Filterung zu Testzwecken
+    end
+    variantof = l.AdditionalInfo(j,3);
+    Name_GenMdl = l.Names_Ndof{variantof};
+    if ~isempty(filter_genmdl_test) && ~strcmp(Name_GenMdl, filter_genmdl_test)
+      continue % Filterung zu Testzwecken
     end
     fprintf('%d/%d: Prüfe Struktur %s\n', j, length(l.Names_Ndof), RobName);
     RS = serroblib_create_robot_class(RobName);

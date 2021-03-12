@@ -52,6 +52,7 @@
 %   02: Spalte "Roboter" (Kette kommt aus Struktursynthese mit EE-FG)
 %   03: Spalte "3T0R-PKM" (Beinkette für PKM mit EE-FG)
 %   04: Spalte "3T1R-PKM"
+%   05: Spalte "Gelenkfolge" (Varianten mit Kardan-/Kugelgelenken)
 % 
 % Siehe auch: serroblib_bits2csvline
 
