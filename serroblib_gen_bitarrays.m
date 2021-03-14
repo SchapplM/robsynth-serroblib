@@ -38,6 +38,11 @@
 %     Bit-Array mit Filter, um Varianten eines Roboters zu erkennen
 %   BitArrays_Origin
 %     Bit-Array mit Herkunft der Kinematik kodiert als Bits
+% serrob_list.mat (wie mdl_xdof/Sx_list.mat, aber für alle Roboter)
+%   Names
+%     Namen der Roboter (anstatt Names_Ndof)
+%   N
+%     Anzahl der Gelenke des jeweiligen Roboters
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für Mechatronische Systeme, Universität Hannover
@@ -49,6 +54,7 @@ if nargin == 0
   N_update = 1:7; % Aktualisiere alle Roboter
 end
 repopath=fileparts(which('serroblib_path_init.m'));
+mdllistfile_alldof = fullfile(repopath, 'serrob_list.mat');
 for N = N_update(:)'
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
   BitArrays_Ndof = uint16(zeros(0,N));
@@ -210,5 +216,42 @@ for N = N_update(:)'
     save(mdllistfile_Ndof, '-struct', 'Ndof_struct_new');
 %     fprintf('serroblib_gen_bitarrays: Datei %s mit %d Einträgen gespeichert \n', ...
 %       mdllistfile_Ndof, size(BitArrays_Ndof,1));
+  end
+  % Gesamt-Datei aktualisieren
+  if length(N_update) == 7 % nur wenn auch alle Roboter aktualisiert werden
+    % Anzahl der Spalten erhöhen (Ndof-Variable wird nicht mehr benötigt
+    Ndof_struct_new.BitArrays_Ndof = [Ndof_struct_new.BitArrays_Ndof, ...
+      uint8(zeros(size(Ndof_struct_new.BitArrays_Ndof,1), 7-N))];
+    Ndof_struct_new.BitArrays_Ndof_VF = [Ndof_struct_new.BitArrays_Ndof_VF, ...
+      uint8(zeros(size(Ndof_struct_new.BitArrays_Ndof_VF,1), 7-N))];
+    if N == 1
+      alldof_struct_new = Ndof_struct_new;
+      alldof_struct_new.N = ones(length(Ndof_struct_new.Names_Ndof),1);
+      alldof_struct_new.Names = alldof_struct_new.Names_Ndof;
+      alldof_struct_new = rmfield(alldof_struct_new, 'Names_Ndof');
+    else
+      alldof_struct_new.Names = [alldof_struct_new.Names, ...
+        Ndof_struct_new.Names_Ndof];
+      for e = {'BitArrays_Ndof', 'BitArrays_Ndof_VF', 'BitArrays_phiNE', ...
+          'BitArrays_EEdof0', 'BitArrays_Origin', 'AdditionalInfo'}
+        alldof_struct_new.(e{1}) = [alldof_struct_new.(e{1}); Ndof_struct_new.(e{1})];
+      end
+      alldof_struct_new.N = [alldof_struct_new.N; repmat(N,length(Ndof_struct_new.Names_Ndof),1)];
+    end
+  end
+end
+% Gesamt-Datei speichern (falls vollständig zusammengestellt wurde)
+if length(N_update) == 7
+  write_new = false;
+  if exist(mdllistfile_alldof, 'file')
+    alldof_struct_old = load(mdllistfile_alldof);
+    if ~isequaln(alldof_struct_old, alldof_struct_new)
+      write_new = true; % Dateiinhalt wird sich ändern. Schreibe neu.
+    end
+  else
+    write_new = true; % Schreibe mat-Datei neu, sie existiert noch nicht
+  end
+  if write_new
+    save(mdllistfile_alldof, '-struct', 'alldof_struct_new');
   end
 end
