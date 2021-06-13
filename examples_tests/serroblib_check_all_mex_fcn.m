@@ -17,6 +17,8 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
   fprintf('Prüfe %d Roboter mit %d Gelenken\n', length(l.Names_Ndof), N);
   for j = 1:length(l.Names_Ndof) % gehe alle Modelle durch
     Name = l.Names_Ndof{j};
+    % Debug: Einzelnen Roboter prüfen.
+%     if ~contains(Name, 'S6RRRRRR10V2'), continue; end
     isvar = l.AdditionalInfo(j,2); % Marker, ob Modellvariante
     Name_GenMdl = l.Names_Ndof{l.AdditionalInfo(j,3)};
     % Suche nach den Mex-Dateien
@@ -60,7 +62,10 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
         % Dummy-Aufruf der Funktionen, um Syntax-Fehler aufzudecken.
         if contains(filelist(kk).name, 'invkin_eulangresidual')
           try
-            RS.invkin2(eye(3,4), zeros(RS.NJ,1));
+            % Gebe mehr als einen Startwert vor (neue Schnittstelle seit 2021-06)
+            [~,~,~,Stats] = RS.invkin2(eye(3,4), rand(RS.NJ,2));
+            % Prüfe, ob neue Ausgabe (seit 2021-06) da ist.
+            tmp = Stats.coll;
           catch err
             if ~strcmp(err.identifier, 'MATLAB:svd:matrixWithNaNInf')
               recompile = true;
