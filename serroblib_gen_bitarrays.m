@@ -219,7 +219,8 @@ for N = N_update(:)'
   end
   % Gesamt-Datei aktualisieren
   if length(N_update) == 7 % nur wenn auch alle Roboter aktualisiert werden
-    % Anzahl der Spalten erhöhen (Ndof-Variable wird nicht mehr benötigt
+    % Anzahl der Spalten erhöhen (Ndof-Variable wird nicht mehr benötigt.
+    % Kann verändert werden.)
     Ndof_struct_new.BitArrays_Ndof = [Ndof_struct_new.BitArrays_Ndof, ...
       uint8(zeros(size(Ndof_struct_new.BitArrays_Ndof,1), 7-N))];
     Ndof_struct_new.BitArrays_Ndof_VF = [Ndof_struct_new.BitArrays_Ndof_VF, ...
@@ -230,6 +231,10 @@ for N = N_update(:)'
       alldof_struct_new.Names = alldof_struct_new.Names_Ndof;
       alldof_struct_new = rmfield(alldof_struct_new, 'Names_Ndof');
     else
+      % Korrigiere die Indizies, die in AdditionalInfo gespeichert sind.
+      % Beziehen sich vorher auf die FG-Variablen, jetzt auf die Gesamt-Var.
+      Ndof_struct_new.AdditionalInfo(:,3) = Ndof_struct_new.AdditionalInfo(:,3) + ...
+        length(alldof_struct_new.Names);
       alldof_struct_new.Names = [alldof_struct_new.Names, ...
         Ndof_struct_new.Names_Ndof];
       for e = {'BitArrays_Ndof', 'BitArrays_Ndof_VF', 'BitArrays_phiNE', ...
