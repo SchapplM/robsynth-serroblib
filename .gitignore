@@ -31,3 +31,4 @@ maplerepo_path.m
 tpl
 *.orig
 *.asv
+*.lock
