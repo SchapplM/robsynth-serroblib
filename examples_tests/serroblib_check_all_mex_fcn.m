@@ -66,6 +66,10 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
             [~,~,~,Stats] = RS.invkin2(eye(3,4), rand(RS.NJ,2));
             % Prüfe, ob neue Ausgabe (seit 2021-06) da ist.
             tmp = Stats.coll;
+            % Prüfe, ob Korrektur von Fehler bei Kollisionsprüfung da ist
+            % Behoben ca. 2021-07; max/min mit Eingabe variabler Länge
+            s = struct('avoid_collision_finish', true);
+            [~,~,~,Stats] = RS.invkin2(eye(3,4), rand(RS.NJ,3), s);
           catch err
             if ~strcmp(err.identifier, 'MATLAB:svd:matrixWithNaNInf')
               recompile = true;
