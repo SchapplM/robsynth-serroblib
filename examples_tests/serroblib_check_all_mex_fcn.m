@@ -21,7 +21,7 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
 %     if ~contains(Name, 'S6RRRRRR10V2'), continue; end
     isvar = l.AdditionalInfo(j,2); % Marker, ob Modellvariante
     Name_GenMdl = l.Names_Ndof{l.AdditionalInfo(j,3)};
-    % Suche nach den Mex-Dateien
+    % Suche nach den m- und mex-Dateien
     if ~isvar
       tpl_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name, 'tpl');
     else % Bei Varianten andere Ordnerstruktur
@@ -31,29 +31,26 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
         tpl_dir = fullfile(repopath, sprintf('mdl_%ddof', N), Name_GenMdl, 'tpl');
       end
     end
-    % TODO: Hier muss mex/kein mex gleichermaßen geprüft werden. Eventuell
-    % muss neu generiert werden, wenn keine mex-Datei da ist. Wenn neu
-    % generiert wurde, müssen die nicht-mex-Funktionen nicht neu geprüft
-    % werden.
     mexfilelist = dir(fullfile(tpl_dir, '*_mex.mex*'));
     mfilelist = dir(fullfile(tpl_dir, '*.m'));
-    filelist = [mexfilelist; mfilelist];
+    filelist = [mfilelist;mexfilelist; ];
     if isempty(filelist)
       % Nichts zu prüfen. Es gibt keine Dateien
       continue
     end
     fprintf('Prüfe Roboter %d/%d (%s) (%d mex-Dateien und %d m-Dateien liegen in tpl-Ordner %s)\n', ...
       j, length(l.Names_Ndof), Name, length(mexfilelist), length(mfilelist), tpl_dir)
+    % Initialisiere Matlab-Klasse und setze auf Nutzung von M-Funktionen
     RS = serroblib_create_robot_class(Name);
-    RS_mex_status = true;
-    RS.fill_fcn_handles(true, false);
-    % Gehe alle mex- und m-Dateien durch, die da sind.
+    % Gehe alle m- und mex-Dateien durch, die da sind. Fange mit m an.
+    % Dadurch werden die Vorlagen-Funktionen meistens schon neu generiert.
+    RS.fill_fcn_handles(false, false); RS_mex_status = false;
     for kk = 1:length(filelist)
-      if ~contains(filelist(kk).name, '_mex')
-        % Prüfe ab jetzt die m-Dateien. Die mex-Dateien sind fertig.
-        if RS_mex_status == true
-          RS.fill_fcn_handles(false, false);
-          RS_mex_status = false;
+      if contains(filelist(kk).name, '_mex')
+        % Prüfe ab jetzt die mex-Dateien. Die m-Dateien sind fertig.
+        if RS_mex_status == false
+          RS.fill_fcn_handles(true, false);
+          RS_mex_status = true;
         end
       end
       for retryiter = 1:3 % mehrfache Neuversuche zur Fehlerkorrektur
