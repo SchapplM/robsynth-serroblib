@@ -59,6 +59,14 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
         % Dummy-Aufruf der Funktionen, um Syntax-Fehler aufzudecken.
         if contains(filelist(kk).name, 'invkin_eulangresidual')
           try
+            % Prüfe Dateiinhalte auf charakteristische Einträge
+            if ~RS_mex_status % Nicht für mex-Dateien
+              filetext = fileread(fullfile(tpl_dir, filelist(kk).name));
+              if ~contains(filetext, 'collbodies_thresh')
+                error('Textfragment "collbodies_thresh" nicht gefunden. Alte Version.');
+              end
+            end
+            % Führe die Funktion aus
             % Gebe mehr als einen Startwert vor (neue Schnittstelle seit 2021-06)
             [~,~,~,Stats] = RS.invkin2(eye(3,4), rand(RS.NJ,2));
             % Prüfe, ob neue Ausgabe (seit 2021-06) da ist.
@@ -75,6 +83,14 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
         end
         if contains(filelist(kk).name, 'invkin_traj')
           try
+            % Prüfe Dateiinhalte auf charakteristische Einträge
+            if ~RS_mex_status % Nicht für mex-Dateien
+              filetext = fileread(fullfile(tpl_dir, filelist(kk).name));
+              if ~contains(filetext, 'collbodies_thresh')
+                error('Textfragment "collbodies_thresh" nicht gefunden. Alte Version.');
+              end
+            end
+            % Führe die Funktion aus
             RS.invkin2_traj(zeros(2,6), zeros(2,6), zeros(2,6), [0;1], zeros(RS.NQJ,1));
           catch err
             if ~strcmp(err.identifier, 'MATLAB:svd:matrixWithNaNInf')
