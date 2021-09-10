@@ -62,8 +62,8 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
             % Prüfe Dateiinhalte auf charakteristische Einträge
             if ~RS_mex_status % Nicht für mex-Dateien
               filetext = fileread(fullfile(tpl_dir, filelist(kk).name));
-              if ~contains(filetext, 'installspace_thresh')
-                error('Textfragment "installspace_thresh" nicht gefunden. Alte Version.');
+              if ~contains(filetext, 'Stats.maxcolldepth')
+                error('Textfragment "Stats.maxcolldepth" nicht gefunden. Alte Version.');
               end
             end
             % Führe die Funktion aus
@@ -86,8 +86,8 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
             % Prüfe Dateiinhalte auf charakteristische Einträge
             if ~RS_mex_status % Nicht für mex-Dateien
               filetext = fileread(fullfile(tpl_dir, filelist(kk).name));
-              if ~contains(filetext, 'installspace_thresh')
-                error('Textfragment "installspace_thresh" nicht gefunden. Alte Version.');
+              if ~contains(filetext, 'Stats.h_coll_thresh')
+                error('Textfragment "Stats.h_coll_thresh" nicht gefunden. Alte Version.');
               end
             end
             % Führe die Funktion aus
