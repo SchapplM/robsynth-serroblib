@@ -90,8 +90,12 @@ if isempty(rtp)
 end
 for tmp = function_list_copy_robotics
   tplf = tmp{1};
-  copyfile(fullfile(rtp, tplf{1}, ['robot_',tplf{2},'.template']), ...
-           fullfile(repopath, 'template_functions') );
+  srcfile = fullfile(rtp, tplf{1}, ['robot_',tplf{2},'.template']);
+  if ~exist(srcfile, 'file')
+    error(['Zu kopierende Vorlagendatei %s existiert nicht. Vermutlich ', ...
+      'Versionen der Repos nicht kompatibel'], srcfile);
+  end
+  copyfile(srcfile, fullfile(repopath, 'template_functions') );
 end
 
 % Generiere die Liste der Vorlagen-Funktionen aus den tatsächlich
