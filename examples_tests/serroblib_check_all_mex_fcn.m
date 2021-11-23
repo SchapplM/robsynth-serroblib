@@ -42,6 +42,7 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
       j, length(l.Names_Ndof), Name, length(mexfilelist), length(mfilelist), tpl_dir)
     % Initialisiere Matlab-Klasse und setze auf Nutzung von M-Funktionen
     RS = serroblib_create_robot_class(Name);
+    RS.gen_testsettings(true, true); % Zufallswerte für Parameter. Sonst kommen NaN-Fehler und überdecken die Syntax-Fehler
     % Gehe alle m- und mex-Dateien durch, die da sind. Fange mit m an.
     % Dadurch werden die Vorlagen-Funktionen meistens schon neu generiert.
     RS.fill_fcn_handles(false, false); RS_mex_status = false;
@@ -59,18 +60,15 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
         % Dummy-Aufruf der Funktionen, um Syntax-Fehler aufzudecken.
         if contains(filelist(kk).name, 'invkin_eulangresidual')
           try
-            % Prüfe Dateiinhalte auf charakteristische Einträge
-            if ~RS_mex_status % Nicht für mex-Dateien
-              filetext = fileread(fullfile(tpl_dir, filelist(kk).name));
-              if ~contains(filetext, 'Stats.maxcolldepth')
-                error('Textfragment "Stats.maxcolldepth" nicht gefunden. Alte Version.');
-              end
-            end
             % Führe die Funktion aus
             % Gebe mehr als einen Startwert vor (neue Schnittstelle seit 2021-06)
             [~,~,~,Stats] = RS.invkin2(eye(3,4), rand(RS.NJ,2));
             % Prüfe, ob neue Ausgabe (seit 2021-06) da ist.
             tmp = Stats.coll;
+            % Prüfe, ob Versionsausgabe existiert, und ob der Wert passt
+            if Stats.version < 1 % hier wird die aktuelle Version eingetragen
+              error('Version der Datei ist zu alt (%d).', Stats.version);
+            end
             % Prüfe, ob Korrektur von Fehler bei Kollisionsprüfung da ist
             % Behoben ca. 2021-07; max/min mit Eingabe variabler Länge
             s = struct('avoid_collision_finish', true);
@@ -83,15 +81,13 @@ for N = 1:7 % Alle Gelenk-FG durchgehen
         end
         if contains(filelist(kk).name, 'invkin_traj')
           try
-            % Prüfe Dateiinhalte auf charakteristische Einträge
-            if ~RS_mex_status % Nicht für mex-Dateien
-              filetext = fileread(fullfile(tpl_dir, filelist(kk).name));
-              if ~contains(filetext, 'Stats.h_coll_thresh')
-                error('Textfragment "Stats.h_coll_thresh" nicht gefunden. Alte Version.');
-              end
-            end
             % Führe die Funktion aus
-            RS.invkin2_traj(zeros(2,6), zeros(2,6), zeros(2,6), [0;1], zeros(RS.NQJ,1));
+           [~, ~, ~, ~, ~, Stats] = ...
+             RS.invkin2_traj(zeros(2,6), zeros(2,6), zeros(2,6), [0;1], zeros(RS.NQJ,1));
+            % Prüfe, ob Versionsausgabe existiert, und ob der Wert passt
+            if Stats.version < 1 % hier wird die aktuelle Version eingetragen
+              error('Version der Datei ist zu alt (%d).', Stats.version);
+            end
           catch err
             if ~strcmp(err.identifier, 'MATLAB:svd:matrixWithNaNInf')
               recompile = true;
