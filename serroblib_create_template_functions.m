@@ -115,7 +115,7 @@ for i = 1:length(Names)
   N = str2double(Name_i(2)); % Anzahl FG
   % Daten des Robotermodells laden
   mdllistfile_Ndof = fullfile(repopath, sprintf('mdl_%ddof', N), sprintf('S%d_list.mat',N));
-  l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
+  l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo', 'BitArrays_EEdof0');
   I_robot = find(strcmp(l.Names_Ndof,Name_i));
   if isempty(I_robot)
     error('Modell %s ist nicht in der Datenbank', Name_i);
@@ -124,6 +124,7 @@ for i = 1:length(Names)
   isvariant = addinfo(2);
   variantof = addinfo(3);
   hascode   = addinfo(4);
+  I_EE = serroblib_bits2csvline_EE(l.BitArrays_EEdof0(I_robot,:));
 	% Prüfe, ob Roboter einen Code-Ordner hat. Wenn nicht, ist die Erstellung
 	% nicht sinnvoll (weil die robot_env.sh nicht existiert)
   if hascode ~= 1
@@ -170,7 +171,7 @@ for i = 1:length(Names)
   end
   subsexp_array{10,2} = 'VERSIONINFO';
   subsexp_array{10,3} = 'Generated in SerRobLib from HybrDyn-Template';
-  
+  subsexp_array(11,1:3) = {'', 'Rob_I_EE', ['logical([', disp_array(strcmp(I_EE(1:6),'1'),'%d'),'])']};
   % Kopiere alle Vorlagen-Funktionen an die Ziel-Orte und Ersetze die
   % Platzhalter-Ausdrücke
   mkdirs(fcn_dir);  % Ordner existiert noch nicht. Neu erstellen.
@@ -186,8 +187,8 @@ for i = 1:length(Names)
       continue % Keine Datei erzeugen. Nur mex-Liste erstellen.
     end
     % Ersetzungsausdruck für Dateinamen vorbereiten
-    subsexp_array{11,2} = 'FN';
-    [~,subsexp_array{11,3},~] = fileparts(file2);
+    subsexp_array{12,2} = 'FN';
+    [~,subsexp_array{12,3},~] = fileparts(file2);
     % Kopieren und Ausdrücke ersetzen
     if strcmp(copycommand, 'sed')
       % Variante für Linux: Vorlagen-Datei kopieren und anschließend
