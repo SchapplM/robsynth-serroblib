@@ -12,7 +12,7 @@
 % (C) Institut für Mechatronische Systeme, Leibniz Universität Hannover
 
 function serroblib_update_template_functions(Names, verbosity)
-
+orig_state = warning('off', 'all'); % Warnungen temporär unterdrücken
 %% Prüfe Eingabe
 repopath=fileparts(which('serroblib_path_init.m'));
 % Stelle Liste aller Roboter zusammen
@@ -129,6 +129,7 @@ for j = 1:length(Names)
           end
           serroblib_create_template_functions({Name}, false, false);
         elseif retryiter == 3
+          warning(orig_state);
           error('Auch beim dritten Versuch kein Erfolg');
         end
         if contains(filelist(kk).name, '_mex')
@@ -146,3 +147,4 @@ for j = 1:length(Names)
     end % retryiter
   end % kk (Mex-Dateien)
 end % j (Roboter-Modelle)
+warning(orig_state);
