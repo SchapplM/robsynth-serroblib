@@ -27,6 +27,7 @@ end
 %% Bestimme aktuelle Version der jeweiligen Vorlagen-Funktion
 filelist = {'robot_invkin_eulangresidual.m.template', 'robot_invkin_traj.m.template'};
 fileversions = struct('robot_invkin_eulangresidual', 0, 'robot_invkin_traj', 0);
+files_found = fileversions; % Merke, welche Dateien da sind
 kinematics_dir = fullfile(fileparts(which('robotics_toolbox_path_init.m')), ...
   'kinematics');
 for i = 1:length(filelist)
@@ -87,8 +88,10 @@ for j = 1:length(Names)
       % Einzelne Fälle für die mex-Dateien durchgehen und jeweils
       % Dummy-Aufruf der Funktionen, um Syntax-Fehler aufzudecken.
       if contains(filelist(kk).name, 'invkin_eulangresidual')
-        try
-          % Führe die Funktion aus
+        if ~RS_mex_status % markiere die Datei als vorhanden (ohne Mex)
+          files_found.robot_invkin_eulangresidual = true;
+        end
+        try % Führe die Funktion aus
           s = struct('n_max', 1, 'retry_limit', -1); % keine Ausführung
           [~,~,~,Stats] = RS.invkin2(eye(3,4), rand(RS.NJ,2), s);
           % Prüfe, ob neue Ausgabe (seit 2021-06) da ist.
@@ -101,10 +104,12 @@ for j = 1:length(Names)
         end
       end
       if contains(filelist(kk).name, 'invkin_traj')
-        try
-          % Führe die Funktion aus
-         [~, ~, ~, ~, ~, Stats] = ...
-           RS.invkin2_traj(zeros(2,6), zeros(2,6), zeros(2,6), [0;1], zeros(RS.NQJ,1));
+        if ~RS_mex_status % markiere die Datei als vorhanden (ohne Mex)
+          files_found.robot_invkin_traj = true;
+        end
+        try % Führe die Funktion aus
+          [~, ~, ~, ~, ~, Stats] = ...
+            RS.invkin2_traj(zeros(2,6), zeros(2,6), zeros(2,6), [0;1], zeros(RS.NQJ,1));
           % Prüfe, ob Versionsausgabe existiert, und ob der Wert passt
           if Stats.version < fileversions.robot_invkin_traj
             error('Version der Datei ist zu alt (%d). Aktuell: %d', ...
@@ -151,5 +156,17 @@ for j = 1:length(Names)
       end % recompile
     end % retryiter
   end % kk (Mex-Dateien)
+  % Prüfe die Funktionen auf Vollständigkeit. Es gibt immer min. eine Datei
+  for f = fields(files_found)'
+    if ~all(files_found.(f{1}))
+      % Es gibt aus Vorlagen generierte Dateien, aber manche Nicht- 
+      % Mex-Dateien fehlen. Diese wurden manuell gelöscht. Neu erstellen
+      if verbosity
+        fprintf('Datei %s fehlt, aber %d Dateien vorhanden.\n', f{1}, length(filelist));
+      end
+      serroblib_create_template_functions({Name}, false, false);
+      break;
+    end
+  end
 end % j (Roboter-Modelle)
 warning(orig_state);
