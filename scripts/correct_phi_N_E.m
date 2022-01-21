@@ -12,8 +12,10 @@ clc
 
 %% Initialisierung
 roblibpath=fileparts(which('serroblib_path_init.m'));
-
 serroblib_gen_bitarrays(1:7);
+
+% Einstellungen
+usr_overwrite = true;
 filter_genmdl_test = ''; % Bsp: "S6RRRRRR10" Prüfe nur dieses Hauptmodell
 %% Durchsuche alle Roboter und stelle die korrekte Orientierung des Endeffektors fest
 % Zuordnung der Zahlenwerte in der csv-Tabelle zu den physikalischen Werten
@@ -44,7 +46,7 @@ for N = 1:7
       undef = true;
       RS.update_EE([], zeros(3,1));
     end
-    if ~undef
+    if ~undef && ~usr_overwrite
       % In der Tabelle wurden bereits Werte gesetzt. Die werden wohl
       % richtig sein. Überspringe diesen Roboter
       fprintf('Keine Änderungen vorgenommen. Bereits phi_N_E=[%s] gesetzt.\n', ...
@@ -58,13 +60,18 @@ for N = 1:7
     %% Neue Transformation berechnen
     phi_N_E_neu = NaN(3,1);
     % Prüfe mit direkter Kinematik, ob die EE-FG erfüllt werden
+    Ja = RS.jacobia(q0);
+    Jg = RS.jacobia(q0);
+    rankJg = rank(Jg);
+    rankJg_rot = rank(Jg(4:6,:));
+    rankJa_rot = rank(Ja(4:6,:));
     % Überprüfung: dec2bin(l.BitArrays_EEdof0(j),9)
-    if all(bitget(l.BitArrays_EEdof0(j),[4:6 7:9]) == [[1 1 1] [1 1 1]])
+    if rankJa_rot==3 && rankJg_rot==3
       % 3 Rotations-FG: Die Orientierung des End-Effektors ist kinematisch
       % egal. Setze daher zu Null
       phi_N_E_neu = zeros(3,1);
       fprintf('Setze Transformation N-E auf Null, da 3 Rotations-FG\n');
-    elseif all(bitget(l.BitArrays_EEdof0(j),[4:6 7:9]) == [[0 0 1] [0 0 1]])
+    elseif rankJg_rot == 1 && rankJa_rot == 1
       % Nur ein Rotations-FG (als Standard definiert um z-Achse).
       % Hier tritt das Problem mit phi_N_E besonders auf.
       
@@ -86,13 +93,13 @@ for N = 1:7
       if any(abs(phi_test(1:2)) > 1e-10)
         error('Die Transformation N-E konnte nicht richtig berechnet werden');
       end
-    elseif all(bitget(l.BitArrays_EEdof0(j),4:6) == [0 0 0])
+    elseif rankJg_rot == 0
       % Kein Rotations-FG. Die Orientierung des End-Effektors ist für die
       % inverse Kinematik egal, da sowieso keine rotatorischen
       % Zwangsbedingungen ausgewählt werden
       % (Betrifft sowieso nur PPP-Kette)
       phi_N_E_neu = zeros(3,1);
-    elseif all(bitget(l.BitArrays_EEdof0(j),7:9) == [1 1 0])
+    elseif rankJa_rot == 2 || rankJg_rot == 2
       % Nur zwei Rotations-FG in Euler-Winkeln (es gibt also nur zwei Paare
       % Von Drehgelenken und damit Rotations-Mobilität 2).
       % Probiere verschiedene Winkel aus und prüfe, ob voller Rang besteht
@@ -112,8 +119,9 @@ for N = 1:7
         continue
       end  
     else
-      warning('EE-Kombination [%s] nicht in Tabelle hinterlegt. Überspringe.', ...
-        disp_array(bitget(l.BitArrays_EEdof0(j),4:9), '%d'));
+      warning('EE-Kombination [%s] nicht in Tabelle hinterlegt. Überspringe. ', ...
+        'Rang(Jg_rot)=%d, Rang(Ja_rot)=%d', disp_array(bitget( ...
+        l.BitArrays_EEdof0(j),4:9), '%d'), rankJg_rot, rankJa_rot);
       continue
     end
     %% Durchsuche die csv-Tabelle und ändere die Werte
@@ -127,6 +135,7 @@ for N = 1:7
     fidc = fopen(filepath_csv_copy, 'w');
     tline = fgetl(fid);
     found = false;
+    changed = false;
     while ischar(tline)
       % Spaltenweise als Cell-Array
       csvline = strsplit(tline, ';', 'CollapseDelimiters', false);
@@ -142,6 +151,14 @@ for N = 1:7
               break;
             end
           end
+        end
+        % Prüfe, ob modifizierte Zeile anders ist
+        I_change = ~strcmp(csvline_mod, csvline);
+        if any(I_change)
+          fprintf('\tZeile %s wurde geändert. Spalten [%s]: {%s} -> {%s}\n', ...
+            RobName, disp_array(find(I_change), '%d'), disp_array(...
+            csvline(I_change),'%s'), disp_array(csvline_mod(I_change), '%s'));
+          changed = true;
         end
         % modifizierte csv-Zeile in Textzeile umwandeln
         line_copy = csvline_mod{1};
@@ -164,10 +181,14 @@ for N = 1:7
       return
     end
     % Modifizierte Tabelle zurückkopieren
-    copyfile(filepath_csv_copy, filepath_csv);
+    if changed
+      copyfile(filepath_csv_copy, filepath_csv);
+    end
     % Kopie-Tabelle löschen
     delete(filepath_csv_copy);
-    fprintf('Neue Transformation phi_N_E=[%s] gesetzt.\n', ...
-      disp_array(phi_N_E_neu', '%1.3f'));
+    if changed
+      fprintf('Neue Transformation phi_N_E=[%s] gesetzt.\n', ...
+        disp_array(phi_N_E_neu', '%1.3f'));
+    end
   end
 end

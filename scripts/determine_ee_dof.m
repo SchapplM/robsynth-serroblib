@@ -3,6 +3,10 @@
 % Diese Eigenschaft wird normalerweise bei der Struktursynthese erzeugt.
 % Bei händisch erstellten Strukturen fehlt sie aber eventuell.
 % Mit diesem Skript kann die Eigenschaft auch geprüft werden.
+% 
+% Vorher ausführen: correct_phi_N_E.
+% Damit wird die EE-Transformation so gewählt, dass die EE-Z-Achse in die
+% richtige Richtung zeigt. Das wird dann hier eingetragen.
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2019-07
 % (C) Institut für Mechatronische Systeme, Universität Hannover
@@ -16,7 +20,7 @@ serroblib_gen_bitarrays(1:7);
 
 % Einstellungen
 usr_dryrun = false; % Nur Anzeigen, was gemacht werden würde, nichts schreiben
-usr_overwrite = true; % Überschreibe auch bestehende Einträge. Sinnvoll, wenn die Spalten vorher leer sind
+usr_overwrite = false; % Überschreibe auch bestehende Einträge. Sinnvoll, wenn die Spalten vorher leer sind
 usr_abortonerror = true; % Bei irgendeinem Fehler anhalten
 only_look_at_robot = {}; % Nur eine Liste namentlich genannter Roboter bearbeiten; z.B. S5PRPRR4 
 filter_genmdl_test = ''; % Bsp: "S6RRRRRR10" Prüfe nur dieses Hauptmodell
@@ -78,26 +82,25 @@ for N = 1:7
     % Bestimme die EE-FG aufgrund der Existenz der
     % Geschwindigkeits-Komponenten
     I_EE_0 = abs([v;xD(4:6)]) > 1e-9;
-    
-    % Sonderfall 3T2R: Setze die letzte Rotation (nur Euler-Winkel) auf
-    % Null (Konvention zum Abspeichern und kennzeichnen)
-    if rank(Ja(4:6,:)) == 2 && rank(Ja(4:5,:)) == 2
-      I_EE_0(9) = 0;
-    end
+
+    % Keine besondere Kennzeichnung von 3T2R-Ketten.
+    % Vorher muss nochmal correct_phi_N_E gemacht werden. Annahme: Man
+    % findet schon eine Transformation, mit der die Euler-Winkel dann
+    % passen. 
     
     csvline_EE_FG_calc = cell(1,9);
     csvline_EE_FG_calc(I_EE_0) = {'1'};
     csvline_EE_FG_calc(~I_EE_0) = {'0'};
     
     if serroblib_csvline2bits_EE(csvline_EE_FG_calc) ~= l.BitArrays_EEdof0(j)
-      warning('Der Roboter hat in der DB andere EE-FG (%s) als aus der Berechnung (%s)', ...
+      warning('Der Roboter hat in der DB andere EE-FG (binär %s) als aus der Berechnung (binär %s)', ...
         dec2bin(l.BitArrays_EEdof0(j),9), dec2bin(serroblib_csvline2bits_EE(csvline_EE_FG_calc),9));
     elseif ~usr_overwrite
-      fprintf('Die EE-FG von %s sind bereits richtig in DB (%s). Nichts unternehmen\n', ...
+      fprintf('Die EE-FG von %s sind bereits richtig in DB (binär %s). Nichts unternehmen\n', ...
         RobName, dec2bin(l.BitArrays_EEdof0(j),9));
       continue
     else
-      fprintf('Die EE-FG von %s sind bereits richtig in DB (%s). Überschreibe trotzdem\n', ...
+      fprintf('Die EE-FG von %s sind bereits richtig in DB (binär %s). Überschreibe trotzdem\n', ...
         RobName, dec2bin(l.BitArrays_EEdof0(j),9));
     end
     if usr_dryrun
@@ -114,6 +117,7 @@ for N = 1:7
     fidc = fopen(filepath_csv_copy, 'w');
     tline = fgetl(fid);
     found = false;
+    changed = false;
     while ischar(tline)
       % Spaltenweise als Cell-Array
       csvline = strsplit(tline, ';', 'CollapseDelimiters', false);
@@ -123,6 +127,14 @@ for N = 1:7
         % Zeile modifizieren
         csvline_mod = csvline;
         csvline_mod(1+8*N+3+(1:9)) = csvline_EE_FG_calc;
+        % Prüfe, ob modifizierte Zeile anders ist
+        I_change = ~strcmp(csvline_mod, csvline);
+        if any(I_change)
+          fprintf('\tZeile %s wurde geändert. Spalten [%s]: {%s} -> {%s}\n', ...
+            RobName, disp_array(find(I_change), '%d'), disp_array(...
+            csvline(I_change),'%s'), disp_array(csvline_mod(I_change), '%s'));
+          changed = true;
+        end
         % modifizierte csv-Zeile in Textzeile umwandeln
         line_copy = csvline_mod{1};
         for i = 2:length(csvline_mod)
@@ -144,9 +156,13 @@ for N = 1:7
       return
     end
     % Modifizierte Tabelle zurückkopieren
-    copyfile(filepath_csv_copy, filepath_csv);
+    if changed
+      copyfile(filepath_csv_copy, filepath_csv);
+    end
     % Kopie-Tabelle löschen
     delete(filepath_csv_copy);
-    fprintf('\tWert EE-FG auf %s gesetzt.\n', dec2bin(serroblib_csvline2bits_EE(csvline_EE_FG_calc),9));
+    if changed
+      fprintf('\tWert EE-FG auf %s gesetzt.\n', dec2bin(serroblib_csvline2bits_EE(csvline_EE_FG_calc),9));
+    end
   end
 end
