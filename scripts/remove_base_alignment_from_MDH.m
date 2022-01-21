@@ -99,8 +99,8 @@ for j = 1:length(l.Names)
       csvline_mod = csvline;
       csvline_mod{3} = '0'; % beta1 immer auf Null setzen
       csvline_mod{5} = '0'; % alpha1 auch
-      if ~strcmp(csvline{7}, 'theta1')
-        csvline_mod{7} = '0'; % theta1 auch, nur wenn konstant
+      if ~strcmp(csvline{7}, 'theta1') && strcmp(csvline{2}, 'P')
+        csvline_mod{7} = '0'; % theta1 auch, nur wenn konstant (bei Schubgelenk)
       end
       csvline_mod{9} = '0'; % offset1 immer zu Null setzen. Hat keinen Einfluss
       % Aktualisiere auch die neue EE-Komponenten
