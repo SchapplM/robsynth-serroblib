@@ -23,6 +23,11 @@ maplerepo_path.m
 *invkin_eulangresidual.m
 *constr2.m
 *constr2grad.m
+*constr3_trans.m
+*constr3grad_tq.m
+*constr4.m
+*constr4grad.m
+*fkineEE_traj.m
 *inertiaJ_nCRB_vp1.m
 *invdynJ_fixb_mdp_slag_vp_traj.m
 *invdynJ_fixb_mdp_slag_vr_traj.m
