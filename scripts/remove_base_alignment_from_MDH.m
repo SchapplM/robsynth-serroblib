@@ -25,8 +25,10 @@ for j = 1:length(l.Names)
   N = l.N(j);
   % Debug: Nur für bestimmte Kinematiken durchführen
   % if l.N(j) ~= 5, continue; end
-  % if ~strcmp(RobName, 'S5RRRRR5'), continue; end
+  % if ~strcmp(RobName, 'S5RRRRR5V1'), continue; end
   RS = serroblib_create_robot_class(RobName);
+  isvariant = l.AdditionalInfo(j,2);
+  hascode = l.AdditionalInfo(j,4);
   % Prüfe, ob MDH-Parameter zu Schema gehören
   RS.update_mdh(zeros(length(RS.pkin), 1));
   Tc = RS.fkine(zeros(RS.NJ,1));
@@ -66,13 +68,20 @@ for j = 1:length(l.Names)
   fprintf('%d, %s: Base direction %s. joint %s, beta1=%s, alpha1=%s, theta1=%s, offset1=%s\n', ...
     j, RobName, char(119+basedir_idx), csvline{2}, csvline{3}, csvline{5}, ...
     csvline{7}, csvline{9});
-   
-  Mask_Origin = uint16(bin2dec('10000'));
+  force_update = false;
+  if isvariant && any(contains(csvline([5,7]), 'pi'))
+    % Die Erkennung für Varianten funktioniert nicht, da auf die Funktionen
+    % der Haupt-Modelle zurückgegriffen wird. Diese sind schon
+    % aktualisiert.
+    fprintf('Modell %s ist Variante. Informationen sind evtl. falsch. Neu eintragen\n', RobName);
+    force_update = true;
+  end
+  Mask_Origin = uint16(bin2dec('00001'));
   if bitand(Mask_Origin, l.BitArrays_Origin(j)) ~= 0
     fprintf('%d, %s: Manuell eingefügt. Überspringen.\n', j, RobName);
     continue
   end
-  if basedir_z
+  if basedir_z && ~force_update
     continue % Z-Ausrichtung ist Standard. Nichts unternehmen.
   end
   if strcmp(csvline{7}, 'theta1')
@@ -131,10 +140,12 @@ for j = 1:length(l.Names)
   % Aktualisiere die mat-Datenbank zum Laden der aktualisierten Parameter.
   serroblib_gen_bitarrays(N);
   %% Erzeuge die symbolischen Funktionen neu
-  serroblib_generate_mapleinput({RobName});
-  serroblib_generate_code({RobName}, true, false, 1);
+  if hascode == 1
+    serroblib_generate_mapleinput({RobName});
+    serroblib_generate_code({RobName}, true, false, 1);
+    fprintf('Code für %d, %s neu generiert\n', j, RobName);
+  end
   fprintf(fid_stats, '%s\n', RobName);
-  fprintf('Code für %d, %s neu generiert\n', j, RobName);
 end
 fclose(fid_stats);
 % Aktualisiere die Datenbank
