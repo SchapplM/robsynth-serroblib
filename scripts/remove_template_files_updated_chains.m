@@ -33,13 +33,22 @@ for i = 1:length(LegNames_updated)
     % Prüfe, ob der Ordner des Variantenmodells existiert
     Name_GenMdl = l.Names{variantof};
     if ~contains(Name_GenMdl, Name_i), error('Name passt nicht'); end
-    fcn_dir = fullfile(roblibpath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
+    tpl_dir = fullfile(roblibpath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
       sprintf('tpl_%s', Name_i(length(Name_GenMdl)+1:end)));
+    hd_dir = fullfile(roblibpath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
+      sprintf('hd_%s', Name_i(length(Name_GenMdl)+1:end)));
   else
-    fcn_dir = fullfile(roblibpath, sprintf('mdl_%ddof', N), Name_i, 'tpl');
+    tpl_dir = fullfile(roblibpath, sprintf('mdl_%ddof', N), Name_i, 'tpl');
+    hd_dir = fullfile(roblibpath, sprintf('mdl_%ddof', N), Name_i, 'hd');
   end
-  if exist(fcn_dir, 'file')
-    fprintf('Verzeichnis %s gelöscht. Gehört zu aktualisierter Kinematik.\n', fcn_dir);
-    rmdir(fcn_dir, 's');
+  if exist(tpl_dir, 'file')
+    fprintf('Verzeichnis %s gelöscht. Gehört zu aktualisierter Kinematik.\n', tpl_dir);
+    rmdir(tpl_dir, 's');
   end
+  % Entferne alle mex-Dateien
+  mexfiles = dir(fullfile(hd_dir, '*.mex*'));
+  for kk = 1:length(mexfiles)
+    delete(fullfile(hd_dir, mexfiles(kk).name));
+  end
+  fprintf('%d Mex-Dateien aus %s gelöscht\n', length(mexfiles), hd_dir)
 end
