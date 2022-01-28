@@ -17,7 +17,7 @@ roblibpath=fileparts(which('serroblib_path_init.m'));
 papath = fileparts(which('robsynth_projektablage_path.m'));
 listfile = fullfile(papath, '03_Entwicklung', 'Struktursynthese', ...
   '20220121_Aktualisierung_Beinketten_Basisausrichtung', ...
-  'base_alignment_changed_list20220120_091120.txt');
+  'base_alignment_changed_list20220120_091120_update.txt');
 LegNames_updated = readlines(listfile);
 l = load(fullfile(roblibpath, 'serrob_list.mat'));
 
@@ -32,7 +32,9 @@ for i = 1:length(LegNames_updated)
   if isvariant
     % Prüfe, ob der Ordner des Variantenmodells existiert
     Name_GenMdl = l.Names{variantof};
-    if ~contains(Name_GenMdl, Name_i), error('Name passt nicht'); end
+    if ~contains(Name_i, Name_GenMdl)
+      error('Name %s (gesucht) passt nicht zu %s (allgemein)', Name_i, Name_GenMdl);
+    end
     tpl_dir = fullfile(roblibpath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
       sprintf('tpl_%s', Name_i(length(Name_GenMdl)+1:end)));
     hd_dir = fullfile(roblibpath, sprintf('mdl_%ddof', N), Name_GenMdl, ...
