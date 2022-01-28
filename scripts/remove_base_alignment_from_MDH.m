@@ -169,3 +169,30 @@ end
 fclose(fid_stats);
 % Aktualisiere die Datenbank
 serroblib_gen_bitarrays();
+
+return
+%% Aktualisiere die generierte Datei um die vergessenen Varianten
+% Wenn beim Durchlauf des Skripts oben die Varianten vergessen werden (so
+% wie geschehen), können sie mit diesem Skript hinzugefügt werden.
+papath = fileparts(which('robsynth_projektablage_path.m'));
+listfile = fullfile(papath, '03_Entwicklung', 'Struktursynthese', ...
+  '20220121_Aktualisierung_Beinketten_Basisausrichtung', ...
+  'base_alignment_changed_list20220120_091120.txt');
+LegNames_updated = readlines(listfile);
+roblibpath=fileparts(which('serroblib_path_init.m'));
+mdllistfile_Ndof = fullfile(roblibpath, 'serrob_list.mat');
+l = load(mdllistfile_Ndof);
+LegNames_updated_var = {};
+LegNames_updated_cell = {};
+for i = 1:length(LegNames_updated)
+  j = find(strcmp(l.Names, LegNames_updated{i}));
+  if isempty(j), continue; end % ungültiger Eintrag
+  LegNames_updated_cell = [LegNames_updated_cell, LegNames_updated{i}];
+  j_variants = find((l.AdditionalInfo(:,3) == j & l.AdditionalInfo(:,2) == 1));
+  if isempty(j_variants), continue; end
+  LegNames_updated_var = [LegNames_updated_var, l.Names(j_variants)];
+end
+LegNames_updated_all = sort([LegNames_updated_cell, LegNames_updated_var]);
+[fp,fn] = fileparts(listfile);
+listfile_update = fullfile(fp, [fn, '_update.txt']);
+writecell(LegNames_updated_all', listfile_update);
