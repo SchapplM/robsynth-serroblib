@@ -19,8 +19,8 @@
 %   joint torques required to compensate gravitation load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 12:16
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 12:09
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -38,26 +38,26 @@ assert(isreal(MDP) && all(size(MDP) == [27 1]), ...
 %% Symbolic Calculation
 % From gravload_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 12:15:19
-% EndTime: 2020-01-03 12:15:19
-% DurationCPUTime: 0.09s
+% StartTime: 2022-01-20 12:08:23
+% EndTime: 2022-01-20 12:08:23
+% DurationCPUTime: 0.08s
 % Computational Cost: add. (195->27), mult. (150->36), div. (0->0), fcn. (120->10), ass. (0->18)
-t46 = qJ(3) + qJ(4);
-t45 = qJ(5) + t46;
-t39 = sin(t45);
-t40 = cos(t45);
-t47 = qJ(1) + qJ(2);
-t42 = sin(t47);
-t44 = cos(t47);
-t53 = g(2) * t42 - g(3) * t44;
-t56 = (-g(1) * t40 + t53 * t39) * MDP(26) + (g(1) * t39 + t53 * t40) * MDP(27);
+t45 = qJ(3) + qJ(4);
+t44 = qJ(5) + t45;
+t38 = sin(t44);
+t39 = cos(t44);
+t46 = qJ(1) + qJ(2);
 t41 = sin(t46);
 t43 = cos(t46);
-t55 = (-g(1) * t43 + t53 * t41) * MDP(19) + (g(1) * t41 + t53 * t43) * MDP(20) + t56;
-t48 = sin(qJ(3));
-t50 = cos(qJ(3));
-t52 = t53 * MDP(6) + (-t50 * MDP(12) + t48 * MDP(13) - t43 * MDP(19) + t41 * MDP(20) - t40 * MDP(26) + t39 * MDP(27) - MDP(5)) * (g(2) * t44 + g(3) * t42);
-t51 = cos(qJ(1));
-t49 = sin(qJ(1));
-t1 = [(-g(2) * t51 - g(3) * t49) * MDP(2) + (g(2) * t49 - g(3) * t51) * MDP(3) + t52; t52; (-g(1) * t50 + t53 * t48) * MDP(12) + (g(1) * t48 + t53 * t50) * MDP(13) + t55; t55; t56;];
+t53 = g(1) * t43 + g(2) * t41;
+t55 = (-g(3) * t39 + t38 * t53) * MDP(26) + (g(3) * t38 + t39 * t53) * MDP(27);
+t40 = sin(t45);
+t42 = cos(t45);
+t54 = (-g(3) * t42 + t40 * t53) * MDP(19) + (g(3) * t40 + t42 * t53) * MDP(20) + t55;
+t47 = sin(qJ(3));
+t49 = cos(qJ(3));
+t51 = t53 * MDP(6) + (MDP(12) * t49 - MDP(13) * t47 + MDP(19) * t42 - MDP(20) * t40 + MDP(26) * t39 - MDP(27) * t38 + MDP(5)) * (g(1) * t41 - g(2) * t43);
+t50 = cos(qJ(1));
+t48 = sin(qJ(1));
+t1 = [(g(1) * t48 - g(2) * t50) * MDP(2) + (g(1) * t50 + g(2) * t48) * MDP(3) + t51; t51; (-g(3) * t49 + t47 * t53) * MDP(12) + (g(3) * t47 + t49 * t53) * MDP(13) + t54; t54; t55;];
 taug = t1;

@@ -14,7 +14,7 @@
 % pkin [9x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d2,d3,d4,d5]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % mrSges [6x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -30,8 +30,8 @@
 %   vector of cutting forces (contains inertial, gravitational coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 12:16
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 12:09
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,9 +60,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_NewtonEuler_linkframe_f_i_i_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 12:14:52
-% EndTime: 2020-01-03 12:14:55
-% DurationCPUTime: 1.42s
+% StartTime: 2022-01-20 12:07:47
+% EndTime: 2022-01-20 12:07:51
+% DurationCPUTime: 1.50s
 % Computational Cost: add. (25010->142), mult. (32116->188), div. (0->0), fcn. (20711->10), ass. (0->78)
 t64 = qJDD(1) + qJDD(2);
 t70 = sin(qJ(3));
@@ -89,11 +89,11 @@ t58 = qJD(3) * pkin(3) - pkin(8) * t95;
 t67 = t75 ^ 2;
 t72 = sin(qJ(1));
 t77 = cos(qJ(1));
-t85 = -t77 * g(2) - t72 * g(3);
-t54 = qJDD(1) * pkin(1) + t85;
+t89 = t72 * g(1) - t77 * g(2);
+t54 = qJDD(1) * pkin(1) + t89;
 t78 = qJD(1) ^ 2;
-t88 = -t72 * g(2) + t77 * g(3);
-t55 = -t78 * pkin(1) + t88;
+t85 = -t77 * g(1) - t72 * g(2);
+t55 = -t78 * pkin(1) + t85;
 t71 = sin(qJ(2));
 t76 = cos(qJ(2));
 t86 = t76 * t54 - t71 * t55;
@@ -120,9 +120,9 @@ t91 = t71 * t54 + t76 * t55;
 t40 = -t62 * pkin(2) + t64 * pkin(7) + t91;
 t93 = t70 * t40;
 t96 = pkin(3) * t62;
-t25 = qJDD(3) * pkin(3) - t49 * pkin(8) - t93 + (pkin(8) * t90 + t70 * t96 - g(1)) * t75;
-t89 = -t70 * g(1) + t75 * t40;
-t26 = t50 * pkin(8) - qJD(3) * t58 - t67 * t96 + t89;
+t25 = qJDD(3) * pkin(3) - t49 * pkin(8) - t93 + (pkin(8) * t90 + t70 * t96 - g(3)) * t75;
+t88 = -t70 * g(3) + t75 * t40;
+t26 = t50 * pkin(8) - qJD(3) * t58 - t67 * t96 + t88;
 t87 = t74 * t25 - t69 * t26;
 t13 = (t45 * t65 - t31) * pkin(9) + (t45 * t46 + t63) * pkin(4) + t87;
 t92 = t69 * t25 + t74 * t26;
@@ -134,12 +134,12 @@ t12 = m(6) * (t68 * t13 + t73 * t14) + t18 * mrSges(6,3) - t59 * mrSges(6,2) + t
 t38 = -t45 * mrSges(5,1) + t46 * mrSges(5,2);
 t8 = m(5) * t87 + t63 * mrSges(5,1) - t31 * mrSges(5,3) + t73 * t11 + t68 * t12 - t46 * t38 + t65 * t41;
 t9 = m(5) * t92 - t63 * mrSges(5,2) + t30 * mrSges(5,3) - t68 * t11 + t73 * t12 + t45 * t38 - t65 * t42;
-t6 = m(4) * (-t75 * g(1) - t93) - t49 * mrSges(4,3) + qJDD(3) * mrSges(4,1) - t48 * t95 + qJD(3) * t57 + t69 * t9 + t74 * t8;
-t7 = m(4) * t89 - qJDD(3) * mrSges(4,2) + t50 * mrSges(4,3) - qJD(3) * t56 + t48 * t94 - t69 * t8 + t74 * t9;
+t6 = m(4) * (-t75 * g(3) - t93) - t49 * mrSges(4,3) + qJDD(3) * mrSges(4,1) - t48 * t95 + qJD(3) * t57 + t69 * t9 + t74 * t8;
+t7 = m(4) * t88 - qJDD(3) * mrSges(4,2) + t50 * mrSges(4,3) - qJD(3) * t56 + t48 * t94 - t69 * t8 + t74 * t9;
 t97 = t75 * t6 + t70 * t7;
 t10 = m(3) * t86 + t64 * mrSges(3,1) - t62 * mrSges(3,2) - t99;
 t3 = m(3) * t91 - t62 * mrSges(3,1) - t64 * mrSges(3,2) - t70 * t6 + t75 * t7;
-t2 = m(2) * t85 + qJDD(1) * mrSges(2,1) - t78 * mrSges(2,2) + t76 * t10 + t71 * t3;
-t1 = m(2) * t88 - t78 * mrSges(2,1) - qJDD(1) * mrSges(2,2) - t71 * t10 + t76 * t3;
-t4 = [(-m(1) + t98) * g(1) + t97, t1, t3, t7, t9, t12; -m(1) * g(2) + t72 * t1 + t77 * t2, t2, t10, t6, t8, t11; -m(1) * g(3) - t77 * t1 + t72 * t2, t98 * g(1) + t97, -m(3) * g(1) + t97, t99, -t80, -t82;];
+t2 = m(2) * t85 - t78 * mrSges(2,1) - qJDD(1) * mrSges(2,2) - t71 * t10 + t76 * t3;
+t1 = m(2) * t89 + qJDD(1) * mrSges(2,1) - t78 * mrSges(2,2) + t76 * t10 + t71 * t3;
+t4 = [-m(1) * g(1) - t72 * t1 + t77 * t2, t2, t3, t7, t9, t12; -m(1) * g(2) + t77 * t1 + t72 * t2, t1, t10, t6, t8, t11; (-m(1) + t98) * g(3) + t97, t98 * g(3) + t97, -m(3) * g(3) + t97, t99, -t80, -t82;];
 f_new = t4;

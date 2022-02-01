@@ -23,8 +23,8 @@
 %   Rotatorische Teilmatrix der analytischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 12:08
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 11:31
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -39,12 +39,13 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S5RRRPR2_jacobia_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
   'S5RRRPR2_jacobia_rot_sym_varpar: pkin has to be [9x1] (double)');
+Ja_rot=NaN(3,5);
 if link_index == 0
 	%% Symbolic Calculation
 	% From jacobia_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:08:01
-	% EndTime: 2020-01-03 12:08:01
+	% StartTime: 2022-01-20 11:31:17
+	% EndTime: 2022-01-20 11:31:17
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
@@ -53,52 +54,50 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobia_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:08:01
-	% EndTime: 2020-01-03 12:08:01
-	% DurationCPUTime: 0.01s
-	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
-	t1 = [NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN;];
+	% StartTime: 2022-01-20 11:31:17
+	% EndTime: 2022-01-20 11:31:17
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (3->0), mult. (6->0), div. (5->0), fcn. (6->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 1, 0, 0, 0, 0;];
 	Ja_rot = t1;
 elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobia_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:08:01
-	% EndTime: 2020-01-03 12:08:01
-	% DurationCPUTime: 0.01s
-	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
-	t1 = [NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN;];
+	% StartTime: 2022-01-20 11:31:18
+	% EndTime: 2022-01-20 11:31:18
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (18->0), mult. (12->0), div. (10->0), fcn. (12->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 1, 1, 0, 0, 0;];
 	Ja_rot = t1;
 elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobia_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:08:01
-	% EndTime: 2020-01-03 12:08:01
+	% StartTime: 2022-01-20 11:31:18
+	% EndTime: 2022-01-20 11:31:18
 	% DurationCPUTime: 0.01s
-	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
-	t1 = [NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN;];
+	% Computational Cost: add. (45->0), mult. (18->0), div. (15->0), fcn. (18->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 1, 1, 1, 0, 0;];
 	Ja_rot = t1;
 elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobia_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:08:01
-	% EndTime: 2020-01-03 12:08:01
+	% StartTime: 2022-01-20 11:31:18
+	% EndTime: 2022-01-20 11:31:18
 	% DurationCPUTime: 0.01s
-	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
-	t1 = [NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN;];
+	% Computational Cost: add. (63->0), mult. (18->0), div. (15->0), fcn. (18->0), ass. (0->1)
+	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 1, 1, 1, 0, 0;];
 	Ja_rot = t1;
 elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobia_rot_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:08:01
-	% EndTime: 2020-01-03 12:08:01
+	% StartTime: 2022-01-20 11:31:18
+	% EndTime: 2022-01-20 11:31:18
 	% DurationCPUTime: 0.01s
-	% Computational Cost: add. (66->0), mult. (24->0), div. (20->0), fcn. (24->0), ass. (0->1)
-	t1 = [1, 1, 1, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 1;];
+	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
+	t1 = [NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN; NaN, NaN, NaN, NaN, NaN;];
 	Ja_rot = t1;
-else
-	Ja_rot=NaN(3,5);
 end

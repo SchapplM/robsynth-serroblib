@@ -16,8 +16,8 @@
 %   minimal parameter regressor of Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 12:16
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 12:09
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,23 +36,23 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 12:15:18
-% EndTime: 2020-01-03 12:15:18
-% DurationCPUTime: 0.03s
+% StartTime: 2022-01-20 12:08:21
+% EndTime: 2022-01-20 12:08:21
+% DurationCPUTime: 0.04s
 % Computational Cost: add. (50->14), mult. (38->20), div. (0->0), fcn. (38->10), ass. (0->15)
-t140 = qJ(3) + qJ(4);
-t141 = qJ(1) + qJ(2);
-t136 = sin(t141);
+t141 = qJ(3) + qJ(4);
+t142 = qJ(1) + qJ(2);
+t137 = sin(t142);
+t139 = cos(t142);
+t147 = g(1) * t139 + g(2) * t137;
+t146 = cos(qJ(1));
+t145 = cos(qJ(3));
+t144 = sin(qJ(1));
+t143 = sin(qJ(3));
+t140 = qJ(5) + t141;
 t138 = cos(t141);
-t146 = g(2) * t136 - g(3) * t138;
-t145 = cos(qJ(1));
-t144 = cos(qJ(3));
-t143 = sin(qJ(1));
-t142 = sin(qJ(3));
-t139 = qJ(5) + t140;
-t137 = cos(t140);
-t135 = sin(t140);
-t134 = cos(t139);
-t133 = sin(t139);
-t1 = [0, -g(2) * t143 + g(3) * t145, -g(2) * t145 - g(3) * t143, 0, -t146, -g(2) * t138 - g(3) * t136, 0, 0, 0, 0, 0, -g(1) * t142 - t146 * t144, -g(1) * t144 + t146 * t142, 0, 0, 0, 0, 0, -g(1) * t135 - t146 * t137, -g(1) * t137 + t146 * t135, 0, 0, 0, 0, 0, -g(1) * t133 - t146 * t134, -g(1) * t134 + t146 * t133;];
+t136 = sin(t141);
+t135 = cos(t140);
+t134 = sin(t140);
+t1 = [0, -g(1) * t146 - g(2) * t144, g(1) * t144 - g(2) * t146, 0, -t147, g(1) * t137 - g(2) * t139, 0, 0, 0, 0, 0, -g(3) * t143 - t147 * t145, -g(3) * t145 + t147 * t143, 0, 0, 0, 0, 0, -g(3) * t136 - t147 * t138, -g(3) * t138 + t147 * t136, 0, 0, 0, 0, 0, -g(3) * t134 - t147 * t135, -g(3) * t135 + t147 * t134;];
 U_reg = t1;

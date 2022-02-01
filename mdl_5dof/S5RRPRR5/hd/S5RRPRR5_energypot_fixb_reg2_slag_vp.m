@@ -16,8 +16,8 @@
 %   inertial parameter regressor of Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 12:04
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 11:03
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,34 +35,34 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From energy_potential_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 12:03:57
-% EndTime: 2020-01-03 12:03:57
-% DurationCPUTime: 0.07s
-% Computational Cost: add. (116->44), mult. (86->49), div. (0->0), fcn. (73->10), ass. (0->26)
-t70 = pkin(6) + pkin(5);
-t75 = g(1) * t70;
-t69 = cos(qJ(1));
-t74 = t69 * pkin(1);
-t66 = cos(pkin(9));
-t53 = t66 * pkin(3) + pkin(2);
-t67 = -pkin(7) - qJ(3);
-t63 = pkin(9) + qJ(4);
-t65 = sin(pkin(9));
-t73 = t65 * pkin(3) + t70;
-t64 = qJ(1) + qJ(2);
-t57 = sin(t64);
-t58 = cos(t64);
-t72 = g(2) * t57 - g(3) * t58;
-t68 = sin(qJ(1));
-t71 = -g(2) * t68 + g(3) * t69;
-t62 = -pkin(8) + t67;
-t61 = t68 * pkin(1);
-t56 = qJ(5) + t63;
-t55 = cos(t63);
-t54 = sin(t63);
-t52 = cos(t56);
-t51 = sin(t56);
-t50 = pkin(4) * t55 + t53;
-t49 = g(2) * t58 + g(3) * t57;
-t1 = [0, 0, 0, 0, 0, 0, t71, -g(2) * t69 - g(3) * t68, -g(1), -g(1) * pkin(5), 0, 0, 0, 0, 0, 0, -t72, -t49, -g(1), t71 * pkin(1) - t75, 0, 0, 0, 0, 0, 0, -g(1) * t65 - t72 * t66, -g(1) * t66 + t72 * t65, t49, -t75 - g(2) * (t57 * pkin(2) - t58 * qJ(3) + t61) - g(3) * (-t58 * pkin(2) - t57 * qJ(3) - t74), 0, 0, 0, 0, 0, 0, -g(1) * t54 - t72 * t55, -g(1) * t55 + t72 * t54, t49, -g(1) * t73 - g(2) * (t57 * t53 + t58 * t67 + t61) - g(3) * (-t58 * t53 + t57 * t67 - t74), 0, 0, 0, 0, 0, 0, -g(1) * t51 - t72 * t52, -g(1) * t52 + t72 * t51, t49, -g(1) * (pkin(4) * t54 + t73) - g(2) * (t57 * t50 + t58 * t62 + t61) - g(3) * (-t58 * t50 + t57 * t62 - t74);];
+% StartTime: 2022-01-20 11:02:48
+% EndTime: 2022-01-20 11:02:48
+% DurationCPUTime: 0.09s
+% Computational Cost: add. (116->46), mult. (86->49), div. (0->0), fcn. (73->10), ass. (0->26)
+t72 = pkin(6) + pkin(5);
+t76 = g(3) * t72;
+t68 = cos(pkin(9));
+t53 = t68 * pkin(3) + pkin(2);
+t69 = -pkin(7) - qJ(3);
+t65 = pkin(9) + qJ(4);
+t67 = sin(pkin(9));
+t75 = t67 * pkin(3) + t72;
+t66 = qJ(1) + qJ(2);
+t58 = sin(t66);
+t59 = cos(t66);
+t74 = g(1) * t59 + g(2) * t58;
+t70 = sin(qJ(1));
+t71 = cos(qJ(1));
+t73 = -g(1) * t71 - g(2) * t70;
+t64 = pkin(8) - t69;
+t63 = t71 * pkin(1);
+t62 = t70 * pkin(1);
+t57 = qJ(5) + t65;
+t56 = cos(t65);
+t55 = sin(t65);
+t52 = cos(t57);
+t51 = sin(t57);
+t50 = pkin(4) * t56 + t53;
+t49 = g(1) * t58 - g(2) * t59;
+t1 = [0, 0, 0, 0, 0, 0, t73, g(1) * t70 - g(2) * t71, -g(3), -g(3) * pkin(5), 0, 0, 0, 0, 0, 0, -t74, t49, -g(3), t73 * pkin(1) - t76, 0, 0, 0, 0, 0, 0, -g(3) * t67 - t74 * t68, -g(3) * t68 + t74 * t67, -t49, -g(1) * (t59 * pkin(2) + t58 * qJ(3) + t63) - g(2) * (t58 * pkin(2) - t59 * qJ(3) + t62) - t76, 0, 0, 0, 0, 0, 0, -g(3) * t55 - t74 * t56, -g(3) * t56 + t74 * t55, -t49, -g(1) * (t59 * t53 - t58 * t69 + t63) - g(2) * (t58 * t53 + t59 * t69 + t62) - g(3) * t75, 0, 0, 0, 0, 0, 0, -g(3) * t51 - t74 * t52, -g(3) * t52 + t74 * t51, -t49, -g(1) * (t59 * t50 + t64 * t58 + t63) - g(2) * (t58 * t50 - t59 * t64 + t62) - g(3) * (pkin(4) * t55 + t75);];
 U_reg = t1;

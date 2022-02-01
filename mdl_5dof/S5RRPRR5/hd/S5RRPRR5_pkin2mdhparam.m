@@ -23,8 +23,8 @@
 %   Offset on joint coordinate q
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 12:04
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 11:03
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,7 +40,7 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 
 
 % Aus parameters_mdh_beta_matlab.m
-t1 = [pi / 0.2e1; 0; 0; 0; 0;];
+t1 = [0; 0; 0; 0; 0;];
 beta_mdh = t1;
 
 % Aus parameters_mdh_b_matlab.m
@@ -48,9 +48,8 @@ t1 = [0; 0; 0; 0; 0;];
 b_mdh = t1;
 
 % Aus parameters_mdh_alpha_matlab.m
-t1 = pi / 0.2e1;
-t2 = [t1; 0; t1; 0; 0;];
-alpha_mdh = t2;
+t1 = [0; 0; pi / 0.2e1; 0; 0;];
+alpha_mdh = t1;
 
 % Aus parameters_mdh_a_matlab.m
 t1 = [0; pkin(1); pkin(2); pkin(3); pkin(4);];
@@ -65,5 +64,5 @@ t1 = [pkin(5); pkin(6); 0; pkin(7); pkin(8);];
 d_mdh = t1;
 
 % Aus parameters_mdh_qoffset_matlab.m
-t1 = [-pi / 0.2e1; 0; 0; 0; 0;];
+t1 = [0; 0; 0; 0; 0;];
 qoffset_mdh = t1;

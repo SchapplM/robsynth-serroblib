@@ -17,8 +17,8 @@
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:23
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-23 09:00
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -37,8 +37,8 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From inertiaD_joint_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:22:55
-% EndTime: 2020-01-03 11:22:57
+% StartTime: 2022-01-23 08:59:46
+% EndTime: 2022-01-23 08:59:47
 % DurationCPUTime: 0.31s
 % Computational Cost: add. (280->63), mult. (752->150), div. (0->0), fcn. (739->8), ass. (0->56)
 t33 = sin(pkin(9));
@@ -52,7 +52,7 @@ t39 = sin(qJ(5));
 t34 = sin(pkin(8));
 t40 = cos(qJ(5));
 t59 = t34 * t40;
-t41 = -t21 * t39 + t35 * t59;
+t41 = -t39 * t21 + t35 * t59;
 t8 = t41 * qJD(5);
 t64 = 0.2e1 * t8;
 t53 = qJD(3) * t35;
@@ -62,7 +62,7 @@ t63 = t22 * t37;
 t62 = t33 * t34;
 t61 = t34 * t35;
 t60 = t34 * t39;
-t25 = -t38 * pkin(2) - t35 * qJ(3) - pkin(1);
+t25 = -pkin(2) * t38 - t35 * qJ(3) - pkin(1);
 t55 = qJ(2) * t38;
 t56 = t34 * t25 + t37 * t55;
 t13 = -t38 * qJ(4) + t56;

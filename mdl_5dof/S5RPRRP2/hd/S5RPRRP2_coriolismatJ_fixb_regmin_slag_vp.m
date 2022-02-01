@@ -16,8 +16,8 @@
 %   minimal parameter regressor of coriolis matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2021-01-15 12:36
-% Revision: d12c3222fdeb2c5f3b3c8fa5751e113be2fc3aae (2021-01-15)
+% Datum: 2022-01-23 09:28
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2021-01-15 12:36:31
-% EndTime: 2021-01-15 12:36:34
-% DurationCPUTime: 0.74s
+% StartTime: 2022-01-23 09:28:14
+% EndTime: 2022-01-23 09:28:16
+% DurationCPUTime: 0.78s
 % Computational Cost: add. (1166->138), mult. (2174->173), div. (0->0), fcn. (1709->6), ass. (0->123)
 t125 = qJD(1) + qJD(3);
 t98 = sin(qJ(4));
@@ -54,7 +54,7 @@ t112 = cos(pkin(8)) * pkin(1) + pkin(2);
 t150 = cos(qJ(3));
 t154 = pkin(1) * sin(pkin(8));
 t99 = sin(qJ(3));
-t62 = -t150 * t112 + t154 * t99;
+t62 = -t150 * t112 + t99 * t154;
 t156 = -t62 / 0.2e1;
 t155 = t98 / 0.2e1;
 t153 = pkin(4) * t98;
@@ -133,7 +133,7 @@ t109 = -t5 * qJD(1) + t43 * qJD(3);
 t64 = -t84 + t124;
 t9 = (-t149 + t156) * t98 + t118;
 t108 = t9 * qJD(1) - t64 * qJD(3);
-t12 = t100 * t113 + t152;
+t12 = t113 * t100 + t152;
 t71 = t89 * t100 + t152;
 t107 = t12 * qJD(1) + t71 * qJD(3);
 t69 = t141 / 0.2e1;
@@ -142,7 +142,7 @@ t106 = -t14 * qJD(1) - t37 * qJD(3);
 t18 = t121 * t98 + t49;
 t104 = pkin(3) * t130 + t18 * qJD(1);
 t50 = t62 * t151;
-t19 = t100 * t121 + t50;
+t19 = t121 * t100 + t50;
 t103 = pkin(3) * t127 + t19 * qJD(1);
 t1 = t113 * t153;
 t17 = pkin(4) * t84;
@@ -156,8 +156,8 @@ t59 = t63 * qJD(3);
 t58 = t62 * qJD(3);
 t35 = t37 * qJD(4);
 t21 = t100 * t157 + t60 * t151 + t50;
-t20 = t60 * t155 + t157 * t98 + t49;
-t13 = t100 * t117 + t152 + t50;
+t20 = t60 * t155 + t98 * t157 + t49;
+t13 = t117 * t100 + t152 + t50;
 t11 = t14 * qJD(4);
 t10 = t118 + t49 - t124;
 t6 = t69 + t31 + t147 / 0.2e1 + t148 / 0.2e1 + t101;

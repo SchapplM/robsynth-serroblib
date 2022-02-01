@@ -10,7 +10,7 @@
 %   Generalized joint coordinates (joint angles)
 % link_index [1x1 uint8]
 %   Index des Segmentes, auf dem der Punkt C liegt. (0=Basis).
-%   Siehe auch: bsp_3T1R_fkine_fixb_rotmat_mdh_sym_varpar.m
+%   Siehe auch: S5RPPPR1_fkine_fixb_rotmat_mdh_sym_varpar.m
 % r_i_i_C [3x1]
 %   Ortsvektor vom KörperKS-Ursprung zum gesuchten Punkt
 % pkin [9x1]
@@ -22,8 +22,8 @@
 %   Geometrische Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:21
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 09:13
+% Revision: 008671b0a00594318b890887636eaaff83cd5e2f (2021-12-12)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 

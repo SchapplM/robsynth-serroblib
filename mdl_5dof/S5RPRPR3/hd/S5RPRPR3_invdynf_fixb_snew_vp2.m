@@ -14,7 +14,7 @@
 % pkin [9x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d3,d5,theta2,theta4]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % mrSges [6x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -30,8 +30,8 @@
 %   vector of cutting forces (contains inertial, gravitational coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:37
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-23 09:21
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -60,9 +60,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From invdyn_fixb_NewtonEuler_linkframe_f_i_i_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:36:04
-% EndTime: 2020-01-03 11:36:07
-% DurationCPUTime: 0.72s
+% StartTime: 2022-01-23 09:20:40
+% EndTime: 2022-01-23 09:20:40
+% DurationCPUTime: 0.66s
 % Computational Cost: add. (8362->99), mult. (11760->136), div. (0->0), fcn. (6518->10), ass. (0->65)
 t49 = sin(pkin(9));
 t51 = cos(pkin(9));
@@ -73,15 +73,15 @@ t82 = t44 * mrSges(5,3);
 t47 = qJD(1) + qJD(3);
 t81 = t47 * t49;
 t80 = t51 * t47;
-t48 = -g(1) + qJDD(2);
+t48 = -g(3) + qJDD(2);
 t79 = t51 * t48;
 t55 = sin(qJ(1));
 t58 = cos(qJ(1));
-t65 = -t58 * g(2) - t55 * g(3);
-t34 = qJDD(1) * pkin(1) + t65;
+t70 = t55 * g(1) - t58 * g(2);
+t34 = qJDD(1) * pkin(1) + t70;
 t59 = qJD(1) ^ 2;
-t70 = -t55 * g(2) + t58 * g(3);
-t35 = -t59 * pkin(1) + t70;
+t65 = -t58 * g(1) - t55 * g(2);
+t35 = -t59 * pkin(1) + t65;
 t50 = sin(pkin(8));
 t52 = cos(pkin(8));
 t67 = t52 * t34 - t50 * t35;
@@ -126,7 +126,7 @@ t6 = m(4) * t68 + (mrSges(4,1) - t64) * t44 + (-mrSges(4,2) + t84) * t43 - t62;
 t5 = m(4) * t78 - t43 * mrSges(4,1) - t44 * mrSges(4,2) - t49 * t10 + t51 * t8;
 t4 = m(3) * t77 - t59 * mrSges(3,1) - qJDD(1) * mrSges(3,2) + t57 * t5 - t54 * t6;
 t3 = m(3) * t67 + qJDD(1) * mrSges(3,1) - t59 * mrSges(3,2) + t54 * t5 + t57 * t6;
-t2 = m(2) * t65 + qJDD(1) * mrSges(2,1) - t59 * mrSges(2,2) + t52 * t3 + t50 * t4;
-t1 = m(2) * t70 - t59 * mrSges(2,1) - qJDD(1) * mrSges(2,2) - t50 * t3 + t52 * t4;
-t7 = [(-m(1) - m(2)) * g(1) + t69, t1, t4, t5, t8, t12; -m(1) * g(2) + t55 * t1 + t58 * t2, t2, t3, t6, t10, t11; -m(1) * g(3) - t58 * t1 + t55 * t2, -m(2) * g(1) + t69, t69, t74, -t43 * t84 + t64 * t44 + t62, t63 * t81 + t61;];
+t2 = m(2) * t65 - t59 * mrSges(2,1) - qJDD(1) * mrSges(2,2) - t50 * t3 + t52 * t4;
+t1 = m(2) * t70 + qJDD(1) * mrSges(2,1) - t59 * mrSges(2,2) + t52 * t3 + t50 * t4;
+t7 = [-m(1) * g(1) - t55 * t1 + t58 * t2, t2, t4, t5, t8, t12; -m(1) * g(2) + t58 * t1 + t55 * t2, t1, t3, t6, t10, t11; (-m(1) - m(2)) * g(3) + t69, -m(2) * g(3) + t69, t69, t74, -t43 * t84 + t64 * t44 + t62, t63 * t81 + t61;];
 f_new = t7;

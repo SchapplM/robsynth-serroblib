@@ -22,8 +22,8 @@
 %   base parameter vector (minimal parameter vector)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2021-01-15 11:45
-% Revision: d12c3222fdeb2c5f3b3c8fa5751e113be2fc3aae (2021-01-15)
+% Datum: 2022-01-23 09:23
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -59,5 +59,5 @@ t7 = sin(pkin(8));
 t9 = cos(pkin(8));
 t12 = t3 * t7 + t4 * t9;
 t1 = t13 * pkin(4) + Ifges(5,5);
-t11 = [t16 + 0.2e1 * t14 + ((pkin(2) ^ 2 + pkin(6) ^ 2) * m(4)) + (2 * mrSges(4,3) * pkin(6)) + Ifges(5,1) + Ifges(4,2) + Ifges(6,2) + Ifges(2,3) + Ifges(3,3) + ((2 * mrSges(6,3) + t17) * pkin(7)) + 0.2e1 * t12 * pkin(1); mrSges(2,1) + t12; -t3 * t9 + t4 * t7 + mrSges(2,2); m(3) + m(4); Ifges(4,1) - Ifges(4,2) - 0.4e1 * t14 + t2 - 0.2e1 * t16; 0.2e1 * t5 * Ifges(5,4) - t2 * t15 + Ifges(4,4) - Ifges(5,4); -t6 * Ifges(5,6) + t1 * t8 + Ifges(4,5); t8 * Ifges(5,6) + t1 * t6 + Ifges(4,6); Ifges(4,3) + Ifges(5,3) + t10; mrSges(4,1); mrSges(4,2); pkin(4) * m(6) + mrSges(5,1); mrSges(5,2); mrSges(5,3) - t13; m(5) + m(6); Ifges(6,1) - Ifges(6,2); Ifges(6,4); Ifges(6,5); Ifges(6,6); Ifges(6,3); mrSges(6,1); mrSges(6,2);];
+t11 = [t16 + 0.2e1 * t14 + ((pkin(2) ^ 2 + pkin(6) ^ 2) * m(4)) + (2 * mrSges(4,3) * pkin(6)) + Ifges(5,1) + Ifges(4,2) + Ifges(6,2) + Ifges(2,3) + Ifges(3,3) + ((2 * mrSges(6,3) + t17) * pkin(7)) + 0.2e1 * t12 * pkin(1); mrSges(2,1) + t12; -t3 * t9 + t4 * t7 + mrSges(2,2); m(3) + m(4); Ifges(4,1) - Ifges(4,2) - 0.4e1 * t14 + t2 - 0.2e1 * t16; 0.2e1 * t5 * Ifges(5,4) - t2 * t15 + Ifges(4,4) - Ifges(5,4); -t6 * Ifges(5,6) + t1 * t8 + Ifges(4,5); t8 * Ifges(5,6) + t1 * t6 + Ifges(4,6); Ifges(4,3) + Ifges(5,3) + t10; mrSges(4,1); mrSges(4,2); m(6) * pkin(4) + mrSges(5,1); mrSges(5,2); mrSges(5,3) - t13; m(5) + m(6); Ifges(6,1) - Ifges(6,2); Ifges(6,4); Ifges(6,5); Ifges(6,6); Ifges(6,3); mrSges(6,1); mrSges(6,2);];
 MPV = t11;

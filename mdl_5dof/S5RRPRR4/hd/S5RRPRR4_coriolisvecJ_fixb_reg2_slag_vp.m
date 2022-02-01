@@ -16,8 +16,8 @@
 %   inertial parameter regressor of coriolis joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 12:02
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 10:49
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 12:02:06
-% EndTime: 2020-01-03 12:02:10
-% DurationCPUTime: 1.10s
+% StartTime: 2022-01-20 10:48:32
+% EndTime: 2022-01-20 10:48:37
+% DurationCPUTime: 1.20s
 % Computational Cost: add. (2687->204), mult. (5054->276), div. (0->0), fcn. (3173->8), ass. (0->160)
 t114 = cos(pkin(9));
 t120 = cos(qJ(2));

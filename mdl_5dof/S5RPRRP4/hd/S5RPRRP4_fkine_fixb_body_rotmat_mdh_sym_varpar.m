@@ -13,11 +13,11 @@
 % 
 % Output:
 % Tc_mdh [4x4]
-%   homogenous transformation matrices for body frame of "link_index"
+%   homogenous transformation matrices for the body frame of "link_index"
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-11-04 20:23
-% Revision: de51baf798caa2364afaf24686304d90a3288510 (2020-11-04)
+% Datum: 2022-01-23 09:33
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,8 +36,8 @@ Tc_mdh=NaN(4,4);
 if link_index == 0
 	% From fkine_0_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:23:25
-	% EndTime: 2020-11-04 20:23:25
+	% StartTime: 2022-01-23 09:31:40
+	% EndTime: 2022-01-23 09:31:40
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1;];
@@ -45,93 +45,93 @@ if link_index == 0
 elseif link_index == 1
 	% From fkine_1_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:23:25
-	% EndTime: 2020-11-04 20:23:25
-	% DurationCPUTime: 0.01s
+	% StartTime: 2022-01-23 09:31:40
+	% EndTime: 2022-01-23 09:31:40
+	% DurationCPUTime: 0.04s
 	% Computational Cost: add. (2->2), mult. (0->0), div. (0->0), fcn. (4->2), ass. (0->3)
-	t52 = cos(qJ(1));
-	t51 = sin(qJ(1));
-	t1 = [0, 0, 1, pkin(5) + 0; t51, t52, 0, 0; -t52, t51, 0, 0; 0, 0, 0, 1;];
+	t55 = cos(qJ(1));
+	t54 = sin(qJ(1));
+	t1 = [t55, -t54, 0, 0; t54, t55, 0, 0; 0, 0, 1, pkin(5) + 0; 0, 0, 0, 1;];
 	Tc_mdh = t1;
 elseif link_index == 2
 	% From fkine_2_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:23:25
-	% EndTime: 2020-11-04 20:23:25
-	% DurationCPUTime: 0.07s
-	% Computational Cost: add. (9->9), mult. (8->8), div. (0->0), fcn. (16->4), ass. (0->5)
-	t56 = cos(qJ(1));
-	t55 = sin(qJ(1));
-	t54 = cos(pkin(8));
-	t53 = sin(pkin(8));
-	t1 = [t53, t54, 0, pkin(5) + 0; t55 * t54, -t55 * t53, -t56, t55 * pkin(1) - t56 * qJ(2) + 0; -t56 * t54, t56 * t53, -t55, -t56 * pkin(1) - t55 * qJ(2) + 0; 0, 0, 0, 1;];
+	% StartTime: 2022-01-23 09:31:40
+	% EndTime: 2022-01-23 09:31:40
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (8->8), mult. (8->8), div. (0->0), fcn. (16->4), ass. (0->5)
+	t59 = cos(qJ(1));
+	t58 = sin(qJ(1));
+	t57 = cos(pkin(8));
+	t56 = sin(pkin(8));
+	t1 = [t59 * t57, -t59 * t56, t58, t59 * pkin(1) + t58 * qJ(2) + 0; t58 * t57, -t58 * t56, -t59, t58 * pkin(1) - t59 * qJ(2) + 0; t56, t57, 0, pkin(5) + 0; 0, 0, 0, 1;];
 	Tc_mdh = t1;
 elseif link_index == 3
 	% From fkine_3_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:23:25
-	% EndTime: 2020-11-04 20:23:25
-	% DurationCPUTime: 0.03s
-	% Computational Cost: add. (18->16), mult. (26->20), div. (0->0), fcn. (39->6), ass. (0->12)
-	t60 = sin(qJ(3));
-	t61 = sin(qJ(1));
-	t67 = t61 * t60;
-	t62 = cos(qJ(3));
-	t66 = t61 * t62;
-	t63 = cos(qJ(1));
-	t65 = t63 * t60;
-	t64 = t63 * t62;
-	t59 = cos(pkin(8));
-	t58 = sin(pkin(8));
-	t57 = pkin(2) * t59 + t58 * pkin(6) + pkin(1);
-	t1 = [t58 * t62, -t58 * t60, -t59, t58 * pkin(2) - t59 * pkin(6) + pkin(5) + 0; t59 * t66 - t65, -t59 * t67 - t64, t61 * t58, -t63 * qJ(2) + t57 * t61 + 0; -t59 * t64 - t67, t59 * t65 - t66, -t63 * t58, -t61 * qJ(2) - t57 * t63 + 0; 0, 0, 0, 1;];
+	% StartTime: 2022-01-23 09:31:40
+	% EndTime: 2022-01-23 09:31:40
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (17->15), mult. (26->20), div. (0->0), fcn. (39->6), ass. (0->12)
+	t63 = sin(qJ(3));
+	t64 = sin(qJ(1));
+	t70 = t64 * t63;
+	t65 = cos(qJ(3));
+	t69 = t64 * t65;
+	t66 = cos(qJ(1));
+	t68 = t66 * t63;
+	t67 = t66 * t65;
+	t62 = cos(pkin(8));
+	t61 = sin(pkin(8));
+	t60 = pkin(2) * t62 + t61 * pkin(6) + pkin(1);
+	t1 = [t62 * t67 + t70, -t62 * t68 + t69, t66 * t61, t64 * qJ(2) + t60 * t66 + 0; t62 * t69 - t68, -t62 * t70 - t67, t64 * t61, -t66 * qJ(2) + t60 * t64 + 0; t61 * t65, -t61 * t63, -t62, t61 * pkin(2) - t62 * pkin(6) + pkin(5) + 0; 0, 0, 0, 1;];
 	Tc_mdh = t1;
 elseif link_index == 4
 	% From fkine_4_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:23:25
-	% EndTime: 2020-11-04 20:23:25
-	% DurationCPUTime: 0.04s
-	% Computational Cost: add. (36->20), mult. (34->22), div. (0->0), fcn. (47->8), ass. (0->16)
-	t72 = sin(pkin(8));
-	t73 = cos(pkin(8));
-	t77 = pkin(7) + pkin(6);
-	t79 = pkin(3) * cos(qJ(3)) + pkin(2);
-	t84 = t77 * t72 + t79 * t73 + pkin(1);
-	t71 = qJ(3) + qJ(4);
-	t69 = sin(t71);
-	t74 = sin(qJ(1));
-	t83 = t74 * t69;
-	t70 = cos(t71);
-	t82 = t74 * t70;
-	t76 = cos(qJ(1));
-	t81 = t76 * t69;
-	t80 = t76 * t70;
-	t68 = -sin(qJ(3)) * pkin(3) - qJ(2);
-	t1 = [t72 * t70, -t72 * t69, -t73, t79 * t72 - t73 * t77 + pkin(5) + 0; t73 * t82 - t81, -t73 * t83 - t80, t74 * t72, t68 * t76 + t84 * t74 + 0; -t73 * t80 - t83, t73 * t81 - t82, -t76 * t72, t68 * t74 - t84 * t76 + 0; 0, 0, 0, 1;];
+	% StartTime: 2022-01-23 09:31:40
+	% EndTime: 2022-01-23 09:31:40
+	% DurationCPUTime: 0.03s
+	% Computational Cost: add. (35->19), mult. (34->22), div. (0->0), fcn. (47->8), ass. (0->16)
+	t75 = qJ(3) + qJ(4);
+	t73 = sin(t75);
+	t78 = sin(qJ(1));
+	t86 = t78 * t73;
+	t74 = cos(t75);
+	t85 = t78 * t74;
+	t80 = cos(qJ(1));
+	t84 = t80 * t73;
+	t83 = t80 * t74;
+	t82 = pkin(3) * cos(qJ(3)) + pkin(2);
+	t81 = pkin(7) + pkin(6);
+	t77 = cos(pkin(8));
+	t76 = sin(pkin(8));
+	t72 = sin(qJ(3)) * pkin(3) + qJ(2);
+	t71 = t81 * t76 + t82 * t77 + pkin(1);
+	t1 = [t77 * t83 + t86, -t77 * t84 + t85, t80 * t76, t71 * t80 + t72 * t78 + 0; t77 * t85 - t84, -t77 * t86 - t83, t78 * t76, t71 * t78 - t72 * t80 + 0; t76 * t74, -t76 * t73, -t77, t82 * t76 - t77 * t81 + pkin(5) + 0; 0, 0, 0, 1;];
 	Tc_mdh = t1;
 elseif link_index == 5
 	% From fkine_5_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:23:25
-	% EndTime: 2020-11-04 20:23:25
-	% DurationCPUTime: 0.04s
-	% Computational Cost: add. (49->22), mult. (42->24), div. (0->0), fcn. (55->8), ass. (0->16)
-	t90 = qJ(3) + qJ(4);
-	t87 = sin(t90);
-	t93 = sin(qJ(1));
-	t100 = t93 * t87;
-	t88 = cos(t90);
-	t99 = t93 * t88;
-	t94 = cos(qJ(1));
-	t98 = t94 * t87;
-	t97 = t94 * t88;
-	t96 = -qJ(2) - pkin(4) * t87 - sin(qJ(3)) * pkin(3);
-	t85 = pkin(4) * t88 + pkin(3) * cos(qJ(3)) + pkin(2);
-	t89 = -qJ(5) - pkin(7) - pkin(6);
-	t91 = sin(pkin(8));
-	t92 = cos(pkin(8));
-	t95 = t85 * t92 - t89 * t91 + pkin(1);
-	t1 = [t91 * t88, -t91 * t87, -t92, t91 * t85 + t92 * t89 + pkin(5) + 0; t92 * t99 - t98, -t92 * t100 - t97, t93 * t91, t95 * t93 + t96 * t94 + 0; -t92 * t97 - t100, t92 * t98 - t99, -t94 * t91, t96 * t93 - t95 * t94 + 0; 0, 0, 0, 1;];
+	% StartTime: 2022-01-23 09:31:40
+	% EndTime: 2022-01-23 09:31:40
+	% DurationCPUTime: 0.03s
+	% Computational Cost: add. (48->21), mult. (42->24), div. (0->0), fcn. (55->8), ass. (0->16)
+	t92 = qJ(3) + qJ(4);
+	t89 = sin(t92);
+	t95 = sin(qJ(1));
+	t102 = t95 * t89;
+	t90 = cos(t92);
+	t101 = t95 * t90;
+	t96 = cos(qJ(1));
+	t100 = t96 * t89;
+	t99 = t96 * t90;
+	t98 = qJ(2) + pkin(4) * t89 + sin(qJ(3)) * pkin(3);
+	t87 = pkin(4) * t90 + pkin(3) * cos(qJ(3)) + pkin(2);
+	t91 = -qJ(5) - pkin(7) - pkin(6);
+	t93 = sin(pkin(8));
+	t94 = cos(pkin(8));
+	t97 = t87 * t94 - t91 * t93 + pkin(1);
+	t1 = [t94 * t99 + t102, -t94 * t100 + t101, t96 * t93, t98 * t95 + t97 * t96 + 0; t94 * t101 - t100, -t94 * t102 - t99, t95 * t93, t97 * t95 - t98 * t96 + 0; t93 * t90, -t93 * t89, -t94, t93 * t87 + t94 * t91 + pkin(5) + 0; 0, 0, 0, 1;];
 	Tc_mdh = t1;
 end

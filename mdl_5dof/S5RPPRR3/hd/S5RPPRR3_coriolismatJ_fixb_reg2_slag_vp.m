@@ -16,8 +16,8 @@
 %   inertial parameter regressor of coriolis matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:29
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-23 09:15
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:28:29
-% EndTime: 2020-01-03 11:28:37
-% DurationCPUTime: 1.82s
+% StartTime: 2022-01-23 09:14:39
+% EndTime: 2022-01-23 09:14:41
+% DurationCPUTime: 1.75s
 % Computational Cost: add. (4214->106), mult. (7728->148), div. (0->0), fcn. (8920->8), ass. (0->98)
 t219 = qJD(4) + qJD(5);
 t136 = sin(pkin(9));

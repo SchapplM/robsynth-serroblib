@@ -10,7 +10,7 @@
 % pkin [9x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d5,theta2,theta3,theta4]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % mrSges [6x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -26,8 +26,8 @@
 %   matrix of coriolis and centrifugal joint torques
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:21
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 09:13
+% Revision: 008671b0a00594318b890887636eaaff83cd5e2f (2021-12-12)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:20:09
-% EndTime: 2020-01-03 11:20:11
-% DurationCPUTime: 0.56s
+% StartTime: 2022-01-20 09:12:16
+% EndTime: 2022-01-20 09:12:18
+% DurationCPUTime: 0.61s
 % Computational Cost: add. (2138->106), mult. (4582->170), div. (0->0), fcn. (4552->8), ass. (0->69)
 t67 = sin(pkin(9));
 t69 = cos(pkin(9));

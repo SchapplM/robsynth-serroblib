@@ -10,7 +10,7 @@
 % pkin [8x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d2,d4,theta3]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % mrSges [6x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -26,8 +26,8 @@
 %   time derivative of inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:59
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 10:20
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_time_derivative_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:58:55
-% EndTime: 2020-01-03 11:58:56
-% DurationCPUTime: 0.52s
+% StartTime: 2022-01-20 10:19:33
+% EndTime: 2022-01-20 10:19:35
+% DurationCPUTime: 0.55s
 % Computational Cost: add. (435->122), mult. (1047->165), div. (0->0), fcn. (650->6), ass. (0->69)
 t91 = Ifges(6,4) + Ifges(5,4);
 t90 = -Ifges(5,2) - Ifges(6,2);
@@ -124,7 +124,7 @@ t4 = t10 * t46 + t39;
 t3 = t63 * t44;
 t2 = (-qJD(5) - t12) * t44 + t46 * t52;
 t1 = t12 * t46 + t44 * t52 + t38;
-t13 = [t6 * t84 + t9 * t83 + 0.2e1 * t77 - 0.2e1 * t12 * mrSges(4,2) + 0.2e1 * m(5) * (t10 * t54 + t11 * t9) + 0.2e1 * m(4) * (-t53 * t11 + t67 * t12) + (t1 * t4 + t2 * t3 + t5 * t6) * t85 + (t1 * t81 + t2 * t82 + (-t3 * t46 - t4 * t44) * t59) * mrSges(6,3) + 0.2e1 * t55 * t12 + 0.2e1 * t48 + 0.2e1 * t56 + t88; t77 + (t32 + t9) * t22 + (t6 + t23) * t21 + t56 + t48 + (-mrSges(4,2) + t55) * t12 + (pkin(4) * t24 + t68) * t61 + m(5) * (t11 * t32 + t31 * t54) + m(6) * (t1 * t18 + t17 * t2 + t23 * t5 + t3 * t8 + t4 * t7 + t6 * t58) + m(4) * (-t11 * t43 + t12 * t42) * pkin(2) + ((t1 + t7) * t46 + (-t2 - t8) * t44 + ((-t17 - t3) * t46 + (-t18 - t4) * t44) * qJD(4)) * mrSges(6,3) + t49; 0.2e1 * t24 * t58 + t23 * t84 + t32 * t83 + (t17 * t8 + t18 * t7 + t23 * t58) * t85 + (t8 * t82 + t7 * t81 + (-t17 * t46 - t18 * t44) * t59) * mrSges(6,3) + t88; m(6) * (t1 * t44 + t2 * t46 + (-t3 * t44 + t4 * t46) * qJD(4)); m(6) * (t44 * t7 + t46 * t8 + (-t17 * t44 + t18 * t46) * qJD(4)); 0; -mrSges(6,2) * t1 + t57 * t2 - t50 * t12 + ((-mrSges(5,1) * t10 - t79) * t46 + (mrSges(5,2) * t10 + t69) * t44) * qJD(4) + t66; -mrSges(6,2) * t7 + t57 * t8 + ((-mrSges(5,1) * t31 - t79) * t46 + (mrSges(5,2) * t31 + t69) * t44) * qJD(4) + t66; (-t76 + (-mrSges(5,1) - t80) * t44) * qJD(4) - t21; 0; m(6) * t5 + t21; m(6) * t58 + t21; 0; 0; 0;];
+t13 = [t6 * t84 + t9 * t83 + 0.2e1 * t77 - 0.2e1 * t12 * mrSges(4,2) + 0.2e1 * m(5) * (t10 * t54 + t11 * t9) + 0.2e1 * m(4) * (-t53 * t11 + t67 * t12) + (t1 * t4 + t2 * t3 + t5 * t6) * t85 + (t1 * t81 + t2 * t82 + (-t3 * t46 - t4 * t44) * t59) * mrSges(6,3) + 0.2e1 * t55 * t12 + 0.2e1 * t48 + 0.2e1 * t56 + t88; t77 + (t32 + t9) * t22 + (t23 + t6) * t21 + t56 + t48 + (-mrSges(4,2) + t55) * t12 + (pkin(4) * t24 + t68) * t61 + m(5) * (t11 * t32 + t31 * t54) + m(6) * (t1 * t18 + t17 * t2 + t23 * t5 + t3 * t8 + t4 * t7 + t6 * t58) + m(4) * (-t11 * t43 + t12 * t42) * pkin(2) + ((t1 + t7) * t46 + (-t2 - t8) * t44 + ((-t17 - t3) * t46 + (-t18 - t4) * t44) * qJD(4)) * mrSges(6,3) + t49; 0.2e1 * t24 * t58 + t23 * t84 + t32 * t83 + (t17 * t8 + t18 * t7 + t23 * t58) * t85 + (t8 * t82 + t7 * t81 + (-t17 * t46 - t18 * t44) * t59) * mrSges(6,3) + t88; m(6) * (t1 * t44 + t2 * t46 + (-t3 * t44 + t4 * t46) * qJD(4)); m(6) * (t44 * t7 + t46 * t8 + (-t17 * t44 + t18 * t46) * qJD(4)); 0; -mrSges(6,2) * t1 + t57 * t2 - t50 * t12 + ((-mrSges(5,1) * t10 - t79) * t46 + (mrSges(5,2) * t10 + t69) * t44) * qJD(4) + t66; -mrSges(6,2) * t7 + t57 * t8 + ((-mrSges(5,1) * t31 - t79) * t46 + (mrSges(5,2) * t31 + t69) * t44) * qJD(4) + t66; (-t76 + (-mrSges(5,1) - t80) * t44) * qJD(4) - t21; 0; m(6) * t5 + t21; m(6) * t58 + t21; 0; 0; 0;];
 %% Postprocessing: Reshape Output
 % From vec2symmat_5_matlab.m
 res = [t13(1), t13(2), t13(4), t13(7), t13(11); t13(2), t13(3), t13(5), t13(8), t13(12); t13(4), t13(5), t13(6), t13(9), t13(13); t13(7), t13(8), t13(9), t13(10), t13(14); t13(11), t13(12), t13(13), t13(14), t13(15);];
