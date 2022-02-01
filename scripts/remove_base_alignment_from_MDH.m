@@ -53,22 +53,41 @@ for j = 1:length(l.Names)
               RS.MDH.beta(1) == pi && abs(RS.MDH.alpha(1)) == pi/2);% && ...
 %     (RS.MDH.sigma(1)==0 && abs(RS.MDH.offset(1)) == pi/2 || ...
 %      RS.MDH.sigma(1)==1 && abs(RS.MDH.theta(1)) ==  pi/2);
+  force_update = false;
   basedir_z = RS.MDH.beta(1) == 0 && RS.MDH.alpha(1) == 0;
+  wrong_direction_in_code = false;
   if basedir_x ~= basedirt_x
-    error('X-Basis-Ausrichtung stimmt nicht');
+    wrong_direction_in_code = true;
+    warning('X-Basis-Ausrichtung stimmt nicht (Trafo vs MDH-Param)');
   end
   if basedir_y ~= basedirt_y
-    error('Y-Basis-Ausrichtung stimmt nicht');
+    wrong_direction_in_code = true;
+    warning('Y-Basis-Ausrichtung stimmt nicht (Trafo vs MDH-Param)');
   end
   if basedir_z ~= basedirt_z
-    error('Z-Basis-Ausrichtung stimmt nicht');
+    wrong_direction_in_code = true;
+    warning('Z-Basis-Ausrichtung stimmt nicht (Trafo vs MDH-Param)');
+  end
+%   if wrong_direction_in_code && ~basedir_z
+%     error('Inkonsistente Daten/unerwarteter Fall');
+%   end
+  if wrong_direction_in_code
+    % Der Code ist falsch. Muss neu generiert werden. Inkonsistente Daten
+    % liegen vermutlich an unvollständigem Durchlauf dieses Skripts.
+    % (Nachträgliche Änderung der Filter-Bedingungen für Code-Erzeugung)
+    if hascode == 1
+      serroblib_generate_mapleinput({RobName});
+      serroblib_generate_code({RobName}, true, false, 1);
+      fprintf('Code für %d, %s neu generiert\n', j, RobName);
+    end
+    continue
   end
   [csvline, csvbits] = serroblib_bits2csvline(l.BitArrays_Ndof(j,1));
   basedir_idx = find([basedirt_x;basedirt_y;basedirt_z]);
   fprintf('%d, %s: Base direction %s. joint %s, beta1=%s, alpha1=%s, theta1=%s, offset1=%s\n', ...
     j, RobName, char(119+basedir_idx), csvline{2}, csvline{3}, csvline{5}, ...
     csvline{7}, csvline{9});
-  force_update = false;
+
   if isvariant && any(contains(csvline([5,7]), 'pi'))
     % Die Erkennung für Varianten funktioniert nicht, da auf die Funktionen
     % der Haupt-Modelle zurückgegriffen wird. Diese sind schon
