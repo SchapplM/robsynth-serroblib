@@ -20,6 +20,9 @@
 %   3: Alles generieren in Maple, aber keinen Matlab-Code exportieren
 %      (wichtig für PKM. Dort wird die Bein-Dynamik nur als Maple gebraucht)
 %   4: Nur Kinematik generieren (ansonsten, wie Modus 1)
+% notest
+%   Aktivierung des Tests aller generierter Matlab-Dateien aus der Modelgen-
+%   Toolbox (true/false). Dadurch direkt Validierung des Codes.
 % 
 % Vorher: 
 % * Funktion maplerepo_path.m muss vorliegen mit Rückgabe des
@@ -30,7 +33,7 @@
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-08
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function serroblib_generate_code(Names, force, nocopy, mode)
+function serroblib_generate_code(Names, force, nocopy, mode, notest)
 
 if ispc()
   warning('Die Code-Generierung ist unter Windows noch etwas instabil.');
@@ -45,10 +48,16 @@ end
 if nargin < 4
   mode = 1;
 end
+if nargin < 5
+  notest = 1;
+end
 if mode == 4
   kinematics_arg = '--kinematics_only';
 else
   kinematics_arg = '';
+end
+if notest
+  kinematics_arg = [kinematics_arg, ' --notest'];
 end
 repopath=fileparts(which('serroblib_path_init.m'));
 % Pfad zur Maple-Dynamik-Toolbox (muss im Repo abgelegt werden)
@@ -175,11 +184,11 @@ for i = 1:length(Names)
         copyfile(fullfile(outputdir_tb, f.name), fullfile(outputdir_local, f.name));
       end
     end
+    % Definitionen des Roboters zurückkopieren. Damit lassen sich später
+    % leichter Roboterspezifische Funktionen neu generieren, ohne die Toolbox
+    % neu durchlaufen zu lassen
+    copyfile( fullfile(mrp, 'robot_codegen_definitions', 'robot_env.sh'), [mapleinputfile, '.sh']);
   end
-  % Definitionen des Roboters zurückkopieren. Damit lassen sich später
-  % leichter Roboterspezifische Funktionen neu generieren, ohne die Toolbox
-  % neu durchlaufen zu lassen
-  copyfile( fullfile(mrp, 'robot_codegen_definitions', 'robot_env.sh'), [mapleinputfile, '.sh']);
 end
 end
 
