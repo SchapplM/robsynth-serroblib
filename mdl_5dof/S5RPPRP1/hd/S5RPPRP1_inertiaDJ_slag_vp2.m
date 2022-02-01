@@ -10,7 +10,7 @@
 % pkin [8x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d4,theta2,theta3]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % mrSges [6x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -26,8 +26,8 @@
 %   time derivative of inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:26
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-23 09:13
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_time_derivative_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:25:09
-% EndTime: 2020-01-03 11:25:12
-% DurationCPUTime: 0.41s
+% StartTime: 2022-01-23 09:12:13
+% EndTime: 2022-01-23 09:12:14
+% DurationCPUTime: 0.40s
 % Computational Cost: add. (364->102), mult. (828->159), div. (0->0), fcn. (604->6), ass. (0->56)
 t62 = 2 * qJD(3);
 t30 = sin(pkin(8));
@@ -78,7 +78,7 @@ t57 = t25 * t32;
 t56 = t32 * t30;
 t55 = t33 * t30;
 t54 = mrSges(5,2) + mrSges(6,2);
-t53 = Ifges(6,4) + Ifges(5,4);
+t53 = Ifges(5,4) + Ifges(6,4);
 t52 = Ifges(6,5) + Ifges(5,5);
 t51 = Ifges(5,6) + Ifges(6,6);
 t17 = t31 * mrSges(6,2) - mrSges(6,3) * t56;

@@ -10,21 +10,24 @@
 %   pkin=[a2,a3,a4,a5,d1,d2,d5,theta3,theta4]';
 % 
 % Output:
-% T_c_mdh [4x4x(5+1)]
+% Tc_mdh [4x4x(5+1)]
 %   homogenous transformation matrices for each (body) frame (MDH)
 %   1:  mdh base (link 0) -> mdh base link 0 (unit matrix, no information)
 %   ...
 %   6:  mdh base (link 0) -> mdh frame (6-1), link (6-1)
 %   ...
 %   5+1:  mdh base (link 0) -> mdh frame (5)
+% T_c_stack [(5+1)*3 x 4]
+%   stacked matrices from Tc_mdh into one 2D array, last row left out.
+%   Last row only contains [0 0 0 1].
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:56
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 09:52
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function [T_c_mdh, Tc_stack] = S5RRPPR1_fkine_fixb_rotmat_mdh_sym_varpar(qJ, pkin)
+function [Tc_mdh, Tc_stack] = S5RRPPR1_fkine_fixb_rotmat_mdh_sym_varpar(qJ, pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(5,1),zeros(9,1)}
@@ -36,42 +39,39 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From fkine_mdh_floatb_twist_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:55:37
-% EndTime: 2020-01-03 11:55:37
-% DurationCPUTime: 0.10s
-% Computational Cost: add. (114->32), mult. (33->22), div. (0->0), fcn. (61->10), ass. (0->23)
-t13 = qJ(1) + qJ(2);
-t24 = pkin(5) + 0;
-t17 = sin(qJ(1));
-t23 = t17 * pkin(1) + 0;
-t22 = pkin(6) + t24;
-t9 = sin(t13);
-t21 = pkin(2) * t9 + t23;
-t18 = cos(qJ(1));
-t20 = -t18 * pkin(1) + 0;
-t5 = qJ(3) + t22;
-t10 = cos(t13);
-t19 = -pkin(2) * t10 + t20;
-t16 = -pkin(7) - qJ(4);
-t15 = cos(pkin(9));
-t14 = sin(pkin(9));
-t12 = pkin(9) + qJ(5);
-t8 = pkin(8) + t13;
-t7 = cos(t12);
-t6 = sin(t12);
-t3 = t15 * pkin(4) + pkin(3);
-t2 = cos(t8);
-t1 = sin(t8);
-t4 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1; 0, 0, 1, t24; t17, t18, 0, 0; -t18, t17, 0, 0; 0, 0, 0, 1; 0, 0, 1, t22; t9, t10, 0, t23; -t10, t9, 0, t20; 0, 0, 0, 1; 0, 0, 1, t5; t1, t2, 0, t21; -t2, t1, 0, t19; 0, 0, 0, 1; t14, t15, 0, t5; t1 * t15, -t1 * t14, -t2, t1 * pkin(3) - t2 * qJ(4) + t21; -t2 * t15, t2 * t14, -t1, -t2 * pkin(3) - t1 * qJ(4) + t19; 0, 0, 0, 1; t6, t7, 0, t14 * pkin(4) + t5; t1 * t7, -t1 * t6, -t2, t1 * t3 + t2 * t16 + t21; -t2 * t7, t2 * t6, -t1, t1 * t16 - t2 * t3 + t19; 0, 0, 0, 1;];
-T_ges = t4;
+% StartTime: 2022-01-20 09:51:12
+% EndTime: 2022-01-20 09:51:12
+% DurationCPUTime: 0.11s
+% Computational Cost: add. (112->30), mult. (33->22), div. (0->0), fcn. (61->10), ass. (0->23)
+t15 = qJ(1) + qJ(2);
+t26 = pkin(5) + 0;
+t19 = sin(qJ(1));
+t25 = t19 * pkin(1) + 0;
+t20 = cos(qJ(1));
+t24 = t20 * pkin(1) + 0;
+t23 = pkin(6) + t26;
+t10 = sin(t15);
+t22 = pkin(2) * t10 + t25;
+t11 = cos(t15);
+t21 = pkin(2) * t11 + t24;
+t6 = qJ(3) + t23;
+t18 = -pkin(7) - qJ(4);
+t17 = cos(pkin(9));
+t16 = sin(pkin(9));
+t14 = pkin(9) + qJ(5);
+t9 = pkin(8) + t15;
+t8 = cos(t14);
+t7 = sin(t14);
+t3 = pkin(4) * t17 + pkin(3);
+t2 = cos(t9);
+t1 = sin(t9);
+t4 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; t20, -t19, 0, 0; t19, t20, 0, 0; 0, 0, 1, t26; t11, -t10, 0, t24; t10, t11, 0, t25; 0, 0, 1, t23; t2, -t1, 0, t21; t1, t2, 0, t22; 0, 0, 1, t6; t2 * t17, -t2 * t16, t1, pkin(3) * t2 + qJ(4) * t1 + t21; t1 * t17, -t1 * t16, -t2, pkin(3) * t1 - qJ(4) * t2 + t22; t16, t17, 0, t6; t2 * t8, -t2 * t7, t1, -t1 * t18 + t2 * t3 + t21; t1 * t8, -t1 * t7, -t2, t1 * t3 + t18 * t2 + t22; t7, t8, 0, pkin(4) * t16 + t6;];
+Tc_stack = t4;
 %% Postprocessing: Reshape Output
 % Convert Maple format (2-dimensional tensor) to Matlab format (3-dimensional tensor)
 % Fallunterscheidung der Initialisierung für symbolische Eingabe
-if isa([qJ; pkin], 'double'), T_c_mdh = NaN(4,4,5+1);               % numerisch
-else,                         T_c_mdh = sym('xx', [4,4,5+1]); end % symbolisch
+if isa([qJ; pkin], 'double'), Tc_mdh = NaN(4,4,5+1);               % numerisch
+else,                         Tc_mdh = sym('xx', [4,4,5+1]); end % symbolisch
 for i = 1:5+1
-  T_c_mdh(:,:,i) = T_ges((i-1)*4+1 : 4*i, :);
+  Tc_mdh(:,:,i) = [Tc_stack((i-1)*3+1 : 3*i, :);[0 0 0 1]];
 end
-Tc_stack = NaN(3*size(T_c_mdh,3),4);
-% Zusätzliche Ausgabe: Als 2D-array gestapelt, ohne Zeile mit 0001
-for i = 1:size(T_c_mdh,3), Tc_stack((i-1)*3+1:3*i,1:4) = T_c_mdh(1:3,1:4,i); end

@@ -1,4 +1,4 @@
-% Calculate minimal parameter regressor of Coriolis joint torque vector for
+% Calculate Coriolis joint torque vector for
 % S5RRRPR2
 % Use Code from Maple symbolic Code Generation
 % 
@@ -19,8 +19,8 @@
 %   joint torques required to compensate Coriolis and centrifugal load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 12:08
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 11:31
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,9 +40,9 @@ assert(isreal(MDP) && all(size(MDP) == [17 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 12:07:38
-% EndTime: 2020-01-03 12:07:39
-% DurationCPUTime: 0.52s
+% StartTime: 2022-01-20 11:30:54
+% EndTime: 2022-01-20 11:30:56
+% DurationCPUTime: 0.55s
 % Computational Cost: add. (795->125), mult. (1724->184), div. (0->0), fcn. (960->8), ass. (0->84)
 t167 = sin(qJ(3));
 t171 = cos(qJ(2));

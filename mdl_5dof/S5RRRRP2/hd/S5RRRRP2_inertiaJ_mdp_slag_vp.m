@@ -17,8 +17,8 @@
 %   inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2021-01-16 00:01
-% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
+% Datum: 2022-01-20 11:49
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,8 +36,8 @@ assert(isreal(MDP) && all(size(MDP) == [24 1]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2021-01-16 00:01:03
-% EndTime: 2021-01-16 00:01:04
+% StartTime: 2022-01-20 11:49:29
+% EndTime: 2022-01-20 11:49:29
 % DurationCPUTime: 0.25s
 % Computational Cost: add. (454->103), mult. (765->126), div. (0->0), fcn. (733->6), ass. (0->58)
 t108 = sin(qJ(4));

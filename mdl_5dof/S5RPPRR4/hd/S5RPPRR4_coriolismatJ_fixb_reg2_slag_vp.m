@@ -16,8 +16,8 @@
 %   inertial parameter regressor of coriolis matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:32
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-23 09:17
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,9 +35,9 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:31:32
-% EndTime: 2020-01-03 11:31:46
-% DurationCPUTime: 4.74s
+% StartTime: 2022-01-23 09:17:03
+% EndTime: 2022-01-23 09:17:09
+% DurationCPUTime: 4.25s
 % Computational Cost: add. (7333->262), mult. (15785->371), div. (0->0), fcn. (17370->8), ass. (0->235)
 t215 = sin(pkin(9));
 t343 = sin(qJ(4));
@@ -73,12 +73,12 @@ t383 = t373 * qJD(1);
 t388 = -t159 * t380 - t383;
 t341 = t218 * pkin(4);
 t216 = sin(pkin(8));
-t264 = -t218 * pkin(2) - pkin(1);
+t264 = -pkin(2) * t218 - pkin(1);
 t232 = (-pkin(6) - qJ(3)) * t216 + t264;
 t322 = t215 * qJ(2);
 t223 = (-pkin(3) - t322) * t218 + t232 * t217;
 t265 = t217 * t218 * qJ(2);
-t224 = t215 * t232 + t265;
+t224 = t232 * t215 + t265;
 t103 = -t345 * t223 + t343 * t224;
 t180 = t195 * t216;
 t74 = t180 * pkin(7) - t103;

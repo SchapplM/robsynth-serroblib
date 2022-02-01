@@ -25,8 +25,8 @@
 % base inertial parameter identification: A linear matrix inequality approach (2014)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2021-01-15 20:09
-% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
+% Datum: 2022-01-20 10:20
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 

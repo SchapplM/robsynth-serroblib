@@ -16,8 +16,8 @@
 %   inertial parameter regressor of coriolis joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:52
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-23 09:35
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -35,15 +35,15 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:52:21
-% EndTime: 2020-01-03 11:52:26
-% DurationCPUTime: 0.82s
+% StartTime: 2022-01-23 09:34:46
+% EndTime: 2022-01-23 09:34:47
+% DurationCPUTime: 0.57s
 % Computational Cost: add. (1812->113), mult. (4046->156), div. (0->0), fcn. (2322->8), ass. (0->81)
 t43 = cos(pkin(9)) * pkin(1) + pkin(2);
 t41 = t43 * qJD(1);
 t56 = sin(qJ(3));
 t59 = cos(qJ(3));
-t102 = sin(pkin(9)) * pkin(1);
+t102 = pkin(1) * sin(pkin(9));
 t83 = qJD(1) * t102;
 t29 = t59 * t41 - t56 * t83;
 t49 = qJD(1) + qJD(3);
@@ -80,7 +80,7 @@ t44 = t55 * pkin(3) + pkin(8);
 t60 = qJD(5) ^ 2;
 t103 = (pkin(3) * t87 - t17) * t47 + t44 * t60;
 t79 = t55 * t25 + t58 * t26;
-t6 = t16 * qJD(4) + t79;
+t6 = qJD(4) * t16 + t79;
 t101 = t47 * pkin(4);
 t33 = t74 * qJD(3);
 t34 = t36 * qJD(3);

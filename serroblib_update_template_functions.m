@@ -99,6 +99,14 @@ for j = 1:length(Names)
             error('Version der Datei ist zu alt (%d). Aktuell: %d', ...
               Stats.version, fileversions.robot_invkin_eulangresidual);
           end
+          % Debug: Prüfe, ob die Kinematik stimmt
+%           q0 = rand(RS.NJ,1);
+%           T0 = RS.fkineEE(q0);
+%           [q1, Phi1] = RS.invkin2(T0(1:3,:), q0, struct('retry_limit', 0, ...
+%             'n_max', 20));
+%           if any(abs(q0-q1)>1e-6) || any(abs(Phi1)>1e-6)
+%             error('InvKin und DirKin stimmen nicht überein');
+%           end
         catch err
           recompile = true;
         end

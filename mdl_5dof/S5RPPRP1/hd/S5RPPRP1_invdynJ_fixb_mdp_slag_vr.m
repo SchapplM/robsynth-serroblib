@@ -15,8 +15,8 @@
 %   joint torques of inverse dynamics (contains inertial, gravitational Coriolis and centrifugal forces)
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2021-01-15 16:56
-% Revision: 24b2e7d74a0c1a3b64fa2f8f5ad758691ad61af3 (2021-01-15)
+% Datum: 2022-01-23 09:13
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -30,8 +30,8 @@ assert(isreal(MDP) && all(size(MDP) == [18 1]), ...
 %% Symbolic Calculation
 % From invdyn_joint_fixb_mdp_mult_matlab.m
 % OptimizationMode: 2
-% StartTime: 2021-01-15 16:55:57
-% EndTime: 2021-01-15 16:55:57
+% StartTime: 2022-01-23 09:12:51
+% EndTime: 2022-01-23 09:12:51
 % DurationCPUTime: 0.03s
 % Computational Cost: add. (44->44), mult. (49->49), div. (0->0), fcn. (49->49), ass. (0->1)
 t1 = [RV(1) * MDP(1) + RV(2) * MDP(2) + RV(3) * MDP(3) + RV(4) * MDP(4) + RV(6) * MDP(5) + RV(8) * MDP(6) + RV(10) * MDP(7) + RV(13) * MDP(8) + RV(15) * MDP(9) + RV(17) * MDP(10) + RV(19) * MDP(11) + RV(21) * MDP(12) + RV(23) * MDP(13) + RV(27) * MDP(14) + RV(31) * MDP(15) + RV(36) * MDP(16) + RV(41) * MDP(17) + RV(45) * MDP(18); RV(5) * MDP(4) + RV(11) * MDP(7) + RV(24) * MDP(13) + RV(28) * MDP(14) + RV(32) * MDP(15) + RV(37) * MDP(16) + RV(46) * MDP(18); RV(7) * MDP(5) + RV(9) * MDP(6) + RV(12) * MDP(7) + RV(25) * MDP(13) + RV(29) * MDP(14) + RV(33) * MDP(15) + RV(38) * MDP(16) + RV(42) * MDP(17) + RV(47) * MDP(18); RV(14) * MDP(8) + RV(16) * MDP(9) + RV(18) * MDP(10) + RV(20) * MDP(11) + RV(22) * MDP(12) + RV(26) * MDP(13) + RV(30) * MDP(14) + RV(34) * MDP(15) + RV(39) * MDP(16) + RV(43) * MDP(17) + RV(48) * MDP(18); RV(35) * MDP(15) + RV(40) * MDP(16) + RV(44) * MDP(17) + RV(49) * MDP(18);];

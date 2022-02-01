@@ -16,8 +16,8 @@
 %   minimal parameter regressor of coriolis joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2021-01-15 12:57
-% Revision: d12c3222fdeb2c5f3b3c8fa5751e113be2fc3aae (2021-01-15)
+% Datum: 2022-01-23 09:33
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2021-01-15 12:56:35
-% EndTime: 2021-01-15 12:56:42
-% DurationCPUTime: 1.18s
+% StartTime: 2022-01-23 09:32:52
+% EndTime: 2022-01-23 09:32:55
+% DurationCPUTime: 1.17s
 % Computational Cost: add. (2029->201), mult. (5435->285), div. (0->0), fcn. (3782->6), ass. (0->144)
 t141 = qJD(3) + qJD(4);
 t95 = sin(pkin(8));

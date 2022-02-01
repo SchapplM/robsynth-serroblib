@@ -13,15 +13,17 @@
 % T_mdh [4x4x5]
 %   homogenous transformation matrices for joint transformation (MDH)
 %   Transformation matrices from one joint to the next (not: from base to joints)
+% T_stack [(5+1)*3 x 4]
+%   stacked matrices from T_mdh into one 2D array, last row left out.
+%   Last row only contains [0 0 0 1].
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:23
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-23 09:00
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
-function T_mdh = S5RPPPR2_joint_trafo_rotmat_mdh_sym_varpar(qJ, ...
-  pkin)
+function [T_mdh, T_stack] = S5RPPPR2_joint_trafo_rotmat_mdh_sym_varpar(qJ, pkin)
 %% Coder Information
 %#codegen
 %$cgargs {zeros(5,1),zeros(9,1)}
@@ -33,22 +35,22 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From joint_transformation_mdh_rotmat_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:22:11
-% EndTime: 2020-01-03 11:22:11
-% DurationCPUTime: 0.04s
+% StartTime: 2022-01-23 08:58:56
+% EndTime: 2022-01-23 08:58:56
+% DurationCPUTime: 0.03s
 % Computational Cost: add. (9->9), mult. (0->0), div. (0->0), fcn. (20->10), ass. (0->11)
-t56 = cos(qJ(1));
-t55 = cos(qJ(5));
-t54 = sin(qJ(1));
-t53 = sin(qJ(5));
-t52 = cos(pkin(7));
-t51 = cos(pkin(8));
-t50 = cos(pkin(9));
-t49 = sin(pkin(7));
-t48 = sin(pkin(8));
-t47 = sin(pkin(9));
-t1 = [0, 0, 1, pkin(5); t54, t56, 0, 0; -t56, t54, 0, 0; 0, 0, 0, 1; t52, -t49, 0, pkin(1); 0, 0, -1, -qJ(2); t49, t52, 0, 0; 0, 0, 0, 1; t51, -t48, 0, pkin(2); 0, 0, -1, -qJ(3); t48, t51, 0, 0; 0, 0, 0, 1; t50, -t47, 0, pkin(3); 0, 0, -1, -qJ(4); t47, t50, 0, 0; 0, 0, 0, 1; t55, -t53, 0, pkin(4); 0, 0, -1, -pkin(6); t53, t55, 0, 0; 0, 0, 0, 1;];
-T_ges = t1;
+t60 = cos(qJ(1));
+t59 = cos(qJ(5));
+t58 = sin(qJ(1));
+t57 = sin(qJ(5));
+t56 = cos(pkin(7));
+t55 = cos(pkin(8));
+t54 = cos(pkin(9));
+t53 = sin(pkin(7));
+t52 = sin(pkin(8));
+t51 = sin(pkin(9));
+t1 = [t60, -t58, 0, 0; t58, t60, 0, 0; 0, 0, 1, pkin(5); t56, -t53, 0, pkin(1); 0, 0, -1, -qJ(2); t53, t56, 0, 0; t55, -t52, 0, pkin(2); 0, 0, -1, -qJ(3); t52, t55, 0, 0; t54, -t51, 0, pkin(3); 0, 0, -1, -qJ(4); t51, t54, 0, 0; t59, -t57, 0, pkin(4); 0, 0, -1, -pkin(6); t57, t59, 0, 0;];
+T_stack = t1;
 %% Postprocessing: Reshape Output
 % Convert Maple format (2-dimensional tensor) to Matlab format (3-dimensional tensor)
 % Fallunterscheidung der Initialisierung für symbolische Eingabe
@@ -56,5 +58,5 @@ if isa([qJ; pkin], 'double'), T_mdh = NaN(4,4,5);             % numerisch
 else,                         T_mdh = sym('xx', [4,4,5]); end % symbolisch
 
 for i = 1:5
-  T_mdh(:,:,i) = T_ges((i-1)*4+1 : 4*i, :);
+  T_mdh(:,:,i) = [T_stack((i-1)*3+1 : 3*i, :);[0 0 0 1]];
 end

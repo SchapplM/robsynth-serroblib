@@ -10,7 +10,7 @@
 % pkin [9x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d2,d3,d5,theta4]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % mrSges [6x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -26,8 +26,8 @@
 %   kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 12:10
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 11:44
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,15 +52,15 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_linkframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 12:08:47
-% EndTime: 2020-01-03 12:08:48
+% StartTime: 2022-01-20 11:42:24
+% EndTime: 2022-01-20 11:42:24
 % DurationCPUTime: 0.25s
 % Computational Cost: add. (400->71), mult. (579->119), div. (0->0), fcn. (346->8), ass. (0->32)
 t84 = qJD(1) + qJD(2);
 t99 = t84 / 0.2e1;
 t89 = sin(qJ(2));
-t97 = qJD(1) * pkin(1);
-t81 = pkin(7) * t84 + t89 * t97;
+t97 = pkin(1) * qJD(1);
+t81 = t84 * pkin(7) + t89 * t97;
 t98 = t81 * mrSges(4,3);
 t88 = sin(qJ(3));
 t95 = qJ(4) * t84 + t81;
@@ -72,17 +72,17 @@ t86 = cos(pkin(9));
 t68 = t85 * t75 + t86 * t76;
 t92 = cos(qJ(2));
 t96 = t92 * t97;
-t67 = t86 * t75 - t76 * t85;
+t67 = t86 * t75 - t85 * t76;
 t77 = -t96 + qJD(4) + (-pkin(3) * t91 - pkin(2)) * t84;
 t90 = cos(qJ(5));
 t87 = sin(qJ(5));
 t83 = qJD(3) + qJD(5);
-t82 = -pkin(2) * t84 - t96;
+t82 = -t84 * pkin(2) - t96;
 t79 = (t85 * t91 + t86 * t88) * t84;
 t78 = (-t85 * t88 + t86 * t91) * t84;
-t71 = -pkin(4) * t78 + t77;
-t70 = t78 * t87 + t79 * t90;
-t69 = t78 * t90 - t79 * t87;
+t71 = -t78 * pkin(4) + t77;
+t70 = t87 * t78 + t90 * t79;
+t69 = t90 * t78 - t87 * t79;
 t66 = pkin(8) * t78 + t68;
 t65 = qJD(3) * pkin(4) - pkin(8) * t79 + t67;
 t64 = t65 * t87 + t66 * t90;

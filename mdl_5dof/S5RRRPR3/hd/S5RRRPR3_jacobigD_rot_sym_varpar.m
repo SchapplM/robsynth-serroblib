@@ -13,7 +13,7 @@
 %   Generalized joint velocities
 % link_index [1x1 uint8]
 %   Index des Segmentes, auf dem der Punkt C liegt. (0=Basis).
-%   Siehe auch: bsp_3T1R_fkine_fixb_rotmat_mdh_sym_varpar.m
+%   Siehe auch: S5RRRPR3_fkine_fixb_rotmat_mdh_sym_varpar.m
 % pkin [9x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d2,d3,d5,theta4]';
@@ -23,8 +23,8 @@
 %   Zeitableitung der rotatorischen Teilmatrix der geometrischen Jacobi-Matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 12:10
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 11:44
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,12 +40,13 @@ assert(isa(link_index,'uint8') && all(size(link_index) == [1 1]), ...
 	'S5RRRPR3_jacobigD_rot_sym_varpar: link_index has to be [1x1] uint8');
 assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
   'S5RRRPR3_jacobigD_rot_sym_varpar: pkin has to be [9x1] (double)');
+JgD_rot=NaN(3,5);
 if link_index == 0
 	%% Symbolic Calculation
 	% From jacobigD_rot_0_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:10:13
-	% EndTime: 2020-01-03 12:10:13
+	% StartTime: 2022-01-20 11:44:01
+	% EndTime: 2022-01-20 11:44:01
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
@@ -54,8 +55,8 @@ elseif link_index == 1
 	%% Symbolic Calculation
 	% From jacobigD_rot_1_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:10:13
-	% EndTime: 2020-01-03 12:10:13
+	% StartTime: 2022-01-20 11:44:01
+	% EndTime: 2022-01-20 11:44:01
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
@@ -64,8 +65,8 @@ elseif link_index == 2
 	%% Symbolic Calculation
 	% From jacobigD_rot_2_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:10:13
-	% EndTime: 2020-01-03 12:10:13
+	% StartTime: 2022-01-20 11:44:01
+	% EndTime: 2022-01-20 11:44:01
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [0, 0, 0, 0, 0; 0, 0, 0, 0, 0; 0, 0, 0, 0, 0;];
@@ -74,40 +75,38 @@ elseif link_index == 3
 	%% Symbolic Calculation
 	% From jacobigD_rot_3_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:10:13
-	% EndTime: 2020-01-03 12:10:13
+	% StartTime: 2022-01-20 11:44:01
+	% EndTime: 2022-01-20 11:44:01
 	% DurationCPUTime: 0.01s
-	% Computational Cost: add. (5->3), mult. (2->2), div. (0->0), fcn. (2->2), ass. (0->3)
-	t43 = qJ(1) + qJ(2);
-	t42 = qJD(1) + qJD(2);
-	t1 = [0, 0, 0, 0, 0; 0, 0, t42 * sin(t43), 0, 0; 0, 0, -t42 * cos(t43), 0, 0;];
+	% Computational Cost: add. (4->2), mult. (2->2), div. (0->0), fcn. (2->2), ass. (0->3)
+	t32 = qJ(1) + qJ(2);
+	t31 = qJD(1) + qJD(2);
+	t1 = [0, 0, t31 * cos(t32), 0, 0; 0, 0, t31 * sin(t32), 0, 0; 0, 0, 0, 0, 0;];
 	JgD_rot = t1;
 elseif link_index == 4
 	%% Symbolic Calculation
 	% From jacobigD_rot_4_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:10:13
-	% EndTime: 2020-01-03 12:10:13
+	% StartTime: 2022-01-20 11:44:01
+	% EndTime: 2022-01-20 11:44:01
 	% DurationCPUTime: 0.01s
-	% Computational Cost: add. (5->3), mult. (2->2), div. (0->0), fcn. (2->2), ass. (0->3)
-	t51 = qJ(1) + qJ(2);
-	t50 = qJD(1) + qJD(2);
-	t1 = [0, 0, 0, 0, 0; 0, 0, t50 * sin(t51), 0, 0; 0, 0, -t50 * cos(t51), 0, 0;];
+	% Computational Cost: add. (4->2), mult. (2->2), div. (0->0), fcn. (2->2), ass. (0->3)
+	t37 = qJ(1) + qJ(2);
+	t36 = qJD(1) + qJD(2);
+	t1 = [0, 0, t36 * cos(t37), 0, 0; 0, 0, t36 * sin(t37), 0, 0; 0, 0, 0, 0, 0;];
 	JgD_rot = t1;
 elseif link_index == 5
 	%% Symbolic Calculation
 	% From jacobigD_rot_5_floatb_twist_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-01-03 12:10:13
-	% EndTime: 2020-01-03 12:10:13
+	% StartTime: 2022-01-20 11:44:01
+	% EndTime: 2022-01-20 11:44:01
 	% DurationCPUTime: 0.01s
-	% Computational Cost: add. (10->4), mult. (4->2), div. (0->0), fcn. (4->2), ass. (0->5)
-	t61 = qJD(1) + qJD(2);
-	t62 = qJ(1) + qJ(2);
-	t63 = t61 * cos(t62);
-	t59 = t61 * sin(t62);
-	t1 = [0, 0, 0, 0, 0; 0, 0, t59, 0, t59; 0, 0, -t63, 0, -t63;];
+	% Computational Cost: add. (8->2), mult. (4->2), div. (0->0), fcn. (4->2), ass. (0->5)
+	t46 = qJ(1) + qJ(2);
+	t45 = qJD(1) + qJD(2);
+	t44 = t45 * cos(t46);
+	t43 = t45 * sin(t46);
+	t1 = [0, 0, t44, 0, t44; 0, 0, t43, 0, t43; 0, 0, 0, 0, 0;];
 	JgD_rot = t1;
-else
-	JgD_rot=NaN(3,5);
 end

@@ -8,7 +8,7 @@
 % pkin [8x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d4,theta2,theta3]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % mrSges [6x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -24,8 +24,8 @@
 %   inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:26
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-23 09:13
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -48,8 +48,8 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:25:09
-% EndTime: 2020-01-03 11:25:11
+% StartTime: 2022-01-23 09:12:12
+% EndTime: 2022-01-23 09:12:12
 % DurationCPUTime: 0.34s
 % Computational Cost: add. (261->99), mult. (515->131), div. (0->0), fcn. (391->6), ass. (0->47)
 t58 = -Ifges(5,5) - Ifges(6,5);
@@ -98,7 +98,7 @@ t6 = t36 * t11;
 t3 = -t33 * t50 + t6;
 t2 = -t35 * t40 + t4;
 t1 = -t36 * t40 + t6 + (-pkin(4) - t50) * t33;
-t5 = [0.2e1 * t1 * t14 + 0.2e1 * t2 * t12 + 0.2e1 * t4 * t13 + 0.2e1 * t3 * t15 + 0.2e1 * t25 * t26 + 0.2e1 * t7 * t9 + Ifges(2,3) + Ifges(3,3) + 0.2e1 * (t34 * mrSges(3,1) - t32 * mrSges(3,2)) * pkin(1) + t42 * mrSges(4,3) * t57 + (-0.2e1 * t25 * mrSges(4,1) + (Ifges(4,2) + t46) * t33 + t43) * t33 + m(6) * (t1 ^ 2 + t2 ^ 2 + t7 ^ 2) + m(5) * (t3 ^ 2 + t4 ^ 2 + t17) + m(4) * (t28 * t23 + t25 ^ 2 + t17) + m(3) * (t32 ^ 2 + t34 ^ 2) * pkin(1) ^ 2 + (t10 * t57 + ((Ifges(6,2) + Ifges(5,2)) * t35 + 0.2e1 * (-Ifges(5,4) - Ifges(6,4)) * t36) * t49 + (0.2e1 * t47 * t35 + t58 * t36 + (2 * Ifges(4,4))) * t33 + (Ifges(4,1) + (Ifges(6,1) + Ifges(5,1)) * t30) * t31) * t31; (-t10 - t55) * t33 + (t45 * t36 - t44 * t35 + m(5) * (-t3 * t35 + t36 * t4 - t51) + m(6) * (-t1 * t35 + t2 * t36)) * t31; m(3) + m(4) * t42 + (t41 * t27 + t28) * t56; -t33 * mrSges(4,1) + t26 + t44 * t36 + t45 * t35 + m(6) * (t36 * t1 + t35 * t2) + m(5) * (t36 * t3 + t35 * t4) + m(4) * t25; 0; t41 * t56 + m(4); t3 * mrSges(5,1) + t1 * mrSges(6,1) - t4 * mrSges(5,2) - t2 * mrSges(6,2) - t46 * t33 - t47 * t49 + (m(6) * t1 + t14) * pkin(4) - t43; (t38 * t35 - t52) * t31 - t9; (-mrSges(5,2) - mrSges(6,2)) * t35 + (mrSges(6,1) - t38) * t36; (0.2e1 * mrSges(6,1) + t54) * pkin(4) + t46; t55; -m(6) * t33; 0; 0; m(6);];
+t5 = [0.2e1 * t1 * t14 + 0.2e1 * t2 * t12 + 0.2e1 * t4 * t13 + 0.2e1 * t3 * t15 + 0.2e1 * t25 * t26 + 0.2e1 * t7 * t9 + Ifges(2,3) + Ifges(3,3) + 0.2e1 * (t34 * mrSges(3,1) - t32 * mrSges(3,2)) * pkin(1) + t42 * mrSges(4,3) * t57 + (-0.2e1 * t25 * mrSges(4,1) + (Ifges(4,2) + t46) * t33 + t43) * t33 + m(4) * (t28 * t23 + t25 ^ 2 + t17) + m(6) * (t1 ^ 2 + t2 ^ 2 + t7 ^ 2) + m(5) * (t3 ^ 2 + t4 ^ 2 + t17) + m(3) * (t32 ^ 2 + t34 ^ 2) * pkin(1) ^ 2 + (t10 * t57 + ((Ifges(6,2) + Ifges(5,2)) * t35 + 0.2e1 * (-Ifges(5,4) - Ifges(6,4)) * t36) * t49 + (0.2e1 * t47 * t35 + t58 * t36 + (2 * Ifges(4,4))) * t33 + (Ifges(4,1) + (Ifges(5,1) + Ifges(6,1)) * t30) * t31) * t31; (-t10 - t55) * t33 + (t45 * t36 - t44 * t35 + m(5) * (-t3 * t35 + t36 * t4 - t51) + m(6) * (-t1 * t35 + t2 * t36)) * t31; m(3) + m(4) * t42 + (t41 * t27 + t28) * t56; -t33 * mrSges(4,1) + t26 + t44 * t36 + t45 * t35 + m(6) * (t36 * t1 + t35 * t2) + m(5) * (t36 * t3 + t35 * t4) + m(4) * t25; 0; t41 * t56 + m(4); t3 * mrSges(5,1) + t1 * mrSges(6,1) - t4 * mrSges(5,2) - t2 * mrSges(6,2) - t46 * t33 - t47 * t49 + (m(6) * t1 + t14) * pkin(4) - t43; (t38 * t35 - t52) * t31 - t9; (-mrSges(5,2) - mrSges(6,2)) * t35 + (mrSges(6,1) - t38) * t36; (0.2e1 * mrSges(6,1) + t54) * pkin(4) + t46; t55; -m(6) * t33; 0; 0; m(6);];
 %% Postprocessing: Reshape Output
 % From vec2symmat_5_matlab.m
 res = [t5(1), t5(2), t5(4), t5(7), t5(11); t5(2), t5(3), t5(5), t5(8), t5(12); t5(4), t5(5), t5(6), t5(9), t5(13); t5(7), t5(8), t5(9), t5(10), t5(14); t5(11), t5(12), t5(13), t5(14), t5(15);];

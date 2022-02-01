@@ -13,11 +13,11 @@
 % 
 % Output:
 % Tc_mdh [4x4]
-%   homogenous transformation matrices for body frame of "link_index"
+%   homogenous transformation matrices for the body frame of "link_index"
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-11-04 20:45
-% Revision: de51baf798caa2364afaf24686304d90a3288510 (2020-11-04)
+% Datum: 2022-01-20 11:49
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,8 +36,8 @@ Tc_mdh=NaN(4,4);
 if link_index == 0
 	% From fkine_0_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:45:18
-	% EndTime: 2020-11-04 20:45:18
+	% StartTime: 2022-01-20 11:48:36
+	% EndTime: 2022-01-20 11:48:36
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (0->0), mult. (0->0), div. (0->0), fcn. (0->0), ass. (0->1)
 	t1 = [1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1;];
@@ -45,72 +45,72 @@ if link_index == 0
 elseif link_index == 1
 	% From fkine_1_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:45:18
-	% EndTime: 2020-11-04 20:45:18
+	% StartTime: 2022-01-20 11:48:36
+	% EndTime: 2022-01-20 11:48:36
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (2->2), mult. (0->0), div. (0->0), fcn. (4->2), ass. (0->3)
-	t36 = cos(qJ(1));
-	t35 = sin(qJ(1));
-	t1 = [0, 0, 1, pkin(5) + 0; t35, t36, 0, 0; -t36, t35, 0, 0; 0, 0, 0, 1;];
+	t37 = cos(qJ(1));
+	t36 = sin(qJ(1));
+	t1 = [t37, -t36, 0, 0; t36, t37, 0, 0; 0, 0, 1, pkin(5) + 0; 0, 0, 0, 1;];
 	Tc_mdh = t1;
 elseif link_index == 2
 	% From fkine_2_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:45:18
-	% EndTime: 2020-11-04 20:45:18
+	% StartTime: 2022-01-20 11:48:36
+	% EndTime: 2022-01-20 11:48:36
 	% DurationCPUTime: 0.01s
 	% Computational Cost: add. (9->6), mult. (2->2), div. (0->0), fcn. (6->4), ass. (0->4)
-	t39 = qJ(1) + qJ(2);
-	t38 = cos(t39);
-	t37 = sin(t39);
-	t1 = [0, 0, 1, pkin(6) + pkin(5) + 0; t37, t38, 0, sin(qJ(1)) * pkin(1) + 0; -t38, t37, 0, -cos(qJ(1)) * pkin(1) + 0; 0, 0, 0, 1;];
+	t40 = qJ(1) + qJ(2);
+	t39 = cos(t40);
+	t38 = sin(t40);
+	t1 = [t39, -t38, 0, cos(qJ(1)) * pkin(1) + 0; t38, t39, 0, sin(qJ(1)) * pkin(1) + 0; 0, 0, 1, pkin(6) + pkin(5) + 0; 0, 0, 0, 1;];
 	Tc_mdh = t1;
 elseif link_index == 3
 	% From fkine_3_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:45:18
-	% EndTime: 2020-11-04 20:45:18
-	% DurationCPUTime: 0.05s
-	% Computational Cost: add. (22->13), mult. (10->10), div. (0->0), fcn. (18->6), ass. (0->6)
-	t44 = cos(qJ(3));
-	t43 = sin(qJ(3));
-	t42 = qJ(1) + qJ(2);
-	t41 = cos(t42);
-	t40 = sin(t42);
-	t1 = [t43, t44, 0, pkin(6) + pkin(5) + 0; t40 * t44, -t40 * t43, -t41, t40 * pkin(2) - t41 * pkin(7) + sin(qJ(1)) * pkin(1) + 0; -t41 * t44, t41 * t43, -t40, -t41 * pkin(2) - t40 * pkin(7) - cos(qJ(1)) * pkin(1) + 0; 0, 0, 0, 1;];
+	% StartTime: 2022-01-20 11:48:36
+	% EndTime: 2022-01-20 11:48:36
+	% DurationCPUTime: 0.02s
+	% Computational Cost: add. (21->12), mult. (10->10), div. (0->0), fcn. (18->6), ass. (0->6)
+	t45 = cos(qJ(3));
+	t44 = sin(qJ(3));
+	t43 = qJ(1) + qJ(2);
+	t42 = cos(t43);
+	t41 = sin(t43);
+	t1 = [t42 * t45, -t42 * t44, t41, t42 * pkin(2) + t41 * pkin(7) + cos(qJ(1)) * pkin(1) + 0; t41 * t45, -t41 * t44, -t42, t41 * pkin(2) - t42 * pkin(7) + sin(qJ(1)) * pkin(1) + 0; t44, t45, 0, pkin(6) + pkin(5) + 0; 0, 0, 0, 1;];
 	Tc_mdh = t1;
 elseif link_index == 4
 	% From fkine_4_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:45:18
-	% EndTime: 2020-11-04 20:45:18
-	% DurationCPUTime: 0.02s
-	% Computational Cost: add. (33->17), mult. (13->12), div. (0->0), fcn. (21->8), ass. (0->9)
-	t52 = -pkin(8) - pkin(7);
-	t51 = qJ(1) + qJ(2);
-	t50 = qJ(3) + qJ(4);
+	% StartTime: 2022-01-20 11:48:36
+	% EndTime: 2022-01-20 11:48:36
+	% DurationCPUTime: 0.06s
+	% Computational Cost: add. (32->16), mult. (13->12), div. (0->0), fcn. (21->8), ass. (0->9)
+	t53 = -pkin(8) - pkin(7);
+	t52 = qJ(1) + qJ(2);
+	t51 = qJ(3) + qJ(4);
+	t50 = cos(t52);
 	t49 = cos(t51);
-	t48 = cos(t50);
+	t48 = sin(t52);
 	t47 = sin(t51);
-	t46 = sin(t50);
-	t45 = cos(qJ(3)) * pkin(3) + pkin(2);
-	t1 = [t46, t48, 0, sin(qJ(3)) * pkin(3) + pkin(6) + pkin(5) + 0; t47 * t48, -t47 * t46, -t49, t47 * t45 + t49 * t52 + sin(qJ(1)) * pkin(1) + 0; -t49 * t48, t49 * t46, -t47, -t49 * t45 + t47 * t52 - cos(qJ(1)) * pkin(1) + 0; 0, 0, 0, 1;];
+	t46 = cos(qJ(3)) * pkin(3) + pkin(2);
+	t1 = [t50 * t49, -t50 * t47, t48, t50 * t46 - t48 * t53 + cos(qJ(1)) * pkin(1) + 0; t48 * t49, -t48 * t47, -t50, t48 * t46 + t50 * t53 + sin(qJ(1)) * pkin(1) + 0; t47, t49, 0, sin(qJ(3)) * pkin(3) + pkin(6) + pkin(5) + 0; 0, 0, 0, 1;];
 	Tc_mdh = t1;
 elseif link_index == 5
 	% From fkine_5_floatb_twist_rotmat_matlab.m
 	% OptimizationMode: 2
-	% StartTime: 2020-11-04 20:45:18
-	% EndTime: 2020-11-04 20:45:18
+	% StartTime: 2022-01-20 11:48:36
+	% EndTime: 2022-01-20 11:48:36
 	% DurationCPUTime: 0.02s
-	% Computational Cost: add. (41->19), mult. (16->14), div. (0->0), fcn. (24->8), ass. (0->9)
-	t60 = qJ(1) + qJ(2);
-	t59 = qJ(3) + qJ(4);
-	t58 = -qJ(5) - pkin(8) - pkin(7);
+	% Computational Cost: add. (40->18), mult. (16->14), div. (0->0), fcn. (24->8), ass. (0->9)
+	t61 = qJ(1) + qJ(2);
+	t60 = qJ(3) + qJ(4);
+	t59 = qJ(5) + pkin(7) + pkin(8);
+	t58 = cos(t61);
 	t57 = cos(t60);
-	t56 = cos(t59);
+	t56 = sin(t61);
 	t55 = sin(t60);
-	t54 = sin(t59);
-	t53 = -cos(qJ(3)) * pkin(3) - pkin(4) * t56 - pkin(2);
-	t1 = [t54, t56, 0, pkin(4) * t54 + sin(qJ(3)) * pkin(3) + pkin(6) + pkin(5) + 0; t55 * t56, -t55 * t54, -t57, -t55 * t53 + t57 * t58 + sin(qJ(1)) * pkin(1) + 0; -t57 * t56, t57 * t54, -t55, t53 * t57 + t55 * t58 - cos(qJ(1)) * pkin(1) + 0; 0, 0, 0, 1;];
+	t54 = pkin(4) * t57 + cos(qJ(3)) * pkin(3) + pkin(2);
+	t1 = [t58 * t57, -t58 * t55, t56, t58 * t54 + t59 * t56 + cos(qJ(1)) * pkin(1) + 0; t56 * t57, -t56 * t55, -t58, t56 * t54 - t58 * t59 + sin(qJ(1)) * pkin(1) + 0; t55, t57, 0, pkin(4) * t55 + sin(qJ(3)) * pkin(3) + pkin(6) + pkin(5) + 0; 0, 0, 0, 1;];
 	Tc_mdh = t1;
 end

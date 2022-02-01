@@ -1,4 +1,4 @@
-% Calculate minimal parameter regressor of Coriolis joint torque vector for
+% Calculate Coriolis joint torque vector for
 % S5RPRRR5
 % Use Code from Maple symbolic Code Generation
 % 
@@ -19,8 +19,8 @@
 %   joint torques required to compensate Coriolis and centrifugal load
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:54
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 09:49
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -40,9 +40,9 @@ assert(isreal(MDP) && all(size(MDP) == [21 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_mdp_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:54:11
-% EndTime: 2020-01-03 11:54:15
-% DurationCPUTime: 1.01s
+% StartTime: 2022-01-20 09:49:05
+% EndTime: 2022-01-20 09:49:08
+% DurationCPUTime: 0.90s
 % Computational Cost: add. (893->141), mult. (1721->206), div. (0->0), fcn. (1058->8), ass. (0->93)
 t272 = pkin(7) + pkin(8);
 t211 = sin(qJ(5));
@@ -64,7 +64,7 @@ t269 = t216 * t199 - t213 * t265;
 t191 = t199 * qJD(1);
 t240 = qJD(1) * t265;
 t172 = t213 * t191 + t216 * t240;
-t233 = t206 * t272 + t172;
+t233 = t272 * t206 + t172;
 t152 = t215 * qJD(2) - t233 * t212;
 t268 = t212 * MDP(13) + t215 * MDP(14);
 t153 = t212 * qJD(2) + t233 * t215;
@@ -86,8 +86,8 @@ t156 = t201 * t206 - t171;
 t230 = qJD(3) * t240;
 t248 = qJD(3) * t191;
 t169 = t213 * t248 + t216 * t230;
-t245 = t212 * qJD(4);
-t239 = pkin(4) * t245;
+t247 = qJD(4) * t212;
+t239 = pkin(4) * t247;
 t157 = t206 * t239 + t169;
 t183 = -t254 + t258;
 t160 = t205 * t183;
@@ -95,15 +95,15 @@ t252 = -t156 * t160 + t157 * t184;
 t161 = t205 * t184;
 t251 = t156 * t161 + t157 * t183;
 t163 = -t171 - t264;
-t243 = t215 * qJD(4);
-t250 = t163 * t243 + t169 * t212;
+t246 = qJD(4) * t215;
+t250 = t163 * t246 + t169 * t212;
 t217 = qJD(4) ^ 2;
 t242 = t217 * MDP(11);
 t241 = pkin(4) * t206 * t212;
 t238 = t206 * t258;
 t237 = t206 * t254;
 t236 = qJD(4) * t272;
-t235 = t206 * t243;
+t235 = t206 * t246;
 t149 = qJD(4) * pkin(4) + t152;
 t234 = -pkin(4) * t205 - t149;
 t232 = qJD(4) * t262;
@@ -123,7 +123,7 @@ t176 = -t237 + t238;
 t220 = t178 * t176 * MDP(15) + (-t176 ^ 2 + t178 ^ 2) * MDP(16) + (t176 * t205 + t150) * MDP(17);
 t151 = t161 * t206;
 t219 = (-t150 * t183 - t184 * t151 + t160 * t176 - t178 * t161) * MDP(16) + (t150 * t184 - t178 * t160) * MDP(15) - 0.2e1 * t206 * qJD(4) * t270 + 0.2e1 * t235 * t271 + t217 * t215 * MDP(10) + (-t160 * MDP(17) - t161 * MDP(18)) * t205;
-t218 = t156 * t176 + (t153 * t267 - t138) * t211;
+t218 = t156 * t176 + (t267 * t153 - t138) * t211;
 t203 = t215 * pkin(8);
 t196 = t215 * pkin(7) + t203;
 t195 = t272 * t212;
@@ -133,7 +133,7 @@ t170 = t179 - t263;
 t167 = t175 + t239;
 t166 = t215 * t180 + t203;
 t165 = t262 * t212;
-t158 = t163 * t245;
+t158 = t163 * t247;
 t145 = -t212 * t174 + t215 * t232;
 t144 = t215 * t174 + t212 * t232;
 t1 = [(-t169 - t259) * MDP(6) + (-t174 * t206 - t168) * MDP(7) + t158 * MDP(13) + t250 * MDP(14) + (t167 * t176 + t170 * t151 + (-t211 * t144 + t214 * t145 + (-t165 * t211 - t166 * t214) * qJD(5)) * t205 + t251) * MDP(20) + (t167 * t178 + t170 * t150 - (t214 * t144 + t211 * t145 + (t165 * t214 - t166 * t211) * qJD(5)) * t205 + t252) * MDP(21) + ((-t169 - t224) * MDP(13) + MDP(14) * t223) * t215 + (MDP(13) * t223 + t224 * MDP(14) - t242) * t212 + t219; -t268 * t217 + (-MDP(20) * t161 + MDP(21) * t160) * t205; (-t169 + t260) * MDP(6) + (t171 * t206 - t168) * MDP(7) - t212 * t242 + (t158 + t212 * t226 + (-t169 - t227) * t215) * MDP(13) + (t227 * t212 + t215 * t226 + t250) * MDP(14) + (t201 * t151 + (t211 * t185 - t214 * t186 + (t195 * t211 - t196 * t214) * qJD(5)) * t205 + t229 * t176 + t184 * t261 + t251) * MDP(20) + (t201 * t150 - (-t214 * t185 - t211 * t186 + (-t195 * t214 - t196 * t211) * qJD(5)) * t205 + t229 * t178 - t183 * t261 + t252) * MDP(21) + t219; (-t176 * t241 - (-t211 * t152 - t256) * t205 + (t234 * t211 - t256) * qJD(5) + t221) * MDP(20) + (-t178 * t241 + (t234 * qJD(5) + t152 * t205 - t137) * t214 + t218) * MDP(21) + t220 + t268 * (-t163 * t206 - t168) + (-t215 * t271 + t270) * t206 ^ 2; (t221 + t267 * (-t211 * t149 - t256)) * MDP(20) + ((-t267 * t149 - t137) * t214 + t218) * MDP(21) + t220;];

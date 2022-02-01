@@ -12,12 +12,12 @@
 %   pkin=[a2,a3,a4,a5,d1,d4,d5,theta2,theta3]';
 % 
 % Output:
-% tauc_reg [5x22]
+% tauc_reg [5x21]
 %   minimal parameter regressor of coriolis joint torque vector
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:29
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-23 09:15
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [9 1]), ...
 %% Symbolic Calculation
 % From coriolisvec_joint_fixb_regressor_minpar_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:28:15
-% EndTime: 2020-01-03 11:28:21
-% DurationCPUTime: 0.64s
+% StartTime: 2022-01-23 09:14:36
+% EndTime: 2022-01-23 09:14:37
+% DurationCPUTime: 0.52s
 % Computational Cost: add. (791->116), mult. (2027->173), div. (0->0), fcn. (1564->8), ass. (0->81)
 t64 = cos(pkin(9));
 t69 = cos(qJ(4));
@@ -120,5 +120,5 @@ t14 = t45 * pkin(7) + t71;
 t13 = -t46 * pkin(7) + t73;
 t12 = t24 * qJD(5) - t66 * t45 + t68 * t46;
 t7 = t12 * t61;
-t1 = [0, 0, 0, 0, 0, 0, 0.2e1 * qJD(3) * t84, (t56 * t84 - t81) * qJD(3), t39 * t51 - t44 * t45, -t39 * t77 - t51 * t40 + t45 * t43 - t44 * t46, -t90, -t41, 0, t71 * qJD(4) + t52 * t40 + t42 * t46, -t73 * qJD(4) + t52 * t39 - t42 * t45, t11 * t80 + t4 * t24, -t11 * t18 - t12 * t80 - t24 * t5 + t4 * t78, t100, -t7, 0, t26 * t5 + t22 * t12 + (-t66 * t13 + t68 * t14 + (-t15 * t66 - t16 * t68) * qJD(5)) * t61 + (t46 * t18 - t40 * t78) * pkin(4), t26 * t4 + t22 * t11 - (t68 * t13 + t66 * t14 + (t15 * t68 - t16 * t66) * qJD(5)) * t61 + (t40 * t24 + t46 * t80) * pkin(4); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t41, t90, 0, 0, 0, 0, 0, -t7, -t100; 0, 0, 0, 0, 0, 0, -t93 * qJD(1) ^ 2, t81 * qJD(1), 0, 0, 0, 0, 0, 0.2e1 * t44 * qJD(4), t54 + (-t43 - t88) * qJD(4), 0, 0, 0, 0, 0, t5 + t99, t4 - t98; 0, 0, 0, 0, 0, 0, 0, 0, t44 * t43, -t43 ^ 2 + t44 ^ 2, t54 + (t43 - t88) * qJD(4), 0, 0, -t42 * t44 - t74, t42 * t43 + t105, t111, t109, t112, t110, 0, -t18 * t102 - (-t66 * t9 - t95) * t61 + (t87 * t66 - t95) * qJD(5) + t103, -t80 * t102 + (t87 * qJD(5) + t9 * t61 - t2) * t68 + t108; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t111, t109, t112, t110, 0, t104 * (-t66 * t8 - t95) + t103, (-t104 * t8 - t2) * t68 + t108;];
+t1 = [0, 0, 0, 0, 0, 0.2e1 * qJD(3) * t84, (t56 * t84 - t81) * qJD(3), t39 * t51 - t44 * t45, -t39 * t77 - t51 * t40 + t45 * t43 - t44 * t46, -t90, -t41, 0, t71 * qJD(4) + t52 * t40 + t42 * t46, -t73 * qJD(4) + t52 * t39 - t42 * t45, t11 * t80 + t4 * t24, -t11 * t18 - t12 * t80 - t24 * t5 + t4 * t78, t100, -t7, 0, t26 * t5 + t22 * t12 + (-t66 * t13 + t68 * t14 + (-t15 * t66 - t16 * t68) * qJD(5)) * t61 + (t46 * t18 - t40 * t78) * pkin(4), t26 * t4 + t22 * t11 - (t68 * t13 + t66 * t14 + (t15 * t68 - t16 * t66) * qJD(5)) * t61 + (t40 * t24 + t46 * t80) * pkin(4); 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -t41, t90, 0, 0, 0, 0, 0, -t7, -t100; 0, 0, 0, 0, 0, -t93 * qJD(1) ^ 2, t81 * qJD(1), 0, 0, 0, 0, 0, 0.2e1 * t44 * qJD(4), t54 + (-t43 - t88) * qJD(4), 0, 0, 0, 0, 0, t5 + t99, t4 - t98; 0, 0, 0, 0, 0, 0, 0, t44 * t43, -t43 ^ 2 + t44 ^ 2, t54 + (t43 - t88) * qJD(4), 0, 0, -t42 * t44 - t74, t42 * t43 + t105, t111, t109, t112, t110, 0, -t18 * t102 - (-t66 * t9 - t95) * t61 + (t87 * t66 - t95) * qJD(5) + t103, -t80 * t102 + (t87 * qJD(5) + t9 * t61 - t2) * t68 + t108; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, t111, t109, t112, t110, 0, t104 * (-t66 * t8 - t95) + t103, (-t104 * t8 - t2) * t68 + t108;];
 tauc_reg = t1;

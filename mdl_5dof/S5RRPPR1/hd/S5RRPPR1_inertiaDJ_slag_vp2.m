@@ -10,7 +10,7 @@
 % pkin [9x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d2,d5,theta3,theta4]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % mrSges [6x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -26,8 +26,8 @@
 %   time derivative of inertia matrix
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:56
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 09:52
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From inertia_joint_joint_time_derivative_floatb_twist_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:55:44
-% EndTime: 2020-01-03 11:55:46
-% DurationCPUTime: 0.41s
+% StartTime: 2022-01-20 09:51:19
+% EndTime: 2022-01-20 09:51:21
+% DurationCPUTime: 0.42s
 % Computational Cost: add. (677->106), mult. (1536->162), div. (0->0), fcn. (1204->8), ass. (0->75)
 t41 = sin(pkin(9));
 t43 = cos(pkin(9));
@@ -109,10 +109,10 @@ t15 = (-pkin(7) - t19) * t41;
 t38 = t43 * pkin(7);
 t16 = t43 * t19 + t38;
 t3 = t47 * t15 - t45 * t16;
-t1 = qJD(5) * t3 + t18 * t28;
+t1 = t3 * qJD(5) + t28 * t18;
 t64 = t1 * t73;
 t4 = t45 * t15 + t47 * t16;
-t2 = -qJD(5) * t4 - t18 * t29;
+t2 = -t4 * qJD(5) - t29 * t18;
 t63 = t2 * t72;
 t62 = t3 * t75;
 t61 = t4 * t74;
@@ -128,9 +128,9 @@ t26 = (-pkin(7) - t36) * t41;
 t27 = t43 * t36 + t38;
 t11 = t47 * t26 - t45 * t27;
 t12 = t45 * t26 + t47 * t27;
-t6 = -qJD(4) * t29 - qJD(5) * t12;
-t5 = qJD(4) * t28 + qJD(5) * t11;
-t7 = [t55 - 0.2e1 * t50 - 0.2e1 * t51 + (t18 * t54 + t20 * t49) * t84 + 0.2e1 * m(4) * (-t20 * t52 + t21 * t68) + (t4 * t1 + t17 * t20 + t3 * t2) * t83 + 0.2e1 * t59 - 0.2e1 * t61 + 0.2e1 * t64 - 0.2e1 * t63 + 0.2e1 * t60 + 0.2e1 * t77 + 0.2e1 * t81 + 0.2e1 * t78 - 0.2e1 * t79 - 0.2e1 * t76 - 0.2e1 * t62; t55 - t50 - t51 + m(5) * (qJD(4) * t54 + t18 * t53 + t20 * t56) + m(4) * (-t44 * t20 + t21 * t42) * pkin(2) + m(6) * (t12 * t1 + t11 * t2 + t30 * t20 + t6 * t3 + t5 * t4) + t59 - t12 * t74 - t61 + t5 * t73 + t64 - t6 * t72 - t63 + t60 + t71 + t77 + t81 + t78 - t79 - t76 - t11 * t75 - t62 + t86; 0.2e1 * t71 + (t11 * t6 + t12 * t5) * t83 + t53 * t84 * qJD(4) + t55 + 0.2e1 * t86 + 0.2e1 * (-t11 * t24 - t12 * t25 + t5 * t28 - t6 * t29) * mrSges(6,3); m(6) * (t1 * t29 + t2 * t28 + t4 * t24 - t3 * t25); m(6) * (-t11 * t25 + t12 * t24 + t6 * t28 + t5 * t29); (t87 - t88) * t83; 0.2e1 * (m(6) / 0.2e1 + m(5) / 0.2e1) * t20 + t13; t13; 0; 0; t2 * mrSges(6,1) - t1 * mrSges(6,2) + t69; t6 * mrSges(6,1) - t5 * mrSges(6,2) + t69; -t13; 0; 0;];
+t6 = -t29 * qJD(4) - t12 * qJD(5);
+t5 = t28 * qJD(4) + t11 * qJD(5);
+t7 = [t55 - 0.2e1 * t50 - 0.2e1 * t51 + (t18 * t54 + t49 * t20) * t84 + 0.2e1 * m(4) * (-t52 * t20 + t68 * t21) + (t4 * t1 + t17 * t20 + t3 * t2) * t83 + 0.2e1 * t77 + 0.2e1 * t78 - 0.2e1 * t79 - 0.2e1 * t76 + 0.2e1 * t81 + 0.2e1 * t60 + 0.2e1 * t59 - 0.2e1 * t62 - 0.2e1 * t61 + 0.2e1 * t64 - 0.2e1 * t63; t55 - t50 - t51 + m(5) * (qJD(4) * t54 + t18 * t53 + t56 * t20) + m(4) * (-t44 * t20 + t21 * t42) * pkin(2) + m(6) * (t12 * t1 + t11 * t2 + t30 * t20 + t6 * t3 + t5 * t4) + t71 + t77 + t78 - t79 - t76 + t81 + t60 + t59 - t11 * t75 - t62 - t12 * t74 - t61 + t5 * t73 + t64 - t6 * t72 - t63 + t86; 0.2e1 * t71 + (t11 * t6 + t12 * t5) * t83 + t53 * t84 * qJD(4) + t55 + 0.2e1 * t86 + 0.2e1 * (-t11 * t24 - t12 * t25 + t5 * t28 - t6 * t29) * mrSges(6,3); m(6) * (t1 * t29 + t2 * t28 + t4 * t24 - t3 * t25); m(6) * (-t11 * t25 + t12 * t24 + t6 * t28 + t5 * t29); (t87 - t88) * t83; 0.2e1 * (m(6) / 0.2e1 + m(5) / 0.2e1) * t20 + t13; t13; 0; 0; t2 * mrSges(6,1) - t1 * mrSges(6,2) + t69; t6 * mrSges(6,1) - t5 * mrSges(6,2) + t69; -t13; 0; 0;];
 %% Postprocessing: Reshape Output
 % From vec2symmat_5_matlab.m
 res = [t7(1), t7(2), t7(4), t7(7), t7(11); t7(2), t7(3), t7(5), t7(8), t7(12); t7(4), t7(5), t7(6), t7(9), t7(13); t7(7), t7(8), t7(9), t7(10), t7(14); t7(11), t7(12), t7(13), t7(14), t7(15);];

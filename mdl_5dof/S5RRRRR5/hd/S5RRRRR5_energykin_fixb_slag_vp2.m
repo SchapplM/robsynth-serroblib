@@ -10,7 +10,7 @@
 % pkin [9x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d2,d3,d4,d5]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % mrSges [6x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -26,8 +26,8 @@
 %   kinetic energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 12:13
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 12:02
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,15 +52,15 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From energy_kinetic_fixb_linkframe_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 12:13:01
-% EndTime: 2020-01-03 12:13:01
-% DurationCPUTime: 0.16s
+% StartTime: 2022-01-20 12:01:37
+% EndTime: 2022-01-20 12:01:38
+% DurationCPUTime: 0.24s
 % Computational Cost: add. (291->56), mult. (357->99), div. (0->0), fcn. (174->8), ass. (0->29)
 t82 = qJD(1) + qJD(2);
 t80 = qJD(3) + t82;
 t97 = t80 / 0.2e1;
 t90 = cos(qJ(2));
-t95 = qJD(1) * pkin(1);
+t95 = pkin(1) * qJD(1);
 t77 = t82 * pkin(2) + t90 * t95;
 t85 = sin(qJ(3));
 t89 = cos(qJ(3));

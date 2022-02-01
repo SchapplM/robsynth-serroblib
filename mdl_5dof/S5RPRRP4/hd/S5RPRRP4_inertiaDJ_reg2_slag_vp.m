@@ -17,8 +17,8 @@
 %   (only lower left triangular matrix (including diagonal) due to symmetry
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:51
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-23 09:33
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -36,9 +36,9 @@ assert(isreal(pkin) && all(size(pkin) == [8 1]), ...
 %% Symbolic Calculation
 % From inertiaD_joint_joint_fixb_regressor_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:50:25
-% EndTime: 2020-01-03 11:50:28
-% DurationCPUTime: 0.91s
+% StartTime: 2022-01-23 09:32:52
+% EndTime: 2022-01-23 09:32:55
+% DurationCPUTime: 0.90s
 % Computational Cost: add. (1332->132), mult. (3266->231), div. (0->0), fcn. (2890->6), ass. (0->92)
 t71 = sin(qJ(4));
 t72 = sin(qJ(3));
@@ -50,7 +50,7 @@ t40 = t49 * t69;
 t111 = t69 * t72;
 t70 = cos(pkin(8));
 t57 = t74 * t70 * qJ(2);
-t84 = t70 * pkin(2) + pkin(1);
+t84 = pkin(2) * t70 + pkin(1);
 t78 = -t69 * pkin(6) - t84;
 t38 = t72 * t78 + t57;
 t35 = -pkin(7) * t111 + t38;
@@ -105,7 +105,7 @@ t10 = -t71 * t35 + t26;
 t82 = t69 * t70 * t115;
 t67 = t69 ^ 2;
 t81 = t67 * t72 * t102;
-t75 = -t85 + (-t57 + ((pkin(6) + pkin(7)) * t69 + t84) * t72) * qJD(3);
+t75 = -t85 + (-t57 + ((pkin(7) + pkin(6)) * t69 + t84) * t72) * qJD(3);
 t76 = (-t90 - t95) * qJD(3) + t106;
 t4 = -qJD(4) * t26 + t35 * t101 - t71 * t75 - t73 * t76;
 t1 = t23 * qJ(5) + t40 * qJD(5) + t4;

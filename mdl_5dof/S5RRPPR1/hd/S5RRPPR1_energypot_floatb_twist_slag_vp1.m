@@ -12,7 +12,7 @@
 % pkin [9x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d2,d5,theta3,theta4]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % rSges [6x3]
 %   center of mass of all robot links (in body frames)
@@ -24,8 +24,8 @@
 %   Potential energy
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:56
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 09:52
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -50,34 +50,34 @@ assert(isreal(rSges) && all(size(rSges) == [6,3]), ...
 %% Symbolic Calculation
 % From energy_potential_floatb_twist_worldframe_par1_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:55:40
-% EndTime: 2020-01-03 11:55:40
+% StartTime: 2022-01-20 09:51:15
+% EndTime: 2022-01-20 09:51:16
 % DurationCPUTime: 0.22s
 % Computational Cost: add. (154->64), mult. (85->60), div. (0->0), fcn. (61->10), ass. (0->26)
-t29 = -rSges(6,3) - pkin(7) - qJ(4);
-t28 = -rSges(5,3) - qJ(4);
-t12 = qJ(1) + qJ(2);
-t27 = pkin(5) + r_base(1);
-t16 = sin(qJ(1));
-t26 = t16 * pkin(1) + r_base(2);
-t25 = pkin(6) + t27;
-t8 = sin(t12);
-t24 = pkin(2) * t8 + t26;
-t17 = cos(qJ(1));
-t23 = -pkin(1) * t17 + r_base(3);
-t22 = qJ(3) + t25;
-t14 = cos(pkin(9));
-t11 = pkin(9) + qJ(5);
-t5 = sin(t11);
-t6 = cos(t11);
-t21 = rSges(6,1) * t6 - rSges(6,2) * t5 + pkin(4) * t14 + pkin(3);
-t13 = sin(pkin(9));
-t20 = rSges(5,1) * t14 - rSges(5,2) * t13 + pkin(3);
-t9 = cos(t12);
-t19 = -pkin(2) * t9 + t23;
-t18 = g(2) * t24 + g(3) * t19;
-t7 = pkin(8) + t12;
-t2 = cos(t7);
-t1 = sin(t7);
-t3 = -m(1) * (g(1) * (r_base(1) + rSges(1,1)) + g(2) * (r_base(2) + rSges(1,2)) + g(3) * (r_base(3) + rSges(1,3))) - m(2) * (g(1) * (rSges(2,3) + t27) + g(2) * (t16 * rSges(2,1) + rSges(2,2) * t17 + r_base(2)) + g(3) * (-rSges(2,1) * t17 + t16 * rSges(2,2) + r_base(3))) - m(3) * (g(1) * (rSges(3,3) + t25) + g(2) * (rSges(3,1) * t8 + rSges(3,2) * t9 + t26) + g(3) * (-t9 * rSges(3,1) + t8 * rSges(3,2) + t23)) - m(4) * (g(1) * (rSges(4,3) + t22) + g(2) * (rSges(4,1) * t1 + rSges(4,2) * t2 + t24) + g(3) * (-t2 * rSges(4,1) + t1 * rSges(4,2) + t19)) - m(5) * (g(1) * (rSges(5,1) * t13 + rSges(5,2) * t14 + t22) + (g(2) * t28 - g(3) * t20) * t2 + (g(2) * t20 + g(3) * t28) * t1 + t18) - m(6) * (g(1) * (rSges(6,1) * t5 + rSges(6,2) * t6 + pkin(4) * t13 + t22) + (g(2) * t29 - g(3) * t21) * t2 + (g(2) * t21 + g(3) * t29) * t1 + t18);
+t31 = rSges(6,3) + pkin(7) + qJ(4);
+t30 = rSges(5,3) + qJ(4);
+t14 = qJ(1) + qJ(2);
+t29 = pkin(5) + r_base(3);
+t18 = sin(qJ(1));
+t28 = t18 * pkin(1) + r_base(2);
+t19 = cos(qJ(1));
+t27 = t19 * pkin(1) + r_base(1);
+t26 = pkin(6) + t29;
+t9 = sin(t14);
+t25 = pkin(2) * t9 + t28;
+t10 = cos(t14);
+t24 = pkin(2) * t10 + t27;
+t23 = qJ(3) + t26;
+t16 = cos(pkin(9));
+t13 = pkin(9) + qJ(5);
+t6 = sin(t13);
+t7 = cos(t13);
+t22 = rSges(6,1) * t7 - rSges(6,2) * t6 + t16 * pkin(4) + pkin(3);
+t15 = sin(pkin(9));
+t21 = rSges(5,1) * t16 - rSges(5,2) * t15 + pkin(3);
+t20 = g(1) * t24 + g(2) * t25;
+t8 = pkin(8) + t14;
+t2 = cos(t8);
+t1 = sin(t8);
+t3 = -m(1) * (g(1) * (r_base(1) + rSges(1,1)) + g(2) * (r_base(2) + rSges(1,2)) + g(3) * (r_base(3) + rSges(1,3))) - m(2) * (g(1) * (t19 * rSges(2,1) - t18 * rSges(2,2) + r_base(1)) + g(2) * (t18 * rSges(2,1) + t19 * rSges(2,2) + r_base(2)) + g(3) * (rSges(2,3) + t29)) - m(3) * (g(1) * (t10 * rSges(3,1) - t9 * rSges(3,2) + t27) + g(2) * (t9 * rSges(3,1) + t10 * rSges(3,2) + t28) + g(3) * (rSges(3,3) + t26)) - m(4) * (g(1) * (t2 * rSges(4,1) - t1 * rSges(4,2) + t24) + g(2) * (t1 * rSges(4,1) + t2 * rSges(4,2) + t25) + g(3) * (rSges(4,3) + t23)) - m(5) * (g(3) * (t15 * rSges(5,1) + t16 * rSges(5,2) + t23) + (g(1) * t21 - g(2) * t30) * t2 + (g(1) * t30 + g(2) * t21) * t1 + t20) - m(6) * (g(3) * (t6 * rSges(6,1) + t7 * rSges(6,2) + t15 * pkin(4) + t23) + (g(1) * t22 - g(2) * t31) * t2 + (g(1) * t31 + g(2) * t22) * t1 + t20);
 U = t3;

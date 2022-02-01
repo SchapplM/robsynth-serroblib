@@ -10,7 +10,7 @@
 % pkin [9x1]
 %   kinematic parameters (e.g. lengths of the links)
 %   pkin=[a2,a3,a4,a5,d1,d3,d4,d5,theta2]';
-% m_mdh [6x1]
+% m [6x1]
 %   mass of all robot links (including the base)
 % mrSges [6x3]
 %  first moment of all robot links (mass times center of mass in body frames)
@@ -26,8 +26,8 @@
 %   matrix of coriolis and centrifugal joint torques
 
 % Quelle: HybrDyn-Toolbox
-% Datum: 2020-01-03 11:54
-% Revision: 9bd3e9fa678258af3b32f1bcc8622e39ff85504d (2019-12-30)
+% Datum: 2022-01-20 09:49
+% Revision: fd3771346c4aea32fdeb66112c511235427c26a7 (2022-01-20)
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
 
@@ -52,9 +52,9 @@ assert(isreal(Ifges) && all(size(Ifges) == [6 6]), ...
 %% Symbolic Calculation
 % From coriolismat_joint_fixb_par2_matlab.m
 % OptimizationMode: 2
-% StartTime: 2020-01-03 11:53:52
-% EndTime: 2020-01-03 11:53:55
-% DurationCPUTime: 1.40s
+% StartTime: 2022-01-20 09:48:38
+% EndTime: 2022-01-20 09:48:42
+% DurationCPUTime: 1.37s
 % Computational Cost: add. (5014->127), mult. (9606->177), div. (0->0), fcn. (8868->8), ass. (0->93)
 t121 = cos(qJ(4));
 t229 = t121 ^ 2;
@@ -139,14 +139,14 @@ t9 = m(6) * t104 + t163 - t188 + t211;
 t132 = -t2 * qJD(1) - t9 * qJD(3);
 t12 = t129 + t163;
 t124 = t145 + t129;
-t4 = t124 - t208;
-t131 = -t4 * qJD(1) - t12 * qJD(3);
+t3 = t124 - t208;
+t131 = -t3 * qJD(1) - t12 * qJD(3);
 t128 = Ifges(5,5) * t121 - Ifges(5,6) * t119 + t169 + (t100 * t156 - t157 * t99) * mrSges(6,3);
 t103 = (mrSges(6,1) * t190 + mrSges(6,2) * t191) * pkin(4);
 t127 = t103 * qJD(4);
 t98 = t103 * qJD(5);
 t7 = t24 * qJD(3) * t199 / 0.4e1;
-t3 = t124 + t208;
+t4 = t124 + t208;
 t1 = t125 + t145 + (-pkin(3) / 0.2e1 + t84 / 0.2e1) * t106 + t211 + t227;
-t11 = [qJD(3) * t6 + qJD(4) * t5 + qJD(5) * t8, t7, t1 * qJD(4) + t3 * qJD(5) - t135 + (0.2e1 * (t113 * t88 + t143 * t49 - t50 * t75) * t198 + m(5) * (-pkin(3) * t88 + pkin(7) * t147) + t201) * qJD(3), t1 * qJD(3) + ((t144 * t190 + t191 * t39) * t197 + t128 + t204 * t85 + t225) * qJD(4) + t224 + t136, t3 * qJD(3) + t10 * qJD(4) + t134 + t224; t7, 0, t158 / 0.2e1, -t214 + (-t106 - t66 + (t100 * t157 + t99 * t156) * t199 / 0.2e1) * qJD(4), -qJD(4) * t66 - t214; t2 * qJD(4) + t4 * qJD(5) + t135, -t158 / 0.2e1, qJD(4) * t9 + qJD(5) * t12, ((t143 * t190 + t191 * t75) * t197 + t128 + t204 * pkin(7) + t226) * qJD(4) + t222 - t132, t17 * qJD(4) - t131 + t222; -t2 * qJD(3) - t136, 0, t132, -t98, -t98 - t127; -t4 * qJD(3) - t134, 0, t131, t127, 0;];
+t11 = [qJD(3) * t6 + qJD(4) * t5 + qJD(5) * t8, t7, t1 * qJD(4) + t4 * qJD(5) - t135 + (0.2e1 * (t113 * t88 + t143 * t49 - t50 * t75) * t198 + m(5) * (-pkin(3) * t88 + pkin(7) * t147) + t201) * qJD(3), t1 * qJD(3) + ((t144 * t190 + t191 * t39) * t197 + t128 + t204 * t85 + t225) * qJD(4) + t224 + t136, t4 * qJD(3) + t10 * qJD(4) + t134 + t224; t7, 0, t158 / 0.2e1, -t214 + (-t106 - t66 + (t100 * t157 + t99 * t156) * t199 / 0.2e1) * qJD(4), -qJD(4) * t66 - t214; t2 * qJD(4) + t3 * qJD(5) + t135, -t158 / 0.2e1, qJD(4) * t9 + qJD(5) * t12, ((t143 * t190 + t191 * t75) * t197 + t128 + t204 * pkin(7) + t226) * qJD(4) + t222 - t132, t17 * qJD(4) - t131 + t222; -t2 * qJD(3) - t136, 0, t132, -t98, -t98 - t127; -t3 * qJD(3) - t134, 0, t131, t127, 0;];
 Cq = t11;
