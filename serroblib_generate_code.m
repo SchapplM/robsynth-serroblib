@@ -187,7 +187,13 @@ for i = 1:length(Names)
     % Definitionen des Roboters zurückkopieren. Damit lassen sich später
     % leichter Roboterspezifische Funktionen neu generieren, ohne die Toolbox
     % neu durchlaufen zu lassen
-    copyfile( fullfile(mrp, 'robot_codegen_definitions', 'robot_env.sh'), [mapleinputfile, '.sh']);
+    if exist([mapleinputfile, '.sh'], 'file') && mode == 4
+      % Datei nicht kopieren. Bei reiner Generierung der Kinematik fehlt
+      % die Information zum MPV.
+    else
+      copyfile( fullfile(mrp, 'robot_codegen_definitions', 'robot_env.sh'), ...
+        [mapleinputfile, '.sh']);
+    end
   end
 end
 end
