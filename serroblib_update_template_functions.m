@@ -7,11 +7,14 @@
 %   Falls leer gelassen: Alle.
 % verbosity
 %   Grad der Textausgabe (0=aus, 1=Fortschritt)
+% ignore_mex
+%   Bei true werden die mex-Dateien ignoriert und nur M-Funktionen
+%   aktualisiert. Standard: false
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2021-04
 % (C) Institut für Mechatronische Systeme, Leibniz Universität Hannover
 
-function serroblib_update_template_functions(Names, verbosity)
+function serroblib_update_template_functions(Names, verbosity, ignore_mex)
 orig_state = warning('off', 'all'); % Warnungen temporär unterdrücken
 %% Prüfe Eingabe
 repopath=fileparts(which('serroblib_path_init.m'));
@@ -23,6 +26,9 @@ if nargin < 1 || isempty(Names) % keine Eingabe einer Liste. Nehme alle.
 end
 if nargin < 2
   verbosity = 0;
+end
+if nargin < 3
+  ignore_mex = false;
 end
 %% Bestimme aktuelle Version der jeweiligen Vorlagen-Funktion
 filelist = {'robot_invkin_eulangresidual.m.template', 'robot_invkin_traj.m.template'};
@@ -59,7 +65,11 @@ for j = 1:length(Names)
   end
   mexfilelist = dir(fullfile(tpl_dir, '*_mex.mex*'));
   mfilelist = dir(fullfile(tpl_dir, '*.m'));
-  filelist = [mfilelist;mexfilelist; ];
+  if ignore_mex
+    filelist = mfilelist;
+  else
+    filelist = [mfilelist;mexfilelist];
+  end
   if isempty(filelist)
     % Nichts zu prüfen. Es gibt keine Dateien
     continue
