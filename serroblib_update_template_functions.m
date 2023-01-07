@@ -126,6 +126,13 @@ for j = 1:length(Names)
           files_found.robot_invkin_traj = true;
         end
         try % Führe die Funktion aus
+          if RS_mex_status == 1 && RS.NJ == 1
+            % Sonderfall Kinematik mit einem Gelenk. Fehler bzgl.
+            % Indizierung mit leeren Vektor:
+            % all(abs(Phi_neu(n_Phi_t+1:end))
+            % Korrektur lohnt sich nicht.
+            continue
+          end
           [~, ~, ~, ~, ~, Stats] = ...
             RS.invkin2_traj(zeros(2,6), zeros(2,6), zeros(2,6), [0;1], zeros(RS.NQJ,1));
           % Prüfe, ob Versionsausgabe existiert, und ob der Wert passt
