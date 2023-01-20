@@ -34,6 +34,7 @@ maplerepo_path.m
 *invdynJ_fixb_regmin_slag_vp_traj.m
 *jacobi*_[0-9]*_*.m
 tpl
+tpl_V*
 *.orig
 *.asv
 *.lock
