@@ -95,10 +95,15 @@ for kk = 1:N % über alle Gelenk-FG
   % csv-Zeile. Index ist Null-Basiert. Aus diesem Index (Bit_...) wird dann
   % das Bit-Array erzeugt.
   c=c+1; Bit_type   = uint16(find(strcmp(csvline{c},descr_type  ))-1);
+  assert(~isempty(Bit_type), sprintf('%s: Falscher Wert für Typ: %s', csvline{1}, csvline{c}));
   c=c+1; Bit_beta   = uint16(find(strcmp(csvline{c},descr_beta  ))-1);
+  assert(~isempty(Bit_beta), sprintf('%s: Falscher Wert für beta: %s', csvline{1}, csvline{c}));
   c=c+1; Bit_b      = uint16(find(strcmp(csvline{c},descr_b     ))-1);
+  assert(~isempty(Bit_b), sprintf('%s: Falscher Wert für b: %s', csvline{1}, csvline{c}));
   c=c+1; Bit_alpha  = uint16(find(strcmp(csvline{c},descr_alpha ))-1); 
+  assert(~isempty(Bit_alpha), sprintf('%s: Falscher Wert für alpha: %s', csvline{1}, csvline{c}));
   c=c+1; Bit_a      = uint16(find(strcmp(csvline{c},descr_a     ))-1);
+  assert(~isempty(Bit_a), sprintf('%s: Falscher Wert für a: %s', csvline{1}, csvline{c}));
   c=c+1;
   if Bit_type == 1
     % Schubgelenk: theta ist Parameter
