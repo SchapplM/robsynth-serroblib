@@ -95,15 +95,20 @@ for kk = 1:N % über alle Gelenk-FG
   % csv-Zeile. Index ist Null-Basiert. Aus diesem Index (Bit_...) wird dann
   % das Bit-Array erzeugt.
   c=c+1; Bit_type   = uint16(find(strcmp(csvline{c},descr_type  ))-1);
-  assert(~isempty(Bit_type), sprintf('%s: Falscher Wert für Typ: %s', csvline{1}, csvline{c}));
+  assert(~isempty(Bit_type), sprintf(['%s: Falscher Wert für Typ: %s. ', ...
+    'Erwartet: {%s}'], csvline{1}, csvline{c}, disp_array(descr_type,'%s')));
   c=c+1; Bit_beta   = uint16(find(strcmp(csvline{c},descr_beta  ))-1);
-  assert(~isempty(Bit_beta), sprintf('%s: Falscher Wert für beta: %s', csvline{1}, csvline{c}));
+  assert(~isempty(Bit_beta), sprintf(['%s: Falscher Wert für beta: %s. ', ...
+    'Erwartet: {%s}'], csvline{1}, csvline{c}, disp_array(descr_beta,'%s')));
   c=c+1; Bit_b      = uint16(find(strcmp(csvline{c},descr_b     ))-1);
-  assert(~isempty(Bit_b), sprintf('%s: Falscher Wert für b: %s', csvline{1}, csvline{c}));
+  assert(~isempty(Bit_b), sprintf(['%s: Falscher Wert für b: %s. ', ...
+    'Erwartet: {%s}'], csvline{1}, csvline{c}, disp_array(descr_b,'%s')));
   c=c+1; Bit_alpha  = uint16(find(strcmp(csvline{c},descr_alpha ))-1); 
-  assert(~isempty(Bit_alpha), sprintf('%s: Falscher Wert für alpha: %s', csvline{1}, csvline{c}));
+  assert(~isempty(Bit_alpha), sprintf(['%s: Falscher Wert für alpha: %s. ', ...
+    'Erwartet: {%s}'], csvline{1}, csvline{c}, disp_array(descr_alpha,'%s')));
   c=c+1; Bit_a      = uint16(find(strcmp(csvline{c},descr_a     ))-1);
-  assert(~isempty(Bit_a), sprintf('%s: Falscher Wert für a: %s', csvline{1}, csvline{c}));
+  assert(~isempty(Bit_a), sprintf(['%s: Falscher Wert für a: %s. ', ...
+    'Erwartet: {%s}'], csvline{1}, csvline{c}, disp_array(descr_a,'%s')));
   c=c+1;
   if Bit_type == 1
     % Schubgelenk: theta ist Parameter
@@ -112,6 +117,8 @@ for kk = 1:N % über alle Gelenk-FG
     % Drehgelenk: theta ist Gelenkkoordinate. Setze auf 0
     Bit_theta = uint16(0);
   end
+  assert(~isempty(Bit_theta), sprintf(['%s: Falscher Wert für theta: %s. ', ...
+    'Erwartet: {%s}'], csvline{1}, csvline{c}, disp_array(descr_theta,'%s')));
   c=c+1; 
   if Bit_type == 0
     % Drehgelenk, d ist Parameter
@@ -119,8 +126,11 @@ for kk = 1:N % über alle Gelenk-FG
   else
     Bit_d = uint16(0);
   end
+  assert(~isempty(Bit_theta), sprintf(['%s: Falscher Wert für d: %s. ', ...
+    'Erwartet: {%s}'], csvline{1}, csvline{c}, disp_array(descr_d,'%s')));
   c=c+1; Bit_offset = uint16(find(strcmp(csvline{c},descr_offset))-1);
-  
+  assert(~isempty(Bit_offset), sprintf(['%s: Falscher Wert für offset: %s. ', ...
+    'Erwartet: {%s}'], csvline{1}, csvline{c}, disp_array(descr_offset,'%s')));
   % Bit-Array aus den Bits für alle Parameter zusammenstellen
   b = 0; % Bit-Offset zur Verschiebung der Parameter-Bits in der Gesamtvariable
   BAJ(kk) = bitor( BAJ(kk), bitshift(Bit_type,0)); b = b+1;
