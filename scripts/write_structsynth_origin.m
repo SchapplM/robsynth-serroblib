@@ -13,7 +13,7 @@ roblibpath=fileparts(which('serroblib_path_init.m'));
 robot_list_dir = fullfile(roblibpath, 'synthesis_result_lists');
 serroblib_gen_bitarrays(1:7);
 
-for idx_case = 1:11
+for idx_case = 11%1:12
   %% Optionen zur Bearbeitung der Tabellen
   flush_data = false;
   set_undef_to_zero = false;
@@ -72,6 +72,10 @@ for idx_case = 1:11
       idx_oc = 5; % Spalte für Mehr-FG-Gelenke
       flush_data = true; flush_Njoint = 4:6; flush_EEFG = [1 1 1 1 1 1];
     case 11
+      reslist='prismatic_rod_chains';
+      idx_oc = 6; % Spalte für Stabkinematiken
+      flush_data = true; flush_Njoint = 4:6; flush_EEFG = [1 1 1 1 1 1];
+    case 12
       % Letzter Durchgang: Setze alle Felder, in denen bis jetzt ein "?"
       % steht auf 0. Annahme: Alle möglichen Herkünfte der seriellen Ketten
       % wurden bereits vorher aus den Ergebnisliste generiert
