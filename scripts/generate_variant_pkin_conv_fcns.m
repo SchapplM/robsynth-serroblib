@@ -18,7 +18,9 @@ clc
 
 %% Initialisierung
 roblibpath=fileparts(which('serroblib_path_init.m'));
-only_add_new = false;
+only_add_new = true;
+only_look_at_robot = {}; % Nur eine Liste namentlich genannter Roboter bearbeiten; z.B. S5PRPRR4 
+% only_look_at_robot = readcell(fullfile(roblibpath,'synthesis_result_lists','prismatic_rod_chains.txt'));
 filter_genmdl_test = ''; % Bsp: "S6RRRRRR10" Prüfe nur dieses Hauptmodell
 %% Alle Modelle durchgehen
 for N = 1:7
@@ -28,6 +30,9 @@ for N = 1:7
   l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_EEdof0', 'AdditionalInfo');
   for j = 1:length(l.Names_Ndof)
     Name = l.Names_Ndof{j};
+    if ~isempty(only_look_at_robot) && ~any(strcmp(only_look_at_robot, Name))
+      continue % Filterung zu Testzwecken
+    end
     isvariant = l.AdditionalInfo(j,2);
     if ~isvariant
       continue % Nur Varianten durchgehen
