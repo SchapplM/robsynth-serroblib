@@ -13,10 +13,10 @@ roblibpath=fileparts(which('serroblib_path_init.m'));
 robot_list_dir = fullfile(roblibpath, 'synthesis_result_lists');
 serroblib_gen_bitarrays(1:7);
 
-for idx_case = 11%1:12
+for idx_case = 1:12
   %% Optionen zur Bearbeitung der Tabellen
   flush_data = false;
-  set_undef_to_zero = false;
+  set_undef_to_zero = true;
   flush_EEFG_mask = [1 1 1 1 1 1];
   reslist = '';
   switch idx_case
@@ -80,7 +80,7 @@ for idx_case = 11%1:12
       % steht auf 0. Annahme: Alle möglichen Herkünfte der seriellen Ketten
       % wurden bereits vorher aus den Ergebnisliste generiert
       flush_Njoint = 1:7;
-      idx_oc = 1:5;
+      idx_oc = 1:6;
       set_undef_to_zero = true;
       flush_EEFG = [1 1 1 1 1 1];
       flush_EEFG_mask = [0 0 0 0 0 0]; % alle seriellen Ketten bearbeiten
@@ -100,6 +100,8 @@ for idx_case = 11%1:12
       for j = IndZ'
         k = k+1;
         RobName = l.Names_Ndof{j};
+        % Debug: Filter für Schubgelenk-Beinketten
+%         if sum(RobName=='P') ~= 1, continue; end
         fprintf('%d/%d: Prüfe Struktur %s\n', k, length(IndZ), RobName);
         % Aktualisieren in Tabelle
         typestring = RobName(3:3+N-1); % Roboterdaten aus Namen extrahieren
