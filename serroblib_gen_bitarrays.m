@@ -80,7 +80,7 @@ for N = N_update(:)'
       if isempty(csvline) || strcmp(csvline{1}, '')
         continue
       end
-      if length(csvline) ~= 1+N*8+3+6+3+2+5 % Siehe serroblib_gen_bitarrays.m
+      if length(csvline) ~= 1+N*8+3+6+3+2+6 % Siehe serroblib_gen_bitarrays.m
         warning('Zeile %s (Datei %s) sieht ungültig aus', tline, d.name);
         continue % nicht genug Spalten: Ungültiger Datensatz
       end
@@ -165,11 +165,16 @@ for N = N_update(:)'
       numrotjoints = sum(Name=='R');
       
       % Anzahl technischer Gelenke bestimmen
-      joints_string = csvline{end-5}; % die letzten 5 Spalten geben die Modellherkunft an
+      joints_string = csvline{end-6}; % die letzten 6 Spalten geben die Modellherkunft an
       if isempty(joints_string)
         % Ohne Angabe werden einzelne Dreh- und Schubgelenke angenommen
         % (stehen schon direkt im Namen drin)
         joints_string = Name(3:3+N-1);
+      else % Prüfe, ob die richtige Spalte gewählt wurde
+        match_jointstr = regexp(joints_string, '[PRUS]+', 'match');
+        if isempty(match_jointstr)
+          error('Zeichenkette für Gelenkfolge passt nicht. Logik-Fehler.');
+        end
       end
       numtechjoints = length(joints_string);
       % Technische Gelenke als Zahl kodieren
