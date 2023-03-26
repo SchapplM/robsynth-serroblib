@@ -15,7 +15,10 @@ roblibpath=fileparts(which('serroblib_path_init.m'));
 serroblib_gen_bitarrays(1:7);
 
 % Einstellungen
-usr_overwrite = true;
+usr_overwrite = false;
+only_look_at_robot = {}; % Nur eine Liste namentlich genannter Roboter bearbeiten; z.B. S5PRPRR4 
+% only_look_at_robot = readcell(fullfile(roblibpath,'synthesis_result_lists','prismatic_rod_chains.txt'));
+% only_look_at_robot = {'S5RPRRR10V2'};
 filter_genmdl_test = ''; % Bsp: "S6RRRRRR10" Prüfe nur dieses Hauptmodell
 %% Durchsuche alle Roboter und stelle die korrekte Orientierung des Endeffektors fest
 % Zuordnung der Zahlenwerte in der csv-Tabelle zu den physikalischen Werten
@@ -33,6 +36,9 @@ for N = 1:7
     % Dann sind in der csv-Tabelle "?" als Platzhalter für phix_NE gesetzt
     undef = false;
     RobName = l.Names_Ndof{j};
+    if ~isempty(only_look_at_robot) && ~any(strcmp(only_look_at_robot, RobName))
+      continue % Filterung zu Testzwecken
+    end
     variantof = l.AdditionalInfo(j,3);
     Name_GenMdl = l.Names_Ndof{variantof};
     if ~isempty(filter_genmdl_test) && ~strcmp(Name_GenMdl, filter_genmdl_test)
@@ -63,6 +69,9 @@ for N = 1:7
     Ja = RS.jacobia(q0);
     Jg = RS.jacobia(q0);
     rankJg = rank(Jg);
+    if rankJg < RS.NJ
+      error('Kette %s hat nicht vollen Rang', RobName);
+    end
     rankJg_rot = rank(Jg(4:6,:));
     rankJa_rot = rank(Ja(4:6,:));
     % Überprüfung: dec2bin(l.BitArrays_EEdof0(j),9)
@@ -74,7 +83,6 @@ for N = 1:7
     elseif rankJg_rot == 1 && rankJa_rot == 1
       % Nur ein Rotations-FG (als Standard definiert um z-Achse).
       % Hier tritt das Problem mit phi_N_E besonders auf.
-      
 
       % Direkte Kinematik bestimmen (ohne zusätzliche Rotation N-E)
       T_0_N = RS.fkineEE(q0);
@@ -107,7 +115,7 @@ for N = 1:7
       for pp = 1:size(Phi_N_E_Komb,2)
         RS.update_EE([], Phi_N_E_Komb(:,pp));
         Ja = RS.jacobia(q0);
-        if rank(Ja(1:5,:)) == 5
+        if rank(Ja(1:5,:)) == RS.NJ
           % Voller Rang auf gewünschten Freiheitsgraden. Behalte diese
           % Einstellung.
           phi_N_E_neu = Phi_N_E_Komb(:,pp);

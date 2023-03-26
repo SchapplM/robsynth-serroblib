@@ -53,6 +53,7 @@
 %   03: Spalte "3T0R-PKM" (Beinkette für PKM mit EE-FG)
 %   04: Spalte "3T1R-PKM"
 %   05: Spalte "Gelenkfolge" (Varianten mit Kardan-/Kugelgelenken)
+%   06: Spalte "NoPrismaticLever" (Varianten ohne Hebel auf Schubgelenke)
 % 
 % Siehe auch: serroblib_bits2csvline
 
@@ -66,7 +67,7 @@ function [BAJ, BAR, BAE, BAJVF, BAO] = serroblib_csvline2bits(csvline)
 % Nicht Teil der Gelenk-Einträge: Name (1 Spalte), EE-Trafo (3), EE-FG (6
 % Spalten), EE-FG Euler-Winkel (3), Nummer des Pos.-beeinfl. Gelenks (1),
 % Gelenktypen (U/S/...) (1), Herkunft der Kinematik (5 Spalten)
-N1 = (length(csvline)-1-3-6-3-2-5);
+N1 = (length(csvline)-1-3-6-3-2-6);
 if mod(N1,8) ~= 0
   error('falsche Anzahl Einträge in csvline');
 end
@@ -176,7 +177,7 @@ c = c+1;
 c = c+1;
 %% Bit-Vektor für Modellherkunft
 b = 0; % Bit-Offset zur Verschiebung der Parameter-Bits in der Gesamtvariable
-for kk = 1:5 % 5 Tabellenspalten -> 5 Bits
+for kk = 1:6 % 6 Tabellenspalten -> 6 Bits
   c=c+1; Bit_phi = uint16( strcmp(csvline{c},'1') );
   BAO = bitor( BAO, bitshift(Bit_phi,b)); b = b+1;
   % Prüfen mit: `dec2bin(Bit_phi)`

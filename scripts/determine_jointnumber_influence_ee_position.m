@@ -13,6 +13,8 @@ clc
 roblibpath=fileparts(which('serroblib_path_init.m'));
 
 serroblib_gen_bitarrays(1:7);
+only_look_at_robot = {}; % Nur eine Liste namentlich genannter Roboter bearbeiten; z.B. S5PRPRR4 
+% only_look_at_robot = readcell(fullfile(roblibpath,'synthesis_result_lists','prismatic_rod_chains.txt'));
 filter_genmdl_test = ''; % Bsp: "S6RRRRRR10" Prüfe nur dieses Hauptmodell
 %% Durchsuche alle Roboter und prüfe die Kinematikparameter
 % Zuordnung der Zahlenwerte in der csv-Tabelle zu den physikalischen Werten
@@ -24,6 +26,9 @@ for N = 1:7
   l = load(mdllistfile_Ndof, 'Names_Ndof', 'BitArrays_Ndof', 'BitArrays_EEdof0', 'AdditionalInfo');
   for j = 1:length(l.Names_Ndof)
     RobName = l.Names_Ndof{j};
+    if ~isempty(only_look_at_robot) && ~any(strcmp(only_look_at_robot, RobName))
+      continue % Filterung zu Testzwecken
+    end
     variantof = l.AdditionalInfo(j,3);
     Name_GenMdl = l.Names_Ndof{variantof};
     if ~isempty(filter_genmdl_test) && ~strcmp(Name_GenMdl, filter_genmdl_test)

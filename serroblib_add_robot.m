@@ -117,9 +117,9 @@ if ~exist(filepath_csv, 'file')
   csvline_head2(c-1:c) = {'Positionsbeeinflussendes Gelenk', 'Gelenkfolge'};
   
   % Kopfzeile für Herkunft der Kinematik
-  c = length(csvline_head1)+5;
-  csvline_head1(c-4:c) = {'Herkunft Struktursynthese', '', '', '', ''};
-  csvline_head2(c-4:c) = {'Manuell', 'Roboter', '3T0R-PKM', '3T1R-PKM', 'Gelenkfolge'};
+  c = length(csvline_head1)+6;
+  csvline_head1(c-5:c) = {'Herkunft Struktursynthese', '', '', '', '', ''};
+  csvline_head2(c-5:c) = {'Manuell', 'Roboter', '3T0R-PKM', '3T1R-PKM', 'Gelenkfolge', 'NoPrismaticLever'};
   
   % String aus Cell-Array erzeugen
   line_head1 = csvline_head1{1};
@@ -198,7 +198,7 @@ c = c+1; csvline{c} = '?';
 c = c+1; csvline{c} = '';
 
 % Spalten für Herkunft der Kinematik (Manuell, Struktsynth. Roboter, ...)
-c = c+5; csvline(c-4:c) = {'?', '?', '?', '?', '?'};
+c = c+6; csvline(c-5:c) = {'?', '?', '?', '?', '?', '?'};
 %% Zeile für den Roboter finden
 % Suche Roboter in den bestehenden csv-Tabellen
 [found, idx_direct, ~, Name] = serroblib_find_robot(csvline);

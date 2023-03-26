@@ -23,6 +23,7 @@ usr_dryrun = false; % Nur Anzeigen, was gemacht werden würde, nichts schreiben
 usr_overwrite = false; % Überschreibe auch bestehende Einträge. Sinnvoll, wenn die Spalten vorher leer sind
 usr_abortonerror = true; % Bei irgendeinem Fehler anhalten
 only_look_at_robot = {}; % Nur eine Liste namentlich genannter Roboter bearbeiten; z.B. S5PRPRR4 
+% only_look_at_robot = readcell(fullfile(roblibpath,'synthesis_result_lists','prismatic_rod_chains.txt'));
 filter_genmdl_test = ''; % Bsp: "S6RRRRRR10" Prüfe nur dieses Hauptmodell
 %% Durchsuche alle Roboter und prüfe die Kinematikparameter
 % Zuordnung der Zahlenwerte in der csv-Tabelle zu den physikalischen Werten
