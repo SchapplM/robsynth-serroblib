@@ -35,10 +35,6 @@
 
 function serroblib_generate_code(Names, force, nocopy, mode, notest)
 
-if ispc()
-  warning('Die Code-Generierung ist unter Windows noch etwas instabil.');
-end
-  
 if nargin < 2
   force = false;
 end
@@ -61,14 +57,15 @@ if notest
 end
 repopath=fileparts(which('serroblib_path_init.m'));
 % Pfad zur Maple-Dynamik-Toolbox (muss im Repo abgelegt werden)
+mrp = fileparts(which('hybrdyn_path_init.m'));
 if ispc()
-  % Windows: Benutze zwei verschiedene Pfade, für Git Bash und Windows
-  % Dateizugriff
-  [mrp, mrp_cmd] = maplerepo_path();
+  % Windows: Benutze zwei verschiedene Pfade, für WSL- und Windows-Dateizugriff
+  [wsl_err, mrp_wsl] = system(sprintf('wsl wslpath -u "%s"', mrp));
+  assert(wsl_err==0, 'error calling wsl. Is the windows-linux-subsystem installed?');
+  mrp_wsl = strtrim(mrp_wsl);
 else
   % Linux: Ein Pfad für beide Zugriffe
-  mrp_cmd = maplerepo_path();
-  mrp = mrp_cmd;
+  mrp_wsl = mrp;
 end
 
 for i = 1:length(Names)
@@ -100,7 +97,6 @@ for i = 1:length(Names)
   end
   % Verzeichnisse für die zu erzeugenden Matlab-Funktionen
   outputdir_tb = fullfile(mrp, 'codeexport', n, 'matlabfcn'); % Verzeichnis in der Maple-Toolbox
-  lockfile = fullfile(mrp, 'codeexport', n, 'codegen.lock');
   outputdir_local = fileparts(mapleinputfile); % Verzeichnis in der Bibliothek
   
   % Prüfe, ob Code schon einmal generiert wurde 
@@ -130,7 +126,7 @@ for i = 1:length(Names)
   % Code-Erstellung starten
   if mode == 1 || mode == 3 || mode == 4
     fprintf('Starte Code-Generierung %d/%d für %s\n', i, length(Names), n);
-    system_gen( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --parallel %s', mrp_cmd, kinematics_arg), lockfile); %  > /dev/null
+    system_wsl( sprintf('cd %s && ./robot_codegen_start.sh --fixb_only --parallel %s', mrp_wsl, kinematics_arg)); %  > /dev/null
   elseif mode == 2
     warning('Achtung: Mit der gesonderten Behandlung von Vorlagen-Funktionen ist dieser Modus nicht mehr sinnvoll');
     fprintf('Generiere Matlab-Funktionen aus Vorlagen (%d/%d) für %s\n', i, length(Names), n);
@@ -143,12 +139,12 @@ for i = 1:length(Names)
       % Kopiere sh-Datei, damit die Skripte funktionieren
       copyfile( [mapleinputfile, '.sh'], fullfile(mrp, 'robot_codegen_definitions', 'robot_env.sh') );
     end
-    system_gen( sprintf('rm -rf %s/workdir/*', mrp_cmd) ); % Inhalt des tmp-Verzeichnisses leeren und neu erstellen, ...
-    system_gen( sprintf('mkdir -p %s/workdir/tmp', mrp_cmd) ); % damit keine alten Versionen enthalten sein können
-    system_gen( sprintf('cd %s/robot_codegen_scripts && ./create_git_versioninfo.sh', mrp_cmd) );
-    system_gen( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_tmpvar_matlab.sh', mrp_cmd) );
-    system_gen( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_matlab_num_varpar.sh', mrp_cmd) );
-    system_gen( sprintf('cd %s/robot_codegen_scripts && ./testfunctions_generate.sh', mrp_cmd) );
+    system_wsl( sprintf('rm -rf %s/workdir/*', mrp_wsl) ); % Inhalt des tmp-Verzeichnisses leeren und neu erstellen, ...
+    system_wsl( sprintf('mkdir -p %s/workdir/tmp', mrp_wsl) ); % damit keine alten Versionen enthalten sein können
+    system_wsl( sprintf('cd %s/robot_codegen_scripts && ./create_git_versioninfo.sh', mrp_wsl) );
+    system_wsl( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_tmpvar_matlab.sh', mrp_wsl) );
+    system_wsl( sprintf('cd %s/robot_codegen_scripts && ./robot_codegen_matlab_num_varpar.sh', mrp_wsl) );
+    system_wsl( sprintf('cd %s/robot_codegen_scripts && ./testfunctions_generate.sh', mrp_wsl) );
   else
     error('Modus nicht definiert');
   end
@@ -198,30 +194,21 @@ for i = 1:length(Names)
 end
 end
 
-function system_gen(cmd, lockfile)
-  % Betriebssystem-unabhängiger Aufruf von Befehlen in der Git Bash
-  % Ermöglicht den Aufruf der Dynamik-Berechnungen aus Windows und Linux
+function system_wsl(cmd)
+  % Betriebssystem-unabhängiger Aufruf von Befehlen: Windows-Linux-Subsystem
+  % Ermöglicht den Systemaufruf aus Windows und Linux
   % Vorher: Wechseln in Verzeichnis aus Matlab heraus
   %
   % Eingabe:
   % cmd:
-  %  Befehl, der in der Git Bash ausgeführt werden soll.
-  % lockfile:
-  %  Pfad zur Sperrdatei, die existiert, solange noch Code generiert wird.
-  if isunix() || ismac()
-    system(cmd);
-  elseif ispc()
-    % Befehl über Git Bash ausführen und nach Ausführung noch 3 Minuten anzeigen
-    system(sprintf('start "" "%%PROGRAMFILES%%\\Git\\bin\\sh.exe" --login  -c "%s || sleep 180"', cmd));
-    if nargin == 2
-      while true
-        pause(5); % Warte auf den Start der Code-Generierung
-        if ~exist(lockfile, 'file')
-          break; % Die Sperr-Datei existiert nicht mehr. Wahrscheinlich fertig.
-        end
-      end
-    end
-  else
-    error('System nicht erkannt');
+  %  Befehl, der in der Konsole (WSL oder Unix-Terminal) werden soll.
+  %  Im Befehl enthaltene Pfade müssen unter Windows ins WSL-Schema
+  %  umgewandelt werden
+  if ispc() % Führe den Befehl in WSL aus (mit angepasstem Pfad)
+    WSL_prefix = 'wsl ';
+    cmd = strrep(cmd, '&&', ';'); % && wird von Windows-Shell gefangen
+  else % Normale Unix-Shell
+    WSL_prefix = '';
   end
+  system([WSL_prefix, cmd]);
 end

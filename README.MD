@@ -15,8 +15,7 @@ Die Robotermodelle setzen folgende ebenfalls herunterzuladenden Toolboxen mit in
 * imes-matlab: [GitHub](https://github.com/SchapplM/matlab_toolbox), [LUH-intern](https://gitlab.projekt.uni-hannover.de/imes-material/matlab-toolbox)
 * imes-matlab-robotics [GitHub](https://github.com/SchapplM/robotics-toolbox), [LUH-intern](https://gitlab.projekt.uni-hannover.de/imes-gruppe-robotik/matlab-robotik-toolbox)
 * robot-dynamics-hybriddyn: [GitHub](https://github.com/SchapplM/robsynth-modelgen), [LUH-intern](https://gitlab.projekt.uni-hannover.de/imes-gruppe-robotik/hybriddyn)
-Für die Code-Generierung muss die Datei `maplerepo_path.m` aus der Vorlage `maplerepo_path.m.template` so erstellt werden, dass diese auf den Pfad zur 
-Toolbox robot-dynamics-hybriddyn zeigt.
+  * Die Umgebungsvariable `MAPLE_BIN` muss auf die aktuelle Maple-Installation verweisen (siehe README). Unter Windows muss dies über die Datei MAPLE_BIN.env umgesetzt werden (siehe README)
 
 ## Inhalt
 
