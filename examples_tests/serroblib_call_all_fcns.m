@@ -15,7 +15,7 @@ for N = 1:7
   l = load(mdllistfile_Ndof, 'Names_Ndof');
   
   % Debug: Modell finden:
-  % II = find(strcmp(l.Names_Ndof, 'S6RRPRRR14'));
+  % II = find(strcmp(l.Names_Ndof, 'S5RRPRR8'));
   % Alle Modelle nehmen
   II = 1:length(l.Names_Ndof);
   % Alle Funktionen ausführen
@@ -152,10 +152,10 @@ for N = 1:7
       RS.invdyn3_traj(RV);
 
       % Rufe IK-Funktionen auf
-      RS.constr1(q0, xE);
-      RS.constr1grad(q0, xE);
-      Phi_fromclass = RS.constr2(q0, xE, true);
-      eval(sprintf('[Phi_fromfcn,Tcges_stack] = %s_constr2(q0, xE, RS.pkin, RS.T_N_E, RS.phiconv_W_E, RS.I_EElink, true);', RS.mdlname));
+      RS.constr1(q0, RS.x2tr(xE));
+      RS.constr1grad(q0, RS.x2tr(xE));
+      Phi_fromclass = RS.constr2(q0, RS.x2tr(xE), true);
+      eval(sprintf('[Phi_fromfcn,Tcges_stack] = %s_constr2(q0, RS.x2tr(xE), RS.pkin, RS.T_N_E, RS.phiconv_W_E, RS.I_EElink, true);', RS.mdlname));
       if any(abs(Phi_fromclass-Phi_fromfcn)>1e-14)
         error('Funktion constr2 stimmt nicht zwischen Klassenmethode und eigener Funktion');
       end
@@ -168,9 +168,9 @@ for N = 1:7
           error('Ausgegebene direkte Kinematik aus constr2 stimmt nicht gegen direkte Berechnung. Max Fehler: %1.1e', max(abs(test_Tc_kk(:))));
         end
       end
-      RS.constr2grad(q0, xE);
-      [q_ik1, Phi_ik1, Tcges_stack_IK1] = RS.invkin2(xE, q0+0.1*ones(RS.NJ,1), struct('reci', true, 'Phir_tol', 1e-3, 'Phit_tol', 1e-3));
-      [q_ik2, Phi_ik2] = RS.invkin2(xE, q0+0.1*ones(RS.NJ,1), struct('reci', false));
+      RS.constr2grad(q0, RS.x2tr(xE));
+      [q_ik1, Phi_ik1, Tcges_stack_IK1] = RS.invkin2(RS.x2tr(xE), q0+0.1*ones(RS.NJ,1), struct('reci', true, 'Phir_tol', 1e-3, 'Phit_tol', 1e-3));
+      [q_ik2, Phi_ik2] = RS.invkin2(RS.x2tr(xE), q0+0.1*ones(RS.NJ,1), struct('reci', false));
       Tcges_IK1 = RS.fkine(q_ik1);
       for kk = 1:RS.NJ+1
         Tc_kk = Tcges_IK1(:,:,kk);
